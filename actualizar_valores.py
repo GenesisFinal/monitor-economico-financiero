@@ -4951,7 +4951,7 @@ def build_insurance_market_data():
 def deploy_to_github(html_filepath):
     """Deploys the generated HTML file to GitHub Pages as index.html."""
     print("Starting automated deploy to GitHub Pages...")
-    token = "os.getenv("GITHUB_TOKEN")"
+    token = os.getenv("GITHUB_TOKEN")
     repo = "GenesisFinal/monitor-economico-financiero"
     
     headers = {
