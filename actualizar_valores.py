@@ -4433,11 +4433,53 @@ def build_insurance_market_data():
         trabajo = raw_data["Riesgos del Trabajo"]['value']
         otros_pat_val = tot_patrimoniales - (auto + agro + trabajo)
         
+        # Calculate implicit IPC using Automotores
+        var_nom_auto = raw_data["Automotores (incluye Motovehculos)"]['var_nominal'] / 100.0
+        var_real_auto = raw_data["Automotores (incluye Motovehculos)"]['var_real'] / 100.0
+        
+        if (1 + var_real_auto) != 0:
+            ipc = (1 + var_nom_auto) / (1 + var_real_auto) - 1
+        else:
+            ipc = 0
+            
+        def get_prev(val_now, var_nom_pct):
+            return val_now / (1 + var_nom_pct / 100.0) if (1 + var_nom_pct / 100.0) != 0 else 0
+            
+        tot_pat_prev = get_prev(tot_patrimoniales, raw_data["SEGUROS DE DAOS PATRIMONIALES"]['var_nominal'])
+        auto_prev = get_prev(auto, raw_data["Automotores (incluye Motovehculos)"]['var_nominal'])
+        agro_prev = get_prev(agro, raw_data["Riesgos Agropecuarios y Forestales"]['var_nominal'])
+        trabajo_prev = get_prev(trabajo, raw_data["Riesgos del Trabajo"]['var_nominal'])
+        
+        otros_pat_prev = tot_pat_prev - (auto_prev + agro_prev + trabajo_prev)
+        
+        if otros_pat_prev != 0:
+            otros_var_nom = (otros_pat_val / otros_pat_prev) - 1
+        else:
+            otros_var_nom = 0
+            
+        otros_var_real = (1 + otros_var_nom) / (1 + ipc) - 1 if (1 + ipc) != 0 else 0
+        
         raw_data["Otros Riesgos Patrimoniales"] = {
             'value': otros_pat_val,
-            'var_nominal': 0,
-            'var_real': 0
+            'var_nominal': otros_var_nom * 100,
+            'var_real': otros_var_real * 100
         }
+
+        total_mercado = raw_data["TOTAL DE MERCADO"]['value']
+        total_personas = raw_data["SEGUROS DE PERSONAS"]['value']
+        total_patrimoniales = raw_data["SEGUROS DE DAOS PATRIMONIALES"]['value']
+
+        for k, v in raw_data.items():
+            val = v['value']
+            v['share_total'] = (val / total_mercado * 100) if total_mercado else 0
+            
+            if k in ["Accidentes Personales", "Vida", "Salud", "Sepelio", "Retiro"]:
+                v['share_group'] = (val / total_personas * 100) if total_personas else 0
+            elif k in ["Automotores (incluye Motovehculos)", "Riesgos Agropecuarios y Forestales", "Riesgos del Trabajo", "Otros Riesgos Patrimoniales"]:
+                v['share_group'] = (val / total_patrimoniales * 100) if total_patrimoniales else 0
+            else:
+                v['share_group'] = 100
+
         
         return {
             'period': period_name,
@@ -6748,7 +6790,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         <i class="fas fa-chart-line text-brandBlue"></i> Valores Financieros
                     </button>
                     <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
-                        <i class="fas fa-building-columns"></i> Indicadores Económicos
+                        <i class="fas fa-building-columns text-brandBlue"></i> Indicadores Económicos
                     </button>
                     <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
@@ -8295,7 +8337,15 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <i class="fas fa-building-shield text-6xl"></i>
                 </div>
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total del Mercado</h3>
-                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['TOTAL DE MERCADO'].value | format_price }}</div>
+                <div class="text-3xl font-black text-white light:text-slate-900 mb-2">${{ data.insurance_data.ramos['TOTAL DE MERCADO'].value | format_billions }}</div>
+                <div class="w-full bg-darkBg light:bg-slate-200 rounded-full h-1.5 mb-2 overflow-hidden flex">
+                    <div class="bg-brandBlue h-1.5" style="width: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total }}%" title="Personas: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total | round(1) }}%"></div>
+                    <div class="bg-brandGreen h-1.5" style="width: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total }}%" title="Patrimoniales: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total | round(1) }}%"></div>
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-500 mb-4 font-semibold uppercase tracking-wider">
+                    <span class="text-brandBlue">Personas: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total | round(1) }}%</span>
+                    <span class="text-brandGreen">Patrimoniales: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total | round(1) }}%</span>
+                </div>
                 
                 <div class="flex gap-4">
                     <div>
@@ -8321,7 +8371,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <i class="fas fa-people-group text-6xl"></i>
                 </div>
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total Seguros de Personas</h3>
-                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].value | format_price }}</div>
+                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].value | format_billions }}</div>
                 
                 <div class="flex gap-4">
                     <div>
@@ -8345,7 +8395,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <i class="fas fa-car-burst text-6xl"></i>
                 </div>
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total Seguros Patrimoniales</h3>
-                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].value | format_price }}</div>
+                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].value | format_billions }}</div>
                 
                 <div class="flex gap-4">
                     <div>
@@ -8372,6 +8422,8 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         <tr class="bg-darkCard/50 light:bg-slate-100/50 text-slate-400 light:text-slate-500 text-xs uppercase tracking-wider">
                             <th class="px-6 py-4 font-semibold border-b border-darkBorder/40">Rama de Seguro</th>
                             <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right">Primas Acumuladas ($)</th>
+                            <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right text-slate-500">Part. % del Rubro</th>
+                            <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right text-slate-500">Part. % del Mercado</th>
                             <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right">Var. % i.a. Nominal</th>
                             <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right">Var. % i.a. Real</th>
                         </tr>
@@ -8394,7 +8446,9 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         {% for lbl, key in personas_items %}
                         <tr class="hover:bg-brandBlue/5 transition-colors group">
                             <td class="px-6 py-4 font-semibold text-white light:text-slate-800 pl-10">{{ lbl }}</td>
-                            <td class="px-6 py-4 text-right font-mono text-slate-300 light:text-slate-700">${{ data.insurance_data.ramos[key].value | format_price }}</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-300 light:text-slate-700">${{ data.insurance_data.ramos[key].value | format_billions_1d }}</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-400 light:text-slate-600">{{ data.insurance_data.ramos[key].share_group | round(1) }}%</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-400 light:text-slate-600">{{ data.insurance_data.ramos[key].share_total | round(1) }}%</td>
                             <td class="px-6 py-4 text-right font-bold {% if data.insurance_data.ramos[key].var_nominal > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
                                 {{ data.insurance_data.ramos[key].var_nominal | format_pct }}%
                             </td>
@@ -8419,8 +8473,9 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         {% for lbl, key in patrimoniales_items %}
                         <tr class="hover:bg-brandBlue/5 transition-colors group">
                             <td class="px-6 py-4 font-semibold text-white light:text-slate-800 pl-10">{{ lbl }}</td>
-                            <td class="px-6 py-4 text-right font-mono text-slate-300 light:text-slate-700">${{ data.insurance_data.ramos[key].value | format_price }}</td>
-                            
+                            <td class="px-6 py-4 text-right font-mono text-slate-300 light:text-slate-700">${{ data.insurance_data.ramos[key].value | format_billions_1d }}</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-400 light:text-slate-600">{{ data.insurance_data.ramos[key].share_group | round(1) }}%</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-400 light:text-slate-600">{{ data.insurance_data.ramos[key].share_total | round(1) }}%</td>
                             <td class="px-6 py-4 text-right font-bold {% if data.insurance_data.ramos[key].var_nominal > 0 %}text-emerald-500{% elif data.insurance_data.ramos[key].var_nominal < 0 %}text-red-500{% else %}text-slate-500{% endif %}">
                                 {% if data.insurance_data.ramos[key].var_nominal != 0 %}
                                     {{ data.insurance_data.ramos[key].var_nominal | format_pct }}%
@@ -8446,7 +8501,172 @@ Stack: ${error ? error.stack : 'N/A'}`;
             <i class="fas fa-info-circle mr-1"></i> Los datos de "Otros Riesgos Patrimoniales" se calculan restando las ramas principales del Total de Patrimoniales.
         </div>
     </div>
-<!-- Global Tab Content 4: Fuentes -->
+
+    {% if ssn_monthly %}
+    <!-- Evolución de la Producción Mensual -->
+    <section class="mt-8 border-t border-darkBorder/40 pt-8">
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+            <h3 class="text-2xl font-semibold text-slate-100 flex items-center gap-2">
+                <i class="fas fa-chart-line text-brandBlue"></i> Evoluci&oacute;n de la Producci&oacute;n
+                <span class="text-sm font-normal text-slate-400 ml-2">({{ ssn_monthly.corrientes.periodo_str }})</span>
+            </h3>
+            
+            <!-- Toggle Switch -->
+            <div class="flex items-center gap-3 bg-slate-800/50 p-1.5 rounded-full border border-slate-700/50">
+                <span class="text-sm font-medium text-slate-300 px-3 cursor-pointer" id="label-corrientes" onclick="toggleValoresMensuales('corrientes')">Corrientes</span>
+                <button type="button" id="toggle-valores-mensuales" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brandBlue focus:ring-offset-2 focus:ring-offset-slate-900 bg-slate-600" role="switch" aria-checked="false" onclick="toggleValoresMensuales()">
+                    <span aria-hidden="true" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-0" id="toggle-knob-mensuales"></span>
+                </button>
+                <span class="text-sm font-medium text-slate-400 px-3 cursor-pointer" id="label-constantes" onclick="toggleValoresMensuales('constantes')">Constantes</span>
+            </div>
+        </div>
+        
+        <!-- Contenedor de Tarjetas -->
+        <div class="space-y-8" id="mensual-cards-container">
+            <!-- Renderizado dinámico vía JS -->
+        </div>
+        
+    </section>
+    
+    <!-- Script para los datos mensuales y el Toggle -->
+    <script>
+        const ssnMonthlyData = {{ ssn_monthly | tojson }};
+        let isConstantes = false;
+        
+        function formatVal(val) {
+            return (val / 1000).toLocaleString('es-AR', {minimumFractionDigits: 1, maximumFractionDigits: 1});
+        }
+        
+        function formatVar(val) {
+            const num = parseFloat(val);
+            if(isNaN(num)) return "0.0%";
+            const prefix = num > 0 ? "+" : "";
+            return prefix + num.toLocaleString('es-AR', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + "%";
+        }
+        
+        function getVarBadge(val) {
+            const num = parseFloat(val);
+            if(isNaN(num) || num === 0) return `<span class="px-2 py-0.5 rounded text-xs font-medium bg-slate-700/50 text-slate-300">0.0%</span>`;
+            if(num > 0) return `<span class="px-2 py-0.5 rounded text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"><i class="fas fa-arrow-up text-[10px] mr-1"></i>${formatVar(val)}</span>`;
+            return `<span class="px-2 py-0.5 rounded text-xs font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20"><i class="fas fa-arrow-down text-[10px] mr-1"></i>${formatVar(val)}</span>`;
+        }
+        
+        function renderCard(title, dataObj, icon, colorClass) {
+            return `
+                <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/50 transition-colors">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-${colorClass}-500/10 flex items-center justify-center border border-${colorClass}-500/20">
+                            <i class="${icon} text-${colorClass}-400 text-sm"></i>
+                        </div>
+                        <h4 class="text-slate-200 font-medium">${title}</h4>
+                    </div>
+                    <div class="flex flex-col gap-1 mb-4">
+                        <span class="text-3xl font-bold text-white tracking-tight">$${formatVal(dataObj.value)} <span class="text-sm font-normal text-slate-400">mil M</span></span>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2 border-t border-slate-700/50 pt-3">
+                        <div class="flex flex-col">
+                            <span class="text-[11px] text-slate-400 mb-1 uppercase tracking-wider">m/m</span>
+                            ${getVarBadge(dataObj.var_mes)}
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[11px] text-slate-400 mb-1 uppercase tracking-wider">i.a.</span>
+                            ${getVarBadge(dataObj.var_ia)}
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-[11px] text-slate-400 mb-1 uppercase tracking-wider">YTD</span>
+                            ${getVarBadge(dataObj.var_acum)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function renderMensualCards() {
+            const type = isConstantes ? 'constantes' : 'corrientes';
+            const data = ssnMonthlyData[type].metrics;
+            
+            const container = document.getElementById('mensual-cards-container');
+            
+            let html = `
+                <!-- Total Mercado -->
+                <div class="mb-6">
+                    ${renderCard("Total Mercado", data.Mercado_Total, "fas fa-globe", "brandBlue")}
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Patrimoniales -->
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-slate-300 border-b border-slate-700 pb-2">Da&ntilde;os Patrimoniales</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            ${renderCard("Total Patrimoniales", data.Patrimoniales_Total, "fas fa-car-crash", "emerald")}
+                            ${renderCard("Automotores", data.Patrimoniales_Autos, "fas fa-car", "emerald")}
+                            ${renderCard("Riesgos del Trabajo", data.Patrimoniales_RT, "fas fa-hard-hat", "emerald")}
+                            ${renderCard("Resto Patrimoniales", data.Patrimoniales_Resto, "fas fa-box-open", "emerald")}
+                        </div>
+                    </div>
+                    
+                    <!-- Personas -->
+                    <div class="space-y-4">
+                        <h4 class="text-lg font-semibold text-slate-300 border-b border-slate-700 pb-2">Seguros de Personas</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            ${renderCard("Total Personas", data.Personas_Total, "fas fa-users", "purple")}
+                            ${renderCard("Vida Individual", data.Personas_VidaInd, "fas fa-user", "purple")}
+                            ${renderCard("Vida Colectivo", data.Personas_VidaCol, "fas fa-users", "purple")}
+                            ${renderCard("Retiro", data.Personas_Retiro, "fas fa-piggy-bank", "purple")}
+                            ${renderCard("Otros Personas", data.Personas_Otros, "fas fa-plus", "purple")}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+        
+        function toggleValoresMensuales(forceMode) {
+            if(forceMode === 'corrientes' && !isConstantes) return;
+            if(forceMode === 'constantes' && isConstantes) return;
+            
+            isConstantes = forceMode ? (forceMode === 'constantes') : !isConstantes;
+            
+            const btn = document.getElementById('toggle-valores-mensuales');
+            const knob = document.getElementById('toggle-knob-mensuales');
+            const lblCorr = document.getElementById('label-corrientes');
+            const lblConst = document.getElementById('label-constantes');
+            
+            if (isConstantes) {
+                btn.classList.remove('bg-slate-600');
+                btn.classList.add('bg-brandBlue');
+                knob.classList.remove('translate-x-0');
+                knob.classList.add('translate-x-5');
+                lblCorr.classList.remove('text-slate-200');
+                lblCorr.classList.add('text-slate-400');
+                lblConst.classList.remove('text-slate-400');
+                lblConst.classList.add('text-slate-200');
+            } else {
+                btn.classList.remove('bg-brandBlue');
+                btn.classList.add('bg-slate-600');
+                knob.classList.remove('translate-x-5');
+                knob.classList.add('translate-x-0');
+                lblConst.classList.remove('text-slate-200');
+                lblConst.classList.add('text-slate-400');
+                lblCorr.classList.remove('text-slate-400');
+                lblCorr.classList.add('text-slate-200');
+            }
+            
+            renderMensualCards();
+        }
+        
+        // Initial render
+        document.addEventListener('DOMContentLoaded', () => {
+            if(document.getElementById('mensual-cards-container')){
+                toggleValoresMensuales('corrientes');
+            }
+        });
+    </script>
+    {% endif %}
+
+    <!-- Global Tab Content 4: Fuentes -->
     <div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
         <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
             <i class="fas fa-book-open text-brandBlue"></i> Directorio de Fuentes de Datos
@@ -8709,25 +8929,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             performance: null
         };
 
-        );
 
-            // Show active panel
-            const activePanel = document.getElementById(tabId);
-            if (activePanel) {
-                activePanel.classList.remove('hidden');
-            }
-
-            // Highlight selected button
-            const activeBtn = document.getElementById('btn-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('active-tab-btn');
-            }
-
-            localStorage.setItem('activeAsegTab', tabId);
-
-            // Re-render insurance charts
-            setTimeout(renderInsuranceCharts, 50);
-        }
 
         function renderInsuranceCharts() {
             if (!appData.insurance_data) return;
@@ -12483,9 +12685,30 @@ Stack: ${error ? error.stack : 'N/A'}`;
             val = re.sub(r'[^\w\s-]', '', val).strip().lower()
             return re.sub(r'[-\s]+', '-', val)
             
+        def filter_format_billions_1d(val):
+            if val is None or val == "-": return "-"
+            try:
+                v = float(val) / 1e9
+                s = f"{v:,.1f}"
+                s = s.replace(',', 'X').replace('.', ',').replace('X', '.')
+                return f"{s} mil M"
+            except:
+                return str(val)
+
+        def filter_format_billions(val):
+            if val is None or val == "-": return "-"
+            try:
+                v = float(val)
+                billions = int(v / 1e9)
+                return f"{billions:,} mil M".replace(',', '.')
+            except:
+                return str(val)
+        
         env.filters['format_price'] = filter_format_price
         env.filters['format_pct'] = filter_format_pct
         env.filters['slugify'] = filter_slugify
+        env.filters['format_billions'] = filter_format_billions
+        env.filters['format_billions_1d'] = filter_format_billions_1d
         
         template = env.from_string(html_template)
         rendered_html = template.render(data=final_data, final_data_json=final_data_json)
