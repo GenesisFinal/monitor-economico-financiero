@@ -8163,7 +8163,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                                     <input type="checkbox" {% if loop.index == 1 %}checked{% endif %} onchange="toggleSelect(event, 'bonds_usd', '{{ b.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                                 </td>
                                                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono relative group cursor-pointer" onclick="event.stopPropagation(); showBondDetailsModal('{{ b.ticker }}')">
-                                                    <span class="underline decoration-dotted decoration-brandBlue/60 hover:text-brandBlue transition-colors font-bold">{{ b.ticker }}</span>
+                                                    <span class="underline decoration-dotted decoration-brandBlue/60 hover:text-brandBlue transition-colors font-bold">{{ b.ticker }}</span> <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'bonds\', \'{{ b.ticker }}\', event)" title="Ir a la fuente del dato"></i>
                                                     <span class="hover-badge">
                                                         <strong>{{ b.ticker }}</strong><br>
                                                         <span class="text-xs text-slate-300 light:text-slate-600">{{ b.name }}</span>
@@ -8249,7 +8249,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                                     <input type="checkbox" {% if loop.index == 1 %}checked{% endif %} onchange="toggleSelect(event, 'bonds_cer', '{{ b.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                                 </td>
                                                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono relative group cursor-pointer" onclick="event.stopPropagation(); showBondDetailsModal('{{ b.ticker }}')">
-                                                    <span class="underline decoration-dotted decoration-brandBlue/60 hover:text-brandBlue transition-colors font-bold">{{ b.ticker }}</span>
+                                                    <span class="underline decoration-dotted decoration-brandBlue/60 hover:text-brandBlue transition-colors font-bold">{{ b.ticker }}</span> <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'bonds\', \'{{ b.ticker }}\', event)" title="Ir a la fuente del dato"></i>
                                                     <span class="hover-badge">
                                                         <strong>{{ b.ticker }}</strong><br>
                                                         <span class="text-xs text-slate-300 light:text-slate-600">{{ b.name }}</span>
@@ -8335,7 +8335,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                                     <input type="checkbox" {% if loop.index == 1 %}checked{% endif %} onchange="toggleSelect(event, 'bonds_pesos', '{{ b.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                                 </td>
                                                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono relative group cursor-pointer" onclick="event.stopPropagation(); showBondDetailsModal('{{ b.ticker }}')">
-                                                    <span class="underline decoration-dotted decoration-brandBlue/60 hover:text-brandBlue transition-colors font-bold">{{ b.ticker }}</span>
+                                                    <span class="underline decoration-dotted decoration-brandBlue/60 hover:text-brandBlue transition-colors font-bold">{{ b.ticker }}</span> <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'bonds\', \'{{ b.ticker }}\', event)" title="Ir a la fuente del dato"></i>
                                                     <span class="hover-badge">
                                                         <strong>{{ b.ticker }}</strong><br>
                                                         <span class="text-xs text-slate-300 light:text-slate-600">{{ b.name }}</span>
@@ -8487,7 +8487,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                             <input type="checkbox" {% if loop.index == 1 %}checked{% endif %} onchange="toggleSelect(event, 'corporate', '{{ b.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                         </td>
                                         <td class="px-4 py-2.5 font-mono text-brandGreen font-bold cursor-pointer" onclick="event.stopPropagation(); showBondDetailsModal('{{ b.ticker }}')">
-                                            <span class="underline decoration-dotted decoration-brandGreen/60 hover:text-white light:hover:text-slate-900 transition-colors">{{ b.ticker }}</span>
+                                            <span class="underline decoration-dotted decoration-brandGreen/60 hover:text-white light:hover:text-slate-900 transition-colors">{{ b.ticker }}</span> <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'bonds\', \'{{ b.ticker }}\', event)" title="Ir a la fuente del dato"></i>
                                         </td>
                                         <td class="px-4 py-2.5 text-slate-400 font-semibold">{{ b.company }}</td>
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="{{ b.name }}">{{ b.name }}</td>
@@ -8515,7 +8515,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                             <input type="checkbox" onchange="toggleSelect(event, 'corporate', '{{ b.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                         </td>
                                         <td class="px-4 py-2.5 font-mono text-brandGreen font-bold cursor-pointer" onclick="event.stopPropagation(); showBondDetailsModal('{{ b.ticker }}')">
-                                            <span class="underline decoration-dotted decoration-brandGreen/60 hover:text-white light:hover:text-slate-900 transition-colors">{{ b.ticker }}</span>
+                                            <span class="underline decoration-dotted decoration-brandGreen/60 hover:text-white light:hover:text-slate-900 transition-colors">{{ b.ticker }}</span> <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'bonds\', \'{{ b.ticker }}\', event)" title="Ir a la fuente del dato"></i>
                                         </td>
                                         <td class="px-4 py-2.5 text-slate-400 font-semibold">{{ b.company }}</td>
                                         <td class="px-4 py-2.5 truncate max-w-[200px]" title="{{ b.name }}">{{ b.name }}</td>
@@ -9770,6 +9770,111 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 </div>
             </div>
         </main>
+    </div>
+
+
+    <!-- Global Tab Content 4: Fuentes -->
+    <div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
+        <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
+            <i class="fas fa-book-open text-brandBlue"></i> Directorio de Fuentes de Datos
+        </h2>
+        
+        <p class="text-sm text-slate-400 light:text-slate-600 mb-8 leading-relaxed">
+            A continuación se detallan las fuentes oficiales e institucionales de las cuales provienen los datos utilizados en este tablero. Para verificar el origen y la metodología de cada dato, puede visitar los sitios web listados.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Yahoo Finance -->
+            <a href="https://finance.yahoo.com/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    Yahoo Finance
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Cotizaciones históricas y en tiempo real de índices globales, acciones mundiales, CEDEARs, ETFs, commodities, y criptomonedas.</p>
+            </a>
+            
+            <!-- Rava Bursátil -->
+            <a href="https://www.rava.com/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    Rava Bursátil
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Cotizaciones locales de Bonos Soberanos (USD, CER, Pesos), Obligaciones Negociables (ONs), LECAPs y perfiles de activos argentinos.</p>
+            </a>
+
+            <!-- BYMA -->
+            <a href="https://www.byma.com.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    BYMA
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Bolsas y Mercados Argentinos. Información oficial del mercado de capitales, volúmenes transados y rendimientos de especies locales.</p>
+            </a>
+
+            <!-- BCRA -->
+            <a href="https://www.bcra.gob.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    BCRA
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Banco Central de la República Argentina. Tasas de referencia, reservas internacionales, base monetaria y regulaciones.</p>
+            </a>
+
+            <!-- INDEC -->
+            <a href="https://www.indec.gob.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    INDEC
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Instituto Nacional de Estadística y Censos. Índices de precios (IPC), pobreza, indigencia, salarios, y datos macroeconómicos.</p>
+            </a>
+
+            <!-- CAFCI -->
+            <a href="https://cafci.org.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    CAFCI
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Cámara Argentina de Fondos Comunes de Inversión. Estadísticas, rendimientos y patrimonios de la industria de FCIs.</p>
+            </a>
+
+            <!-- SSN -->
+            <a href="https://www.argentina.gob.ar/ssn" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    SSN
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Superintendencia de Seguros de la Nación. Estadísticas e información del Mercado Asegurador Argentino.</p>
+            </a>
+            
+            <!-- Ministerio de Economía -->
+            <a href="https://www.argentina.gob.ar/economia" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    Hacienda y Finanzas
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Secretaría de Hacienda y Finanzas Públicas. Resultados fiscales, recaudación tributaria y datos de deuda pública soberana.</p>
+            </a>
+
+            <!-- DolarHoy -->
+            <a href="https://dolarhoy.com/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    DolarHoy / DolarAPI
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Cotizaciones históricas y del momento de los distintos tipos de cambio (Dólar Oficial, MEP, CCL, Blue, Tarjeta).</p>
+            </a>
+            
+            <!-- IAMC -->
+            <a href="https://www.iamc.com.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
+                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
+                    IAMC
+                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+                </h3>
+                <p class="text-xs text-slate-300 light:text-slate-700">Instituto Argentino de Mercado de Capitales. Informes diarios, calculadoras de bonos y series históricas.</p>
+            </a>
+
+        </div>
     </div>
 
     <!-- Data Object Embedded -->
