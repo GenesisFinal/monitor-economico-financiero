@@ -15195,7 +15195,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 <!-- Evolucion Mensual Tab -->
                 <div id="aseg-tab-evolucion" class="aseg-tab-content fade-in hidden">
 <!-- Evolución de la Producción Mensual -->
-    <section class="mt-8 border-t border-darkBorder/40 pt-8">
+    <section class="pt-2">
         <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
             <h3 class="text-2xl font-semibold text-slate-100 flex items-center gap-2">
                 <i class="fas fa-chart-line text-brandBlue"></i> Evoluci&oacute;n de la Producci&oacute;n
@@ -17207,7 +17207,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchGlobalTab(tabId) {
-            
+            localStorage.setItem('activeGlobalTab', tabId);
             const btnValores = document.getElementById('btn-global-valores');
             const btnIndicadores = document.getElementById('btn-global-indicadores');
             const btnAsegurador = document.getElementById('btn-global-asegurador');
@@ -17250,6 +17250,14 @@ Stack: ${error ? error.stack : 'N/A'}`;
             } else if (tabId === 'fuentes') {
                 if (containerFuentes) containerFuentes.classList.remove('hidden');
                 if (btnFuentes) btnFuentes.className = activeClass;
+            }
+            
+            if (tabId === 'valores-financieros' && !document.querySelector('.tab-btn.active:not(.econ-tab-btn):not(.aseg-tab-btn)')) {
+                switchTab('exchange');
+            } else if (tabId === 'indicadores-economicos' && !document.querySelector('.econ-tab-btn.active')) {
+                switchEconTab('econ-tab-precios-y-costo-de-vida');
+            } else if (tabId === 'mercado-asegurador' && !document.querySelector('.aseg-tab-btn.active')) {
+                switchAsegTab('aseg-tab-primas');
             }
 
         }
