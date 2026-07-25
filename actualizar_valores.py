@@ -2568,7 +2568,7 @@ def build_economic_indicators_data(dolar_data=None, dolar_history=None):
         "exportaciones_moi": ("74.3_IEMOI_0_M_46", "month", "value_and_interannual", "INDEC", "Exportaciones Industriales (MOI)", "Exportaciones de manufacturas de origen industrial en millones de USD.", "Comercio Internacional"),
         "isac_general": ("33.2_ISAC_NIVELRAL_0_M_18_63", "month", "monthly_change", "INDEC", "ISAC Construcción", "Indicador Sintético de la Actividad de la Construcción.", "Construcción e Inmobiliario"),
         "emae_construccion": ("11.3_VMATC_2004_M_12", "month", "index_and_interannual", "INDEC", "EMAE Construcción", "Nivel de actividad económica para el sector construcción.", "Construcción e Inmobiliario"),
-        "icc_general": ("109.3_I1NG_1993_A_22", "month", "index_and_monthly", "INDEC", "Costo Construcción (ICC)", "Variación mensual del nivel general del Índice del Costo de la Construcción.", "Construcción e Inmobiliario"),
+        "icc_general": ("109.3_I1NG_1993_A_22", "month", "index_and_monthly", "INDEC", "Costo Construcción (ICC)", "Nivel general del Índice del Costo de la Construcción.", "Construcción e Inmobiliario"),
         "tcrm": ("116.3_TCRMA_0_M_36", "month", "value_monthly_interannual", "INDEC", "Tipo de Cambio Real", "Índice de Tipo de Cambio Real Multilateral (ITCRM) base 100=2015. Mide el precio relativo de los bienes y servicios de la economía argentina.", "Tipo de Cambio"),
         "cemento_total": ("41.3_CP_0_A_16", "month", "index_and_interannual", "INDEC", "Despachos de Cemento (Total)", "Despachos de Cemento Portland al Mercado Interno (Miles de Toneladas).", "Construcción e Inmobiliario")
     })
@@ -3469,6 +3469,111 @@ def build_economic_indicators_data(dolar_data=None, dolar_history=None):
                 "weekly": {"dates": ripte_dates, "prices": [round(p / get_historic_usd(d), 2) for d, p in zip(ripte_dates, ripte_prices)]}
             }
 
+    # Índice de Salarios en USD
+    if "salarios_indice" in all_indicators:
+        s_ars = all_indicators["salarios_indice"]["value"]
+        s_usd = s_ars / mep_price
+        all_indicators["salarios_indice_usd"] = {
+            "key": "salarios_indice_usd",
+            "name": "Índice de Salarios en USD (MEP)",
+            "value": s_usd,
+            "display_value": f"{s_usd:,.2f}",
+            "change": all_indicators["salarios_indice"]["change"],
+            "display_change": all_indicators["salarios_indice"].get("display_change", ""),
+            "change_direction": all_indicators["salarios_indice"].get("change_direction", "flat"),
+            "nature": "variación mensual e interanual",
+            "source": "INDEC / BCRA",
+            "desc": "Índice de salarios medido en Dólar MEP.",
+            "date": all_indicators["salarios_indice"]["date"],
+            "category": "Empleo y Salarios"
+        }
+        
+        if "salarios_indice" in econ_histories:
+            s_dates = econ_histories["salarios_indice"]["daily"]["dates"]
+            s_prices = econ_histories["salarios_indice"]["daily"]["prices"]
+            econ_histories["salarios_indice_usd"] = {
+                "daily": {"dates": s_dates, "prices": [round(p / get_historic_usd(d), 2) for d, p in zip(s_dates, s_prices)]},
+                "weekly": {"dates": s_dates, "prices": [round(p / get_historic_usd(d), 2) for d, p in zip(s_dates, s_prices)]}
+            }
+            # Add variations as distinct cards
+            # 1. Variación Mensual en Pesos
+            if len(s_prices) >= 2:
+                var_mensual = ((s_prices[-1] / s_prices[-2]) - 1) * 100
+                all_indicators["salarios_indice_mensual"] = {
+                    "key": "salarios_indice_mensual",
+                    "name": "Índice de Salarios - Mensual",
+                    "value": var_mensual,
+                    "display_value": f"{var_mensual:,.2f}%",
+                    "change": 0.0,
+                    "display_change": "Variación respecto al mes anterior",
+                    "change_direction": "flat",
+                    "nature": "variación mensual",
+                    "source": "INDEC",
+                    "desc": "Variación mensual del Índice de Salarios.",
+                    "date": all_indicators["salarios_indice"]["date"],
+                    "category": "Empleo y Salarios",
+                    "format": "percent"
+                }
+                # Create history of monthly variations
+                mensual_dates = s_dates[1:]
+                mensual_prices = [((s_prices[i] / s_prices[i-1]) - 1) * 100 for i in range(1, len(s_prices))]
+                econ_histories["salarios_indice_mensual"] = {
+                    "daily": {"dates": mensual_dates, "prices": mensual_prices},
+                    "weekly": {"dates": mensual_dates, "prices": mensual_prices}
+                }
+            
+            # 2. Variación Interanual en Pesos
+            if len(s_prices) >= 13:
+                var_ia = ((s_prices[-1] / s_prices[-13]) - 1) * 100
+                all_indicators["salarios_indice_ia"] = {
+                    "key": "salarios_indice_ia",
+                    "name": "Índice de Salarios - Interanual",
+                    "value": var_ia,
+                    "display_value": f"{var_ia:,.2f}%",
+                    "change": 0.0,
+                    "display_change": "Variación respecto al mismo mes del año anterior",
+                    "change_direction": "flat",
+                    "nature": "variación interanual",
+                    "source": "INDEC",
+                    "desc": "Variación interanual del Índice de Salarios.",
+                    "date": all_indicators["salarios_indice"]["date"],
+                    "category": "Empleo y Salarios",
+                    "format": "percent"
+                }
+                ia_dates = s_dates[12:]
+                ia_prices = [((s_prices[i] / s_prices[i-12]) - 1) * 100 for i in range(12, len(s_prices))]
+                econ_histories["salarios_indice_ia"] = {
+                    "daily": {"dates": ia_dates, "prices": ia_prices},
+                    "weekly": {"dates": ia_dates, "prices": ia_prices}
+                }
+
+            # 3. Variación Interanual en USD
+            usd_prices = econ_histories["salarios_indice_usd"]["daily"]["prices"]
+            if len(usd_prices) >= 13:
+                var_ia_usd = ((usd_prices[-1] / usd_prices[-13]) - 1) * 100
+                all_indicators["salarios_indice_usd_ia"] = {
+                    "key": "salarios_indice_usd_ia",
+                    "name": "Índice Salarios en USD - I.A.",
+                    "value": var_ia_usd,
+                    "display_value": f"{var_ia_usd:,.2f}%",
+                    "change": 0.0,
+                    "display_change": "Variación i.a. del Índice en USD MEP",
+                    "change_direction": "flat",
+                    "nature": "variación interanual",
+                    "source": "INDEC / BCRA",
+                    "desc": "Variación interanual del Índice de Salarios medido en Dólar MEP.",
+                    "date": all_indicators["salarios_indice"]["date"],
+                    "category": "Empleo y Salarios",
+                    "format": "percent"
+                }
+                ia_usd_dates = s_dates[12:]
+                ia_usd_prices = [((usd_prices[i] / usd_prices[i-12]) - 1) * 100 if usd_prices[i-12] else 0 for i in range(12, len(usd_prices))]
+                econ_histories["salarios_indice_usd_ia"] = {
+                    "daily": {"dates": ia_usd_dates, "prices": ia_usd_prices},
+                    "weekly": {"dates": ia_usd_dates, "prices": ia_usd_prices}
+                }
+
+
     # 3. Jubilación Mínima USD
     if "jubilacion_minima" in all_indicators:
         jub_ars = all_indicators["jubilacion_minima"]["value"]
@@ -3563,6 +3668,34 @@ def build_economic_indicators_data(dolar_data=None, dolar_history=None):
         # USD MEP based on historical Corriente
         pbi_ars = all_indicators["pbi_corriente"]["value"]
         pbi_usd = pbi_ars / mep_price if mep_price > 0 else 0
+        
+        # Base Monetaria en USD MEP
+        if "base_monetaria" in all_indicators:
+            bm_ars = all_indicators["base_monetaria"]["value"]
+            bm_usd = (bm_ars * 1000000) / mep_price if mep_price > 0 else 0
+            all_indicators["base_monetaria_usd"] = {
+                "key": "base_monetaria_usd",
+                "name": "Base Monetaria en USD (MEP)",
+                "value": bm_usd,
+                "display_value": f"USD {bm_usd:,.0f} M",
+                "change": all_indicators["base_monetaria"]["change"],
+                "display_change": all_indicators["base_monetaria"].get("display_change", ""),
+                "change_direction": all_indicators["base_monetaria"].get("change_direction", "flat"),
+                "nature": "variación mensual e interanual",
+                "source": "BCRA",
+                "desc": "Base Monetaria medida en Dólar MEP (Millones).",
+                "date": all_indicators["base_monetaria"]["date"],
+                "category": "Agregados Monetarios"
+            }
+            if "base_monetaria" in econ_histories:
+                bm_dates = econ_histories["base_monetaria"]["daily"]["dates"]
+                bm_prices = econ_histories["base_monetaria"]["daily"]["prices"]
+                bm_usd_prices = [round((p * 1000000) / get_historic_usd(d), 0) if get_historic_usd(d) else 0 for d, p in zip(bm_dates, bm_prices)]
+                econ_histories["base_monetaria_usd"] = {
+                    "daily": {"dates": bm_dates, "prices": bm_usd_prices},
+                    "weekly": {"dates": bm_dates, "prices": bm_usd_prices}
+                }
+        
         all_indicators["pbi_usd_mep"] = {
             "key": "pbi_usd_mep",
             "name": "PBI en Dólares (MEP)",
@@ -3695,7 +3828,7 @@ def build_economic_indicators_data(dolar_data=None, dolar_history=None):
             "ipc_mensual", "ipc_interanual", 
             "ipim_mensual", "ipim_interanual", 
             "base_monetaria", "agregado_b1", "agregado_b2", "agregado_b3", 
-            "recaudacion_tributaria", "resultado_primario", "resultado_financiero", 
+            "recaudacion_tributaria", "resultado_fiscal_primario", "resultado_financiero", 
             "saldo_comercial", "deuda_publica_total", "deuda_publica_pesos", 
             "deuda_publica_externa", "deuda_publica_fmi", "deuda_externa_total", 
             "ripte_val", "indice_salarios"
@@ -7253,6 +7386,10 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
                     </button>
+                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                        <i class="fas fa-book-open"></i> Fuentes
+                    </button>
+
                 </div>
                 <!-- Selector de Diseño (Layout) -->
                 <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl">
@@ -7368,31 +7505,31 @@ Stack: ${error ? error.stack : 'N/A'}`;
                             <tbody id="tbl-exchange" class="divide-y divide-darkBorder/40 light:divide-gray-200">
                                 <tr data-ticker="Oficial Billete" onclick="rowClick(event, 'exchange', 'Oficial Billete')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'exchange', 'Oficial Billete')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
-                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Billete</td>
+                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Billete <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'Oficial Billete\', event)" title="Ir a la fuente del dato"></i></td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.oficial.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.oficial.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="Oficial Divisa" onclick="rowClick(event, 'exchange', 'Oficial Divisa')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'Oficial Divisa')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
-                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Divisa</td>
+                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Divisa <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'Oficial Divisa\', event)" title="Ir a la fuente del dato"></i></td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.mayorista.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.mayorista.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="MEP" onclick="rowClick(event, 'exchange', 'MEP')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'MEP')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
-                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar MEP (Bolsa)</td>
+                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar MEP (Bolsa) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'MEP\', event)" title="Ir a la fuente del dato"></i></td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.mep.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.mep.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="CCL" onclick="rowClick(event, 'exchange', 'CCL')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'CCL')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
-                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar CCL (Cable)</td>
+                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar CCL (Cable) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'CCL\', event)" title="Ir a la fuente del dato"></i></td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.ccl.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.ccl.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="Blue" onclick="rowClick(event, 'exchange', 'Blue')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'Blue')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
-                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Blue (Informal)</td>
+                                    <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Blue (Informal) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'Blue\', event)" title="Ir a la fuente del dato"></i></td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.blue.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.blue.venta | format_price }}</td>
                                 </tr>
@@ -7400,31 +7537,31 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'tarjeta')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Dólar Tarjeta</td>
                                     <td class="px-4 py-2.5 text-right">-</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.tarjeta.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.tarjeta.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'tarjeta\', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="euro" onclick="rowClick(event, 'exchange', 'euro')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'euro')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Euro Oficial BNA</td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.euro.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.euro.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.euro.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'euro\', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="real" onclick="rowClick(event, 'exchange', 'real')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'real')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Real Oficial BNA</td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.real.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.real.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.real.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'real\', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="libra" onclick="rowClick(event, 'exchange', 'libra')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'libra')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Libra Esterlina BNA</td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.libra.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.libra.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.libra.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'libra\', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="yen" onclick="rowClick(event, 'exchange', 'yen')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'yen')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Yen BNA</td>
                                     <td class="px-4 py-2.5 text-right">${{ data.dolar.yen.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.yen.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.yen.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'exchange\', \'yen\', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -7736,7 +7873,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                             <input type="checkbox" {% if loop.index == 1 %}checked{% endif %} onchange="toggleSelect(event, '{{ id }}', '{{ item.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                         </td>
                                         <td class="px-4 py-2.5 font-mono text-brandBlue font-bold">{% if item.ticker == '000001.SS' %}SSEC{% else %}{{ item.ticker.split('.')[0] }}{% endif %}</td>
-                                        <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="{{ item.name }}">{{ item.name }}</td>
+                                        <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="{{ item.name }}">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'{{ id }}\', \'{{ item.ticker }}\', event)" title="Ir a la fuente del dato"></i></td>
                                         <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">
                                             {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}${{ item.price | format_price }}{% endif %}
                                         </td>
@@ -7826,7 +7963,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                         <td class="px-4 py-2.5 text-center">
                                             <input type="checkbox" {% if loop.index == 1 %}checked{% endif %} onchange="toggleSelect(event, '{{ id }}', '{{ item.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                         </td>
-                                        <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 font-semibold">{{ item.name }}</td>
+                                        <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 font-semibold">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'{{ id }}\', \'{{ item.ticker }}\', event)" title="Ir a la fuente del dato"></i></td>
                                         <td class="px-4 py-2.5 text-right font-mono font-bold text-white light:text-slate-950">
                                             {{ item.price | format_pct }}%
                                         </td>
@@ -8486,7 +8623,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                                                 <input type="checkbox" {% if loop.index == 1 and sub_id == 'mcap' %}checked{% endif %} onchange="toggleSelect(event, 'stocks', '{{ item.ticker }}')" class="rounded text-brandBlue focus:ring-brandBlue">
                                             </td>
                                             <td class="px-4 py-2.5 font-mono text-brandBlue font-bold">{{ item.ticker }}</td>
-                                            <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[150px]" title="{{ item.name }}">{{ item.name }}</td>
+                                            <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[150px]" title="{{ item.name }}">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource(\'{{ id }}\', \'{{ item.ticker }}\', event)" title="Ir a la fuente del dato"></i></td>
                                             <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ item.price | format_price }}</td>
                                             <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if item.change >= 0 else 'text-brandRed' }}">
                                                 {{ '+' if item.change >= 0 else '' }}{{ item.change | format_pct }}%
@@ -10764,6 +10901,41 @@ Stack: ${error ? error.stack : 'N/A'}`;
             renderDebtChart(key);
         }
 
+        
+        function openAssetSource(category, ticker, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            if (!ticker) return;
+            
+            let url = "";
+            const cleanTicker = ticker.trim().toUpperCase();
+            
+            if (category === 'exchange') {
+                if (cleanTicker.includes("OFICIAL")) {
+                    url = "https://www.bna.com.ar/Personas";
+                } else if (cleanTicker.includes("MEP") || cleanTicker.includes("CCL") || cleanTicker.includes("BLUE")) {
+                    url = "https://dolarhoy.com/";
+                } else if (cleanTicker.includes("EURO")) {
+                    url = "https://www.bna.com.ar/Personas";
+                } else {
+                    url = "https://www.bcra.gob.ar/";
+                }
+            } else if (category === 'bonds' || category === 'corporate' || category === 'lecaps' || category === 'bonds_usd' || category === 'bonds_cer' || category === 'bonds_pesos') {
+                // Rava Bursatil Profile
+                url = "https://www.rava.com/perfil/" + cleanTicker;
+            } else if (category === 'fci') {
+                url = "https://cafci.org.ar/";
+            } else if (category === 'local_rates') {
+                url = "https://www.bcra.gob.ar/BCRAyVos/Plazos_fijos_online.asp";
+            } else {
+                // Yahoo Finance for indices, forex, commodities, etfs, acciones_arg, cryptos, etc.
+                url = "https://finance.yahoo.com/quote/" + cleanTicker;
+            }
+            
+            window.open(url, '_blank');
+        }
+
         function openSourceLink(sourceName, event) {
             if (event) {
                 event.stopPropagation();
@@ -11342,12 +11514,15 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchGlobalTab(tabId) {
+            
             const btnValores = document.getElementById('btn-global-valores');
             const btnIndicadores = document.getElementById('btn-global-indicadores');
             const btnAsegurador = document.getElementById('btn-global-asegurador');
+            const btnFuentes = document.getElementById('btn-global-fuentes');
             const containerValores = document.getElementById('container-valores-financieros');
             const containerIndicadores = document.getElementById('container-indicadores-economicos');
             const containerAsegurador = document.getElementById('container-mercado-asegurador');
+            const containerFuentes = document.getElementById('container-fuentes');
             const body = document.body;
             const isDark = body.classList.contains('dark');
             
@@ -11355,6 +11530,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             containerValores.classList.add('hidden');
             containerIndicadores.classList.add('hidden');
             if (containerAsegurador) containerAsegurador.classList.add('hidden');
+            if (containerFuentes) containerFuentes.classList.add('hidden');
             
             // Reset button classes to inactive
             const inactiveClass = isDark 
@@ -11364,6 +11540,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             btnValores.className = inactiveClass;
             btnIndicadores.className = inactiveClass;
             if (btnAsegurador) btnAsegurador.className = inactiveClass;
+            if (btnFuentes) btnFuentes.className = inactiveClass;
             
             const activeClass = isDark ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20" : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
             
@@ -11371,25 +11548,17 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 containerValores.classList.remove('hidden');
                 btnValores.className = activeClass;
                 renderChart(activeTab);
-                localStorage.setItem('globalTab', 'valores-financieros');
             } else if (tabId === 'indicadores-economicos') {
                 containerIndicadores.classList.remove('hidden');
                 btnIndicadores.className = activeClass;
-                localStorage.setItem('globalTab', 'indicadores-economicos');
-                
-                // Trigger sub-tab selection and rendering
-                const savedEconTab = localStorage.getItem('activeEconTab') || 'econ-tab-precios-y-costo-de-vida';
-                switchEconTab(savedEconTab);
-
             } else if (tabId === 'mercado-asegurador') {
                 if (containerAsegurador) containerAsegurador.classList.remove('hidden');
                 if (btnAsegurador) btnAsegurador.className = activeClass;
-                localStorage.setItem('globalTab', 'mercado-asegurador');
-                
-                // Trigger sub-tab selection and rendering
-                const savedAsegTab = localStorage.getItem('activeAsegTab') || 'aseg-tab-resumen';
-                switchAsegTab(savedAsegTab);
+            } else if (tabId === 'fuentes') {
+                if (containerFuentes) containerFuentes.classList.remove('hidden');
+                if (btnFuentes) btnFuentes.className = activeClass;
             }
+
         }
 
         function toggleBandsVisibility() {
@@ -12167,8 +12336,8 @@ Stack: ${error ? error.stack : 'N/A'}`;
             sparklineElements.forEach(canvas => {
                 const key = canvas.dataset.key;
                 const type = canvas.dataset.type || 'line';
-                const minVal = canvas.dataset.min !== undefined ? parseFloat(canvas.dataset.min) : undefined;
-                const maxVal = canvas.dataset.max !== undefined ? parseFloat(canvas.dataset.max) : undefined;
+                let minVal = canvas.dataset.min !== undefined ? parseFloat(canvas.dataset.min) : undefined;
+                let maxVal = canvas.dataset.max !== undefined ? parseFloat(canvas.dataset.max) : undefined;
                 
                     if (key === 'indigencia_val' || key === 'pobreza_val') {
                         minVal = undefined;
@@ -12201,10 +12370,12 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 
                 let datasetConfig = {};
                 if (type === 'bar') {
+                    const barColors = prices.map(p => p >= 0 ? 'rgba(16, 185, 129, 0.65)' : 'rgba(239, 68, 68, 0.65)');
+                    const borderColors = prices.map(p => p >= 0 ? 'rgba(16, 185, 129, 0.95)' : 'rgba(239, 68, 68, 0.95)');
                     datasetConfig = {
                         data: prices,
-                        backgroundColor: barColor,
-                        borderColor: chartColor,
+                        backgroundColor: barColors,
+                        borderColor: borderColors,
                         borderWidth: 1,
                         borderRadius: 2
                     };
@@ -12678,7 +12849,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             } else if (key === 'empleo_privado' || key === 'empleo_total' || key === 'base_monetaria' || key.startsWith('agregado_')) {
                 chartType = 'line';
                 fillConfig = true;
-            } else if (key === 'resultado_fiscal_primario' || key === 'resultado_financiero' || key === 'pbi_interanual' || key === 'emae_interanual' || key === 'ipi_interanual' || key.includes('variacion') || key === 'saldo_comercial') {
+            } else if (key.includes('resultado_') || key === 'pbi_interanual' || key === 'emae_interanual' || key === 'ipi_interanual' || key.includes('variacion') || key === 'saldo_comercial') {
                 chartType = 'bar';
                 fillConfig = false;
                 barPercentage = 0.8;
@@ -12787,7 +12958,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     }
                 ];
             } else {
-                const isConditionalColor = (chartType === 'bar' && finalPrices.some(v => v < 0)) || key === 'resultado_fiscal_primario' || key === 'resultado_financiero' || key === 'saldo_comercial' || key.includes('fiscal') || key.includes('comercial');
+                const isConditionalColor = (chartType === 'bar' && finalPrices.some(v => v < 0)) || key.includes('resultado') || key === 'saldo_comercial' || key.includes('fiscal') || key.includes('comercial');
                 const datasetColor = isConditionalColor ? finalPrices.map(v => v >= 0 ? '#10b981' : '#ef4444') : chartColor;
                 const datasetBg = isConditionalColor 
                     ? finalPrices.map(v => v >= 0 ? 'rgba(16, 185, 129, 0.75)' : 'rgba(239, 68, 68, 0.75)') 
@@ -12815,13 +12986,13 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 "resultado_financiero", "resultado_fiscal_primario", "ripte_usd", "actividad_val",
                 "empleo_val", "desocupacion_val", "smvm_usd", "pobreza_val", "indigencia_val",
                 "jubilacion_minima_usd", "jubilacion_promedio_usd", "jubilacion_maxima_usd",
-                "emae_interanual", "icc_interanual", "pbi_corriente", "pbi_constante_hoy", "pbi_interanual", "pbi_usd_mep", "pbi_per_capita_usd_mep",
+                "emae_interanual", "icc_interanual", "pbi_corriente", "pbi_constante_hoy", "pbi_interanual", "pbi_usd_mep", "pbi_per_capita_usd_mep", "salarios_indice_usd", "salarios_indice_mensual", "salarios_indice_ia", "salarios_indice_usd_ia", "base_monetaria_usd",
                 "ipi_interanual", "utilizacion_capacidad", "gas_produccion", "petroleo_produccion",
                 "patentamientos_autos", "isac_interanual", "empleo_construccion",
                 "m2_autorizados", "soja_precio", "maiz_precio", "trigo_precio", "faena_bovina"
             ];
             
-            if (regressionKeys.includes(key) && datasets.length > 0 && datasets[0].data && datasets[0].data.length > 1) {
+            if (datasets.length > 0 && datasets[0].data && datasets[0].data.length > 1) {
                 // Prepare points where x is index 1..N
                 const pts = datasets[0].data.map((y, i) => ({x: i + 1, y: y}));
                 const bestModel = calculateRegressions(pts);
