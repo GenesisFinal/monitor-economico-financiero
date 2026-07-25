@@ -4126,7 +4126,159 @@ def build_economic_indicators_data(dolar_data=None, dolar_history=None):
         
     return categories, econ_histories
 
+
+def parse_ssn_monthly_data():
+    try:
+        import io
+        import requests
+        import pandas as pd
+        import re
+        
+        df_links = pd.read_csv('https://docs.google.com/spreadsheets/d/1gsq2uKPxLCRF4hSVhEgbVrzEA0fo1cDB_G_iQqU47iU/export?format=csv')
+        url = "https://www.argentina.gob.ar" + df_links.iloc[0]['bd']
+        resp = requests.get(url, verify=False, timeout=15)
+        xls = pd.ExcelFile(io.BytesIO(resp.content))
+        
+        meses_map = {
+            "enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6,
+            "julio": 7, "agosto": 8, "septiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12
+        }
+        
+        indices = {
+            "corrientes": {
+                "Patrimoniales_Total": 15, "Patrimoniales_Autos": 16, "Patrimoniales_RT": 19,
+                "Personas_Total": 23, "Personas_VidaInd": 24, "Personas_VidaCol": 25, "Personas_Retiro": 27
+            },
+            "constantes": {
+                "Patrimoniales_Total": 11, "Patrimoniales_Autos": 13, "Patrimoniales_RT": 19,
+                "Personas_Total": 25, "Personas_VidaInd": 27, "Personas_VidaCol": 29, "Personas_Retiro": 33
+            }
+        }
+
+        def parse_sheet(sheet_name, col_map):
+            df = pd.read_excel(xls, sheet_name=sheet_name, header=None)
+            data_rows = []
+            current_year = 2017
+            last_mes = 0
+            
+            for idx, row in df.iterrows():
+                if idx < 5: continue
+                date_str = str(row[0]).strip().lower()
+                if not date_str or date_str == "nan" or "incluye" in date_str: continue
+                
+                # Check if there is an explicit year
+                import re
+                year_match = re.search(r'(20\d\d)', date_str)
+                if year_match:
+                    current_year = int(year_match.group(1))
+                    
+                mes_str = None
+                for m in meses_map:
+                    if date_str.startswith(m):
+                        mes_str = m
+                        break
+                        
+                if not mes_str: continue
+                
+                mes_num = meses_map[mes_str]
+                if mes_num < last_mes and not year_match:
+                    current_year += 1
+                last_mes = mes_num
+                
+                row_data = {"year": current_year, "month": mes_num}
+                for k, c_idx in col_map.items():
+                    val = row[c_idx]
+                    try:
+                        row_data[k] = float(val) if pd.notnull(val) and val != '-' else 0.0
+                    except:
+                        row_data[k] = 0.0
+                data_rows.append(row_data)
+                
+            data_rows = sorted(data_rows, key=lambda x: (x["year"], x["month"]))
+            if not data_rows: return None
+            
+            current = data_rows[-1]
+            prev_month = data_rows[-2] if len(data_rows) >= 2 else None
+            
+            prev_year_month = None
+            for r in reversed(data_rows[:-1]):
+                if r["year"] == current["year"] - 1 and r["month"] == current["month"]:
+                    prev_year_month = r
+                    break
+                    
+            def get_ytd_sum(target_year, target_month):
+                start_year = target_year if target_month >= 7 else target_year - 1
+                tot = {k: 0.0 for k in col_map.keys()}
+                for r in data_rows:
+                    if r["year"] == start_year and r["month"] >= 7:
+                        if target_month >= 7 and r["month"] > target_month: continue
+                        for k in col_map.keys(): tot[k] += r[k]
+                    elif r["year"] == start_year + 1 and r["month"] <= target_month:
+                        for k in col_map.keys(): tot[k] += r[k]
+                return tot
+                
+            ytd_current = get_ytd_sum(current["year"], current["month"])
+            ytd_prev = get_ytd_sum(current["year"] - 1, current["month"])
+            
+            def calc_var(val_new, val_old):
+                if not val_old or val_old == 0: return 0
+                return (val_new / val_old - 1) * 100
+                
+            metrics = {}
+            for k in col_map.keys():
+                metrics[k] = {
+                    "value": current[k],
+                    "var_mes": calc_var(current[k], prev_month[k]) if prev_month else 0,
+                    "var_ia": calc_var(current[k], prev_year_month[k]) if prev_year_month else 0,
+                    "var_acum": calc_var(ytd_current[k], ytd_prev[k])
+                }
+                
+            def add_derived(name, total_key, keys_to_sub):
+                val = metrics[total_key]["value"] - sum(metrics[x]["value"] for x in keys_to_sub)
+                val_prev_month = (prev_month[total_key] - sum(prev_month[x] for x in keys_to_sub)) if prev_month else 0
+                val_prev_year = (prev_year_month[total_key] - sum(prev_year_month[x] for x in keys_to_sub)) if prev_year_month else 0
+                val_ytd_cur = ytd_current[total_key] - sum(ytd_current[x] for x in keys_to_sub)
+                val_ytd_prev = ytd_prev[total_key] - sum(ytd_prev[x] for x in keys_to_sub)
+                
+                metrics[name] = {
+                    "value": val,
+                    "var_mes": calc_var(val, val_prev_month),
+                    "var_ia": calc_var(val, val_prev_year),
+                    "var_acum": calc_var(val_ytd_cur, val_ytd_prev)
+                }
+                
+            add_derived("Patrimoniales_Resto", "Patrimoniales_Total", ["Patrimoniales_Autos", "Patrimoniales_RT"])
+            add_derived("Personas_Otros", "Personas_Total", ["Personas_VidaInd", "Personas_VidaCol", "Personas_Retiro"])
+            
+            metrics["Mercado_Total"] = {
+                "value": metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"],
+                "var_mes": calc_var(metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"], 
+                                    (prev_month["Patrimoniales_Total"] + prev_month["Personas_Total"]) if prev_month else 0),
+                "var_ia": calc_var(metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"],
+                                   (prev_year_month["Patrimoniales_Total"] + prev_year_month["Personas_Total"]) if prev_year_month else 0),
+                "var_acum": calc_var(ytd_current["Patrimoniales_Total"] + ytd_current["Personas_Total"],
+                                     ytd_prev["Patrimoniales_Total"] + ytd_prev["Personas_Total"])
+            }
+            
+            # Format month name for display
+            mes_nombre = list(meses_map.keys())[list(meses_map.values()).index(current["month"])].capitalize()
+            return {
+                "periodo_str": f"{mes_nombre} {current['year']}",
+                "metrics": metrics
+            }
+
+        return {
+            "corrientes": parse_sheet("Valores Corrientes", indices["corrientes"]),
+            "constantes": parse_sheet("Valores Constantes", indices["constantes"])
+        }
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Error parsing SSN monthly data: {e}")
+        return None
+
 def load_ssn_data():
+
     """
     Scans the data/ssn/ directory for Excel files, reads the latest sheet containing
     premiums by entity and branch, and computes rankings, shares and totals dynamically.
@@ -5780,6 +5932,8 @@ def build_dashboard():
 
     yesterday_yyyymmdd = (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')
 
+    print('Fetching SSN monthly data...')
+    ssn_monthly_data = parse_ssn_monthly_data()
     final_data = {
         "bond_details": bond_details,
         "yesterday_yyyymmdd": yesterday_yyyymmdd,
@@ -12711,7 +12865,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         env.filters['format_billions_1d'] = filter_format_billions_1d
         
         template = env.from_string(html_template)
-        rendered_html = template.render(data=final_data, final_data_json=final_data_json)
+        rendered_html = template.render(data=final_data, final_data_json=final_data_json, ssn_monthly=ssn_monthly_data)
         
         os.makedirs(OUTPUT_DIR, exist_ok=True)
         with open(OUTPUT_HTML, "w", encoding="utf-8") as f:
