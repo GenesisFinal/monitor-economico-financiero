@@ -4313,773 +4313,140 @@ def load_ssn_data():
 
 
 def build_insurance_market_data():
-    """Generates structured statistics and comparative data for the Argentine Insurance Market."""
-    ssn_data = load_ssn_data()
-    return {
-        "summary_cards": [
-            {
-                "key": "market_total_premiums",
-                "name": "Primas Emitidas Totales (Mercado)",
-                "display_value": "ARS 2,55 B",
-                "change_mom": "+4,5% m/m (vs. Feb 26)",
-                "change_yoy": "+43,8% i.a. (vs. Mar 25)",
-                "display_change": "+4,5% m/m",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Suma total de primas emitidas netas de anulaciones por todas las entidades aseguradoras del mercado en el mes.",
-                "badge": "Mercado Total"
-            },
-            {
-                "key": "market_patrimoniales",
-                "name": "Primas de Patrimoniales",
-                "display_value": "ARS 1.443,00 mil M",
-                "change_mom": "+4,1% m/m (vs. Feb 26)",
-                "change_yoy": "+42,8% i.a. (vs. Mar 25)",
-                "display_change": "+4,1% m/m",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Facturación mensual en seguros patrimoniales (automotores, incendio, transporte, granizo, etc.).",
-                "badge": "Patrimoniales"
-            },
-            {
-                "key": "market_autos",
-                "name": "Primas de Automotores",
-                "display_value": "ARS 870,80 mil M",
-                "change_mom": "+3,8% m/m (vs. Feb 26)",
-                "change_yoy": "+41,2% i.a. (vs. Mar 25)",
-                "display_change": "+3,8% m/m",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Ramo principal de patrimoniales. Concentra más del 40% del primaje del sistema.",
-                "badge": "Automotores"
-            },
-            {
-                "key": "market_art",
-                "name": "Primas de ART (Riesgos del Trabajo)",
-                "display_value": "ARS 599,25 mil M",
-                "change_mom": "+5,2% m/m (vs. Feb 26)",
-                "change_yoy": "+44,8% i.a. (vs. Mar 25)",
-                "display_change": "+5,2% m/m",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SRT / SSN",
-                "desc": "Facturación mensual por cobertura de accidentes de trabajo y enfermedades profesionales basada en la masa salarial.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "market_vida",
-                "name": "Primas de Vida (Colectivo + Individual)",
-                "display_value": "ARS 290,70 mil M",
-                "change_mom": "+4,8% m/m (vs. Feb 26)",
-                "change_yoy": "+45,8% i.a. (vs. Mar 25)",
-                "display_change": "+4,8% m/m",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Suma de seguros de vida individuales (voluntarios) y colectivos (obligatorios y opcionales).",
-                "badge": "Vida"
-            },
-            {
-                "key": "market_retiro",
-                "name": "Primas de Retiro (Ahorro)",
-                "display_value": "ARS 150,50 mil M",
-                "change_mom": "+5,5% m/m (vs. Feb 26)",
-                "change_yoy": "+52,5% i.a. (vs. Mar 25)",
-                "display_change": "+5,5% m/m",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Suscripción mensual de planes de capitalización y jubilación complementaria voluntaria.",
-                "badge": "Retiro"
+    print("Fetching SSN Market Data (Primas Acumuladas)...")
+    import requests
+    base_url = "https://www.argentina.gob.ar/superintendencia-de-seguros/estadisticas/situacion-del-mercado-asegurador"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    
+    excel_link = "https://www.argentina.gob.ar/sites/default/files/ssn_202603_sit_mercado_asegurador.xlsx"
+    try:
+        r = requests.get(base_url, headers=headers, verify=False, timeout=15)
+        if r.status_code == 200:
+            from bs4 import BeautifulSoup
+            soup = BeautifulSoup(r.text, 'html.parser')
+            for a in soup.find_all('a', href=True):
+                href = a['href']
+                if 'ssn_' in href and '_sit_mercado_asegurador' in href and href.endswith('.xlsx'):
+                    if href.startswith('/'):
+                        excel_link = 'https://www.argentina.gob.ar' + href
+                    else:
+                        excel_link = href
+                    break
+    except Exception as e:
+        print(f"Failed to scrape SSN page, using fallback link: {e}")
+        
+    print(f"Downloading SSN Excel: {excel_link}")
+    try:
+        import pandas as pd
+        from io import BytesIO
+        r = requests.get(excel_link, headers=headers, verify=False, timeout=30)
+        r.raise_for_status()
+        xls = pd.ExcelFile(BytesIO(r.content))
+        
+        if "Evol Trim Prima Emitida 2" not in xls.sheet_names:
+            print("Sheet 'Evol Trim Prima Emitida 2' not found!")
+            return {}
+            
+        df = pd.read_excel(xls, sheet_name="Evol Trim Prima Emitida 2")
+        
+        header_row_idx = None
+        var_nominal_col = None
+        var_real_col = None
+        current_period_col = None
+        
+        for idx, row in df.iterrows():
+            for col in df.columns:
+                val = str(row[col]).lower().replace(' ', '').replace('\n', '')
+                if 'var.%i.a.nominal' in val or ('var.%i.a.' in val and 'nominal' in val):
+                    header_row_idx = idx
+                    var_nominal_col = col
+                    for c in df.columns:
+                        c_val = str(row[c]).lower().replace(' ', '').replace('\n', '')
+                        if 'var.%i.a.real' in c_val or ('var.%i.a.' in c_val and 'real' in c_val):
+                            var_real_col = c
+                            break
+                    
+                    cols_list = list(df.columns)
+                    col_index = cols_list.index(var_nominal_col)
+                    if col_index > 0:
+                        current_period_col = cols_list[col_index - 1]
+                    break
+            if header_row_idx is not None:
+                break
+                
+        if header_row_idx is None:
+            header_row_idx = 3
+            var_nominal_col = 'Unnamed: 6'
+            var_real_col = 'Unnamed: 7'
+            current_period_col = 'Unnamed: 5'
+            
+        period_name = str(df.at[header_row_idx, current_period_col]).strip().replace('\n', ' ')
+        
+        targets = [
+            "Accidentes Personales", "Vida", "Salud", "Sepelio", "Retiro", "SEGUROS DE PERSONAS",
+            "Automotores (incluye Motovehculos)", "Riesgos Agropecuarios y Forestales", 
+            "Riesgos del Trabajo", "SEGUROS DE DAOS PATRIMONIALES", "TOTAL DE MERCADO"
+        ]
+        
+        def safe_float(v):
+            try:
+                return float(v)
+            except:
+                return 0.0
+
+        raw_data = {}
+        for t in targets:
+            matched_val = 0
+            matched_nom = 0
+            matched_real = 0
+            for idx in range(header_row_idx + 1, len(df)):
+                val0 = str(df.iloc[idx, 0]).strip()
+                def normalize(s):
+                    import unicodedata
+                    return unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore').decode('utf-8').lower()
+                
+                if "Automotores" in t and "Automotores" in val0 and "incluye" in val0:
+                    matched_val = safe_float(df.at[idx, current_period_col])
+                    matched_nom = safe_float(df.at[idx, var_nominal_col])
+                    matched_real = safe_float(df.at[idx, var_real_col])
+                    break
+                elif "DA" in t and "DA" in val0 and "PATRIMONIALES" in val0:
+                    matched_val = safe_float(df.at[idx, current_period_col])
+                    matched_nom = safe_float(df.at[idx, var_nominal_col])
+                    matched_real = safe_float(df.at[idx, var_real_col])
+                    break
+                elif normalize(t) == normalize(val0):
+                    matched_val = safe_float(df.at[idx, current_period_col])
+                    matched_nom = safe_float(df.at[idx, var_nominal_col])
+                    matched_real = safe_float(df.at[idx, var_real_col])
+                    break
+                    
+            raw_data[t] = {
+                'value': matched_val,
+                'var_nominal': matched_nom,
+                'var_real': matched_real
             }
-        ],
-        "accumulated_cards": [
-            {
-                "key": "accum_total_premiums",
-                "name": "Acumulado Total (Mercado)",
-                "display_value": "ARS 19,94 B",
-                "display_previous": "ARS 7,45 B (Ej. Anterior)",
-                "change_yoy": "+167,6% i.a. (vs. 9M 25)",
-                "display_change": "+167,6%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado de primas emitidas netas de anulaciones para los primeros 9 meses del ejercicio en curso.",
-                "badge": "Mercado Total"
-            },
-            {
-                "key": "accum_patrimoniales",
-                "name": "Acumulado Patrimoniales",
-                "display_value": "ARS 11,28 B",
-                "display_previous": "ARS 4,25 B (Ej. Anterior)",
-                "change_yoy": "+165,4% i.a. (vs. 9M 25)",
-                "display_change": "+165,4%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado de primas emitidas en ramos patrimoniales para los primeros 9 meses del ejercicio en curso.",
-                "badge": "Patrimoniales"
-            },
-            {
-                "key": "accum_autos",
-                "name": "Acumulado Automotores",
-                "display_value": "ARS 6,81 B",
-                "display_previous": "ARS 2,60 B (Ej. Anterior)",
-                "change_yoy": "+161,9% i.a. (vs. 9M 25)",
-                "display_change": "+161,9%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado en el ramo Automotores para los primeros 9 meses del ejercicio en curso.",
-                "badge": "Automotores"
-            },
-            {
-                "key": "accum_art",
-                "name": "Acumulado ART",
-                "display_value": "ARS 4,69 B",
-                "display_previous": "ARS 1,75 B (Ej. Anterior)",
-                "change_yoy": "+168,0% i.a. (vs. 9M 25)",
-                "display_change": "+168,0%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SRT / SSN",
-                "desc": "Acumulado por cobertura de Riesgos del Trabajo para los primeros 9 meses del ejercicio en curso.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "accum_vida",
-                "name": "Acumulado Vida",
-                "display_value": "ARS 2,79 B",
-                "display_previous": "ARS 1,02 B (Ej. Anterior)",
-                "change_yoy": "+173,5% i.a. (vs. 9M 25)",
-                "display_change": "+173,5%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado en Vida Individual y Colectivo para los primeros 9 meses del ejercicio en curso.",
-                "badge": "Vida"
-            },
-            {
-                "key": "accum_retiro",
-                "name": "Acumulado Retiro",
-                "display_value": "ARS 1,18 B",
-                "display_previous": "ARS 0,43 B (Ej. Anterior)",
-                "change_yoy": "+174,4% i.a. (vs. 9M 25)",
-                "display_change": "+174,4%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado en planes de capitalización y Retiro para los primeros 9 meses del ejercicio en curso.",
-                "badge": "Retiro"
-            }
-        ],
-        "market_breakdown_accumulated": [
-            {
-                "ramo": "Seguros Patrimoniales (Total)",
-                "sub_ramo": "-",
-                "premiums": "ARS 11.280,00 mil M",
-                "share": "56,57%",
-                "change_yoy": "+165,4%",
-                "desc": "Incendio, combinado familiar, transporte, granizo, etc. (Acumulado 9M)"
-            },
-            {
-                "ramo": "Seguros Patrimoniales",
-                "sub_ramo": "Automotores",
-                "premiums": "ARS 6.810,00 mil M",
-                "share": "34,15%",
-                "change_yoy": "+161,9%",
-                "desc": "Ramo líder en facturación patrimonial (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros Patrimoniales",
-                "sub_ramo": "Patrimoniales Resto",
-                "premiums": "ARS 4.470,00 mil M",
-                "share": "22,42%",
-                "change_yoy": "+170,8%",
-                "desc": "Riesgos agrícolas, combinado familiar, transportes, etc. (Acumulado 9M)"
-            },
-            {
-                "ramo": "Riesgos del Trabajo (ART)",
-                "sub_ramo": "-",
-                "premiums": "ARS 4.690,00 mil M",
-                "share": "23,52%",
-                "change_yoy": "+168,0%",
-                "desc": "Cobertura obligatoria por accidentes y enfermedades laborales (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas (Total)",
-                "sub_ramo": "-",
-                "premiums": "ARS 2.790,00 mil M",
-                "share": "13,99%",
-                "change_yoy": "+173,5%",
-                "desc": "Suma de vida individual/colectivo, accidentes personales y salud (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Vida Colectivo",
-                "premiums": "ARS 1.330,00 mil M",
-                "share": "6,67%",
-                "change_yoy": "+171,2%",
-                "desc": "SCVO obligatorio y convenios colectivos (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Vida Individual",
-                "premiums": "ARS 930,00 mil M",
-                "share": "4,66%",
-                "change_yoy": "+176,5%",
-                "desc": "Vida ahorro y protección individual (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Accidentes Personales",
-                "premiums": "ARS 310,00 mil M",
-                "share": "1,55%",
-                "change_yoy": "+172,0%",
-                "desc": "Pólizas de cobertura de accidentes individuales o colectivos (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Salud",
-                "premiums": "ARS 220,00 mil M",
-                "share": "1,10%",
-                "change_yoy": "+174,0%",
-                "desc": "Seguros indemnizatorios de salud (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Retiro (Total)",
-                "sub_ramo": "-",
-                "premiums": "ARS 1.180,00 mil M",
-                "share": "5,92%",
-                "change_yoy": "+174,4%",
-                "desc": "Planes de capitalización y jubilación privada (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Retiro",
-                "sub_ramo": "Retiro Individual",
-                "premiums": "ARS 750,00 mil M",
-                "share": "3,76%",
-                "change_yoy": "+175,2%",
-                "desc": "Planes individuales de retiro voluntario (Acumulado 9M)."
-            },
-            {
-                "ramo": "Seguros de Retiro",
-                "sub_ramo": "Retiro Colectivo",
-                "premiums": "ARS 430,00 mil M",
-                "share": "2,16%",
-                "change_yoy": "+173,0%",
-                "desc": "Planes corporativos para empleados (Acumulado 9M)."
-            }
-        ],
-        "market_breakdown": [
-            {
-                "ramo": "Seguros Patrimoniales (Total)",
-                "sub_ramo": "-",
-                "premiums": "ARS 1.443,00 mil M",
-                "share": "56,59%",
-                "change_mom": "+4,1%",
-                "change_yoy": "+42,8%",
-                "desc": "Incendio, combinado familiar, transporte, granizo, etc."
-            },
-            {
-                "ramo": "Seguros Patrimoniales",
-                "sub_ramo": "Automotores",
-                "premiums": "ARS 870,80 mil M",
-                "share": "34,15%",
-                "change_mom": "+3,8%",
-                "change_yoy": "+41,2%",
-                "desc": "Ramo líder en facturación patrimonial."
-            },
-            {
-                "ramo": "Seguros Patrimoniales",
-                "sub_ramo": "Patrimoniales Resto",
-                "premiums": "ARS 572,20 mil M",
-                "share": "22,44%",
-                "change_mom": "+4,5%",
-                "change_yoy": "+45,3%",
-                "desc": "Riesgos agrícolas, combinado familiar, transportes, incendio, etc."
-            },
-            {
-                "ramo": "Riesgos del Trabajo (ART)",
-                "sub_ramo": "-",
-                "premiums": "ARS 599,25 mil M",
-                "share": "23,50%",
-                "change_mom": "+5,2%",
-                "change_yoy": "+44,8%",
-                "desc": "Cobertura obligatoria por accidentes y enfermedades laborales."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas (Total)",
-                "sub_ramo": "-",
-                "premiums": "ARS 357,25 mil M",
-                "share": "14,01%",
-                "change_mom": "+4,8%",
-                "change_yoy": "+45,5%",
-                "desc": "Suma de vida individual/colectivo, accidentes personales y salud."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Vida Colectivo",
-                "premiums": "ARS 170,85 mil M",
-                "share": "6,70%",
-                "change_mom": "+4,3%",
-                "change_yoy": "+43,5%",
-                "desc": "SCVO obligatorio y convenios colectivos."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Vida Individual",
-                "premiums": "ARS 119,85 mil M",
-                "share": "4,70%",
-                "change_mom": "+5,1%",
-                "change_yoy": "+49,0%",
-                "desc": "Vida ahorro y protección individual."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Accidentes Personales",
-                "premiums": "ARS 38,75 mil M",
-                "share": "1,52%",
-                "change_mom": "+5,0%",
-                "change_yoy": "+42,5%",
-                "desc": "Pólizas de cobertura de accidentes individuales o colectivos."
-            },
-            {
-                "ramo": "Seguros de Vida y Personas",
-                "sub_ramo": "Salud",
-                "premiums": "ARS 27,80 mil M",
-                "share": "1,08%",
-                "change_mom": "+4,9%",
-                "change_yoy": "+41,8%",
-                "desc": "Seguros indemnizatorios de salud."
-            },
-            {
-                "ramo": "Seguros de Retiro (Total)",
-                "sub_ramo": "-",
-                "premiums": "ARS 150,50 mil M",
-                "share": "5,90%",
-                "change_mom": "+5,5%",
-                "change_yoy": "+52,5%",
-                "desc": "Planes de capitalización y jubilación privada."
-            },
-            {
-                "ramo": "Seguros de Retiro",
-                "sub_ramo": "Retiro Individual",
-                "premiums": "ARS 96,35 mil M",
-                "share": "3,78%",
-                "change_mom": "+5,8%",
-                "change_yoy": "+53,6%",
-                "desc": "Planes individuales de retiro voluntario."
-            },
-            {
-                "ramo": "Seguros de Retiro",
-                "sub_ramo": "Retiro Colectivo",
-                "premiums": "ARS 54,15 mil M",
-                "share": "2,12%",
-                "change_mom": "+5,0%",
-                "change_yoy": "+50,2%",
-                "desc": "Planes corporativos para empleados."
-            }
-        ],
-        "deep_dive_people": [
-            {
-                "key": "vida_individual",
-                "name": "Vida Individual (Ahorro y Prot.)",
-                "display_value": "ARS 119,85 mil M",
-                "display_change": "+49,00% i.a. (vs. Mar 25)",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN / AVIRA",
-                "desc": "Seguros voluntarios individuales con o sin componente de capitalización. Cifras del mes.",
-                "badge": "Vida Individual"
-            },
-            {
-                "key": "vida_colectivo",
-                "name": "Vida Colectivo (SCVO / Convenios)",
-                "display_value": "ARS 170,85 mil M",
-                "display_change": "+43,50% i.a. (vs. Mar 25)",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Seguros de vida colectivos, incluyendo el obligatorio SCVO y acuerdos gremiales. Cifras del mes.",
-                "badge": "Vida Colectivo"
-            },
-            {
-                "key": "retiro_individual",
-                "name": "Retiro Individual (Previsional)",
-                "display_value": "ARS 96,35 mil M",
-                "display_change": "+53,60% i.a. (vs. Mar 25)",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN / AVIRA",
-                "desc": "Planes de jubilación privada voluntaria para personas físicas, con tasas mínimas garantizadas. Cifras del mes.",
-                "badge": "Retiro Individual"
-            },
-            {
-                "key": "retiro_colectivo",
-                "name": "Retiro Colectivo (Planes Corporat.)",
-                "display_value": "ARS 54,15 mil M",
-                "display_change": "+50,20% i.a. (vs. Mar 25)",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Programas corporativos de capitalización para empleados clave contratados por empresas. Cifras del mes.",
-                "badge": "Retiro Colectivo"
-            },
-            {
-                "key": "acc_personales",
-                "name": "Accidentes Personales (AP)",
-                "display_value": "ARS 38,75 mil M",
-                "display_change": "+44,10% i.a. (vs. Mar 25)",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Cobertura ante fallecimiento o incapacidad por accidentes. Amplio uso en trabajadores independientes. Cifras del mes.",
-                "badge": "Accidentes Personales"
-            },
-            {
-                "key": "salud_seguros",
-                "name": "Salud (Indemnizatorio / Reembol.)",
-                "display_value": "ARS 27,80 mil M",
-                "display_change": "+41,80% i.a. (vs. Mar 25)",
-                "change_direction": "up",
-                "nature": "PRIMAS EMITIDAS MENSUALES",
-                "date": "Marzo 2026",
-                "source": "SSN",
-                "desc": "Cobertura indemnizatoria por intervenciones de alta complejidad, trasplantes y diagnóstico. Cifras del mes.",
-                "badge": "Salud"
-            }
-        ],
-        "deep_dive_people_accumulated": [
-            {
-                "key": "vida_individual_accum",
-                "name": "Acumulado Vida Individual",
-                "display_value": "ARS 1,15 B",
-                "display_previous": "ARS 0,42 B (Ej. Anterior)",
-                "change_yoy": "+173,8% i.a. (vs. 9M 25)",
-                "display_change": "+173,8%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN / AVIRA",
-                "desc": "Acumulado de seguros de vida individuales con o sin componente de ahorro para los primeros 9 meses del ejercicio.",
-                "badge": "Vida Individual"
-            },
-            {
-                "key": "vida_colectivo_accum",
-                "name": "Acumulado Vida Colectivo",
-                "display_value": "ARS 1,64 B",
-                "display_previous": "ARS 0,60 B (Ej. Anterior)",
-                "change_yoy": "+173,3% i.a. (vs. 9M 25)",
-                "display_change": "+173,3%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado de seguros de vida colectivos (SCVO y convenios) para los primeros 9 meses del ejercicio.",
-                "badge": "Vida Colectivo"
-            },
-            {
-                "key": "retiro_individual_accum",
-                "name": "Acumulado Retiro Individual",
-                "display_value": "ARS 0,75 B",
-                "display_previous": "ARS 0,27 B (Ej. Anterior)",
-                "change_yoy": "+177,8% i.a. (vs. 9M 25)",
-                "display_change": "+177,8%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN / AVIRA",
-                "desc": "Acumulado de planes de retiro voluntario individual con tasas garantizadas para los primeros 9 meses del ejercicio.",
-                "badge": "Retiro Individual"
-            },
-            {
-                "key": "retiro_colectivo_accum",
-                "name": "Acumulado Retiro Colectivo",
-                "display_value": "ARS 0,43 B",
-                "display_previous": "ARS 0,16 B (Ej. Anterior)",
-                "change_yoy": "+168,7% i.a. (vs. 9M 25)",
-                "display_change": "+168,7%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado de programas de capitalización y retiro colectivo corporativo para los primeros 9 meses del ejercicio.",
-                "badge": "Retiro Colectivo"
-            },
-            {
-                "key": "acc_personales_accum",
-                "name": "Acumulado Acc. Personales",
-                "display_value": "ARS 0,37 B",
-                "display_previous": "ARS 0,14 B (Ej. Anterior)",
-                "change_yoy": "+164,3% i.a. (vs. 9M 25)",
-                "display_change": "+164,3%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado por pólizas de Accidentes Personales para los primeros 9 meses del ejercicio.",
-                "badge": "Accidentes Personales"
-            },
-            {
-                "key": "salud_seguros_accum",
-                "name": "Acumulado Salud (Seguros)",
-                "display_value": "ARS 0,27 B",
-                "display_previous": "ARS 0,10 B (Ej. Anterior)",
-                "change_yoy": "+170,0% i.a. (vs. 9M 25)",
-                "display_change": "+170,0%",
-                "change_direction": "up",
-                "nature": "PRIMAS ACUMULADAS (9 MESES)",
-                "date": "Jul 25 - Mar 26",
-                "source": "SSN",
-                "desc": "Acumulado en coberturas de salud indemnizatoria o de reembolso para los primeros 9 meses del ejercicio.",
-                "badge": "Salud"
-            }
-        ],
-        "general_patrimoniales_art": [
-            {
-                "key": "exposicion_autos",
-                "name": "Vehículos Asegurados (Flota)",
-                "display_value": "8,45 M de Autos",
-                "display_change": "+2,30% i.a.",
-                "change_direction": "up",
-                "nature": "CANTIDAD DE UNIDADES VIGENTES",
-                "date": "Diciembre 2025",
-                "source": "SSN",
-                "desc": "Parque automotor asegurado total bajo pólizas de responsabilidad civil o cobertura total.",
-                "badge": "Automotores"
-            },
-            {
-                "key": "hectareas_agro",
-                "name": "Hectáreas Aseguradas (Agro)",
-                "display_value": "19,20 M de Hectáreas",
-                "display_change": "+1,50% i.a.",
-                "change_direction": "up",
-                "nature": "SUPERFICIE SEMBRADA CUBIERTA",
-                "date": "Campaña 2025/2026",
-                "source": "SSN / MinAgri",
-                "desc": "Superficie total nacional protegida contra riesgos climáticos (granizo, viento, heladas).",
-                "badge": "Riesgos Agrícolas"
-            },
-            {
-                "key": "viviendas_hogar",
-                "name": "Viviendas Aseguradas (Hogares)",
-                "display_value": "3,25 M de Hogares",
-                "display_change": "+2,80% i.a.",
-                "change_direction": "up",
-                "nature": "PÓLIZAS VIGENTES HOGAR",
-                "date": "Diciembre 2025",
-                "source": "SSN",
-                "desc": "Cantidad estimada de hogares cubiertos por seguros residenciales de combinado familiar.",
-                "badge": "Multicobertura Hogar"
-            },
-            {
-                "key": "comercios_industria",
-                "name": "Comercios e Industrias Protegidos",
-                "display_value": "850 K Pólizas",
-                "display_change": "+1,20% i.a.",
-                "change_direction": "up",
-                "nature": "PÓLIZAS VIGENTES COMERCIO",
-                "date": "Diciembre 2025",
-                "source": "SSN",
-                "desc": "Locales comerciales e industriales con cobertura vigente de integral de comercio y riesgos de incendio.",
-                "badge": "Pyme / Industria"
-            },
-            {
-                "key": "trabajadores_art",
-                "name": "Trabajadores Protegidos (ART)",
-                "display_value": "10,25 M de Personas",
-                "display_change": "+1,80% i.a.",
-                "change_direction": "up",
-                "nature": "CANTIDAD DE AFILIADOS VIGENTES",
-                "date": "Marzo 2026",
-                "source": "SRT",
-                "desc": "Personas trabajadoras registradas cubiertas en el Sistema de Riesgos del Trabajo.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "trabajadores_cotizantes_art",
-                "name": "Trabajadores Cotizantes (ART)",
-                "display_value": "9,82 M de Personas",
-                "display_change": "+1,40% i.a.",
-                "change_direction": "up",
-                "nature": "TRABAJADORES CON APORTES EFECTIVOS",
-                "date": "Marzo 2026",
-                "source": "SRT",
-                "desc": "Cantidad de trabajadores por quienes se han realizado contribuciones y aportes efectivos al sistema de riesgos del trabajo en el período de referencia.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "empleadores_art",
-                "name": "Empleadores Afiliados (ART)",
-                "display_value": "1,04 M de Empresas",
-                "display_change": "+1,10% i.a.",
-                "change_direction": "up",
-                "nature": "EMPRESAS AFILIADAS VIGENTES",
-                "date": "Marzo 2026",
-                "source": "SRT",
-                "desc": "Cantidad de empleadores (personas humanas o jurídicas) con personal cubierto por contrato de ART.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "empleadores_cotizantes_art",
-                "name": "Empleadores Cotizantes (ART)",
-                "display_value": "992 K Empleadores",
-                "display_change": "+0,90% i.a.",
-                "change_direction": "up",
-                "nature": "EMPRESAS CON APORTES EFECTIVOS",
-                "date": "Marzo 2026",
-                "source": "SRT",
-                "desc": "Empleadores registrados que han declarado y pagado efectivamente las cuotas de afiliación de su personal en el mes.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "tasa_accidentabilidad",
-                "name": "Siniestralidad ART (Frecuencia)",
-                "display_value": "4,20% anual",
-                "display_change": "-0,30% vs. año anterior",
-                "change_direction": "down",
-                "nature": "ÍNDICE DE INCIDENCIA DE ACCIDENTES",
-                "date": "Marzo 2026",
-                "source": "SRT",
-                "desc": "Porcentaje de trabajadores cubiertos que sufren algún siniestro laboral en el año.",
-                "badge": "Riesgos del Trabajo"
-            },
-            {
-                "key": "siniestralidad_autos",
-                "name": "Siniestralidad Automotores",
-                "display_value": "52,40% anual",
-                "display_change": "+1,20% vs. año anterior",
-                "change_direction": "up",
-                "nature": "Frecuencia de Siniestros de Autos",
-                "date": "Diciembre 2025",
-                "source": "SSN",
-                "desc": "Proporción estimada de vehículos asegurados que denuncian siniestros (choques, robos, daños) en el año.",
-                "badge": "Automotores"
-            },
-            {
-                "key": "siniestralidad_hogares",
-                "name": "Siniestralidad Hogar",
-                "display_value": "3,15% anual",
-                "display_change": "-0,10% vs. año anterior",
-                "change_direction": "down",
-                "nature": "Frecuencia de Siniestros Residencia",
-                "date": "Diciembre 2025",
-                "source": "SSN",
-                "desc": "Porcentaje de viviendas aseguradas que registran un reclamo por robo, incendio, agua o daños al año.",
-                "badge": "Multicobertura Hogar"
-            },
-            {
-                "key": "siniestralidad_agricola",
-                "name": "Siniestralidad Agrícola",
-                "display_value": "8,60% anual",
-                "display_change": "-2,40% vs. campaña anterior",
-                "change_direction": "down",
-                "nature": "Frecuencia de Siniestros Agro",
-                "date": "Campaña 2025/2026",
-                "source": "SSN / MAGyP",
-                "desc": "Relación entre hectáreas siniestradas (con indemnización de daños) y total de hectáreas aseguradas.",
-                "badge": "Riesgos Agrícolas"
-            },
-            {
-                "key": "demandas_art",
-                "name": "Juicios Notificados (ART - Sistema)",
-                "display_value": "112 K juicios/año",
-                "display_change": "-4,20% i.a.",
-                "change_direction": "down",
-                "nature": "DEMANDAS INGRESADAS ANUALES",
-                "date": "Año 2025",
-                "source": "SRT / UART",
-                "desc": "Cantidad total de juicios notificados e ingresados en el sistema de riesgos del trabajo.",
-                "badge": "Litigiosidad ART"
-            }
-        ],
-        "la_segunda_group": ssn_data["la_segunda_group"],
-        "insurance_groups_comparison": ssn_data["insurance_groups_comparison"],
-        "la_segunda_vs_mercado": {
-            "ratios": [
-                {
-                    "entity": "La Segunda Cooperativa (Patrimoniales)",
-                    "siniestralidad_lasegunda": 61.2,
-                    "siniestralidad_mercado": 64.8,
-                    "resultado_lasegunda": 4.2,
-                    "resultado_mercado": 2.5,
-                    "litigiosidad_lasegunda": 14.5,
-                    "litigiosidad_mercado": 17.2
-                },
-                {
-                    "entity": "La Segunda ART (Riesgos del Trabajo)",
-                    "siniestralidad_lasegunda": 73.5,
-                    "siniestralidad_mercado": 77.2,
-                    "resultado_lasegunda": 1.8,
-                    "resultado_mercado": -1.5,
-                    "litigiosidad_lasegunda": 48.2,
-                    "litigiosidad_mercado": 54.1
-                },
-                {
-                    "entity": "La Segunda Personas (Vida/Salud/AP)",
-                    "siniestralidad_lasegunda": 31.8,
-                    "siniestralidad_mercado": 34.5,
-                    "resultado_lasegunda": 8.4,
-                    "resultado_mercado": 6.1,
-                    "litigiosidad_lasegunda": 1.2,
-                    "litigiosidad_mercado": 1.8
-                },
-                {
-                    "entity": "La Segunda Retiro (Ahorro)",
-                    "siniestralidad_lasegunda": 12.4,
-                    "siniestralidad_mercado": 14.2,
-                    "resultado_lasegunda": 5.2,
-                    "resultado_mercado": 4.8,
-                    "litigiosidad_lasegunda": 0.2,
-                    "litigiosidad_mercado": 0.4
-                }
-            ],
-            "rankings": ssn_data["rankings"]
-        },
-        "historical_series": {
-            "months": ["Abr 25", "May 25", "Jun 25", "Jul 25", "Ago 25", "Sep 25", "Oct 25", "Nov 25", "Dic 25", "Ene 26", "Feb 26", "Mar 26"],
-            "vida_premiums": [150.2, 156.9, 166.2, 172.5, 181.8, 190.3, 201.5, 211.6, 231.3, 249.9, 267.0, 290.7],
-            "retiro_premiums": [74.0, 78.3, 83.0, 87.6, 92.5, 98.7, 105.2, 111.5, 123.3, 132.4, 140.9, 150.5],
-            "la_segunda_retiro_share": [12.1, 12.2, 12.1, 12.3, 12.2, 12.4, 12.5, 12.4, 12.5, 12.6, 12.5, 12.5],
-            "la_segunda_vida_share": [2.0, 2.0, 2.1, 2.1, 2.1, 2.1, 2.1, 2.2, 2.2, 2.1, 2.2, 2.1],
-            "years": ["2021", "2022", "2023", "2024", "2025"],
-            "retiro_ind_yearly": [15.4, 28.2, 58.4, 142.1, 412.5],
-            "retiro_col_yearly": [10.2, 18.5, 36.1, 89.4, 248.6],
-            "coop_share_5y": [5.4, 5.5, 5.6, 5.7, 5.8],
-            "art_share_5y": [7.9, 8.1, 8.2, 8.3, 8.4],
-            "personas_share_5y": [1.8, 1.9, 2.0, 2.1, 2.1],
-            "retiro_share_5y": [11.2, 11.8, 12.2, 12.4, 12.5],
-            "group_prem_coop": [55.2, 54.8, 54.2, 53.8, 53.5],
-            "group_prem_art": [30.2, 30.5, 30.8, 31.0, 31.2],
-            "group_prem_pers": [3.5, 3.6, 3.7, 3.7, 3.8],
-            "group_prem_ret": [11.1, 11.1, 11.3, 11.5, 11.5],
-            "group_prof_coop": [56.5, 56.1, 55.8, 55.4, 55.0],
-            "group_prof_art": [14.2, 13.8, 14.0, 14.5, 14.8],
-            "group_prof_pers": [7.8, 7.9, 8.0, 8.1, 8.2],
-            "group_prof_ret": [21.5, 22.2, 22.2, 22.0, 22.0]
+            
+        tot_patrimoniales = raw_data["SEGUROS DE DAOS PATRIMONIALES"]['value']
+        auto = raw_data["Automotores (incluye Motovehculos)"]['value']
+        agro = raw_data["Riesgos Agropecuarios y Forestales"]['value']
+        trabajo = raw_data["Riesgos del Trabajo"]['value']
+        otros_pat_val = tot_patrimoniales - (auto + agro + trabajo)
+        
+        raw_data["Otros Riesgos Patrimoniales"] = {
+            'value': otros_pat_val,
+            'var_nominal': 0,
+            'var_real': 0
         }
-    }
+        
+        return {
+            'period': period_name,
+            'ramos': raw_data
+        }
+        
+    except Exception as e:
+        print(f"Error fetching SSN Market Data: {e}")
+        return {}
 
 def deploy_to_github(html_filepath):
     """Deploys the generated HTML file to GitHub Pages as index.html."""
@@ -8902,878 +8269,184 @@ Stack: ${error ? error.stack : 'N/A'}`;
     </div>
 
     <!-- Global Tab Content 3: Mercado Asegurador -->
-    <div id="container-mercado-asegurador" class="hidden min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
-        <!-- SIDEBAR -->
-        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200">
-            <div class="p-6 border-b border-darkBorder light:border-gray-200">
-                <h1 class="text-xl font-black text-white light:text-slate-900 flex items-center gap-2">
-                    <i class="fas fa-shield-halved text-brandBlue"></i> Seguros
-                </h1>
-                <p class="text-xs text-slate-500 light:text-slate-400 mt-1">Mercado Asegurador Argentino</p>
-                <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-1">Actualizado: {{ data.update_time_insurance | default(data.update_time) }} hs</span>
-                <span class="text-[9px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
-            </div>
-            <div class="p-4 flex-1 space-y-1.5 overflow-y-auto">
-                <button onclick="switchAsegTab('aseg-tab-resumen-mensual')" id="btn-aseg-tab-resumen-mensual" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-gauge-high"></i> Resumen Primas Mensuales
-                </button>
-                <button onclick="switchAsegTab('aseg-tab-resumen-acumulado')" id="btn-aseg-tab-resumen-acumulado" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-layer-group"></i> Resumen Primas Acumuladas
-                </button>
-                <button onclick="switchAsegTab('aseg-tab-vida-retiro-mensual')" id="btn-aseg-tab-vida-retiro-mensual" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-people-group"></i> Vida y Retiro (Mensual)
-                </button>
-                <button onclick="switchAsegTab('aseg-tab-vida-retiro-acumulado')" id="btn-aseg-tab-vida-retiro-acumulado" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-vault"></i> Vida y Retiro (Acumulado)
-                </button>
-                <button onclick="switchAsegTab('aseg-tab-patrimoniales-art')" id="btn-aseg-tab-patrimoniales-art" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-car-burst"></i> Patrimoniales y ART
-                </button>
-                <button onclick="switchAsegTab('aseg-tab-la-segunda')" id="btn-aseg-tab-la-segunda" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-hands-holding-circle"></i> La Segunda (Grupo)
-                </button>
-                <button onclick="switchAsegTab('aseg-tab-la-segunda-vs-mercado')" id="btn-aseg-tab-la-segunda-vs-mercado" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-scale-balanced"></i> La Segunda vs Mercado
-                </button>
-            </div>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <main class="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full space-y-6">
-            <!-- PANEL 1A: RESUMEN GENERAL MENSUAL -->
-            <div id="aseg-tab-resumen-mensual" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-gauge-high text-brandBlue"></i> Resumen General - Primas Mensuales (Marzo 2026)
+    
+    <!-- Global Tab Content 3: Mercado Asegurador -->
+    <div id="container-mercado-asegurador" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
+        
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-darkBorder/40">
+            <div>
+                <h2 class="text-3xl font-black text-white light:text-slate-900 flex items-center gap-3">
+                    <i class="fas fa-shield-halved text-brandBlue"></i> Primas Acumuladas - Mercado
                 </h2>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 animate-fade-in">
-                    {% for card in data.insurance_data.summary_cards %}
-                    <div onclick="openSourceLink('{{ card.source }}')" class="cursor-pointer glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 border border-darkBorder/40">
-                        <div class="flex justify-between items-start gap-2 mb-2">
-                            <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-                                {{ card.name }}
-                                <span class="hover-badge">
-                                    <strong class="block text-brandBlue mb-1">{{ card.name }}</strong>
-                                    <span class="block mb-2 text-slate-300 light:text-slate-600">{{ card.desc }}</span>
-                                    <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Fuente: {{ card.source }}</span>
-                                </span>
-                            </span>
-                            <span class="px-2 py-0.5 text-[9px] rounded-full font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">{{ card.badge }}</span>
-                        </div>
-                        <div class="my-3">
-                          <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">{{ card.display_value }}</div>
-                        </div>
-                        <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-                            <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-                                {{ card.nature }}
-                                <span class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: {{ card.source }}</span>
-                            </span>
-                            <div class="flex flex-col items-end text-[10px] font-bold">
-                                {% if card.change_mom %}
-                                <span class="text-brandGreen flex items-center gap-0.5"><i class="fas fa-caret-up text-[9px]"></i> {{ card.change_mom }}</span>
-                                {% endif %}
-                                {% if card.change_yoy %}
-                                <span class="text-emerald-500 flex items-center gap-0.5 mt-0.5"><i class="fas fa-caret-up text-[9px]"></i> {{ card.change_yoy }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                
-                <!-- Bento Two-Column Layout -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <!-- Tabla de Desglose Jerárquico (7 cols) -->
-                    <div class="lg:col-span-7 glass-card rounded-2xl p-6 flex flex-col justify-between animate-fade-in">
-                        <div>
-                            <h3 class="text-md font-bold text-slate-300 light:text-slate-700 mb-2 flex items-center gap-2">
-                                <i class="fas fa-list-ol text-brandBlue"></i> Estructura y Desglose del Mercado
-                            </h3>
-                            <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                                Valores correspondientes a primas del mes de Marzo 2026. La participación indica el peso de cada ramo sobre el total facturado del sistema.
-                            </p>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-xs border-collapse">
-                                    <thead>
-                                        <tr class="border-b border-darkBorder/30 light:border-gray-200 text-slate-400 light:text-slate-500 font-bold">
-                                            <th class="py-2.5">Ramo / Segmento</th>
-                                            <th class="py-2.5 text-right">Primas (Mensual)</th>
-                                            <th class="py-2.5 text-right">% Part.</th>
-                                            <th class="py-2.5 text-right">Var. Mensual</th>
-                                            <th class="py-2.5 text-right">Var. Interanual</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-darkBorder/10 light:divide-gray-100 text-slate-300 light:text-slate-700">
-                                        {% for item in data.insurance_data.market_breakdown %}
-                                        <tr class="hover:bg-darkCard/20 light:hover:bg-slate-100/50 transition-colors">
-                                            <td class="py-2.5 flex items-center gap-2">
-                                                {% if item.sub_ramo == '-' %}
-                                                    <span class="font-bold text-white light:text-slate-900">{{ item.ramo }}</span>
-                                                {% else %}
-                                                    <span class="text-slate-500 light:text-slate-400 ml-4">└──</span>
-                                                    <span class="text-slate-300 light:text-slate-800">{{ item.sub_ramo }}</span>
-                                                {% endif %}
-                                            </td>
-                                            <td class="py-2.5 text-right font-semibold {% if item.sub_ramo == '-' %}text-white light:text-slate-900{% endif %}">{{ item.premiums }}</td>
-                                            <td class="py-2.5 text-right font-medium {% if item.sub_ramo == '-' %}text-slate-200 light:text-slate-600{% else %}text-slate-400 light:text-slate-500{% endif %}">{{ item.share }}</td>
-                                            <td class="py-2.5 text-right text-brandGreen font-semibold">{{ item.change_mom }}</td>
-                                            <td class="py-2.5 text-right text-emerald-500 font-semibold">{{ item.change_yoy }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-darkBorder/20 light:border-gray-100 text-[10px] text-slate-500 light:text-slate-400">
-                            <i class="fas fa-info-circle mr-1 text-brandBlue"></i> <strong>Nota sobre inflación:</strong> Las variaciones interanuales se expresan en términos nominales en Pesos (ARS). Debido a la inflación acumulada en el periodo de 9 meses (IPC de aprox. 32,6%), los porcentajes nominales de crecimiento interanual muestran una variación real positiva, con una producción que creció al 43,8% nominal.
-                        </div>
-                    </div>
-
-                    <!-- Torta de Distribución (5 cols) -->
-                    <div class="lg:col-span-5 glass-card rounded-2xl p-6 flex flex-col justify-between animate-fade-in">
-                        <div>
-                            <h3 class="text-md font-bold text-slate-300 light:text-slate-700 mb-2 flex items-center gap-2">
-                                <i class="fas fa-chart-pie text-brandBlue"></i> Distribución del Negocio
-                            </h3>
-                            <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                                Participación de los ramos principales y sub-ramos en la facturación mensual del mercado asegurador.
-                            </p>
-                            <div class="h-72 flex justify-center items-center relative my-4">
-                                <canvas id="chart-aseg-distribucion"></canvas>
-                            </div>
-                        </div>
-                        <div class="text-[10px] text-slate-400 light:text-slate-500 text-center">
-                            Pasa el cursor sobre cada segmento para visualizar la facturación y el porcentaje sobre el total del mercado.
-                        </div>
-                    </div>
-                </div>
+                <p class="text-sm text-slate-400 light:text-slate-600 mt-2">
+                    Situacin del Mercado Asegurador (Acumulado a {{ data.insurance_data.period }}) - <span class="italic text-xs">Valores en pesos corrientes. Fuente: SSN.</span>
+                </p>
             </div>
+            <div class="mt-4 md:mt-0 text-right">
+                <span class="text-xs text-slate-500 light:text-slate-400 font-semibold block">Actualizado: {{ data.update_time_insurance }} hs</span>
+            </div>
+        </div>
 
-            <!-- PANEL 1B: RESUMEN GENERAL ACUMULADO -->
-            <div id="aseg-tab-resumen-acumulado" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-layer-group text-brandBlue"></i> Resumen General - Primas Acumuladas (9 Meses al 31/03/2026)
-                </h2>
-
-                <div class="p-4 rounded-xl bg-brandBlue/5 border border-brandBlue/10 text-xs text-slate-400 light:text-slate-600 flex items-start gap-3">
-                    <i class="fas fa-info-circle text-brandBlue mt-0.5 text-sm"></i>
+        <!-- KPI Cards (Top Totals) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Total Mercado -->
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-brandBlue relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i class="fas fa-building-shield text-6xl"></i>
+                </div>
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total del Mercado</h3>
+                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['TOTAL DE MERCADO'].value | format_price }}</div>
+                
+                <div class="flex gap-4">
                     <div>
-                        <strong class="text-white light:text-slate-900 block mb-1">Nota sobre Datos de Primas Acumuladas:</strong>
-                        <p class="leading-relaxed">
-                            Los datos corresponden al acumulado de **9 meses** (Julio 2025 - Marzo 2026, dado que el ciclo fiscal de las compañías aseguradoras corre del 01/07 al 30/06).
-                            Se presenta el valor nominal actual y se compara de forma directa contra el acumulado nominal de 9 meses del ciclo previo (Julio 2024 - Marzo 2025).
-                        </p>
+                        <span class="text-[10px] text-slate-500 uppercase block mb-1">Var. i.a. Nominal</span>
+                        <span class="text-sm font-bold {% if data.insurance_data.ramos['TOTAL DE MERCADO'].var_nominal > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                            <i class="fas {% if data.insurance_data.ramos['TOTAL DE MERCADO'].var_nominal > 0 %}fa-arrow-up{% else %}fa-arrow-down{% endif %} mr-1"></i>
+                            {{ data.insurance_data.ramos['TOTAL DE MERCADO'].var_nominal | format_pct }}%
+                        </span>
                     </div>
-                </div>
-                
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5 animate-fade-in">
-                    {% for card in data.insurance_data.accumulated_cards %}
-                    <div onclick="openSourceLink('{{ card.source }}')" class="cursor-pointer glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 border border-darkBorder/40">
-                        <div class="flex justify-between items-start gap-2 mb-2">
-                            <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-                                {{ card.name }}
-                                <span class="hover-badge">
-                                    <strong class="block text-brandBlue mb-1">{{ card.name }}</strong>
-                                    <span class="block mb-2 text-slate-300 light:text-slate-600">{{ card.desc }}</span>
-                                    <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Fuente: {{ card.source }}</span>
-                                </span>
-                            </span>
-                            <span class="px-2 py-0.5 text-[9px] rounded-full font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">{{ card.badge }}</span>
-                        </div>
-                        <div class="my-3">
-                            <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">{{ card.display_value }}</div>
-                            <div class="text-[10px] text-slate-400 light:text-slate-500 mt-1.5 font-semibold">
-                                <span class="text-slate-500">Ej. Anterior:</span> {{ card.display_previous }}
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-                            <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-                                {{ card.nature }}
-                                <span class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: {{ card.source }}</span>
-                            </span>
-                            {% if card.display_change %}
-                            <span class="font-bold flex items-center gap-1 text-emerald-500">
-                                <i class="fas fa-caret-up"></i> {{ card.display_change }} i.a.
-                            </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Bento Two-Column Layout (Acumulado) -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-                    <!-- Tabla de Desglose Jerárquico (7 cols) -->
-                    <div class="lg:col-span-7 glass-card rounded-2xl p-6 flex flex-col justify-between animate-fade-in">
-                        <div>
-                            <h3 class="text-md font-bold text-slate-300 light:text-slate-700 mb-2 flex items-center gap-2">
-                                <i class="fas fa-list-ol text-brandBlue"></i> Estructura y Desglose (Acumulado 9M)
-                            </h3>
-                            <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                                Valores correspondientes a primas acumuladas del ejercicio fiscal actual (Julio 2025 - Marzo 2026). La participación indica el peso de cada ramo sobre el total facturado del sistema.
-                            </p>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-left text-xs border-collapse">
-                                    <thead>
-                                        <tr class="border-b border-darkBorder/30 light:border-gray-200 text-slate-400 light:text-slate-500 font-bold">
-                                            <th class="py-2.5">Ramo / Segmento</th>
-                                            <th class="py-2.5 text-right">Primas (Acumuladas 9M)</th>
-                                            <th class="py-2.5 text-right">% Part.</th>
-                                            <th class="py-2.5 text-right">Var. Interanual (vs. 9M 25)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="divide-y divide-darkBorder/10 light:divide-gray-100 text-slate-300 light:text-slate-700">
-                                        {% for item in data.insurance_data.market_breakdown_accumulated %}
-                                        <tr class="hover:bg-darkCard/20 light:hover:bg-slate-100/50 transition-colors">
-                                            <td class="py-2.5 flex items-center gap-2">
-                                                {% if item.sub_ramo == '-' %}
-                                                    <span class="font-bold text-white light:text-slate-900">{{ item.ramo }}</span>
-                                                {% else %}
-                                                    <span class="text-slate-500 light:text-slate-400 ml-4">└──</span>
-                                                    <span class="text-slate-300 light:text-slate-800">{{ item.sub_ramo }}</span>
-                                                {% endif %}
-                                            </td>
-                                            <td class="py-2.5 text-right font-semibold {% if item.sub_ramo == '-' %}text-white light:text-slate-900{% endif %}">{{ item.premiums }}</td>
-                                            <td class="py-2.5 text-right font-medium {% if item.sub_ramo == '-' %}text-slate-200 light:text-slate-600{% else %}text-slate-400 light:text-slate-500{% endif %}">{{ item.share }}</td>
-                                            <td class="py-2.5 text-right text-emerald-500 font-semibold">{{ item.change_yoy }}</td>
-                                        </tr>
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="mt-4 pt-3 border-t border-darkBorder/20 light:border-gray-100 text-[10px] text-slate-500 light:text-slate-400">
-                            <i class="fas fa-info-circle mr-1 text-brandBlue"></i> <strong>Nota sobre inflación:</strong> Las variaciones interanuales representan el crecimiento nominal de la facturación acumulada de 9 meses respecto al mismo periodo del ejercicio previo.
-                        </div>
-                    </div>
-
-                    <!-- Torta de Distribución (5 cols) -->
-                    <div class="lg:col-span-5 glass-card rounded-2xl p-6 flex flex-col justify-between animate-fade-in">
-                        <div>
-                            <h3 class="text-md font-bold text-slate-300 light:text-slate-700 mb-2 flex items-center gap-2">
-                                <i class="fas fa-chart-pie text-brandBlue"></i> Distribución del Negocio (Acumulado 9M)
-                            </h3>
-                            <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                                Participación de los ramos principales y sub-ramos en la facturación acumulada del ejercicio actual.
-                            </p>
-                            <div class="h-72 flex justify-center items-center relative my-4">
-                                <canvas id="chart-aseg-distribucion-acumulado"></canvas>
-                            </div>
-                        </div>
-                        <div class="text-[10px] text-slate-400 light:text-slate-500 text-center">
-                            Pasa el cursor sobre cada segmento para visualizar la facturación acumulada y el porcentaje de participación.
-                        </div>
+                    <div>
+                        <span class="text-[10px] text-slate-500 uppercase block mb-1">Var. i.a. Real</span>
+                        <span class="text-sm font-bold {% if data.insurance_data.ramos['TOTAL DE MERCADO'].var_real > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                            <i class="fas {% if data.insurance_data.ramos['TOTAL DE MERCADO'].var_real > 0 %}fa-arrow-up{% else %}fa-arrow-down{% endif %} mr-1"></i>
+                            {{ data.insurance_data.ramos['TOTAL DE MERCADO'].var_real | format_pct }}%
+                        </span>
                     </div>
                 </div>
             </div>
 
-            <!-- PANEL 2A: VIDA Y RETIRO (MENSUAL) -->
-            <div id="aseg-tab-vida-retiro-mensual" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-people-group text-brandBlue"></i> Seguros de Personas - Vida y Retiro (Mensual)
-                </h2>
-
-                <!-- Nota Aclaratoria sobre Fechas e Inflación -->
-                <div class="p-4 rounded-xl bg-brandBlue/5 border border-brandBlue/10 text-xs text-slate-400 light:text-slate-600 flex items-start gap-3">
-                    <i class="fas fa-info-circle text-brandBlue mt-0.5 text-sm"></i>
+            <!-- Seguros de Personas -->
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-emerald-500 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i class="fas fa-people-group text-6xl"></i>
+                </div>
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total Seguros de Personas</h3>
+                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].value | format_price }}</div>
+                
+                <div class="flex gap-4">
                     <div>
-                        <strong class="text-white light:text-slate-900 block mb-1">Nota sobre Datos de Vida y Retiro Mensual:</strong>
-                        <p class="leading-relaxed">
-                            Los datos corresponden a **valores mensuales de Marzo 2026**. 
-                            Los porcentajes de variación interanual nominal reflejan aumentos del orden del **40% al 53% i.a.** debido al impacto inflacionario interanual acumulado en pesos corrientes.
-                        </p>
+                        <span class="text-[10px] text-slate-500 uppercase block mb-1">Var. Nominal</span>
+                        <span class="text-sm font-bold {% if data.insurance_data.ramos['SEGUROS DE PERSONAS'].var_nominal > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                            {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].var_nominal | format_pct }}%
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-slate-500 uppercase block mb-1">Var. Real</span>
+                        <span class="text-sm font-bold {% if data.insurance_data.ramos['SEGUROS DE PERSONAS'].var_real > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                            {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].var_real | format_pct }}%
+                        </span>
                     </div>
                 </div>
+            </div>
 
-                <!-- Sub-section: Primas Mensuales -->
-                <div class="space-y-3 animate-fade-in">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-                        {% for card in data.insurance_data.deep_dive_people %}
-                        <div onclick="openSourceLink('{{ card.source }}')" class="cursor-pointer glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 border border-darkBorder/40">
-                            <div class="flex justify-between items-start gap-2 mb-2">
-                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-                                    {{ card.name }}
-                                    <span class="hover-badge">
-                                        <strong class="block text-brandBlue mb-1">{{ card.name }}</strong>
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">{{ card.desc }}</span>
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Fuente: {{ card.source }}</span>
-                                    </span>
-                                </span>
-                                <span class="px-2 py-0.5 text-[9px] rounded-full font-bold bg-brandGreen/10 text-brandGreen border border-brandGreen/20">{{ card.badge }}</span>
-                            </div>
-                            <div class="my-3">
-                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">{{ card.display_value }}</div>
-                            </div>
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-                                    {{ card.nature }}
-                                    <span class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: {{ card.source }}</span>
-                                </span>
-                                {% if card.display_change %}
-                                <span class="font-bold flex items-center gap-1 text-brandGreen">
-                                    <i class="fas fa-caret-up"></i> {{ card.display_change }}
-                                </span>
-                                {% endif %}
-                            </div>
-                        </div>
+            <!-- Seguros Patrimoniales -->
+            <div class="glass-card rounded-2xl p-6 border-l-4 border-l-orange-500 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <i class="fas fa-car-burst text-6xl"></i>
+                </div>
+                <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total Seguros Patrimoniales</h3>
+                <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].value | format_price }}</div>
+                
+                <div class="flex gap-4">
+                    <div>
+                        <span class="text-[10px] text-slate-500 uppercase block mb-1">Var. Nominal</span>
+                        <span class="text-sm font-bold {% if data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].var_nominal > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                            {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].var_nominal | format_pct }}%
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-[10px] text-slate-500 uppercase block mb-1">Var. Real</span>
+                        <span class="text-sm font-bold {% if data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].var_real > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                            {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].var_real | format_pct }}%
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Breakdown Table -->
+        <div class="glass-card rounded-2xl overflow-hidden border border-darkBorder/40">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-darkCard/50 light:bg-slate-100/50 text-slate-400 light:text-slate-500 text-xs uppercase tracking-wider">
+                            <th class="px-6 py-4 font-semibold border-b border-darkBorder/40">Rama de Seguro</th>
+                            <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right">Primas Acumuladas ($)</th>
+                            <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right">Var. % i.a. Nominal</th>
+                            <th class="px-6 py-4 font-semibold border-b border-darkBorder/40 text-right">Var. % i.a. Real</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-darkBorder/20 light:divide-gray-100 text-sm">
+                        
+                        <!-- Seguros de Personas -->
+                        <tr class="bg-darkCard/20 light:bg-slate-50/50">
+                            <td colspan="4" class="px-6 py-3 font-bold text-emerald-400 light:text-emerald-600">
+                                <i class="fas fa-users mr-2"></i> Seguros de Personas
+                            </td>
+                        </tr>
+                        {% set personas_items = [
+                            ('Accidentes Personales', 'Accidentes Personales'),
+                            ('Vida', 'Vida'),
+                            ('Salud', 'Salud'),
+                            ('Sepelio', 'Sepelio'),
+                            ('Retiro', 'Retiro')
+                        ] %}
+                        {% for lbl, key in personas_items %}
+                        <tr class="hover:bg-brandBlue/5 transition-colors group">
+                            <td class="px-6 py-4 font-semibold text-white light:text-slate-800 pl-10">{{ lbl }}</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-300 light:text-slate-700">${{ data.insurance_data.ramos[key].value | format_price }}</td>
+                            <td class="px-6 py-4 text-right font-bold {% if data.insurance_data.ramos[key].var_nominal > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                                {{ data.insurance_data.ramos[key].var_nominal | format_pct }}%
+                            </td>
+                            <td class="px-6 py-4 text-right font-bold {% if data.insurance_data.ramos[key].var_real > 0 %}text-emerald-500{% else %}text-red-500{% endif %}">
+                                {{ data.insurance_data.ramos[key].var_real | format_pct }}%
+                            </td>
+                        </tr>
                         {% endfor %}
-                    </div>
-                </div>
 
-                <!-- Gráficos de Evolución Mensual -->
-                <div class="glass-card rounded-2xl p-6 animate-fade-in">
-                    <h3 class="text-md font-bold text-slate-300 light:text-slate-700 mb-4">Evolución del Primaje Mensual (Últimos 12 Meses)</h3>
-                    <div class="h-64">
-                        <canvas id="chart-aseg-vida-retiro-mensual"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANEL 2B: VIDA Y RETIRO (ACUMULADO) -->
-            <div id="aseg-tab-vida-retiro-acumulado" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-vault text-brandBlue"></i> Seguros de Personas - Vida y Retiro (Acumulado 9 Meses)
-                </h2>
-
-                <!-- Nota Aclaratoria sobre Fechas e Inflación -->
-                <div class="p-4 rounded-xl bg-brandBlue/5 border border-brandBlue/10 text-xs text-slate-400 light:text-slate-600 flex items-start gap-3">
-                    <i class="fas fa-info-circle text-brandBlue mt-0.5 text-sm"></i>
-                    <div>
-                        <strong class="text-white light:text-slate-900 block mb-1">Nota sobre Datos de Vida y Retiro Acumulado:</strong>
-                        <p class="leading-relaxed">
-                            Los datos corresponden a **valores acumulados de 9 meses a Marzo 2026** (ejercicio fiscal iniciado el 01/07/2025). 
-                            Los porcentajes de variación interanual nominal reflejan aumentos del orden del **160% al 178% i.a.** en las cifras acumuladas.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Sub-section: Primas Acumuladas -->
-                <div class="space-y-3 animate-fade-in">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-                        {% for card in data.insurance_data.deep_dive_people_accumulated %}
-                        <div onclick="openSourceLink('{{ card.source }}')" class="cursor-pointer glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 border border-darkBorder/40">
-                            <div class="flex justify-between items-start gap-2 mb-2">
-                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-                                    {{ card.name }}
-                                    <span class="hover-badge">
-                                        <strong class="block text-brandBlue mb-1">{{ card.name }}</strong>
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">{{ card.desc }}</span>
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Fuente: {{ card.source }}</span>
-                                    </span>
-                                </span>
-                                <span class="px-2 py-0.5 text-[9px] rounded-full font-bold bg-brandGreen/10 text-brandGreen border border-brandGreen/20">{{ card.badge }}</span>
-                            </div>
-                            <div class="my-3">
-                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">{{ card.display_value }}</div>
-                                <div class="text-[10px] text-slate-400 light:text-slate-500 mt-1.5 font-semibold">
-                                    <span class="text-slate-500">Ej. Anterior:</span> {{ card.display_previous }}
-                                </div>
-                            </div>
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-                                    {{ card.nature }}
-                                    <span class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: {{ card.source }}</span>
-                                </span>
-                                {% if card.display_change %}
-                                <span class="font-bold flex items-center gap-1 text-emerald-500">
-                                    <i class="fas fa-caret-up"></i> {{ card.display_change }}
-                                </span>
+                        <!-- Seguros Patrimoniales -->
+                        <tr class="bg-darkCard/20 light:bg-slate-50/50 border-t-2 border-darkBorder/60">
+                            <td colspan="4" class="px-6 py-3 font-bold text-orange-400 light:text-orange-600">
+                                <i class="fas fa-car-burst mr-2"></i> Seguros Patrimoniales
+                            </td>
+                        </tr>
+                        {% set patrimoniales_items = [
+                            ('Automotores (incl. Motovehculos)', 'Automotores (incluye Motovehculos)'),
+                            ('Riesgos Agropecuarios y Forestales', 'Riesgos Agropecuarios y Forestales'),
+                            ('Riesgos del Trabajo', 'Riesgos del Trabajo'),
+                            ('Otros Riesgos Patrimoniales', 'Otros Riesgos Patrimoniales')
+                        ] %}
+                        {% for lbl, key in patrimoniales_items %}
+                        <tr class="hover:bg-brandBlue/5 transition-colors group">
+                            <td class="px-6 py-4 font-semibold text-white light:text-slate-800 pl-10">{{ lbl }}</td>
+                            <td class="px-6 py-4 text-right font-mono text-slate-300 light:text-slate-700">${{ data.insurance_data.ramos[key].value | format_price }}</td>
+                            
+                            <td class="px-6 py-4 text-right font-bold {% if data.insurance_data.ramos[key].var_nominal > 0 %}text-emerald-500{% elif data.insurance_data.ramos[key].var_nominal < 0 %}text-red-500{% else %}text-slate-500{% endif %}">
+                                {% if data.insurance_data.ramos[key].var_nominal != 0 %}
+                                    {{ data.insurance_data.ramos[key].var_nominal | format_pct }}%
+                                {% else %}
+                                    -
                                 {% endif %}
-                            </div>
-                        </div>
+                            </td>
+                            <td class="px-6 py-4 text-right font-bold {% if data.insurance_data.ramos[key].var_real > 0 %}text-emerald-500{% elif data.insurance_data.ramos[key].var_real < 0 %}text-red-500{% else %}text-slate-500{% endif %}">
+                                {% if data.insurance_data.ramos[key].var_real != 0 %}
+                                    {{ data.insurance_data.ramos[key].var_real | format_pct }}%
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
                         {% endfor %}
-                    </div>
-                </div>
-
-                <!-- Gráficos de Evolución de Ejercicios Anuales -->
-                <div class="glass-card rounded-2xl p-6 animate-fade-in">
-                    <h3 class="text-md font-bold text-slate-300 light:text-slate-700 mb-4">Evolución de Ejercicios Anuales de Retiro (Previsional)</h3>
-                    <div class="h-64">
-                        <canvas id="chart-aseg-retiro-ejercicios"></canvas>
-                    </div>
-                </div>
+                    </tbody>
+                </table>
             </div>
-
-            <!-- PANEL 3: PATRIMONIALES Y ART -->
-            <div id="aseg-tab-patrimoniales-art" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-car-burst text-brandBlue"></i> Seguros Generales y Riesgos del Trabajo
-                </h2>
-                
-                <!-- Cards Grid - 8 Cards for detailed P&C and ART overview -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                    {% for card in data.insurance_data.general_patrimoniales_art %}
-                    <div onclick="openSourceLink('{{ card.source }}')" class="cursor-pointer glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 border border-darkBorder/40">
-                        <div class="flex justify-between items-start gap-2 mb-2">
-                            <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-                                {{ card.name }}
-                                <span class="hover-badge">
-                                    <strong class="block text-brandBlue mb-1">{{ card.name }}</strong>
-                                    <span class="block mb-2 text-slate-300 light:text-slate-600">{{ card.desc }}</span>
-                                    <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Fuente: {{ card.source }}</span>
-                                </span>
-                            </span>
-                            <span class="px-2 py-0.5 text-[9px] rounded-full font-bold bg-amber-500/10 text-amber-500 border border-amber-500/20">{{ card.badge }}</span>
-                        </div>
-                        <div class="my-3">
-                            <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">{{ card.display_value }}</div>
-                        </div>
-                        <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-                            <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-                                {{ card.nature }}
-                                <span class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: {{ card.source }}</span>
-                            </span>
-                            {% if card.display_change %}
-                            <span class="font-bold flex items-center gap-1 {% if card.change_direction == 'down' %}text-brandGreen{% else %}text-brandGreen{% endif %}">
-                                <i class="fas {% if card.change_direction == 'down' %}fa-caret-down{% else %}fa-caret-up{% endif %}"></i> {{ card.display_change }}
-                            </span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- PANEL 4: LA SEGUNDA (GRUPO) -->
-            <div id="aseg-tab-la-segunda" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-hands-holding-circle text-brandBlue"></i> La Segunda Grupo Asegurador
-                </h2>
-                
-                <!-- Estructura del Grupo -->
-                <div class="glass-card rounded-2xl p-6">
-                    <h3 class="text-md font-bold text-slate-200 light:text-slate-800 border-b border-darkBorder/40 pb-2 mb-4">Estructura de Negocios y Producción</h3>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500 uppercase border-b border-darkBorder/30">
-                                    <th class="px-4 py-3">Entidad</th>
-                                    <th class="px-4 py-3">Segmento principal</th>
-                                    <th class="px-4 py-3 text-right">Producción (Primas)</th>
-                                    <th class="px-4 py-3 text-right">Cuota de Mercado</th>
-                                    <th class="px-4 py-3 text-right">Posición / Ranking</th>
-                                    <th class="px-4 py-3">Líder del Ramo</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/40 light:divide-gray-200 text-slate-300 light:text-slate-700">
-                                {% for row in data.insurance_data.la_segunda_group %}
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50 transition-colors">
-                                    <td class="px-4 py-3 font-semibold text-white light:text-slate-900">{{ row.entity }}</td>
-                                    <td class="px-4 py-3">{{ row.segment }}</td>
-                                    <td class="px-4 py-3 text-right text-brandGreen font-bold">{{ row.premiums }}</td>
-                                    <td class="px-4 py-3 text-right font-bold">{{ row.share }}</td>
-                                    <td class="px-4 py-3 text-right text-brandBlue font-semibold">{{ row.rank }}</td>
-                                    <td class="px-4 py-3 text-slate-400 light:text-slate-500">{{ row.leader }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Comparación de Grupos Aseguradores -->
-                <div class="glass-card rounded-2xl p-6">
-                    <h3 class="text-md font-bold text-slate-200 light:text-slate-800 border-b border-darkBorder/40 pb-2 mb-4 flex items-center gap-2">
-                        <i class="fas fa-users-rectangle text-brandBlue"></i> Comparación de Grupos Aseguradores (Líderes del Mercado)
-                    </h3>
-                    <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                        Ranking nacional de grupos aseguradores consolidados por producción de primas (valores acumulados de 9 meses al 31/03/2026).
-                    </p>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500 uppercase border-b border-darkBorder/30">
-                                    <th class="px-4 py-3">Puesto</th>
-                                    <th class="px-4 py-3">Grupo Asegurador</th>
-                                    <th class="px-4 py-3">Aseguradoras del Grupo</th>
-                                    <th class="px-4 py-3 text-right">Producción (Primas 9M)</th>
-                                    <th class="px-4 py-3 text-right">Cuota de Mercado Grupo</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/40 light:divide-gray-200 text-slate-300 light:text-slate-700">
-                                {% for row in data.insurance_data.insurance_groups_comparison %}
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50 transition-colors {% if row.group == 'Grupo La Segunda' %}bg-brandBlue/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="px-4 py-3 text-brandBlue font-bold">{{ row.rank }}</td>
-                                    <td class="px-4 py-3 font-semibold text-white light:text-slate-900">{{ row.group }}</td>
-                                    <td class="px-4 py-3 text-slate-400 light:text-slate-500">{{ row.companies }}</td>
-                                    <td class="px-4 py-3 text-right text-brandGreen font-bold">{{ row.premiums }}</td>
-                                    <td class="px-4 py-3 text-right font-bold {% if row.group == 'Grupo La Segunda' %}text-brandBlue{% endif %}">{{ row.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Gráficos del Grupo La Segunda -->
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                    <!-- Gráfico 1: Cuota de Mercado (Seleccionable) (7 cols) -->
-                    <div class="lg:col-span-7 glass-card rounded-2xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
-                                <h3 class="text-md font-bold text-slate-300 light:text-slate-700 flex items-center gap-2">
-                                    <i class="fas fa-chart-line text-brandBlue"></i> Evolución de Cuota de Mercado (5 Años)
-                                </h3>
-                                <!-- Checkboxes de Selección -->
-                                <div class="flex flex-wrap items-center gap-3 text-[10px] font-semibold text-slate-400 light:text-slate-600 bg-slate-900/40 light:bg-slate-100/80 p-1.5 rounded-lg border border-darkBorder/20 light:border-gray-200">
-                                    <label class="flex items-center gap-1 cursor-pointer hover:text-white light:hover:text-slate-900">
-                                        <input type="checkbox" id="chk-share-coop" checked onchange="updateGroupShareChart()" class="rounded border-darkBorder/40 text-brandBlue focus:ring-0 bg-darkBg light:bg-white w-3 h-3">
-                                        Generales
-                                    </label>
-                                    <label class="flex items-center gap-1 cursor-pointer hover:text-white light:hover:text-slate-900">
-                                        <input type="checkbox" id="chk-share-art" checked onchange="updateGroupShareChart()" class="rounded border-darkBorder/40 text-brandBlue focus:ring-0 bg-darkBg light:bg-white w-3 h-3">
-                                        ART
-                                    </label>
-                                    <label class="flex items-center gap-1 cursor-pointer hover:text-white light:hover:text-slate-900">
-                                        <input type="checkbox" id="chk-share-pers" checked onchange="updateGroupShareChart()" class="rounded border-darkBorder/40 text-brandBlue focus:ring-0 bg-darkBg light:bg-white w-3 h-3">
-                                        Personas
-                                    </label>
-                                    <label class="flex items-center gap-1 cursor-pointer hover:text-white light:hover:text-slate-900">
-                                        <input type="checkbox" id="chk-share-ret" checked onchange="updateGroupShareChart()" class="rounded border-darkBorder/40 text-brandBlue focus:ring-0 bg-darkBg light:bg-white w-3 h-3">
-                                        Retiro
-                                    </label>
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                                Cuota de mercado individual de cada compañía del grupo sobre su correspondiente ramo a nivel nacional (ejercicios anuales 2021-2025).
-                            </p>
-                            <div class="h-64">
-                                <canvas id="chart-aseg-lasegunda-share"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Gráfico 2: Participación Interna del Grupo (Alternable) (5 cols) -->
-                    <div class="lg:col-span-5 glass-card rounded-2xl p-6 flex flex-col justify-between">
-                        <div>
-                            <div class="flex items-center justify-between gap-2 mb-4">
-                                <h3 class="text-md font-bold text-slate-300 light:text-slate-700 flex items-center gap-2">
-                                    <i class="fas fa-chart-bar text-brandBlue"></i> Composición del Grupo (5 Años)
-                                </h3>
-                                <!-- Selector de Alternancia -->
-                                <div class="flex items-center bg-slate-900/60 light:bg-slate-200/80 p-0.5 rounded-lg border border-darkBorder/20 light:border-gray-300">
-                                    <button onclick="toggleGroupContribution('primas')" id="btn-contrib-primas" class="px-2.5 py-1 rounded-md text-[10px] font-bold transition-all text-white bg-brandBlue">
-                                        Primas
-                                    </button>
-                                    <button onclick="toggleGroupContribution('resultados')" id="btn-contrib-resultados" class="px-2.5 py-1 rounded-md text-[10px] font-bold transition-all text-slate-400 light:text-slate-600 hover:text-white light:hover:text-slate-900">
-                                        Resultados
-                                    </button>
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-500 light:text-slate-400 mb-4">
-                                Participación de cada una de las 4 aseguradoras en el total consolidado del grupo La Segunda.
-                            </p>
-                            <div class="h-64">
-                                <canvas id="chart-aseg-group-contribution"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PANEL 5: LA SEGUNDA VS MERCADO -->
-            <div id="aseg-tab-la-segunda-vs-mercado" class="aseg-tab-panel space-y-6 hidden">
-                <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                    <i class="fas fa-scale-balanced text-brandBlue"></i> La Segunda vs El Mercado
-                </h2>
-                
-                <!-- Ratios Comparativos -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Cuadro de Siniestralidad, Resultado y Litigiosidad -->
-                    <div class="glass-card rounded-2xl p-6 space-y-4">
-                        <h3 class="text-md font-bold text-slate-200 light:text-slate-800 border-b border-darkBorder/40 pb-2">Métricas de Desempeño Técnico y Resultados</h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full text-xs text-left">
-                                <thead>
-                                    <tr class="text-slate-500 uppercase font-semibold text-[10px] tracking-wider border-b border-darkBorder/30">
-                                        <th class="py-2.5">Entidad</th>
-                                        <th class="py-2.5 text-right">
-                                            <span class="cursor-help border-b border-dotted border-slate-500 pb-0.5 relative group">
-                                                Siniestralidad L.S.
-                                                <span class="hover-badge text-left font-normal normal-case w-56">
-                                                    <strong class="block text-brandBlue mb-1">Siniestralidad (Loss Ratio)</strong>
-                                                    Porcentaje de siniestros ocurridos sobre primas devengadas. Representa el costo directo de los reclamos.
-                                                </span>
-                                            </span>
-                                        </th>
-                                        <th class="py-2.5 text-right text-slate-500">Mercado</th>
-                                        <th class="py-2.5 text-right">
-                                            <span class="cursor-help border-b border-dotted border-slate-500 pb-0.5 relative group">
-                                                Margen Neto L.S.
-                                                <span class="hover-badge text-left font-normal normal-case w-56">
-                                                    <strong class="block text-brandBlue mb-1">Margen de Resultado Neto</strong>
-                                                    Rentabilidad final de la compañía (resultado técnico consolidado más financiero) sobre primas emitidas.
-                                                </span>
-                                            </span>
-                                        </th>
-                                        <th class="py-2.5 text-right text-slate-500">Mercado</th>
-                                        <th class="py-2.5 text-right">
-                                            <span class="cursor-help border-b border-dotted border-slate-500 pb-0.5 relative group">
-                                                Litigiosidad L.S.
-                                                <span class="hover-badge text-left font-normal normal-case w-56">
-                                                    <strong class="block text-brandBlue mb-1">Índice de Litigiosidad</strong>
-                                                    Juicios en trámite en relación a la cartera total (en patrimoniales) o juicios sobre siniestros notificados (en ART).
-                                                </span>
-                                            </span>
-                                        </th>
-                                        <th class="py-2.5 text-right text-slate-500">Mercado</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-darkBorder/20 light:divide-gray-100 text-slate-300 light:text-slate-700">
-                                    {% for ratio in data.insurance_data.la_segunda_vs_mercado.ratios %}
-                                    <tr class="hover:bg-slate-800/10">
-                                        <td class="py-2.5 font-semibold text-white light:text-slate-900">{{ ratio.entity }}</td>
-                                        <td class="py-2.5 text-right font-bold text-brandRed">{{ ratio.siniestralidad_lasegunda }}%</td>
-                                        <td class="py-2.5 text-right text-slate-500">{{ ratio.siniestralidad_mercado }}%</td>
-                                        <td class="py-2.5 text-right font-bold text-brandGreen">{% if ratio.resultado_lasegunda >= 0 %}+{% endif %}{{ ratio.resultado_lasegunda }}%</td>
-                                        <td class="py-2.5 text-right text-slate-500">{% if ratio.resultado_mercado >= 0 %}+{% endif %}{{ ratio.resultado_mercado }}%</td>
-                                        <td class="py-2.5 text-right font-bold text-amber-500">{{ ratio.litigiosidad_lasegunda }}%</td>
-                                        <td class="py-2.5 text-right text-slate-500">{{ ratio.litigiosidad_mercado }}%</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Gráfico de Performance La Segunda vs Mercado -->
-                    <div class="glass-card rounded-2xl p-6">
-                        <h3 class="text-md font-bold text-slate-200 light:text-slate-800 mb-4">Siniestralidad Comparada (La Segunda vs Promedio Mercado)</h3>
-                        <div class="h-64">
-                            <canvas id="chart-aseg-performance"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rankings de Primas por Ramos principales -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Automotores Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-brandGreen flex items-center gap-2 border-b border-darkBorder/40 pb-2"><i class="fas fa-car"></i> Ramo Automotores (P&C) - Top Operadores</h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Primas Emitidas Acumuladas de 9 Meses (Julio 2025 - Marzo 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.autos %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-brandGreen">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- ART Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-amber-500 flex items-center gap-2 border-b border-darkBorder/40 pb-2"><i class="fas fa-user-doctor"></i> Ramo ART (Riesgos de Trabajo) - Top Operadores</h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Primas Emitidas Acumuladas de 9 Meses (Julio 2025 - Marzo 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.art %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-amber-500">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Seguros de Retiro y Vida Rankings -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Retiro Individual Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-brandBlue flex items-center gap-2 border-b border-darkBorder/40 pb-2"><i class="fas fa-piggy-bank"></i> Retiro Individual (Previsional) - Top Operadores</h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Total Mercado: ARS 43,13 mil M | Acumulado 9 Meses (Jul 2025 - Mar 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.retiro_individual %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-brandBlue">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Retiro Colectivo Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-indigo-400 flex items-center gap-2 border-b border-darkBorder/40 pb-2"><i class="fas fa-building-columns"></i> Retiro Colectivo (Planes Corporat.) - Top Operadores</h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Total Mercado: ARS 225,26 mil M | Acumulado 9 Meses (Jul 2025 - Mar 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.retiro_colectivo %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-indigo-400">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Seguros de Vida Rankings -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                    <!-- Vida Individual Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-brandGreen flex items-center gap-2 border-b border-darkBorder/40 pb-2"><i class="fas fa-heart"></i> Vida Individual - Top Operadores</h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Total Mercado: ARS 671,70 mil M | Acumulado 9 Meses (Jul 2025 - Mar 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.vida_individual %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-brandGreen">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Vida Colectivo Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-emerald-500 flex items-center gap-2 border-b border-darkBorder/40 pb-2"><i class="fas fa-people-group"></i> Vida Colectivo - Top Operadores</h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Total Mercado: ARS 2.115,00 mil M | Acumulado 9 Meses (Jul 2025 - Mar 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.vida_colectivo %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-emerald-500">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Ramo Accidentes Personales y Salud Rankings -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                    <!-- AP Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-emerald-400 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                            <i class="fas fa-user-shield text-emerald-400"></i> Ramo Accidentes Personales (AP) - Top Operadores
-                        </h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Primas Emitidas Acumuladas de 9 Meses (Julio 2025 - Marzo 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.ap %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-emerald-400">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Salud Ranking -->
-                    <div class="glass-card rounded-2xl p-6 space-y-3">
-                        <h3 class="text-sm font-bold text-cyan-400 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-                            <i class="fas fa-heart-pulse text-cyan-400"></i> Ramo Salud - Top Operadores
-                        </h3>
-                        <p class="text-[10px] text-slate-500 light:text-slate-400 mt-1 italic">Primas Emitidas Acumuladas de 9 Meses (Julio 2025 - Marzo 2026)</p>
-                        <table class="min-w-full text-xs text-left">
-                            <thead>
-                                <tr class="text-slate-500">
-                                    <th class="py-2">Puesto</th>
-                                    <th class="py-2">Aseguradora</th>
-                                    <th class="py-2 text-right">Primas (Acum. 9m)</th>
-                                    <th class="py-2 text-right">Participación</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-darkBorder/20 text-slate-300 light:text-slate-700">
-                                {% for item in data.insurance_data.la_segunda_vs_mercado.rankings.salud %}
-                                <tr class="{% if 'La Segunda' in item.company %}bg-brandGreen/10 font-bold text-white light:text-slate-900{% endif %}">
-                                    <td class="py-2">{{ item.rank }}</td>
-                                    <td class="py-2">{{ item.company }}</td>
-                                    <td class="py-2 text-right">{{ item.premiums }}</td>
-                                    <td class="py-2 text-right text-cyan-400">{{ item.share }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </main>
+        </div>
+        
+        <div class="mt-6 text-center text-sm text-slate-500 light:text-slate-400">
+            <i class="fas fa-info-circle mr-1"></i> Los datos de "Otros Riesgos Patrimoniales" se calculan restando las ramas principales del Total de Patrimoniales.
+        </div>
     </div>
-
-
-    <!-- Global Tab Content 4: Fuentes -->
+<!-- Global Tab Content 4: Fuentes -->
     <div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
         <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
             <i class="fas fa-book-open text-brandBlue"></i> Directorio de Fuentes de Datos
@@ -10036,18 +8709,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             performance: null
         };
 
-        function switchAsegTab(tabId) {
-            activeAsegTab = tabId;
-
-            // Hide all insurance panels
-            const panels = document.querySelectorAll('.aseg-tab-panel');
-            panels.forEach(p => p.classList.add('hidden'));
-
-            // Reset active button styles
-            const buttons = document.querySelectorAll('.aseg-tab-btn');
-            buttons.forEach(b => {
-                b.classList.remove('active-tab-btn');
-            });
+        );
 
             // Show active panel
             const activePanel = document.getElementById(tabId);
