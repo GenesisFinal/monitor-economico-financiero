@@ -15402,25 +15402,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             performance: null
         };
 
-        );
 
-            // Show active panel
-            const activePanel = document.getElementById(tabId);
-            if (activePanel) {
-                activePanel.classList.remove('hidden');
-            }
-
-            // Highlight selected button
-            const activeBtn = document.getElementById('btn-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('active-tab-btn');
-            }
-
-            localStorage.setItem('activeAsegTab', tabId);
-
-            // Re-render insurance charts
-            setTimeout(renderInsuranceCharts, 50);
-        }
 
         function renderInsuranceCharts() {
             if (!appData.insurance_data) return;
