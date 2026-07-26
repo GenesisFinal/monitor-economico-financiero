@@ -4226,11 +4226,13 @@ def parse_ssn_monthly_data():
                 
             metrics = {}
             for k in col_map.keys():
+                history = [{"date": f"{r['year']}-{str(r['month']).zfill(2)}", "value": r[k]} for r in data_rows]
                 metrics[k] = {
                     "value": current[k],
                     "var_mes": calc_var(current[k], prev_month[k]) if prev_month else 0,
                     "var_ia": calc_var(current[k], prev_year_month[k]) if prev_year_month else 0,
-                    "var_acum": calc_var(ytd_current[k], ytd_prev[k])
+                    "var_acum": calc_var(ytd_current[k], ytd_prev[k]),
+                    "history": history
                 }
                 
             def add_derived(name, total_key, keys_to_sub):
@@ -4240,25 +4242,41 @@ def parse_ssn_monthly_data():
                 val_ytd_cur = ytd_current[total_key] - sum(ytd_current[x] for x in keys_to_sub)
                 val_ytd_prev = ytd_prev[total_key] - sum(ytd_prev[x] for x in keys_to_sub)
                 
+                history = [{"date": f"{r['year']}-{str(r['month']).zfill(2)}", "value": r[total_key] - sum(r[x] for x in keys_to_sub)} for r in data_rows]
+                
                 metrics[name] = {
                     "value": val,
                     "var_mes": calc_var(val, val_prev_month),
                     "var_ia": calc_var(val, val_prev_year),
-                    "var_acum": calc_var(val_ytd_cur, val_ytd_prev)
+                    "var_acum": calc_var(val_ytd_cur, val_ytd_prev),
+                    "history": history
                 }
                 
             add_derived("Patrimoniales_Resto", "Patrimoniales_Total", ["Patrimoniales_Autos", "Patrimoniales_RT"])
             add_derived("Personas_Otros", "Personas_Total", ["Personas_VidaInd", "Personas_VidaCol", "Personas_Retiro"])
             
+            # Build history for Mercado_Total
+            mercado_history = []
+            pat_hist = metrics.get("Patrimoniales_Total", {}).get("history", [])
+            per_hist = metrics.get("Personas_Total", {}).get("history", [])
+            if pat_hist and per_hist and len(pat_hist) == len(per_hist):
+                for i in range(len(pat_hist)):
+                    mercado_history.append({
+                        "date": pat_hist[i]["date"],
+                        "value": pat_hist[i]["value"] + per_hist[i]["value"]
+                    })
+            
             metrics["Mercado_Total"] = {
                 "value": metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"],
                 "var_mes": calc_var(metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"], 
-                                    (prev_month["Patrimoniales_Total"] + prev_month["Personas_Total"]) if prev_month else 0),
-                "var_ia": calc_var(metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"],
-                                   (prev_year_month["Patrimoniales_Total"] + prev_year_month["Personas_Total"]) if prev_year_month else 0),
-                "var_acum": calc_var(ytd_current["Patrimoniales_Total"] + ytd_current["Personas_Total"],
-                                     ytd_prev["Patrimoniales_Total"] + ytd_prev["Personas_Total"])
+                                    (prev_month["Patrimoniales_Total"] + prev_month["Personas_Total"]) if prev_month else None),
+                "var_acum": calc_var(metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"], 
+                                     (ytd_prev["Patrimoniales_Total"] + ytd_prev["Personas_Total"])),
+                "var_ia": calc_var(metrics["Patrimoniales_Total"]["value"] + metrics["Personas_Total"]["value"], 
+                                   (prev_year_month["Patrimoniales_Total"] + prev_year_month["Personas_Total"]) if prev_year_month else None),
+                "history": mercado_history
             }
+
             
             # Format month name for display
             mes_nombre = list(meses_map.keys())[list(meses_map.values()).index(current["month"])].capitalize()
@@ -6125,6 +6143,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         /* CSS Variables for Themes */
@@ -6305,7 +6324,33 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         /* 1. BENTO GRID & CARDS LAYOUT (Premium Glassmorphic) */
-        body.layout-bento {
+        
+        /* 7. Theme L2 Color */
+        body.theme-l2-color.dark {
+            --bg-color: #212120;
+            --card-bg: #30302d;
+            --border-color: #512420;
+            --highlight-color: #e20039;
+            --highlight-glow: rgba(226, 0, 57, 0.15);
+            --success-color: #3ac792;
+            --error-color: #ff593e;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --text-color: #f8fafc;
+            --title-color: #ffffff;
+        }
+        body.theme-l2-color.light {
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --highlight-color: #e20039;
+            --highlight-glow: rgba(226, 0, 57, 0.1);
+            --success-color: #3ac792;
+            --error-color: #ff593e;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --text-color: #30302d;
+            --title-color: #1e293b;
+        }
+body.layout-bento {
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.08) 0%, transparent 45%),
@@ -6627,7 +6672,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             background-color: var(--highlight-glow);
             padding-left: 1.5rem;
         }
-        .active-tab-btn {
+        .active {
             color: var(--highlight-color) !important;
             background-color: var(--highlight-glow) !important;
             border-left: 4px solid var(--highlight-color);
@@ -6646,7 +6691,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             color: var(--highlight-color);
             background-color: var(--highlight-glow);
         }
-        .light .active-tab-btn {
+        .light .active {
             color: var(--highlight-color) !important;
             background-color: var(--highlight-glow) !important;
             border-left: 4px solid var(--highlight-color);
@@ -6950,7 +6995,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
                     </button>
                     <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
-                        <i class="fas fa-book-open"></i> Fuentes
+                        <i class="fas fa-book-open text-brandBlue"></i> Fuentes
                     </button>
 
                 </div>
@@ -6960,6 +7005,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
                         <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid & Cards (Moderno / Glassmorphic)</option>
                         <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report (Elegante)</option>
+                        <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style (Corporativo)</option>
                         <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS (Minimalista)</option>
                     </select>
                 </div>
@@ -6972,6 +7018,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
                         <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
+                        <option value="l2-color" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
                     </select>
                 </div>
@@ -8022,9 +8069,9 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
                     <i class="fas fa-handshake text-brandGreen"></i> Obligaciones Negociables (ONs)
                 </h2>
-                <div class="flex flex-col lg:flex-row gap-6 mb-6">
+                <div class="flex flex-col gap-6 mb-6">
                     <!-- Table Column -->
-                    <div class="w-full lg:w-1/2 flex flex-col">
+                    <div class="w-full flex flex-col">
                         <div class="glass-card rounded-2xl overflow-hidden">
                             <table class="min-w-full divide-y divide-darkBorder light:divide-gray-200 text-sm text-left">
                                 <thead class="bg-darkBg light:bg-slate-100 text-slate-300 light:text-slate-700 font-semibold uppercase text-xs">
@@ -8105,7 +8152,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     </div>
                     
                     <!-- Chart Column -->
-                    <div class="w-full lg:w-1/2 lg:sticky lg:top-6 lg:self-start flex flex-col">
+                    <div class="w-full flex flex-col">
                         <div class="glass-card rounded-2xl p-6">
                             <div>
                                 <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
@@ -8272,10 +8319,10 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
     <!-- Global Tab Content 2: Indicadores Económicos -->
         <!-- Global Tab Content 2: Indicadores Económicos -->
-    <div id="container-indicadores-economicos" class="hidden p-6 md:p-8 max-w-7xl mx-auto w-full">
-        <div class="flex flex-col md:flex-row gap-6 items-start">
-            <!-- Sidebar Navigation -->
-            <aside class="w-full md:w-64 flex-shrink-0 flex flex-col gap-1 bg-darkCard/25 backdrop-blur p-2 rounded-2xl border border-darkBorder/40 light:bg-slate-50 light:border-gray-200">
+    <div id="container-indicadores-economicos" class="hidden min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200">
+            <div class="flex-1 p-4 space-y-1 overflow-y-auto font-medium" id="sidebar-nav-econ">
                 <div class="px-3 py-2 border-b border-darkBorder/20 light:border-gray-200 mb-2">
                     <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Categorías Económicas</span>
                     <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_economic | default(data.update_time) }} hs</span>
@@ -8467,7 +8514,32 @@ Stack: ${error ? error.stack : 'N/A'}`;
     <!-- Global Tab Content 3: Mercado Asegurador -->
     
     <!-- Global Tab Content 3: Mercado Asegurador -->
-    <div id="container-mercado-asegurador" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-7xl mx-auto w-full">
+    <div id="container-mercado-asegurador" class="hidden min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200">
+            <div class="flex-1 p-4 space-y-1 overflow-y-auto font-medium" id="sidebar-nav-aseg">
+                <div class="px-3 py-2 border-b border-darkBorder/20 light:border-gray-200 mb-2">
+                    <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Mercado Asegurador</span>
+                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_insurance }}</span>
+                </div>
+                
+                <button onclick="switchAsegTab('aseg-tab-primas')" id="btn-aseg-tab-primas" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
+                    <i class="fas fa-shield-halved w-5 text-center text-brandBlue"></i>
+                    <span>Primas Acumuladas</span>
+                </button>
+                
+                <button onclick="switchAsegTab('aseg-tab-evolucion')" id="btn-aseg-tab-evolucion" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
+                    <i class="fas fa-chart-line w-5 text-center text-brandBlue"></i>
+                    <span>Evolución Mensual</span>
+                </button>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="flex-1 p-4 md:p-6 lg:p-8 relative overflow-y-auto">
+                <!-- Primas Acumuladas Tab -->
+                <div id="aseg-tab-primas" class="aseg-tab-content fade-in">
+
         
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-darkBorder/40">
             <div>
@@ -8657,8 +8729,11 @@ Stack: ${error ? error.stack : 'N/A'}`;
     </div>
 
     {% if ssn_monthly %}
-    <!-- Evolución de la Producción Mensual -->
-    <section class="mt-8 border-t border-darkBorder/40 pt-8">
+
+                <!-- Evolucion Mensual Tab -->
+                <div id="aseg-tab-evolucion" class="aseg-tab-content fade-in hidden">
+<!-- Evolución de la Producción Mensual -->
+    <section class="pt-2">
         <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
             <h3 class="text-2xl font-semibold text-slate-100 flex items-center gap-2">
                 <i class="fas fa-chart-line text-brandBlue"></i> Evoluci&oacute;n de la Producci&oacute;n
@@ -8687,6 +8762,245 @@ Stack: ${error ? error.stack : 'N/A'}`;
         const ssnMonthlyData = {{ ssn_monthly | tojson }};
         let isConstantes = false;
         
+        
+        let ssnSparklineCharts = {};
+        let ssnMainChart = null;
+        let currentSsnKey = null;
+        let currentSsnRange = '24M';
+
+        function getLinearRegression(data) {
+            let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
+            const n = data.length;
+            if(n === 0) return [];
+            for (let i = 0; i < n; i++) {
+                sumX += i;
+                sumY += data[i];
+                sumXY += i * data[i];
+                sumX2 += i * i;
+            }
+            const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
+            const intercept = (sumY - slope * sumX) / n;
+            return data.map((_, i) => slope * i + intercept);
+        }
+
+        function drawSsnSparklines() {
+            const type = isConstantes ? 'constantes' : 'corrientes';
+            const data = ssnMonthlyData[type].metrics;
+            const isDark = document.body.classList.contains('dark');
+            const lineColor = isDark ? '#3b82f6' : '#2563eb'; // brandBlue
+            
+            Object.keys(data).forEach(key => {
+                const canvasId = `sparkline-${key}`;
+                const canvas = document.getElementById(canvasId);
+                if (!canvas) return;
+                
+                if (ssnSparklineCharts[key]) {
+                    ssnSparklineCharts[key].destroy();
+                }
+
+                const history = data[key].history;
+                if (!history || history.length === 0) return;
+                
+                // Get last 24 months
+                const sliced = history.slice(-24);
+                const labels = sliced.map(d => d.date);
+                const values = sliced.map(d => d.value);
+
+                ssnSparklineCharts[key] = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: values,
+                            borderColor: lineColor,
+                            borderWidth: 2,
+                            tension: 0.3,
+                            pointRadius: 0,
+                            pointHoverRadius: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                        scales: { x: { display: false }, y: { display: false } },
+                        interaction: { intersect: false, mode: 'index' }
+                    }
+                });
+            });
+        }
+
+        function openSsnModal(key, title) {
+            currentSsnKey = key;
+            const modal = document.getElementById('ssn-modal');
+            document.getElementById('ssn-modal-title').textContent = title;
+            document.getElementById('ssn-modal-subtitle').textContent = `Evolución Histórica (${isConstantes ? 'Valores Constantes' : 'Valores Corrientes'})`;
+            
+            modal.classList.remove('hidden');
+            // Small delay for transition
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('div').classList.remove('scale-95');
+                renderSsnModalChart();
+            }, 10);
+        }
+
+        function closeSsnModal() {
+            const modal = document.getElementById('ssn-modal');
+            modal.classList.add('opacity-0');
+            modal.querySelector('div').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function setSsnTimeRange(range) {
+            currentSsnRange = range;
+            const buttons = document.getElementById('ssn-time-buttons').querySelectorAll('button');
+            buttons.forEach(btn => {
+                if (btn.dataset.range === range) {
+                    btn.classList.replace('text-slate-400', 'text-white');
+                    btn.classList.add('bg-slate-700', 'shadow');
+                    btn.classList.remove('hover:text-white');
+                } else {
+                    btn.classList.replace('text-white', 'text-slate-400');
+                    btn.classList.remove('bg-slate-700', 'shadow');
+                    btn.classList.add('hover:text-white');
+                }
+            });
+            renderSsnModalChart();
+        }
+
+        function renderSsnModalChart() {
+            if (!currentSsnKey) return;
+            
+            const type = isConstantes ? 'constantes' : 'corrientes';
+            const history = ssnMonthlyData[type].metrics[currentSsnKey].history;
+            if (!history || history.length === 0) return;
+
+            let filteredHistory = [];
+            const currentDate = new Date(history[history.length - 1].date + '-01');
+            
+            if (currentSsnRange === 'YTD') {
+                // Exercise starts in July
+                let targetYear = currentDate.getFullYear();
+                if (currentDate.getMonth() < 6) { // Jan-Jun
+                    targetYear -= 1;
+                }
+                const exerciseStart = `${targetYear}-07`;
+                filteredHistory = history.filter(d => d.date >= exerciseStart);
+            } else if (currentSsnRange === '12M') {
+                filteredHistory = history.slice(-12);
+            } else if (currentSsnRange === '24M') {
+                filteredHistory = history.slice(-24);
+            } else if (currentSsnRange === '36M') {
+                filteredHistory = history.slice(-36);
+            } else if (currentSsnRange === '5Y') {
+                filteredHistory = history.slice(-60);
+            } else {
+                filteredHistory = history;
+            }
+
+            const labels = filteredHistory.map(d => d.date);
+            const values = filteredHistory.map(d => d.value);
+            const regressionValues = getLinearRegression(values);
+
+            const isDark = document.body.classList.contains('dark');
+            const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+            const textColor = isDark ? '#94a3b8' : '#64748b'; // slate-400 / slate-500
+
+            const ctx = document.getElementById('ssn-modal-chart').getContext('2d');
+            
+            if (ssnMainChart) {
+                ssnMainChart.destroy();
+            }
+
+            // Crosshair plugin config is global in chart.js but we can enable/disable per chart
+            ssnMainChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Producción',
+                            data: values,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true,
+                            pointRadius: 3,
+                            pointHoverRadius: 6,
+                            order: 2
+                        },
+                        {
+                            label: 'Tendencia',
+                            data: regressionValues,
+                            borderColor: '#ef4444',
+                            borderWidth: 1,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            pointHoverRadius: 0,
+                            fill: false,
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: textColor }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += '$' + formatVal(context.parsed.y) + ' mil M';
+                                    }
+                                    return label;
+                                }
+                            }
+                        },
+                        crosshair: {
+                            line: {
+                                color: isDark ? '#ffffff' : '#000000',
+                                width: 1,
+                                dashPattern: [5, 5]
+                            },
+                            sync: { enabled: false },
+                            zoom: { enabled: false }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: gridColor },
+                            ticks: { color: textColor }
+                        },
+                        y: {
+                            grid: { color: gridColor },
+                            ticks: { 
+                                color: textColor,
+                                callback: function(value) {
+                                    return '$' + (value / 1000).toLocaleString('es-AR', {maximumFractionDigits: 0}) + 'k M';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Also update the toggleValoresMensuales function to redraw charts
         function formatVal(val) {
             return (val / 1000).toLocaleString('es-AR', {minimumFractionDigits: 1, maximumFractionDigits: 1});
         }
@@ -8705,9 +9019,9 @@ Stack: ${error ? error.stack : 'N/A'}`;
             return `<span class="px-2 py-0.5 rounded text-xs font-medium bg-rose-500/10 text-rose-400 border border-rose-500/20"><i class="fas fa-arrow-down text-[10px] mr-1"></i>${formatVar(val)}</span>`;
         }
         
-        function renderCard(title, dataObj, icon, colorClass) {
+        function renderCard(title, key, dataObj, icon, colorClass) {
             return `
-                <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/50 transition-colors">
+                <div class="bg-slate-800/40 rounded-xl p-5 border border-slate-700/50 hover:border-slate-600/50 transition-colors cursor-pointer" onclick="openSsnModal('${key}', '${title}')">
                     <div class="flex items-center gap-3 mb-3">
                         <div class="w-8 h-8 rounded-lg bg-${colorClass}-500/10 flex items-center justify-center border border-${colorClass}-500/20">
                             <i class="${icon} text-${colorClass}-400 text-sm"></i>
@@ -8716,6 +9030,10 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     </div>
                     <div class="flex flex-col gap-1 mb-4">
                         <span class="text-3xl font-bold text-white tracking-tight">$${formatVal(dataObj.value)} <span class="text-sm font-normal text-slate-400">mil M</span></span>
+                    </div>
+                    
+                    <div class="h-16 w-full mb-4">
+                        <canvas id="sparkline-${key}"></canvas>
                     </div>
                     
                     <div class="grid grid-cols-3 gap-2 border-t border-slate-700/50 pt-3">
@@ -8745,7 +9063,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             let html = `
                 <!-- Total Mercado -->
                 <div class="mb-6">
-                    ${renderCard("Total Mercado", data.Mercado_Total, "fas fa-globe", "brandBlue")}
+                    ${renderCard("Total Mercado", "Mercado_Total", data.Mercado_Total, "fas fa-globe", "brandBlue")}
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -8753,10 +9071,10 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <div class="space-y-4">
                         <h4 class="text-lg font-semibold text-slate-300 border-b border-slate-700 pb-2">Da&ntilde;os Patrimoniales</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            ${renderCard("Total Patrimoniales", data.Patrimoniales_Total, "fas fa-car-crash", "emerald")}
-                            ${renderCard("Automotores", data.Patrimoniales_Autos, "fas fa-car", "emerald")}
-                            ${renderCard("Riesgos del Trabajo", data.Patrimoniales_RT, "fas fa-hard-hat", "emerald")}
-                            ${renderCard("Resto Patrimoniales", data.Patrimoniales_Resto, "fas fa-box-open", "emerald")}
+                            ${renderCard("Total Patrimoniales", "Patrimoniales_Total", data.Patrimoniales_Total, "fas fa-car-crash", "emerald")}
+                            ${renderCard("Automotores", "Patrimoniales_Autos", data.Patrimoniales_Autos, "fas fa-car", "emerald")}
+                            ${renderCard("Riesgos del Trabajo", "Patrimoniales_RT", data.Patrimoniales_RT, "fas fa-hard-hat", "emerald")}
+                            ${renderCard("Resto Patrimoniales", "Patrimoniales_Resto", data.Patrimoniales_Resto, "fas fa-box-open", "emerald")}
                         </div>
                     </div>
                     
@@ -8764,10 +9082,10 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <div class="space-y-4">
                         <h4 class="text-lg font-semibold text-slate-300 border-b border-slate-700 pb-2">Seguros de Personas</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            ${renderCard("Total Personas", data.Personas_Total, "fas fa-users", "purple")}
-                            ${renderCard("Vida Individual", data.Personas_VidaInd, "fas fa-user", "purple")}
-                            ${renderCard("Vida Colectivo", data.Personas_VidaCol, "fas fa-users", "purple")}
-                            ${renderCard("Retiro", data.Personas_Retiro, "fas fa-piggy-bank", "purple")}
+                            ${renderCard("Total Personas", "Personas_Total", data.Personas_Total, "fas fa-users", "purple")}
+                            ${renderCard("Vida Individual", "Personas_VidaInd", data.Personas_VidaInd, "fas fa-user", "purple")}
+                            ${renderCard("Vida Colectivo", "Personas_VidaCol", data.Personas_VidaCol, "fas fa-users", "purple")}
+                            ${renderCard("Retiro", "Personas_Retiro", data.Personas_Retiro, "fas fa-piggy-bank", "purple")}
                             ${renderCard("Otros Personas", data.Personas_Otros, "fas fa-plus", "purple")}
                         </div>
                     </div>
@@ -8775,6 +9093,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             `;
             
             container.innerHTML = html;
+            drawSsnSparklines();
         }
         
         function toggleValoresMensuales(forceMode) {
@@ -8814,12 +9133,15 @@ Stack: ${error ? error.stack : 'N/A'}`;
         // Initial render
         document.addEventListener('DOMContentLoaded', () => {
             if(document.getElementById('mensual-cards-container')){
-                toggleValoresMensuales('corrientes');
+                renderMensualCards();
             }
         });
     </script>
     {% endif %}
 
+    </div>
+        </main>
+    </div>
     <!-- Global Tab Content 4: Fuentes -->
     <div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
         <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
@@ -9591,6 +9913,36 @@ Stack: ${error ? error.stack : 'N/A'}`;
             setTimeout(renderInsuranceCharts, 20);
         }
         
+        
+        function switchAsegTab(tabId) {
+            localStorage.setItem('activeAsegTab', tabId);
+            // Hide all aseg tabs
+            const tabs = document.querySelectorAll('.aseg-tab-content');
+            tabs.forEach(tab => {
+                tab.classList.add('hidden');
+            });
+            
+            // Show target tab
+            const targetTab = document.getElementById(tabId);
+            if (targetTab) {
+                targetTab.classList.remove('hidden');
+                // trigger chart re-renders if necessary (handled globally usually)
+                if (window.dispatchEvent) {
+                    window.dispatchEvent(new Event('resize'));
+                }
+            }
+            
+            // Update buttons
+            const buttons = document.querySelectorAll('.aseg-tab-btn');
+            buttons.forEach(btn => {
+                if (btn.id === 'btn-' + tabId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
         function switchEconTab(tabId) {
             activeEconTab = tabId;
             
@@ -9601,7 +9953,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             // Reset active button styles
             const buttons = document.querySelectorAll('.econ-tab-btn');
             buttons.forEach(b => {
-                b.classList.remove('active-tab-btn');
+                b.classList.remove('active');
             });
             
             // Show active panel
@@ -9613,7 +9965,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             // Highlight selected button
             const activeBtn = document.getElementById('btn-' + tabId);
             if (activeBtn) {
-                activeBtn.classList.add('active-tab-btn');
+                activeBtn.classList.add('active');
             }
             
             localStorage.setItem('activeEconTab', tabId);
@@ -10637,7 +10989,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchGlobalTab(tabId) {
-            
+            localStorage.setItem('activeGlobalTab', tabId);
             const btnValores = document.getElementById('btn-global-valores');
             const btnIndicadores = document.getElementById('btn-global-indicadores');
             const btnAsegurador = document.getElementById('btn-global-asegurador');
@@ -10680,6 +11032,14 @@ Stack: ${error ? error.stack : 'N/A'}`;
             } else if (tabId === 'fuentes') {
                 if (containerFuentes) containerFuentes.classList.remove('hidden');
                 if (btnFuentes) btnFuentes.className = activeClass;
+            }
+            
+            if (tabId === 'valores-financieros' && !document.querySelector('.tab-btn.active:not(.econ-tab-btn):not(.aseg-tab-btn)')) {
+                switchTab('exchange');
+            } else if (tabId === 'indicadores-economicos' && !document.querySelector('.econ-tab-btn.active')) {
+                switchEconTab('econ-tab-precios-y-costo-de-vida');
+            } else if (tabId === 'mercado-asegurador' && !document.querySelector('.aseg-tab-btn.active')) {
+                switchAsegTab('aseg-tab-primas');
             }
 
         }
@@ -11407,7 +11767,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchVisualTheme(themeName) {
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-l2-color');
             document.body.classList.add('theme-' + themeName);
             
             const selectEl = document.getElementById('select-visual-theme');
@@ -11432,7 +11792,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchVisualLayout(layoutName) {
-            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas');
+            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style');
             // Normalize removed layouts to bento
             if (['terminal', 'neobrutalist', 'cyber-grid'].includes(layoutName)) layoutName = 'bento';
             document.body.classList.add('layout-' + layoutName);
@@ -12263,7 +12623,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             // Restablecer estilos de todos los botones de pestañas
             const buttons = document.querySelectorAll('.tab-btn');
             buttons.forEach(b => {
-                b.classList.remove('active-tab-btn');
+                b.classList.remove('active');
             });
             
             // Mostrar panel activo
@@ -12275,7 +12635,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             // Activar estilo del botón seleccionado
             const activeBtn = document.getElementById('btn-tab-' + tabId);
             if (activeBtn) {
-                activeBtn.classList.add('active-tab-btn');
+                activeBtn.classList.add('active');
             }
             
             // Renderizar o redimensionar gráfico para el panel visible
@@ -12370,7 +12730,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                 const savedTab = localStorage.getItem('activeTab') || 'exchange';
                 activeTab = savedTab;
                 const activeBtn = document.getElementById('btn-tab-' + savedTab);
-                if (activeBtn) activeBtn.classList.add('active-tab-btn');
+                if (activeBtn) activeBtn.classList.add('active');
             }
             
             // Render sparkline canvases on initial load
@@ -12790,6 +13150,45 @@ Stack: ${error ? error.stack : 'N/A'}`;
             </div>
         </div>
     </div>
+
+    <!-- Modal SSN Evolución -->
+    <div id="ssn-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-darkBg light:bg-white border border-darkBorder light:border-gray-200 rounded-2xl w-full max-w-5xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300">
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between p-4 border-b border-darkBorder light:border-gray-200">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-lg bg-brandBlue/10 flex items-center justify-center text-brandBlue">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white light:text-slate-900" id="ssn-modal-title">Evolución Histórica</h3>
+                        <p class="text-xs text-slate-400" id="ssn-modal-subtitle">Valores Mensuales</p>
+                    </div>
+                </div>
+                <button onclick="closeSsnModal()" class="text-slate-400 hover:text-white light:hover:text-slate-900 transition-colors focus:outline-none">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <!-- Modal Body -->
+            <div class="p-6">
+                <!-- Toolbar -->
+                <div class="flex flex-wrap gap-4 items-center justify-between mb-4">
+                    <div class="flex items-center bg-darkCard light:bg-slate-100 rounded-lg p-1" id="ssn-time-buttons">
+                        <button onclick="setSsnTimeRange('YTD')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="YTD">Ejercicio</button>
+                        <button onclick="setSsnTimeRange('12M')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="12M">12M</button>
+                        <button onclick="setSsnTimeRange('24M')" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-slate-700 text-white shadow" data-range="24M">24M</button>
+                        <button onclick="setSsnTimeRange('36M')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="36M">36M</button>
+                        <button onclick="setSsnTimeRange('5Y')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="5Y">5A</button>
+                        <button onclick="setSsnTimeRange('MAX')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="MAX">MAX</button>
+                    </div>
+                </div>
+                <!-- Chart -->
+                <div class="h-[400px] w-full">
+                    <canvas id="ssn-modal-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 """
@@ -12885,3 +13284,4 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
 if __name__ == "__main__":
     build_dashboard()
+    
