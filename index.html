@@ -15246,13 +15246,25 @@ body.layout-bento {
             id: 'verticalLine',
             afterDraw: chart => {
                 if (chart.tooltip?._active?.length) {
-                    const x = chart.tooltip._active[0].element.x;
+                    // Find the active point for the main data series (datasetIndex 0)
+                    let activePoint = chart.tooltip._active.find(e => e.datasetIndex === 0);
+                    if (!activePoint) activePoint = chart.tooltip._active[0];
+                    
+                    const x = activePoint.element.x;
+                    const y = activePoint.element.y;
                     const yAxis = chart.scales.y;
+                    const xAxis = chart.scales.x;
                     const ctx = chart.ctx;
+                    
                     ctx.save();
                     ctx.beginPath();
+                    // Vertical line
                     ctx.moveTo(x, yAxis.top);
                     ctx.lineTo(x, yAxis.bottom);
+                    // Horizontal line
+                    ctx.moveTo(xAxis.left, y);
+                    ctx.lineTo(xAxis.right, y);
+                    
                     ctx.lineWidth = 1;
                     ctx.strokeStyle = '#64748b';
                     ctx.setLineDash([5, 5]);
@@ -15261,8 +15273,7 @@ body.layout-bento {
                 }
             }
         };
-
-        function setSsnTimeRange(range) {
+function setSsnTimeRange(range) {
             currentSsnRange = range;
             const buttons = document.getElementById('ssn-time-buttons').querySelectorAll('button');
             buttons.forEach(btn => {
