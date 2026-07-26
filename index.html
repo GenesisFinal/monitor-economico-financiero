@@ -256,7 +256,33 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         /* 1. BENTO GRID & CARDS LAYOUT (Premium Glassmorphic) */
-        body.layout-bento {
+        
+        /* 7. Theme L2 Color */
+        body.theme-l2-color.dark {
+            --bg-color: #212120;
+            --card-bg: #30302d;
+            --border-color: #512420;
+            --highlight-color: #e20039;
+            --highlight-glow: rgba(226, 0, 57, 0.15);
+            --success-color: #3ac792;
+            --error-color: #ff593e;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --text-color: #f8fafc;
+            --title-color: #ffffff;
+        }
+        body.theme-l2-color.light {
+            --bg-color: #ffffff;
+            --card-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --highlight-color: #e20039;
+            --highlight-glow: rgba(226, 0, 57, 0.1);
+            --success-color: #3ac792;
+            --error-color: #ff593e;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --text-color: #30302d;
+            --title-color: #1e293b;
+        }
+body.layout-bento {
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(239, 68, 68, 0.08) 0%, transparent 45%),
@@ -911,6 +937,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                     <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
                         <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid & Cards (Moderno / Glassmorphic)</option>
                         <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report (Elegante)</option>
+                        <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style (Corporativo)</option>
                         <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS (Minimalista)</option>
                     </select>
                 </div>
@@ -923,6 +950,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
                         <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
+                        <option value="l2-color" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
                     </select>
                 </div>
@@ -17981,7 +18009,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchVisualTheme(themeName) {
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-l2-color');
             document.body.classList.add('theme-' + themeName);
             
             const selectEl = document.getElementById('select-visual-theme');
@@ -18006,7 +18034,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
         }
 
         function switchVisualLayout(layoutName) {
-            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas');
+            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style');
             // Normalize removed layouts to bento
             if (['terminal', 'neobrutalist', 'cyber-grid'].includes(layoutName)) layoutName = 'bento';
             document.body.classList.add('layout-' + layoutName);
