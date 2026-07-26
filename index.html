@@ -76,8 +76,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-crosshair"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         /* CSS Variables for Themes */
         
@@ -15242,6 +15241,27 @@ body.layout-bento {
             }, 300);
         }
 
+        
+        const verticalLinePlugin = {
+            id: 'verticalLine',
+            afterDraw: chart => {
+                if (chart.tooltip?._active?.length) {
+                    const x = chart.tooltip._active[0].element.x;
+                    const yAxis = chart.scales.y;
+                    const ctx = chart.ctx;
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.moveTo(x, yAxis.top);
+                    ctx.lineTo(x, yAxis.bottom);
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#64748b';
+                    ctx.setLineDash([5, 5]);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+            }
+        };
+
         function setSsnTimeRange(range) {
             currentSsnRange = range;
             const buttons = document.getElementById('ssn-time-buttons').querySelectorAll('button');
@@ -15305,6 +15325,7 @@ body.layout-bento {
 
             // Crosshair plugin config is global in chart.js but we can enable/disable per chart
             ssnMainChart = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: 'line',
                 data: {
                     labels: labels,
@@ -15359,15 +15380,7 @@ body.layout-bento {
                                 }
                             }
                         },
-                        crosshair: {
-                            line: {
-                                color: isDark ? '#ffffff' : '#000000',
-                                width: 1,
-                                dashPattern: [5, 5]
-                            },
-                            sync: { enabled: false },
-                            zoom: { enabled: false }
-                        }
+                        
                     },
                     scales: {
                         x: {
@@ -16452,6 +16465,7 @@ body.layout-bento {
             const textColor = isDark ? '#cbd5e1' : '#334155';
             
             lecapsChart = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: 'scatter',
                 data: {
                     datasets: [
@@ -16644,6 +16658,7 @@ body.layout-bento {
             const textColor = isDark ? '#cbd5e1' : '#334155';
             
             window[canvasId + 'Instance'] = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: 'scatter',
                 data: {
                     datasets: [
@@ -16951,6 +16966,7 @@ body.layout-bento {
             const nameIndicator = appData.names[key] || key;
             
             debtChartInstance = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: 'bar',
                 data: {
                     labels: labels,
@@ -17737,6 +17753,7 @@ body.layout-bento {
             
             if (activeSeries.length === 0) {
                 charts[section] = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                     type: 'line',
                     data: { labels: [], datasets: [] },
                     options: {
@@ -18046,6 +18063,7 @@ body.layout-bento {
             };
             
             charts[section] = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: 'line',
                 data: {
                     labels: commonLabels,
@@ -18262,6 +18280,7 @@ body.layout-bento {
                 }
                 
                 canvas.chart = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                     type: type,
                     data: {
                         labels: dates,
@@ -18885,6 +18904,7 @@ body.layout-bento {
             }
 
             indicatorChartInstance = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: chartType,
                 data: {
                     labels: finalDates.map(dStr => {
@@ -19323,6 +19343,7 @@ body.layout-bento {
             const labelColor = isDark ? '#94a3b8' : '#64748b';
             
             bondDetailChartInstance = new Chart(ctx, {
+                    plugins: [verticalLinePlugin],
                 type: 'line',
                 data: {
                     labels: labels,
