@@ -30315,6 +30315,49 @@ body.layout-bento {
 
         // bestFit: tries linear, quadratic and cubic regression on indexed data,
         // returns { values, slope, intercept, r2, degree, equation } where values[] aligns with input.
+        // formatPolyEq: polynomial equation string from xs, ys data points.
+        // Returns e.g. "y = 0.03x² + 1.2x + 50.00" for degree 2.
+        function formatPolyEq(xs, ys, degree) {
+            const m = degree + 1;
+            const A = Array.from({length: m}, () => new Array(m).fill(0));
+            const b = new Array(m).fill(0);
+            const nPts = Math.min(xs.length, ys.length);
+            for (let i = 0; i < nPts; i++) {
+                const xi = xs[i], yi = ys[i];
+                for (let j = 0; j < m; j++) {
+                    b[j] += Math.pow(xi, j) * yi;
+                    for (let k = 0; k < m; k++) A[j][k] += Math.pow(xi, j + k);
+                }
+            }
+            for (let i = 0; i < m; i++) {
+                let piv = i;
+                for (let r = i + 1; r < m; r++) if (Math.abs(A[r][i]) > Math.abs(A[piv][i])) piv = r;
+                if (piv !== i) { [A[i], A[piv]] = [A[piv], A[i]]; [b[i], b[piv]] = [b[piv], b[i]]; }
+                const d = A[i][i];
+                if (!d) return null;
+                for (let k = 0; k < m; k++) A[i][k] /= d;
+                b[i] /= d;
+                for (let r = 0; r < m; r++) {
+                    if (r === i) continue;
+                    const fac = A[r][i];
+                    for (let k = 0; k < m; k++) A[r][k] -= fac * A[i][k];
+                    b[r] -= fac * b[i];
+                }
+            }
+            const sup = ['²', '³'];
+            let terms = [];
+            for (let i = m - 1; i >= 0; i--) {
+                const c = b[i];
+                if (Math.abs(c) < 1e-10) continue;
+                const sign = c >= 0 ? (terms.length ? ' + ' : '') : (terms.length ? ' - ' : '-');
+                const val = Math.abs(c).toFixed(i === 0 ? 2 : 4);
+                if (i === 0) terms.push(sign + val);
+                else if (i === 1) terms.push(sign + val + 'x');
+                else terms.push(sign + val + 'x' + sup[i - 2]);
+            }
+            return 'y = ' + (terms.join('') || '0');
+        }
+
         function bestFit(data) {
             const n = data.length;
             if (n < 2) return { values: data.slice(), slope: 0, intercept: 0, r2: 0, degree: 1, equation: 'y = 0x + 0' };
@@ -30337,49 +30380,6 @@ body.layout-bento {
                 if (!fitFn) return null;
                 // Recover coefficients via finite differences (simpler: return fitFn + sample)
                 return fitFn;
-            }
-
-            function formatPolyEq(xs, ys, degree) {
-                // Build equation string using Gaussian elimination coefficients
-                const m = degree + 1;
-                const A = Array.from({length: m}, () => new Array(m).fill(0));
-                const b = new Array(m).fill(0);
-                const nPts = Math.min(xs.length, ys.length);
-                for (let i = 0; i < nPts; i++) {
-                    const xi = xs[i], yi = ys[i];
-                    for (let j = 0; j < m; j++) {
-                        b[j] += Math.pow(xi, j) * yi;
-                        for (let k = 0; k < m; k++) A[j][k] += Math.pow(xi, j + k);
-                    }
-                }
-                for (let i = 0; i < m; i++) {
-                    let piv = i;
-                    for (let r = i + 1; r < m; r++) if (Math.abs(A[r][i]) > Math.abs(A[piv][i])) piv = r;
-                    if (piv !== i) { [A[i], A[piv]] = [A[piv], A[i]]; [b[i], b[piv]] = [b[piv], b[i]]; }
-                    const d = A[i][i];
-                    if (!d) return null;
-                    for (let k = 0; k < m; k++) A[i][k] /= d;
-                    b[i] /= d;
-                    for (let r = 0; r < m; r++) {
-                        if (r === i) continue;
-                        const fac = A[r][i];
-                        for (let k = 0; k < m; k++) A[r][k] -= fac * A[i][k];
-                        b[r] -= fac * b[i];
-                    }
-                }
-                // b[0]=const, b[1]=x coeff, b[2]=x^2 coeff, b[3]=x^3 coeff
-                const sup = ['²', '³'];  // superscripts for 2 and 3
-                let terms = [];
-                for (let i = m - 1; i >= 0; i--) {
-                    const c = b[i];
-                    if (Math.abs(c) < 1e-10) continue;
-                    const sign = c >= 0 ? (terms.length ? ' + ' : '') : (terms.length ? ' - ' : '-');
-                    const val = Math.abs(c).toFixed(i === 0 ? 0 : 2);
-                    if (i === 0) terms.push(sign + val);
-                    else if (i === 1) terms.push(sign + val + 'x');
-                    else terms.push(sign + val + 'x' + sup[i - 2]);
-                }
-                return 'y = ' + (terms.join('') || '0');
             }
 
             // Linear (degree 1)
