@@ -30312,6 +30312,49 @@ body.layout-bento {
 
 
 
+
+        // bestFit: tries linear, quadratic and cubic regression on indexed data,
+        // returns { values, slope, intercept, r2, degree } where values[] aligns with input.
+        function bestFit(data) {
+            const n = data.length;
+            if (n < 2) return { values: data.slice(), slope: 0, intercept: 0, r2: 0, degree: 1 };
+
+            const yMean = data.reduce((a, b) => a + b, 0) / n;
+
+            function r2For(predicted) {
+                let ssTot = 0, ssRes = 0;
+                for (let i = 0; i < n; i++) {
+                    ssTot += (data[i] - yMean) ** 2;
+                    ssRes += (data[i] - predicted[i]) ** 2;
+                }
+                return ssTot === 0 ? 0 : 1 - ssRes / ssTot;
+            }
+
+            // Linear (degree 1)
+            const linStats = getLinearRegression(data);
+            const candidates = [{ degree: 1, values: linStats.values, slope: linStats.slope, intercept: linStats.intercept, r2: linStats.r2 }];
+
+            // Quadratic + Cubic via polyFit (only if enough points)
+            const xs = data.map((_, i) => i);
+            for (const deg of [2, 3]) {
+                if (n < deg + 2) continue;
+                const fitFn = polyFit(xs, data, deg);
+                if (!fitFn) continue;
+                const predicted = xs.map(x => fitFn(x));
+                const r2 = r2For(predicted);
+                candidates.push({ degree: deg, values: predicted, slope: null, intercept: null, r2 });
+            }
+
+            // Pick best R² (but prefer simpler model if improvement < 0.02)
+            candidates.sort((a, b) => b.r2 - a.r2);
+            let best = candidates[0];
+            // Prefer linear if quadratic/cubic only marginally better
+            const linear = candidates.find(c => c.degree === 1);
+            if (linear && best.r2 - linear.r2 < 0.02) best = linear;
+
+            return best;
+        }
+
         function getLinearRegression(data) {
             let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
             const n = data.length;
@@ -30634,7 +30677,7 @@ function setSsnTimeRange(range) {
 
             const values = filteredHistory.map(d => d.value);
 
-            const regStats = getLinearRegression(values);
+            const regStats = bestFit(values);
             const regressionValues = regStats.values;
             const regSlope = regStats.slope;
             const regIntercept = regStats.intercept;
@@ -36622,7 +36665,9 @@ function setSsnTimeRange(range) {
 
                             tooltip: { enabled: false },
 
-                            crosshair: { enabled: false }
+                            crosshair: { enabled: false },
+
+                            verticalLine: { enabled: false }
 
                         },
 
