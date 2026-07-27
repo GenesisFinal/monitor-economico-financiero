@@ -950,7 +950,7 @@ body.layout-bento {
                         <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
                         <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
-                        <option value="l2-color" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
+                        <option value="l2-color" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
                     </select>
                 </div>
@@ -15158,7 +15158,7 @@ body.layout-bento {
         function getLinearRegression(data) {
             let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
             const n = data.length;
-            if(n === 0) return [];
+            if(n === 0) return { values: [], slope: 0, intercept: 0, r2: 0 };
             for (let i = 0; i < n; i++) {
                 sumX += i;
                 sumY += data[i];
@@ -15167,7 +15167,16 @@ body.layout-bento {
             }
             const slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX * sumX);
             const intercept = (sumY - slope * sumX) / n;
-            return data.map((_, i) => slope * i + intercept);
+            const yMean = sumY / n;
+            let ssTot = 0, ssRes = 0;
+            for (let i = 0; i < n; i++) {
+                const predicted = slope * i + intercept;
+                ssTot += (data[i] - yMean) ** 2;
+                ssRes += (data[i] - predicted) ** 2;
+            }
+            const r2 = ssTot === 0 ? 0 : 1 - ssRes / ssTot;
+            const values = data.map((_, i) => slope * i + intercept);
+            return { values, slope, intercept, r2 };
         }
 
         function drawSsnSparklines() {
@@ -15209,7 +15218,7 @@ body.layout-bento {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                        plugins: { legend: { display: false }, tooltip: { enabled: false }, verticalLine: { enabled: false } },
                         scales: { x: { display: false }, y: { display: false } },
                         interaction: { intersect: false, mode: 'index' }
                     }
@@ -15245,6 +15254,8 @@ body.layout-bento {
         const verticalLinePlugin = {
             id: 'verticalLine',
             afterDraw: chart => {
+                // Only draw crosshair when tooltip is active (not for sparklines)
+                if (chart.options?.plugins?.verticalLine?.enabled === false) return;
                 if (chart.tooltip?._active?.length) {
                     // Find the active point for the main data series (datasetIndex 0)
                     let activePoint = chart.tooltip._active.find(e => e.datasetIndex === 0);
@@ -15269,6 +15280,29 @@ body.layout-bento {
                     ctx.strokeStyle = '#64748b';
                     ctx.setLineDash([5, 5]);
                     ctx.stroke();
+                    ctx.restore();
+                }
+
+                // Draw regression stats if provided
+                const rOpts = chart.options?.plugins?.verticalLine;
+                if (rOpts?.r2 !== undefined) {
+                    const ctx = chart.ctx;
+                    const r2 = rOpts.r2;
+                    const slope = rOpts.slope;
+                    const intercept = rOpts.intercept;
+                    const area = chart.chartArea;
+                    
+                    // Format equation: y = m·x + b  (where x is month index)
+                    const slopeStr = slope >= 0 ? '+' + slope.toFixed(1) : slope.toFixed(1);
+                    const eqText = `y = ${slope.toFixed(1)}x ${slope >= 0 ? '+' : ''}${intercept.toFixed(0)}`;
+                    const r2Text = `R² = ${r2.toFixed(3)}`;
+                    const fullText = `${r2Text}   ${eqText}`;
+                    
+                    ctx.save();
+                    ctx.font = '10px Inter, system-ui, sans-serif';
+                    ctx.fillStyle = 'rgba(148, 163, 184, 0.75)'; // slate-400 at 75%
+                    ctx.textAlign = 'right';
+                    ctx.fillText(fullText, area.right, area.top - 6);
                     ctx.restore();
                 }
             }
@@ -15322,7 +15356,11 @@ function setSsnTimeRange(range) {
 
             const labels = filteredHistory.map(d => d.date);
             const values = filteredHistory.map(d => d.value);
-            const regressionValues = getLinearRegression(values);
+            const regStats = getLinearRegression(values);
+            const regressionValues = regStats.values;
+            const regSlope = regStats.slope;
+            const regIntercept = regStats.intercept;
+            const regR2 = regStats.r2;
 
             const isDark = document.body.classList.contains('dark');
             const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
@@ -15391,6 +15429,12 @@ function setSsnTimeRange(range) {
                                 }
                             }
                         },
+                        verticalLine: {
+                            enabled: true,
+                            r2: regR2,
+                            slope: regSlope,
+                            intercept: regIntercept
+                        }
                         
                     },
                     scales: {
@@ -19087,7 +19131,7 @@ function setSsnTimeRange(range) {
                 selectLayoutEl.value = savedVisualLayout;
             }
 
-            const savedVisualTheme = localStorage.getItem('visualTheme') || 'carbon-electric';
+            const savedVisualTheme = localStorage.getItem('visualTheme') || 'l2-color';
             document.body.classList.add('theme-' + savedVisualTheme);
             const selectThemeEl = document.getElementById('select-visual-theme');
             if (selectThemeEl) {
