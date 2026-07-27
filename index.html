@@ -30608,25 +30608,28 @@ body.layout-bento {
                     ctx.restore();
                 }
 
-                // Draw R² and regression equation if provided
+                // Draw R² and regression equation if provided (two lines)
                 const rOpts = chart.options?.plugins?.verticalLine;
                 if (rOpts && rOpts.r2 !== undefined && rOpts.r2 !== null) {
                     const r2 = rOpts.r2;
                     const area = chart.chartArea;
                     const ctx2 = chart.ctx;
-                    const r2Text = 'R² = ' + r2.toFixed(3);
-                    let displayText = r2Text;
-                    if (rOpts.equation) {
-                        displayText = r2Text + '   ' + rOpts.equation;
-                    } else if (rOpts.slope !== null && rOpts.slope !== undefined) {
-                        const sign = rOpts.intercept >= 0 ? '+' : '-';
-                        displayText = r2Text + '   y = ' + rOpts.slope.toFixed(2) + 'x ' + sign + ' ' + Math.abs(rOpts.intercept).toFixed(0);
-                    }
                     ctx2.save();
                     ctx2.font = '10px Inter, system-ui, sans-serif';
-                    ctx2.fillStyle = 'rgba(148, 163, 184, 0.8)';
+                    ctx2.fillStyle = 'rgba(148, 163, 184, 0.85)';
                     ctx2.textAlign = 'right';
-                    ctx2.fillText(displayText, area.right, area.top - 6);
+                    const lineH = 14; // px between lines
+                    const r2Text = 'R² = ' + r2.toFixed(3);
+                    // Line 1: R² value (inside chart area, top-right corner)
+                    ctx2.fillText(r2Text, area.right, area.top + 14);
+                    // Line 2: equation (if available)
+                    if (rOpts.equation) {
+                        ctx2.fillText(rOpts.equation, area.right, area.top + 14 + lineH);
+                    } else if (rOpts.slope !== null && rOpts.slope !== undefined) {
+                        const sign = rOpts.intercept >= 0 ? '+' : '-';
+                        const eqText = 'y = ' + rOpts.slope.toFixed(2) + 'x ' + sign + ' ' + Math.abs(rOpts.intercept).toFixed(0);
+                        ctx2.fillText(eqText, area.right, area.top + 14 + lineH);
+                    }
                     ctx2.restore();
                 }
             }
