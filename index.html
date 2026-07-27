@@ -30314,10 +30314,10 @@ body.layout-bento {
 
 
         // bestFit: tries linear, quadratic and cubic regression on indexed data,
-        // returns { values, slope, intercept, r2, degree } where values[] aligns with input.
+        // returns { values, slope, intercept, r2, degree, equation } where values[] aligns with input.
         function bestFit(data) {
             const n = data.length;
-            if (n < 2) return { values: data.slice(), slope: 0, intercept: 0, r2: 0, degree: 1 };
+            if (n < 2) return { values: data.slice(), slope: 0, intercept: 0, r2: 0, degree: 1, equation: 'y = 0x + 0' };
 
             const yMean = data.reduce((a, b) => a + b, 0) / n;
 
@@ -30330,9 +30330,62 @@ body.layout-bento {
                 return ssTot === 0 ? 0 : 1 - ssRes / ssTot;
             }
 
+            function polyCoeffs(xs, ys, degree) {
+                // Returns coefficients array [c0, c1, c2...] for y = c0 + c1*x + c2*x^2...
+                // by reusing polyFit logic and sampling
+                const fitFn = polyFit(xs, ys, degree);
+                if (!fitFn) return null;
+                // Recover coefficients via finite differences (simpler: return fitFn + sample)
+                return fitFn;
+            }
+
+            function formatPolyEq(xs, ys, degree) {
+                // Build equation string using Gaussian elimination coefficients
+                const m = degree + 1;
+                const A = Array.from({length: m}, () => new Array(m).fill(0));
+                const b = new Array(m).fill(0);
+                const nPts = Math.min(xs.length, ys.length);
+                for (let i = 0; i < nPts; i++) {
+                    const xi = xs[i], yi = ys[i];
+                    for (let j = 0; j < m; j++) {
+                        b[j] += Math.pow(xi, j) * yi;
+                        for (let k = 0; k < m; k++) A[j][k] += Math.pow(xi, j + k);
+                    }
+                }
+                for (let i = 0; i < m; i++) {
+                    let piv = i;
+                    for (let r = i + 1; r < m; r++) if (Math.abs(A[r][i]) > Math.abs(A[piv][i])) piv = r;
+                    if (piv !== i) { [A[i], A[piv]] = [A[piv], A[i]]; [b[i], b[piv]] = [b[piv], b[i]]; }
+                    const d = A[i][i];
+                    if (!d) return null;
+                    for (let k = 0; k < m; k++) A[i][k] /= d;
+                    b[i] /= d;
+                    for (let r = 0; r < m; r++) {
+                        if (r === i) continue;
+                        const fac = A[r][i];
+                        for (let k = 0; k < m; k++) A[r][k] -= fac * A[i][k];
+                        b[r] -= fac * b[i];
+                    }
+                }
+                // b[0]=const, b[1]=x coeff, b[2]=x^2 coeff, b[3]=x^3 coeff
+                const sup = ['²', '³'];  // superscripts for 2 and 3
+                let terms = [];
+                for (let i = m - 1; i >= 0; i--) {
+                    const c = b[i];
+                    if (Math.abs(c) < 1e-10) continue;
+                    const sign = c >= 0 ? (terms.length ? ' + ' : '') : (terms.length ? ' - ' : '-');
+                    const val = Math.abs(c).toFixed(i === 0 ? 0 : 2);
+                    if (i === 0) terms.push(sign + val);
+                    else if (i === 1) terms.push(sign + val + 'x');
+                    else terms.push(sign + val + 'x' + sup[i - 2]);
+                }
+                return 'y = ' + (terms.join('') || '0');
+            }
+
             // Linear (degree 1)
             const linStats = getLinearRegression(data);
-            const candidates = [{ degree: 1, values: linStats.values, slope: linStats.slope, intercept: linStats.intercept, r2: linStats.r2 }];
+            const linEq = 'y = ' + linStats.slope.toFixed(2) + 'x ' + (linStats.intercept >= 0 ? '+ ' : '- ') + Math.abs(linStats.intercept).toFixed(0);
+            const candidates = [{ degree: 1, values: linStats.values, slope: linStats.slope, intercept: linStats.intercept, r2: linStats.r2, equation: linEq }];
 
             // Quadratic + Cubic via polyFit (only if enough points)
             const xs = data.map((_, i) => i);
@@ -30342,7 +30395,8 @@ body.layout-bento {
                 if (!fitFn) continue;
                 const predicted = xs.map(x => fitFn(x));
                 const r2 = r2For(predicted);
-                candidates.push({ degree: deg, values: predicted, slope: null, intercept: null, r2 });
+                const eq = formatPolyEq(xs, data, deg) || ('R²=' + r2.toFixed(3));
+                candidates.push({ degree: deg, values: predicted, slope: null, intercept: null, r2, equation: eq });
             }
 
             // Pick best R² (but prefer simpler model if improvement < 0.02)
@@ -30458,7 +30512,7 @@ body.layout-bento {
 
                         maintainAspectRatio: false,
 
-                        plugins: { legend: { display: false }, tooltip: { enabled: false }, verticalLine: { enabled: false } },
+                        plugins: { legend: { display: false }, tooltip: { enabled: false }, crosshair: { enabled: false }, verticalLine: { enabled: false } },
 
                         scales: { x: { display: false }, y: { display: false } },
 
@@ -30554,20 +30608,19 @@ body.layout-bento {
                     ctx.restore();
                 }
 
-                // Draw R² + equation when regression stats are provided
+                // Draw R² and regression equation if provided
                 const rOpts = chart.options?.plugins?.verticalLine;
                 if (rOpts && rOpts.r2 !== undefined && rOpts.r2 !== null) {
                     const r2 = rOpts.r2;
-                    const slope = rOpts.slope;
-                    const intercept = rOpts.intercept;
                     const area = chart.chartArea;
                     const ctx2 = chart.ctx;
                     const r2Text = 'R² = ' + r2.toFixed(3);
                     let displayText = r2Text;
-                    if (slope !== null && slope !== undefined) {
-                        const sign = intercept >= 0 ? '+' : '-';
-                        const eqText = 'y = ' + slope.toFixed(2) + 'x ' + sign + ' ' + Math.abs(intercept).toFixed(0);
-                        displayText = r2Text + '   ' + eqText;
+                    if (rOpts.equation) {
+                        displayText = r2Text + '   ' + rOpts.equation;
+                    } else if (rOpts.slope !== null && rOpts.slope !== undefined) {
+                        const sign = rOpts.intercept >= 0 ? '+' : '-';
+                        displayText = r2Text + '   y = ' + rOpts.slope.toFixed(2) + 'x ' + sign + ' ' + Math.abs(rOpts.intercept).toFixed(0);
                     }
                     ctx2.save();
                     ctx2.font = '10px Inter, system-ui, sans-serif';
@@ -30822,7 +30875,8 @@ function setSsnTimeRange(range) {
                             enabled: true,
                             r2: regR2,
                             slope: regSlope,
-                            intercept: regIntercept
+                            intercept: regIntercept,
+                            equation: regStats.equation
                         }
 
                     },
