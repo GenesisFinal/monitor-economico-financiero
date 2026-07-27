@@ -33024,6 +33024,7 @@ function setSsnTimeRange(range) {
             const fit = polyFit(xs, ys, 2);
 
             const lecapsR2 = fit ? polyFitR2(xs, ys, fit) : 0;
+            const lecapsEq  = fit ? (formatPolyEq(xs, ys, 2) || '') : '';
 
             const lineData = [];
 
@@ -33170,7 +33171,7 @@ function setSsnTimeRange(range) {
                             }
 
                         },
-                        verticalLine: { enabled: true, r2: lecapsR2, slope: null, intercept: null }
+                        verticalLine: { enabled: true, r2: lecapsR2, slope: null, intercept: null, equation: lecapsEq }
                     },
 
                     scales: {
@@ -33412,6 +33413,7 @@ function setSsnTimeRange(range) {
             const fit = polyFit(xs, ys, 2);
 
             const bondsR2 = fit ? polyFitR2(xs, ys, fit) : 0;
+            const bondsEq  = fit ? (formatPolyEq(xs, ys, 2) || '') : '';
 
             const lineData = [];
 
@@ -33550,7 +33552,7 @@ function setSsnTimeRange(range) {
                             }
 
                         },
-                        verticalLine: { enabled: true, r2: bondsR2, slope: null, intercept: null }
+                        verticalLine: { enabled: true, r2: bondsR2, slope: null, intercept: null, equation: bondsEq }
                     },
 
                     scales: {
