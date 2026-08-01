@@ -8134,10 +8134,15 @@ function setSsnTimeRange(range) {
 
                 <div class="glass-card rounded-3xl p-6 md:p-8 mb-8 border border-darkBorder/40 overflow-hidden relative shadow-lg">
                     <div class="flex flex-wrap items-center gap-4 mb-6">
-                        <select id="retiro-section-select" class="bg-darkBg light:bg-white text-white light:text-slate-900 border border-darkBorder light:border-slate-300 rounded-xl px-4 py-2.5 outline-none focus:border-brandBlue transition-colors appearance-none min-w-[250px] font-semibold text-sm cursor-pointer">
-                            <option value="compromisos" class="bg-darkBg light:bg-white text-white light:text-slate-900">Compromisos Técnicos</option>
-                            <option value="asegurados" class="bg-darkBg light:bg-white text-white light:text-slate-900">Asegurados</option>
-                        </select>
+                        <div class="relative inline-block min-w-[250px]">
+                            <select id="retiro-section-select" class="w-full bg-darkBg light:bg-white text-white light:text-slate-900 border border-darkBorder light:border-slate-300 rounded-xl pl-4 pr-10 py-2.5 outline-none focus:border-brandBlue transition-colors appearance-none font-semibold text-sm cursor-pointer shadow-sm">
+                                <option value="compromisos" class="bg-darkBg light:bg-white text-white light:text-slate-900">Compromisos Técnicos</option>
+                                <option value="asegurados" class="bg-darkBg light:bg-white text-white light:text-slate-900">Asegurados</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400 light:text-slate-500">
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="overflow-x-auto rounded-xl border border-darkBorder/20">
