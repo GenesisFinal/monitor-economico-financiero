@@ -28,8 +28,9 @@ from src.scrapers.ssn_retiro_fetcher import fetch_retiro_data
 from src.scrapers.ssn_rankings_fetcher import fetch_ssn_rankings
 
 
-OUTPUT_DIR = r"g:\Mi unidad\IA\Valores Financieros"
-OUTPUT_HTML = os.path.join(OUTPUT_DIR, "valores_financieros.html")
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUTPUT_DIR = PROJECT_ROOT
+OUTPUT_HTML = os.path.join(OUTPUT_DIR, "index.html")
 
 def get_company_name(ticker):
     if not ticker:
