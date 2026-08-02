@@ -297,23 +297,23 @@ def fetch_retiro_data(period_current="202603", period_prev="202503"):
     final_list.sort(key=lambda x: x["compromisos"]["Total"]["val"], reverse=True)
 
     # Compute TOTAL MERCADO summary row
-    tot_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Total", 0.0) for e in all_entidades)
-    tot_c25 = sum(prev.get(e, {}).get("compromisos", {}).get("Total", 0.0) for e in all_entidades)
+    tot_c26 = sum(data_curr.get(e, {}).get("compromisos", {}).get("Total", 0.0) for e in all_entidades)
+    tot_c25 = sum(data_prev.get(e, {}).get("compromisos", {}).get("Total", 0.0) for e in all_entidades)
     
-    pa_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
-    pa_c25 = sum(prev.get(e, {}).get("compromisos", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
+    pa_c26 = sum(data_curr.get(e, {}).get("compromisos", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
+    pa_c25 = sum(data_prev.get(e, {}).get("compromisos", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
     
-    rv_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Rentas Vitalicias", 0.0) for e in all_entidades)
-    rv_c25 = sum(prev.get(e, {}).get("compromisos", {}).get("Rentas Vitalicias", 0.0) for e in all_entidades)
+    rv_c26 = sum(data_curr.get(e, {}).get("compromisos", {}).get("Rentas Vitalicias", 0.0) for e in all_entidades)
+    rv_c25 = sum(data_prev.get(e, {}).get("compromisos", {}).get("Rentas Vitalicias", 0.0) for e in all_entidades)
     
-    rvp_art_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("RVP y ART", 0.0) for e in all_entidades)
-    otros_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Otros", 0.0) for e in all_entidades)
+    rvp_art_c26 = sum(data_curr.get(e, {}).get("compromisos", {}).get("RVP y ART", 0.0) for e in all_entidades)
+    otros_c26 = sum(data_curr.get(e, {}).get("compromisos", {}).get("Otros", 0.0) for e in all_entidades)
 
-    aseg_tot_c26 = sum(curr.get(e, {}).get("asegurados", {}).get("Cantidad Total", 0.0) for e in all_entidades)
-    aseg_tot_c25 = sum(prev.get(e, {}).get("asegurados", {}).get("Cantidad Total", 0.0) for e in all_entidades)
+    aseg_tot_c26 = sum(data_curr.get(e, {}).get("asegurados", {}).get("Cantidad Total", 0.0) for e in all_entidades)
+    aseg_tot_c25 = sum(data_prev.get(e, {}).get("asegurados", {}).get("Cantidad Total", 0.0) for e in all_entidades)
     
-    aseg_pa_c26 = sum(curr.get(e, {}).get("asegurados", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
-    aseg_pr_c26 = sum(curr.get(e, {}).get("asegurados", {}).get("Periodo Renta", 0.0) for e in all_entidades)
+    aseg_pa_c26 = sum(data_curr.get(e, {}).get("asegurados", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
+    aseg_pr_c26 = sum(data_curr.get(e, {}).get("asegurados", {}).get("Periodo Renta", 0.0) for e in all_entidades)
 
     market_row = {
         "Entidad": "TOTAL MERCADO",
