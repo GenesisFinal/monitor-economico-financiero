@@ -295,5 +295,42 @@ def fetch_retiro_data(period_current="202603", period_prev="202503"):
         
     # Sort by Compromisos Total descending
     final_list.sort(key=lambda x: x["compromisos"]["Total"]["val"], reverse=True)
+
+    # Compute TOTAL MERCADO summary row
+    tot_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Total", 0.0) for e in all_entidades)
+    tot_c25 = sum(prev.get(e, {}).get("compromisos", {}).get("Total", 0.0) for e in all_entidades)
     
+    pa_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
+    pa_c25 = sum(prev.get(e, {}).get("compromisos", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
+    
+    rv_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Rentas Vitalicias", 0.0) for e in all_entidades)
+    rv_c25 = sum(prev.get(e, {}).get("compromisos", {}).get("Rentas Vitalicias", 0.0) for e in all_entidades)
+    
+    rvp_art_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("RVP y ART", 0.0) for e in all_entidades)
+    otros_c26 = sum(curr.get(e, {}).get("compromisos", {}).get("Otros", 0.0) for e in all_entidades)
+
+    aseg_tot_c26 = sum(curr.get(e, {}).get("asegurados", {}).get("Cantidad Total", 0.0) for e in all_entidades)
+    aseg_tot_c25 = sum(prev.get(e, {}).get("asegurados", {}).get("Cantidad Total", 0.0) for e in all_entidades)
+    
+    aseg_pa_c26 = sum(curr.get(e, {}).get("asegurados", {}).get("Periodo Ahorro", 0.0) for e in all_entidades)
+    aseg_pr_c26 = sum(curr.get(e, {}).get("asegurados", {}).get("Periodo Renta", 0.0) for e in all_entidades)
+
+    market_row = {
+        "Entidad": "TOTAL MERCADO",
+        "isTotalRow": True,
+        "compromisos": {
+            "Total": {"val": tot_c26, "pct": 100.0, "yoy": calc_yoy(tot_c26, tot_c25)},
+            "Periodo Ahorro": {"val": pa_c26, "pct": 100.0, "yoy": calc_yoy(pa_c26, pa_c25)},
+            "Rentas Vitalicias": {"val": rv_c26, "pct": 100.0, "yoy": calc_yoy(rv_c26, rv_c25)},
+            "RVP y ART": {"val": rvp_art_c26, "pct": (rvp_art_c26 / tot_c26 * 100) if tot_c26 > 0 else 0, "yoy": 0.0},
+            "Otros": {"val": otros_c26, "pct": (otros_c26 / tot_c26 * 100) if tot_c26 > 0 else 0, "yoy": 0.0}
+        },
+        "asegurados": {
+            "Cantidad Total": {"val": aseg_tot_c26, "yoy": calc_yoy(aseg_tot_c26, aseg_tot_c25)},
+            "Periodo Ahorro": {"val": aseg_pa_c26, "yoy": 0.0},
+            "Periodo Renta": {"val": aseg_pr_c26, "yoy": 0.0}
+        }
+    }
+    
+    final_list.append(market_row)
     return final_list
