@@ -7498,6 +7498,11 @@ function setSsnTimeRange(range) {
                 setTimeout(() => {
                     renderLecapsChart();
                 }, 50);
+            } else if (tabId === 'fci') {
+                setTimeout(() => {
+                    renderChart('fci-pesos');
+                    renderChart('fci-dolares');
+                }, 50);
             } else if (tabId === 'bonds') {
                 setTimeout(() => {
                     const viewUsd = document.getElementById('container-history-bonds_usd').classList.contains('hidden') ? 'curve' : 'history';
@@ -7565,6 +7570,7 @@ function setSsnTimeRange(range) {
                         if (cb) cb.checked = true;
                         const ticker = firstRow.dataset.ticker;
                         state[sec].tickers = [ticker];
+                        renderChart(sec);
                     }
                 }
             });
