@@ -946,6 +946,29 @@ body.layout-bento {
                 padding: 0.35rem !important;
             }
         }
+
+        /* Mobile Table Touch-Scroll Optimization (Vertical & Landscape) */
+        @media (max-width: 768px) {
+            .glass-card, .bg-darkCard, div[class*="overflow-"] {
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+            
+            table {
+                min-width: 680px !important;
+            }
+            
+            .overflow-x-auto::-webkit-scrollbar,
+            div::-webkit-scrollbar {
+                height: 5px !important;
+                display: block !important;
+            }
+            .overflow-x-auto::-webkit-scrollbar-thumb,
+            div::-webkit-scrollbar-thumb {
+                background-color: rgba(59, 130, 246, 0.5) !important;
+                border-radius: 4px !important;
+            }
+        }
     </style>
 </head>
 <body class="dark bg-darkBg text-slate-100 min-h-screen transition-all duration-300">
