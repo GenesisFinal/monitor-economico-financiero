@@ -1304,9 +1304,9 @@ body.layout-bento {
                                     {{ cat_label }}
                                     <span class="text-[11px] font-normal text-slate-500 ml-1">({{ pesos_funds|length }} fondos)</span>
                                 </span>
-                                <i class="fas fa-chevron-down text-slate-500 text-xs group-hover:text-emerald-400 transition-all duration-200" id="chevron-fci-p-{{ cat_key | replace(' ', '-') }}"></i>
+                                <i class="fas fa-chevron-down text-slate-500 text-xs group-hover:text-emerald-400 transition-all duration-200" id="chevron-fci-p-{{ cat_key | replace(' ', '-') }}" style="transform: rotate(-90deg);"></i>
                             </button>
-                            <div id="fci-p-{{ cat_key | replace(' ', '-') }}" class="subsection-content">
+                            <div id="fci-p-{{ cat_key | replace(' ', '-') }}" class="subsection-content collapsed">
                                 <div class="glass-card rounded-2xl overflow-x-auto mb-2">
                                     <table class="min-w-[600px] w-full divide-y divide-darkBorder light:divide-gray-200 text-[14px] text-left">
                                         <thead class="bg-darkBg light:bg-slate-100 text-slate-300 light:text-slate-700 font-semibold uppercase text-[12px]">
@@ -1407,9 +1407,9 @@ body.layout-bento {
                                     {{ cat_label }}
                                     <span class="text-[11px] font-normal text-slate-500 ml-1">({{ dollar_funds|length }} fondos)</span>
                                 </span>
-                                <i class="fas fa-chevron-down text-slate-500 text-xs group-hover:text-brandBlue transition-all duration-200" id="chevron-fci-d-{{ cat_key | replace(' ', '-') }}"></i>
+                                <i class="fas fa-chevron-down text-slate-500 text-xs group-hover:text-brandBlue transition-all duration-200" id="chevron-fci-d-{{ cat_key | replace(' ', '-') }}" style="transform: rotate(-90deg);"></i>
                             </button>
-                            <div id="fci-d-{{ cat_key | replace(' ', '-') }}" class="subsection-content">
+                            <div id="fci-d-{{ cat_key | replace(' ', '-') }}" class="subsection-content collapsed">
                                 <div class="glass-card rounded-2xl overflow-x-auto mb-2">
                                     <table class="min-w-[600px] w-full divide-y divide-darkBorder light:divide-gray-200 text-[14px] text-left">
                                         <thead class="bg-darkBg light:bg-slate-100 text-slate-300 light:text-slate-700 font-semibold uppercase text-[12px]">
@@ -7553,18 +7553,21 @@ function setSsnTimeRange(range) {
                 }
             });
 
-            // Initialize FCI selection
-            const fciPesosTbody = document.getElementById('tbody-fci-pesos');
-            if (fciPesosTbody) {
-                const firstRow = fciPesosTbody.querySelector('tr[data-ticker]');
-                if (firstRow) {
-                    firstRow.classList.add('grid-row-selected');
-                    const cb = firstRow.querySelector('input[type="checkbox"]');
-                    if (cb) cb.checked = true;
-                    const ticker = firstRow.dataset.ticker;
-                    state.fci.tickers = [ticker];
+            // Initialize FCI selection (Default: First Money Market fund for Pesos and Dolares)
+            ['fci-pesos', 'fci-dolares'].forEach(sec => {
+                const subId = (sec === 'fci-pesos') ? 'fci-p-Mercado-de-Dinero' : 'fci-d-Mercado-de-Dinero';
+                const subEl = document.getElementById(subId);
+                if (subEl) {
+                    const firstRow = subEl.querySelector('tr[data-ticker]');
+                    if (firstRow) {
+                        firstRow.classList.add('grid-row-selected');
+                        const cb = firstRow.querySelector('input[type="checkbox"]');
+                        if (cb) cb.checked = true;
+                        const ticker = firstRow.dataset.ticker;
+                        state[sec].tickers = [ticker];
+                    }
                 }
-            }
+            });
 
             // Restore active econ sub-tab
             const savedEconTab = localStorage.getItem('activeEconTab') || 'econ-tab-precios-y-costo-de-vida';
