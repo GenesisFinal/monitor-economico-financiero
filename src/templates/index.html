@@ -955,7 +955,7 @@ body.layout-bento {
             }
             
             table {
-                min-width: 680px !important;
+                min-width: 750px !important;
             }
             
             .overflow-x-auto::-webkit-scrollbar,
@@ -1505,9 +1505,9 @@ body.layout-bento {
                                         <th class="px-4 py-3">Especie / Nombre</th>
                                         <th class="px-4 py-3 text-right">Precio</th>
                                         <th class="px-4 py-3 text-right">Var %</th>
-                                        <th class="px-4 py-3 text-right hidden md:table-cell">1M</th>
-                                        <th class="px-4 py-3 text-right hidden md:table-cell">YTD</th>
-                                        <th class="px-4 py-3 text-right hidden md:table-cell">12M</th>
+                                        <th class="px-4 py-3 text-right ">1M</th>
+                                        <th class="px-4 py-3 text-right ">YTD</th>
+                                        <th class="px-4 py-3 text-right ">12M</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbl-{{ id }}" class="divide-y divide-darkBorder/40 light:divide-gray-200">
@@ -1531,13 +1531,13 @@ body.layout-bento {
                                         <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if item.change >= 0 else 'text-brandRed' }}">
                                             {{ '+' if item.change >= 0 else '' }}{{ item.change | format_pct }}%
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if item.change_1m != '-' and item.change_1m >= 0 else ('text-brandRed' if item.change_1m != '-' and item.change_1m < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if item.change_1m != '-' and item.change_1m >= 0 else ('text-brandRed' if item.change_1m != '-' and item.change_1m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(item.change_1m) if item.change_1m != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if item.change_ytd != '-' and item.change_ytd >= 0 else ('text-brandRed' if item.change_ytd != '-' and item.change_ytd < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if item.change_ytd != '-' and item.change_ytd >= 0 else ('text-brandRed' if item.change_ytd != '-' and item.change_ytd < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(item.change_ytd) if item.change_ytd != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if item.change_12m != '-' and item.change_12m >= 0 else ('text-brandRed' if item.change_12m != '-' and item.change_12m < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if item.change_12m != '-' and item.change_12m >= 0 else ('text-brandRed' if item.change_12m != '-' and item.change_12m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(item.change_12m) if item.change_12m != '-' else '-' }}
                                         </td>
                                     </tr>
@@ -2153,9 +2153,9 @@ body.layout-bento {
                                         <th class="px-4 py-3">Emisor / Estructura</th>
                                         <th class="px-4 py-3 text-right">Precio</th>
                                         <th class="px-4 py-3 text-right">Var %</th>
-                                        <th class="px-4 py-3 text-right hidden md:table-cell">1M</th>
-                                        <th class="px-4 py-3 text-right hidden md:table-cell">YTD</th>
-                                        <th class="px-4 py-3 text-right hidden md:table-cell">12M</th>
+                                        <th class="px-4 py-3 text-right ">1M</th>
+                                        <th class="px-4 py-3 text-right ">YTD</th>
+                                        <th class="px-4 py-3 text-right ">12M</th>
                                         <th class="px-4 py-3 text-right">TIR</th>
                                         <th class="px-4 py-3 text-right">Duration</th>
                                     </tr>
@@ -2176,13 +2176,13 @@ body.layout-bento {
                                         <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                             {{ '+' if b.change >= 0 else '' }}{{ '{:.2f}%'.format(b.change) if b.change is not none and b.change != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if b.change_1m != '-' and b.change_1m >= 0 else ('text-brandRed' if b.change_1m != '-' and b.change_1m < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_1m != '-' and b.change_1m >= 0 else ('text-brandRed' if b.change_1m != '-' and b.change_1m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_1m) if b.change_1m != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if b.change_ytd != '-' and b.change_ytd >= 0 else ('text-brandRed' if b.change_ytd != '-' and b.change_ytd < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_ytd != '-' and b.change_ytd >= 0 else ('text-brandRed' if b.change_ytd != '-' and b.change_ytd < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_ytd) if b.change_ytd != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if b.change_12m != '-' and b.change_12m >= 0 else ('text-brandRed' if b.change_12m != '-' and b.change_12m < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_12m != '-' and b.change_12m >= 0 else ('text-brandRed' if b.change_12m != '-' and b.change_12m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_12m) if b.change_12m != '-' else '-' }}
                                         </td>
                                         <td class="px-4 py-2.5 text-right font-semibold text-brandGreen">{{ b.tir }}</td>
@@ -2204,13 +2204,13 @@ body.layout-bento {
                                         <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                             {{ '+' if b.change >= 0 else '' }}{{ '{:.2f}%'.format(b.change) if b.change is not none and b.change != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if b.change_1m != '-' and b.change_1m >= 0 else ('text-brandRed' if b.change_1m != '-' and b.change_1m < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_1m != '-' and b.change_1m >= 0 else ('text-brandRed' if b.change_1m != '-' and b.change_1m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_1m) if b.change_1m != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if b.change_ytd != '-' and b.change_ytd >= 0 else ('text-brandRed' if b.change_ytd != '-' and b.change_ytd < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_ytd != '-' and b.change_ytd >= 0 else ('text-brandRed' if b.change_ytd != '-' and b.change_ytd < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_ytd) if b.change_ytd != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if b.change_12m != '-' and b.change_12m >= 0 else ('text-brandRed' if b.change_12m != '-' and b.change_12m < 0 else 'text-slate-400') }}">
+                                        <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_12m != '-' and b.change_12m >= 0 else ('text-brandRed' if b.change_12m != '-' and b.change_12m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_12m) if b.change_12m != '-' else '-' }}
                                         </td>
                                         <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">{{ b.tir }}</td>
@@ -2294,7 +2294,7 @@ body.layout-bento {
                                             {% if extra_header %}
                                             <th class="px-4 py-3 text-right">{{ extra_header }}</th>
                                             {% endif %}
-                                            <th class="px-4 py-3 text-right hidden md:table-cell">12M</th>
+                                            <th class="px-4 py-3 text-right ">12M</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tbl-stocks-{{ sub_id }}" class="divide-y divide-darkBorder/40 light:divide-gray-200">
@@ -2326,7 +2326,7 @@ body.layout-bento {
                                                 {% endif %}
                                             </td>
                                             {% endif %}
-                                            <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono {{ 'text-brandGreen' if item.change_12m != '-' and item.change_12m >= 0 else ('text-brandRed' if item.change_12m != '-' and item.change_12m < 0 else 'text-slate-400') }}">
+                                            <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if item.change_12m != '-' and item.change_12m >= 0 else ('text-brandRed' if item.change_12m != '-' and item.change_12m < 0 else 'text-slate-400') }}">
                                                 {{ '{:+.2f}%'.format(item.change_12m) if item.change_12m != '-' else '-' }}
                                             </td>
                                         </tr>
