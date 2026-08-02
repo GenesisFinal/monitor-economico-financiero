@@ -913,54 +913,63 @@ body.layout-bento {
 </head>
 <body class="dark bg-darkBg text-slate-100 min-h-screen transition-all duration-300">
     <!-- Header Global -->
-    <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-6 py-4 light:bg-white/80 light:border-gray-200">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-3">
-                <i class="fas fa-chart-pie text-2xl text-brandBlue"></i>
-                <h1 class="text-xl font-bold text-white light:text-slate-900 font-black">Monitor Económico Financiero</h1>
+    <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-3 sm:px-6 py-3 sm:py-4 light:bg-white/80 light:border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">
+            <div class="flex items-center justify-between w-full lg:w-auto gap-3">
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    <i class="fas fa-chart-pie text-xl sm:text-2xl text-brandBlue"></i>
+                    <h1 class="text-base sm:text-xl font-bold text-white light:text-slate-900 font-black">Monitor Económico Financiero</h1>
+                </div>
+                <button onclick="toggleTheme()" class="lg:hidden p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0">
+                    <i id="theme-icon-mobile" class="fas fa-sun text-base"></i>
+                </button>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="flex bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200">
-                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20">
+            
+            <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto overflow-x-auto no-scrollbar">
+                <!-- Global Tabs Container -->
+                <div class="flex w-full sm:w-auto overflow-x-auto no-scrollbar bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200 whitespace-nowrap shrink-0">
+                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 sm:gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
                         <i class="fas fa-chart-line text-brandBlue"></i> Valores Financieros
                     </button>
-                    <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                    <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 sm:gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
                         <i class="fas fa-building-columns text-brandBlue"></i> Indicadores Económicos
                     </button>
-                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 sm:gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
                     </button>
-                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 sm:gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
                         <i class="fas fa-book-open text-brandBlue"></i> Fuentes
                     </button>
-
                 </div>
-                <!-- Selector de Diseño (Layout) -->
-                <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl">
-                    <i class="fas fa-table-cells-large text-xs text-slate-400 light:text-slate-600"></i>
-                    <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
-                        <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid & Cards (Moderno / Glassmorphic)</option>
-                        <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report (Elegante)</option>
-                        <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style (Corporativo)</option>
-                        <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS (Minimalista)</option>
-                    </select>
+                
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-start">
+                    <!-- Selector de Diseño (Layout) -->
+                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl max-w-[170px] sm:max-w-none">
+                        <i class="fas fa-table-cells-large text-xs text-slate-400 light:text-slate-600 shrink-0"></i>
+                        <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3 truncate">
+                            <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid & Cards (Moderno)</option>
+                            <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report (Elegante)</option>
+                            <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style (Corporativo)</option>
+                            <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS (Minimalista)</option>
+                        </select>
+                    </div>
+                    <!-- Selector de Paleta de Color -->
+                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl max-w-[150px] sm:max-w-none">
+                        <i class="fas fa-palette text-xs text-slate-400 light:text-slate-600 shrink-0"></i>
+                        <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3 truncate">
+                            <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon & Electric</option>
+                            <option value="indigo-slate" class="bg-darkCard text-white light:bg-white light:text-slate-800">Indigo Slate</option>
+                            <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
+                            <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
+                            <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
+                            <option value="l2-color" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
+                            <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
+                        </select>
+                    </div>
+                    <button onclick="toggleTheme()" class="hidden lg:block p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0">
+                        <i id="theme-icon" class="fas fa-sun text-lg"></i>
+                    </button>
                 </div>
-                <!-- Selector de Paleta de Color -->
-                <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl">
-                    <i class="fas fa-palette text-xs text-slate-400 light:text-slate-600"></i>
-                    <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
-                        <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon & Electric</option>
-                        <option value="indigo-slate" class="bg-darkCard text-white light:bg-white light:text-slate-800">Indigo Slate</option>
-                        <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
-                        <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
-                        <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
-                        <option value="l2-color" selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
-                        <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
-                    </select>
-                </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors">
-                    <i id="theme-icon" class="fas fa-sun text-lg"></i>
-                </button>
             </div>
         </div>
     </header>
@@ -968,15 +977,17 @@ body.layout-bento {
     <!-- Global Tab Content 1: Valores Financieros -->
     <div id="container-valores-financieros" class="min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
         <!-- SIDEBAR -->
-        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200">
-            <div class="p-6 border-b border-darkBorder light:border-gray-200">
-                <h1 class="text-xl font-black text-white light:text-slate-900 flex items-center gap-2">
-                    <i class="fas fa-chart-line text-brandBlue"></i> Valores
-                </h1>
-                <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-1">Actualizado: {{ data.update_time_financial | default(data.update_time) }} hs</span>
-                <span class="text-[9px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización lunes a viernes, 21:00 hs)</span>
+        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200 shrink-0">
+            <div class="p-3 md:p-6 border-b border-darkBorder light:border-gray-200 flex md:block items-center justify-between">
+                <div>
+                    <h1 class="text-base md:text-xl font-black text-white light:text-slate-900 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-brandBlue"></i> Valores
+                    </h1>
+                    <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-0.5 md:mt-1">Actualizado: {{ data.update_time_financial | default(data.update_time) }} hs</span>
+                </div>
+                <span class="text-[9px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización lunes a viernes, 21:00 hs)</span>
             </div>
-            <nav class="flex-1 p-4 space-y-1 overflow-y-auto font-medium" id="sidebar-nav">
+            <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav">
                 <!-- Botones de Pestañas -->
                 
                 
@@ -1186,6 +1197,12 @@ body.layout-bento {
             <!-- SECTION FCI: FONDOS COMUNES DE INVERSION -->
             <div id="panel-fci" class="tab-panel hidden">
                 <div class="max-w-full px-2 py-4 space-y-10">
+
+                    <!-- Mobile Rotate Hint Banner -->
+                    <div class="md:hidden flex items-center gap-2 text-xs font-semibold text-amber-400 light:text-amber-700 bg-amber-500/10 light:bg-amber-50 border border-amber-500/20 light:border-amber-200 px-3.5 py-2.5 rounded-xl mb-4 shadow-sm">
+                        <i class="fas fa-mobile-screen-button rotate-90 text-sm shrink-0 animate-pulse text-amber-400"></i>
+                        <span><strong>Tip:</strong> Para visualizar mejor las tablas extensas de FCIs, gira tu teléfono a modo horizontal.</span>
+                    </div>
 
                     <!-- FCI DE PESOS -->
                     <div>
@@ -2326,20 +2343,23 @@ body.layout-bento {
         <!-- Global Tab Content 2: Indicadores Económicos -->
     <div id="container-indicadores-economicos" class="hidden min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
         <!-- Sidebar Navigation -->
-        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200">
-            <div class="flex-1 p-4 space-y-1 overflow-y-auto font-medium" id="sidebar-nav-econ">
-                <div class="px-3 py-2 border-b border-darkBorder/20 light:border-gray-200 mb-2">
+        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200 shrink-0">
+            <div class="p-3 md:p-4 border-b border-darkBorder/20 light:border-gray-200 flex md:block items-center justify-between">
+                <div>
                     <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Categorías Económicas</span>
                     <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_economic | default(data.update_time) }} hs</span>
-                    <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
                 </div>
+                <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
+            </div>
+            <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav-econ">
                 {% for cat in data.economic_categories %}
-                <button onclick="switchEconTab('econ-tab-{{ cat.name|slugify }}')" id="btn-econ-tab-{{ cat.name|slugify }}" class="econ-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="{{ cat.icon }} w-5 text-center text-brandBlue font-bold"></i>
+                <button onclick="switchEconTab('econ-tab-{{ cat.name|slugify }}')" id="btn-econ-tab-{{ cat.name|slugify }}" class="econ-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="{{ cat.icon }} w-4 md:w-5 text-center text-brandBlue font-bold"></i>
                     <span>{{ cat.name }}</span>
                 </button>
                 {% endfor %}
-            </aside>
+            </nav>
+        </aside>
             
             <!-- MAIN ECON CONTENT PANELS -->
             <main class="flex-grow w-full space-y-6">
@@ -2530,45 +2550,45 @@ body.layout-bento {
     <!-- Global Tab Content 3: Mercado Asegurador -->
     <div id="container-mercado-asegurador" class="hidden min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
         <!-- Sidebar Navigation -->
-        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200">
-            <div class="flex-1 p-4 space-y-1 overflow-y-auto font-medium" id="sidebar-nav-aseg">
-                <div class="px-3 py-2 border-b border-darkBorder/20 light:border-gray-200 mb-2">
+        <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200 shrink-0">
+            <div class="p-3 md:p-4 border-b border-darkBorder/20 light:border-gray-200 flex md:block items-center justify-between">
+                <div>
                     <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Mercado Asegurador</span>
                     <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_insurance }}</span>
                 </div>
-                
-                <button onclick="switchAsegTab('aseg-tab-primas')" id="btn-aseg-tab-primas" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-shield-halved w-5 text-center text-brandBlue"></i>
+            </div>
+            <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav-aseg">
+                <button onclick="switchAsegTab('aseg-tab-primas')" id="btn-aseg-tab-primas" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-shield-halved w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Primas Acumuladas</span>
                 </button>
                 
-                <button onclick="switchAsegTab('aseg-tab-evolucion')" id="btn-aseg-tab-evolucion" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-chart-line w-5 text-center text-brandBlue"></i>
+                <button onclick="switchAsegTab('aseg-tab-evolucion')" id="btn-aseg-tab-evolucion" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-chart-line w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Evolución Mensual</span>
                 </button>
                 
-                <button onclick="switchAsegTab('aseg-tab-rankings')" id="btn-aseg-tab-rankings" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-trophy w-5 text-center text-brandBlue"></i>
+                <button onclick="switchAsegTab('aseg-tab-rankings')" id="btn-aseg-tab-rankings" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-trophy w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Rankings de Producción</span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-lasegunda')" id="btn-aseg-tab-lasegunda" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-building-shield w-5 text-center text-brandBlue"></i>
+                <button onclick="switchAsegTab('aseg-tab-lasegunda')" id="btn-aseg-tab-lasegunda" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-building-shield w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Grupo La Segunda</span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-personas-retiro')" id="btn-aseg-tab-personas-retiro" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-user-shield w-5 text-center text-brandBlue"></i>
+                <button onclick="switchAsegTab('aseg-tab-personas-retiro')" id="btn-aseg-tab-personas-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-user-shield w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Personas y Retiro</span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-balances')" id="btn-aseg-tab-balances" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-scale-balanced w-5 text-center text-brandBlue"></i>
+                <button onclick="switchAsegTab('aseg-tab-balances')" id="btn-aseg-tab-balances" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-scale-balanced w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Estados Contables</span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-retiro')" id="btn-aseg-tab-retiro" class="aseg-tab-btn tab-btn flex items-center gap-3 w-full px-4 py-3 text-left rounded-xl transition-all font-semibold text-sm">
-                    <i class="fas fa-piggy-bank w-5 text-center text-brandBlue"></i>
+                <button onclick="switchAsegTab('aseg-tab-retiro')" id="btn-aseg-tab-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
+                    <i class="fas fa-piggy-bank w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Seguros de Retiro</span>
                 </button>
-
-            </div>
+            </nav>
         </aside>
         
         <!-- Main Content Area -->
@@ -2674,6 +2694,12 @@ body.layout-bento {
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- Mobile Rotate Hint Banner -->
+        <div class="md:hidden flex items-center gap-2 text-xs font-semibold text-amber-400 light:text-amber-700 bg-amber-500/10 light:bg-amber-50 border border-amber-500/20 light:border-amber-200 px-3.5 py-2.5 rounded-xl mb-4 shadow-sm">
+            <i class="fas fa-mobile-screen-button rotate-90 text-sm shrink-0 animate-pulse text-amber-400"></i>
+            <span><strong>Tip:</strong> Para visualizar mejor las tablas extensas de primas, gira tu teléfono a modo horizontal.</span>
         </div>
 
         <!-- Main Breakdown Table -->
@@ -7758,6 +7784,12 @@ function setSsnTimeRange(range) {
             <strong>"La Segunda"</strong> se consolida como grupo (La Segunda ART, La Segunda Seguros, La Segunda Retiro, La Segunda Personas).
         </p>
 
+        <!-- Mobile Rotate Hint Banner -->
+        <div class="md:hidden flex items-center gap-2 text-xs font-semibold text-amber-400 light:text-amber-700 bg-amber-500/10 light:bg-amber-50 border border-amber-500/20 light:border-amber-200 px-3.5 py-2.5 rounded-xl mb-4 shadow-sm">
+            <i class="fas fa-mobile-screen-button rotate-90 text-sm shrink-0 animate-pulse text-amber-400"></i>
+            <span><strong>Tip:</strong> Para visualizar mejor los Rankings de Producción, gira tu teléfono a modo horizontal.</span>
+        </div>
+
         <!-- Selector -->
         <div class="mb-8 flex items-center gap-4 bg-darkCard/60 p-4 rounded-xl border border-darkBorder/40 light:bg-slate-50 light:border-slate-200 shadow-sm max-w-2xl">
             <label for="ranking-segment-select" class="text-sm font-medium text-slate-300 light:text-slate-700 whitespace-nowrap">Segmento a visualizar:</label>
@@ -8053,7 +8085,10 @@ function setSsnTimeRange(range) {
                         </h2>
                         <p class="text-slate-400 light:text-slate-500 mt-2 max-w-4xl">Análisis de estados contables trimestrales provistos por la SSN.</p>
                         <p class="text-brandBlue font-medium mt-1 text-sm">Valores expresados en millones de pesos.</p>
-                    </div>
+                <!-- Mobile Rotate Hint Banner -->
+                <div class="md:hidden flex items-center gap-2 text-xs font-semibold text-amber-400 light:text-amber-700 bg-amber-500/10 light:bg-amber-50 border border-amber-500/20 light:border-amber-200 px-3.5 py-2.5 rounded-xl mb-4 shadow-sm">
+                    <i class="fas fa-mobile-screen-button rotate-90 text-sm shrink-0 animate-pulse text-amber-400"></i>
+                    <span><strong>Tip:</strong> Para visualizar mejor las tablas de Estados Contables, gira tu teléfono a modo horizontal.</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mt-4">
@@ -8130,6 +8165,12 @@ function setSsnTimeRange(range) {
                         <p class="text-slate-400 mt-2 max-w-4xl">Datos de Reserva Matemática y Asegurados/Rentistas.</p>
                         <p class="text-emerald-400 mt-1 max-w-4xl text-sm"><i class="fas fa-info-circle"></i> Los compromisos técnicos están expresados en miles de millones de pesos corrientes.</p>
                     </div>
+                </div>
+
+                <!-- Mobile Rotate Hint Banner -->
+                <div class="md:hidden flex items-center gap-2 text-xs font-semibold text-amber-400 light:text-amber-700 bg-amber-500/10 light:bg-amber-50 border border-amber-500/20 light:border-amber-200 px-3.5 py-2.5 rounded-xl mb-4 shadow-sm">
+                    <i class="fas fa-mobile-screen-button rotate-90 text-sm shrink-0 animate-pulse text-amber-400"></i>
+                    <span><strong>Tip:</strong> Para visualizar mejor la tabla de Seguros de Retiro, gira tu teléfono a modo horizontal.</span>
                 </div>
 
                 <div class="glass-card rounded-3xl p-6 md:p-8 mb-8 border border-darkBorder/40 overflow-hidden relative shadow-lg">
