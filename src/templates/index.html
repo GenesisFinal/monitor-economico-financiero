@@ -8720,7 +8720,7 @@ const companies = Object.keys(balancesData[seg]);
         }
         function formatPctRetiro(v) {
             if (v === undefined || v === null || isNaN(v)) return "-";
-            return new Intl.NumberFormat('es-AR', { style: 'percent', maximumFractionDigits: 1 }).format(v / 100);
+            return new Intl.NumberFormat('es-AR', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(v / 100);
         }
 
         function getVarColor(yoy) {
@@ -8739,7 +8739,12 @@ const companies = Object.keys(balancesData[seg]);
         function renderRetiroCompromisos() {
             if (!retiroBodyComp) return;
             retiroBodyComp.innerHTML = "";
-            retiroData.forEach((row, i) => {
+            
+            // Separate regular rows and total row
+            const regularRows = retiroData.filter(r => !r.isTotalRow);
+            const totalRow = retiroData.find(r => r.isTotalRow);
+
+            regularRows.forEach((row, i) => {
                 const c = row.compromisos || {};
                 const totalVal = getRetiroField(c, "Total", "val", 0);
                 if (totalVal === 0) return; // Skip zero total
@@ -8827,14 +8832,52 @@ const companies = Object.keys(balancesData[seg]);
                     retiroBodyComp.appendChild(trCol);
                 }
             });
+
+            // Append TOTAL MERCADO summary row
+            if (totalRow) {
+                const c = totalRow.compromisos || {};
+                const totalVal = getRetiroField(c, "Total", "val", 0);
+                const totalYoY = getRetiroField(c, "Total", "yoy", undefined);
+                const paVal = getRetiroField(c, "Periodo Ahorro", "val", 0);
+                const paYoY = getRetiroField(c, "Periodo Ahorro", "yoy", undefined);
+                const rvVal = getRetiroField(c, "Rentas Vitalicias", "val", 0);
+                const rvYoY = getRetiroField(c, "Rentas Vitalicias", "yoy", undefined);
+                const rvpVal = getRetiroField(c, "RVP y ART", "val", 0);
+                const otrosVal = getRetiroField(c, "Otros", "val", 0);
+
+                const trTot = document.createElement("tr");
+                trTot.className = "bg-brandBlue/20 font-bold text-white border-t-2 border-brandBlue/50 text-xs";
+                trTot.innerHTML = `
+                    <td class="px-4 py-3"></td>
+                    <td class="px-4 py-3 font-bold text-brandBlue uppercase tracking-wider text-xs">TOTAL MERCADO</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(totalVal)}</td>
+                    <td class="px-4 py-3 text-right text-brandBlue font-bold">${formatPctRetiro(100)}</td>
+                    <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-bold">${formatPctRetiro(totalYoY)}</td>
+                    
+                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(paVal)}</td>
+                    <td class="px-4 py-3 text-right text-brandBlue font-bold">${formatPctRetiro(100)}</td>
+                    <td class="px-4 py-3 text-right ${getVarColor(paYoY)} font-bold">${formatPctRetiro(paYoY)}</td>
+                    
+                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(rvVal)}</td>
+                    <td class="px-4 py-3 text-right text-brandBlue font-bold">${formatPctRetiro(100)}</td>
+                    <td class="px-4 py-3 text-right ${getVarColor(rvYoY)} font-bold">${formatPctRetiro(rvYoY)}</td>
+                    
+                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(rvpVal)}</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(otrosVal)}</td>
+                `;
+                retiroBodyComp.appendChild(trTot);
+            }
         }
 
         function renderRetiroAsegurados() {
             if (!retiroBodyAseg) return;
             retiroBodyAseg.innerHTML = "";
             
+            const regularRows = retiroData.filter(r => !r.isTotalRow);
+            const totalRow = retiroData.find(r => r.isTotalRow);
+
             // Sort by Asegurados Total descending
-            const sortedAseg = [...retiroData].sort((a,b) => {
+            const sortedAseg = [...regularRows].sort((a,b) => {
                 const valA = getRetiroField(a.asegurados, "Cantidad Total", "val", 0);
                 const valB = getRetiroField(b.asegurados, "Cantidad Total", "val", 0);
                 return valB - valA;
@@ -8906,6 +8949,27 @@ const companies = Object.keys(balancesData[seg]);
                 `;
                 retiroBodyAseg.appendChild(trPrev);
             });
+
+            // Append TOTAL MERCADO summary row for Asegurados
+            if (totalRow) {
+                const a = totalRow.asegurados || {};
+                const totalVal = getRetiroField(a, "Cantidad Total", "val", 0);
+                const totalYoY = getRetiroField(a, "Cantidad Total", "yoy", undefined);
+                const paVal = getRetiroField(a, "Periodo Ahorro", "val", 0);
+                const prVal = getRetiroField(a, "Periodo Renta", "val", 0);
+
+                const trTot = document.createElement("tr");
+                trTot.className = "bg-brandBlue/20 font-bold text-white border-t-2 border-brandBlue/50 text-xs";
+                trTot.innerHTML = `
+                    <td class="px-4 py-3"></td>
+                    <td class="px-4 py-3 font-bold text-brandBlue uppercase tracking-wider text-xs">TOTAL MERCADO</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(totalVal)}</td>
+                    <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-bold">${formatPctRetiro(totalYoY)}</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(paVal)}</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(prVal)}</td>
+                `;
+                retiroBodyAseg.appendChild(trTot);
+            }
         }
 
         function formatPct(val) {
