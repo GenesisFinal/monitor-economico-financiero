@@ -8686,7 +8686,16 @@ const companies = Object.keys(balancesData[seg]);
         }
         function formatPctRetiro(v) {
             if (v === undefined || v === null || isNaN(v)) return "-";
-                 function getRetiroField(obj, key, prop, fallback) {
+            return new Intl.NumberFormat('es-AR', { style: 'percent', maximumFractionDigits: 1 }).format(v / 100);
+        }
+
+        function getVarColor(yoy) {
+            if (yoy > 0) return "text-emerald-500";
+            if (yoy < 0) return "text-red-500";
+            return "text-slate-400";
+        }
+
+        function getRetiroField(obj, key, prop, fallback) {
             if (obj && obj[key] && obj[key][prop] !== undefined) {
                 return obj[key][prop];
             }
