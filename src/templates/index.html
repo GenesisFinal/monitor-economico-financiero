@@ -909,23 +909,45 @@ body.layout-bento {
         body.layout-terminal.theme-amber-terminal table td .text-red-500 {
             color: #ef4444 !important;
         }
+
+        /* Mobile Landscape Viewport Optimization */
+        @media (max-height: 600px) and (orientation: landscape) {
+            header {
+                padding-top: 0.25rem !important;
+                padding-bottom: 0.25rem !important;
+            }
+            aside div.p-3 {
+                padding: 0.35rem 0.75rem !important;
+            }
+            aside nav {
+                padding: 0.35rem 0.5rem !important;
+            }
+            aside nav button {
+                padding-top: 0.35rem !important;
+                padding-bottom: 0.35rem !important;
+                font-size: 0.75rem !important;
+            }
+            .glass-card {
+                padding: 0.75rem !important;
+            }
+        }
     </style>
 </head>
 <body class="dark bg-darkBg text-slate-100 min-h-screen transition-all duration-300">
     <!-- Header Global -->
-    <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-3 sm:px-6 py-3 sm:py-4 light:bg-white/80 light:border-gray-200">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-3 sm:gap-4">
-            <div class="flex items-center justify-between w-full lg:w-auto gap-3">
+    <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-3 sm:px-6 py-2.5 sm:py-3.5 light:bg-white/80 light:border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col xl:flex-row items-center justify-between gap-3">
+            <div class="flex items-center justify-between w-full xl:w-auto gap-3">
                 <div class="flex items-center gap-2.5 sm:gap-3">
                     <i class="fas fa-chart-pie text-xl sm:text-2xl text-brandBlue"></i>
                     <h1 class="text-base sm:text-xl font-bold text-white light:text-slate-900 font-black">Monitor Económico Financiero</h1>
                 </div>
-                <button onclick="toggleTheme()" class="lg:hidden p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0">
+                <button onclick="toggleTheme()" class="xl:hidden p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0" title="Cambiar Tema (Claro/Oscuro)">
                     <i id="theme-icon-mobile" class="fas fa-sun text-base"></i>
                 </button>
             </div>
             
-            <div class="flex flex-col sm:flex-row items-center gap-3 w-full lg:w-auto overflow-x-auto no-scrollbar">
+            <div class="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 w-full xl:w-auto overflow-x-auto no-scrollbar">
                 <!-- Global Tabs Container -->
                 <div class="flex w-full sm:w-auto overflow-x-auto no-scrollbar bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200 whitespace-nowrap shrink-0">
                     <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-1.5 sm:gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
@@ -942,11 +964,11 @@ body.layout-bento {
                     </button>
                 </div>
                 
-                <div class="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-start">
+                <div class="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-start shrink-0">
                     <!-- Selector de Diseño (Layout) -->
-                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl max-w-[170px] sm:max-w-none">
+                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
                         <i class="fas fa-table-cells-large text-xs text-slate-400 light:text-slate-600 shrink-0"></i>
-                        <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3 truncate">
+                        <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3">
                             <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid & Cards (Moderno)</option>
                             <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report (Elegante)</option>
                             <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style (Corporativo)</option>
@@ -954,9 +976,9 @@ body.layout-bento {
                         </select>
                     </div>
                     <!-- Selector de Paleta de Color -->
-                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl max-w-[150px] sm:max-w-none">
+                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
                         <i class="fas fa-palette text-xs text-slate-400 light:text-slate-600 shrink-0"></i>
-                        <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3 truncate">
+                        <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3">
                             <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon & Electric</option>
                             <option value="indigo-slate" class="bg-darkCard text-white light:bg-white light:text-slate-800">Indigo Slate</option>
                             <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
@@ -966,8 +988,8 @@ body.layout-bento {
                             <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
                         </select>
                     </div>
-                    <button onclick="toggleTheme()" class="hidden lg:block p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0">
-                        <i id="theme-icon" class="fas fa-sun text-lg"></i>
+                    <button onclick="toggleTheme()" class="hidden xl:flex items-center justify-center p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0" title="Cambiar Tema (Claro/Oscuro)">
+                        <i id="theme-icon" class="fas fa-sun text-base"></i>
                     </button>
                 </div>
             </div>
@@ -978,14 +1000,15 @@ body.layout-bento {
     <div id="container-valores-financieros" class="min-h-[calc(100vh-73px)] flex flex-col md:flex-row">
         <!-- SIDEBAR -->
         <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200 shrink-0">
-            <div class="p-3 md:p-6 border-b border-darkBorder light:border-gray-200 flex md:block items-center justify-between">
+            <div class="p-3 md:p-4 border-b border-darkBorder/20 light:border-gray-200 flex md:block items-center justify-between">
                 <div>
-                    <h1 class="text-base md:text-xl font-black text-white light:text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-chart-line text-brandBlue"></i> Valores
+                    <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Sección Financiera</span>
+                    <h1 class="text-sm md:text-base font-extrabold text-white light:text-slate-900 flex items-center gap-2 mt-0.5">
+                        <i class="fas fa-chart-line text-brandBlue"></i> Valores Financieros
                     </h1>
-                    <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-0.5 md:mt-1">Actualizado: {{ data.update_time_financial | default(data.update_time) }} hs</span>
+                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                 </div>
-                <span class="text-[9px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización lunes a viernes, 21:00 hs)</span>
+                <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización lun a vie, 21:00 hs)</span>
             </div>
             <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav">
                 <!-- Botones de Pestañas -->
@@ -1158,7 +1181,7 @@ body.layout-bento {
                                     <span class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/20 cursor-help" title="Muestra la cotización del dólar oficial, dólar MEP, CCL y la brecha cambiaria en el período seleccionado.">Significado: Cotizaciones y Brechas Cambiarias</span>
                                 </div>
                             </div>
-                            <div class="flex gap-1 items-center" id="periods-exchange">
+                            <div class="flex flex-wrap gap-1 items-center mt-1 sm:mt-0" id="periods-exchange">
                                 <button onclick="changePeriod('exchange', '1M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">1M</button>
                                 <button onclick="changePeriod('exchange', '6M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">6M</button>
                                 <button onclick="changePeriod('exchange', '12M')" class="text-[10px] px-2 py-0.5 rounded bg-brandBlue text-white font-bold">12M</button>
@@ -1498,7 +1521,7 @@ body.layout-bento {
                                             <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 cursor-help" title="Muestra la cotización e índice de rendimiento para {{ title }}.">Significado: Evolución de {{ title }}</span>
                                         </div>
                                     </div>
-                                    <div class="flex gap-1 items-center" id="periods-{{ id }}">
+                                    <div class="flex flex-wrap gap-1 items-center mt-1 sm:mt-0" id="periods-{{ id }}">
                                         <button onclick="changePeriod('{{ id }}', '1M')" class="text-[11px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">1M</button>
                                         <button onclick="changePeriod('{{ id }}', '6M')" class="text-[11px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">6M</button>
                                         <button onclick="changePeriod('{{ id }}', '12M')" class="text-[11px] px-2 py-0.5 rounded bg-brandBlue text-white font-bold">12M</button>
@@ -2347,6 +2370,9 @@ body.layout-bento {
             <div class="p-3 md:p-4 border-b border-darkBorder/20 light:border-gray-200 flex md:block items-center justify-between">
                 <div>
                     <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Categorías Económicas</span>
+                    <h1 class="text-sm md:text-base font-extrabold text-white light:text-slate-900 flex items-center gap-2 mt-0.5">
+                        <i class="fas fa-building-columns text-brandBlue"></i> Indicadores Económicos
+                    </h1>
                     <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_economic | default(data.update_time) }} hs</span>
                 </div>
                 <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
@@ -2553,9 +2579,13 @@ body.layout-bento {
         <aside class="w-full md:w-64 bg-darkCard border-b md:border-b-0 md:border-r border-darkBorder flex flex-col light:bg-slate-50 light:border-gray-200 shrink-0">
             <div class="p-3 md:p-4 border-b border-darkBorder/20 light:border-gray-200 flex md:block items-center justify-between">
                 <div>
-                    <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Mercado Asegurador</span>
-                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_insurance }}</span>
+                    <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Información del Sector</span>
+                    <h1 class="text-sm md:text-base font-extrabold text-white light:text-slate-900 flex items-center gap-2 mt-0.5">
+                        <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
+                    </h1>
+                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_insurance }} hs</span>
                 </div>
+                <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
             </div>
             <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav-aseg">
                 <button onclick="switchAsegTab('aseg-tab-primas')" id="btn-aseg-tab-primas" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0 whitespace-nowrap">
