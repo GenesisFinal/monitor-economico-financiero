@@ -66,16 +66,22 @@ def parse_res_mat(df, results):
         if entidad not in results:
             results[entidad] = {"compromisos": {}, "asegurados": {}}
             
+        pa_tot = _safe_float(row.iloc[2])
+        rv_tot = _safe_float(row.iloc[5])
+        rvp_val = _safe_float(row.iloc[8])
+        art_val = _safe_float(row.iloc[9])
+        otros_val = _safe_float(row.iloc[12])
+
         results[entidad]["compromisos"] = {
-            "Total": _safe_float(row.iloc[1]) + _safe_float(row.iloc[12]),
-            "Periodo Ahorro": _safe_float(row.iloc[2]),
+            "Total": pa_tot + rv_tot + rvp_val + art_val + otros_val,
+            "Periodo Ahorro": pa_tot,
             "Periodo Ahorro Indiv": _safe_float(row.iloc[3]),
             "Periodo Ahorro Col": _safe_float(row.iloc[4]),
-            "Rentas Vitalicias": _safe_float(row.iloc[5]),
+            "Rentas Vitalicias": rv_tot,
             "Rentas Vitalicias Indiv": _safe_float(row.iloc[6]),
             "Rentas Vitalicias Col": _safe_float(row.iloc[7]),
-            "RVP y ART": _safe_float(row.iloc[8]) + _safe_float(row.iloc[9]),
-            "Otros": _safe_float(row.iloc[12])
+            "RVP y ART": rvp_val + art_val,
+            "Otros": otros_val
         }
 
 def parse_stacked_asegurados(df, results, col_key_indiv, col_key_col):
@@ -182,27 +188,48 @@ def get_possible_retiro_urls(period):
     urls = []
     # 1. Standard format
     urls.append(f"https://www.argentina.gob.ar/sites/default/files/ssn_{period}_reserva_matematica.xlsx")
+    urls.append(f"https://www.argentina.gob.ar/sites/default/files/ssn_{period}_reserva_matematica_0.xlsx")
     
     # 2. Named month format (mar, jun, sep, dic) used in 2025
     month_map = {"03": "mar", "06": "jun", "09": "sep", "12": "dic"}
     if month in month_map:
         named_month = month_map[month]
         urls.append(f"https://www.argentina.gob.ar/sites/default/files/ssn_{year}_{named_month}_reserva_matematica.xlsx")
+        urls.append(f"https://www.argentina.gob.ar/sites/default/files/ssn_{year}_{named_month}_reserva_matematica_0.xlsx")
         
     return urls
 
 def fetch_retiro_data(period_current="202603", period_prev="202503"):
-    print(f"[SSN Retiro] Fetching data for periods {period_current} and {period_prev}...")
+    candidate_periods = [period_current, "202503", "202512", "202403"]
+    print(f"[SSN Retiro] Fetching data for current period (probing {candidate_periods})...")
     
     data_curr = {}
-    for url in get_possible_retiro_urls(period_current):
-        data_curr = process_period(url)
-        if data_curr: break
-        
+    actual_curr_period = None
+    for p in candidate_periods:
+        for url in get_possible_retiro_urls(p):
+            data_curr = process_period(url)
+            if data_curr:
+                actual_curr_period = p
+                print(f"[SSN Retiro] Found valid current dataset for period {p}")
+                break
+        if data_curr:
+            break
+            
+    if not data_curr:
+        print("[SSN Retiro] Warning: Could not find any valid current SSN Retiro dataset.")
+        return []
+
+    # Calculate previous year period (e.g. 202503 -> 202403)
+    curr_yr = int(actual_curr_period[:4])
+    prev_yr = curr_yr - 1
+    actual_prev_period = f"{prev_yr}{actual_curr_period[4:]}"
+
     data_prev = {}
-    for url in get_possible_retiro_urls(period_prev):
+    for url in get_possible_retiro_urls(actual_prev_period):
         data_prev = process_period(url)
-        if data_prev: break
+        if data_prev:
+            print(f"[SSN Retiro] Found valid previous dataset for period {actual_prev_period}")
+            break
     
     # Merge and calculate YoY
     final_data = {}
