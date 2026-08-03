@@ -9188,6 +9188,33 @@ const companies = Object.keys(balancesData[seg]);
     </div>
 
     <script>
+        async function fetchYahooPriceWithProxy(sym) {
+            const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1m&range=1d`;
+            const proxyUrls = [
+                `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+                `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
+                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+            ];
+
+            for (const pUrl of proxyUrls) {
+                try {
+                    const res = await fetch(pUrl);
+                    if (!res.ok) continue;
+                    let text = await res.text();
+                    if (text.includes('"contents"')) {
+                        const wrapper = JSON.parse(text);
+                        text = wrapper.contents;
+                    }
+                    const data = JSON.parse(text);
+                    const price = data.chart?.result?.[0]?.meta?.regularMarketPrice;
+                    if (price !== undefined && price !== null && !isNaN(price)) {
+                        return price;
+                    }
+                } catch(e) {}
+            }
+            return null;
+        }
+
         async function updateLivePrices() {
             const btnIcon = document.getElementById('update-now-icon');
             const btnText = document.getElementById('update-now-text');
@@ -9259,7 +9286,23 @@ const companies = Object.keys(balancesData[seg]);
                     console.warn("Could not fetch Binance API:", e);
                 }
 
-                // 3. Gather tickers needing Yahoo query
+                // 3. Fetch Metals (Gold, Silver, Platinum, Palladium) via Gold-API
+                try {
+                    const metalsMap = { 'GC=F': 'XAU', 'SI=F': 'XAG', 'PL=F': 'XPT', 'XPD': 'XPD' };
+                    const metalPromises = Object.entries(metalsMap).map(async ([ticker, code]) => {
+                        try {
+                            const res = await fetch(`https://api.gold-api.com/price/${code}`).then(r => r.json());
+                            if (res && res.price) {
+                                liveMap[ticker] = res.price;
+                            }
+                        } catch(e) {}
+                    });
+                    await Promise.allSettled(metalPromises);
+                } catch(e) {
+                    console.warn("Could not fetch Gold-API:", e);
+                }
+
+                // 4. Gather remaining tickers needing Yahoo query via proxies
                 const cells = document.querySelectorAll('.live-price-cell');
                 const yahooTickersToFetch = new Set();
                 cells.forEach(cell => {
@@ -9269,7 +9312,6 @@ const companies = Object.keys(balancesData[seg]);
                     const cleanTicker = ticker.replace('-', '').replace('USD', 'USDT');
                     if (liveMap[cleanTicker] !== undefined) return;
 
-                    // Prepare Yahoo Symbol
                     let ySymbol = ticker;
                     if (ticker.includes('^') || ticker.includes('=') || ticker.includes('.')) {
                         ySymbol = ticker;
@@ -9279,24 +9321,19 @@ const companies = Object.keys(balancesData[seg]);
                     yahooTickersToFetch.add(ySymbol);
                 });
 
-                // Batch fetch Yahoo Finance symbols in parallel
                 if (yahooTickersToFetch.size > 0) {
                     const fetchPromises = Array.from(yahooTickersToFetch).map(async (sym) => {
-                        try {
-                            const res = await fetch(`https://query2.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1m&range=1d`);
-                            const data = await res.json();
-                            const price = data.chart?.result?.[0]?.meta?.regularMarketPrice;
-                            if (price !== undefined && price !== null) {
-                                liveMap[sym] = price;
-                                const baseSym = sym.replace('.BA', '');
-                                liveMap[baseSym] = price;
-                            }
-                        } catch(e) {}
+                        const price = await fetchYahooPriceWithProxy(sym);
+                        if (price !== null) {
+                            liveMap[sym] = price;
+                            const baseSym = sym.replace('.BA', '');
+                            liveMap[baseSym] = price;
+                        }
                     });
                     await Promise.allSettled(fetchPromises);
                 }
 
-                // 4. Update all .live-price-cell DOM elements
+                // 5. Update all .live-price-cell DOM elements
                 cells.forEach(cell => {
                     const ticker = cell.dataset.ticker;
                     const closePrice = parseFloat(cell.dataset.closePrice);
