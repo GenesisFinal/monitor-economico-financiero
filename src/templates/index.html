@@ -9263,8 +9263,17 @@ const companies = Object.keys(balancesData[seg]);
                             text = wrapper.contents;
                         }
                         const data = JSON.parse(text);
-                        const price = data.chart?.result?.[0]?.meta?.regularMarketPrice;
-                        if (price !== undefined && price !== null && !isNaN(price)) {
+                        const meta = data.chart?.result?.[0]?.meta;
+                        if (!meta) continue;
+
+                        const marketState = (meta.marketState || '').toUpperCase();
+                        // If market is CLOSED, return null to indicate market is closed / no live quote
+                        if (marketState === 'CLOSED' || marketState === 'POSTPOST') {
+                            return null;
+                        }
+
+                        const price = meta.regularMarketPrice;
+                        if (price !== undefined && price !== null && !isNaN(price) && price > 0) {
                             return price;
                         }
                     } catch(e) {}
@@ -9417,30 +9426,29 @@ const companies = Object.keys(balancesData[seg]);
                         }
                     }
 
+                    const parentRow = cell.closest('tr');
+                    const isMuted = parentRow && parentRow.classList.contains('text-slate-400');
+
+                    // If live update returned no active price (e.g. market closed or no live stream), display "--" in neutral gray without colors
                     if (livePrice === null || livePrice === undefined || isNaN(livePrice)) {
-                        livePrice = closePrice;
+                        cell.textContent = "--";
+                        cell.className = "px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500";
+                        return;
                     }
 
                     let priceStr = "-";
-                    if (!isNaN(livePrice) && livePrice !== null && livePrice !== 0) {
-                        const textHasPct = (cell.textContent && cell.textContent.includes('%')) || (activeTabId && ['rates', 'local_rates'].includes(activeTabId));
-                        if (textHasPct) {
-                            priceStr = livePrice.toFixed(2) + "%";
-                        } else if (Math.abs(livePrice) >= 1000) {
-                            priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
-                        } else if (Math.abs(livePrice) < 1 && Math.abs(livePrice) > 0) {
-                            priceStr = livePrice.toFixed(4);
-                        } else {
-                            priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
-                        }
-                    } else if (!isNaN(closePrice) && closePrice !== 0) {
-                        priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(closePrice);
+                    const textHasPct = (cell.textContent && cell.textContent.includes('%')) || (activeTabId && ['rates', 'local_rates'].includes(activeTabId));
+                    if (textHasPct) {
+                        priceStr = livePrice.toFixed(2) + "%";
+                    } else if (Math.abs(livePrice) >= 1000) {
+                        priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
+                    } else if (Math.abs(livePrice) < 1 && Math.abs(livePrice) > 0) {
+                        priceStr = livePrice.toFixed(4);
+                    } else {
+                        priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
                     }
 
                     cell.textContent = priceStr;
-
-                    const parentRow = cell.closest('tr');
-                    const isMuted = parentRow && parentRow.classList.contains('text-slate-400');
 
                     if (isNaN(closePrice) || closePrice === 0 || livePrice === closePrice) {
                         cell.className = "px-4 py-2.5 text-right font-semibold font-mono live-price-cell " + (isMuted ? "text-slate-400" : "text-slate-200 light:text-slate-800");
