@@ -7643,6 +7643,17 @@ function setSsnTimeRange(range) {
                 const activeBtn = document.getElementById('btn-tab-' + savedTab);
                 if (activeBtn) activeBtn.classList.add('active');
             }
+
+            // Restore per-section last updated timestamps if individually updated by user
+            try {
+                const sectionStamps = JSON.parse(localStorage.getItem('sectionLastUpdated') || '{}');
+                Object.keys(sectionStamps).forEach(secId => {
+                    const badge = document.getElementById(`last-updated-${secId}`);
+                    if (badge && sectionStamps[secId]) {
+                        badge.textContent = `Última actualización: ${sectionStamps[secId]}`;
+                    }
+                });
+            } catch(e) {}
             
             // Render sparkline canvases on initial load
             renderSparklines();
@@ -9449,8 +9460,13 @@ const companies = Object.keys(balancesData[seg]);
                 if (activeTabId) {
                     const badge = document.getElementById(`last-updated-${activeTabId}`);
                     if (badge) {
-                        badge.textContent = `Última actualización: ${fullStampStr}`;
+                        badge.textContent = `Última actualización: ${fullStampStr} hs`;
                     }
+                    try {
+                        const sectionStamps = JSON.parse(localStorage.getItem('sectionLastUpdated') || '{}');
+                        sectionStamps[activeTabId] = `${fullStampStr} hs`;
+                        localStorage.setItem('sectionLastUpdated', JSON.stringify(sectionStamps));
+                    } catch(e) {}
                 }
 
                 if (btnText) btnText.textContent = `${btnLabel} (${timeStr})`;
