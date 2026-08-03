@@ -1221,11 +1221,11 @@ body.layout-bento {
                         <div class="text-right flex gap-4">
                             <div>
                                 <span class="text-[10px] text-slate-500 block">PISO</span>
-                                <span class="font-extrabold text-brandBlue font-mono">${{ data.bands.piso | format_price }}</span>
+                                <span class="font-extrabold text-brandBlue font-mono">{{ data.bands.piso | format_price }}</span>
                             </div>
                             <div>
                                 <span class="text-[10px] text-slate-500 block">TECHO</span>
-                                <span class="font-extrabold text-brandBlue font-mono">${{ data.bands.techo | format_price }}</span>
+                                <span class="font-extrabold text-brandBlue font-mono">{{ data.bands.techo | format_price }}</span>
                             </div>
                         </div>
                     </div>
@@ -9321,10 +9321,10 @@ const companies = Object.keys(balancesData[seg]);
 
                     if (Array.isArray(cotizResp)) {
                         cotizResp.forEach(c => {
-                            if (c.casa === 'eur') liveMap['euro'] = c.venta;
-                            if (c.casa === 'brl') liveMap['real'] = c.venta;
-                            if (c.casa === 'clp') liveMap['clp'] = c.venta;
-                            if (c.casa === 'uyu') liveMap['uyu'] = c.venta;
+                            if (c.moneda === 'EUR' || c.casa === 'eur') liveMap['euro'] = c.venta;
+                            if (c.moneda === 'BRL' || c.casa === 'brl') liveMap['real'] = c.venta;
+                            if (c.moneda === 'CLP' || c.casa === 'clp') liveMap['clp'] = c.venta;
+                            if (c.moneda === 'UYU' || c.casa === 'uyu') liveMap['uyu'] = c.venta;
                         });
                     }
                 } catch(e) {
