@@ -1119,8 +1119,9 @@ body.layout-bento {
             <!-- SECTION 1: TIPOS DE CAMBIO -->
             <div id="panel-exchange" class="tab-panel hidden">
             <section class="mb-12">
-            <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+            <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                 <i class="fas fa-dollar-sign text-brandBlue"></i> Dólar y Mercado Cambiario
+                <span id="last-updated-exchange" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
             </h2>
             <div class="space-y-6">
                 <!-- Table -->
@@ -1131,59 +1132,60 @@ body.layout-bento {
                                 <tr>
                                     <th class="w-12 px-4 py-3 text-center">Comparar</th>
                                     <th class="px-4 py-3">Especie / Tipo de Cambio</th>
-                                    <th class="px-4 py-3 text-right text-emerald-400 font-bold">Actual ($)</th>
-                                    <th class="px-4 py-3 text-right">Compra ($)</th>
-                                    <th class="px-4 py-3 text-right">Venta ($)</th>
+                                    <th class="px-4 py-3 text-right text-emerald-400 font-bold">Actual</th>
+                                    <th class="px-4 py-3 text-right">Compra</th>
+                                    <th class="px-4 py-3 text-right">Venta</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl-exchange" class="divide-y divide-darkBorder/40 light:divide-gray-200">
                                 <tr data-ticker="Oficial Billete" onclick="rowClick(event, 'exchange', 'Oficial Billete')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'exchange', 'Oficial Billete')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Billete <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'Oficial Billete', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.oficial.venta }}" data-ticker="Oficial Billete">${{ data.dolar.oficial.venta | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.oficial.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.oficial.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.oficial.venta }}" data-ticker="Oficial Billete">{{ data.dolar.oficial.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.oficial.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.oficial.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="Oficial Divisa" onclick="rowClick(event, 'exchange', 'Oficial Divisa')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'Oficial Divisa')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Divisa <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'Oficial Divisa', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.mayorista.venta }}" data-ticker="Oficial Divisa">${{ data.dolar.mayorista.venta | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.mayorista.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.mayorista.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.mayorista.venta }}" data-ticker="Oficial Divisa">{{ data.dolar.mayorista.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.mayorista.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.mayorista.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="MEP" onclick="rowClick(event, 'exchange', 'MEP')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'MEP')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar MEP (Bolsa) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'MEP', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.mep.venta }}" data-ticker="MEP">${{ data.dolar.mep.venta | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.mep.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.mep.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.mep.venta }}" data-ticker="MEP">{{ data.dolar.mep.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.mep.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.mep.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="CCL" onclick="rowClick(event, 'exchange', 'CCL')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'CCL')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar CCL (Cable) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'CCL', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.ccl.venta }}" data-ticker="CCL">${{ data.dolar.ccl.venta | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.ccl.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.ccl.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.ccl.venta }}" data-ticker="CCL">{{ data.dolar.ccl.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.ccl.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.ccl.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="Blue" onclick="rowClick(event, 'exchange', 'Blue')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'Blue')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Blue (Informal) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'Blue', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.blue.venta }}" data-ticker="Blue">${{ data.dolar.blue.venta | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.blue.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-brandBlue">${{ data.dolar.blue.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.blue.venta }}" data-ticker="Blue">{{ data.dolar.blue.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.blue.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.blue.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="tarjeta" onclick="rowClick(event, 'exchange', 'tarjeta')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'tarjeta')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Dólar Tarjeta</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.tarjeta.venta }}" data-ticker="tarjeta">${{ data.dolar.tarjeta.venta | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right">-</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.tarjeta.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'tarjeta', event)" title="Ir a la fuente del dato"></i></td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.tarjeta.venta }}" data-ticker="tarjeta">{{ data.dolar.tarjeta.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-400">-</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.tarjeta.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'tarjeta', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="euro" onclick="rowClick(event, 'exchange', 'euro')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'euro')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Euro Oficial BNA</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.euro.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.euro.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'euro', event)" title="Ir a la fuente del dato"></i></td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.euro.venta }}" data-ticker="euro">{{ data.dolar.euro.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.euro.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.euro.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'euro', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="real" onclick="rowClick(event, 'exchange', 'real')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'real')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
@@ -1289,10 +1291,13 @@ body.layout-bento {
 
                     <!-- FCI DE PESOS -->
                     <div>
-                        <div class="flex items-center gap-3 mb-6">
+                        <div class="flex items-center gap-3 mb-6 flex-wrap">
                             <div class="w-1 h-8 rounded-full bg-gradient-to-b from-emerald-400 to-emerald-600"></div>
                             <div>
-                                <h2 class="text-xl font-bold text-white light:text-slate-800">FCI de Pesos</h2>
+                                <h2 class="text-xl font-bold text-white light:text-slate-800 flex items-center gap-2 flex-wrap">
+                                    FCI de Pesos
+                                    <span id="last-updated-fci" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
+                                </h2>
                                 <p class="text-xs text-slate-400 light:text-slate-500">Fondos denominados en pesos argentinos &middot; Patrimonio m&iacute;nimo USD 20M equiv.</p>
                             </div>
                         </div>
@@ -1500,8 +1505,9 @@ body.layout-bento {
             {% macro render_section(id, title, icon, data_list) %}
             <div id="panel-{{ id }}" class="tab-panel hidden">
             <section class="mb-12">
-                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                     <i class="fas {{ icon }} text-brandBlue"></i> {{ title }}
+                    <span id="last-updated-{{ id }}" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                 </h2>
                 <div class="flex flex-col gap-6 mb-6">
                     <!-- Table Column -->
@@ -1537,10 +1543,10 @@ body.layout-bento {
                                         <td class="px-4 py-2.5 font-mono text-brandBlue font-bold">{% if item.ticker == '000001.SS' %}SSEC{% else %}{{ item.ticker.split('.')[0] }}{% endif %}</td>
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="{{ item.name }}">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('{{ id }}', '{{ item.ticker }}', event)" title="Ir a la fuente del dato"></i></td>
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">
-                                            {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}${{ item.price | format_price }}{% endif %}
+                                            {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}{{ item.price | format_price }}{% endif %}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">
-                                            {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}${{ item.price | format_price }}{% endif %}
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">
+                                            {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}{{ item.price | format_price }}{% endif %}
                                         </td>
                                         <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if item.change >= 0 else 'text-brandRed' }}">
                                             {{ '+' if item.change >= 0 else '' }}{{ item.change | format_pct }}%
@@ -1622,8 +1628,9 @@ body.layout-bento {
             {% macro render_rates_section(id, title, icon, data_list) %}
             <div id="panel-{{ id }}" class="tab-panel hidden">
             <section class="mb-12">
-                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                     <i class="fas {{ icon }} text-brandBlue"></i> {{ title }}
+                    <span id="last-updated-{{ id }}" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                 </h2>
                 <div class="flex flex-col gap-6 mb-6">
                     <!-- Table Column -->
@@ -1711,8 +1718,9 @@ body.layout-bento {
             <!-- SECTION: LOCAL RATES (Custom layout matching monitor-real) -->
             <div id="panel-local_rates" class="tab-panel hidden">
             <section class="mb-12">
-                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                     <i class="fas fa-percent text-brandBlue"></i> Tasas de Interés Locales (Argentina)
+                    <span id="last-updated-local_rates" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                 </h2>
                 <div class="flex flex-col gap-6 mb-6">
                     <!-- Table Column -->
@@ -1813,8 +1821,9 @@ body.layout-bento {
             <!-- SECTION: SOVEREIGN BONDS -->
             <div id="panel-bonds" class="tab-panel hidden">
                 <section class="mb-12">
-                    <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                         <i class="fas fa-gavel text-brandBlue"></i> Bonos Soberanos
+                        <span id="last-updated-bonds" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                     </h2>
                     
                     <!-- Riesgo Pais Header Card -->
@@ -1865,8 +1874,8 @@ body.layout-bento {
                                                         <span class="text-xs text-slate-300 light:text-slate-600">{{ b.name }}</span>
                                                     </span>
                                                 </td>
-                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">${{ b.price }}</td>
-                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">${{ b.price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">{{ b.price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">{{ b.price }}</td>
                                                 <td class="py-2.5 px-3 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                                     {{ '+' if b.change >= 0 else '' }}{{ b.change }}%
                                                 </td>
@@ -1953,8 +1962,8 @@ body.layout-bento {
                                                         <span class="text-xs text-slate-300 light:text-slate-600">{{ b.name }}</span>
                                                     </span>
                                                 </td>
-                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">${{ b.price }}</td>
-                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">${{ b.price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">{{ b.price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">{{ b.price }}</td>
                                                 <td class="py-2.5 px-3 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                                     {{ '+' if b.change >= 0 else '' }}{{ b.change }}%
                                                 </td>
@@ -2041,8 +2050,8 @@ body.layout-bento {
                                                         <span class="text-xs text-slate-300 light:text-slate-600">{{ b.name }}</span>
                                                     </span>
                                                 </td>
-                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">${{ b.price }}</td>
-                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">${{ b.price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">{{ b.price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">{{ b.price }}</td>
                                                 <td class="py-2.5 px-3 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                                     {{ '+' if b.change >= 0 else '' }}{{ b.change }}%
                                                 </td>
@@ -2100,8 +2109,9 @@ body.layout-bento {
             <!-- SECTION: LECAPs -->
             <div id="panel-lecaps" class="tab-panel hidden">
                 <section class="mb-12">
-                    <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                    <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                         <i class="fas fa-money-bill-trend-up text-brandBlue"></i> Letras Capitalizables (LECAPs y BONCAPs)
+                        <span id="last-updated-lecaps" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                     </h2>
                     <div class="flex flex-col gap-6 mb-6">
                         <!-- Table Column (Full width) -->
@@ -2126,13 +2136,13 @@ body.layout-bento {
                                         <tbody class="text-slate-300 light:text-slate-700 divide-y divide-darkBorder/10">
                                             {% for item in data.lecaps %}
                                             <tr class="hover:bg-brandBlue/5 transition-colors">
-                                                <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900" title="{{ item.name }}">{{ item.ticker }}</td>
+                                                <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono" title="{{ item.name }}">{{ item.ticker }}</td>
                                                 <td class="py-2.5 px-3 text-right font-mono">{{ item.dtm }} d</td>
                                                 <td class="py-2.5 px-3 text-right font-mono">{{ item.tem | format_pct }}%</td>
                                                 <td class="py-2.5 px-3 text-right font-mono">{{ item.tna | format_pct }}%</td>
                                                 <td class="py-2.5 px-3 text-right font-mono text-emerald-400 font-bold light:text-emerald-600">{{ item.tea | format_pct }}%</td>
-                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">${{ item.price | format_price }}</td>
-                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">${{ item.price | format_price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">{{ item.price | format_price }}</td>
+                                                <td class="py-2.5 px-3 text-right font-mono font-semibold">{{ item.price | format_price }}</td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>
@@ -2159,8 +2169,9 @@ body.layout-bento {
             <!-- SECTION: CORPORATE BONDS -->
             <div id="panel-corporate" class="tab-panel hidden">
             <section class="mb-12">
-                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                     <i class="fas fa-handshake text-brandGreen"></i> Obligaciones Negociables (ONs)
+                    <span id="last-updated-corporate" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                 </h2>
                 <div class="flex flex-col gap-6 mb-6">
                     <!-- Table Column -->
@@ -2174,7 +2185,7 @@ body.layout-bento {
                                         <th class="px-4 py-3">Empresa</th>
                                         <th class="px-4 py-3">Emisor / Estructura</th>
                                         <th class="px-4 py-3 text-right text-emerald-400 font-bold">Actual</th>
-                                        <th class="px-4 py-3 text-right">Precio</th>
+                                        <th class="px-4 py-3 text-right">Precio (Cierre)</th>
                                         <th class="px-4 py-3 text-right">Var %</th>
                                         <th class="px-4 py-3 text-right ">1M</th>
                                         <th class="px-4 py-3 text-right ">YTD</th>
@@ -2195,8 +2206,8 @@ body.layout-bento {
                                         </td>
                                         <td class="px-4 py-2.5 text-slate-400 font-semibold">{{ b.company }}</td>
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="{{ b.name }}">{{ b.name }}</td>
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">${{ b.price }}</td>
-                                        <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ b.price }}</td>
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">{{ b.price }}</td>
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ b.price }}</td>
                                         <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                             {{ '+' if b.change >= 0 else '' }}{{ '{:.2f}%'.format(b.change) if b.change is not none and b.change != '-' else '-' }}
                                         </td>
@@ -2209,8 +2220,8 @@ body.layout-bento {
                                         <td class="px-4 py-2.5 text-right font-semibold  font-mono {{ 'text-brandGreen' if b.change_12m != '-' and b.change_12m >= 0 else ('text-brandRed' if b.change_12m != '-' and b.change_12m < 0 else 'text-slate-400') }}">
                                             {{ '{:+.2f}%'.format(b.change_12m) if b.change_12m != '-' else '-' }}
                                         </td>
-                                        <td class="px-4 py-2.5 text-right font-semibold text-brandGreen">{{ b.tir }}</td>
-                                        <td class="px-4 py-2.5 text-right text-slate-400 light:text-slate-600">{{ b.duration }}</td>
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono text-brandGreen">{{ b.tir }}</td>
+                                        <td class="px-4 py-2.5 text-right font-mono text-slate-400 light:text-slate-600">{{ b.duration }}</td>
                                     </tr>
                                     {% endfor %}
                                     <!-- Pesos/CER ONs -->
@@ -2224,8 +2235,8 @@ body.layout-bento {
                                         </td>
                                         <td class="px-4 py-2.5 text-slate-400 font-semibold">{{ b.company }}</td>
                                         <td class="px-4 py-2.5 truncate max-w-[200px]" title="{{ b.name }}">{{ b.name }}</td>
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">${{ b.price }}</td>
-                                        <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ b.price }}</td>
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ b.price }}" data-ticker="{{ b.ticker }}">{{ b.price }}</td>
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ b.price }}</td>
                                         <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if b.change >= 0 else 'text-brandRed' }}">
                                             {{ '+' if b.change >= 0 else '' }}{{ '{:.2f}%'.format(b.change) if b.change is not none and b.change != '-' else '-' }}
                                         </td>
@@ -2283,8 +2294,9 @@ body.layout-bento {
 
             <div id="panel-stocks" class="tab-panel hidden">
             <section class="mb-12">
-                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2">
+                <h2 class="text-xl font-bold text-white light:text-slate-950 mb-4 flex items-center gap-2 flex-wrap">
                     <i class="fas fa-building text-brandBlue"></i> Acciones Mundiales
+                    <span id="last-updated-stocks" class="text-xs font-normal text-slate-400 light:text-slate-500 ml-3 bg-darkBg/60 light:bg-slate-100 px-2.5 py-1 rounded-lg border border-darkBorder/40 light:border-slate-200">Última actualización: {{ data.update_time_financial | default(data.update_time) }} hs</span>
                 </h2>
                 
                 <!-- Sub-tabs navigation -->
@@ -2331,15 +2343,15 @@ body.layout-bento {
                                             </td>
                                             <td class="px-4 py-2.5 font-mono text-brandBlue font-bold">{{ item.ticker }}</td>
                                             <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[150px]" title="{{ item.name }}">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('{{ id }}', '{{ item.ticker }}', event)" title="Ir a la fuente del dato"></i></td>
-                                            <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">${{ item.price | format_price }}</td>
-                                            <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ item.price | format_price }}</td>
+                                            <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">{{ item.price | format_price }}</td>
+                                            <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ item.price | format_price }}</td>
                                             <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if item.change >= 0 else 'text-brandRed' }}">
                                                 {{ '+' if item.change >= 0 else '' }}{{ item.change | format_pct }}%
                                             </td>
                                             {% if extra_header and extra_key %}
                                             <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950 font-mono">
                                                 {% if extra_key == 'market_cap' %}
-                                                    ${{ (item.market_cap / 1e9) | round(1) }}B
+                                                    {{ (item.market_cap / 1e9) | round(1) }}B
                                                 {% elif extra_key == 'rsi' %}
                                                     {{ item.rsi | round(1) }}
                                                 {% elif extra_key == 'volatility' %}
@@ -9190,29 +9202,54 @@ const companies = Object.keys(balancesData[seg]);
     </div>
 
     <script>
-        async function fetchYahooPriceWithProxy(sym) {
-            const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(sym)}?interval=1m&range=1d`;
-            const proxyUrls = [
-                `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
-                `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
-                `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
-            ];
+        const sectionBtnNames = {
+            'exchange': 'Update Dólares',
+            'indices': 'Update Índices',
+            'forex': 'Update Divisas',
+            'commodities': 'Update Commodities',
+            'rates': 'Update Tasas Int.',
+            'local_rates': 'Update Tasas Loc.',
+            'fci': 'Update FCI',
+            'bonds': 'Update Bonos',
+            'lecaps': 'Update LECAPs',
+            'corporate': 'Update ONs',
+            'stocks': 'Update Acciones',
+            'etfs': 'Update ETFs',
+            'acciones_arg': 'Update Acciones Arg.',
+            'cryptos': 'Update Cripto'
+        };
 
-            for (const pUrl of proxyUrls) {
-                try {
-                    const res = await fetch(pUrl);
-                    if (!res.ok) continue;
-                    let text = await res.text();
-                    if (text.includes('"contents"')) {
-                        const wrapper = JSON.parse(text);
-                        text = wrapper.contents;
-                    }
-                    const data = JSON.parse(text);
-                    const price = data.chart?.result?.[0]?.meta?.regularMarketPrice;
-                    if (price !== undefined && price !== null && !isNaN(price)) {
-                        return price;
-                    }
-                } catch(e) {}
+        async function fetchYahooPriceWithProxy(sym) {
+            const candidates = [sym];
+            if (!sym.includes('.') && !sym.includes('^') && !sym.includes('=')) {
+                candidates.push(sym + '.BA');
+                candidates.push(sym + 'D.BA');
+            }
+
+            for (const cSym of candidates) {
+                const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(cSym)}?interval=1m&range=1d`;
+                const proxyUrls = [
+                    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
+                    `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
+                    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
+                ];
+
+                for (const pUrl of proxyUrls) {
+                    try {
+                        const res = await fetch(pUrl, { signal: AbortSignal.timeout(3000) });
+                        if (!res.ok) continue;
+                        let text = await res.text();
+                        if (text.includes('"contents"')) {
+                            const wrapper = JSON.parse(text);
+                            text = wrapper.contents;
+                        }
+                        const data = JSON.parse(text);
+                        const price = data.chart?.result?.[0]?.meta?.regularMarketPrice;
+                        if (price !== undefined && price !== null && !isNaN(price)) {
+                            return price;
+                        }
+                    } catch(e) {}
+                }
             }
             return null;
         }
@@ -9220,16 +9257,19 @@ const companies = Object.keys(balancesData[seg]);
         async function updateLivePrices(onlyActiveTab = true) {
             const btnIcon = document.getElementById('update-now-icon');
             const btnText = document.getElementById('update-now-text');
+            const activePanel = document.querySelector('.tab-panel:not(.hidden)');
+            const activeTabId = activePanel ? activePanel.id.replace('panel-', '') : null;
+            const btnLabel = (activeTabId && sectionBtnNames[activeTabId]) ? sectionBtnNames[activeTabId] : 'Update Now';
+
             if (btnIcon) btnIcon.className = 'fas fa-sync fa-spin text-yellow-400';
             if (btnText) btnText.textContent = 'Actualizando...';
 
             try {
                 const liveMap = {};
-                const activePanel = document.querySelector('.tab-panel:not(.hidden)');
                 const cells = (onlyActiveTab && activePanel) ? activePanel.querySelectorAll('.live-price-cell') : document.querySelectorAll('.live-price-cell');
 
                 if (cells.length === 0) {
-                    if (btnText) btnText.textContent = 'Actualizado';
+                    if (btnText) btnText.textContent = btnLabel;
                     return;
                 }
 
@@ -9320,13 +9360,7 @@ const companies = Object.keys(balancesData[seg]);
                     const cleanTicker = ticker.replace('-', '').replace('USD', 'USDT');
                     if (liveMap[cleanTicker] !== undefined) return;
 
-                    let ySymbol = ticker;
-                    if (ticker.includes('^') || ticker.includes('=') || ticker.includes('.')) {
-                        ySymbol = ticker;
-                    } else if (['GGAL', 'YPFD', 'PAMP', 'BMA', 'AL30', 'GD30', 'AL29', 'GD35', 'AE38', 'AL35', 'S31O4', 'S14O4', 'S29N4'].includes(ticker)) {
-                        ySymbol = ticker + '.BA';
-                    }
-                    yahooTickersToFetch.add(ySymbol);
+                    yahooTickersToFetch.add(ticker);
                 });
 
                 if (yahooTickersToFetch.size > 0) {
@@ -9334,7 +9368,7 @@ const companies = Object.keys(balancesData[seg]);
                         const price = await fetchYahooPriceWithProxy(sym);
                         if (price !== null) {
                             liveMap[sym] = price;
-                            const baseSym = sym.replace('.BA', '');
+                            const baseSym = sym.replace('.BA', '').replace('D.BA', '');
                             liveMap[baseSym] = price;
                         }
                     });
@@ -9367,11 +9401,11 @@ const companies = Object.keys(balancesData[seg]);
                         if (cell.textContent && cell.textContent.includes('%')) {
                             priceStr = livePrice.toFixed(2) + "%";
                         } else if (livePrice >= 1000) {
-                            priceStr = "$" + new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
+                            priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
                         } else if (livePrice < 1) {
-                            priceStr = "$" + livePrice.toFixed(4);
+                            priceStr = livePrice.toFixed(4);
                         } else {
-                            priceStr = "$" + new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
+                            priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
                         }
                     }
 
@@ -9390,8 +9424,19 @@ const companies = Object.keys(balancesData[seg]);
                 });
 
                 const now = new Date();
-                const timeStr = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
-                if (btnText) btnText.textContent = `Actualizado (${timeStr})`;
+                const pad = n => n < 10 ? '0' + n : n;
+                const dateStr = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}`;
+                const timeStr = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
+                const fullStampStr = `${dateStr} ${timeStr}`;
+
+                if (activeTabId) {
+                    const badge = document.getElementById(`last-updated-${activeTabId}`);
+                    if (badge) {
+                        badge.textContent = `Última actualización: ${fullStampStr}`;
+                    }
+                }
+
+                if (btnText) btnText.textContent = `${btnLabel} (${timeStr})`;
             } catch (e) {
                 console.error("Error updating live prices:", e);
                 if (btnText) btnText.textContent = 'Error';
