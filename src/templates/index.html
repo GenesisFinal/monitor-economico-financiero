@@ -2314,7 +2314,8 @@ body.layout-bento {
                                             <th class="w-12 px-4 py-3 text-center">Comparar</th>
                                             <th class="px-4 py-3">Ticker</th>
                                             <th class="px-4 py-3">Nombre</th>
-                                            <th class="px-4 py-3 text-right">Precio</th>
+                                            <th class="px-4 py-3 text-right text-emerald-400 font-bold">Actual</th>
+                                            <th class="px-4 py-3 text-right">Precio (Cierre)</th>
                                             <th class="px-4 py-3 text-right">Var %</th>
                                             {% if extra_header %}
                                             <th class="px-4 py-3 text-right">{{ extra_header }}</th>
@@ -2330,6 +2331,7 @@ body.layout-bento {
                                             </td>
                                             <td class="px-4 py-2.5 font-mono text-brandBlue font-bold">{{ item.ticker }}</td>
                                             <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[150px]" title="{{ item.name }}">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('{{ id }}', '{{ item.ticker }}', event)" title="Ir a la fuente del dato"></i></td>
+                                            <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">${{ item.price | format_price }}</td>
                                             <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ item.price | format_price }}</td>
                                             <td class="px-4 py-2.5 text-right font-bold {{ 'text-brandGreen' if item.change >= 0 else 'text-brandRed' }}">
                                                 {{ '+' if item.change >= 0 else '' }}{{ item.change | format_pct }}%
@@ -9215,7 +9217,7 @@ const companies = Object.keys(balancesData[seg]);
             return null;
         }
 
-        async function updateLivePrices() {
+        async function updateLivePrices(onlyActiveTab = true) {
             const btnIcon = document.getElementById('update-now-icon');
             const btnText = document.getElementById('update-now-text');
             if (btnIcon) btnIcon.className = 'fas fa-sync fa-spin text-yellow-400';
@@ -9223,6 +9225,13 @@ const companies = Object.keys(balancesData[seg]);
 
             try {
                 const liveMap = {};
+                const activePanel = document.querySelector('.tab-panel:not(.hidden)');
+                const cells = (onlyActiveTab && activePanel) ? activePanel.querySelectorAll('.live-price-cell') : document.querySelectorAll('.live-price-cell');
+
+                if (cells.length === 0) {
+                    if (btnText) btnText.textContent = 'Actualizado';
+                    return;
+                }
 
                 // 1. Fetch Dólar API
                 try {
@@ -9303,7 +9312,6 @@ const companies = Object.keys(balancesData[seg]);
                 }
 
                 // 4. Gather remaining tickers needing Yahoo query via proxies
-                const cells = document.querySelectorAll('.live-price-cell');
                 const yahooTickersToFetch = new Set();
                 cells.forEach(cell => {
                     const ticker = cell.dataset.ticker;
