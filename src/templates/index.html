@@ -1190,20 +1190,23 @@ body.layout-bento {
                                 <tr data-ticker="real" onclick="rowClick(event, 'exchange', 'real')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'real')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Real Oficial BNA</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.real.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.real.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'real', event)" title="Ir a la fuente del dato"></i></td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.real.venta }}" data-ticker="real">{{ data.dolar.real.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.real.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.real.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'real', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="libra" onclick="rowClick(event, 'exchange', 'libra')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'libra')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Libra Esterlina BNA</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.libra.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.libra.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'libra', event)" title="Ir a la fuente del dato"></i></td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.libra.venta }}" data-ticker="libra">{{ data.dolar.libra.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.libra.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.libra.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'libra', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="yen" onclick="rowClick(event, 'exchange', 'yen')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'yen')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Yen BNA</td>
-                                    <td class="px-4 py-2.5 text-right">${{ data.dolar.yen.compra | format_price }}</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold text-white light:text-slate-950">${{ data.dolar.yen.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'yen', event)" title="Ir a la fuente del dato"></i></td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.yen.venta }}" data-ticker="yen">{{ data.dolar.yen.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.yen.compra | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.yen.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'yen', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -7510,6 +7513,11 @@ function setSsnTimeRange(range) {
             activeTab = tabId;
             localStorage.setItem('activeTab', tabId);
             
+            const btnText = document.getElementById('update-now-text');
+            if (btnText && typeof sectionBtnNames !== 'undefined' && sectionBtnNames[tabId]) {
+                btnText.textContent = sectionBtnNames[tabId];
+            }
+            
             // Ocultar todos los paneles
             const panels = document.querySelectorAll('.tab-panel');
             panels.forEach(p => p.classList.add('hidden'));
@@ -9378,7 +9386,13 @@ const companies = Object.keys(balancesData[seg]);
                 // 5. Update all .live-price-cell DOM elements
                 cells.forEach(cell => {
                     const ticker = cell.dataset.ticker;
-                    const closePrice = parseFloat(cell.dataset.closePrice);
+                    let closePriceRaw = (cell.dataset.closePrice || '').toString().trim().replace(/[^0-9.,-]/g, '');
+                    if (closePriceRaw.includes(',') && closePriceRaw.includes('.')) {
+                        closePriceRaw = closePriceRaw.replace(/\./g, '').replace(',', '.');
+                    } else if (closePriceRaw.includes(',')) {
+                        closePriceRaw = closePriceRaw.replace(',', '.');
+                    }
+                    const closePrice = parseFloat(closePriceRaw);
                     let livePrice = null;
 
                     if (ticker && liveMap[ticker] !== undefined) {
@@ -9397,16 +9411,19 @@ const companies = Object.keys(balancesData[seg]);
                     }
 
                     let priceStr = "-";
-                    if (!isNaN(livePrice) && livePrice !== 0) {
-                        if (cell.textContent && cell.textContent.includes('%')) {
+                    if (!isNaN(livePrice) && livePrice !== null && livePrice !== 0) {
+                        const textHasPct = (cell.textContent && cell.textContent.includes('%')) || (activeTabId && ['rates', 'local_rates'].includes(activeTabId));
+                        if (textHasPct) {
                             priceStr = livePrice.toFixed(2) + "%";
-                        } else if (livePrice >= 1000) {
+                        } else if (Math.abs(livePrice) >= 1000) {
                             priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
-                        } else if (livePrice < 1) {
+                        } else if (Math.abs(livePrice) < 1 && Math.abs(livePrice) > 0) {
                             priceStr = livePrice.toFixed(4);
                         } else {
                             priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
                         }
+                    } else if (!isNaN(closePrice) && closePrice !== 0) {
+                        priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(closePrice);
                     }
 
                     cell.textContent = priceStr;
