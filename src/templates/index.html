@@ -1042,10 +1042,7 @@ body.layout-bento {
                     <h1 class="text-sm md:text-base font-extrabold text-white light:text-slate-900 flex items-center gap-2 mt-0.5">
                         <i class="fas fa-chart-line text-brandBlue"></i> Valores Financieros
                     </h1>
-                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ data.update_time_financial | default(data.update_time) }} hs</span>
-                    <button id="btn-update-now" onclick="updateLivePrices()" class="mt-2 text-xs font-bold px-2.5 py-1 rounded-lg bg-brandBlue/20 hover:bg-brandBlue/30 text-brandBlue border border-brandBlue/40 transition-all flex items-center justify-center gap-1.5 w-full cursor-pointer shadow-sm active:scale-95" title="Obtener precios actuales en vivo">
-                        <i id="update-now-icon" class="fas fa-bolt text-yellow-400"></i> <span id="update-now-text">Update Now</span>
-                    </button>
+                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualización automática al cambiar de pestaña</span>
                 </div>
                 <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización lun a vie, 21:00 hs)</span>
             </div>
@@ -1141,70 +1138,70 @@ body.layout-bento {
                                 <tr data-ticker="Oficial Billete" onclick="rowClick(event, 'exchange', 'Oficial Billete')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'exchange', 'Oficial Billete')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Billete <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'Oficial Billete', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.oficial.venta }}" data-ticker="Oficial Billete">{{ data.dolar.oficial.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.oficial.venta }}" data-ticker="Oficial Billete">{{ data.dolar.oficial.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.oficial.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.oficial.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="Oficial Divisa" onclick="rowClick(event, 'exchange', 'Oficial Divisa')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'Oficial Divisa')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Oficial BNA Divisa <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'Oficial Divisa', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.mayorista.venta }}" data-ticker="Oficial Divisa">{{ data.dolar.mayorista.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.mayorista.venta }}" data-ticker="Oficial Divisa">{{ data.dolar.mayorista.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.mayorista.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.mayorista.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="MEP" onclick="rowClick(event, 'exchange', 'MEP')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'MEP')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar MEP (Bolsa) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'MEP', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.mep.venta }}" data-ticker="MEP">{{ data.dolar.mep.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.mep.venta }}" data-ticker="MEP">{{ data.dolar.mep.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.mep.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.mep.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="CCL" onclick="rowClick(event, 'exchange', 'CCL')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'CCL')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar CCL (Cable) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'CCL', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.ccl.venta }}" data-ticker="CCL">{{ data.dolar.ccl.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.ccl.venta }}" data-ticker="CCL">{{ data.dolar.ccl.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.ccl.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.ccl.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="Blue" onclick="rowClick(event, 'exchange', 'Blue')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'Blue')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5 font-semibold text-white light:text-slate-800">Dólar Blue (Informal) <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'Blue', event)" title="Ir a la fuente del dato"></i></td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.blue.venta }}" data-ticker="Blue">{{ data.dolar.blue.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.blue.venta }}" data-ticker="Blue">{{ data.dolar.blue.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-300 light:text-slate-700">{{ data.dolar.blue.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-brandBlue">{{ data.dolar.blue.venta | format_price }}</td>
                                 </tr>
                                 <tr data-ticker="tarjeta" onclick="rowClick(event, 'exchange', 'tarjeta')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'tarjeta')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Dólar Tarjeta</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.tarjeta.venta }}" data-ticker="tarjeta">{{ data.dolar.tarjeta.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.tarjeta.venta }}" data-ticker="tarjeta">{{ data.dolar.tarjeta.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-mono font-semibold text-slate-400">-</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.tarjeta.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'tarjeta', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="euro" onclick="rowClick(event, 'exchange', 'euro')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'euro')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Euro Oficial BNA</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.euro.venta }}" data-ticker="euro">{{ data.dolar.euro.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.euro.venta }}" data-ticker="euro">{{ data.dolar.euro.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.euro.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.euro.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'euro', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="real" onclick="rowClick(event, 'exchange', 'real')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'real')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Real Oficial BNA</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.real.venta }}" data-ticker="real">{{ data.dolar.real.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.real.venta }}" data-ticker="real">{{ data.dolar.real.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.real.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.real.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'real', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="libra" onclick="rowClick(event, 'exchange', 'libra')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'libra')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Libra Esterlina BNA</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.libra.venta }}" data-ticker="libra">{{ data.dolar.libra.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.libra.venta }}" data-ticker="libra">{{ data.dolar.libra.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.libra.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.libra.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'libra', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
                                 <tr data-ticker="yen" onclick="rowClick(event, 'exchange', 'yen')" class="hover:bg-slate-800/40 light:hover:bg-slate-50 cursor-pointer transition-colors text-slate-400">
                                     <td class="px-4 py-2.5 text-center"><input type="checkbox" onchange="toggleSelect(event, 'exchange', 'yen')" class="rounded text-brandBlue focus:ring-brandBlue"></td>
                                     <td class="px-4 py-2.5">Yen BNA</td>
-                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ data.dolar.yen.venta }}" data-ticker="yen">{{ data.dolar.yen.venta | format_price }}</td>
+                                    <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ data.dolar.yen.venta }}" data-ticker="yen">{{ data.dolar.yen.venta | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-slate-400">{{ data.dolar.yen.compra | format_price }}</td>
                                     <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">{{ data.dolar.yen.venta | format_price }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('exchange', 'yen', event)" title="Ir a la fuente del dato"></i></td>
                                 </tr>
@@ -1545,9 +1542,7 @@ body.layout-bento {
                                         </td>
                                         <td class="px-4 py-2.5 font-mono text-brandBlue font-bold">{% if item.ticker == '000001.SS' %}SSEC{% else %}{{ item.ticker.split('.')[0] }}{% endif %}</td>
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="{{ item.name }}">{{ item.name }} <i class="fas fa-link text-[10px] ml-1.5 text-slate-400 hover:text-brandBlue transition-colors cursor-pointer" onclick="openAssetSource('{{ id }}', '{{ item.ticker }}', event)" title="Ir a la fuente del dato"></i></td>
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-200 light:text-slate-800" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">
-                                            {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}{{ item.price | format_price }}{% endif %}
-                                        </td>
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500" data-close-price="{{ item.price }}" data-ticker="{{ item.ticker }}">--</td>
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-950">
                                             {% if id in ['rates', 'local_rates'] %}{{ item.price | format_pct }}%{% else %}{{ item.price | format_price }}{% endif %}
                                         </td>
@@ -7513,11 +7508,6 @@ function setSsnTimeRange(range) {
             activeTab = tabId;
             localStorage.setItem('activeTab', tabId);
             
-            const btnText = document.getElementById('update-now-text');
-            if (btnText && typeof sectionBtnNames !== 'undefined' && sectionBtnNames[tabId]) {
-                btnText.textContent = sectionBtnNames[tabId];
-            }
-            
             // Ocultar todos los paneles
             const panels = document.querySelectorAll('.tab-panel');
             panels.forEach(p => p.classList.add('hidden'));
@@ -7532,12 +7522,25 @@ function setSsnTimeRange(range) {
             const activePanel = document.getElementById('panel-' + tabId);
             if (activePanel) {
                 activePanel.classList.remove('hidden');
+
+                // Reiniciar celdas de precios "Actual" a "--" en neutral gris
+                const cells = activePanel.querySelectorAll('.live-price-cell');
+                cells.forEach(cell => {
+                    cell.textContent = "--";
+                    cell.className = "px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500";
+                });
             }
             
             // Activar estilo del botón seleccionado
             const activeBtn = document.getElementById('btn-tab-' + tabId);
             if (activeBtn) {
                 activeBtn.classList.add('active');
+            }
+
+            // Indicar estado de actualización en la etiqueta de la sección
+            const badge = document.getElementById(`last-updated-${tabId}`);
+            if (badge) {
+                badge.innerHTML = `<i class="fas fa-sync fa-spin text-yellow-400 mr-1.5"></i> Actualizando cotizaciones en vivo...`;
             }
             
             // Renderizar o redimensionar gráfico para el panel visible
@@ -7563,6 +7566,11 @@ function setSsnTimeRange(range) {
             } else {
                 renderChart(tabId);
             }
+
+            // Lanzar actualización automática en tiempo real de esta pestaña
+            setTimeout(() => {
+                updateLivePrices(true);
+            }, 100);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -9469,19 +9477,35 @@ const companies = Object.keys(balancesData[seg]);
                 const timeStr = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
                 const fullStampStr = `${dateStr} ${timeStr}`;
 
+                const sectionNotes = {
+                    'exchange': '(DolarApi / BNA en vivo)',
+                    'indices': '(Yahoo Finance / Sujeto a horario de mercado - 15m delay)',
+                    'forex': '(Mercado FOREX / Yahoo Finance)',
+                    'commodities': '(Gold-API & Yahoo Finance)',
+                    'rates': '(Tesoro EE.UU. & Bancos Centrales)',
+                    'local_rates': '(BCRA & Bancos Públicos/Privados)',
+                    'fci': '(Precios cuotapartes CNV / CAFCI)',
+                    'bonds': '(Mercado BYMA / Sujeto a horario de mercado - 15m delay)',
+                    'lecaps': '(Mercado BYMA / Sujeto a horario de mercado - 15m delay)',
+                    'corporate': '(Obligaciones Negociables BYMA - 15m delay)',
+                    'stocks': '(NYSE / NASDAQ - Sujeto a horario de mercado - 15m delay)',
+                    'etfs': '(CEDEARs / NYSE - Sujeto a horario de mercado - 15m delay)',
+                    'acciones_arg': '(Panel Líder BYMA - Sujeto a horario de mercado - 15m delay)',
+                    'cryptos': '(Binance API 24/7 en tiempo real)'
+                };
+
                 if (activeTabId) {
                     const badge = document.getElementById(`last-updated-${activeTabId}`);
+                    const note = sectionNotes[activeTabId] ? ` <span class="text-[11px] font-normal opacity-75 ml-1">${sectionNotes[activeTabId]}</span>` : '';
                     if (badge) {
-                        badge.textContent = `Última actualización: ${fullStampStr} hs`;
+                        badge.innerHTML = `Última actualización: ${fullStampStr} hs${note}`;
                     }
                     try {
                         const sectionStamps = JSON.parse(localStorage.getItem('sectionLastUpdated') || '{}');
-                        sectionStamps[activeTabId] = `${fullStampStr} hs`;
+                        sectionStamps[activeTabId] = `${fullStampStr} hs${note}`;
                         localStorage.setItem('sectionLastUpdated', JSON.stringify(sectionStamps));
                     } catch(e) {}
                 }
-
-                if (btnText) btnText.textContent = `${btnLabel} (${timeStr})`;
             } catch (e) {
                 console.error("Error updating live prices:", e);
                 if (btnText) btnText.textContent = 'Error';
