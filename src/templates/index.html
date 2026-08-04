@@ -7701,27 +7701,34 @@ function setSsnTimeRange(range) {
             activeBondTicker = ticker;
             activeBondMetric = 'tir';
             
+            // Determine currency symbol based on bond ticker/type/lists
+            const isUsd = ticker.endsWith('D') || 
+                          (bond.name && bond.name.toUpperCase().includes('USD')) || 
+                          (appData.bonds && appData.bonds.usd && appData.bonds.usd.some(b => b.ticker === ticker)) || 
+                          (appData.bonds && appData.bonds.ons_hard && appData.bonds.ons_hard.some(b => b.ticker === ticker));
+            const currencySymbol = isUsd ? "USD " : "$ ";
+            
             // Populate basic header
             document.getElementById('bond-modal-ticker').textContent = ticker;
             document.getElementById('bond-modal-family').textContent = (bond.type || "Soberano");
             document.getElementById('bond-modal-name').textContent = bond.name || "";
             
             // Populate highlighter cards
-            document.getElementById('bond-metric-price').textContent = "USD " + Number(bond.price).toFixed(2);
-            document.getElementById('bond-metric-tir').textContent = Number(bond.tir * 100).toFixed(2) + "%";
-            document.getElementById('bond-metric-tv').textContent = "USD " + Number(bond.fair_value).toFixed(2);
-            document.getElementById('bond-metric-dm').textContent = Number(bond.modified_duration).toFixed(2);
+            document.getElementById('bond-metric-price').textContent = currencySymbol + Number(bond.price || 0.0).toFixed(2);
+            document.getElementById('bond-metric-tir').textContent = Number((bond.tir || 0.0) * 100).toFixed(2) + "%";
+            document.getElementById('bond-metric-tv').textContent = currencySymbol + Number(bond.fair_value || 0.0).toFixed(2);
+            document.getElementById('bond-metric-dm').textContent = Number(bond.modified_duration || 0.0).toFixed(2);
             
             // Populate tech sheet
-            document.getElementById('bond-detail-price').textContent = "USD " + Number(bond.price).toFixed(2);
+            document.getElementById('bond-detail-price').textContent = currencySymbol + Number(bond.price || 0.0).toFixed(2);
             
             const changeEl = document.getElementById('bond-detail-change');
             const changeVal = bond.change || 0.0;
             changeEl.textContent = (changeVal >= 0 ? '+' : '') + Number(changeVal).toFixed(2) + '%';
             changeEl.className = 'px-4 py-2 text-right font-mono font-bold ' + (changeVal >= 0 ? 'text-brandGreen' : 'text-brandRed');
             
-            document.getElementById('bond-detail-opencolse').textContent = "USD " + Number(bond.open || 0.0).toFixed(2) + " / USD " + Number(bond.close || 0.0).toFixed(2);
-            document.getElementById('bond-detail-minmax').textContent = "USD " + Number(bond.min || 0.0).toFixed(2) + " / USD " + Number(bond.max || 0.0).toFixed(2);
+            document.getElementById('bond-detail-opencolse').textContent = currencySymbol + Number(bond.open || 0.0).toFixed(2) + " / " + currencySymbol + Number(bond.close || 0.0).toFixed(2);
+            document.getElementById('bond-detail-minmax').textContent = currencySymbol + Number(bond.min || 0.0).toFixed(2) + " / " + currencySymbol + Number(bond.max || 0.0).toFixed(2);
             
             // Dates format helper
             const formatDateStr = (dStr) => {
@@ -7734,13 +7741,13 @@ function setSsnTimeRange(range) {
             
             document.getElementById('bond-detail-start').textContent = formatDateStr(bond.start_date);
             document.getElementById('bond-detail-end').textContent = formatDateStr(bond.end_date);
-            document.getElementById('bond-detail-tv').textContent = "USD " + Number(bond.fair_value).toFixed(2);
-            document.getElementById('bond-detail-parity').textContent = Number(bond.parity * 100).toFixed(2) + "%";
-            document.getElementById('bond-detail-tirdm').textContent = Number(bond.tir * 100).toFixed(2) + "% / " + Number(bond.modified_duration).toFixed(2);
+            document.getElementById('bond-detail-tv').textContent = currencySymbol + Number(bond.fair_value || 0.0).toFixed(2);
+            document.getElementById('bond-detail-parity').textContent = Number((bond.parity || 0.0) * 100).toFixed(2) + "%";
+            document.getElementById('bond-detail-tirdm').textContent = Number((bond.tir || 0.0) * 100).toFixed(2) + "% / " + Number(bond.modified_duration || 0.0).toFixed(2);
             
-            document.getElementById('bond-detail-tiravg').textContent = Number(bond.tir_avg_365 * 100).toFixed(2) + "%";
-            document.getElementById('bond-detail-tirmin').textContent = Number(bond.tir_min_365 * 100).toFixed(2) + "%";
-            document.getElementById('bond-detail-tirmax').textContent = Number(bond.tir_max_365 * 100).toFixed(2) + "%";
+            document.getElementById('bond-detail-tiravg').textContent = Number((bond.tir_avg_365 || 0.0) * 100).toFixed(2) + "%";
+            document.getElementById('bond-detail-tirmin').textContent = Number((bond.tir_min_365 || 0.0) * 100).toFixed(2) + "%";
+            document.getElementById('bond-detail-tirmax').textContent = Number((bond.tir_max_365 || 0.0) * 100).toFixed(2) + "%";
             
             // Populate sensitivity table
             const sensTbody = document.getElementById('bond-sensitivity-tbody');
@@ -9131,7 +9138,7 @@ const companies = Object.keys(balancesData[seg]);
                         <div class="px-4 py-3 bg-darkBg/60 light:bg-slate-100 border-b border-darkBorder/30 light:border-slate-200 font-bold text-xs uppercase text-slate-300 light:text-slate-700">
                             Ficha Técnica
                         </div>
-                        <table class="min-w-[600px] w-full divide-y divide-darkBorder/20 light:divide-gray-200 text-xs text-left">
+                        <table class="w-full divide-y divide-darkBorder/20 light:divide-gray-200 text-xs text-left">
                             <tbody class="divide-y divide-darkBorder/10 light:divide-gray-100">
                                 <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Precio</td><td id="bond-detail-price" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
                                 <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Variación Diaria</td><td id="bond-detail-change" class="px-4 py-2 text-right font-mono font-bold"></td></tr>
@@ -9154,7 +9161,7 @@ const companies = Object.keys(balancesData[seg]);
                         <div class="px-4 py-3 bg-darkBg/60 light:bg-slate-100 border-b border-darkBorder/30 light:border-slate-200 font-bold text-xs uppercase text-slate-300 light:text-slate-700">
                             Sensibilidad TIR vs Precio
                         </div>
-                        <table class="min-w-[600px] w-full divide-y divide-darkBorder/20 light:divide-gray-200 text-xs text-left">
+                        <table class="w-full divide-y divide-darkBorder/20 light:divide-gray-200 text-xs text-left">
                             <thead class="bg-darkBg/20 light:bg-slate-100/50 text-slate-400 font-semibold uppercase text-[10px]">
                                 <tr>
                                     <th class="px-4 py-2">Cambio TIR</th>
