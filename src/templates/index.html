@@ -2956,7 +2956,7 @@ body.layout-bento {
     
     <!-- Script para los datos mensuales y el Toggle -->
     <script>
-        const ssnMonthlyData = {{ ssn_monthly | tojson }};
+        const ssnMonthlyData = {{ ssn_monthly | tojson | safe if ssn_monthly else '{}' }};
         let isConstantes = false;
         
         
@@ -8525,7 +8525,7 @@ function setSsnTimeRange(range) {
 
 
     <script>
-        const balancesData = {{ data.balances | tojson if data.balances else '{}' }};
+        const balancesData = {{ data.balances | tojson | safe if data.balances else '{}' }};
         
         // Configuration for table rows
         const balancesConfig = {
