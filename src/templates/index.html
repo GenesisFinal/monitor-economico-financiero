@@ -2756,12 +2756,12 @@ body.layout-bento {
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total del Mercado</h3>
                 <div class="text-3xl font-black text-white light:text-slate-900 mb-2">${{ data.insurance_data.ramos['TOTAL DE MERCADO'].value | format_billions }}</div>
                 <div class="w-full bg-darkBg light:bg-slate-200 rounded-full h-1.5 mb-2 overflow-hidden flex">
-                    <div class="bg-brandBlue h-1.5" style="width: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total }}%" title="Personas: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total | round(1) }}%"></div>
-                    <div class="bg-brandGreen h-1.5" style="width: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total }}%" title="Patrimoniales: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total | round(1) }}%"></div>
+                    <div class="bg-purple-500 h-1.5" style="width: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total }}%" title="Personas: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total | round(1) }}%"></div>
+                    <div class="bg-emerald-500 h-1.5" style="width: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total }}%" title="Patrimoniales: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total | round(1) }}%"></div>
                 </div>
-                <div class="flex justify-between text-[10px] text-slate-500 mb-4 font-semibold uppercase tracking-wider">
-                    <span class="text-brandBlue">Personas: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total | round(1) }}%</span>
-                    <span class="text-brandGreen">Patrimoniales: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total | round(1) }}%</span>
+                <div class="flex justify-between text-[10px] mb-4 font-semibold uppercase tracking-wider">
+                    <span class="text-purple-400 light:text-purple-600">Personas: {{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].share_total | round(1) }}%</span>
+                    <span class="text-emerald-400 light:text-emerald-600">Patrimoniales: {{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].share_total | round(1) }}%</span>
                 </div>
                 
                 <div class="flex gap-4">
@@ -2783,9 +2783,9 @@ body.layout-bento {
             </div>
 
             <!-- Seguros de Personas -->
-            <div class="glass-card rounded-2xl overflow-x-auto p-6 border-l-4 border-l-emerald-500 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+            <div class="glass-card rounded-2xl overflow-x-auto p-6 border-l-4 border-l-purple-500 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
                 <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i class="fas fa-people-group text-6xl"></i>
+                    <i class="fas fa-people-group text-6xl text-purple-400"></i>
                 </div>
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total Seguros de Personas</h3>
                 <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE PERSONAS'].value | format_billions }}</div>
@@ -2807,9 +2807,9 @@ body.layout-bento {
             </div>
 
             <!-- Seguros Patrimoniales -->
-            <div class="glass-card rounded-2xl overflow-x-auto p-6 border-l-4 border-l-orange-500 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+            <div class="glass-card rounded-2xl overflow-x-auto p-6 border-l-4 border-l-emerald-500 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
                 <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <i class="fas fa-car-burst text-6xl"></i>
+                    <i class="fas fa-car-burst text-6xl text-emerald-400"></i>
                 </div>
                 <h3 class="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Total Seguros Patrimoniales</h3>
                 <div class="text-3xl font-black text-white light:text-slate-900 mb-4">${{ data.insurance_data.ramos['SEGUROS DE DAOS PATRIMONIALES'].value | format_billions }}</div>
@@ -2854,9 +2854,9 @@ body.layout-bento {
                     <tbody class="divide-y divide-darkBorder/20 light:divide-gray-100 text-sm">
                         
                         <!-- Seguros de Personas -->
-                        <tr class="bg-darkCard/20 light:bg-slate-50/50">
-                            <td colspan="4" class="px-6 py-3 font-bold text-emerald-400 light:text-emerald-600">
-                                <i class="fas fa-users mr-2"></i> Seguros de Personas
+                        <tr class="bg-purple-500/10 light:bg-purple-50/50">
+                            <td colspan="6" class="px-6 py-3 font-bold text-purple-400 light:text-purple-600">
+                                <i class="fas fa-users mr-2 text-purple-400 light:text-purple-600"></i> Seguros de Personas
                             </td>
                         </tr>
                         {% set personas_items = [
@@ -2882,9 +2882,9 @@ body.layout-bento {
                         {% endfor %}
 
                         <!-- Seguros Patrimoniales -->
-                        <tr class="bg-darkCard/20 light:bg-slate-50/50 border-t-2 border-darkBorder/60">
-                            <td colspan="4" class="px-6 py-3 font-bold text-orange-400 light:text-orange-600">
-                                <i class="fas fa-car-burst mr-2"></i> Seguros Patrimoniales
+                        <tr class="bg-emerald-500/10 light:bg-emerald-50/50 border-t-2 border-darkBorder/60">
+                            <td colspan="6" class="px-6 py-3 font-bold text-emerald-400 light:text-emerald-600">
+                                <i class="fas fa-car-burst mr-2 text-emerald-400 light:text-emerald-600"></i> Seguros Patrimoniales
                             </td>
                         </tr>
                         {% set patrimoniales_items = [
