@@ -5696,7 +5696,7 @@ function setSsnTimeRange(range) {
             else if (segmentName === 'total_agro') histSegmentKey = 'agro';
             else if (segmentName === 'total_otros_patrimoniales') histSegmentKey = 'otros_patrimoniales';
             else if (segmentName === 'total_accidentes_personales') histSegmentKey = 'accidentes_personales';
-            else if (segmentName === 'total_retiro') histSegmentKey = 'retiro';
+            else if (segmentName === 'total_retiro' || segmentName === 'total_retiro_individual' || segmentName === 'total_retiro_colectivo') histSegmentKey = 'retiro';
             else if (segmentName === 'total_sepelio') histSegmentKey = 'sepelio';
             else if (segmentName === 'total_salud') histSegmentKey = 'salud';
 
@@ -8074,6 +8074,8 @@ function setSsnTimeRange(range) {
                     <option value="total_otros_patrimoniales">Total de Otros Riesgos Patrimoniales</option>
                     <option value="total_accidentes_personales">Total de Accidentes Personales</option>
                     <option value="total_retiro">Total de Retiro</option>
+                    <option value="total_retiro_individual">Retiro Individual</option>
+                    <option value="total_retiro_colectivo">Retiro Colectivo</option>
                     <option value="total_vida">Total de Vida</option>
                     <option value="total_sepelio">Total de Sepelio</option>
                     <option value="total_salud">Total de Salud</option>
