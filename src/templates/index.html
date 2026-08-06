@@ -523,6 +523,27 @@ body.layout-bento {
             border-bottom: 1px solid #1f2937 !important;
         }
 
+        /* 6. HFT CYBER-TERMINAL LAYOUT (Bloomberg Sharp Monospace High-Density) */
+        body.layout-hft-terminal .glass-card,
+        body.layout-hft-terminal .bg-darkCard {
+            border-radius: 4px !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: 0 0 12px var(--highlight-glow) !important;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+        }
+        body.layout-hft-terminal .glass-card:hover {
+            border-color: var(--highlight-color) !important;
+            box-shadow: 0 0 20px var(--highlight-glow) !important;
+            transform: none !important;
+        }
+        body.layout-hft-terminal table th,
+        body.layout-hft-terminal table td {
+            font-family: 'JetBrains Mono', 'Consolas', monospace !important;
+            padding: 8px 12px !important;
+        }
+
         /* Dark Theme Glassmorphism Overrides */
         .dark .bg-darkBg {
             background-color: var(--bg-color) !important;
@@ -1012,6 +1033,7 @@ body.layout-bento {
                             <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report</option>
                             <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style</option>
                             <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS</option>
+                            <option value="hft-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">HFT Cyber-Terminal (Bloomberg)</option>
                         </select>
                     </div>
                     <!-- Selector de Paleta de Color -->
@@ -6672,7 +6694,7 @@ function setSsnTimeRange(range) {
         }
 
         function switchVisualLayout(layoutName) {
-            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style');
+            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style', 'layout-hft-terminal');
             // Normalize removed layouts to bento
             if (['terminal', 'neobrutalist', 'cyber-grid'].includes(layoutName)) layoutName = 'bento';
             document.body.classList.add('layout-' + layoutName);
@@ -7576,7 +7598,7 @@ function setSsnTimeRange(range) {
         window.addEventListener('DOMContentLoaded', () => {
             // Restore visual layout and theme first
             const _rawLayout = localStorage.getItem('visualLayout') || 'bento';
-            const savedVisualLayout = ['bento', 'executive', 'flat-saas'].includes(_rawLayout) ? _rawLayout : 'bento';
+            const savedVisualLayout = ['bento', 'executive', 'flat-saas', 'hft-terminal'].includes(_rawLayout) ? _rawLayout : 'bento';
             document.body.classList.add('layout-' + savedVisualLayout);
             const selectLayoutEl = document.getElementById('select-visual-layout');
             if (selectLayoutEl) {
