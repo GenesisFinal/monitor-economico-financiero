@@ -544,6 +544,35 @@ body.layout-bento {
             padding: 8px 12px !important;
         }
 
+        /* 7. AGMD STYLE LAYOUT (Bento Grid Structure + HFT Monospace Financial Typography) */
+        body.layout-agmd-style {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace !important;
+        }
+        body.layout-agmd-style .glass-card,
+        body.layout-agmd-style .bg-darkCard {
+            border-radius: 16px !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: 0 4px 20px var(--shadow-color) !important;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease !important;
+        }
+        body.layout-agmd-style .glass-card:hover {
+            border-color: var(--highlight-color) !important;
+            box-shadow: 0 8px 30px var(--highlight-glow) !important;
+            transform: translateY(-2px) !important;
+        }
+        body.layout-agmd-style table th,
+        body.layout-agmd-style table td,
+        body.layout-agmd-style .font-mono,
+        body.layout-agmd-style span,
+        body.layout-agmd-style div,
+        body.layout-agmd-style p,
+        body.layout-agmd-style h1,
+        body.layout-agmd-style h2,
+        body.layout-agmd-style h3,
+        body.layout-agmd-style h4 {
+            font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace !important;
+        }
+
         /* Dark Theme Glassmorphism Overrides */
         .dark .bg-darkBg {
             background-color: var(--bg-color) !important;
@@ -1034,6 +1063,7 @@ body.layout-bento {
                             <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style</option>
                             <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS</option>
                             <option value="hft-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">HFT Cyber-Terminal (Bloomberg)</option>
+                            <option value="agmd-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
                         </select>
                     </div>
                     <!-- Selector de Paleta de Color -->
@@ -6694,7 +6724,7 @@ function setSsnTimeRange(range) {
         }
 
         function switchVisualLayout(layoutName) {
-            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style', 'layout-hft-terminal');
+            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style', 'layout-hft-terminal', 'layout-agmd-style');
             // Normalize removed layouts to bento
             if (['terminal', 'neobrutalist', 'cyber-grid'].includes(layoutName)) layoutName = 'bento';
             document.body.classList.add('layout-' + layoutName);
@@ -7598,7 +7628,7 @@ function setSsnTimeRange(range) {
         window.addEventListener('DOMContentLoaded', () => {
             // Restore visual layout and theme first
             const _rawLayout = localStorage.getItem('visualLayout') || 'bento';
-            const savedVisualLayout = ['bento', 'executive', 'flat-saas', 'hft-terminal'].includes(_rawLayout) ? _rawLayout : 'bento';
+            const savedVisualLayout = ['bento', 'executive', 'flat-saas', 'hft-terminal', 'agmd-style'].includes(_rawLayout) ? _rawLayout : 'bento';
             document.body.classList.add('layout-' + savedVisualLayout);
             const selectLayoutEl = document.getElementById('select-visual-layout');
             if (selectLayoutEl) {
