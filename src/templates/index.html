@@ -5613,17 +5613,17 @@ function setSsnTimeRange(range) {
             const selectedCompany = invData.empresas[selectedKey] || invData.empresas['SEGUNDA RETIRO'] || Object.values(invData.empresas)[1];
             if (!selectedCompany) return;
 
-            const formatNumber = (num) => new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(num);
+            const formatMillions = (num) => new Intl.NumberFormat('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(num / 1000);
 
             // Update Header Th Titles
             const companyDisplayName = selectedCompany.nombre || selectedKey;
-            document.getElementById('inv-retiro-th-empresa-monto').innerText = `${companyDisplayName} ($)`;
+            document.getElementById('inv-retiro-th-empresa-monto').innerText = `${companyDisplayName} ($ Millones)`;
             document.getElementById('inv-retiro-th-empresa-pct').innerText = `% ${companyDisplayName}`;
             document.getElementById('inv-retiro-chart-empresa-title').innerHTML = `<i class="fas fa-chart-pie text-emerald-400"></i> Distribución ${companyDisplayName}`;
 
             // KPI Cards Updates
-            document.getElementById('inv-retiro-kpi-total-mercado').innerText = '$ ' + formatNumber(mercadoTotal.total_inversiones);
-            document.getElementById('inv-retiro-kpi-total-empresa').innerText = '$ ' + formatNumber(selectedCompany.total_inversiones);
+            document.getElementById('inv-retiro-kpi-total-mercado').innerText = '$ ' + formatMillions(mercadoTotal.total_inversiones) + ' M';
+            document.getElementById('inv-retiro-kpi-total-empresa').innerText = '$ ' + formatMillions(selectedCompany.total_inversiones) + ' M';
 
             const marketShare = (selectedCompany.total_inversiones / mercadoTotal.total_inversiones * 100).toFixed(2);
             document.getElementById('inv-retiro-kpi-empresa-market-share').innerText = `${marketShare.replace('.', ',')}% del Mercado de Retiro`;
@@ -5646,16 +5646,16 @@ function setSsnTimeRange(range) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="px-4 py-3 whitespace-nowrap text-slate-200 light:text-slate-700 font-medium font-sans">${mItem.rubro}</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatNumber(mItem.monto)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatMillions(mItem.monto)}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-brandBlue">${mItem.pct.toFixed(2).replace('.', ',')}%</td>
-                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatNumber(cItem.monto)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatMillions(cItem.monto)}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-emerald-400 light:text-emerald-600">${cItem.pct.toFixed(2).replace('.', ',')}%</td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            document.getElementById('inv-retiro-foot-mercado-monto').innerText = '$ ' + formatNumber(mercadoTotal.total_inversiones);
-            document.getElementById('inv-retiro-foot-empresa-monto').innerText = '$ ' + formatNumber(selectedCompany.total_inversiones);
+            document.getElementById('inv-retiro-foot-mercado-monto').innerText = '$ ' + formatMillions(mercadoTotal.total_inversiones) + ' M';
+            document.getElementById('inv-retiro-foot-empresa-monto').innerText = '$ ' + formatMillions(selectedCompany.total_inversiones) + ' M';
 
             // Doughnut Charts
             const isDark = document.body.classList.contains('dark');
@@ -8714,12 +8714,17 @@ function setSsnTimeRange(range) {
 
 <!-- Asegurador Tab: Inversiones Retiro -->
     <div id="aseg-tab-inversiones-retiro" class="aseg-tab-content hidden fade-in w-full h-full relative pb-10">
-        <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
-            <i class="fas fa-chart-pie text-brandBlue"></i> Inversiones de Seguros de Retiro
-        </h2>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
+            <h2 class="text-3xl font-black text-white light:text-slate-900 flex items-center gap-3">
+                <i class="fas fa-chart-pie text-brandBlue"></i> Inversiones de Seguros de Retiro
+            </h2>
+            <span class="text-xs font-extrabold px-3 py-1.5 bg-brandBlue/20 text-brandBlue border border-brandBlue/40 rounded-xl uppercase tracking-wider self-start sm:self-auto shadow-sm">
+                <i class="fas fa-calendar-check mr-1.5"></i> Período: {{ ssn_inversiones_retiro.period if ssn_inversiones_retiro else 'Marzo 2026' }}
+            </span>
+        </div>
         
         <p class="text-sm text-slate-400 light:text-slate-600 mb-8 leading-relaxed max-w-4xl">
-            Estructura y composición comparativa del portafolio de inversiones del <strong>Total del Mercado Exclusivo de Retiro</strong> versus la aseguradora seleccionada, basándonos en los informes oficiales de la Superintendencia de Seguros de la Nación (SSN).
+            Estructura y composición comparativa del portafolio de inversiones del <strong>Total del Mercado Exclusivo de Retiro</strong> versus la aseguradora seleccionada, basándonos en los boletines oficiales de la Superintendencia de Seguros de la Nación (SSN) al <strong>{{ ssn_inversiones_retiro.period if ssn_inversiones_retiro else 'Marzo 2026' }}</strong>. <span class="text-brandBlue font-semibold block sm:inline mt-1 sm:mt-0">*Cifras reexpresadas en Millones de Pesos ($ Millones).</span>
         </p>
 
         <!-- Top KPI Cards -->
@@ -8764,9 +8769,9 @@ function setSsnTimeRange(range) {
                     <thead class="border-b border-darkBorder/40 light:border-slate-200 text-xs uppercase bg-darkCard/50 light:bg-slate-50">
                         <tr>
                             <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Rubro de Inversión</th>
-                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Total Mercado ($)</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Total Mercado ($ Millones)</th>
                             <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% Mercado</th>
-                            <th id="inv-retiro-th-empresa-monto" class="px-4 py-3 font-semibold text-emerald-400 light:text-emerald-600 text-right whitespace-nowrap">La Segunda Retiro ($)</th>
+                            <th id="inv-retiro-th-empresa-monto" class="px-4 py-3 font-semibold text-emerald-400 light:text-emerald-600 text-right whitespace-nowrap">La Segunda Retiro ($ Millones)</th>
                             <th id="inv-retiro-th-empresa-pct" class="px-4 py-3 font-semibold text-emerald-400 light:text-emerald-600 text-right whitespace-nowrap">% La Segunda</th>
                         </tr>
                     </thead>
@@ -8776,9 +8781,9 @@ function setSsnTimeRange(range) {
                     <tfoot class="bg-brandBlue/10 font-bold border-t border-brandBlue/30 text-white light:text-slate-800">
                         <tr>
                             <td class="px-4 py-3 font-sans">Total Portafolio Inversiones</td>
-                            <td id="inv-retiro-foot-mercado-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap">$ 0</td>
+                            <td id="inv-retiro-foot-mercado-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap">$ 0 M</td>
                             <td class="px-4 py-3 text-right font-mono whitespace-nowrap">100,00%</td>
-                            <td id="inv-retiro-foot-empresa-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap text-emerald-400 light:text-emerald-600">$ 0</td>
+                            <td id="inv-retiro-foot-empresa-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap text-emerald-400 light:text-emerald-600">$ 0 M</td>
                             <td class="px-4 py-3 text-right font-mono whitespace-nowrap text-emerald-400 light:text-emerald-600">100,00%</td>
                         </tr>
                     </tfoot>
