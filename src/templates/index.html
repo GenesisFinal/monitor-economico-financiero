@@ -573,6 +573,29 @@ body.layout-bento {
             font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace !important;
         }
 
+        /* Subtle thin dotted table lines for AGMD Style */
+        body.layout-agmd-style table th,
+        body.layout-agmd-style table td {
+            border-bottom: 1px dotted rgba(255, 255, 255, 0.12) !important;
+            padding: 8px 12px !important;
+        }
+        body.layout-agmd-style.light table th,
+        body.layout-agmd-style.light table td {
+            border-bottom: 1px dotted rgba(0, 0, 0, 0.12) !important;
+        }
+        body.layout-agmd-style .divide-y > * + * {
+            border-top-style: dotted !important;
+            border-top-width: 1px !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
+        }
+        body.layout-agmd-style.light .divide-y > * + * {
+            border-color: rgba(0, 0, 0, 0.12) !important;
+        }
+        body.layout-agmd-style .border-b {
+            border-bottom-style: dotted !important;
+            border-bottom-width: 1px !important;
+        }
+
         /* Dark Theme Glassmorphism Overrides */
         .dark .bg-darkBg {
             background-color: var(--bg-color) !important;
