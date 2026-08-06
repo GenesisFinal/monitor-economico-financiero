@@ -8488,7 +8488,8 @@ function setSsnTimeRange(range) {
                                     <th class="px-4 py-3 text-right font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider text-[11px]">Total Asegurados</th>
                                     <th class="px-4 py-3 text-right font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider text-[11px]">Var YoY</th>
                                     <th class="px-4 py-3 text-right font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider text-[11px]">Período de Ahorro</th>
-                                    <th class="px-4 py-3 text-right font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider text-[11px]">Período de Renta</th>
+                                    <th class="px-4 py-3 text-right font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider text-[11px]">Rentistas Voluntarios</th>
+                                    <th class="px-4 py-3 text-right font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider text-[11px]">RVP+ART</th>
                                 </tr>
                             </thead>
                             <tbody id="retiro-body-asegurados" class="divide-y divide-darkBorder/10 font-mono text-xs">
@@ -9046,7 +9047,8 @@ const companies = Object.keys(balancesData[seg]);
 
                 const totalYoY = getRetiroField(a, "Cantidad Total", "yoy", undefined);
                 const paVal = getRetiroField(a, "Periodo Ahorro", "val", 0);
-                const prVal = getRetiroField(a, "Periodo Renta", "val", 0);
+                const rvVal = getRetiroField(a, "Rentistas Voluntarios", "val", 0);
+                const rvpArtVal = getRetiroField(a, "RVP+ART", "val", 0);
 
                 const tr = document.createElement("tr");
                 tr.className = "hover:bg-darkBorder/20 transition-colors group";
@@ -9059,7 +9061,8 @@ const companies = Object.keys(balancesData[seg]);
                     <td class="px-4 py-3 text-right text-white light:text-slate-900">${formatCountRetiro(totalVal)}</td>
                     <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-medium">${formatPctRetiro(totalYoY)}</td>
                     <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(paVal)}</td>
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(prVal)}</td>
+                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(rvVal)}</td>
+                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(rvpArtVal)}</td>
                 `;
                 retiroBodyAseg.appendChild(tr);
 
@@ -9067,7 +9070,7 @@ const companies = Object.keys(balancesData[seg]);
                 const rtaIndiv = getRetiroField(a, "Renta Indiv", "val", 0);
                 const ahCol = getRetiroField(a, "Ahorro Col", "val", 0);
                 const rtaCol = getRetiroField(a, "Renta Col", "val", 0);
-                const rtaPrev = getRetiroField(a, "Renta Previsional", "val", 0);
+                const rtaPrev = getRetiroField(a, "RVP+ART", "val", 0);
 
                 // Subrow Individual
                 const trIndiv = document.createElement("tr");
@@ -9078,6 +9081,7 @@ const companies = Object.keys(balancesData[seg]);
                     <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
                     <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(ahIndiv)}</td>
                     <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(rtaIndiv)}</td>
+                    <td class="px-4 py-2 text-right text-slate-400">-</td>
                 `;
                 retiroBodyAseg.appendChild(trIndiv);
                 
@@ -9090,16 +9094,18 @@ const companies = Object.keys(balancesData[seg]);
                     <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
                     <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(ahCol)}</td>
                     <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(rtaCol)}</td>
+                    <td class="px-4 py-2 text-right text-slate-400">-</td>
                 `;
                 retiroBodyAseg.appendChild(trCol);
                 
-                // Subrow Previsional
+                // Subrow RVP y ART
                 const trPrev = document.createElement("tr");
                 trPrev.className = `retiro-subrow-a${i} hidden bg-darkBorder/10`;
                 trPrev.innerHTML = `
                     <td></td>
-                    <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>Previsional</td>
+                    <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>RVP y ART</td>
                     <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
+                    <td class="px-4 py-2 text-right text-slate-400">-</td>
                     <td class="px-4 py-2 text-right text-slate-400">-</td>
                     <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(rtaPrev)}</td>
                 `;
@@ -9112,7 +9118,8 @@ const companies = Object.keys(balancesData[seg]);
                 const totalVal = getRetiroField(a, "Cantidad Total", "val", 0);
                 const totalYoY = getRetiroField(a, "Cantidad Total", "yoy", undefined);
                 const paVal = getRetiroField(a, "Periodo Ahorro", "val", 0);
-                const prVal = getRetiroField(a, "Periodo Renta", "val", 0);
+                const rvVal = getRetiroField(a, "Rentistas Voluntarios", "val", 0);
+                const rvpArtVal = getRetiroField(a, "RVP+ART", "val", 0);
 
                 const trTot = document.createElement("tr");
                 trTot.className = "bg-brandBlue/20 font-bold text-white border-t-2 border-brandBlue/50 text-xs";
@@ -9122,7 +9129,8 @@ const companies = Object.keys(balancesData[seg]);
                     <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(totalVal)}</td>
                     <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-bold">${formatPctRetiro(totalYoY)}</td>
                     <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(paVal)}</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(prVal)}</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(rvVal)}</td>
+                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(rvpArtVal)}</td>
                 `;
                 retiroBodyAseg.appendChild(trTot);
             }
