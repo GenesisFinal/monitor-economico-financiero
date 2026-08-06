@@ -1052,7 +1052,7 @@ body.layout-bento {
         }
     </style>
 </head>
-<body class="dark bg-darkBg text-slate-100 min-h-screen transition-all duration-300">
+<body class="dark bg-darkBg text-slate-100 min-h-screen transition-all duration-300 layout-agmd-style theme-emerald-green">
     <!-- Header Global -->
     <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-3 sm:px-6 py-2 sm:py-2.5 light:bg-white/80 light:border-gray-200">
         <div class="max-w-[1800px] w-full mx-auto flex flex-col xl:flex-row items-center justify-between gap-2 sm:gap-3">
@@ -1094,7 +1094,7 @@ body.layout-bento {
                             <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style</option>
                             <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS</option>
                             <option value="hft-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">HFT Cyber-Terminal (Bloomberg)</option>
-                            <option value="agmd-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
+                            <option value="agmd-style" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
                         </select>
                     </div>
                     <!-- Selector de Paleta de Color -->
@@ -1103,10 +1103,10 @@ body.layout-bento {
                         <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-1 max-w-[130px] sm:max-w-[150px] truncate">
                             <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon & Electric</option>
                             <option value="indigo-slate" class="bg-darkCard text-white light:bg-white light:text-slate-800">Indigo Slate</option>
-                            <option value="emerald-green" class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
+                            <option value="emerald-green" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
                             <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
                             <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
-                            <option value="l2-color" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
+                            <option value="l2-color" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
                             <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
                         </select>
                     </div>
@@ -3500,15 +3500,15 @@ function setSsnTimeRange(range) {
                     const textWidth = ctx.measureText(fullText).width;
                     const padding = 6;
                     const boxX = area.right - textWidth - padding * 2;
-                    const boxY = area.top + 10;
-                    const boxHeight = 20;
+                    const boxY = Math.max(2, area.top - 24);
+                    const boxHeight = 18;
                     const _isDark = document.body.classList.contains('dark');
-                    ctx.fillStyle = _isDark ? 'rgba(30, 41, 59, 0.8)' : 'rgba(241, 245, 249, 0.8)';
+                    ctx.fillStyle = _isDark ? 'rgba(30, 41, 59, 0.85)' : 'rgba(241, 245, 249, 0.85)';
                     ctx.beginPath();
                     ctx.roundRect(boxX, boxY, textWidth + padding * 2, boxHeight, 4);
                     ctx.fill();
                     
-                    ctx.fillStyle = _isDark ? 'rgba(255, 255, 255, 0.8)' : 'rgba(15, 23, 42, 0.8)';
+                    ctx.fillStyle = _isDark ? 'rgba(255, 255, 255, 0.9)' : 'rgba(15, 23, 42, 0.9)';
                     ctx.textBaseline = 'middle';
                     ctx.fillText(fullText, area.right - padding, boxY + boxHeight/2);
                     ctx.restore();
@@ -7664,15 +7664,15 @@ function setSsnTimeRange(range) {
 
         window.addEventListener('DOMContentLoaded', () => {
             // Restore visual layout and theme first
-            const _rawLayout = localStorage.getItem('visualLayout') || 'bento';
-            const savedVisualLayout = ['bento', 'executive', 'flat-saas', 'hft-terminal', 'agmd-style'].includes(_rawLayout) ? _rawLayout : 'bento';
+            const _rawLayout = localStorage.getItem('visualLayout') || 'agmd-style';
+            const savedVisualLayout = ['bento', 'executive', 'flat-saas', 'hft-terminal', 'agmd-style'].includes(_rawLayout) ? _rawLayout : 'agmd-style';
             document.body.classList.add('layout-' + savedVisualLayout);
             const selectLayoutEl = document.getElementById('select-visual-layout');
             if (selectLayoutEl) {
                 selectLayoutEl.value = savedVisualLayout;
             }
 
-            const savedVisualTheme = localStorage.getItem('visualTheme') || 'l2-color';
+            const savedVisualTheme = localStorage.getItem('visualTheme') || 'emerald-green';
             document.body.classList.add('theme-' + savedVisualTheme);
             const selectThemeEl = document.getElementById('select-visual-theme');
             if (selectThemeEl) {
