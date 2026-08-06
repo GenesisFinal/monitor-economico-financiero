@@ -5361,9 +5361,9 @@ function setSsnTimeRange(range) {
             ls.empresas.forEach(emp => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap font-medium text-white light:text-slate-800">${emp.entidad}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-slate-300 light:text-slate-600">$ ${formatNumber(emp.prima)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right font-bold text-brandBlue">${emp.participacion.toFixed(2)}%</td>
+                    <td class="px-3 py-3 font-medium text-white light:text-slate-800 text-xs sm:text-sm truncate max-w-[150px] sm:max-w-[170px]" title="${emp.entidad}">${emp.entidad}</td>
+                    <td class="px-3 py-3 whitespace-nowrap text-right text-slate-300 light:text-slate-600 text-xs sm:text-sm font-mono">$ ${formatNumber(emp.prima)}</td>
+                    <td class="px-3 py-3 whitespace-nowrap text-right font-bold text-brandBlue text-xs sm:text-sm font-mono">${emp.participacion.toFixed(2)}%</td>
                 `;
                 empTbody.appendChild(tr);
             });
@@ -8159,12 +8159,12 @@ function setSsnTimeRange(range) {
             <!-- Table -->
             <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
                 <div class="overflow-x-auto">
-                    <table class="min-w-[600px] w-full text-left text-sm">
+                    <table class="w-full text-left text-sm">
                         <thead class="border-b border-darkBorder/40 light:border-slate-200 text-xs uppercase bg-darkCard/50 light:bg-slate-50">
                             <tr>
-                                <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600">Empresa</th>
-                                <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">Prima ($)</th>
-                                <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">% Total Grupo</th>
+                                <th class="px-3 py-3 font-semibold text-slate-300 light:text-slate-600">Empresa</th>
+                                <th class="px-3 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Prima ($)</th>
+                                <th class="px-3 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% Total Grupo</th>
                             </tr>
                         </thead>
                         <tbody id="ls-empresas-table-body" class="divide-y divide-darkBorder/40 light:divide-slate-100 text-slate-200 light:text-slate-700">
@@ -8172,9 +8172,9 @@ function setSsnTimeRange(range) {
                         </tbody>
                         <tfoot class="bg-brandBlue/10 font-bold border-t border-brandBlue/30 text-white light:text-slate-800">
                             <tr>
-                                <td class="px-6 py-4">Total Grupo</td>
-                                <td class="px-6 py-4 text-right" id="ls-empresas-total-prima"></td>
-                                <td class="px-6 py-4 text-right">100%</td>
+                                <td class="px-3 py-3">Total Grupo</td>
+                                <td class="px-3 py-3 text-right whitespace-nowrap" id="ls-empresas-total-prima"></td>
+                                <td class="px-3 py-3 text-right whitespace-nowrap">100%</td>
                             </tr>
                         </tfoot>
                     </table>
