@@ -681,7 +681,7 @@ body.layout-bento {
             color: #94a3b8; /* text-slate-400 */
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            font-size: 0.95em !important;
+            font-size: 0.90em !important;
         }
         .tab-btn:hover {
             color: var(--highlight-color);
@@ -1134,60 +1134,60 @@ body.layout-bento {
                 <!-- Botones de Pestañas -->
                 
                 
-                <button onclick="switchTab('exchange')" id="btn-tab-exchange" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('exchange')" id="btn-tab-exchange" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-dollar-sign w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Dólar</span>
                 </button>
-                <button onclick="switchTab('indices')" id="btn-tab-indices" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('indices')" id="btn-tab-indices" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-globe w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Índices<br>Globales</span><span class="hidden md:inline">Índices Globales</span></span>
                 </button>
-                <button onclick="switchTab('forex')" id="btn-tab-forex" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('forex')" id="btn-tab-forex" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-money-bill-transfer w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Divisas</span>
                 </button>
-                <button onclick="switchTab('commodities')" id="btn-tab-commodities" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('commodities')" id="btn-tab-commodities" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-wheat-awn w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Commodities</span>
                 </button>
-                <button onclick="switchTab('rates')" id="btn-tab-rates" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('rates')" id="btn-tab-rates" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-percent w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Tasas<br>Internac.</span><span class="hidden md:inline">Tasas Internacionales</span></span>
                 </button>
-                <button onclick="switchTab('local_rates')" id="btn-tab-local_rates" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('local_rates')" id="btn-tab-local_rates" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-percent w-4 md:w-5 text-center text-brandBlue font-bold"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Tasas<br>Locales</span><span class="hidden md:inline">Tasas Locales</span></span>
                 </button>
-                <button onclick="switchTab('fci')" id="btn-tab-fci" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('fci')" id="btn-tab-fci" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-wallet w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Fondos<br>FCI</span><span class="hidden md:inline">Fondos Comunes (FCI)</span></span>
                 </button>
-                <button onclick="switchTab('bonds')" id="btn-tab-bonds" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('bonds')" id="btn-tab-bonds" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-gavel w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Bonos<br>Soberanos</span><span class="hidden md:inline">Bonos Soberanos</span></span>
                 </button>
-                <button onclick="switchTab('lecaps')" id="btn-tab-lecaps" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('lecaps')" id="btn-tab-lecaps" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-money-bill-trend-up w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">LECAPs<br>BONCAPs</span><span class="hidden md:inline">LECAPs / BONCAPs</span></span>
                 </button>
 
-                <button onclick="switchTab('corporate')" id="btn-tab-corporate" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('corporate')" id="btn-tab-corporate" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-briefcase w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>ONs</span>
                 </button>
-                <button onclick="switchTab('stocks')" id="btn-tab-stocks" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('stocks')" id="btn-tab-stocks" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-building w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Acciones<br>Mundiales</span><span class="hidden md:inline">Acciones Mundiales</span></span>
                 </button>
-                <button onclick="switchTab('etfs')" id="btn-tab-etfs" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('etfs')" id="btn-tab-etfs" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-chart-pie w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>ETFs</span>
                 </button>
-                <button onclick="switchTab('acciones_arg')" id="btn-tab-acciones_arg" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('acciones_arg')" id="btn-tab-acciones_arg" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-flag w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Acciones<br>Argentinas</span><span class="hidden md:inline">Acciones Argentinas</span></span>
                 </button>
-                <button onclick="switchTab('cryptos')" id="btn-tab-cryptos" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchTab('cryptos')" id="btn-tab-cryptos" class="tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fab fa-bitcoin w-4 md:w-5 text-center text-brandBlue"></i>
                     <span>Criptomonedas</span>
                 </button>
@@ -2550,7 +2550,7 @@ body.layout-bento {
             </div>
             <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav-econ">
                 {% for cat in data.economic_categories %}
-                <button onclick="switchEconTab('econ-tab-{{ cat.name|slugify }}')" id="btn-econ-tab-{{ cat.name|slugify }}" class="econ-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchEconTab('econ-tab-{{ cat.name|slugify }}')" id="btn-econ-tab-{{ cat.name|slugify }}" class="econ-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="{{ cat.icon }} w-4 md:w-5 text-center text-brandBlue font-bold"></i>
                     <span class="leading-tight">
                         {% if cat.name == 'Agregados Monetarios' %}
@@ -2777,33 +2777,33 @@ body.layout-bento {
                 <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 hidden md:block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
             </div>
             <nav class="flex-1 p-2 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto no-scrollbar font-medium whitespace-nowrap" id="sidebar-nav-aseg">
-                <button onclick="switchAsegTab('aseg-tab-primas')" id="btn-aseg-tab-primas" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-primas')" id="btn-aseg-tab-primas" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-shield-halved w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Primas<br>Acumuladas</span><span class="hidden md:inline">Primas Acumuladas</span></span>
                 </button>
                 
-                <button onclick="switchAsegTab('aseg-tab-evolucion')" id="btn-aseg-tab-evolucion" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-evolucion')" id="btn-aseg-tab-evolucion" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-chart-line w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Evolución<br>Mensual</span><span class="hidden md:inline">Evolución Mensual</span></span>
                 </button>
                 
-                <button onclick="switchAsegTab('aseg-tab-rankings')" id="btn-aseg-tab-rankings" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-rankings')" id="btn-aseg-tab-rankings" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-trophy w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Rankings<br>Producción</span><span class="hidden md:inline">Rankings de Producción</span></span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-lasegunda')" id="btn-aseg-tab-lasegunda" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-lasegunda')" id="btn-aseg-tab-lasegunda" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-building-shield w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">La Segunda<br>(Foco)</span><span class="hidden md:inline">Grupo La Segunda</span></span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-personas-retiro')" id="btn-aseg-tab-personas-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-personas-retiro')" id="btn-aseg-tab-personas-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-user-shield w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Personas y<br>Retiro</span><span class="hidden md:inline">Personas y Retiro</span></span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-balances')" id="btn-aseg-tab-balances" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-balances')" id="btn-aseg-tab-balances" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-scale-balanced w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Estados<br>Contables</span><span class="hidden md:inline">Estados Contables</span></span>
                 </button>
-                <button onclick="switchAsegTab('aseg-tab-retiro')" id="btn-aseg-tab-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-xs md:text-sm shrink-0">
+                <button onclick="switchAsegTab('aseg-tab-retiro')" id="btn-aseg-tab-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
                     <i class="fas fa-piggy-bank w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Seguros de<br>Retiro</span><span class="hidden md:inline">Seguros de Retiro</span></span>
                 </button>
