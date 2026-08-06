@@ -3008,10 +3008,9 @@ body.layout-bento {
         </div>
     </div>
 
-    {% if ssn_monthly %}
-
                 <!-- Evolucion Mensual Tab -->
                 <div id="aseg-tab-evolucion" class="aseg-tab-content fade-in hidden">
+                {% if ssn_monthly %}
 <!-- Evolución de la Producción Mensual -->
     <section class="pt-2">
         <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
@@ -3431,7 +3430,14 @@ function setSsnTimeRange(range) {
             }
         });
     </script>
+    {% else %}
+        <div class="p-8 text-center glass-card rounded-2xl border border-darkBorder/40 my-8">
+            <i class="fas fa-arrows-rotate text-3xl text-brandBlue animate-spin mb-4 block mx-auto"></i>
+            <h3 class="text-xl font-bold text-white mb-2">Datos de Evolución Mensual en Actualización</h3>
+            <p class="text-sm text-slate-400">Los datos mensuales de la SSN se encuentran en proceso de actualización. Por favor reintenta en unos minutos.</p>
+        </div>
     {% endif %}
+    </div>
     
 
     <!-- Data Object Embedded -->
