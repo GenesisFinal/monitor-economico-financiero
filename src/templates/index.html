@@ -4217,9 +4217,14 @@ function setSsnTimeRange(range) {
                         renderLaSegundaView();
                     }
                 } else if (tabId === 'aseg-tab-retiro') {
+                    if (typeof renderRetiroView === 'function') {
+                        renderRetiroView();
+                    }
+                } else if (tabId === 'aseg-tab-inversiones-retiro') {
+                    if (typeof renderInversionesRetiroView === 'function') {
+                        renderInversionesRetiroView();
                     }
                 }
-            }
             
             // Update buttons
             const buttons = document.querySelectorAll('.aseg-tab-btn');
