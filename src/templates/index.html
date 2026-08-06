@@ -5300,15 +5300,15 @@ function setSsnTimeRange(range) {
             
             // Reset button classes to inactive
             const inactiveClass = isDark 
-                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white" 
-                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900";
+                ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white" 
+                : "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
             
             btnValores.className = inactiveClass;
             btnIndicadores.className = inactiveClass;
             if (btnAsegurador) btnAsegurador.className = inactiveClass;
             if (btnFuentes) btnFuentes.className = inactiveClass;
             
-            const activeClass = isDark ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20" : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
+            const activeClass = isDark ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-white bg-brandBlue/10 border border-brandBlue/20" : "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
             
             if (tabId === 'valores-financieros') {
                 containerValores.classList.remove('hidden');
