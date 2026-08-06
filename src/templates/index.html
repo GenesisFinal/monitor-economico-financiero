@@ -5417,10 +5417,18 @@ function setSsnTimeRange(range) {
             ls.patrimoniales.ramos.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap text-slate-200 light:text-slate-700">${r.ramo}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-slate-300 light:text-slate-600">$ ${formatNumber(r.prima)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-brandBlue/80 light:text-brandBlue">${r.part_patrimoniales.toFixed(2)}%</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right font-bold text-brandBlue">${r.part_grupo.toFixed(2)}%</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-slate-200 light:text-slate-700 font-medium">${r.ramo}</td>
+                    <td class="px-4 py-3 min-w-[130px] max-w-[200px]">
+                        <div class="flex items-center gap-2">
+                            <div class="w-full bg-darkBg light:bg-slate-200 rounded-full h-2 overflow-hidden flex">
+                                <div class="bg-brandBlue h-2 rounded-full transition-all duration-500" style="width: ${Math.min(100, Math.max(0, r.part_patrimoniales))}%"></div>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 shrink-0 w-12 text-right">${r.part_patrimoniales.toFixed(1)}%</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatNumber(r.prima)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-brandBlue/80 light:text-brandBlue">${r.part_patrimoniales.toFixed(2)}%</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-brandBlue">${r.part_grupo.toFixed(2)}%</td>
                 `;
                 patTbody.appendChild(tr);
             });
@@ -5485,10 +5493,18 @@ function setSsnTimeRange(range) {
                 const expandBtn = hasSubs ? `<button onclick="document.querySelectorAll('.ls-sub-${idx}').forEach(el => el.classList.toggle('hidden'))" class="mr-2 text-slate-400 hover:text-green-500"><i class="fas fa-chevron-down text-xs"></i></button>` : `<span class="mr-6 inline-block"></span>`;
                 
                 tr.innerHTML = `
-                    <td class="px-6 py-4 whitespace-nowrap font-semibold text-white light:text-slate-800">${expandBtn}${r.ramo}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-slate-300 light:text-slate-600">$ ${formatNumber(r.prima)}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right text-green-500/80">${r.part_personas.toFixed(2)}%</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-right font-bold text-green-500">${r.part_grupo.toFixed(2)}%</td>
+                    <td class="px-4 py-3 whitespace-nowrap font-semibold text-white light:text-slate-800">${expandBtn}${r.ramo}</td>
+                    <td class="px-4 py-3 min-w-[130px] max-w-[200px]">
+                        <div class="flex items-center gap-2">
+                            <div class="w-full bg-darkBg light:bg-slate-200 rounded-full h-2 overflow-hidden flex">
+                                <div class="bg-green-500 h-2 rounded-full transition-all duration-500" style="width: ${Math.min(100, Math.max(0, r.part_personas))}%"></div>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 shrink-0 w-12 text-right">${r.part_personas.toFixed(1)}%</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatNumber(r.prima)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-green-500/80">${r.part_personas.toFixed(2)}%</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-green-500">${r.part_grupo.toFixed(2)}%</td>
                 `;
                 perTbody.appendChild(tr);
                 
@@ -5497,10 +5513,18 @@ function setSsnTimeRange(range) {
                         const subTr = document.createElement('tr');
                         subTr.className = `hidden ls-sub-${idx} bg-darkCard/30 light:bg-slate-50/50 text-sm`;
                         subTr.innerHTML = `
-                            <td class="px-6 py-2 pl-12 whitespace-nowrap text-slate-400 light:text-slate-500 border-t border-darkBorder/10 light:border-slate-200/50">${sub.ramo}</td>
-                            <td class="px-6 py-2 whitespace-nowrap text-right text-slate-300 light:text-slate-600 font-mono border-t border-darkBorder/10 light:border-slate-200/50">$ ${formatNumber(sub.prima)}</td>
-                            <td class="px-6 py-2 whitespace-nowrap text-right text-green-500/80 font-mono border-t border-darkBorder/10 light:border-slate-200/50">${sub.part_personas.toFixed(2)}%</td>
-                            <td class="px-6 py-2 whitespace-nowrap text-right font-semibold text-green-500 font-mono border-t border-darkBorder/10 light:border-slate-200/50">${sub.part_grupo.toFixed(2)}%</td>
+                            <td class="px-4 py-2 pl-12 whitespace-nowrap text-slate-400 light:text-slate-500 border-t border-darkBorder/10 light:border-slate-200/50">${sub.ramo}</td>
+                            <td class="px-4 py-2 min-w-[130px] max-w-[200px] border-t border-darkBorder/10 light:border-slate-200/50">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-full bg-darkBg light:bg-slate-200 rounded-full h-1.5 overflow-hidden flex">
+                                        <div class="bg-green-400/70 h-1.5 rounded-full" style="width: ${Math.min(100, Math.max(0, sub.part_personas))}%"></div>
+                                    </div>
+                                    <span class="text-[11px] font-mono text-slate-400 shrink-0 w-12 text-right">${sub.part_personas.toFixed(1)}%</span>
+                                </div>
+                            </td>
+                            <td class="px-4 py-2 whitespace-nowrap text-right text-slate-300 light:text-slate-600 font-mono border-t border-darkBorder/10 light:border-slate-200/50">$ ${formatNumber(sub.prima)}</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-right text-green-500/80 font-mono border-t border-darkBorder/10 light:border-slate-200/50">${sub.part_personas.toFixed(2)}%</td>
+                            <td class="px-4 py-2 whitespace-nowrap text-right font-semibold text-green-500 font-mono border-t border-darkBorder/10 light:border-slate-200/50">${sub.part_grupo.toFixed(2)}%</td>
                         `;
                         perTbody.appendChild(subTr);
                     });
@@ -8204,13 +8228,14 @@ function setSsnTimeRange(range) {
         <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 mb-8">
             <h4 class="text-xl font-bold text-brandBlue mb-4">Total de Patrimoniales</h4>
             <div class="overflow-x-auto mb-6">
-                <table class="min-w-[600px] w-full text-left text-sm">
+                <table class="w-full text-left text-sm">
                     <thead class="border-b border-darkBorder/40 light:border-slate-200 text-xs uppercase bg-darkCard/50 light:bg-slate-50">
                         <tr>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600">Ramo</th>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">Prima ($)</th>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">% de Patrimoniales</th>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">% del Grupo</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Ramo</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Distribución %</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Prima ($)</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% de Patrimoniales</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% del Grupo</th>
                         </tr>
                     </thead>
                     <tbody id="ls-patrimoniales-table-body" class="divide-y divide-darkBorder/40 light:divide-slate-100 text-slate-200 light:text-slate-700">
@@ -8218,10 +8243,11 @@ function setSsnTimeRange(range) {
                     </tbody>
                     <tfoot class="bg-brandBlue/10 font-bold border-t border-brandBlue/30 text-white light:text-slate-800">
                         <tr>
-                            <td class="px-6 py-4">Total Patrimoniales</td>
-                            <td class="px-6 py-4 text-right" id="ls-patrimoniales-total-prima"></td>
-                            <td class="px-6 py-4 text-right">100%</td>
-                            <td class="px-6 py-4 text-right" id="ls-patrimoniales-total-grupo-pct"></td>
+                            <td class="px-4 py-3">Total Patrimoniales</td>
+                            <td class="px-4 py-3"></td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap" id="ls-patrimoniales-total-prima"></td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap">100%</td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap" id="ls-patrimoniales-total-grupo-pct"></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -8239,13 +8265,14 @@ function setSsnTimeRange(range) {
         <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 mb-8">
             <h4 class="text-xl font-bold text-green-500 mb-4">Total de Personas</h4>
             <div class="overflow-x-auto mb-6">
-                <table class="min-w-[600px] w-full text-left text-sm">
+                <table class="w-full text-left text-sm">
                     <thead class="border-b border-darkBorder/40 light:border-slate-200 text-xs uppercase bg-darkCard/50 light:bg-slate-50">
                         <tr>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600">Ramo</th>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">Prima ($)</th>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">% de Personas</th>
-                            <th class="px-6 py-4 font-semibold text-slate-300 light:text-slate-600 text-right">% del Grupo</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Ramo</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Distribución %</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Prima ($)</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% de Personas</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% del Grupo</th>
                         </tr>
                     </thead>
                     <tbody id="ls-personas-table-body" class="divide-y divide-darkBorder/40 light:divide-slate-100 text-slate-200 light:text-slate-700">
@@ -8253,10 +8280,11 @@ function setSsnTimeRange(range) {
                     </tbody>
                     <tfoot class="bg-green-500/10 font-bold border-t border-green-500/30 text-white light:text-slate-800">
                         <tr>
-                            <td class="px-6 py-4">Total Personas</td>
-                            <td class="px-6 py-4 text-right" id="ls-personas-total-prima"></td>
-                            <td class="px-6 py-4 text-right">100%</td>
-                            <td class="px-6 py-4 text-right" id="ls-personas-total-grupo-pct"></td>
+                            <td class="px-4 py-3">Total Personas</td>
+                            <td class="px-4 py-3"></td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap" id="ls-personas-total-prima"></td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap">100%</td>
+                            <td class="px-4 py-3 text-right whitespace-nowrap" id="ls-personas-total-grupo-pct"></td>
                         </tr>
                     </tfoot>
                 </table>
