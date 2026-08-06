@@ -2807,6 +2807,10 @@ body.layout-bento {
                     <i class="fas fa-piggy-bank w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Seguros de<br>Retiro</span><span class="hidden md:inline">Seguros de Retiro</span></span>
                 </button>
+                <button onclick="switchAsegTab('aseg-tab-inversiones-retiro')" id="btn-aseg-tab-inversiones-retiro" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
+                    <i class="fas fa-chart-pie w-4 md:w-5 text-center text-brandBlue"></i>
+                    <span class="leading-tight"><span class="md:hidden text-center block">Inversiones<br>Retiro</span><span class="hidden md:inline">Inversiones Retiro</span></span>
+                </button>
             </nav>
         </aside>
         
@@ -4213,8 +4217,6 @@ function setSsnTimeRange(range) {
                         renderLaSegundaView();
                     }
                 } else if (tabId === 'aseg-tab-retiro') {
-                    if (typeof initRetiro === 'function') {
-                        initRetiro();
                     }
                 }
             }
@@ -5567,6 +5569,131 @@ function setSsnTimeRange(range) {
                     }
                 });
             }
+        }
+
+        let invRetiroChartInstance = null;
+
+        function renderInversionesRetiroView(companyKey) {
+            const invData = {{ ssn_inversiones_retiro | tojson if ssn_inversiones_retiro else '{}' | safe }};
+            if (!invData || !invData.empresas) return;
+
+            const selectEl = document.getElementById('inv-retiro-company-select');
+            if (selectEl && selectEl.children.length === 0) {
+                selectEl.innerHTML = '';
+                Object.keys(invData.empresas).forEach(k => {
+                    const emp = invData.empresas[k];
+                    const opt = document.createElement('option');
+                    opt.value = k;
+                    opt.textContent = emp.nombre || k;
+                    opt.className = 'bg-darkBg light:bg-white text-white light:text-slate-900';
+                    selectEl.appendChild(opt);
+                });
+                if (companyKey && invData.empresas[companyKey]) {
+                    selectEl.value = companyKey;
+                } else {
+                    selectEl.value = 'TODAS';
+                }
+            }
+
+            const key = companyKey || (selectEl ? selectEl.value : 'TODAS');
+            const target = invData.empresas[key] || invData.empresas['TODAS'];
+            if (!target) return;
+
+            const formatNumber = (num) => new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(num);
+
+            // KPI Updates
+            document.getElementById('inv-retiro-kpi-total').innerText = '$ ' + formatNumber(target.total_inversiones);
+            document.getElementById('inv-retiro-kpi-entity-name').innerText = target.nombre || key;
+
+            const sortedItems = [...target.items].sort((a, b) => b.monto - a.monto);
+            if (sortedItems.length > 0 && sortedItems[0].monto > 0) {
+                document.getElementById('inv-retiro-kpi-top-rubro').innerText = sortedItems[0].rubro;
+                document.getElementById('inv-retiro-kpi-top-pct').innerText = sortedItems[0].pct.toFixed(2).replace('.', ',') + '% del total';
+            } else {
+                document.getElementById('inv-retiro-kpi-top-rubro').innerText = '-';
+                document.getElementById('inv-retiro-kpi-top-pct').innerText = '-';
+            }
+
+            if (sortedItems.length > 1 && sortedItems[1].monto > 0) {
+                document.getElementById('inv-retiro-kpi-second-rubro').innerText = sortedItems[1].rubro;
+                document.getElementById('inv-retiro-kpi-second-pct').innerText = sortedItems[1].pct.toFixed(2).replace('.', ',') + '% del total';
+            } else {
+                document.getElementById('inv-retiro-kpi-second-rubro').innerText = '-';
+                document.getElementById('inv-retiro-kpi-second-pct').innerText = '-';
+            }
+
+            // Populate Table
+            const tbody = document.getElementById('inv-retiro-table-body');
+            tbody.innerHTML = '';
+
+            target.items.forEach(item => {
+                const tr = document.createElement('tr');
+                const pctVal = item.pct;
+                tr.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap text-slate-200 light:text-slate-700 font-medium">${item.rubro}</td>
+                    <td class="px-4 py-3 min-w-[130px] max-w-[200px]">
+                        <div class="flex items-center gap-2">
+                            <div class="w-full bg-darkBg light:bg-slate-200 rounded-full h-2 overflow-hidden flex">
+                                <div class="bg-brandBlue h-2 rounded-full transition-all duration-500" style="width: ${Math.min(100, Math.max(0, pctVal))}%"></div>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 shrink-0 w-12 text-right">${pctVal.toFixed(1).replace('.', ',')}%</span>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatNumber(item.monto)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-brandBlue">${pctVal.toFixed(2).replace('.', ',')}%</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('inv-retiro-foot-monto').innerText = '$ ' + formatNumber(target.total_inversiones);
+
+            // Doughnut Chart
+            const chartItems = target.items.filter(i => i.monto > 0);
+            const labels = chartItems.map(i => i.rubro);
+            const values = chartItems.map(i => i.pct);
+            const palette = ['#2563eb', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#84cc16', '#6366f1', '#f97316'];
+            const isDark = document.body.classList.contains('dark');
+
+            const ctx = document.getElementById('invRetiroDoughnutChart').getContext('2d');
+            if (invRetiroChartInstance) invRetiroChartInstance.destroy();
+
+            invRetiroChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: palette.slice(0, labels.length),
+                        borderWidth: isDark ? 2 : 1,
+                        borderColor: isDark ? '#1e293b' : '#ffffff',
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        crosshair: { enabled: false },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: isDark ? '#cbd5e1' : '#0f172a',
+                                font: { family: "'Outfit', sans-serif", size: 10 },
+                                boxWidth: 10,
+                                padding: 10
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.label}: ${context.raw.toFixed(2).replace('.', ',')}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
         }
 
         function renderRankingView(segmentName) {
@@ -8531,6 +8658,93 @@ function setSsnTimeRange(range) {
                     </div>
                 </div>
             </div>
+
+
+<!-- Asegurador Tab: Inversiones Retiro -->
+    <div id="aseg-tab-inversiones-retiro" class="aseg-tab-content hidden fade-in w-full h-full relative pb-10">
+        <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
+            <i class="fas fa-chart-pie text-brandBlue"></i> Inversiones de Seguros de Retiro
+        </h2>
+        
+        <p class="text-sm text-slate-400 light:text-slate-600 mb-8 leading-relaxed max-w-4xl">
+            Estructura y composición del portafolio de inversiones de las entidades <strong>Exclusivas de Seguros de Retiro</strong> basándonos en los boletines oficiales de la Superintendencia de Seguros de la Nación (SSN).
+        </p>
+
+        <!-- Top KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="glass-card bg-darkCard border border-darkBorder/60 p-5 rounded-2xl light:bg-white light:border-slate-200">
+                <span class="text-xs uppercase font-semibold text-slate-400 light:text-slate-500 block mb-1">Total Inversiones</span>
+                <div id="inv-retiro-kpi-total" class="text-2xl font-black text-white light:text-slate-900 font-mono">-</div>
+                <span id="inv-retiro-kpi-entity-name" class="text-[11px] text-brandBlue block mt-1 font-medium">Segmento Exclusivas Retiro</span>
+            </div>
+            <div class="glass-card bg-darkCard border border-darkBorder/60 p-5 rounded-2xl light:bg-white light:border-slate-200">
+                <span class="text-xs uppercase font-semibold text-slate-400 light:text-slate-500 block mb-1">Mayor Concentración</span>
+                <div id="inv-retiro-kpi-top-rubro" class="text-lg font-black text-emerald-400 light:text-emerald-600 truncate">-</div>
+                <span id="inv-retiro-kpi-top-pct" class="text-xs text-slate-400 block mt-1 font-mono">-</span>
+            </div>
+            <div class="glass-card bg-darkCard border border-darkBorder/60 p-5 rounded-2xl light:bg-white light:border-slate-200">
+                <span class="text-xs uppercase font-semibold text-slate-400 light:text-slate-500 block mb-1">Segunda Concentración</span>
+                <div id="inv-retiro-kpi-second-rubro" class="text-lg font-black text-brandBlue light:text-brandBlue truncate">-</div>
+                <span id="inv-retiro-kpi-second-pct" class="text-xs text-slate-400 block mt-1 font-mono">-</span>
+            </div>
+        </div>
+
+        <!-- Company Selector -->
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-center gap-4 bg-darkCard/60 p-4 rounded-xl border border-darkBorder/40 light:bg-slate-50 light:border-slate-200 shadow-sm max-w-2xl">
+            <label for="inv-retiro-company-select" class="text-sm font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Seleccionar Aseguradora / Segmento:</label>
+            <div class="relative w-full">
+                <select id="inv-retiro-company-select" onchange="renderInversionesRetiroView(this.value)" class="w-full appearance-none bg-darkBg text-white border border-darkBorder rounded-lg px-4 py-2.5 text-sm font-medium hover:border-brandBlue focus:border-brandBlue focus:ring-1 focus:ring-brandBlue outline-none transition-colors light:bg-white light:text-slate-900 light:border-slate-300 shadow-inner cursor-pointer">
+                    <!-- JS populated -->
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Layout: Table (Left) & Doughnut Chart (Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Table Column -->
+            <div class="lg:col-span-7 glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                <h3 class="text-lg font-bold text-white light:text-slate-800 mb-4 flex items-center gap-2">
+                    <i class="fas fa-list-check text-brandBlue"></i> Composición del Portafolio por Rubro
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="border-b border-darkBorder/40 light:border-slate-200 text-xs uppercase bg-darkCard/50 light:bg-slate-50">
+                            <tr>
+                                <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Rubro de Inversión</th>
+                                <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Distribuci&oacute;n %</th>
+                                <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Monto ($)</th>
+                                <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% del Portafolio</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inv-retiro-table-body" class="divide-y divide-darkBorder/40 light:divide-slate-100 text-slate-200 light:text-slate-700 font-mono">
+                            <!-- JS populated -->
+                        </tbody>
+                        <tfoot class="bg-brandBlue/10 font-bold border-t border-brandBlue/30 text-white light:text-slate-800">
+                            <tr>
+                                <td class="px-4 py-3 font-sans">Total Portafolio Inversiones</td>
+                                <td class="px-4 py-3"></td>
+                                <td id="inv-retiro-foot-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap">$ 0</td>
+                                <td class="px-4 py-3 text-right font-mono whitespace-nowrap">100,00%</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Doughnut Chart Column -->
+            <div class="lg:col-span-5 glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 flex flex-col items-center justify-center">
+                <h3 class="text-lg font-bold text-white light:text-slate-800 mb-4 w-full text-left flex items-center gap-2">
+                    <i class="fas fa-chart-pie text-brandBlue"></i> Distribución Gráfica del Portafolio
+                </h3>
+                <div class="relative w-full aspect-square max-h-[380px] my-auto">
+                    <canvas id="invRetiroDoughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     </main>
