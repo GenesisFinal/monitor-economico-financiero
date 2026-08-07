@@ -9174,41 +9174,74 @@ function setSsnTimeRange(range) {
         <div id="sr-tab-actuaria" class="sr-subtab-content space-y-6">
             <!-- KPI Cards -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1: Esperanza de Vida al Nacer -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
                     <span class="text-xs text-slate-400 font-medium">Esperanza de Vida al Nacer</span>
                     <div class="text-2xl font-black text-white light:text-slate-900 mt-1">77.2 años</div>
                     <span class="text-[11px] text-emerald-400 block mt-1"><i class="fas fa-venus text-rose-400"></i> 80.4 f | <i class="fas fa-mars text-blue-400"></i> 74.0 m</span>
+                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Tablas de Mortalidad de Argentina) & Banco Mundial / HMD</span>
                 </div>
+
+                <!-- Card 2: Esperanza de Vida a los 65 años (e65) -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
                     <span class="text-xs text-slate-400 font-medium">Esperanza de Vida a los 65 años (e65)</span>
                     <div class="text-2xl font-black text-white light:text-slate-900 mt-1">17.8 años</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">INDEC / Human Mortality DB</span>
+                    <span class="text-[11px] text-emerald-400 block mt-1"><i class="fas fa-venus text-rose-400"></i> 19.5 f | <i class="fas fa-mars text-blue-400"></i> 15.8 m</span>
+                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Estadísticas Vitales) & Human Mortality Database</span>
                 </div>
+
+                <!-- Card 3: Tabla Actuarial Seleccionada -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Tabla Regulatoria Base (Res 38.708)</span>
-                    <div class="text-xl font-bold text-brandBlue light:text-blue-600 mt-1">SSN GAM-94</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Reservas Matemáticas Vida/Retiro</span>
+                    <span class="text-xs text-slate-400 font-medium">Selector de Tabla Actuarial</span>
+                    <div class="mt-2">
+                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value)" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
+                            <option value="GAM 94" selected>GAM 94 (SSN Base Res. 38.708)</option>
+                            <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement)</option>
+                            <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement)</option>
+                            <option value="CSO 80">CSO 80 (Ordinary Life)</option>
+                            <option value="GAM 71">GAM 71 (Group Annuity 1971)</option>
+                            <option value="IAM 71">IAM 71 (Individual Annuity 1971)</option>
+                            <option value="GAM 83">GAM 83 (Group Annuity 1983)</option>
+                            <option value="IAM 83">IAM 83 (Individual Annuity 1983)</option>
+                            <option value="IAM 94">IAM 94 (Individual Annuity 1994)</option>
+                        </select>
+                    </div>
+                    <span class="text-[10px] text-slate-400 block mt-2">Valuación de Reservas Matemáticas</span>
                 </div>
+
+                <!-- Card 4: Mejora Anual Longevidad -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
                     <span class="text-xs text-slate-400 font-medium">Mejora Anual Longevidad (SOA MP-2021)</span>
                     <div class="text-2xl font-black text-rose-400 light:text-rose-600 mt-1">1.5% p.a.</div>
                     <span class="text-[11px] text-slate-400 block mt-1">Reducción qx en edades 50-64</span>
+                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Protección frente a Riesgo de Longevidad</span>
                 </div>
             </div>
 
-            <!-- Charts Container -->
+            <!-- Explanatory Alert Badge for Longevity Improvement Scale -->
+            <div class="glass-card bg-brandBlue/10 border border-brandBlue/30 rounded-2xl p-4 text-xs text-slate-200 light:text-slate-700 leading-relaxed flex items-start gap-3">
+                <i class="fas fa-circle-info text-brandBlue text-lg mt-0.5 shrink-0"></i>
+                <div>
+                    <strong class="text-brandBlue font-bold block mb-0.5">¿Qué es y cómo se aplica la Mejora Anual de Longevidad?</strong>
+                    La escala de mejora (SOA MP-2021 / MP-2026) mide la tasa porcentual anual de reducción en la mortalidad $q_x$. Se aplica actuarialmente mediante $q_x(t) = q_x(0) \cdot (1 - f_x)^t$. Su uso es crítico para ajustar las tablas de anualidades y evitar que las aseguradoras de retiro subestimen los años de pago a los beneficiarios, previniendo insuficiencias en las reservas matemáticas.
+                </div>
+            </div>
+
+            <!-- Charts & Table Container -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Chart 1: Curva de Mortalidad qx -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
                     <h3 class="text-md font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
                         <span><i class="fas fa-chart-line text-brandBlue mr-2"></i> Curva de Mortalidad qx por Edad (Escala Logarítmica)</span>
                         <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-lg">Por 1.000 hab.</span>
                     </h3>
-                    <p class="text-xs text-slate-400 mb-4">Comparación entre la tabla SSN GAM-94, SOA Pri-2012 e historia observada en Argentina.</p>
+                    <p class="text-xs text-slate-400 mb-4">Comparativa dinámica entre la tabla seleccionada en el menú y las tablas de referencia.</p>
                     <div class="relative w-full h-[320px]">
                         <canvas id="srMortalityChart"></canvas>
                     </div>
                 </div>
 
+                <!-- Chart 2: Tasa de Invalidez ITP -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
                     <h3 class="text-md font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
                         <span><i class="fas fa-wheelchair text-rose-400 mr-2"></i> Tasa de Invalidez Total y Permanente (ITP - SOA GLTD)</span>
@@ -9218,6 +9251,39 @@ function setSsnTimeRange(range) {
                     <div class="relative w-full h-[320px]">
                         <canvas id="srDisabilityChart"></canvas>
                     </div>
+                </div>
+            </div>
+
+            <!-- Interactive Actuarial Table -->
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-darkBorder/40 pb-3">
+                    <div>
+                        <h3 id="tbl-mortality-title" class="text-md font-bold text-white light:text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: GAM 94 (SSN Base Res. 38.708)
+                        </h3>
+                        <p id="tbl-mortality-desc" class="text-xs text-slate-400 light:text-slate-600 mt-0.5">
+                            Valores de probabilidad de muerte qx por cada 1.000 personas por rango etario.
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl shrink-0">
+                        Norma SSN / SOA
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="border-b border-darkBorder/60 text-slate-400 light:text-slate-500 font-semibold bg-darkBg/50 light:bg-slate-100">
+                                <th class="py-2.5 px-4">Edad (x)</th>
+                                <th class="py-2.5 px-4 text-right">Probabilidad de Muerte qx (por 1.000)</th>
+                                <th class="py-2.5 px-4 text-right">Tasa de Supervivencia px (%)</th>
+                                <th class="py-2.5 px-4 text-right">Impacto en Reservas Matemáticas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200 text-slate-200 light:text-slate-700 font-mono">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -9361,7 +9427,6 @@ function setSsnTimeRange(range) {
             </div>
         </div>
     </div>
-
 
 <!-- Global Tab Content 4: Fuentes -->
     <div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
@@ -10494,30 +10559,66 @@ const companies = Object.keys(balancesData[seg]);
             }, 50);
         }
 
-        let srChartsRendered = false;
-        function renderSaludRetiroDemografiaView() {
-            if (srChartsRendered) return;
-            srChartsRendered = true;
+        let srMortalityChartInstance = null;
+        let srDisabilityChartInstance = null;
+        let srDalysChartInstance = null;
+        let srReplacementChartInstance = null;
+        let srDependencyChartInstance = null;
+        let srAgingChartInstance = null;
+        let srCoverageChartInstance = null;
 
+        function renderMortalityTableAndChart(selectedTableKey) {
             const srData = appData.health_retirement_data;
-            if (!srData) return;
+            if (!srData || !srData.actuarial) return;
 
-            const _isDark = document.body.classList.contains('dark');
-            const textColor = _isDark ? '#cbd5e1' : '#334155';
-            const gridColor = _isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+            const catalog = srData.actuarial.tables_catalog;
+            const ages = srData.actuarial.ages;
+            const selectedInfo = catalog[selectedTableKey] || catalog["GAM 94"];
 
-            // 1. Mortality Chart (qx Log Scale)
+            // Update title & desc
+            const titleEl = document.getElementById('tbl-mortality-title');
+            const descEl = document.getElementById('tbl-mortality-desc');
+            if (titleEl) titleEl.innerHTML = `<i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: ${selectedInfo.name}`;
+            if (descEl) descEl.textContent = selectedInfo.desc;
+
+            // Populate Table
+            const tbody = document.getElementById('tbl-mortality-body');
+            if (tbody) {
+                tbody.innerHTML = '';
+                ages.forEach((age, idx) => {
+                    const qx = selectedInfo.qx_per_thousand[idx];
+                    const px = (100 - (qx / 10)).toFixed(2);
+                    const row = document.createElement('tr');
+                    row.className = 'hover:bg-brandBlue/5 transition-colors';
+                    row.innerHTML = `
+                        <td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad ${age}</td>
+                        <td class="py-2 px-4 text-right text-brandBlue font-bold">${qx.toFixed(2)}</td>
+                        <td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">${px}%</td>
+                        <td class="py-2 px-4 text-right text-slate-400 text-[11px]">${qx > 50 ? 'Alta Recarga / Reserva Eleva' : 'Reserva Estándar'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            }
+
+            // Update Mortality Chart
             const ctxM = document.getElementById('srMortalityChart');
             if (ctxM) {
-                const mData = srData.actuarial.mortality_table;
-                new Chart(ctxM, {
+                const _isDark = document.body.classList.contains('dark');
+                const textColor = _isDark ? '#cbd5e1' : '#334155';
+                const gridColor = _isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+
+                if (srMortalityChartInstance) {
+                    srMortalityChartInstance.destroy();
+                }
+
+                srMortalityChartInstance = new Chart(ctxM, {
                     type: 'line',
                     data: {
-                        labels: mData.ages.map(a => 'Edad ' + a),
+                        labels: ages.map(a => 'Edad ' + a),
                         datasets: [
-                            { label: 'SSN GAM-94', data: mData.ssn_gam94, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', borderWidth: 2, tension: 0.3, pointRadius: 3 },
-                            { label: 'SOA Pri-2012', data: mData.soa_pri2012, borderColor: '#10b981', borderWidth: 2, borderDash: [4, 4], tension: 0.3, pointRadius: 3 },
-                            { label: 'HMD Argentina', data: mData.hmd_argentina, borderColor: '#ef4444', borderWidth: 2, tension: 0.3, pointRadius: 3 }
+                            { label: selectedInfo.name, data: selectedInfo.qx_per_thousand, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.15)', borderWidth: 3, tension: 0.3, pointRadius: 4, fill: true },
+                            { label: 'SOA Pri-2012', data: catalog["SOA Pri-2012"].qx_per_thousand, borderColor: '#10b981', borderWidth: 2, borderDash: [4, 4], tension: 0.3, pointRadius: 2 },
+                            { label: 'GAM 94 (Base SSN)', data: catalog["GAM 94"].qx_per_thousand, borderColor: '#f59e0b', borderWidth: 2, borderDash: [2, 2], tension: 0.3, pointRadius: 2 }
                         ]
                     },
                     options: {
@@ -10531,174 +10632,206 @@ const companies = Object.keys(balancesData[seg]);
                     }
                 });
             }
+        }
 
-            // 2. Disability Chart
-            const ctxD = document.getElementById('srDisabilityChart');
-            if (ctxD) {
-                const dData = srData.actuarial.disability_rates;
-                new Chart(ctxD, {
-                    type: 'bar',
-                    data: {
-                        labels: dData.ages.map(a => 'Edad ' + a),
-                        datasets: [{
-                            label: 'Casos ITP por 1.000 Asegurados',
-                            data: dData.incidence_per_thousand,
-                            backgroundColor: 'rgba(244, 63, 94, 0.75)',
-                            borderColor: '#f43f5e',
-                            borderWidth: 1,
-                            borderRadius: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { ticks: { color: textColor, font: { size: 10 } }, grid: { display: false } },
-                            y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
-                        },
-                        plugins: { legend: { display: false } }
-                    }
-                });
+        function onMortalityTableChange(val) {
+            renderMortalityTableAndChart(val);
+        }
+
+        function renderSaludRetiroDemografiaView() {
+            const srData = appData.health_retirement_data;
+            if (!srData) return;
+
+            // Ensure container is visible for canvas size computation
+            const container = document.getElementById('container-salud-retiro-demografia');
+            if (container && container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
             }
 
-            // 3. DALYs Chart (Doughnut)
-            const ctxDalys = document.getElementById('srDalysChart');
-            if (ctxDalys) {
-                const dalys = srData.health.dalys_breakdown;
-                new Chart(ctxDalys, {
-                    type: 'doughnut',
-                    data: {
-                        labels: dalys.map(d => d.category),
-                        datasets: [{
-                            data: dalys.map(d => d.percentage),
-                            backgroundColor: dalys.map(d => d.color),
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } },
-                            tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+            setTimeout(() => {
+                const _isDark = document.body.classList.contains('dark');
+                const textColor = _isDark ? '#cbd5e1' : '#334155';
+                const gridColor = _isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+
+                // Render Table & Chart 1
+                const sel = document.getElementById('select-mortality-table');
+                const currentVal = sel ? sel.value : 'GAM 94';
+                renderMortalityTableAndChart(currentVal);
+
+                // 2. Disability Chart
+                const ctxD = document.getElementById('srDisabilityChart');
+                if (ctxD) {
+                    if (srDisabilityChartInstance) srDisabilityChartInstance.destroy();
+                    const dData = srData.actuarial.disability_rates;
+                    srDisabilityChartInstance = new Chart(ctxD, {
+                        type: 'bar',
+                        data: {
+                            labels: dData.ages.map(a => 'Edad ' + a),
+                            datasets: [{
+                                label: 'Casos ITP por 1.000 Asegurados',
+                                data: dData.incidence_per_thousand,
+                                backgroundColor: 'rgba(244, 63, 94, 0.75)',
+                                borderColor: '#f43f5e',
+                                borderWidth: 1,
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: { ticks: { color: textColor, font: { size: 10 } }, grid: { display: false } },
+                                y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
+                            },
+                            plugins: { legend: { display: false } }
                         }
-                    }
-                });
-            }
+                    });
+                }
 
-            // 4. Replacement Rates Chart (Grouped Bar)
-            const ctxRep = document.getElementById('srReplacementChart');
-            if (ctxRep) {
-                const repData = srData.pensions.replacement_rates;
-                new Chart(ctxRep, {
-                    type: 'bar',
-                    data: {
-                        labels: repData.map(d => d.country),
-                        datasets: [{
-                            label: 'Tasa de Reemplazo Neta (%)',
-                            data: repData.map(d => d.rate),
-                            backgroundColor: repData.map(d => d.country === 'Argentina' ? '#f59e0b' : '#3b82f6'),
-                            borderRadius: 6
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { ticks: { color: textColor, font: { size: 10 } }, grid: { display: false } },
-                            y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
+                // 3. DALYs Chart (Doughnut)
+                const ctxDalys = document.getElementById('srDalysChart');
+                if (ctxDalys) {
+                    if (srDalysChartInstance) srDalysChartInstance.destroy();
+                    const dalys = srData.health.dalys_breakdown;
+                    srDalysChartInstance = new Chart(ctxDalys, {
+                        type: 'doughnut',
+                        data: {
+                            labels: dalys.map(d => d.category),
+                            datasets: [{
+                                data: dalys.map(d => d.percentage),
+                                backgroundColor: dalys.map(d => d.color),
+                                borderWidth: 0
+                            }]
                         },
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
-
-            // 5. Dependency Ratio Chart (Line)
-            const ctxDep = document.getElementById('srDependencyChart');
-            if (ctxDep) {
-                const depData = srData.pensions.dependency_ratio_projection;
-                new Chart(ctxDep, {
-                    type: 'line',
-                    data: {
-                        labels: depData.years,
-                        datasets: [{
-                            label: '+65 años por 100 activos',
-                            data: depData.ratio,
-                            borderColor: '#f43f5e',
-                            backgroundColor: 'rgba(244, 63, 94, 0.1)',
-                            fill: true,
-                            borderWidth: 3,
-                            tension: 0.3,
-                            pointRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } },
-                            y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
-                        },
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
-
-            // 6. Aging Chart (Area)
-            const ctxAging = document.getElementById('srAgingChart');
-            if (ctxAging) {
-                const agData = srData.demographics.aging_projection;
-                new Chart(ctxAging, {
-                    type: 'line',
-                    data: {
-                        labels: agData.years,
-                        datasets: [{
-                            label: '% Población +65 años',
-                            data: agData.over_65_pct,
-                            borderColor: '#8b5cf6',
-                            backgroundColor: 'rgba(139, 92, 246, 0.15)',
-                            fill: true,
-                            borderWidth: 3,
-                            tension: 0.3,
-                            pointRadius: 4
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } },
-                            y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
-                        },
-                        plugins: { legend: { display: false } }
-                    }
-                });
-            }
-
-            // 7. Health Coverage Chart (Doughnut)
-            const ctxCov = document.getElementById('srCoverageChart');
-            if (ctxCov) {
-                const covData = srData.demographics.health_coverage;
-                new Chart(ctxCov, {
-                    type: 'doughnut',
-                    data: {
-                        labels: covData.map(d => d.type),
-                        datasets: [{
-                            data: covData.map(d => d.pct),
-                            backgroundColor: covData.map(d => d.color),
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } },
-                            tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } },
+                                tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+                            }
                         }
-                    }
-                });
-            }
+                    });
+                }
+
+                // 4. Replacement Rates Chart (Grouped Bar)
+                const ctxRep = document.getElementById('srReplacementChart');
+                if (ctxRep) {
+                    if (srReplacementChartInstance) srReplacementChartInstance.destroy();
+                    const repData = srData.pensions.replacement_rates;
+                    srReplacementChartInstance = new Chart(ctxRep, {
+                        type: 'bar',
+                        data: {
+                            labels: repData.map(d => d.country),
+                            datasets: [{
+                                label: 'Tasa de Reemplazo Neta (%)',
+                                data: repData.map(d => d.rate),
+                                backgroundColor: repData.map(d => d.country === 'Argentina' ? '#f59e0b' : '#3b82f6'),
+                                borderRadius: 6
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: { ticks: { color: textColor, font: { size: 10 } }, grid: { display: false } },
+                                y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+
+                // 5. Dependency Ratio Chart (Line)
+                const ctxDep = document.getElementById('srDependencyChart');
+                if (ctxDep) {
+                    if (srDependencyChartInstance) srDependencyChartInstance.destroy();
+                    const depData = srData.pensions.dependency_ratio_projection;
+                    srDependencyChartInstance = new Chart(ctxDep, {
+                        type: 'line',
+                        data: {
+                            labels: depData.years,
+                            datasets: [{
+                                label: '+65 años por 100 activos',
+                                data: depData.ratio,
+                                borderColor: '#f43f5e',
+                                backgroundColor: 'rgba(244, 63, 94, 0.1)',
+                                fill: true,
+                                borderWidth: 3,
+                                tension: 0.3,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } },
+                                y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+
+                // 6. Aging Chart (Area)
+                const ctxAging = document.getElementById('srAgingChart');
+                if (ctxAging) {
+                    if (srAgingChartInstance) srAgingChartInstance.destroy();
+                    const agData = srData.demographics.aging_projection;
+                    srAgingChartInstance = new Chart(ctxAging, {
+                        type: 'line',
+                        data: {
+                            labels: agData.years,
+                            datasets: [{
+                                label: '% Población +65 años',
+                                data: agData.over_65_pct,
+                                borderColor: '#8b5cf6',
+                                backgroundColor: 'rgba(139, 92, 246, 0.15)',
+                                fill: true,
+                                borderWidth: 3,
+                                tension: 0.3,
+                                pointRadius: 4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } },
+                                y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } }
+                            },
+                            plugins: { legend: { display: false } }
+                        }
+                    });
+                }
+
+                // 7. Health Coverage Chart (Doughnut)
+                const ctxCov = document.getElementById('srCoverageChart');
+                if (ctxCov) {
+                    if (srCoverageChartInstance) srCoverageChartInstance.destroy();
+                    const covData = srData.demographics.health_coverage;
+                    srCoverageChartInstance = new Chart(ctxCov, {
+                        type: 'doughnut',
+                        data: {
+                            labels: covData.map(d => d.type),
+                            datasets: [{
+                                data: covData.map(d => d.pct),
+                                backgroundColor: covData.map(d => d.color),
+                                borderWidth: 0
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } },
+                                tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${ctx.raw}%` } }
+                            }
+                        }
+                    });
+                }
+            }, 100);
         }
 
 </script>
