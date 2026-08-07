@@ -10800,7 +10800,7 @@ const companies = Object.keys(balancesData[seg]);
             const selectedInfo = catalog[currentSelectedTableKey] || catalog["GAM 94"];
             const ages = selectedInfo.ages || [];
 
-            let csvContent = "﻿Edad;qx_Varones_por_Mil;qx_Mujeres_por_Mil;px_Varones_Pct;px_Mujeres_Pct;lx_Varones;lx_Mujeres\n";
+            let csvContent = String.fromCharCode(0xFEFF) + "Edad;qx_Varones_por_Mil;qx_Mujeres_por_Mil;px_Varones_Pct;px_Mujeres_Pct;lx_Varones;lx_Mujeres\n";
             let lxM = 100000;
             let lxF = 100000;
 
