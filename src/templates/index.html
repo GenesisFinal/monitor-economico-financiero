@@ -9191,20 +9191,30 @@ function setSsnTimeRange(range) {
                     <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Estadísticas Vitales) & Human Mortality Database</span>
                 </div>
 
-                <!-- Card 3: Tabla Actuarial Seleccionada -->
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Selector de Tabla Actuarial</span>
+                <!-- Card 3: Tabla Actuarial Seleccionada + Interactive Hover Badge Card -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200 relative group" onmouseenter="showTableBadgeTooltip(document.getElementById('select-mortality-table').value)">
+                    <span class="text-xs text-slate-400 font-medium flex items-center justify-between">
+                        <span>Selector de Tabla Actuarial</span>
+                        <i class="fas fa-circle-info text-brandBlue text-xs cursor-pointer" title="Pase el mouse para ver la recomendación actuarial de uso"></i>
+                    </span>
                     <div class="mt-2">
-                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value)" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
+                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value)" onmouseenter="showTableBadgeTooltip(this.value)" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
                             <option value="GAM 94" selected>GAM 94 (SSN Base Res. 38.708)</option>
-                            <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement)</option>
-                            <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement)</option>
-                            <option value="CSO 80">CSO 80 (Ordinary Life)</option>
+                            <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement Plans)</option>
+                            <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement Plans)</option>
+                            <option value="CSO 80">CSO 80 (Ordinary Life 1980)</option>
+                            <option value="CSO 2001">CSO 2001 (Ordinary Life 2001)</option>
+                            <option value="CSO 2017">CSO 2017 (Ordinary Life 2017 - PBR)</option>
                             <option value="GAM 71">GAM 71 (Group Annuity 1971)</option>
                             <option value="IAM 71">IAM 71 (Individual Annuity 1971)</option>
                             <option value="GAM 83">GAM 83 (Group Annuity 1983)</option>
                             <option value="IAM 83">IAM 83 (Individual Annuity 1983)</option>
                             <option value="IAM 94">IAM 94 (Individual Annuity 1994)</option>
+                            <option value="UP-94">UP-94 (Uninsured Pensioner 1994)</option>
+                            <option value="RP-2000">RP-2000 (Retirement Plans 2000)</option>
+                            <option value="RP-2014">RP-2014 (Retirement Plans 2014)</option>
+                            <option value="INDEC 2010">INDEC 2010 (Censo & Estadísticas Vitales Arg.)</option>
+                            <option value="DEIS / OMS 2022">DEIS / OMS 2022 (Min. Salud / OMS Arg.)</option>
                         </select>
                     </div>
                     <span class="text-[10px] text-slate-400 block mt-2">Valuación de Reservas Matemáticas</span>
@@ -9216,6 +9226,27 @@ function setSsnTimeRange(range) {
                     <div class="text-2xl font-black text-rose-400 light:text-rose-600 mt-1">1.5% p.a.</div>
                     <span class="text-[11px] text-emerald-400 font-bold block mt-1">Año Base Actuarial (t₀): 2012</span>
                     <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Protección frente a Riesgo de Longevidad (2012–2026)</span>
+                </div>
+            </div>
+
+            <!-- Interactive Hover Badge Card for Selected Actuarial Table Usage Recommendation -->
+            <div id="badge-table-info-card" class="glass-card bg-slate-900/90 border border-brandBlue/40 rounded-2xl p-4 text-xs text-slate-200 shadow-xl transition-all duration-300 mb-4 light:bg-white light:border-blue-300 light:text-slate-800">
+                <div class="flex items-start gap-3">
+                    <div class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue shrink-0 mt-0.5">
+                        <i class="fas fa-shield-halved text-lg"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between gap-2 mb-1">
+                            <span id="hover-badge-table-name" class="font-bold text-white text-sm light:text-slate-900">GAM 94 (Group Annuity Mortality 1994)</span>
+                            <span id="hover-badge-tag" class="text-[10px] font-mono bg-brandBlue/20 text-brandBlue border border-brandBlue/30 px-2 py-0.5 rounded-md">Regulatoria SSN Arg.</span>
+                        </div>
+                        <p id="hover-badge-table-usage" class="text-emerald-400 font-medium text-xs mb-1 light:text-emerald-700">
+                            <i class="fas fa-circle-check text-xs mr-1"></i> Recomendada para: Seguros de Retiro, Anualidades Colectivas y Reservas Matemáticas SSN en Argentina.
+                        </p>
+                        <p id="hover-badge-table-desc" class="text-slate-400 text-[11px] leading-relaxed light:text-slate-600">
+                            Tabla regulatoria oficial de la SSN (Res. 38.708) para reservas matemáticas de Seguros de Retiro en Argentina.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -10798,17 +10829,49 @@ const companies = Object.keys(balancesData[seg]);
             "SOA Pub-2010 Mujeres": "#d946ef",
             "CSO 80 Varones": "#f59e0b",
             "CSO 80 Mujeres": "#fbbf24",
-            "GAM 71 Varones": "#06b6d4",
-            "GAM 71 Mujeres": "#22d3ee",
-            "IAM 71 Varones": "#6366f1",
-            "IAM 71 Mujeres": "#818cf8",
-            "GAM 83 Varones": "#14b8a6",
-            "GAM 83 Mujeres": "#2dd4bf",
-            "IAM 83 Varones": "#a855f7",
-            "IAM 83 Mujeres": "#c084fc",
-            "IAM 94 Varones": "#ef4444",
-            "IAM 94 Mujeres": "#f87171"
+            "CSO 2001 Varones": "#06b6d4",
+            "CSO 2001 Mujeres": "#22d3ee",
+            "CSO 2017 Varones": "#14b8a6",
+            "CSO 2017 Mujeres": "#2dd4bf",
+            "GAM 71 Varones": "#6366f1",
+            "GAM 71 Mujeres": "#818cf8",
+            "IAM 71 Varones": "#a855f7",
+            "IAM 71 Mujeres": "#c084fc",
+            "GAM 83 Varones": "#eab308",
+            "GAM 83 Mujeres": "#fde047",
+            "IAM 83 Varones": "#ef4444",
+            "IAM 83 Mujeres": "#f87171",
+            "IAM 94 Varones": "#38bdf8",
+            "IAM 94 Mujeres": "#7dd3fc",
+            "UP-94 Varones": "#f97316",
+            "UP-94 Mujeres": "#fb923c",
+            "RP-2000 Varones": "#84cc16",
+            "RP-2000 Mujeres": "#a3e635",
+            "RP-2014 Varones": "#10b981",
+            "RP-2014 Mujeres": "#34d399",
+            "INDEC 2010 Varones": "#e11d48",
+            "INDEC 2010 Mujeres": "#fb7185",
+            "DEIS / OMS 2022 Varones": "#0284c7",
+            "DEIS / OMS 2022 Mujeres": "#38bdf8"
         };
+
+        function showTableBadgeTooltip(tableKey) {
+            const srData = appData.health_retirement_data;
+            if (!srData || !srData.actuarial) return;
+
+            const catalog = srData.actuarial.tables_catalog;
+            const info = catalog[tableKey] || catalog["GAM 94"];
+
+            const elName = document.getElementById('hover-badge-table-name');
+            const elUsage = document.getElementById('hover-badge-table-usage');
+            const elDesc = document.getElementById('hover-badge-table-desc');
+            const elTag = document.getElementById('hover-badge-tag');
+
+            if (elName) elName.textContent = info.name;
+            if (elUsage) elUsage.innerHTML = `<i class="fas fa-circle-check text-xs mr-1"></i> ${info.usage || 'Recomendada para valuación de pasivos actuariales.'}`;
+            if (elDesc) elDesc.textContent = info.desc;
+            if (elTag) elTag.textContent = tableKey.includes('GAM') || tableKey.includes('SSN') ? 'Regulatoria SSN / SOA' : 'Estándar Actuarial';
+        }
 
         function switchSrSubtab(subtabId) {
             const contents = document.querySelectorAll('.sr-subtab-content');
@@ -10835,8 +10898,6 @@ const companies = Object.keys(balancesData[seg]);
             const container = document.getElementById('container-series-checkboxes');
             if (!container) return;
 
-            if (container.children.length > 0) return;
-
             const srData = appData.health_retirement_data;
             if (!srData || !srData.actuarial) return;
 
@@ -10844,13 +10905,18 @@ const companies = Object.keys(balancesData[seg]);
             container.innerHTML = '';
 
             Object.keys(catalog).forEach(tableKey => {
+                const tableInfo = catalog[tableKey];
                 ["Varones", "Mujeres"].forEach(gender => {
                     const seriesId = `${tableKey} ${gender}`;
                     const isChecked = defaultSelectedSeries.includes(seriesId);
                     const color = seriesColors[seriesId] || "#3b82f6";
+                    const tooltipText = `${tableInfo.name} (${gender}) - ${tableInfo.usage}`;
 
                     const wrapper = document.createElement('label');
-                    wrapper.className = "flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300";
+                    wrapper.className = "flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300 relative group";
+                    wrapper.setAttribute('title', tooltipText);
+                    wrapper.setAttribute('onmouseenter', `showTableBadgeTooltip('${tableKey}')`);
+
                     wrapper.innerHTML = `
                         <input type="checkbox" value="${seriesId}" ${isChecked ? 'checked' : ''} onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer">
                         <span class="w-2 h-2 rounded-full inline-block" style="background-color: ${color}"></span>
@@ -10873,7 +10939,7 @@ const companies = Object.keys(balancesData[seg]);
             const qxArr = gender === "Varones" ? tableInfo.qx_male : tableInfo.qx_female;
             
             const v = 1.0 / (1.0 + rateI);
-            const yearsDelta = 2026 - 2012; // 14 years of longevity improvement since base year t0 = 2012
+            const yearsDelta = 2026 - 2012;
             const improvementFactor = Math.pow(1.0 - rateFx, yearsDelta);
 
             const lx = new Array(121);
@@ -10991,7 +11057,6 @@ const companies = Object.keys(balancesData[seg]);
                     headTr.appendChild(th);
                 });
 
-                // Requirement 4: If exactly 2 series are selected, add Difference % column (Mayor / Menor)
                 const showDiffColumn = selectedSeries.length === 2;
                 if (showDiffColumn) {
                     const thDiff = document.createElement('th');
@@ -11040,6 +11105,8 @@ const companies = Object.keys(balancesData[seg]);
             const catalog = srData.actuarial.tables_catalog;
             const selectedInfo = catalog[currentSelectedTableKey] || catalog["GAM 94"];
             const ages = selectedInfo.ages || Array.from({length: 121}, (_, i) => i);
+
+            showTableBadgeTooltip(currentSelectedTableKey);
 
             const titleEl = document.getElementById('tbl-mortality-title');
             const descEl = document.getElementById('tbl-mortality-desc');
@@ -11353,6 +11420,7 @@ const companies = Object.keys(balancesData[seg]);
         }
 
         // Global window bindings
+        window.showTableBadgeTooltip = showTableBadgeTooltip;
         window.switchSrSubtab = switchSrSubtab;
         window.initSeriesCheckboxes = initSeriesCheckboxes;
         window.renderCommutationComparison = renderCommutationComparison;
