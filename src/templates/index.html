@@ -9255,7 +9255,7 @@ function setSsnTimeRange(range) {
                 </div>
             </div>
 
-            <!-- Interactive Actuarial Table -->
+            <!-- Interactive Actuarial Table (Single-Year Resolution 0-120 with Male & Female breakdown) -->
             <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-darkBorder/40 pb-3">
                     <div>
@@ -9263,40 +9263,33 @@ function setSsnTimeRange(range) {
                             <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: GAM 94 (SSN Base Res. 38.708)
                         </h3>
                         <p id="tbl-mortality-desc" class="text-xs text-slate-400 light:text-slate-600 mt-0.5">
-                            Valores de probabilidad de muerte qx por cada 1.000 personas por rango etario.
+                            Tabla completa año por año desde la edad 0 hasta la edad 120 (ω = 120), con diferenciación por género.
                         </p>
                     </div>
-                    <span class="text-xs font-mono bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl shrink-0">
-                        Norma SSN / SOA
-                    </span>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <button onclick="exportMortalityTableCSV()" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 border border-emerald-500/30 transition-all cursor-pointer" title="Descargar tabla completa en formato CSV para Excel">
+                            <i class="fas fa-file-csv"></i> Exportar CSV / Excel
+                        </button>
+                        <span class="text-xs font-mono bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl">
+                            Edades 0 a 120 (121 filas)
+                        </span>
+                    </div>
                 </div>
 
-                <div class="overflow-x-auto">
+                <div class="max-h-[500px] overflow-y-auto overflow-x-auto no-scrollbar border border-darkBorder/30 rounded-xl">
                     <table class="w-full text-left border-collapse text-xs">
-                        <thead>
-                            <tr class="border-b border-darkBorder/60 text-slate-400 light:text-slate-500 font-semibold bg-darkBg/50 light:bg-slate-100">
-                                <th class="py-2.5 px-4">Edad (x)</th>
-                                <th class="py-2.5 px-4 text-right">Probabilidad de Muerte qx (por 1.000)</th>
-                                <th class="py-2.5 px-4 text-right">Tasa de Supervivencia px (%)</th>
-                                <th class="py-2.5 px-4 text-right">Impacto en Reservas Matemáticas</th>
+                        <thead class="sticky top-0 bg-darkBg text-slate-300 light:bg-slate-100 light:text-slate-700 font-semibold shadow-sm z-10">
+                            <tr class="border-b border-darkBorder/60">
+                                <th class="py-2.5 px-4 whitespace-nowrap">Edad (x)</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">qx Varones (‰)</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">qx Mujeres (‰)</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">px Varones (%)</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">px Mujeres (%)</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap">Carga Actuarial / Reserva</th>
                             </tr>
                         </thead>
                         <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200 text-slate-200 light:text-slate-700 font-mono">
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 0</td><td class="py-2 px-4 text-right text-brandBlue font-bold">10.50</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">98.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 10</td><td class="py-2 px-4 text-right text-brandBlue font-bold">0.40</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 20</td><td class="py-2 px-4 text-right text-brandBlue font-bold">0.90</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">99.91%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 30</td><td class="py-2 px-4 text-right text-brandBlue font-bold">1.20</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">99.88%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 40</td><td class="py-2 px-4 text-right text-brandBlue font-bold">2.10</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">99.79%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 50</td><td class="py-2 px-4 text-right text-brandBlue font-bold">4.80</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">99.52%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 60</td><td class="py-2 px-4 text-right text-brandBlue font-bold">11.20</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">98.88%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 65</td><td class="py-2 px-4 text-right text-brandBlue font-bold">17.50</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">98.25%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 70</td><td class="py-2 px-4 text-right text-brandBlue font-bold">27.40</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">97.26%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 75</td><td class="py-2 px-4 text-right text-brandBlue font-bold">43.10</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">95.69%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Reserva Estándar</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 80</td><td class="py-2 px-4 text-right text-brandBlue font-bold">68.50</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">93.15%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Alta Recarga / Reserva Eleva</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 85</td><td class="py-2 px-4 text-right text-brandBlue font-bold">109.20</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">89.08%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Alta Recarga / Reserva Eleva</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 90</td><td class="py-2 px-4 text-right text-brandBlue font-bold">172.00</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">82.80%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Alta Recarga / Reserva Eleva</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 95</td><td class="py-2 px-4 text-right text-brandBlue font-bold">265.40</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">73.46%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Alta Recarga / Reserva Eleva</td></tr>
-                            <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad 100</td><td class="py-2 px-4 text-right text-brandBlue font-bold">400.00</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">60.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px]">Alta Recarga / Reserva Eleva</td></tr>
+                            <!-- Populated dynamically by JS -->
                         </tbody>
                     </table>
                 </div>
@@ -10582,13 +10575,16 @@ const companies = Object.keys(balancesData[seg]);
         let srAgingChartInstance = null;
         let srCoverageChartInstance = null;
 
+        let currentSelectedTableKey = "GAM 94";
+
         function renderMortalityTableAndChart(selectedTableKey) {
+            currentSelectedTableKey = selectedTableKey || "GAM 94";
             const srData = appData.health_retirement_data;
             if (!srData || !srData.actuarial) return;
 
             const catalog = srData.actuarial.tables_catalog;
-            const ages = srData.actuarial.ages;
-            const selectedInfo = catalog[selectedTableKey] || catalog["GAM 94"];
+            const selectedInfo = catalog[currentSelectedTableKey] || catalog["GAM 94"];
+            const ages = selectedInfo.ages || listRange(0, 120);
 
             // Update title & desc
             const titleEl = document.getElementById('tbl-mortality-title');
@@ -10600,19 +10596,26 @@ const companies = Object.keys(balancesData[seg]);
             const tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
                 tbody.innerHTML = '';
+                const fragment = document.createDocumentFragment();
                 ages.forEach((age, idx) => {
-                    const qx = selectedInfo.qx_per_thousand[idx];
-                    const px = (100 - (qx / 10)).toFixed(2);
+                    const qxM = selectedInfo.qx_male[idx];
+                    const qxF = selectedInfo.qx_female[idx];
+                    const pxM = (100 - (qxM / 10)).toFixed(2);
+                    const pxF = (100 - (qxF / 10)).toFixed(2);
+                    
                     const row = document.createElement('tr');
                     row.className = 'hover:bg-brandBlue/5 transition-colors';
                     row.innerHTML = `
-                        <td class="py-2 px-4 font-bold text-white light:text-slate-900">Edad ${age}</td>
-                        <td class="py-2 px-4 text-right text-brandBlue font-bold">${qx.toFixed(2)}</td>
-                        <td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600">${px}%</td>
-                        <td class="py-2 px-4 text-right text-slate-400 text-[11px]">${qx > 50 ? 'Alta Recarga / Reserva Eleva' : 'Reserva Estándar'}</td>
+                        <td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad ${age}</td>
+                        <td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">${qxM.toFixed(3)}</td>
+                        <td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">${qxF.toFixed(3)}</td>
+                        <td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">${pxM}%</td>
+                        <td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">${pxF}%</td>
+                        <td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">${qxM > 50 ? 'Alta Recarga / Reserva Max' : 'Reserva Estándar'}</td>
                     `;
-                    tbody.appendChild(row);
+                    fragment.appendChild(row);
                 });
+                tbody.appendChild(fragment);
             }
 
             // Update Mortality Chart
@@ -10626,14 +10629,21 @@ const companies = Object.keys(balancesData[seg]);
                     srMortalityChartInstance.destroy();
                 }
 
+                // Sample every 5 years for chart legibility from 0 to 120
+                const sampleIndices = ages.filter(a => a % 5 === 0 || a === 120);
+                const sampleLabels = sampleIndices.map(a => 'Edad ' + a);
+                const sampleQxM = sampleIndices.map(a => selectedInfo.qx_male[a]);
+                const sampleQxF = sampleIndices.map(a => selectedInfo.qx_female[a]);
+                const refQxM = sampleIndices.map(a => catalog["GAM 94"].qx_male[a]);
+
                 srMortalityChartInstance = new Chart(ctxM, {
                     type: 'line',
                     data: {
-                        labels: ages.map(a => 'Edad ' + a),
+                        labels: sampleLabels,
                         datasets: [
-                            { label: selectedInfo.name, data: selectedInfo.qx_per_thousand, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.15)', borderWidth: 3, tension: 0.3, pointRadius: 4, fill: true },
-                            { label: 'SOA Pri-2012', data: catalog["SOA Pri-2012"].qx_per_thousand, borderColor: '#10b981', borderWidth: 2, borderDash: [4, 4], tension: 0.3, pointRadius: 2 },
-                            { label: 'GAM 94 (Base SSN)', data: catalog["GAM 94"].qx_per_thousand, borderColor: '#f59e0b', borderWidth: 2, borderDash: [2, 2], tension: 0.3, pointRadius: 2 }
+                            { label: `${selectedInfo.name} (Varones)`, data: sampleQxM, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.15)', borderWidth: 3, tension: 0.3, pointRadius: 4, fill: true },
+                            { label: `${selectedInfo.name} (Mujeres)`, data: sampleQxF, borderColor: '#f43f5e', backgroundColor: 'rgba(244, 63, 94, 0.1)', borderWidth: 3, tension: 0.3, pointRadius: 4, fill: false },
+                            { label: 'GAM 94 (Varones SSN Ref.)', data: refQxM, borderColor: '#f59e0b', borderWidth: 2, borderDash: [4, 4], tension: 0.3, pointRadius: 2 }
                         ]
                     },
                     options: {
@@ -10647,6 +10657,36 @@ const companies = Object.keys(balancesData[seg]);
                     }
                 });
             }
+        }
+
+        function exportMortalityTableCSV() {
+            const srData = appData.health_retirement_data;
+            if (!srData || !srData.actuarial) return;
+
+            const catalog = srData.actuarial.tables_catalog;
+            const selectedInfo = catalog[currentSelectedTableKey] || catalog["GAM 94"];
+            const ages = selectedInfo.ages || [];
+
+            let csvContent = "﻿Edad;qx_Varones_por_Mil;qx_Mujeres_por_Mil;px_Varones_Pct;px_Mujeres_Pct;Carga_Actuarial\n";
+            ages.forEach((age, idx) => {
+                const qxM = selectedInfo.qx_male[idx];
+                const qxF = selectedInfo.qx_female[idx];
+                const pxM = (100 - (qxM / 10)).toFixed(2);
+                const pxF = (100 - (qxF / 10)).toFixed(2);
+                const carga = qxM > 50 ? "Alta Recarga / Reserva Max" : "Reserva Estandar";
+                
+                csvContent += `${age};${qxM.toFixed(3)};${qxF.toFixed(3)};${pxM}%;${pxF}%;${carga}\n`;
+            });
+
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            const safeName = selectedInfo.name.replace(/[^a-zA-Z0-9_-]/g, "_");
+            link.setAttribute("href", url);
+            link.setAttribute("download", `Tabla_Actuarial_${safeName}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
 
         function onMortalityTableChange(val) {
