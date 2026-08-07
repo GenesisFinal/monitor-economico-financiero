@@ -9430,16 +9430,30 @@ function setSsnTimeRange(range) {
                         </p>
                     </div>
 
-                    <!-- Selector Controls: Interest Rate i & Action buttons -->
+                    <!-- Selector Controls: Interest Rate i & Longevity Improvement Scale fx -->
                     <div class="flex items-center gap-3 flex-wrap">
+                        <!-- Tasa Técnica i -->
                         <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
                             <label for="select-tech-interest" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Tasa Técnica (i):</label>
-                            <select id="select-tech-interest" onchange="renderCommutationComparison()" class="bg-transparent text-xs font-bold text-brandBlue cursor-pointer focus:outline-none">
-                                <option value="0.01">1% p.a.</option>
-                                <option value="0.02">2% p.a.</option>
-                                <option value="0.03" selected>3% p.a. (Estándar SSN)</option>
-                                <option value="0.04">4% p.a.</option>
-                                <option value="0.05">5% p.a.</option>
+                            <select id="select-tech-interest" onchange="renderCommutationComparison()" class="bg-darkBg text-brandBlue text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-blue-700">
+                                <option value="0.01" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1% p.a.</option>
+                                <option value="0.02" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2% p.a.</option>
+                                <option value="0.03" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">3% p.a. (Estándar SSN)</option>
+                                <option value="0.04" class="bg-slate-900 text-white light:bg-white light:text-slate-900">4% p.a.</option>
+                                <option value="0.05" class="bg-slate-900 text-white light:bg-white light:text-slate-900">5% p.a.</option>
+                            </select>
+                        </div>
+
+                        <!-- Mejora Anual Longevidad fx -->
+                        <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
+                            <label for="select-longevity-scale" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Mejora Longevidad (fₓ):</label>
+                            <select id="select-longevity-scale" onchange="renderCommutationComparison()" class="bg-darkBg text-rose-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-rose-600">
+                                <option value="0.00" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.0% p.a. (Sin mejora)</option>
+                                <option value="0.005" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.5% p.a.</option>
+                                <option value="0.010" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.0% p.a.</option>
+                                <option value="0.015" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.5% p.a. (SOA MP-2021 Estándar)</option>
+                                <option value="0.020" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.0% p.a.</option>
+                                <option value="0.025" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.5% p.a.</option>
                             </select>
                         </div>
                     </div>
@@ -10854,11 +10868,14 @@ const companies = Object.keys(balancesData[seg]);
             return list.length > 0 ? list : defaultSelectedSeries;
         }
 
-        function computeSeriesCommutations(tableInfo, gender, rateI) {
+        function computeSeriesCommutations(tableInfo, gender, rateI, rateFx) {
             const ages = tableInfo.ages || Array.from({length: 121}, (_, i) => i);
             const qxArr = gender === "Varones" ? tableInfo.qx_male : tableInfo.qx_female;
             
             const v = 1.0 / (1.0 + rateI);
+            const yearsDelta = 2026 - 2012; // 14 years of longevity improvement since base year t0 = 2012
+            const improvementFactor = Math.pow(1.0 - rateFx, yearsDelta);
+
             const lx = new Array(121);
             const Dx = new Array(121);
             const Nx = new Array(121);
@@ -10868,8 +10885,11 @@ const companies = Object.keys(balancesData[seg]);
             for (let x = 0; x <= 120; x++) {
                 lx[x] = currentLx;
                 Dx[x] = Math.pow(v, x) * currentLx;
-                const qx = qxArr[x] || 1000.0;
-                currentLx = Math.max(0, currentLx * (1.0 - qx / 1000.0));
+                
+                const qxBase = qxArr[x] || 1000.0;
+                const qxProj = x === 0 ? qxBase : Math.min(999.0, qxBase * improvementFactor);
+                
+                currentLx = Math.max(0, currentLx * (1.0 - qxProj / 1000.0));
             }
 
             let sumNx = 0;
@@ -10892,8 +10912,11 @@ const companies = Object.keys(balancesData[seg]);
             const interestSelect = document.getElementById('select-tech-interest');
             const rateI = interestSelect ? parseFloat(interestSelect.value) : 0.03;
 
+            const fxSelect = document.getElementById('select-longevity-scale');
+            const rateFx = fxSelect ? parseFloat(fxSelect.value) : 0.015;
+
             const interestBadge = document.getElementById('badge-tech-interest');
-            if (interestBadge) interestBadge.textContent = `i = ${(rateI * 100).toFixed(1)}%`;
+            if (interestBadge) interestBadge.textContent = `i = ${(rateI * 100).toFixed(1)}% | fₓ = ${(rateFx * 100).toFixed(1)}% p.a.`;
 
             const computedMap = {};
             selectedSeries.forEach(sKey => {
@@ -10901,7 +10924,7 @@ const companies = Object.keys(balancesData[seg]);
                 const gender = parts.pop();
                 const tableKey = parts.join(' ');
                 const tableInfo = catalog[tableKey] || catalog["GAM 94"];
-                computedMap[sKey] = computeSeriesCommutations(tableInfo, gender, rateI);
+                computedMap[sKey] = computeSeriesCommutations(tableInfo, gender, rateI, rateFx);
             });
 
             // 1. Render lx Comparison Line Chart
@@ -10952,15 +10975,30 @@ const companies = Object.keys(balancesData[seg]);
             const tbody = document.getElementById('tbl-annuity-body');
 
             if (headTr && tbody) {
-                headTr.innerHTML = '<th class="py-2 px-3 whitespace-nowrap">Edad (x)</th>';
+                headTr.innerHTML = '<th class="py-2 px-3 whitespace-nowrap text-left">Edad (x)</th>';
+                
                 selectedSeries.forEach(sKey => {
+                    const parts = sKey.split(' ');
+                    const gender = parts.pop();
+                    const tableName = parts.join(' ');
                     const color = seriesColors[sKey] || "#3b82f6";
+                    const symbol = gender === 'Varones' ? '♂ Varones' : '♀ Mujeres';
+
                     const th = document.createElement('th');
-                    th.className = "py-2 px-3 text-right whitespace-nowrap";
+                    th.className = "py-2 px-2 text-right whitespace-normal text-[11px] leading-tight";
                     th.style.color = color;
-                    th.textContent = sKey;
+                    th.innerHTML = `${tableName}<br><span class="opacity-80">${symbol}</span>`;
                     headTr.appendChild(th);
                 });
+
+                // Requirement 4: If exactly 2 series are selected, add Difference % column (Mayor / Menor)
+                const showDiffColumn = selectedSeries.length === 2;
+                if (showDiffColumn) {
+                    const thDiff = document.createElement('th');
+                    thDiff.className = "py-2 px-2 text-right whitespace-normal text-[11px] leading-tight text-amber-400 light:text-amber-600 font-bold";
+                    thDiff.innerHTML = "Dif. %<br><span class="text-[9px] opacity-90">(Mayor / Menor)</span>";
+                    headTr.appendChild(thDiff);
+                }
 
                 tbody.innerHTML = '';
                 const targetAges = [30, 40, 50, 60, 65, 70, 75, 80, 85, 90];
@@ -10971,10 +11009,21 @@ const companies = Object.keys(balancesData[seg]);
                     tr.className = 'hover:bg-brandBlue/5 transition-colors';
 
                     let rowHtml = `<td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad ${x}</td>`;
+                    const vals = [];
+
                     selectedSeries.forEach(sKey => {
                         const valAx = computedMap[sKey].ax[x];
-                        rowHtml += `<td class="py-2 px-3 text-right font-bold whitespace-nowrap text-emerald-400 light:text-emerald-600">${valAx.toFixed(2)}</td>`;
+                        vals.push(valAx);
+                        rowHtml += `<td class="py-2 px-2 text-right font-bold whitespace-nowrap text-emerald-400 light:text-emerald-600">${valAx.toFixed(2)}</td>`;
                     });
+
+                    if (showDiffColumn && vals.length === 2) {
+                        const maxV = Math.max(vals[0], vals[1]);
+                        const minV = Math.min(vals[0], vals[1]);
+                        const diffPct = minV > 0 ? ((maxV / minV - 1.0) * 100.0) : 0.0;
+                        rowHtml += `<td class="py-2 px-2 text-right font-bold whitespace-nowrap text-amber-400 light:text-amber-600">+${diffPct.toFixed(1)}%</td>`;
+                    }
+
                     tr.innerHTML = rowHtml;
                     fragment.appendChild(tr);
                 });
