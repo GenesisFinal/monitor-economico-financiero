@@ -9238,7 +9238,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Comparativa dinámica entre la tabla seleccionada en el menú y las tablas de referencia.</p>
                     <div class="relative w-full h-[320px]">
-                        <canvas id="srMortalityChart"></canvas>
+                        <canvas id="srMortalityChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
 
@@ -9250,7 +9250,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Incidencia actuarial por rango etario para tarificación de coberturas de Invalidez.</p>
                     <div class="relative w-full h-[320px]">
-                        <canvas id="srDisabilityChart"></canvas>
+                        <canvas id="srDisabilityChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
             </div>
@@ -9285,7 +9285,8 @@ function setSsnTimeRange(range) {
                                 <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">qx Mujeres (‰)</th>
                                 <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">px Varones (%)</th>
                                 <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">px Mujeres (%)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap">Carga Actuarial / Reserva</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">lx Varones (l₀=100.000)</th>
+                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">lx Mujeres (l₀=100.000)</th>
                             </tr>
                         </thead>
                         <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200 text-slate-200 light:text-slate-700 font-mono">
@@ -9443,7 +9444,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Carga total de morbilidad en Argentina por grupo de enfermedades (OMS / Global Health Estimates).</p>
                     <div class="relative w-full aspect-square max-h-[320px] mx-auto">
-                        <canvas id="srDalysChart"></canvas>
+                        <canvas id="srDalysChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
 
@@ -9496,7 +9497,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Comparativa de jubilación promedio sobre último salario activo (OCDE Pensions at a Glance).</p>
                     <div class="relative w-full h-[320px]">
-                        <canvas id="srReplacementChart"></canvas>
+                        <canvas id="srReplacementChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
 
@@ -9506,7 +9507,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Evolución proyectada de personas de +65 años por cada 100 personas en edad activa (15-64 años).</p>
                     <div class="relative w-full h-[320px]">
-                        <canvas id="srDependencyChart"></canvas>
+                        <canvas id="srDependencyChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
             </div>
@@ -9539,7 +9540,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Evolución porcentual proyectada de la tercera edad en Argentina (UN Population Division).</p>
                     <div class="relative w-full h-[320px]">
-                        <canvas id="srAgingChart"></canvas>
+                        <canvas id="srAgingChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
 
@@ -9549,7 +9550,7 @@ function setSsnTimeRange(range) {
                     </h3>
                     <p class="text-xs text-slate-400 mb-4">Distribución porcentual de la población argentina según cobertura médica principal.</p>
                     <div class="relative w-full aspect-square max-h-[320px] mx-auto">
-                        <canvas id="srCoverageChart"></canvas>
+                        <canvas id="srCoverageChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
                     </div>
                 </div>
             </div>
@@ -10712,6 +10713,10 @@ const companies = Object.keys(balancesData[seg]);
             if (titleEl) titleEl.innerHTML = `<i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: ${selectedInfo.name}`;
             if (descEl) descEl.textContent = selectedInfo.desc;
 
+            // Compute Actuarial lx for Male & Female starting at l0 = 100,000
+            let lxM = 100000;
+            let lxF = 100000;
+
             // Populate Table
             const tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
@@ -10722,7 +10727,14 @@ const companies = Object.keys(balancesData[seg]);
                     const qxF = selectedInfo.qx_female[idx];
                     const pxM = (100 - (qxM / 10)).toFixed(2);
                     const pxF = (100 - (qxF / 10)).toFixed(2);
-                    
+
+                    const currentLxM = Math.round(lxM);
+                    const currentLxF = Math.round(lxF);
+
+                    // Update next lx
+                    lxM = Math.max(0, lxM * (1.0 - qxM / 1000.0));
+                    lxF = Math.max(0, lxF * (1.0 - qxF / 1000.0));
+
                     const row = document.createElement('tr');
                     row.className = 'hover:bg-brandBlue/5 transition-colors';
                     row.innerHTML = `
@@ -10731,7 +10743,8 @@ const companies = Object.keys(balancesData[seg]);
                         <td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">${qxF.toFixed(3)}</td>
                         <td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">${pxM}%</td>
                         <td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">${pxF}%</td>
-                        <td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">${qxM > 50 ? 'Alta Recarga / Reserva Max' : 'Reserva Estándar'}</td>
+                        <td class="py-2 px-4 text-right text-blue-400 font-mono whitespace-nowrap">${currentLxM.toLocaleString('es-AR')}</td>
+                        <td class="py-2 px-4 text-right text-rose-400 font-mono whitespace-nowrap">${currentLxF.toLocaleString('es-AR')}</td>
                     `;
                     fragment.appendChild(row);
                 });
@@ -10787,15 +10800,23 @@ const companies = Object.keys(balancesData[seg]);
             const selectedInfo = catalog[currentSelectedTableKey] || catalog["GAM 94"];
             const ages = selectedInfo.ages || [];
 
-            let csvContent = "﻿Edad;qx_Varones_por_Mil;qx_Mujeres_por_Mil;px_Varones_Pct;px_Mujeres_Pct;Carga_Actuarial\n";
+            let csvContent = "﻿Edad;qx_Varones_por_Mil;qx_Mujeres_por_Mil;px_Varones_Pct;px_Mujeres_Pct;lx_Varones;lx_Mujeres\n";
+            let lxM = 100000;
+            let lxF = 100000;
+
             ages.forEach((age, idx) => {
                 const qxM = selectedInfo.qx_male[idx];
                 const qxF = selectedInfo.qx_female[idx];
                 const pxM = (100 - (qxM / 10)).toFixed(2);
                 const pxF = (100 - (qxF / 10)).toFixed(2);
-                const carga = qxM > 50 ? "Alta Recarga / Reserva Max" : "Reserva Estandar";
                 
-                csvContent += `${age};${qxM.toFixed(3)};${qxF.toFixed(3)};${pxM}%;${pxF}%;${carga}\n`;
+                const curM = Math.round(lxM);
+                const curF = Math.round(lxF);
+
+                lxM = Math.max(0, lxM * (1.0 - qxM / 1000.0));
+                lxF = Math.max(0, lxF * (1.0 - qxF / 1000.0));
+                
+                csvContent += `${age};${qxM.toFixed(3)};${qxF.toFixed(3)};${pxM}%;${pxF}%;${curM};${curF}\n`;
             });
 
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
@@ -10812,6 +10833,11 @@ const companies = Object.keys(balancesData[seg]);
         function onMortalityTableChange(val) {
             renderMortalityTableAndChart(val);
         }
+
+        // Expose functions globally for inline event handlers
+        window.onMortalityTableChange = onMortalityTableChange;
+        window.exportMortalityTableCSV = exportMortalityTableCSV;
+        window.renderMortalityTableAndChart = renderMortalityTableAndChart;
 
         function renderSaludRetiroDemografiaView() {
             const srData = appData.health_retirement_data;
@@ -11008,6 +11034,7 @@ const companies = Object.keys(balancesData[seg]);
                 }
             }, 100);
         }
+        window.renderSaludRetiroDemografiaView = renderSaludRetiroDemografiaView;
 
 </script>
 </body>
