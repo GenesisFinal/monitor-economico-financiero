@@ -1054,68 +1054,76 @@ body.layout-bento {
     </style>
 </head>
 <body class="dark bg-darkBg text-slate-100 min-h-screen transition-all duration-300 layout-agmd-style theme-emerald-green">
-    <!-- Header Global -->
-    <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-3 sm:px-6 py-2 sm:py-2.5 light:bg-white/80 light:border-gray-200">
-        <div class="max-w-[1800px] w-full mx-auto flex flex-col xl:flex-row items-center justify-between gap-2 sm:gap-3">
-            <div class="flex items-center justify-between w-full xl:w-auto gap-3 shrink-0">
-                <div class="flex items-center gap-2 sm:gap-2.5">
-                    <i class="fas fa-chart-pie text-lg sm:text-xl text-brandBlue"></i>
-                    <h1 class="text-sm sm:text-base md:text-lg font-bold text-white light:text-slate-900 font-black tracking-tight whitespace-nowrap">Monitor Económico Financiero</h1>
-                </div>
-                <!-- Theme toggle button - ALWAYS VISIBLE on all screen sizes -->
-                <button onclick="toggleTheme()" class="p-1.5 sm:p-2 rounded-xl bg-darkBg border border-darkBorder text-amber-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-amber-600 transition-all shrink-0 flex items-center justify-center" title="Cambiar Modo (Claro / Oscuro)">
-                    <i id="theme-icon" class="fas fa-sun text-sm sm:text-base"></i>
-                </button>
-            </div>
+    <!-- Header Global (Layout 2 Renglones Elegante) -->
+    <header class="bg-darkCard/90 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-4 md:px-8 py-2 light:bg-white/90 light:border-gray-200 shadow-md">
+        <div class="max-w-[1800px] w-full mx-auto flex flex-col gap-2">
             
-            <div class="flex flex-wrap xl:flex-nowrap items-center justify-between xl:justify-end gap-2 sm:gap-3 w-full xl:w-auto">
-                <!-- Global Tabs Container -->
-                <div class="flex overflow-x-auto no-scrollbar bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200 whitespace-nowrap shrink-0 max-w-full">
-                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
-                        <i class="fas fa-chart-line text-brandBlue"></i> Val. Financieros
-                    </button>
-                    <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
-                        <i class="fas fa-building-columns text-brandBlue"></i> Indic. Económicos
-                    </button>
-                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
-                        <i class="fas fa-shield-halved text-brandBlue"></i> Merc. Asegurador
-                    </button>
-                    <button onclick="switchGlobalTab('salud-retiro-demografia')" id="btn-global-salud-retiro" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
-                        <i class="fas fa-heart-pulse text-rose-500"></i> Salud, Retiro & Demografía
-                    </button>
-                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
-                        <i class="fas fa-book-open text-brandBlue"></i> Fuentes
-                    </button>
+            <!-- Renglón 1: Logo, Título y Controles de Apariencia -->
+            <div class="flex items-center justify-between w-full border-b border-darkBorder/40 light:border-gray-200 pb-2">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-brandBlue to-emerald-400 flex items-center justify-center shadow-sm">
+                        <i class="fas fa-chart-pie text-white text-xs"></i>
+                    </div>
+                    <h1 class="text-base sm:text-lg font-black text-white light:text-slate-900 tracking-tight whitespace-nowrap">
+                        Monitor Económico Financiero
+                    </h1>
                 </div>
-                
-                <div class="flex items-center gap-2 shrink-0">
-                    <!-- Selector de Diseño (Layout) -->
-                    <div class="flex items-center gap-1 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
-                        <i class="fas fa-table-cells-large text-xs text-slate-400 light:text-slate-600 shrink-0"></i>
-                        <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-1 max-w-[140px] sm:max-w-[170px] truncate">
+
+                <!-- Controles de Apariencia (Derecha) -->
+                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                    <!-- Selector de Diseños -->
+                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder/60 light:bg-slate-100 light:border-gray-300 px-2.5 py-1 rounded-xl">
+                        <i class="fas fa-table-cells-large text-xs text-slate-400 light:text-slate-600"></i>
+                        <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none cursor-pointer pr-1">
+                            <option value="agmd-style" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
                             <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid</option>
                             <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report</option>
-                            <option value="l2-style" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Style</option>
+                            <option value="hft-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">HFT Cyber-Terminal</option>
                             <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">Flat SaaS</option>
-                            <option value="hft-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">HFT Cyber-Terminal (Bloomberg)</option>
-                            <option value="agmd-style" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
                         </select>
                     </div>
+
                     <!-- Selector de Paleta de Color -->
-                    <div class="flex items-center gap-1 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
-                        <i class="fas fa-palette text-xs text-slate-400 light:text-slate-600 shrink-0"></i>
-                        <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-1 max-w-[130px] sm:max-w-[150px] truncate">
-                            <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon & Electric</option>
-                            <option value="indigo-slate" class="bg-darkCard text-white light:bg-white light:text-slate-800">Indigo Slate</option>
+                    <div class="flex items-center gap-1.5 bg-darkBg border border-darkBorder/60 light:bg-slate-100 light:border-gray-300 px-2.5 py-1 rounded-xl">
+                        <i class="fas fa-palette text-xs text-slate-400 light:text-slate-600"></i>
+                        <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none cursor-pointer pr-1">
                             <option value="emerald-green" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Emerald Green</option>
+                            <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon Electric</option>
+                            <option value="indigo-slate" class="bg-darkCard text-white light:bg-white light:text-slate-800">Indigo Slate</option>
                             <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber Terminal</option>
                             <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean Navy</option>
-                            <option value="l2-color" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2 Color</option>
                             <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo Dorado</option>
                         </select>
                     </div>
+
+                    <!-- Botón Modo Claro / Oscuro -->
+                    <button onclick="toggleTheme()" class="p-1.5 sm:p-2 rounded-xl bg-darkBg border border-darkBorder/60 text-amber-400 hover:text-white light:bg-slate-100 light:border-gray-300 light:text-amber-600 transition-all flex items-center justify-center" title="Cambiar Modo (Claro / Oscuro)">
+                        <i id="theme-icon" class="fas fa-sun text-xs sm:text-sm"></i>
+                    </button>
                 </div>
             </div>
+
+            <!-- Renglón 2: Navegación Principal por Pestañas Globales -->
+            <div class="flex items-center justify-start overflow-x-auto no-scrollbar py-0.5 w-full">
+                <div class="flex items-center gap-1.5 bg-darkBg/80 light:bg-slate-100 p-1 rounded-xl border border-darkBorder/40 light:border-gray-200 w-full sm:w-auto">
+                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
+                        <i class="fas fa-chart-line text-brandBlue"></i> Val. Financieros
+                    </button>
+                    <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                        <i class="fas fa-building-columns text-brandBlue"></i> Indic. Económicos
+                    </button>
+                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                        <i class="fas fa-shield-halved text-brandBlue"></i> Merc. Asegurador
+                    </button>
+                    <button onclick="switchGlobalTab('salud-retiro-demografia')" id="btn-global-salud-retiro" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                        <i class="fas fa-heart-pulse text-rose-500"></i> Salud, Retiro & Demografía
+                    </button>
+                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                        <i class="fas fa-book-open text-brandBlue"></i> Fuentes
+                    </button>
+                </div>
+            </div>
+
         </div>
     </header>
 
