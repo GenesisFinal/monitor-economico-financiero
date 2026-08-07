@@ -10816,6 +10816,7 @@ const companies = Object.keys(balancesData[seg]);
         let srAgingChartInstance = null;
         let srCoverageChartInstance = null;
         let srLxComparisonChartInstance = null;
+        let srLxRetirementChartInstance = null;
 
         let currentSelectedTableKey = "GAM 94";
         const defaultSelectedSeries = ["GAM 94 Varones", "GAM 94 Mujeres", "SOA Pri-2012 Varones", "SOA Pri-2012 Mujeres"];
@@ -11034,7 +11035,63 @@ const companies = Object.keys(balancesData[seg]);
                         plugins: { legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } } }
                     }
                 });
-            }
+           
+            // 1b. Render Normalized lx Retirement Survival Chart (lx0 = 100.000 for x >= x0)
+            const ctxRetireLx = document.getElementById('srLxRetirementChart');
+            const x0Select = document.getElementById('select-retire-age-x0');
+            const x0 = x0Select ? parseInt(x0Select.value, 10) : 65;
+
+            if (ctxRetireLx) {
+                const _isDark = document.body.classList.contains('dark');
+                const textColor = _isDark ? '#cbd5e1' : '#334155';
+                const gridColor = _isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+
+                if (srLxRetirementChartInstance) srLxRetirementChartInstance.destroy();
+
+                const retireAges = [];
+                for (let a = x0; a <= 120; a += (x0 >= 80 ? 2 : (x0 >= 60 ? 5 : 5))) {
+                    if (!retireAges.includes(a)) retireAges.push(a);
+                }
+                if (!retireAges.includes(120)) retireAges.push(120);
+
+                const retireLabels = retireAges.map(a => 'Edad ' + a);
+
+                const retireDatasets = selectedSeries.map(sKey => {
+                    const cData = computedMap[sKey];
+                    const lxAtX0 = cData.lx[x0] || 1.0;
+                    
+                    const sampleNormLx = retireAges.map(a => {
+                        const rawLx = cData.lx[a] || 0;
+                        return Math.round((rawLx / lxAtX0) * 100000.0);
+                    });
+                    
+                    const color = seriesColors[sKey] || "#3b82f6";
+                    return {
+                        label: `${sKey} (l${x0}=100k)`,
+                        data: sampleNormLx,
+                        borderColor: color,
+                        backgroundColor: color + '15',
+                        borderWidth: 2.5,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        fill: false
+                    };
+                });
+
+                srLxRetirementChartInstance = new Chart(ctxRetireLx, {
+                    type: 'line',
+                    data: { labels: retireLabels, datasets: retireDatasets },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor } },
+                            y: { ticks: { color: textColor, font: { size: 10 } }, grid: { color: gridColor }, title: { display: true, text: `Sobrevivientes condicionales a Edad ${x0} (l${x0}=100.000)`, color: textColor } }
+                        },
+                        plugins: { legend: { position: 'bottom', labels: { color: textColor, font: { size: 10 }, boxWidth: 10 } } }
+                    }
+                });
+            } }
 
             // 2. Render Nx/Dx Annuity Comparison Table
             const headTr = document.getElementById('tbl-annuity-head');
