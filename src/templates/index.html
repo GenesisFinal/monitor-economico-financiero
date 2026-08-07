@@ -2811,6 +2811,10 @@ body.layout-bento {
                     <i class="fas fa-chart-pie w-4 md:w-5 text-center text-brandBlue"></i>
                     <span class="leading-tight"><span class="md:hidden text-center block">Inversiones<br>Retiro</span><span class="hidden md:inline">Inversiones Retiro</span></span>
                 </button>
+                <button onclick="switchAsegTab('aseg-tab-inversiones-personas')" id="btn-aseg-tab-inversiones-personas" class="aseg-tab-btn tab-btn flex items-center gap-2 md:gap-3 px-3 md:px-4 py-2 md:py-3 text-left rounded-xl transition-all font-semibold text-[11.5px] md:text-[13px] shrink-0">
+                    <i class="fas fa-chart-line w-4 md:w-5 text-center text-brandBlue"></i>
+                    <span class="leading-tight"><span class="md:hidden text-center block">Inversiones<br>Personas</span><span class="hidden md:inline">Inversiones Personas</span></span>
+                </button>
             </nav>
         </aside>
         
@@ -4223,6 +4227,10 @@ function setSsnTimeRange(range) {
                 } else if (tabId === 'aseg-tab-inversiones-retiro') {
                     if (typeof renderInversionesRetiroView === 'function') {
                         renderInversionesRetiroView();
+                    }
+                } else if (tabId === 'aseg-tab-inversiones-personas') {
+                    if (typeof renderInversionesPersonasView === 'function') {
+                        renderInversionesPersonasView();
                     }
                 }
             }
@@ -5710,6 +5718,177 @@ function setSsnTimeRange(range) {
             if (invRetiroEmpresaChartInstance) invRetiroEmpresaChartInstance.destroy();
 
             invRetiroEmpresaChartInstance = new Chart(ctxC, {
+                type: 'doughnut',
+                data: {
+                    labels: cChartItems.map(i => i.rubro),
+                    datasets: [{
+                        data: cChartItems.map(i => i.pct),
+                        backgroundColor: palette.slice(0, cChartItems.length),
+                        borderWidth: isDark ? 2 : 1,
+                        borderColor: isDark ? '#1e293b' : '#ffffff',
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        crosshair: { enabled: false },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: isDark ? '#cbd5e1' : '#0f172a',
+                                font: { family: "'Outfit', sans-serif", size: 10 },
+                                boxWidth: 10,
+                                padding: 10
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.label}: ${context.raw.toFixed(2).replace('.', ',')}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+        }
+
+        let invPersonasMercadoChartInstance = null;
+        let invPersonasEmpresaChartInstance = null;
+
+        function renderInversionesPersonasView(companyKey) {
+            const invData = {{ ssn_inversiones_personas | tojson if ssn_inversiones_personas else '{}' | safe }};
+            if (!invData || !invData.empresas) return;
+
+            const mercadoTotal = invData.empresas['TODAS'];
+            if (!mercadoTotal) return;
+
+            const selectEl = document.getElementById('inv-personas-company-select');
+            if (selectEl && selectEl.children.length === 0) {
+                selectEl.innerHTML = '';
+                Object.keys(invData.empresas).forEach(k => {
+                    if (k === 'TODAS') return;
+                    const emp = invData.empresas[k];
+                    const opt = document.createElement('option');
+                    opt.value = k;
+                    opt.textContent = emp.nombre || k;
+                    opt.className = 'bg-darkBg light:bg-white text-white light:text-slate-900';
+                    selectEl.appendChild(opt);
+                });
+                
+                if (companyKey && invData.empresas[companyKey]) {
+                    selectEl.value = companyKey;
+                } else if (invData.empresas['SEGUNDA PERSONAS']) {
+                    selectEl.value = 'SEGUNDA PERSONAS';
+                } else {
+                    selectEl.value = Object.keys(invData.empresas).find(k => k !== 'TODAS') || '';
+                }
+            }
+
+            const selectedKey = companyKey || (selectEl ? selectEl.value : 'SEGUNDA PERSONAS');
+            const selectedCompany = invData.empresas[selectedKey] || invData.empresas['SEGUNDA PERSONAS'] || Object.values(invData.empresas)[1];
+            if (!selectedCompany) return;
+
+            const formatMillions = (num) => new Intl.NumberFormat('es-AR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(num / 1000);
+
+            // Update Header Th Titles
+            const companyDisplayName = selectedCompany.nombre || selectedKey;
+            document.getElementById('inv-personas-th-empresa-monto').innerText = `${companyDisplayName} ($ Millones)`;
+            document.getElementById('inv-personas-th-empresa-pct').innerText = `% ${companyDisplayName}`;
+            document.getElementById('inv-personas-chart-empresa-title').innerHTML = `<i class="fas fa-chart-pie text-emerald-400"></i> Distribución ${companyDisplayName}`;
+
+            // KPI Cards Updates
+            document.getElementById('inv-personas-kpi-total-mercado').innerText = '$ ' + formatMillions(mercadoTotal.total_inversiones) + ' M';
+            document.getElementById('inv-personas-kpi-total-empresa').innerText = '$ ' + formatMillions(selectedCompany.total_inversiones) + ' M';
+
+            const marketShare = (selectedCompany.total_inversiones / mercadoTotal.total_inversiones * 100).toFixed(2);
+            document.getElementById('inv-personas-kpi-empresa-market-share').innerText = `${marketShare.replace('.', ',')}% del Mercado de Personas`;
+
+            const sortedCompanyItems = [...selectedCompany.items].sort((a, b) => b.monto - a.monto);
+            if (sortedCompanyItems.length > 0 && sortedCompanyItems[0].monto > 0) {
+                document.getElementById('inv-personas-kpi-top-rubro').innerText = sortedCompanyItems[0].rubro;
+                document.getElementById('inv-personas-kpi-top-pct').innerText = `${sortedCompanyItems[0].pct.toFixed(2).replace('.', ',')}% del portafolio`;
+            } else {
+                document.getElementById('inv-personas-kpi-top-rubro').innerText = '-';
+                document.getElementById('inv-personas-kpi-top-pct').innerText = '-';
+            }
+
+            // Populate Side-by-Side Table Rows
+            const tbody = document.getElementById('inv-personas-table-body');
+            tbody.innerHTML = '';
+
+            mercadoTotal.items.forEach((mItem, idx) => {
+                const cItem = selectedCompany.items[idx] || { monto: 0, pct: 0 };
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-3 whitespace-nowrap text-slate-200 light:text-slate-700 font-medium font-sans">${mItem.rubro}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatMillions(mItem.monto)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-brandBlue">${mItem.pct.toFixed(2).replace('.', ',')}%</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono text-slate-300 light:text-slate-600">$ ${formatMillions(cItem.monto)}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-right font-mono font-bold text-emerald-400 light:text-emerald-600">${cItem.pct.toFixed(2).replace('.', ',')}%</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('inv-personas-foot-mercado-monto').innerText = '$ ' + formatMillions(mercadoTotal.total_inversiones) + ' M';
+            document.getElementById('inv-personas-foot-empresa-monto').innerText = '$ ' + formatMillions(selectedCompany.total_inversiones) + ' M';
+
+            // Doughnut Charts
+            const isDark = document.body.classList.contains('dark');
+            const palette = ['#2563eb', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#84cc16', '#6366f1', '#f97316'];
+
+            // 1. Mercado Doughnut Chart
+            const mChartItems = mercadoTotal.items.filter(i => i.monto > 0);
+            const ctxM = document.getElementById('invPersonasMercadoDoughnutChart').getContext('2d');
+            if (invPersonasMercadoChartInstance) invPersonasMercadoChartInstance.destroy();
+
+            invPersonasMercadoChartInstance = new Chart(ctxM, {
+                type: 'doughnut',
+                data: {
+                    labels: mChartItems.map(i => i.rubro),
+                    datasets: [{
+                        data: mChartItems.map(i => i.pct),
+                        backgroundColor: palette.slice(0, mChartItems.length),
+                        borderWidth: isDark ? 2 : 1,
+                        borderColor: isDark ? '#1e293b' : '#ffffff',
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        crosshair: { enabled: false },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: isDark ? '#cbd5e1' : '#0f172a',
+                                font: { family: "'Outfit', sans-serif", size: 10 },
+                                boxWidth: 10,
+                                padding: 10
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return ` ${context.label}: ${context.raw.toFixed(2).replace('.', ',')}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+
+            // 2. Company Doughnut Chart
+            const cChartItems = selectedCompany.items.filter(i => i.monto > 0);
+            const ctxC = document.getElementById('invPersonasEmpresaDoughnutChart').getContext('2d');
+            if (invPersonasEmpresaChartInstance) invPersonasEmpresaChartInstance.destroy();
+
+            invPersonasEmpresaChartInstance = new Chart(ctxC, {
                 type: 'doughnut',
                 data: {
                     labels: cChartItems.map(i => i.rubro),
@@ -8808,6 +8987,107 @@ function setSsnTimeRange(range) {
                 </h3>
                 <div class="relative w-full aspect-square max-h-[350px] my-auto">
                     <canvas id="invRetiroEmpresaDoughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Asegurador Tab: Inversiones Personas -->
+    <div id="aseg-tab-inversiones-personas" class="aseg-tab-content hidden fade-in w-full h-full relative pb-10">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
+            <h2 class="text-3xl font-black text-white light:text-slate-900 flex items-center gap-3">
+                <i class="fas fa-chart-line text-brandBlue"></i> Inversiones de Seguros de Personas
+            </h2>
+            <span class="text-xs font-extrabold px-3 py-1.5 bg-brandBlue/20 text-brandBlue border border-brandBlue/40 rounded-xl uppercase tracking-wider self-start sm:self-auto shadow-sm">
+                <i class="fas fa-calendar-check mr-1.5"></i> Período: {{ ssn_inversiones_personas.period if ssn_inversiones_personas else 'Marzo 2026' }}
+            </span>
+        </div>
+        
+        <p class="text-sm text-slate-400 light:text-slate-600 mb-8 leading-relaxed max-w-4xl">
+            Estructura y composición comparativa del portafolio de inversiones del <strong>Total del Mercado de Seguros de Personas</strong> versus la aseguradora seleccionada, basándonos en los boletines oficiales de la Superintendencia de Seguros de la Nación (SSN) al <strong>{{ ssn_inversiones_personas.period if ssn_inversiones_personas else 'Marzo 2026' }}</strong>. <span class="text-brandBlue font-semibold block sm:inline mt-1 sm:mt-0">*Cifras reexpresadas en Millones de Pesos ($ Millones).</span>
+        </p>
+
+        <!-- Top KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+            <div class="glass-card bg-darkCard border border-darkBorder/60 p-5 rounded-2xl light:bg-white light:border-slate-200">
+                <span class="text-xs uppercase font-semibold text-slate-400 light:text-slate-500 block mb-1">Total Mercado Personas</span>
+                <div id="inv-personas-kpi-total-mercado" class="text-2xl font-black text-white light:text-slate-900 font-mono">-</div>
+                <span class="text-[11px] text-brandBlue block mt-1 font-medium">Entidades de Personas</span>
+            </div>
+            <div class="glass-card bg-darkCard border border-darkBorder/60 p-5 rounded-2xl light:bg-white light:border-slate-200">
+                <span class="text-xs uppercase font-semibold text-slate-400 light:text-slate-500 block mb-1">Portafolio Aseguradora</span>
+                <div id="inv-personas-kpi-total-empresa" class="text-2xl font-black text-emerald-400 light:text-emerald-600 font-mono">-</div>
+                <span id="inv-personas-kpi-empresa-market-share" class="text-xs text-slate-400 block mt-1 font-mono">-</span>
+            </div>
+            <div class="glass-card bg-darkCard border border-darkBorder/60 p-5 rounded-2xl light:bg-white light:border-slate-200">
+                <span class="text-xs uppercase font-semibold text-slate-400 light:text-slate-500 block mb-1">Mayor Concentración</span>
+                <div id="inv-personas-kpi-top-rubro" class="text-lg font-black text-white light:text-slate-800 truncate">-</div>
+                <span id="inv-personas-kpi-top-pct" class="text-xs text-brandBlue block mt-1 font-mono">-</span>
+            </div>
+        </div>
+
+        <!-- Company Selector -->
+        <div class="mb-8 flex flex-col sm:flex-row sm:items-center gap-4 bg-darkCard/60 p-4 rounded-xl border border-darkBorder/40 light:bg-slate-50 light:border-slate-200 shadow-sm max-w-2xl">
+            <label for="inv-personas-company-select" class="text-sm font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Seleccionar Compañía para Comparar:</label>
+            <div class="relative w-full">
+                <select id="inv-personas-company-select" onchange="renderInversionesPersonasView(this.value)" class="w-full appearance-none bg-darkBg text-white border border-darkBorder rounded-lg px-4 py-2.5 text-sm font-medium hover:border-brandBlue focus:border-brandBlue focus:ring-1 focus:ring-brandBlue outline-none transition-colors light:bg-white light:text-slate-900 light:border-slate-300 shadow-inner cursor-pointer">
+                    <!-- JS populated -->
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
+                    <i class="fas fa-chevron-down text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Container (Full Width) -->
+        <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 mb-8">
+            <h3 class="text-lg font-bold text-white light:text-slate-800 mb-4 flex items-center gap-2">
+                <i class="fas fa-list-check text-brandBlue"></i> Comparativa de Portafolio por Rubro
+            </h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="border-b border-darkBorder/40 light:border-slate-200 text-xs uppercase bg-darkCard/50 light:bg-slate-50">
+                        <tr>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600">Rubro de Inversión</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">Total Mercado ($ Millones)</th>
+                            <th class="px-4 py-3 font-semibold text-slate-300 light:text-slate-600 text-right whitespace-nowrap">% Mercado</th>
+                            <th id="inv-personas-th-empresa-monto" class="px-4 py-3 font-semibold text-emerald-400 light:text-emerald-600 text-right whitespace-nowrap">La Segunda Personas ($ Millones)</th>
+                            <th id="inv-personas-th-empresa-pct" class="px-4 py-3 font-semibold text-emerald-400 light:text-emerald-600 text-right whitespace-nowrap">% La Segunda</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inv-personas-table-body" class="divide-y divide-darkBorder/40 light:divide-slate-100 text-slate-200 light:text-slate-700 font-mono">
+                        <!-- JS populated -->
+                    </tbody>
+                    <tfoot class="bg-brandBlue/10 font-bold border-t border-brandBlue/30 text-white light:text-slate-800">
+                        <tr>
+                            <td class="px-4 py-3 font-sans">Total Portafolio Inversiones</td>
+                            <td id="inv-personas-foot-mercado-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap">$ 0 M</td>
+                            <td class="px-4 py-3 text-right font-mono whitespace-nowrap">100,00%</td>
+                            <td id="inv-personas-foot-empresa-monto" class="px-4 py-3 text-right font-mono whitespace-nowrap text-emerald-400 light:text-emerald-600">$ 0 M</td>
+                            <td class="px-4 py-3 text-right font-mono whitespace-nowrap text-emerald-400 light:text-emerald-600">100,00%</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Doughnut Charts Container (Below Table) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 flex flex-col items-center justify-center">
+                <h3 class="text-lg font-bold text-white light:text-slate-800 mb-4 w-full text-left flex items-center gap-2">
+                    <i class="fas fa-chart-pie text-brandBlue"></i> Distribución Total Mercado Personas
+                </h3>
+                <div class="relative w-full aspect-square max-h-[350px] my-auto">
+                    <canvas id="invPersonasMercadoDoughnutChart"></canvas>
+                </div>
+            </div>
+
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 flex flex-col items-center justify-center">
+                <h3 id="inv-personas-chart-empresa-title" class="text-lg font-bold text-white light:text-slate-800 mb-4 w-full text-left flex items-center gap-2">
+                    <i class="fas fa-chart-pie text-emerald-400"></i> Distribución La Segunda Personas
+                </h3>
+                <div class="relative w-full aspect-square max-h-[350px] my-auto">
+                    <canvas id="invPersonasEmpresaDoughnutChart"></canvas>
                 </div>
             </div>
         </div>
