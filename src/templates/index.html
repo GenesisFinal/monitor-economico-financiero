@@ -9624,7 +9624,7 @@ var bondDetailChartInstance = null;
     </div>
     </div></div></div>
     <!-- GLOBAL CONTAINER: Fuentes de Información y APIs -->
-id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p-8 overflow-y-auto max-w-[1700px] mx-auto w-full">
+    <div id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p-8 overflow-y-auto max-w-[1700px] mx-auto w-full">
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
             <div>
@@ -9636,7 +9636,7 @@ id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p
                 </p>
             </div>
             <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 light:bg-emerald-50 light:text-emerald-700 border border-emerald-500/20 px-3 py-1.5 rounded-xl self-start md:self-auto">
-                <i class="fas fa-link text-xs mr-1"></i> Datos Verificados • Enlaces Oficiales
+                <i class="fas fa-link text-xs mr-1"></i> Datos Verificados — Enlaces Oficiales
             </span>
         </div>
 
@@ -9664,73 +9664,56 @@ id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
                     Tablas actuariales de mortalidad internacional (Pri-2012, Pub-2010, RP-2014, CSO 2001, CSO 2017) y Escalas de Longevidad (MP-2021).
                 </p>
-                <span class="inline-block mt-3 text-[10px] font-mono text-brandBlue bg-brandBlue/10 px-2 py-0.5 rounded-md">soa.org/experience-studies</span>
+                <span class="inline-block mt-3 text-[10px] font-mono text-brandBlue bg-brandBlue/10 px-2 py-0.5 rounded-md">soa.org</span>
             </a>
 
-            <!-- Source Card: OMS / WHO -->
-            <a href="https://www.who.int/data/gho" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-rose-500/50 transition-all group light:bg-white light:border-slate-200">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-2">
-                        <div class="p-2 rounded-xl bg-rose-500/10 text-rose-400 group-hover:bg-rose-500 group-hover:text-white transition-all">
-                            <i class="fas fa-heart-pulse text-lg"></i>
-                        </div>
-                        <span class="font-bold text-white text-sm light:text-slate-900">OMS (Organización Mundial de la Salud)</span>
-                    </div>
-                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-rose-400 transition-all"></i>
-                </div>
-                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Global Health Observatory: Estadísticas de Carga Global de Enfermedad (AVISA/DALYs) y Esperanza de Vida Saludable (HALE).
-                </p>
-                <span class="inline-block mt-3 text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-md">who.int/data/gho</span>
-            </a>
-
-            <!-- Source Card: OCDE -->
-            <a href="https://www.oecd.org/pensions/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-amber-500/50 transition-all group light:bg-white light:border-slate-200">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="flex items-center gap-2">
-                        <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 group-hover:bg-amber-500 group-hover:text-white transition-all">
-                            <i class="fas fa-piggy-bank text-lg"></i>
-                        </div>
-                        <span class="font-bold text-white text-sm light:text-slate-900">OCDE (Pension Markets in Focus)</span>
-                    </div>
-                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-amber-400 transition-all"></i>
-                </div>
-                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Estadísticas internacionales de pensiones, tasas de reemplazo netas previsionales y suficiencia de fondos de retiro.
-                </p>
-                <span class="inline-block mt-3 text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md">oecd.org/pensions</span>
-            </a>
-
-            <!-- Source Card: SSN -->
-            <a href="https://www.argentina.gob.ar/ssn" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-emerald-500/50 transition-all group light:bg-white light:border-slate-200">
+            <!-- Source Card: SSN Retiro -->
+            <a href="https://www.argentina.gob.ar/superintendencia-de-seguros" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-emerald-500/50 transition-all group light:bg-white light:border-slate-200">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all">
                             <i class="fas fa-shield-halved text-lg"></i>
                         </div>
-                        <span class="font-bold text-white text-sm light:text-slate-900">SSN (Superintendencia de Seguros)</span>
+                        <span class="font-bold text-white text-sm light:text-slate-900">SSN — Reserva Matemática Retiro</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-emerald-400 transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Tablas regulatorias oficiales de mortalidad (GAM-94 Res. 38.708), Reservas Matemáticas y Producción Aseguradora.
+                    Boletines oficiales de la Superintendencia de Seguros de la Nación (SSN) sobre Reservas Matemáticas e Inversiones de Seguros de Retiro y Personas.
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">argentina.gob.ar/ssn</span>
             </a>
 
-            <!-- Source Card: INDEC & DEIS -->
+            <!-- Source Card: OMS / WHO -->
+            <a href="https://www.who.int/data/gho" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-teal-500/50 transition-all group light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-teal-500/10 text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-all">
+                            <i class="fas fa-hospital text-lg"></i>
+                        </div>
+                        <span class="font-bold text-white text-sm light:text-slate-900">OMS — Global Health Observatory</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-teal-400 transition-all"></i>
+                </div>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Expectativa de vida al nacer (HALE), morbilidad global, carga de enfermedad (DALYs) e indicadores internacionales de salud pública.
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-md">who.int/data/gho</span>
+            </a>
+
+            <!-- Source Card: INDEC -->
             <a href="https://www.indec.gob.ar/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-purple-500/50 transition-all group light:bg-white light:border-slate-200">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all">
-                            <i class="fas fa-users text-lg"></i>
+                            <i class="fas fa-users-line text-lg"></i>
                         </div>
-                        <span class="font-bold text-white text-sm light:text-slate-900">INDEC & DEIS (Min. Salud)</span>
+                        <span class="font-bold text-white text-sm light:text-slate-900">INDEC Argentina</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-purple-400 transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Tablas Abreviadas de Mortalidad de Argentina, Estadísticas Vitales DEIS y Proyecciones Demográficas del Censo.
+                    Censo Nacional de Población, Pirámide Poblacional, Tasa de Dependencia Demográfica y Cobertura Sanitaria de la República Argentina.
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md">indec.gob.ar</span>
             </a>
@@ -9747,7 +9730,7 @@ id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
-                            <i class="fas fa-[#720e9e] fa-globe text-lg"></i>
+                            <i class="fas fa-globe text-lg"></i>
                         </div>
                         <span class="font-bold text-white text-sm light:text-slate-900">Yahoo Finance API</span>
                     </div>
@@ -9812,7 +9795,24 @@ id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p
 
             <!-- Source Card: CAFCI -->
             <a href="https://www.cafci.org.ar/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-indigo-500/50 transition-all group light:bg-white light:border-slate-200">
-                
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                            <i class="fas fa-chart-pie text-lg"></i>
+                        </div>
+                        <span class="font-bold text-white text-sm light:text-slate-900">CAFCI (Fondos Comunes de Inversión)</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-indigo-400 transition-all"></i>
+                </div>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Cámara Argentina de FCI: Patrimonio, rendimiento y valores de cuotaparte de fondos Money Market y Renta Fija.
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-md">cafci.org.ar</span>
+            </a>
+
+        </div>
+    </div>
+
 <script>
 
         window.switchSrSubtab = function(subtabId) {
