@@ -9680,29 +9680,47 @@ function setSsnTimeRange(range) {
                 </div>
             </div>
         </div>
-    </div><div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
-        <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
-            <i class="fas fa-book-open text-brandBlue"></i> Directorio de Fuentes de Datos
-        </h2>
-        
-        <p class="text-sm text-slate-400 light:text-slate-600 mb-8 leading-relaxed">
-            A continuación se detallan las fuentes oficiales e institucionales de las cuales provienen los datos utilizados en este tablero. Para verificar el origen y la metodología de cada dato, puede visitar los sitios web listados.
-        </p>
+    </div>
+    <!-- GLOBAL CONTAINER: Fuentes de Información y APIs -->
+    <div id="container-fuentes" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p-8 overflow-y-auto max-w-[1700px] mx-auto w-full">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-white light:text-slate-900 flex items-center gap-3">
+                    <i class="fas fa-book-bookmark text-emerald-400"></i> Fuentes de Información y APIs
+                </h2>
+                <p class="text-slate-400 text-xs mt-1 light:text-slate-600">
+                    Directorio completo de APIs, organismos oficiales de regulación, organismos multilaterales y fuentes primarias de datos financieros, actuariales y demográficos.
+                </p>
+            </div>
+            <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 light:bg-emerald-50 light:text-emerald-700 border border-emerald-500/20 px-3 py-1.5 rounded-xl self-start md:self-auto">
+                <i class="fas fa-link text-xs mr-1"></i> Datos Verificados • Enlaces Oficiales
+            </span>
+        </div>
 
+        <!-- Grid of Data Sources -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- CATEGORÍA 1: ACTUARÍA, SALUD & DEMOGRAFÍA -->
+            <div class="lg:col-span-3">
+                <h3 class="text-sm font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fas fa-heart-pulse text-rose-500"></i> Fuentes Actuariales, Salud Pública y Demografía
+                </h3>
+            </div>
+
             <!-- Source Card: SOA -->
             <a href="https://www.soa.org/resources/experience-studies/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-brandBlue/50 transition-all group light:bg-white light:border-slate-200">
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-brandBlue group-hover:text-white transition-all">
-                            <i class="fas fa-dna"></i>
+                            <i class="fas fa-dna text-lg"></i>
                         </div>
-                        <span class="font-bold text-white text-sm light:text-slate-900">SOA (Society of Actuaries)</span>
+                        <span class="font-bold text-white text-sm light:text-slate-900">Society of Actuaries (SOA)</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-brandBlue transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Tablas actuariales de mortalidad internacional (Pri-2012, Pub-2010, RP-2014) y Escalas de Longevidad (MP-2021).
+                    Tablas actuariales de mortalidad internacional (Pri-2012, Pub-2010, RP-2014, CSO 2001, CSO 2017) y Escalas de Longevidad (MP-2021).
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-brandBlue bg-brandBlue/10 px-2 py-0.5 rounded-md">soa.org/experience-studies</span>
             </a>
@@ -9712,14 +9730,14 @@ function setSsnTimeRange(range) {
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-rose-500/10 text-rose-400 group-hover:bg-rose-500 group-hover:text-white transition-all">
-                            <i class="fas fa-heart-pulse"></i>
+                            <i class="fas fa-heart-pulse text-lg"></i>
                         </div>
                         <span class="font-bold text-white text-sm light:text-slate-900">OMS (Organización Mundial de la Salud)</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-rose-400 transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Global Health Observatory: Estadísticas de Carga de Enfermedad (AVISA/DALYs) y Esperanza de Vida Saludable (HALE).
+                    Global Health Observatory: Estadísticas de Carga Global de Enfermedad (AVISA/DALYs) y Esperanza de Vida Saludable (HALE).
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded-md">who.int/data/gho</span>
             </a>
@@ -9729,14 +9747,14 @@ function setSsnTimeRange(range) {
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 group-hover:bg-amber-500 group-hover:text-white transition-all">
-                            <i class="fas fa-piggy-bank"></i>
+                            <i class="fas fa-piggy-bank text-lg"></i>
                         </div>
                         <span class="font-bold text-white text-sm light:text-slate-900">OCDE (Pension Markets in Focus)</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-amber-400 transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Estadísticas internacionales de pensiones, tasas de reemplazo netas previsionales y suficiencia de retiro.
+                    Estadísticas internacionales de pensiones, tasas de reemplazo netas previsionales y suficiencia de fondos de retiro.
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md">oecd.org/pensions</span>
             </a>
@@ -9746,14 +9764,14 @@ function setSsnTimeRange(range) {
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                            <i class="fas fa-shield-halved"></i>
+                            <i class="fas fa-shield-halved text-lg"></i>
                         </div>
                         <span class="font-bold text-white text-sm light:text-slate-900">SSN (Superintendencia de Seguros)</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-emerald-400 transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Tablas regulatorias oficiales de mortalidad (GAM-94 Res. 38.708) y Reservas Matemáticas de Seguros de Retiro.
+                    Tablas regulatorias oficiales de mortalidad (GAM-94 Res. 38.708), Reservas Matemáticas y Producción Aseguradora.
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">argentina.gob.ar/ssn</span>
             </a>
@@ -9763,1114 +9781,112 @@ function setSsnTimeRange(range) {
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400 group-hover:bg-purple-500 group-hover:text-white transition-all">
-                            <i class="fas fa-users"></i>
+                            <i class="fas fa-users text-lg"></i>
                         </div>
                         <span class="font-bold text-white text-sm light:text-slate-900">INDEC & DEIS (Min. Salud)</span>
                     </div>
                     <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-purple-400 transition-all"></i>
                 </div>
                 <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
-                    Tablas Abreviadas de Mortalidad de Argentina, Estadísticas Vitales DEIS y Proyecciones Poblacionales del Censo.
+                    Tablas Abreviadas de Mortalidad de Argentina, Estadísticas Vitales DEIS y Proyecciones Demográficas del Censo.
                 </p>
                 <span class="inline-block mt-3 text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-md">indec.gob.ar</span>
             </a>
-            <!-- Yahoo Finance -->
-            <a href="https://finance.yahoo.com/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    Yahoo Finance
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
+
+            <!-- CATEGORÍA 2: FINANZAS & MERCADO CAMBIARIO -->
+            <div class="lg:col-span-3 mt-4">
+                <h3 class="text-sm font-bold text-slate-300 light:text-slate-700 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <i class="fas fa-chart-line text-blue-400"></i> Fuentes Financieras y Mercado de Capitales
                 </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Cotizaciones históricas y en tiempo real de índices globales, acciones mundiales, CEDEARs, ETFs, commodities, y criptomonedas.</p>
-            </a>
-            
-            <!-- Rava Bursátil -->
-            <a href="https://www.rava.com/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    Rava Bursátil
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Cotizaciones locales de Bonos Soberanos (USD, CER, Pesos), Obligaciones Negociables (ONs), LECAPs y perfiles de activos argentinos.</p>
-            </a>
-
-            <!-- BYMA -->
-            <a href="https://www.byma.com.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    BYMA
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Bolsas y Mercados Argentinos. Información oficial del mercado de capitales, volúmenes transados y rendimientos de especies locales.</p>
-            </a>
-
-            <!-- BCRA -->
-            <a href="https://www.bcra.gob.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    BCRA
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Banco Central de la República Argentina. Tasas de referencia, reservas internacionales, base monetaria y regulaciones.</p>
-            </a>
-
-            <!-- INDEC -->
-            <a href="https://www.indec.gob.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    INDEC
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Instituto Nacional de Estadística y Censos. Índices de precios (IPC), pobreza, indigencia, salarios, y datos macroeconómicos.</p>
-            </a>
-
-            <!-- CAFCI -->
-            <a href="https://cafci.org.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    CAFCI
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Cámara Argentina de Fondos Comunes de Inversión. Estadísticas, rendimientos y patrimonios de la industria de FCIs.</p>
-            </a>
-
-            <!-- SSN -->
-            <a href="https://www.argentina.gob.ar/ssn" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    SSN
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Superintendencia de Seguros de la Nación. Estadísticas e información del Mercado Asegurador Argentino.</p>
-            </a>
-            
-            <!-- Ministerio de Economía -->
-            <a href="https://www.argentina.gob.ar/economia" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    Hacienda y Finanzas
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Secretaría de Hacienda y Finanzas Públicas. Resultados fiscales, recaudación tributaria y datos de deuda pública soberana.</p>
-            </a>
-
-            <!-- DolarHoy -->
-            <a href="https://dolarhoy.com/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    DolarHoy / DolarAPI
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Cotizaciones históricas y del momento de los distintos tipos de cambio (Dólar Oficial, MEP, CCL, Blue, Tarjeta).</p>
-            </a>
-            
-            <!-- IAMC -->
-            <a href="https://www.iamc.com.ar/" target="_blank" class="glass-card rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all border border-darkBorder/40 group block">
-                <h3 class="text-lg font-bold text-brandBlue mb-2 flex items-center justify-between">
-                    IAMC
-                    <i class="fas fa-external-link-alt text-[10px] text-slate-500 group-hover:text-brandBlue transition-colors"></i>
-                </h3>
-                <p class="text-xs text-slate-300 light:text-slate-700">Instituto Argentino de Mercado de Capitales. Informes diarios, calculadoras de bonos y series históricas.</p>
-            </a>
-
-        </div>
-    </div>
-
-
-    <script>
-        const balancesData = {{ data.balances | tojson | safe if data.balances else '{}' }};
-        
-        // Configuration for table rows
-        const balancesConfig = {
-            patrimoniales: [
-                { key: "Activos", label: "Activos", isHeader: true, verticalBase: "Activos" },
-                { key: "Disponibilidades", label: "Disponibilidades", verticalBase: "Activos" },
-                { key: "Inversiones", label: "Inversiones", verticalBase: "Activos" },
-                { key: "Créditos", label: "Créditos", verticalBase: "Activos" },
-                { key: "Inmuebles", label: "Inmuebles", verticalBase: "Activos" },
-                { key: "Bienes de Uso", label: "Bienes de Uso", verticalBase: "Activos" },
-                { key: "Otros", label: "Otros", verticalBase: "Activos" },
-                { key: "Pasivo", label: "Pasivo", isHeader: true, verticalBase: "Pasivo" },
-                { key: "Deudas c/Asegurados", label: "Deudas c/Asegurados", verticalBase: "Pasivo" },
-                { key: "Otras Deudas", label: "Otras Deudas", verticalBase: "Pasivo" },
-                { key: "Compromisos Técnicos", label: "Compromisos Técnicos", verticalBase: "Pasivo" },
-                { key: "Previsiones", label: "Previsiones", verticalBase: "Pasivo" },
-                { key: "Patrimonio Neto", label: "Patrimonio Neto", isHeader: true, verticalBase: null }
-            ],
-            resultados: [
-                { key: "Resultado Técnico Seg. Directo", label: "Resultado Técnico Seg. Directo (1)" },
-                { key: "Resultado Técnico Reaseg. Activo", label: "Resultado Técnico Reaseg. Activo (2)" },
-                { key: "Otros Ingresos", label: "Otros Ingresos (3)" },
-                { key: "Otros Egresos", label: "Otros Egresos (4)" },
-                { key: "Resultado Técnico", label: "Resultado Técnico (5 = 1 + 2 + 3 + 4)", isHeader: true },
-                { key: "Resultado Financiero", label: "Resultado Financiero (6)" },
-                { key: "Rdo. Operaciones Ordinarias", label: "Rdo. Operaciones Ordinarias (7 = 5 + 6)" },
-                { key: "Rdo. Operaciones Extraordinarias", label: "Rdo. Operaciones Extraordinarias (8)" },
-                { key: "Impuesto a las Ganancias", label: "Impuesto a las Ganancias (9)" },
-                { key: "Resultado del Ejercicio", label: "Resultado del Ejercicio (10 = 7 + 8 + 9)", isHeader: true }
-            ],
-            tecnico: [
-                { key: "Primas Netas Devengadas", label: "Primas Netas Devengadas" },
-                { key: "Siniestros Netos Devengados", label: "Siniestros Netos Devengados" },
-                { key: "Rescates", label: "Rescates" },
-                { key: "Rentas Vitalicias y Periódicas", label: "Rentas Vitalicias y Periódicas" },
-                { key: "Gastos Totales", label: "Gastos Totales" },
-                { key: "Total Resultado Técnico de Seguros Directos", label: "Total Resultado Técnico de Seguros Directos", isHeader: true },
-                { key: "Total Resultado Técnico de Reaseguros Activos", label: "Total Resultado Técnico de Reaseguros Activos", isHeader: true },
-                { key: "Gastos de Prevención", label: "Gastos de Prevención" },
-                { key: "Otros Ingresos", label: "Otros Ingresos" },
-                { key: "Otros Egresos", label: "Otros Egresos" },
-                { key: "Otras Indemnizaciones y Beneficios", label: "Otras Indemnizaciones y Beneficios" },
-                { key: "Resultado Técnico Total", label: "Resultado Técnico Total", isHeader: true }
-            ],
-            financiero: [
-                { key: "Rentas", label: "Rentas" },
-                { key: "Resultados por Realización", label: "Resultados por Realización" },
-                { key: "Resultados por Tenencia", label: "Resultados por Tenencia" },
-                { key: "Otros Ingresos", label: "Otros Ingresos" },
-                { key: "Otros Egresos", label: "Otros Egresos" },
-                { key: "Gastos de Explotación y Otros Cargos", label: "Gastos de Explotación y Otros Cargos" },
-                { key: "RECPAM", label: "RECPAM" },
-                { key: "Resultado Financiero Total", label: "Resultado Financiero Total", isHeader: true }
-            ]
-        };
-
-        const retiroData = {{ ssn_retiro | tojson | safe }};
-
-
-        const segmentSelect = document.getElementById("balances-segment-select");
-        const companySelect = document.getElementById("balances-company-select");
-        const statementSelect = document.getElementById("balances-statement-select");
-        const tableBody = document.getElementById("balances-table-body");
-        
-        function initBalances() {
-            if (!balancesData || Object.keys(balancesData).length === 0) return;
-            
-            // Populate segments
-            const segments = Object.keys(balancesData);
-            segmentSelect.innerHTML = "";
-            segments.forEach(seg => {
-                const opt = document.createElement("option");
-                opt.value = seg;
-                opt.textContent = seg;
-                segmentSelect.appendChild(opt);
-            });
-            
-            // Event listeners
-            segmentSelect.addEventListener("change", () => {
-                updateCompanyDropdown();
-                renderBalancesTable();
-            });
-            companySelect.addEventListener("change", renderBalancesTable);
-            statementSelect.addEventListener("change", renderBalancesTable);
-            
-            // Initial render
-            updateCompanyDropdown();
-            renderBalancesTable();
-        }
-        
-        function updateCompanyDropdown() {
-            const seg = segmentSelect.value;
-            if (!seg || !balancesData[seg]) return;
-            
-            
-            const nota = document.getElementById("balances-nota-metodologica");
-            if (nota) {
-                if (seg === "Seguros Patrimoniales") {
-                    nota.classList.remove("hidden");
-                } else {
-                    nota.classList.add("hidden");
-                }
-            }
-const companies = Object.keys(balancesData[seg]);
-            companySelect.innerHTML = "";
-            companies.forEach(comp => {
-                const opt = document.createElement("option");
-                opt.value = comp;
-                opt.textContent = comp;
-                companySelect.appendChild(opt);
-            });
-        }
-        
-        function renderBalancesTable() {
-            const seg = segmentSelect.value;
-            const comp = companySelect.value;
-            const stmt = statementSelect.value;
-            
-            if (!seg || !comp || !stmt || !balancesData[seg] || !balancesData[seg][comp]) return;
-            
-            const companyData = balancesData[seg][comp];
-            const data2026 = companyData["202603"] && companyData["202603"][stmt] ? companyData["202603"][stmt] : {};
-            const data2025 = companyData["202503"] && companyData["202503"][stmt] ? companyData["202503"][stmt] : {};
-            
-            const rowsConfig = balancesConfig[stmt];
-            tableBody.innerHTML = "";
-            
-            // Show/Hide vertical analysis columns
-            const showVertical = (stmt === "patrimoniales");
-            document.getElementById("th-vert-26").style.display = showVertical ? "table-cell" : "none";
-            document.getElementById("th-vert-25").style.display = showVertical ? "table-cell" : "none";
-            
-            rowsConfig.forEach(row => {
-                const val26 = (data2026[row.key] || 0) / 1000;
-                const val25 = (data2025[row.key] || 0) / 1000;
-                
-                let varPctStr = "-";
-                if (val25 !== 0) {
-                    const varPct = ((val26 - val25) / Math.abs(val25)) * 100;
-                    varPctStr = formatPct(varPct);
-                }
-                
-                let vert26 = "-", vert25 = "-";
-                if (showVertical && row.verticalBase) {
-                    const base26 = (data2026[row.verticalBase] || 0) / 1000;
-                    const base25 = (data2025[row.verticalBase] || 0) / 1000;
-                    if (base26 !== 0) vert26 = formatPct((val26 / base26) * 100);
-                    if (base25 !== 0) vert25 = formatPct((val25 / base25) * 100);
-                }
-                
-                const tr = document.createElement("tr");
-                if (row.isHeader) {
-                    tr.className = "bg-darkBorder/10 light:bg-slate-50";
-                } else {
-                    tr.className = "hover:bg-darkBorder/20 light:hover:bg-slate-50 transition-colors";
-                }
-                
-                const formatVal = (v) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
-                
-
-                const createTd = (content, align='right', classes='') => {
-                    const td = document.createElement('td');
-                    td.className = `px-6 py-4 whitespace-nowrap text-${align} ${classes}`;
-                    td.textContent = content;
-                    return td;
-                };
-
-                const labelClasses = row.isHeader ? 'font-bold text-slate-200 light:text-slate-800' : 'text-slate-300 light:text-slate-600 pl-10';
-                tr.appendChild(createTd(row.label, 'left', labelClasses));
-
-                const valClasses = row.isHeader ? 'font-bold text-slate-200 light:text-slate-800' : 'text-slate-300 light:text-slate-600';
-                tr.appendChild(createTd(formatVal(val26), 'right', valClasses));
-
-                if (showVertical) {
-                    tr.appendChild(createTd(vert26, 'right', 'text-brandBlue font-medium'));
-                }
-
-                tr.appendChild(createTd(formatVal(val25), 'right', valClasses));
-
-                if (showVertical) {
-                    tr.appendChild(createTd(vert25, 'right', 'text-brandBlue font-medium'));
-                }
-                
-                // Var Pct colored
-                let colorClass = "text-slate-400";
-                if (varPctStr !== "-") {
-                    const num = parseFloat(varPctStr.replace(/\./g, '').replace(',', '.'));
-                    if (num > 0) colorClass = "text-emerald-500 font-medium";
-                    else if (num < 0) colorClass = "text-red-500 font-medium";
-                }
-                tr.appendChild(createTd(varPctStr, 'right', colorClass));
-                
-                tableBody.appendChild(tr);
-            });
-        }
-        
-        
-        // Seguros de Retiro Logic
-        let retiroSectionSelect, retiroTableComp, retiroTableAseg, retiroBodyComp, retiroBodyAseg;
-        let retiroInitialized = false;
-
-        function initRetiro() {
-            if (!retiroData || retiroData.length === 0) return;
-            
-            retiroSectionSelect = document.getElementById("retiro-section-select");
-            retiroTableComp = document.getElementById("retiro-table-compromisos");
-            retiroTableAseg = document.getElementById("retiro-table-asegurados");
-            retiroBodyComp = document.getElementById("retiro-body-compromisos");
-            retiroBodyAseg = document.getElementById("retiro-body-asegurados");
-            
-            if (!retiroBodyComp || !retiroBodyAseg) {
-                return;
-            }
-
-            if (retiroSectionSelect && !retiroInitialized) {
-                retiroSectionSelect.addEventListener("change", () => {
-                    const val = retiroSectionSelect.value;
-                    if (val === 'compromisos') {
-                        if (retiroTableComp) retiroTableComp.classList.remove('hidden');
-                        if (retiroTableAseg) retiroTableAseg.classList.add('hidden');
-                    } else {
-                        if (retiroTableComp) retiroTableComp.classList.add('hidden');
-                        if (retiroTableAseg) retiroTableAseg.classList.remove('hidden');
-                    }
-                });
-                retiroInitialized = true;
-            }
-            
-            renderRetiroCompromisos();
-            renderRetiroAsegurados();
-        }
-
-        function toggleRetiroRow(id) {
-            const rows = document.querySelectorAll('.retiro-subrow-' + id);
-            const icon = document.getElementById('retiro-icon-' + id);
-            
-            let isExpanded = false;
-            rows.forEach(r => {
-                if (r.classList.contains('hidden')) {
-                    r.classList.remove('hidden');
-                    isExpanded = true;
-                } else {
-                    r.classList.add('hidden');
-                }
-            });
-            
-            if (icon) {
-                if (isExpanded) {
-                    icon.classList.remove('fa-chevron-right');
-                    icon.classList.add('fa-chevron-down');
-                } else {
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-right');
-                }
-            }
-        }
-
-        function formatValRetiro(v) {
-            if (v === undefined || v === null || isNaN(v)) return "0,0";
-            return new Intl.NumberFormat('es-AR', { maximumFractionDigits: 1, minimumFractionDigits: 1 }).format(v / 1000000);
-        }
-        function formatCountRetiro(v) {
-            if (v === undefined || v === null || isNaN(v)) return "0";
-            return new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(v);
-        }
-        function formatPctRetiro(v) {
-            if (v === undefined || v === null || isNaN(v)) return "-";
-            return new Intl.NumberFormat('es-AR', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(v / 100);
-        }
-
-        function getVarColor(yoy) {
-            if (yoy > 0) return "text-emerald-500";
-            if (yoy < 0) return "text-red-500";
-            return "text-slate-400";
-        }
-
-        function getRetiroField(obj, key, prop, fallback) {
-            if (obj && obj[key] && obj[key][prop] !== undefined) {
-                return obj[key][prop];
-            }
-            return fallback;
-        }
-
-        function renderRetiroCompromisos() {
-            if (!retiroBodyComp) return;
-            retiroBodyComp.innerHTML = "";
-            
-            // Separate regular rows and total row
-            const regularRows = retiroData.filter(r => !r.isTotalRow);
-            const totalRow = retiroData.find(r => r.isTotalRow);
-
-            regularRows.forEach((row, i) => {
-                const c = row.compromisos || {};
-                const totalVal = getRetiroField(c, "Total", "val", 0);
-                if (totalVal === 0) return; // Skip zero total
-
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-darkBorder/20 transition-colors group";
-                
-                // Has subrows?
-                const paIndiv = getRetiroField(c, "Periodo Ahorro Indiv", "val", 0);
-                const rvIndiv = getRetiroField(c, "Rentas Vitalicias Indiv", "val", 0);
-                const hasSub = (paIndiv > 0 || rvIndiv > 0);
-                
-                const totalPct = getRetiroField(c, "Total", "pct", undefined);
-                const totalYoY = getRetiroField(c, "Total", "yoy", undefined);
-                
-                const paVal = getRetiroField(c, "Periodo Ahorro", "val", 0);
-                const paPct = getRetiroField(c, "Periodo Ahorro", "pct", undefined);
-                const paYoY = getRetiroField(c, "Periodo Ahorro", "yoy", undefined);
-                
-                const rvVal = getRetiroField(c, "Rentas Vitalicias", "val", 0);
-                const rvPct = getRetiroField(c, "Rentas Vitalicias", "pct", undefined);
-                const rvYoY = getRetiroField(c, "Rentas Vitalicias", "yoy", undefined);
-                
-                const rvpVal = getRetiroField(c, "RVP y ART", "val", 0);
-                const otrosVal = getRetiroField(c, "Otros", "val", 0);
-                
-                tr.innerHTML = `
-                    <td class="px-4 py-3 cursor-pointer" onclick="toggleRetiroRow(${i})">
-                        ${hasSub ? `<i id="retiro-icon-${i}" class="fas fa-chevron-right text-slate-500 text-xs"></i>` : ''}
-                    </td>
-                    <td class="px-4 py-3 font-semibold text-slate-200 light:text-slate-800 truncate max-w-[200px]" title="${row.Entidad}">${row.Entidad}</td>
-                    <td class="px-4 py-3 text-right text-white light:text-slate-900">$${formatValRetiro(totalVal)}</td>
-                    <td class="px-4 py-3 text-right text-brandBlue font-medium">${formatPctRetiro(totalPct)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(totalYoY)}">${formatPctRetiro(totalYoY)}</td>
-                    
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">$${formatValRetiro(paVal)}</td>
-                    <td class="px-4 py-3 text-right text-brandBlue/80 light:text-brandBlue">${formatPctRetiro(paPct)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(paYoY)}">${formatPctRetiro(paYoY)}</td>
-                    
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">$${formatValRetiro(rvVal)}</td>
-                    <td class="px-4 py-3 text-right text-brandBlue/80 light:text-brandBlue">${formatPctRetiro(rvPct)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(rvYoY)}">${formatPctRetiro(rvYoY)}</td>
-                    
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">$${formatValRetiro(rvpVal)}</td>
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">$${formatValRetiro(otrosVal)}</td>
-                `;
-                retiroBodyComp.appendChild(tr);
-
-                if (hasSub) {
-                    const paIndivYoY = getRetiroField(c, "Periodo Ahorro Indiv", "yoy", undefined);
-                    const rvIndivYoY = getRetiroField(c, "Rentas Vitalicias Indiv", "yoy", undefined);
-                    const paColVal = getRetiroField(c, "Periodo Ahorro Col", "val", 0);
-                    const paColYoY = getRetiroField(c, "Periodo Ahorro Col", "yoy", undefined);
-                    const rvColVal = getRetiroField(c, "Rentas Vitalicias Col", "val", 0);
-                    const rvColYoY = getRetiroField(c, "Rentas Vitalicias Col", "yoy", undefined);
-
-                    // Subrow Individual
-                    const trIndiv = document.createElement("tr");
-                    trIndiv.className = `retiro-subrow-${i} hidden bg-darkBorder/10`;
-                    trIndiv.innerHTML = `
-                        <td></td>
-                        <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>Individual</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                        <td class="px-4 py-2 text-right text-slate-400">$${formatValRetiro(paIndiv)}</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right ${getVarColor(paIndivYoY)} text-[10px]">${formatPctRetiro(paIndivYoY)}</td>
-                        <td class="px-4 py-2 text-right text-slate-400">$${formatValRetiro(rvIndiv)}</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right ${getVarColor(rvIndivYoY)} text-[10px]">${formatPctRetiro(rvIndivYoY)}</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                    `;
-                    retiroBodyComp.appendChild(trIndiv);
-                    
-                    // Subrow Colectivo
-                    const trCol = document.createElement("tr");
-                    trCol.className = `retiro-subrow-${i} hidden bg-darkBorder/10`;
-                    trCol.innerHTML = `
-                        <td></td>
-                        <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>Colectivo</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                        <td class="px-4 py-2 text-right text-slate-400">$${formatValRetiro(paColVal)}</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right ${getVarColor(paColYoY)} text-[10px]">${formatPctRetiro(paColYoY)}</td>
-                        <td class="px-4 py-2 text-right text-slate-400">$${formatValRetiro(rvColVal)}</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right ${getVarColor(rvColYoY)} text-[10px]">${formatPctRetiro(rvColYoY)}</td>
-                        <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                    `;
-                    retiroBodyComp.appendChild(trCol);
-                }
-            });
-
-            // Append TOTAL MERCADO summary row
-            if (totalRow) {
-                const c = totalRow.compromisos || {};
-                const totalVal = getRetiroField(c, "Total", "val", 0);
-                const totalYoY = getRetiroField(c, "Total", "yoy", undefined);
-                const paVal = getRetiroField(c, "Periodo Ahorro", "val", 0);
-                const paYoY = getRetiroField(c, "Periodo Ahorro", "yoy", undefined);
-                const rvVal = getRetiroField(c, "Rentas Vitalicias", "val", 0);
-                const rvYoY = getRetiroField(c, "Rentas Vitalicias", "yoy", undefined);
-                const rvpVal = getRetiroField(c, "RVP y ART", "val", 0);
-                const otrosVal = getRetiroField(c, "Otros", "val", 0);
-
-                const trTot = document.createElement("tr");
-                trTot.className = "bg-brandBlue/20 font-bold text-white border-t-2 border-brandBlue/50 text-xs";
-                trTot.innerHTML = `
-                    <td class="px-4 py-3"></td>
-                    <td class="px-4 py-3 font-bold text-brandBlue uppercase tracking-wider text-xs">TOTAL MERCADO</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(totalVal)}</td>
-                    <td class="px-4 py-3 text-right text-brandBlue font-bold">${formatPctRetiro(100)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-bold">${formatPctRetiro(totalYoY)}</td>
-                    
-                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(paVal)}</td>
-                    <td class="px-4 py-3 text-right text-brandBlue font-bold">${formatPctRetiro(100)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(paYoY)} font-bold">${formatPctRetiro(paYoY)}</td>
-                    
-                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(rvVal)}</td>
-                    <td class="px-4 py-3 text-right text-brandBlue font-bold">${formatPctRetiro(100)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(rvYoY)} font-bold">${formatPctRetiro(rvYoY)}</td>
-                    
-                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(rvpVal)}</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">$${formatValRetiro(otrosVal)}</td>
-                `;
-                retiroBodyComp.appendChild(trTot);
-            }
-        }
-
-        function renderRetiroAsegurados() {
-            if (!retiroBodyAseg) return;
-            retiroBodyAseg.innerHTML = "";
-            
-            const regularRows = retiroData.filter(r => !r.isTotalRow);
-            const totalRow = retiroData.find(r => r.isTotalRow);
-
-            // Sort by Asegurados Total descending
-            const sortedAseg = [...regularRows].sort((a,b) => {
-                const valA = getRetiroField(a.asegurados, "Cantidad Total", "val", 0);
-                const valB = getRetiroField(b.asegurados, "Cantidad Total", "val", 0);
-                return valB - valA;
-            });
-            
-            sortedAseg.forEach((row, i) => {
-                const a = row.asegurados || {};
-                const totalVal = getRetiroField(a, "Cantidad Total", "val", 0);
-                if (totalVal === 0) return; 
-
-                const totalYoY = getRetiroField(a, "Cantidad Total", "yoy", undefined);
-                const paVal = getRetiroField(a, "Periodo Ahorro", "val", 0);
-                const rvVal = getRetiroField(a, "Rentistas Voluntarios", "val", 0);
-                const rvpArtVal = getRetiroField(a, "RVP+ART", "val", 0);
-
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-darkBorder/20 transition-colors group";
-                
-                tr.innerHTML = `
-                    <td class="px-4 py-3 cursor-pointer" onclick="toggleRetiroRow('a${i}')">
-                        <i id="retiro-icon-a${i}" class="fas fa-chevron-right text-slate-500 text-xs"></i>
-                    </td>
-                    <td class="px-4 py-3 font-semibold text-slate-200 light:text-slate-800 truncate max-w-[200px]" title="${row.Entidad}">${row.Entidad}</td>
-                    <td class="px-4 py-3 text-right text-white light:text-slate-900">${formatCountRetiro(totalVal)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-medium">${formatPctRetiro(totalYoY)}</td>
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(paVal)}</td>
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(rvVal)}</td>
-                    <td class="px-4 py-3 text-right text-slate-300 light:text-slate-700">${formatCountRetiro(rvpArtVal)}</td>
-                `;
-                retiroBodyAseg.appendChild(tr);
-
-                const ahIndiv = getRetiroField(a, "Ahorro Indiv", "val", 0);
-                const rtaIndiv = getRetiroField(a, "Renta Indiv", "val", 0);
-                const ahCol = getRetiroField(a, "Ahorro Col", "val", 0);
-                const rtaCol = getRetiroField(a, "Renta Col", "val", 0);
-                const rtaPrev = getRetiroField(a, "RVP+ART", "val", 0);
-
-                // Subrow Individual
-                const trIndiv = document.createElement("tr");
-                trIndiv.className = `retiro-subrow-a${i} hidden bg-darkBorder/10`;
-                trIndiv.innerHTML = `
-                    <td></td>
-                    <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>Individual</td>
-                    <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                    <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(ahIndiv)}</td>
-                    <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(rtaIndiv)}</td>
-                    <td class="px-4 py-2 text-right text-slate-400">-</td>
-                `;
-                retiroBodyAseg.appendChild(trIndiv);
-                
-                // Subrow Colectivo
-                const trCol = document.createElement("tr");
-                trCol.className = `retiro-subrow-a${i} hidden bg-darkBorder/10`;
-                trCol.innerHTML = `
-                    <td></td>
-                    <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>Colectivo</td>
-                    <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                    <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(ahCol)}</td>
-                    <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(rtaCol)}</td>
-                    <td class="px-4 py-2 text-right text-slate-400">-</td>
-                `;
-                retiroBodyAseg.appendChild(trCol);
-                
-                // Subrow RVP y ART
-                const trPrev = document.createElement("tr");
-                trPrev.className = `retiro-subrow-a${i} hidden bg-darkBorder/10`;
-                trPrev.innerHTML = `
-                    <td></td>
-                    <td class="px-4 py-2 text-slate-400 pl-8"><i class="fas fa-level-up-alt rotate-90 mr-2 text-[10px]"></i>RVP y ART</td>
-                    <td class="px-4 py-2 text-right"></td><td class="px-4 py-2 text-right"></td>
-                    <td class="px-4 py-2 text-right text-slate-400">-</td>
-                    <td class="px-4 py-2 text-right text-slate-400">-</td>
-                    <td class="px-4 py-2 text-right text-slate-400">${formatCountRetiro(rtaPrev)}</td>
-                `;
-                retiroBodyAseg.appendChild(trPrev);
-            });
-
-            // Append TOTAL MERCADO summary row for Asegurados
-            if (totalRow) {
-                const a = totalRow.asegurados || {};
-                const totalVal = getRetiroField(a, "Cantidad Total", "val", 0);
-                const totalYoY = getRetiroField(a, "Cantidad Total", "yoy", undefined);
-                const paVal = getRetiroField(a, "Periodo Ahorro", "val", 0);
-                const rvVal = getRetiroField(a, "Rentistas Voluntarios", "val", 0);
-                const rvpArtVal = getRetiroField(a, "RVP+ART", "val", 0);
-
-                const trTot = document.createElement("tr");
-                trTot.className = "bg-brandBlue/20 font-bold text-white border-t-2 border-brandBlue/50 text-xs";
-                trTot.innerHTML = `
-                    <td class="px-4 py-3"></td>
-                    <td class="px-4 py-3 font-bold text-brandBlue uppercase tracking-wider text-xs">TOTAL MERCADO</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(totalVal)}</td>
-                    <td class="px-4 py-3 text-right ${getVarColor(totalYoY)} font-bold">${formatPctRetiro(totalYoY)}</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(paVal)}</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(rvVal)}</td>
-                    <td class="px-4 py-3 text-right text-white font-bold">${formatCountRetiro(rvpArtVal)}</td>
-                `;
-                retiroBodyAseg.appendChild(trTot);
-            }
-        }
-
-        function formatPct(val) {
-            return new Intl.NumberFormat('es-AR', { style: 'percent', maximumFractionDigits: 1 }).format(val / 100);
-        }
-
-        // Initialize when DOM loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            initBalances();
-            initRetiro();
-        });
-    </script>
-
-    <div id="indicator-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 999999; display: none; align-items: center; justify-content: center; transition: opacity 0.3s ease-in-out; opacity: 0; pointer-events: none;" onclick="const card = this.querySelector('.glass-card'); if (card && !card.contains(event.target)) closeIndicatorModal()">
-        <div class="glass-card bg-darkCard/95 light:bg-white max-w-3xl w-full mx-4 p-6 rounded-3xl border border-darkBorder/40 light:border-gray-200 shadow-2xl relative flex flex-col max-h-[90vh]">
-            <!-- Close Button -->
-            <button onclick="closeIndicatorModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white light:hover:text-slate-900 transition-colors">
-                <i class="fas fa-times text-lg"></i>
-            </button>
-            
-            <!-- Header -->
-            <div class="mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div class="flex-1 min-w-0">
-                    <h3 id="modal-title" class="text-lg font-black text-white light:text-slate-900 tracking-tight truncate"></h3>
-                    <p id="modal-desc" class="text-xs text-slate-400 light:text-slate-500 mt-1 truncate" title=""></p>
-                    <div class="flex gap-2 mt-2">
-                        <span id="modal-period" class="text-[9px] px-2 py-0.5 rounded font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"></span>
-                    </div>
-                </div>
-                <!-- Modal Period Selector -->
-                <div class="flex gap-1 items-center self-start sm:self-center bg-darkBg/60 light:bg-slate-100 p-1 rounded-xl border border-darkBorder/40 light:border-gray-200">
-                    <button onclick="changeModalPeriod('12M')" id="btn-modal-12M" class="text-[10px] px-2.5 py-1 rounded-lg transition-all font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">12M</button>
-                    <button onclick="changeModalPeriod('24M')" id="btn-modal-24M" class="text-[10px] px-2.5 py-1 rounded-lg transition-all font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">24M</button>
-                    <button onclick="changeModalPeriod('36M')" id="btn-modal-36M" class="text-[10px] px-2.5 py-1 rounded-lg transition-all font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">36M</button>
-                    <button onclick="changeModalPeriod('5A')" id="btn-modal-5A" class="text-[10px] px-2.5 py-1 rounded-lg transition-all font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">5A</button>
-                    <button onclick="changeModalPeriod('10A')" id="btn-modal-10A" class="text-[10px] px-2.5 py-1 rounded-lg transition-all font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">10A</button>
-                    <button onclick="changeModalPeriod('MAX')" id="btn-modal-MAX" class="text-[10px] px-2.5 py-1 rounded-lg transition-all font-semibold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">MAX</button>
-                </div>
             </div>
-            
-            <!-- Chart Container -->
-            <div class="flex-grow min-h-[300px] h-[350px] relative w-full mb-2">
-                <canvas id="modal-chart-canvas"></canvas>
-            </div>
-        </div>
-    </div>
 
-    <div id="bond-detail-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 999999; display: none; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out;" onclick="if(event.target === this) closeBondDetailsModal()">
-        <div class="glass-card rounded-3xl p-6 sm:p-8 w-[95%] max-w-5xl max-h-[90vh] overflow-y-auto flex flex-col gap-6 relative shadow-2xl border border-darkBorder/40 light:bg-white light:border-slate-200">
-            
-            <!-- Close Button -->
-            <button onclick="closeBondDetailsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 transition-colors w-8 h-8 rounded-full flex items-center justify-center bg-darkBg/40 border border-darkBorder/40">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <!-- Modal Header -->
-            <div class="flex flex-col gap-1">
-                <div class="flex items-center gap-3">
-                    <span id="bond-modal-ticker" class="text-2xl font-black text-white light:text-slate-900 tracking-tight bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl border border-brandBlue/20"></span>
-                    <span id="bond-modal-family" class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"></span>
-                </div>
-                <h3 id="bond-modal-name" class="text-lg font-bold text-white light:text-slate-800 tracking-tight mt-2"></h3>
-            </div>
-            
-            <!-- Top Metric Highlighters -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-darkBg/60 light:bg-slate-50 border border-darkBorder/40 light:border-slate-200 rounded-2xl p-4 flex flex-col">
-                    <span class="text-[10px] text-slate-400 light:text-slate-500 font-bold uppercase tracking-wider">Precio Actual</span>
-                    <span id="bond-metric-price" class="text-lg font-black text-white light:text-slate-900 font-mono mt-1"></span>
-                </div>
-                <div class="bg-darkBg/60 light:bg-slate-50 border border-darkBorder/40 light:border-slate-200 rounded-2xl p-4 flex flex-col">
-                    <span class="text-[10px] text-slate-400 light:text-slate-500 font-bold uppercase tracking-wider">TIR (Tasa Retorno)</span>
-                    <span id="bond-metric-tir" class="text-lg font-black text-white light:text-slate-900 font-mono mt-1"></span>
-                </div>
-                <div class="bg-darkBg/60 light:bg-slate-50 border border-darkBorder/40 light:border-slate-200 rounded-2xl p-4 flex flex-col">
-                    <span class="text-[10px] text-slate-400 light:text-slate-500 font-bold uppercase tracking-wider">Valor Técnico</span>
-                    <span id="bond-metric-tv" class="text-lg font-black text-white light:text-slate-900 font-mono mt-1"></span>
-                </div>
-                <div class="bg-darkBg/60 light:bg-slate-50 border border-darkBorder/40 light:border-slate-200 rounded-2xl p-4 flex flex-col">
-                    <span class="text-[10px] text-slate-400 light:text-slate-500 font-bold uppercase tracking-wider">Duration Modificada</span>
-                    <span id="bond-metric-dm" class="text-lg font-black text-white light:text-slate-900 font-mono mt-1"></span>
-                </div>
-            </div>
-            
-            <!-- Two-Column Layout -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                
-                <!-- Left Column (Tables) -->
-                <div class="lg:col-span-5 flex flex-col gap-6">
-                    
-                    <!-- Metrics Table Card -->
-                    <div class="bg-darkBg/40 light:bg-slate-50/50 border border-darkBorder/30 light:border-slate-200 rounded-2xl overflow-hidden">
-                        <div class="px-4 py-3 bg-darkBg/60 light:bg-slate-100 border-b border-darkBorder/30 light:border-slate-200 font-bold text-xs uppercase text-slate-300 light:text-slate-700">
-                            Ficha Técnica
+            <!-- Source Card: Yahoo Finance -->
+            <a href="https://finance.yahoo.com/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-blue-500/50 transition-all group light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                            <i class="fas fa-[#720e9e] fa-globe text-lg"></i>
                         </div>
-                        <table class="w-full divide-y divide-darkBorder/20 light:divide-gray-200 text-xs text-left">
-                            <tbody class="divide-y divide-darkBorder/10 light:divide-gray-100">
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Precio</td><td id="bond-detail-price" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Variación Diaria</td><td id="bond-detail-change" class="px-4 py-2 text-right font-mono font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Apertura / Cierre</td><td id="bond-detail-opencolse" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Mínimo / Máximo</td><td id="bond-detail-minmax" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Fecha Emisión</td><td id="bond-detail-start" class="px-4 py-2 text-right text-white light:text-slate-800 font-semibold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Fecha Vencimiento</td><td id="bond-detail-end" class="px-4 py-2 text-right text-white light:text-slate-800 font-semibold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Valor Técnico</td><td id="bond-detail-tv" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">Paridad</td><td id="bond-detail-parity" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">TIR / DM</td><td id="bond-detail-tirdm" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">TIR Promedio (365d)</td><td id="bond-detail-tiravg" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">TIR Mínima (365d)</td><td id="bond-detail-tirmin" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                                <tr class="hover:bg-slate-800/20 light:hover:bg-slate-50"><td class="px-4 py-2 text-slate-400 light:text-slate-500">TIR Máxima (365d)</td><td id="bond-detail-tirmax" class="px-4 py-2 text-right font-mono text-white light:text-slate-800 font-bold"></td></tr>
-                            </tbody>
-                        </table>
+                        <span class="font-bold text-white text-sm light:text-slate-900">Yahoo Finance API</span>
                     </div>
-                    
-                    <!-- Sensitivity Table Card -->
-                    <div class="bg-darkBg/40 light:bg-slate-50/50 border border-darkBorder/30 light:border-slate-200 rounded-2xl overflow-hidden">
-                        <div class="px-4 py-3 bg-darkBg/60 light:bg-slate-100 border-b border-darkBorder/30 light:border-slate-200 font-bold text-xs uppercase text-slate-300 light:text-slate-700">
-                            Sensibilidad TIR vs Precio
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-blue-400 transition-all"></i>
+                </div>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Cotizaciones bursátiles internacionales, índices globales, materias primas, acciones e ADRs en tiempo real.
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-md">finance.yahoo.com</span>
+            </a>
+
+            <!-- Source Card: FRED -->
+            <a href="https://fred.stlouisfed.org/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-emerald-500/50 transition-all group light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                            <i class="fas fa-building-columns text-lg"></i>
                         </div>
-                        <table class="w-full divide-y divide-darkBorder/20 light:divide-gray-200 text-xs text-left">
-                            <thead class="bg-darkBg/20 light:bg-slate-100/50 text-slate-400 font-semibold uppercase text-[10px]">
-                                <tr>
-                                    <th class="px-4 py-2">Cambio TIR</th>
-                                    <th class="px-4 py-2 text-right">Variación Precio</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bond-sensitivity-tbody" class="divide-y divide-darkBorder/10 light:divide-gray-100">
-                                <!-- Populated dynamically by JS -->
-                            </tbody>
-                        </table>
+                        <span class="font-bold text-white text-sm light:text-slate-900">FRED (Federal Reserve Bank of St. Louis)</span>
                     </div>
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-emerald-400 transition-all"></i>
                 </div>
-                
-                <!-- Right Column (Charts Card) -->
-                <div class="lg:col-span-7 flex flex-col gap-4 bg-darkBg/40 light:bg-slate-50/50 border border-darkBorder/30 light:border-slate-200 rounded-3xl p-6">
-                    
-                    <!-- Metric Selector Buttons -->
-                    <div class="flex flex-wrap gap-1.5 p-1 bg-darkBg/60 light:bg-slate-100 rounded-xl border border-darkBorder/40 light:border-slate-200 self-start">
-                        <button onclick="changeBondDetailChartMetric('tir')" id="btn-bm-tir" class="text-[9px] px-2.5 py-1.5 rounded-lg transition-all font-bold text-white bg-brandBlue">TIR Histórica</button>
-                        <button onclick="changeBondDetailChartMetric('paridad')" id="btn-bm-paridad" class="text-[9px] px-2.5 py-1.5 rounded-lg transition-all font-bold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">Paridad</button>
-                        <button onclick="changeBondDetailChartMetric('close')" id="btn-bm-close" class="text-[9px] px-2.5 py-1.5 rounded-lg transition-all font-bold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">Precio Dirty</button>
-                        <button onclick="changeBondDetailChartMetric('clean')" id="btn-bm-clean" class="text-[9px] px-2.5 py-1.5 rounded-lg transition-all font-bold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">Precio Clean</button>
-                        <button onclick="changeBondDetailChartMetric('cC')" id="btn-bm-cC" class="text-[9px] px-2.5 py-1.5 rounded-lg transition-all font-bold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">Int. Corridos</button>
-                        <button onclick="changeBondDetailChartMetric('fair_value')" id="btn-bm-fair_value" class="text-[9px] px-2.5 py-1.5 rounded-lg transition-all font-bold text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">V. Técnico</button>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Tasas de interés internacionales (FEDFUNDS, SOFR, US Treasuries 1y/5y/10y/30y, BCE European Central Bank).
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">fred.stlouisfed.org</span>
+            </a>
+
+            <!-- Source Card: DolarApi -->
+            <a href="https://dolarapi.com/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-teal-500/50 transition-all group light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-teal-500/10 text-teal-400 group-hover:bg-teal-500 group-hover:text-white transition-all">
+                            <i class="fas fa-dollar-sign text-lg"></i>
+                        </div>
+                        <span class="font-bold text-white text-sm light:text-slate-900">DolarApi Argentina</span>
                     </div>
-                    
-                    <!-- Chart canvas -->
-                    <div class="h-[360px] relative w-full mt-2">
-                        <canvas id="bond-detail-chart-canvas"></canvas>
-                    </div>
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-teal-400 transition-all"></i>
                 </div>
-            </div>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Cotizaciones históricas y tiempo real del Dólar Oficial, Dólar Blue, MEP, CCL, Tarjeta y Cripto.
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-md">dolarapi.com</span>
+            </a>
+
+            <!-- Source Card: BCRA -->
+            <a href="https://www.bcra.gob.ar/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-blue-500/50 transition-all group light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                            <i class="fas fa-landmark text-lg"></i>
+                        </div>
+                        <span class="font-bold text-white text-sm light:text-slate-900">Banco Central (BCRA)</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-blue-400 transition-all"></i>
+                </div>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Reservas Brutas Internacionales, Base Monetaria, Billetes en Circulación y Tasas de Política Monetaria.
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-md">bcra.gob.ar</span>
+            </a>
+
+            <!-- Source Card: CAFCI -->
+            <a href="https://www.cafci.org.ar/" target="_blank" rel="noopener noreferrer" class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg hover:border-indigo-500/50 transition-all group light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-2">
+                        <div class="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                            <i class="fas fa-chart-pie text-lg"></i>
+                        </div>
+                        <span class="font-bold text-white text-sm light:text-slate-900">CAFCI (Fondos Comunes de Inversión)</span>
+                    </div>
+                    <i class="fas fa-arrow-up-right-from-square text-xs text-slate-500 group-hover:text-indigo-400 transition-all"></i>
+                </div>
+                <p class="text-xs text-slate-400 light:text-slate-600 leading-relaxed">
+                    Cámara Argentina de FCI: Patrimonio, rendimiento y valores de cuotaparte de fondos Money Market y Renta Fija.
+                </p>
+                <span class="inline-block mt-3 text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded-md">cafci.org.ar</span>
+            </a>
+
         </div>
-    </div>
-
-    <div id="ssn-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-darkBg light:bg-white border border-darkBorder light:border-gray-200 rounded-2xl w-full max-w-5xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300">
-            <!-- Modal Header -->
-            <div class="flex items-center justify-between p-4 border-b border-darkBorder light:border-gray-200">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-brandBlue/10 flex items-center justify-center text-brandBlue">
-                        <i class="fas fa-chart-area"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-white light:text-slate-900" id="ssn-modal-title">Evolución Histórica</h3>
-                        <p class="text-xs text-slate-400" id="ssn-modal-subtitle">Valores Mensuales</p>
-                    </div>
-                </div>
-                <button onclick="closeSsnModal()" class="text-slate-400 hover:text-white light:hover:text-slate-900 transition-colors focus:outline-none">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <!-- Modal Body -->
-            <div class="p-6">
-                <!-- Toolbar -->
-                <div class="flex flex-wrap gap-4 items-center justify-between mb-4">
-                    <div class="flex items-center bg-darkCard light:bg-slate-100 rounded-lg p-1" id="ssn-time-buttons">
-                        <button onclick="setSsnTimeRange('YTD')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="YTD">Ejercicio</button>
-                        <button onclick="setSsnTimeRange('12M')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="12M">12M</button>
-                        <button onclick="setSsnTimeRange('24M')" class="px-3 py-1.5 text-xs font-semibold rounded-md bg-slate-700 text-white shadow" data-range="24M">24M</button>
-                        <button onclick="setSsnTimeRange('36M')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="36M">36M</button>
-                        <button onclick="setSsnTimeRange('5Y')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="5Y">5A</button>
-                        <button onclick="setSsnTimeRange('MAX')" class="px-3 py-1.5 text-xs font-semibold rounded-md text-slate-400 hover:text-white transition-colors" data-range="MAX">MAX</button>
-                    </div>
-                </div>
-                <!-- Chart -->
-                <div class="h-[400px] w-full">
-                    <canvas id="ssn-modal-chart"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const sectionBtnNames = {
-            'exchange': 'Update Dólares',
-            'indices': 'Update Índices',
-            'forex': 'Update Divisas',
-            'commodities': 'Update Commodities',
-            'rates': 'Update Tasas Int.',
-            'local_rates': 'Update Tasas Loc.',
-            'fci': 'Update FCI',
-            'bonds': 'Update Bonos',
-            'lecaps': 'Update LECAPs',
-            'corporate': 'Update ONs',
-            'stocks': 'Update Acciones',
-            'etfs': 'Update ETFs',
-            'acciones_arg': 'Update Acciones Arg.',
-            'cryptos': 'Update Cripto'
-        };
-
-        async function fetchYahooPriceWithProxy(sym) {
-            const candidates = [sym];
-            if (!sym.includes('.') && !sym.includes('^') && !sym.includes('=')) {
-                candidates.push(sym + '.BA');
-                candidates.push(sym + 'D.BA');
-            }
-
-            for (const cSym of candidates) {
-                const targetUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(cSym)}?interval=1m&range=1d`;
-                const proxyUrls = [
-                    `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`,
-                    `https://corsproxy.io/?url=${encodeURIComponent(targetUrl)}`,
-                    `https://corsproxy.io/?${encodeURIComponent(targetUrl)}`
-                ];
-
-                for (const pUrl of proxyUrls) {
-                    try {
-                        const res = await fetch(pUrl, { signal: AbortSignal.timeout(3000) });
-                        if (!res.ok) continue;
-                        let text = await res.text();
-                        if (text.includes('"contents"')) {
-                            const wrapper = JSON.parse(text);
-                            text = wrapper.contents;
-                        }
-                        const data = JSON.parse(text);
-                        const meta = data.chart?.result?.[0]?.meta;
-                        if (!meta) continue;
-
-                        const marketState = (meta.marketState || '').toUpperCase();
-                        // If market is CLOSED, return null to indicate market is closed / no live quote
-                        if (marketState === 'CLOSED' || marketState === 'POSTPOST') {
-                            return null;
-                        }
-
-                        const price = meta.regularMarketPrice;
-                        if (price !== undefined && price !== null && !isNaN(price) && price > 0) {
-                            return price;
-                        }
-                    } catch(e) {}
-                }
-            }
-            return null;
-        }
-
-        async function updateLivePrices(onlyActiveTab = true) {
-            const btnIcon = document.getElementById('update-now-icon');
-            const btnText = document.getElementById('update-now-text');
-            const activePanel = document.querySelector('.tab-panel:not(.hidden)');
-            const activeTabId = activePanel ? activePanel.id.replace('panel-', '') : null;
-            const btnLabel = (activeTabId && sectionBtnNames[activeTabId]) ? sectionBtnNames[activeTabId] : 'Update Now';
-
-            if (btnIcon) btnIcon.className = 'fas fa-sync fa-spin text-yellow-400';
-            if (btnText) btnText.textContent = 'Actualizando...';
-
-            try {
-                const liveMap = {};
-                const cells = (onlyActiveTab && activePanel) ? activePanel.querySelectorAll('.live-price-cell') : document.querySelectorAll('.live-price-cell');
-
-                if (cells.length === 0) {
-                    if (btnText) btnText.textContent = btnLabel;
-                    return;
-                }
-
-                // 1. Fetch Dólar API
-                try {
-                    const [dolarResp, cotizResp] = await Promise.all([
-                        fetch('https://dolarapi.com/v1/dolares').then(r => r.json()).catch(() => []),
-                        fetch('https://dolarapi.com/v1/cotizaciones').then(r => r.json()).catch(() => [])
-                    ]);
-
-                    if (Array.isArray(dolarResp)) {
-                        dolarResp.forEach(d => {
-                            if (d.casa === 'oficial') {
-                                liveMap['Oficial Billete'] = d.venta;
-                                liveMap['oficial'] = d.venta;
-                            }
-                            if (d.casa === 'mayorista') {
-                                liveMap['Oficial Divisa'] = d.venta;
-                                liveMap['mayorista'] = d.venta;
-                            }
-                            if (d.casa === 'bolsa') {
-                                liveMap['MEP'] = d.venta;
-                                liveMap['mep'] = d.venta;
-                                liveMap['bolsa'] = d.venta;
-                            }
-                            if (d.casa === 'contadoconliqui') {
-                                liveMap['CCL'] = d.venta;
-                                liveMap['ccl'] = d.venta;
-                                liveMap['contadoconliqui'] = d.venta;
-                            }
-                            if (d.casa === 'blue') {
-                                liveMap['Blue'] = d.venta;
-                                liveMap['blue'] = d.venta;
-                            }
-                            if (d.casa === 'tarjeta') {
-                                liveMap['Tarjeta'] = d.venta;
-                                liveMap['tarjeta'] = d.venta;
-                            }
-                        });
-                    }
-
-                    if (Array.isArray(cotizResp)) {
-                        cotizResp.forEach(c => {
-                            if (c.moneda === 'EUR' || c.casa === 'eur') liveMap['euro'] = c.venta;
-                            if (c.moneda === 'BRL' || c.casa === 'brl') liveMap['real'] = c.venta;
-                            if (c.moneda === 'CLP' || c.casa === 'clp') liveMap['clp'] = c.venta;
-                            if (c.moneda === 'UYU' || c.casa === 'uyu') liveMap['uyu'] = c.venta;
-                        });
-                    }
-                } catch(e) {
-                    console.warn("Could not fetch DolarApi:", e);
-                }
-
-                // 2. Fetch Binance Crypto Prices
-                try {
-                    const cryptoResp = await fetch('https://api.binance.com/api/v3/ticker/price').then(r => r.json());
-                    if (Array.isArray(cryptoResp)) {
-                        cryptoResp.forEach(c => {
-                            liveMap[c.symbol] = parseFloat(c.price);
-                        });
-                    }
-                } catch(e) {
-                    console.warn("Could not fetch Binance API:", e);
-                }
-
-                // 3. Fetch Metals (Gold, Silver, Platinum, Palladium) via Gold-API
-                try {
-                    const metalsMap = { 'GC=F': 'XAU', 'SI=F': 'XAG', 'PL=F': 'XPT', 'XPD': 'XPD' };
-                    const metalPromises = Object.entries(metalsMap).map(async ([ticker, code]) => {
-                        try {
-                            const res = await fetch(`https://api.gold-api.com/price/${code}`).then(r => r.json());
-                            if (res && res.price) {
-                                liveMap[ticker] = res.price;
-                            }
-                        } catch(e) {}
-                    });
-                    await Promise.allSettled(metalPromises);
-                } catch(e) {
-                    console.warn("Could not fetch Gold-API:", e);
-                }
-
-                // 4. Gather remaining tickers needing Yahoo query via proxies
-                const yahooTickersToFetch = new Set();
-                cells.forEach(cell => {
-                    const ticker = cell.dataset.ticker;
-                    if (!ticker) return;
-                    if (liveMap[ticker] !== undefined) return;
-                    const cleanTicker = ticker.replace('-', '').replace('USD', 'USDT');
-                    if (liveMap[cleanTicker] !== undefined) return;
-
-                    yahooTickersToFetch.add(ticker);
-                });
-
-                if (yahooTickersToFetch.size > 0) {
-                    const fetchPromises = Array.from(yahooTickersToFetch).map(async (sym) => {
-                        const price = await fetchYahooPriceWithProxy(sym);
-                        if (price !== null) {
-                            liveMap[sym] = price;
-                            const baseSym = sym.replace('.BA', '').replace('D.BA', '');
-                            liveMap[baseSym] = price;
-                        }
-                    });
-                    await Promise.allSettled(fetchPromises);
-                }
-
-                // 5. Update all .live-price-cell DOM elements
-                cells.forEach(cell => {
-                    const ticker = cell.dataset.ticker;
-                    let closePriceRaw = (cell.dataset.closePrice || '').toString().trim().replace(/[^0-9.,-]/g, '');
-                    if (closePriceRaw.includes(',') && closePriceRaw.includes('.')) {
-                        closePriceRaw = closePriceRaw.replace(/\./g, '').replace(',', '.');
-                    } else if (closePriceRaw.includes(',')) {
-                        closePriceRaw = closePriceRaw.replace(',', '.');
-                    }
-                    const closePrice = parseFloat(closePriceRaw);
-                    let livePrice = null;
-
-                    if (ticker && liveMap[ticker] !== undefined) {
-                        livePrice = liveMap[ticker];
-                    }
-
-                    if (livePrice === null && ticker) {
-                        const cleanTicker = ticker.replace('-', '').replace('USD', 'USDT');
-                        if (liveMap[cleanTicker] !== undefined) {
-                            livePrice = liveMap[cleanTicker];
-                        }
-                    }
-
-                    const parentRow = cell.closest('tr');
-                    const isMuted = parentRow && parentRow.classList.contains('text-slate-400');
-
-                    // If live update returned no active price (e.g. market closed or no live stream), display "--" in neutral gray without colors
-                    if (livePrice === null || livePrice === undefined || isNaN(livePrice)) {
-                        cell.textContent = "--";
-                        cell.className = "px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500";
-                        return;
-                    }
-
-                    let priceStr = "-";
-                    const textHasPct = (cell.textContent && cell.textContent.includes('%')) || (activeTabId && ['rates', 'local_rates'].includes(activeTabId));
-                    if (textHasPct) {
-                        priceStr = livePrice.toFixed(2) + "%";
-                    } else if (Math.abs(livePrice) >= 1000) {
-                        priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
-                    } else if (Math.abs(livePrice) < 1 && Math.abs(livePrice) > 0) {
-                        priceStr = livePrice.toFixed(4);
-                    } else {
-                        priceStr = new Intl.NumberFormat('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(livePrice);
-                    }
-
-                    cell.textContent = priceStr;
-
-                    const precision = (Math.abs(livePrice) < 1 && Math.abs(livePrice) > 0) ? 10000 : 100;
-                    const liveRounded = Math.round(livePrice * precision) / precision;
-                    const closeRounded = Math.round(closePrice * precision) / precision;
-
-                    if (isNaN(closePrice) || closePrice === 0 || liveRounded === closeRounded) {
-                        cell.className = "px-4 py-2.5 text-right font-semibold font-mono live-price-cell " + (isMuted ? "text-slate-400" : "text-slate-200 light:text-slate-800");
-                    } else if (liveRounded > closeRounded) {
-                        cell.className = "px-4 py-2.5 text-right font-bold font-mono live-price-cell text-emerald-400 light:text-emerald-600 bg-emerald-500/10 rounded";
-                    } else {
-                        cell.className = "px-4 py-2.5 text-right font-bold font-mono live-price-cell text-red-400 light:text-red-600 bg-red-500/10 rounded";
-                    }
-                });
-
-                const now = new Date();
-                const pad = n => n < 10 ? '0' + n : n;
-                const dateStr = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}`;
-                const timeStr = `${pad(now.getHours())}:${pad(now.getMinutes())}`;
-                const fullStampStr = `${dateStr} ${timeStr}`;
-
-                const sectionNotes = {
-                    'exchange': '(DolarApi / BNA en vivo)',
-                    'indices': '(Yahoo Finance / Sujeto a horario de mercado - 15m delay)',
-                    'forex': '(Mercado FOREX / Yahoo Finance)',
-                    'commodities': '(Gold-API & Yahoo Finance)',
-                    'rates': '(Tesoro EE.UU. & Bancos Centrales)',
-                    'local_rates': '(BCRA & Bancos Públicos/Privados)',
-                    'fci': '(Precios cuotapartes CNV / CAFCI)',
-                    'bonds': '(Mercado BYMA / Sujeto a horario de mercado - 15m delay)',
-                    'lecaps': '(Mercado BYMA / Sujeto a horario de mercado - 15m delay)',
-                    'corporate': '(Obligaciones Negociables BYMA - 15m delay)',
-                    'stocks': '(NYSE / NASDAQ - Sujeto a horario de mercado - 15m delay)',
-                    'etfs': '(CEDEARs / NYSE - Sujeto a horario de mercado - 15m delay)',
-                    'acciones_arg': '(Panel Líder BYMA - Sujeto a horario de mercado - 15m delay)',
-                    'cryptos': '(Binance API 24/7 en tiempo real)'
-                };
-
-                if (activeTabId) {
-                    const badge = document.getElementById(`last-updated-${activeTabId}`);
-                    const note = sectionNotes[activeTabId] ? ` <span class="text-[11px] font-normal opacity-75 ml-1">${sectionNotes[activeTabId]}</span>` : '';
-                    if (badge) {
-                        badge.innerHTML = `Última actualización: ${fullStampStr} hs${note}`;
-                    }
-                    try {
-                        const sectionStamps = JSON.parse(localStorage.getItem('sectionLastUpdated') || '{}');
-                        sectionStamps[activeTabId] = `${fullStampStr} hs${note}`;
-                        localStorage.setItem('sectionLastUpdated', JSON.stringify(sectionStamps));
-                    } catch(e) {}
-                }
-            } catch (e) {
-                console.error("Error updating live prices:", e);
-                if (btnText) btnText.textContent = 'Error';
-            } finally {
-                if (btnIcon) btnIcon.className = 'fas fa-bolt text-yellow-400';
-            }
-        }
+    </div>     }
     
         // --- SALUD, RETIRO Y DEMOGRAFÍA JS LOGIC ---
         let srMortalityChartInstance = null;
