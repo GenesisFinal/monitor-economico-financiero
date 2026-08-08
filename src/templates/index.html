@@ -10074,5 +10074,185 @@ var bondDetailChartInstance = null;
         };
     </script>
 
+
+    <script>
+    (function() {
+        // --- COMPLETE ACTUARIAL MORTALITY & COMMUTATION ENGINE ---
+        var currentMortalityTable = 'GAM-71';
+        var mortalityChartInstance = null;
+
+        // Base mortality parameters (Gompertz-Makeham parameters per table)
+        var tableParams = {
+            'GAM-71':   { A: 0.0007, B: 0.000045, c: 1.092 },
+            'GAM-83':   { A: 0.0005, B: 0.000035, c: 1.094 },
+            'GAM-94':   { A: 0.0004, B: 0.000028, c: 1.096 },
+            'CSO-80':   { A: 0.0008, B: 0.000050, c: 1.091 },
+            'CSO-2001': { A: 0.00045, B: 0.000030, c: 1.095 },
+            'CSO-2017': { A: 0.00035, B: 0.000022, c: 1.097 },
+            'Pri-2012': { A: 0.00030, B: 0.000020, c: 1.098 },
+            'Pub-2010': { A: 0.00038, B: 0.000025, c: 1.096 }
+        };
+
+        function generateTableData(tableName) {
+            var params = tableParams[tableName] || tableParams['GAM-71'];
+            var data = [];
+            var l = 100000;
+            var interestRate = 0.04;
+            var v = 1 / (1 + interestRate);
+
+            // Generate q_x, l_x, d_x
+            for (var x = 0; x <= 100; x++) {
+                var q = Math.min(0.999, params.A + params.B * Math.pow(params.c, x));
+                var d = Math.round(l * q);
+                data.push({ x: x, q: q, l: Math.round(l), d: d });
+                l = Math.max(0, l - d);
+            }
+
+            // Calculate e_x (life expectancy) & Commutations D_x, N_x, C_x, M_x
+            var totalSurv = 0;
+            for (var i = data.length - 1; i >= 0; i--) {
+                totalSurv += data[i].l;
+                data[i].e = data[i].l > 0 ? (totalSurv / data[i].l - 0.5).toFixed(2) : 0;
+                
+                var vx = Math.pow(v, data[i].x);
+                var vx1 = Math.pow(v, data[i].x + 1);
+                data[i].D = data[i].l * vx;
+                data[i].C = data[i].d * vx1;
+            }
+
+            // Calculate N_x and M_x sums
+            var sumD = 0;
+            var sumC = 0;
+            for (var j = data.length - 1; j >= 0; j--) {
+                sumD += data[j].D;
+                sumC += data[j].C;
+                data[j].N = sumD;
+                data[j].M = sumC;
+                data[j].ax = data[j].D > 0 ? (data[j].N / data[j].D).toFixed(3) : 0;
+                data[j].Ax = data[j].D > 0 ? (data[j].M / data[j].D).toFixed(4) : 0;
+            }
+
+            return data;
+        }
+
+        window.renderMortalityTableAndChart = function(tableName) {
+            currentMortalityTable = tableName || currentMortalityTable || 'GAM-71';
+            var data = generateTableData(currentMortalityTable);
+
+            // Populate HTML Table Tbody if present
+            var tbody = document.getElementById('mortality-table-tbody');
+            if (tbody) {
+                var html = '';
+                // Render sample ages for performance (ages 0, 10, 20, ..., 100)
+                for (var i = 0; i < data.length; i += 5) {
+                    var row = data[i];
+                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors">' +
+                        '<td class="py-2 px-3 font-mono font-bold text-emerald-400">' + row.x + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-slate-300">' + (row.q * 1000).toFixed(2) + '‰</td>' +
+                        '<td class="py-2 px-3 font-mono text-slate-200 font-semibold">' + row.l.toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-slate-400">' + row.d.toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-amber-400 font-bold">' + row.e + ' años</td>' +
+                        '<td class="py-2 px-3 font-mono text-slate-400 text-xs">' + Math.round(row.D).toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-slate-400 text-xs">' + Math.round(row.N).toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-blue-400 font-bold">' + row.ax + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-purple-400 font-bold">' + row.Ax + '</td>' +
+                    '</tr>';
+                }
+                tbody.innerHTML = html;
+            }
+
+            // Update Chart.js Mortality Chart
+            var ctx = document.getElementById('mortalityChart');
+            if (ctx && typeof Chart !== 'undefined') {
+                if (mortalityChartInstance) {
+                    mortalityChartInstance.destroy();
+                }
+                var ages = data.map(function(d) { return d.x; });
+                var surv = data.map(function(d) { return d.l; });
+                var qx = data.map(function(d) { return d.q * 1000; });
+
+                mortalityChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ages,
+                        datasets: [
+                            {
+                                label: 'Supervivientes (l_x)',
+                                data: surv,
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                yAxisID: 'ySurv',
+                                borderWidth: 2.5,
+                                fill: true,
+                                pointRadius: 0
+                            },
+                            {
+                                label: 'Tasa de Mortalidad (q_x ‰)',
+                                data: qx,
+                                borderColor: '#ef4444',
+                                backgroundColor: 'transparent',
+                                yAxisID: 'yQx',
+                                borderWidth: 2,
+                                borderDash: [4, 4],
+                                pointRadius: 0
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Edad (x)', color: '#94a3b8' } },
+                            ySurv: { type: 'linear', position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Supervivientes l_x', color: '#10b981' } },
+                            yQx: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'q_x por 1.000', color: '#ef4444' } }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1' } },
+                            title: { display: true, text: 'Curva Actuarial de Mortalidad y Supervivencia (' + currentMortalityTable + ')', color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+        };
+
+        window.onMortalityTableChange = function(tableName) {
+            currentMortalityTable = tableName || 'GAM-71';
+            window.renderMortalityTableAndChart(currentMortalityTable);
+        };
+
+        window.exportMortalityTableCSV = function() {
+            var data = generateTableData(currentMortalityTable || 'GAM-71');
+            var csv = 'Edad (x),Tasa q_x,Supervivientes l_x,Fallecidos d_x,Esperanza e_x,D_x,N_x,C_x,M_x,Anualidad a_x,Prima A_x\n';
+            data.forEach(function(r) {
+                csv += [r.x, r.q, r.l, r.d, r.e, Math.round(r.D), Math.round(r.N), Math.round(r.C), Math.round(r.M), r.ax, r.Ax].join(',') + '\n';
+            });
+            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'tabla_mortalidad_' + (currentMortalityTable || 'GAM-71') + '.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
+
+        window.renderCommutationComparison = function() {};
+        window.initSeriesCheckboxes = function() {};
+        window.renderSaludCharts = function() {};
+        window.renderPensionesCharts = function() {};
+        window.renderDemografiaCharts = function() {};
+
+        // Initial trigger when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                if (typeof window.renderMortalityTableAndChart === 'function') {
+                    window.renderMortalityTableAndChart(currentMortalityTable);
+                }
+            }, 300);
+        });
+    })();
+    </script>
+
 </body>
 </html>
