@@ -3482,7 +3482,7 @@ function setSsnTimeRange(range) {
 var appData = {{ final_data_json }};
 
         // Crosshair Plugin for Chart.js (v4.x compatible - uses afterEvent + afterDraw)
-        const verticalLinePlugin = {
+        var verticalLinePlugin = {
             id: 'verticalLine',
             afterDraw: chart => {
                 // Only draw crosshair when tooltip is active (not for sparklines)
@@ -12987,7 +12987,7 @@ function setSsnTimeRange(range) {
 var appData = {{ final_data_json }};
 
         // Crosshair Plugin for Chart.js (v4.x compatible - uses afterEvent + afterDraw)
-        const verticalLinePlugin = {
+        var verticalLinePlugin = {
             id: 'verticalLine',
             afterDraw: chart => {
                 // Only draw crosshair when tooltip is active (not for sparklines)
