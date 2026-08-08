@@ -20084,7 +20084,8 @@ var bondDetailChartInstance = null;
         
         window.switchSrSubtab = function(subtabId) {
             let cleanId = subtabId.replace('sr-tab-', '');
-            const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
+            localStorage.setItem('activeSubtab_salud-retiro-demografia', cleanId);
+                  const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
             
             allTabs.forEach(t => {
                 const cont = document.getElementById('sr-tab-' + t);
@@ -20357,5 +20358,44 @@ function switchSRSubTab(tabId) {
         };
 
 </script>
+
+    <!-- FULL NAVIGATION & SCROLL PERSISTENCE ON REFRESH -->
+    <script>
+    (function() {
+        // Track and save scroll position continuously
+        window.addEventListener('scroll', function() {
+            localStorage.setItem('activeScrollPosition', window.scrollY.toString());
+        }, { passive: true });
+
+        // Restore saved global tab, subtabs, and scroll position on load
+        window.addEventListener('load', function() {
+            var savedGlobalTab = localStorage.getItem('activeGlobalTab') || 'valores-financieros';
+            if (typeof switchGlobalTab === 'function') {
+                switchGlobalTab(savedGlobalTab);
+            }
+
+            var savedAsegSubtab = localStorage.getItem('activeSubtab_mercado-asegurador');
+            if (savedAsegSubtab && typeof switchAsegSubTab === 'function') {
+                switchAsegSubTab(savedAsegSubtab);
+            }
+
+            var savedSRSubtab = localStorage.getItem('activeSubtab_salud-retiro-demografia');
+            if (savedSRSubtab && typeof switchSrSubtab === 'function') {
+                switchSrSubtab(savedSRSubtab);
+            }
+
+            var savedScroll = localStorage.getItem('activeScrollPosition');
+            if (savedScroll !== null) {
+                var scrollY = parseInt(savedScroll, 10);
+                if (!isNaN(scrollY) && scrollY > 0) {
+                    setTimeout(function() {
+                        window.scrollTo({ top: scrollY, behavior: 'instant' });
+                    }, 200);
+                }
+            }
+        });
+    })();
+    </script>
+
 </body>
 </html>
