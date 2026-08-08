@@ -20085,9 +20085,7 @@ var bondDetailChartInstance = null;
         window.switchSrSubtab = function(subtabId) {
             let cleanId = subtabId.replace('sr-tab-', '');
             localStorage.setItem('activeSubtab_salud-retiro-demografia', cleanId);
-                  const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
-            
-            allTabs.forEach(t => {
+            const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];abs.forEach(t => {
                 const cont = document.getElementById('sr-tab-' + t);
                 const btn = document.getElementById('btn-sr-tab-' + t);
                 
@@ -20359,7 +20357,7 @@ function switchSRSubTab(tabId) {
 
 </script>
 
-    <!-- FULL NAVIGATION & SCROLL PERSISTENCE ON REFRESH -->
+    
     <script>
     (function() {
         // Track and save scroll position continuously
@@ -20367,8 +20365,7 @@ function switchSRSubTab(tabId) {
             localStorage.setItem('activeScrollPosition', window.scrollY.toString());
         }, { passive: true });
 
-        // Restore saved global tab, subtabs, and scroll position on load
-        window.addEventListener('load', function() {
+        function restoreState() {
             var savedGlobalTab = localStorage.getItem('activeGlobalTab') || 'valores-financieros';
             if (typeof switchGlobalTab === 'function') {
                 switchGlobalTab(savedGlobalTab);
@@ -20390,12 +20387,20 @@ function switchSRSubTab(tabId) {
                 if (!isNaN(scrollY) && scrollY > 0) {
                     setTimeout(function() {
                         window.scrollTo({ top: scrollY, behavior: 'instant' });
-                    }, 200);
+                    }, 100);
                 }
             }
-        });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', restoreState);
+        } else {
+            restoreState();
+        }
+        window.addEventListener('load', restoreState);
     })();
     </script>
+
 
 </body>
 </html>
