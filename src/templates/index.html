@@ -5328,7 +5328,7 @@ var activeTab = 'exchange';
         }
 
         function switchGlobalTab(tabId) {
-            try { localStorage.setItem('activeGlobalTab', tabId); } catch(e) {}
+            try { localStorage.setItem('globalTab', tabId); } catch(e) {}
             var btnValores = document.getElementById('btn-global-valores');
             var btnIndicadores = document.getElementById('btn-global-indicadores');
             var btnAsegurador = document.getElementById('btn-global-asegurador');
@@ -20265,7 +20265,7 @@ function switchSRSubTab(tabId) {
         }, { passive: true });
 
         function restoreState() {
-            var savedGlobalTab = localStorage.getItem('activeGlobalTab') || 'valores-financieros';
+            var savedGlobalTab = localStorage.getItem('globalTab') || 'valores-financieros';
             if (typeof switchGlobalTab === 'function') {
                 switchGlobalTab(savedGlobalTab);
             }
