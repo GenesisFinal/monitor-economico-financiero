@@ -20080,7 +20080,17 @@ var bondDetailChartInstance = null;
         window.renderSaludRetiroDemografiaView = renderSaludRetiroDemografiaView;
 
         // --- SALUD, RETIRO Y DEMOGRAFÍA SUBTAB SWITCHING LOGIC ---
-        function switchSRSubTab(tabId) {
+        
+        window.switchSrSubtab = function(tabId) {
+            switchSRSubTab(tabId);
+        };
+        window.renderSaludRetiroDemografiaView = function() {
+            if (typeof renderSaludRetiroDemografia === 'function') {
+                renderSaludRetiroDemografia();
+            }
+        };
+
+function switchSRSubTab(tabId) {
             const subtabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
             subtabs.forEach(t => {
                 const el = document.getElementById('sr-tab-' + t);
