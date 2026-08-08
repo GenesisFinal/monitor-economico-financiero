@@ -8085,7 +8085,7 @@ var indicatorChartInstance = null;
             switchEconTab(savedEconTab);
             
             // Restore active insurance sub-tab
-            var savedAsegTab = localStorage.getItem('activeAsegTab') || 'aseg-tab-resumen';
+            var savedAsegTab = localStorage.getItem('activeAsegTab') || 'aseg-tab-primas';
             activeAsegTab = savedAsegTab;
             
             // Restore global tab
@@ -10753,7 +10753,7 @@ var bondDetailChartInstance = null;
             }
             else if (tabId === 'mercado-asegurador') {
                 activeCont = containerAsegurador; activeBtn = btnAsegurador;
-                var savedAseg = localStorage.getItem('activeAsegTab') || 'aseg-tab-resumen';
+                var savedAseg = localStorage.getItem('activeAsegTab') || 'aseg-tab-primas';
                 if (typeof switchAsegSubTab === 'function') switchAsegSubTab(savedAseg);
             }
             else if (tabId === 'salud-retiro-demografia') {
