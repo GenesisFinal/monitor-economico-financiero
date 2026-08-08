@@ -9334,10 +9334,10 @@ function setSsnTimeRange(range) {
                             <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
                                 <label for="select-longevity-scale" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Mejora Longevidad (fₓ):</label>
                                 <select id="select-longevity-scale" onchange="renderCommutationComparison()" class="bg-darkBg text-rose-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-rose-600">
-                                    <option value="0.00" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.0% p.a. (Sin mejora)</option>
+                                    <option value="0.00" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.0% p.a. (Sin mejora)</option>
                                     <option value="0.005" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.5% p.a.</option>
                                     <option value="0.010" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.0% p.a.</option>
-                                    <option value="0.015" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.5% p.a. (SOA MP-2021 Estándar)</option>
+                                    <option value="0.015" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.5% p.a. (SOA MP-2021 Estándar)</option>
                                     <option value="0.020" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.0% p.a.</option>
                                     <option value="0.025" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.5% p.a.</option>
                                 </select>
@@ -9428,7 +9428,7 @@ function setSsnTimeRange(range) {
                                 </p>
                             </div>
                             <span id="badge-tech-interest" class="text-xs font-bold font-mono bg-emerald-500/10 text-emerald-400 light:bg-emerald-50 light:text-emerald-700 border border-emerald-500/20 px-3 py-1 rounded-lg">
-                                i = 3.0% | fₓ = 1.5% p.a.
+                                i = 4.0% | fₓ = 0.0% p.a.
                             </span>
                         </div>
 
@@ -11042,10 +11042,10 @@ const companies = Object.keys(balancesData[seg]);
             const selectedSeries = getSelectedSeriesList();
 
             const interestSelect = document.getElementById('select-tech-interest');
-            const rateI = interestSelect ? parseFloat(interestSelect.value) : 0.03;
+            const rateI = interestSelect ? parseFloat(interestSelect.value) : 0.04;
 
             const fxSelect = document.getElementById('select-longevity-scale');
-            const rateFx = fxSelect ? parseFloat(fxSelect.value) : 0.015;
+            const rateFx = fxSelect ? parseFloat(fxSelect.value) : 0.00;
 
             const interestBadge = document.getElementById('badge-tech-interest');
             if (interestBadge) interestBadge.textContent = `i = ${(rateI * 100).toFixed(1)}% | fₓ = ${(rateFx * 100).toFixed(1)}% p.a.`;
