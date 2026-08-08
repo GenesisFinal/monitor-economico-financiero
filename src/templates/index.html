@@ -20161,7 +20161,7 @@ function switchSRSubTab(tabId) {
         var pensionesChart = null;
         var pensionesDependenceChart = null;
         function renderPensionesCharts() {
-            const ctx1 = document.getElementById('srReplacementRateChart');
+            const ctx1 = document.getElementById('srReplacementChart');
             if (ctx1 && !pensionesChart) {
                 pensionesChart = new Chart(ctx1, {
                     type: 'bar',
