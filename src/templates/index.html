@@ -10032,5 +10032,47 @@ var bondDetailChartInstance = null;
         };
     </script>
 
+
+    <script>
+        window.showTableBadgeTooltip = function(val, evt) {
+            var existing = document.getElementById('table-badge-tooltip-popup');
+            if (!existing) {
+                existing = document.createElement('div');
+                existing.id = 'table-badge-tooltip-popup';
+                existing.className = 'fixed z-[9999] px-3 py-2 text-xs font-sans rounded-xl bg-slate-900/95 text-slate-100 border border-slate-700/80 shadow-2xl backdrop-blur-md pointer-events-none transition-opacity duration-150 opacity-0 max-w-xs';
+                document.body.appendChild(existing);
+            }
+            var descriptions = {
+                'GAM-71': 'Group Annuity Mortality 1971: Tabla base de anualidades de grupo ampliamente utilizada en seguros de vida y retiro.',
+                'GAM-83': 'Group Annuity Mortality 1983: Tabla actuarial estándar para seguros colectivos y sistemas pensionales.',
+                'GAM-94': 'Group Annuity Mortality 1994: Tabla con proyecciones de longevidad para asegurados de grupo.',
+                'CSO-80': 'Commissioners Standard Ordinary 1980: Tabla de mortalidad estándar para seguros de vida individuales.',
+                'CSO-2001': 'Commissioners Standard Ordinary 2001: Tabla actuarial estadounidense con desglose por fumador/no fumador.',
+                'CSO-2017': 'Commissioners Standard Ordinary 2017: Tabla moderna con proyecciones actualizadas de longevidad.',
+                'Pri-2012': 'Private Retirement Plans 2012: Tabla actuarial de planes de retiro privados de la Society of Actuaries (SOA).',
+                'Pub-2010': 'Public Retirement Plans 2010: Tabla actuarial para empleados y pensionados del sector público (SOA).'
+            };
+            var text = descriptions[val] || 'Tabla actuarial de mortalidad y experiencia de longevidad (' + (val || 'estándar') + ').';
+            existing.innerHTML = '<div class="font-bold text-emerald-400 mb-0.5"><i class="fas fa-info-circle mr-1"></i> ' + (val || 'Tabla Actuarial') + '</div><div class="text-[11px] text-slate-300 leading-tight">' + text + '</div>';
+            
+            if (evt && evt.clientX) {
+                existing.style.left = (evt.clientX + 15) + 'px';
+                existing.style.top = (evt.clientY + 15) + 'px';
+            } else {
+                existing.style.left = '50%';
+                existing.style.top = '20%';
+                existing.style.transform = 'translateX(-50%)';
+            }
+            existing.style.opacity = '1';
+        };
+
+        window.hideTableBadgeTooltip = function() {
+            var existing = document.getElementById('table-badge-tooltip-popup');
+            if (existing) {
+                existing.style.opacity = '0';
+            }
+        };
+    </script>
+
 </body>
 </html>
