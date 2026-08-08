@@ -9247,20 +9247,7 @@ function setSsnTimeRange(range) {
 
             
 
-            <!-- Explanatory Alert Badge for Longevity Improvement Scale -->
-            <div class="bg-brandBlue/10 border border-brandBlue/30 rounded-2xl p-4 text-xs text-slate-300 light:bg-blue-50 light:border-blue-200 light:text-slate-800">
-                <div class="flex items-start gap-3">
-                    <div class="p-2 rounded-xl bg-brandBlue/20 text-brandBlue shrink-0 mt-0.5">
-                        <i class="fas fa-lightbulb text-lg"></i>
-                    </div>
-                    <div>
-                        <span class="font-bold text-white text-sm block mb-1 light:text-slate-900">¿Qué es y cómo se aplica la Mejora Anual de Longevidad (Escala fₓ)?</span>
-                        <p class="leading-relaxed text-slate-300 light:text-slate-700">
-                            La Escala de Mejora de Longevidad (ej. SOA MP-2021/2026) expresa la tasa porcentual anual (<span class="font-mono text-rose-400 light:text-rose-600 font-bold">fₓ</span>) en que se reduce la probabilidad de muerte (<span class="font-mono text-blue-400 light:text-blue-600 font-bold">qₓ</span>) para cada edad debido a avances médicos. Tomando como Año Base <span class="font-bold text-white light:text-slate-900">t₀ = 2012</span>, la probabilidad proyectada al año actual <span class="font-bold text-white light:text-slate-900">t = 2026</span> se proyecta como: <span class="font-mono text-emerald-400 light:text-emerald-700 font-bold">qₓ(2026) = qₓ(2012) × (1 - fₓ)¹⁴</span>. Esto incrementa progresivamente los sobrevivientes <span class="font-mono text-amber-400 light:text-amber-600 font-bold">lₓ</span> y el valor actual de las anualidades <span class="font-mono text-emerald-400 light:text-emerald-700 font-bold">äₓ</span>.
-                        </p>
-                    </div>
-                </div>
-            </div>
+            >
 
             <!-- Main Single Table & Chart Layout (qx Log Chart + Single Year Table) -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -9318,22 +9305,7 @@ function setSsnTimeRange(range) {
                 </div>
             </div>
 
-            <!-- Card: Tasa de Invalidez Total y Permanente (ITP) -->
-            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
-                            <i class="fas fa-wheelchair text-rose-400"></i> Tabla de Invalidez Total y Permanente (ITP)
-                        </h4>
-                        <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
-                            Incidencia anual de invalidez absoluta por cada 1.000 asegurados expuestos por tramo de edad.
-                        </p>
-                    </div>
-                </div>
-                <div class="relative w-full" style="height: 320px; min-height: 320px;">
-                    <canvas id="srDisabilityChart" style="height: 320px; min-height: 320px; width: 100%;"></canvas>
-                </div>
-            </div>
+            >
 
             <!-- MÓDULO COMPARATIVO MULTITABLA Y CONMUTACIÓN ACTUARIAL -->
             <div class="border-t-2 border-brandBlue/30 pt-6 mt-8">
@@ -9431,6 +9403,21 @@ function setSsnTimeRange(range) {
                         </div>
                     </div>
 
+                    <!-- Explanatory Alert Badge for Longevity Improvement Scale -->
+            <div class="bg-brandBlue/10 border border-brandBlue/30 rounded-2xl p-4 text-xs text-slate-300 light:bg-blue-50 light:border-blue-200 light:text-slate-800">
+                <div class="flex items-start gap-3">
+                    <div class="p-2 rounded-xl bg-brandBlue/20 text-brandBlue shrink-0 mt-0.5">
+                        <i class="fas fa-lightbulb text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-white text-sm block mb-1 light:text-slate-900">¿Qué es y cómo se aplica la Mejora Anual de Longevidad (Escala fₓ)?</span>
+                        <p class="leading-relaxed text-slate-300 light:text-slate-700">
+                            La Escala de Mejora de Longevidad (ej. SOA MP-2021/2026) expresa la tasa porcentual anual (<span class="font-mono text-rose-400 light:text-rose-600 font-bold">fₓ</span>) en que se reduce la probabilidad de muerte (<span class="font-mono text-blue-400 light:text-blue-600 font-bold">qₓ</span>) para cada edad debido a avances médicos. Tomando como Año Base <span class="font-bold text-white light:text-slate-900">t₀ = 2012</span>, la probabilidad proyectada al año actual <span class="font-bold text-white light:text-slate-900">t = 2026</span> se proyecta como: <span class="font-mono text-emerald-400 light:text-emerald-700 font-bold">qₓ(2026) = qₓ(2012) × (1 - fₓ)¹⁴</span>. Esto incrementa progresivamente los sobrevivientes <span class="font-mono text-amber-400 light:text-amber-600 font-bold">lₓ</span> y el valor actual de las anualidades <span class="font-mono text-emerald-400 light:text-emerald-700 font-bold">äₓ</span>.
+                        </p>
+                    </div>
+                </div>
+            </div
+
                     <!-- Table: Valor Actual Renta Vitalicia Unitaria (äx = Nx/Dx) -->
                     <div class="glass-card bg-darkBg/40 border border-darkBorder/60 rounded-2xl p-5 shadow-lg light:bg-slate-50 light:border-slate-200">
                         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
@@ -9462,6 +9449,24 @@ function setSsnTimeRange(range) {
                     </div>
                 </div>
             </div>
+        
+
+            <!-- Card: Tasa de Invalidez Total y Permanente (ITP) -->
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-wheelchair text-rose-400"></i> Tabla de Invalidez Total y Permanente (ITP)
+                        </h4>
+                        <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                            Incidencia anual de invalidez absoluta por cada 1.000 asegurados expuestos por tramo de edad.
+                        </p>
+                    </div>
+                </div>
+                <div class="relative w-full" style="height: 320px; min-height: 320px;">
+                    <canvas id="srDisabilityChart" style="height: 320px; min-height: 320px; width: 100%;"></canvas>
+                </div>
+            </div
         </div>
 
         <!-- SUBTAB 2: Salud y Morbilidad (EXCLUSIVAMENTE MÓDULOS DE SALUD) -->
