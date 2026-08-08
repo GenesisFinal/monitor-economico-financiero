@@ -3082,7 +3082,7 @@ body.layout-bento {
         window.ssnSparklineCharts = {};
         var ssnMainChart = null;
         var currentSsnKey = null;
-        let currentSsnRange = '24M';
+var currentSsnRange = '24M';
 
         function getLinearRegression(data) {
             let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
@@ -3479,7 +3479,7 @@ function setSsnTimeRange(range) {
 
     <!-- Data Object Embedded -->
     <script>
-        const appData = {{ final_data_json }};
+var appData = {{ final_data_json }};
 
         // Crosshair Plugin for Chart.js (v4.x compatible - uses afterEvent + afterDraw)
         const verticalLinePlugin = {
@@ -3691,12 +3691,12 @@ function setSsnTimeRange(range) {
             return { dates, prices, open, high, low, close };
         }
 
-        let activeEconTab = 'econ-tab-precios-y-costo-de-vida';
-        let activeAsegTab = 'aseg-tab-resumen-mensual';
-        let activeDebtCard = 'deuda_publica_total';
-        let activeGroupContributionType = 'primas';
-        let debtChartInstance = null;
-        let variationChartInstance = null;
+var activeEconTab = 'econ-tab-precios-y-costo-de-vida';
+var activeAsegTab = 'aseg-tab-resumen-mensual';
+var activeDebtCard = 'deuda_publica_total';
+var activeGroupContributionType = 'primas';
+var debtChartInstance = null;
+var variationChartInstance = null;
         let asegCharts = {
             distribucion: null,
             distribucionAcumulado: null,
@@ -4317,7 +4317,7 @@ function setSsnTimeRange(range) {
             setTimeout(renderSparklines, 50);
         }
 
-        let lecapsChart = null;
+var lecapsChart = null;
 
         function polyFit(xs, ys, degree = 2) {
             const n = Math.min(xs.length, ys.length);
@@ -5216,7 +5216,7 @@ function setSsnTimeRange(range) {
 
         
         // Map of chart instances by section
-        const charts = {};
+var charts = {};
         // Current state for each section: active period, scale, and array of active tickers
         const state = {
             exchange: { period: '12M', tickers: ['Oficial Billete'], showBands: true, chartType: 'ohlc' , mas: {ma20: false, ma50: false, ma200: false} },
@@ -5239,7 +5239,7 @@ function setSsnTimeRange(range) {
         };
 
         // Premium Color Palette for charts (Diverse and distinguishable premium colors)
-        const colors = [
+var colors = [
             { border: '#14b8a6', bg: 'rgba(20, 184, 166, 0.12)' }, // Teal
             { border: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)' },  // Indigo
             { border: '#f43f5e', bg: 'rgba(244, 63, 94, 0.12)' },  // Rose/Red
@@ -5266,7 +5266,7 @@ function setSsnTimeRange(range) {
             return Number(Math.round(val + 'e' + dec) + 'e-' + dec);
         }
 
-        let activeTab = 'exchange';
+var activeTab = 'exchange';
 
         function toggleTheme() {
             const body = document.body;
@@ -5401,15 +5401,15 @@ function setSsnTimeRange(range) {
             renderChart('exchange');
         }
 
-        let rankingChartInstance = null;
-        let rankingEvolSegundaChartInstance = null;
-        let rankingEvolTop3ChartInstance = null;
+var rankingChartInstance = null;
+var rankingEvolSegundaChartInstance = null;
+var rankingEvolTop3ChartInstance = null;
 
         
         // --- GRUPO LA SEGUNDA LOGIC ---
-        let lsEmpresasChart = null;
-        let lsPatrimonialesChart = null;
-        let lsPersonasChart = null;
+var lsEmpresasChart = null;
+var lsPatrimonialesChart = null;
+var lsPersonasChart = null;
         
         function formatNumber(num) {
             return new Intl.NumberFormat('es-AR').format(Math.round(num));
@@ -5629,8 +5629,8 @@ function setSsnTimeRange(range) {
             }
         }
 
-        let invRetiroMercadoChartInstance = null;
-        let invRetiroEmpresaChartInstance = null;
+var invRetiroMercadoChartInstance = null;
+var invRetiroEmpresaChartInstance = null;
 
         function renderInversionesRetiroView(companyKey) {
             const invData = {{ ssn_inversiones_retiro | tojson if ssn_inversiones_retiro else '{}' | safe }};
@@ -5800,8 +5800,8 @@ function setSsnTimeRange(range) {
             });
         }
 
-        let invPersonasMercadoChartInstance = null;
-        let invPersonasEmpresaChartInstance = null;
+var invPersonasMercadoChartInstance = null;
+var invPersonasEmpresaChartInstance = null;
 
         function renderInversionesPersonasView(companyKey) {
             const invData = {{ ssn_inversiones_personas | tojson if ssn_inversiones_personas else '{}' | safe }};
@@ -7385,7 +7385,7 @@ function setSsnTimeRange(range) {
             });
         }
 
-        let indicatorChartInstance = null;
+var indicatorChartInstance = null;
         let modalState = {
             key: '',
             name: '',
@@ -8204,9 +8204,9 @@ function setSsnTimeRange(range) {
         });
 
         // Bond Details Modal Logic
-        let activeBondTicker = null;
-        let activeBondMetric = 'tir';
-        let bondDetailChartInstance = null;
+var activeBondTicker = null;
+var activeBondMetric = 'tir';
+var bondDetailChartInstance = null;
 
         function showBondDetailsModal(ticker) {
             const bond = appData.bond_details ? appData.bond_details[ticker] : null;
@@ -12587,7 +12587,7 @@ function setSsnTimeRange(range) {
         window.ssnSparklineCharts = {};
         var ssnMainChart = null;
         var currentSsnKey = null;
-        let currentSsnRange = '24M';
+var currentSsnRange = '24M';
 
         function getLinearRegression(data) {
             let sumX = 0, sumY = 0, sumXY = 0, sumX2 = 0;
@@ -12984,7 +12984,7 @@ function setSsnTimeRange(range) {
 
     <!-- Data Object Embedded -->
     <script>
-        const appData = {{ final_data_json }};
+var appData = {{ final_data_json }};
 
         // Crosshair Plugin for Chart.js (v4.x compatible - uses afterEvent + afterDraw)
         const verticalLinePlugin = {
@@ -13196,12 +13196,12 @@ function setSsnTimeRange(range) {
             return { dates, prices, open, high, low, close };
         }
 
-        let activeEconTab = 'econ-tab-precios-y-costo-de-vida';
-        let activeAsegTab = 'aseg-tab-resumen-mensual';
-        let activeDebtCard = 'deuda_publica_total';
-        let activeGroupContributionType = 'primas';
-        let debtChartInstance = null;
-        let variationChartInstance = null;
+var activeEconTab = 'econ-tab-precios-y-costo-de-vida';
+var activeAsegTab = 'aseg-tab-resumen-mensual';
+var activeDebtCard = 'deuda_publica_total';
+var activeGroupContributionType = 'primas';
+var debtChartInstance = null;
+var variationChartInstance = null;
         let asegCharts = {
             distribucion: null,
             distribucionAcumulado: null,
@@ -13822,7 +13822,7 @@ function setSsnTimeRange(range) {
             setTimeout(renderSparklines, 50);
         }
 
-        let lecapsChart = null;
+var lecapsChart = null;
 
         function polyFit(xs, ys, degree = 2) {
             const n = Math.min(xs.length, ys.length);
@@ -14721,7 +14721,7 @@ function setSsnTimeRange(range) {
 
         
         // Map of chart instances by section
-        const charts = {};
+var charts = {};
         // Current state for each section: active period, scale, and array of active tickers
         const state = {
             exchange: { period: '12M', tickers: ['Oficial Billete'], showBands: true, chartType: 'ohlc' , mas: {ma20: false, ma50: false, ma200: false} },
@@ -14744,7 +14744,7 @@ function setSsnTimeRange(range) {
         };
 
         // Premium Color Palette for charts (Diverse and distinguishable premium colors)
-        const colors = [
+var colors = [
             { border: '#14b8a6', bg: 'rgba(20, 184, 166, 0.12)' }, // Teal
             { border: '#6366f1', bg: 'rgba(99, 102, 241, 0.12)' },  // Indigo
             { border: '#f43f5e', bg: 'rgba(244, 63, 94, 0.12)' },  // Rose/Red
@@ -14771,7 +14771,7 @@ function setSsnTimeRange(range) {
             return Number(Math.round(val + 'e' + dec) + 'e-' + dec);
         }
 
-        let activeTab = 'exchange';
+var activeTab = 'exchange';
 
         function toggleTheme() {
             const body = document.body;
@@ -14906,15 +14906,15 @@ function setSsnTimeRange(range) {
             renderChart('exchange');
         }
 
-        let rankingChartInstance = null;
-        let rankingEvolSegundaChartInstance = null;
-        let rankingEvolTop3ChartInstance = null;
+var rankingChartInstance = null;
+var rankingEvolSegundaChartInstance = null;
+var rankingEvolTop3ChartInstance = null;
 
         
         // --- GRUPO LA SEGUNDA LOGIC ---
-        let lsEmpresasChart = null;
-        let lsPatrimonialesChart = null;
-        let lsPersonasChart = null;
+var lsEmpresasChart = null;
+var lsPatrimonialesChart = null;
+var lsPersonasChart = null;
         
         function formatNumber(num) {
             return new Intl.NumberFormat('es-AR').format(Math.round(num));
@@ -15134,8 +15134,8 @@ function setSsnTimeRange(range) {
             }
         }
 
-        let invRetiroMercadoChartInstance = null;
-        let invRetiroEmpresaChartInstance = null;
+var invRetiroMercadoChartInstance = null;
+var invRetiroEmpresaChartInstance = null;
 
         function renderInversionesRetiroView(companyKey) {
             const invData = {{ ssn_inversiones_retiro | tojson if ssn_inversiones_retiro else '{}' | safe }};
@@ -15305,8 +15305,8 @@ function setSsnTimeRange(range) {
             });
         }
 
-        let invPersonasMercadoChartInstance = null;
-        let invPersonasEmpresaChartInstance = null;
+var invPersonasMercadoChartInstance = null;
+var invPersonasEmpresaChartInstance = null;
 
         function renderInversionesPersonasView(companyKey) {
             const invData = {{ ssn_inversiones_personas | tojson if ssn_inversiones_personas else '{}' | safe }};
@@ -16890,7 +16890,7 @@ function setSsnTimeRange(range) {
             });
         }
 
-        let indicatorChartInstance = null;
+var indicatorChartInstance = null;
         let modalState = {
             key: '',
             name: '',
@@ -17709,9 +17709,9 @@ function setSsnTimeRange(range) {
         });
 
         // Bond Details Modal Logic
-        let activeBondTicker = null;
-        let activeBondMetric = 'tir';
-        let bondDetailChartInstance = null;
+var activeBondTicker = null;
+var activeBondMetric = 'tir';
+var bondDetailChartInstance = null;
 
         function showBondDetailsModal(ticker) {
             const bond = appData.bond_details ? appData.bond_details[ticker] : null;
