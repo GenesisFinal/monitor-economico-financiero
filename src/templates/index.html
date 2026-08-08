@@ -1113,7 +1113,7 @@ body.layout-bento {
             <!-- Renglón 2: Navegación Principal por Pestañas Globales -->
             <div class="flex items-center justify-start overflow-x-auto no-scrollbar py-0.5 w-full">
                 <div class="flex items-center gap-1.5 bg-darkBg/80 light:bg-slate-100 p-1 rounded-xl border border-darkBorder/40 light:border-gray-200 w-full sm:w-auto">
-                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
+                    <button onclick="/* switchGlobalTab deferred to persistence controller */" id="btn-global-valores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
                         <i class="fas fa-chart-line text-brandBlue"></i> Val. Financieros
                     </button>
                     <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
@@ -10582,7 +10582,7 @@ var bondDetailChartInstance = null;
             <!-- Renglón 2: Navegación Principal por Pestañas Globales -->
             <div class="flex items-center justify-start overflow-x-auto no-scrollbar py-0.5 w-full">
                 <div class="flex items-center gap-1.5 bg-darkBg/80 light:bg-slate-100 p-1 rounded-xl border border-darkBorder/40 light:border-gray-200 w-full sm:w-auto">
-                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
+                    <button onclick="/* switchGlobalTab deferred to persistence controller */" id="btn-global-valores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shrink-0">
                         <i class="fas fa-chart-line text-brandBlue"></i> Val. Financieros
                     </button>
                     <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
