@@ -20081,9 +20081,53 @@ var bondDetailChartInstance = null;
 
         // --- SALUD, RETIRO Y DEMOGRAFÍA SUBTAB SWITCHING LOGIC ---
         
-        window.switchSrSubtab = function(tabId) {
-            switchSRSubTab(tabId);
+        
+        window.switchSrSubtab = function(subtabId) {
+            let cleanId = subtabId.replace('sr-tab-', '');
+            const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
+            
+            allTabs.forEach(t => {
+                const cont = document.getElementById('sr-tab-' + t);
+                const btn = document.getElementById('btn-sr-tab-' + t);
+                
+                if (cont) {
+                    if (t === cleanId) {
+                        cont.classList.remove('hidden');
+                        cont.style.display = 'block';
+                    } else {
+                        cont.classList.add('hidden');
+                        cont.style.display = 'none';
+                    }
+                }
+                
+                if (btn) {
+                    if (t === cleanId) {
+                        btn.className = 'sr-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md bg-emerald-500 text-white';
+                    } else {
+                        btn.className = 'sr-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-darkCard text-slate-400 border border-darkBorder hover:text-white light:bg-slate-100 light:text-slate-600 light:border-slate-300';
+                    }
+                }
+            });
+
+            // Trigger chart render and resize
+            setTimeout(() => {
+                if (cleanId === 'salud') {
+                    if (typeof renderSaludCharts === 'function') renderSaludCharts();
+                    if (window.saludDalysChart) window.saludDalysChart.resize();
+                }
+                if (cleanId === 'pensiones') {
+                    if (typeof renderPensionesCharts === 'function') renderPensionesCharts();
+                    if (window.pensionesChart) window.pensionesChart.resize();
+                    if (window.pensionesDependenceChart) window.pensionesDependenceChart.resize();
+                }
+                if (cleanId === 'demografia') {
+                    if (typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
+                    if (window.demografiaAgingChart) window.demografiaAgingChart.resize();
+                    if (window.demografiaCoverageChart) window.demografiaCoverageChart.resize();
+                }
+            }, 50);
         };
+
         window.renderSaludRetiroDemografiaView = function() {
             if (typeof renderSaludRetiroDemografia === 'function') {
                 renderSaludRetiroDemografia();
