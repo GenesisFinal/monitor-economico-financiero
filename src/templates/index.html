@@ -20078,6 +20078,185 @@ var bondDetailChartInstance = null;
         window.exportMortalityTableCSV = exportMortalityTableCSV;
         window.onMortalityTableChange = onMortalityTableChange;
         window.renderSaludRetiroDemografiaView = renderSaludRetiroDemografiaView;
-</script>
+
+        // --- SALUD, RETIRO Y DEMOGRAFÍA SUBTAB SWITCHING LOGIC ---
+        function switchSRSubTab(tabId) {
+            const subtabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
+            subtabs.forEach(t => {
+                const el = document.getElementById('sr-tab-' + t);
+                const btn = document.getElementById('btn-sr-tab-' + t);
+                if (el) {
+                    if (t === tabId) {
+                        el.classList.remove('hidden');
+                    } else {
+                        el.classList.add('hidden');
+                    }
+                }
+                if (btn) {
+                    if (t === tabId) {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md bg-emerald-500 text-white';
+                    } else {
+                        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition-all bg-darkCard text-slate-400 border border-darkBorder hover:text-white light:bg-slate-100 light:text-slate-600 light:border-slate-300';
+                    }
+                }
+            });
+
+            // Trigger chart initialization when switching subtabs
+            if (tabId === 'salud') renderSaludCharts();
+            if (tabId === 'pensiones') renderPensionesCharts();
+            if (tabId === 'demografia') renderDemografiaCharts();
+        }
+
+        // Subtab 2: Salud y Morbilidad Charts
+        var saludDalysChart = null;
+        function renderSaludCharts() {
+            const ctx = document.getElementById('srDalysChart');
+            if (!ctx) return;
+            if (saludDalysChart) return; // already rendered
+
+            saludDalysChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cardiovasculares', 'Neoplasias (Cáncer)', 'Resp. Crónicas', 'Diabetes y Renal', 'Lesiones y Traum.', 'Infecciosas y Maternas', 'Trastornos Mentales'],
+                    datasets: [{
+                        label: 'AVISA / DALYs por 100.000 hab. (OMS / DEIS)',
+                        data: [4250, 3480, 2150, 1820, 1650, 1240, 1180],
+                        backgroundColor: 'rgba(244, 63, 94, 0.85)',
+                        borderColor: '#f43f5e',
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return context.raw.toLocaleString('es-AR') + ' AVISA perdidos / 100k hab.'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { display: false }, ticks: { color: '#e2e8f0', font: { size: 11, weight: '600' } } }
+                    }
+                }
+            });
+        }
+
+        // Subtab 3: Pensiones y Retiro Charts
+        var pensionesChart = null;
+        var pensionesDependenceChart = null;
+        function renderPensionesCharts() {
+            const ctx1 = document.getElementById('srReplacementRateChart');
+            if (ctx1 && !pensionesChart) {
+                pensionesChart = new Chart(ctx1, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Argentina (Bruta)', 'Argentina (Neta)', 'Promedio OCDE', 'Uruguay', 'Chile', 'Brasil'],
+                        datasets: [{
+                            label: 'Tasa de Reemplazo Previsional (% del último haber)',
+                            data: [61.2, 70.8, 62.4, 65.5, 41.2, 69.4],
+                            backgroundColor: ['#10b981', '#059669', '#3b82f6', '#8b5cf6', '#f59e0b', '#ec4899'],
+                            borderRadius: 8
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', callback: function(val) { return val + '%'; } } },
+                            x: { grid: { display: false }, ticks: { color: '#e2e8f0', font: { size: 11 } } }
+                        }
+                    }
+                });
+            }
+
+            const ctx2 = document.getElementById('srPrevisionalDependenceChart');
+            if (ctx2 && !pensionesDependenceChart) {
+                pensionesDependenceChart = new Chart(ctx2, {
+                    type: 'line',
+                    data: {
+                        labels: ['2000', '2010', '2020', '2030 (P)', '2040 (P)', '2050 (P)'],
+                        datasets: [{
+                            label: 'Tasa de Dependencia (+65 / 100 activos)',
+                            data: [15.8, 16.9, 18.4, 21.2, 25.6, 31.8],
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245, 158, 11, 0.15)',
+                            fill: true,
+                            tension: 0.35,
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                            x: { grid: { display: false }, ticks: { color: '#e2e8f0' } }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Subtab 4: Demografía y Cobertura Charts
+        var demografiaAgingChart = null;
+        var demografiaCoverageChart = null;
+        function renderDemografiaCharts() {
+            const ctx1 = document.getElementById('srAgingProjectionChart');
+            if (ctx1 && !demografiaAgingChart) {
+                demografiaAgingChart = new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['1970', '1990', '2010', '2022 (Censo)', '2035 (P)', '2050 (P)'],
+                        datasets: [
+                            { label: '% Población +65 Años', data: [7.0, 8.9, 10.2, 11.9, 14.8, 18.5], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.15)', fill: true, tension: 0.3 },
+                            { label: '% Población <15 Años', data: [29.3, 27.8, 25.5, 22.1, 18.9, 16.2], borderColor: '#3b82f6', borderDash: [5,5], fill: false, tension: 0.3 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#e2e8f0' } } },
+                        scales: {
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } } },
+                            x: { grid: { display: false }, ticks: { color: '#e2e8f0' } }
+                        }
+                    }
+                });
+            }
+
+            const ctx2 = document.getElementById('srHealthCoverageChart');
+            if (ctx2 && !demografiaCoverageChart) {
+                demografiaCoverageChart = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Obra Social (Nacional/Provincial)', 'Exclusivamente Sector Público', 'Medicina Prepaga / Mutuar'],
+                        datasets: [{
+                            data: [61.5, 24.3, 14.2],
+                            backgroundColor: ['#10b981', '#f59e0b', '#3b82f6'],
+                            borderWidth: 2,
+                            borderColor: '#0f172a'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { color: '#e2e8f0', font: { size: 11 } } },
+                            tooltip: { callbacks: { label: function(c) { return ' ' + c.label + ': ' + c.raw + '%'; } } }
+                        }
+                    }
+                });
+            }
+        }
+
+    </script>
 </body>
 </html>
