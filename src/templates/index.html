@@ -19983,11 +19983,11 @@ var bondDetailChartInstance = null;
         
         window.switchSrSubtab = function(subtabId) {
             let cleanId = subtabId.replace('sr-tab-', '');
-            localStorage.setItem('activeSubtab_salud-retiro-demografia', cleanId);
-            const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];abs.forEach(t => {
+            try { localStorage.setItem('activeSubtab_salud-retiro-demografia', cleanId); } catch(e) {}
+            const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
+            allTabs.forEach(t => {
                 const cont = document.getElementById('sr-tab-' + t);
                 const btn = document.getElementById('btn-sr-tab-' + t);
-                
                 if (cont) {
                     if (t === cleanId) {
                         cont.classList.remove('hidden');
@@ -19997,7 +19997,6 @@ var bondDetailChartInstance = null;
                         cont.style.display = 'none';
                     }
                 }
-                
                 if (btn) {
                     if (t === cleanId) {
                         btn.className = 'sr-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md bg-emerald-500 text-white';
@@ -20006,23 +20005,10 @@ var bondDetailChartInstance = null;
                     }
                 }
             });
-
-            // Trigger chart render and resize
             setTimeout(() => {
-                if (cleanId === 'salud') {
-                    if (typeof renderSaludCharts === 'function') renderSaludCharts();
-                    if (window.saludDalysChart) window.saludDalysChart.resize();
-                }
-                if (cleanId === 'pensiones') {
-                    if (typeof renderPensionesCharts === 'function') renderPensionesCharts();
-                    if (window.pensionesChart) window.pensionesChart.resize();
-                    if (window.pensionesDependenceChart) window.pensionesDependenceChart.resize();
-                }
-                if (cleanId === 'demografia') {
-                    if (typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
-                    if (window.demografiaAgingChart) window.demografiaAgingChart.resize();
-                    if (window.demografiaCoverageChart) window.demografiaCoverageChart.resize();
-                }
+                if (cleanId === 'salud' && typeof renderSaludCharts === 'function') renderSaludCharts();
+                if (cleanId === 'pensiones' && typeof renderPensionesCharts === 'function') renderPensionesCharts();
+                if (cleanId === 'demografia' && typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
             }, 50);
         };
 
