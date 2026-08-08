@@ -20268,5 +20268,50 @@ function switchSRSubTab(tabId) {
         }
 
     </script>
+
+<script>
+
+        window.switchSrSubtab = function(subtabId) {
+            // Strip prefix if passed
+            let cleanId = subtabId.replace('sr-tab-', '');
+            const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
+            
+            allTabs.forEach(t => {
+                const cont = document.getElementById('sr-tab-' + t);
+                const btn = document.getElementById('btn-sr-tab-' + t);
+                
+                if (cont) {
+                    if (t === cleanId) {
+                        cont.classList.remove('hidden');
+                        cont.style.display = 'block';
+                    } else {
+                        cont.classList.add('hidden');
+                        cont.style.display = 'none';
+                    }
+                }
+                
+                if (btn) {
+                    if (t === cleanId) {
+                        btn.className = 'sr-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md bg-emerald-500 text-white';
+                    } else {
+                        btn.className = 'sr-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all bg-darkCard text-slate-400 border border-darkBorder hover:text-white light:bg-slate-100 light:text-slate-600 light:border-slate-300';
+                    }
+                }
+            });
+
+            // Trigger chart initialization when switching subtabs
+            if (cleanId === 'salud' && typeof renderSaludCharts === 'function') renderSaludCharts();
+            if (cleanId === 'pensiones' && typeof renderPensionesCharts === 'function') renderPensionesCharts();
+            if (cleanId === 'demografia' && typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
+        };
+
+        window.switchSRSubTab = window.switchSrSubtab;
+
+        window.renderSaludRetiroDemografiaView = function() {
+            // Default to actuarial tab active
+            window.switchSrSubtab('actuaria');
+        };
+
+</script>
 </body>
 </html>
