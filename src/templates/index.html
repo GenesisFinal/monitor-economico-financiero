@@ -5327,37 +5327,7 @@ var activeTab = 'exchange';
             renderSparklines();
         }
 
-        function switchGlobalTab(tabId) {
-            try { localStorage.setItem('globalTab', tabId); } catch(e) {}
-            var btnValores = document.getElementById('btn-global-valores');
-            var btnIndicadores = document.getElementById('btn-global-indicadores');
-            var btnAsegurador = document.getElementById('btn-global-asegurador');
-            var btnSaludRetiro = document.getElementById('btn-global-salud-retiro');
-            var btnFuentes = document.getElementById('btn-global-fuentes');
-
-            var containerValores = document.getElementById('container-valores-financieros');
-            var containerIndicadores = document.getElementById('container-indicadores-economicos');
-            var containerAsegurador = document.getElementById('container-mercado-asegurador');
-            var containerSaludRetiro = document.getElementById('container-salud-retiro-demografia');
-            var containerFuentes = document.getElementById('container-fuentes');
-
-            // Hide all
-            [containerValores, containerIndicadores, containerAsegurador, containerSaludRetiro, containerFuentes].forEach(c => {
-                if (c) { c.classList.add('hidden'); c.style.display = 'none'; }
-            });
-
-            // Reset active button styling
-            [btnValores, btnIndicadores, btnAsegurador, btnSaludRetiro, btnFuentes].forEach(b => {
-                if (b) b.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg');
-            });
-
-            // Show selected container and highlight button
-            if (tabId === 'valores-financieros' && containerValores) { containerValores.classList.remove('hidden'); containerValores.style.display = 'block'; if (btnValores) btnValores.classList.add('bg-brandBlue', 'text-white'); }
-            else if (tabId === 'indicadores-economicos' && containerIndicadores) { containerIndicadores.classList.remove('hidden'); containerIndicadores.style.display = 'block'; if (btnIndicadores) btnIndicadores.classList.add('bg-brandBlue', 'text-white'); }
-            else if (tabId === 'mercado-asegurador' && containerAsegurador) { containerAsegurador.classList.remove('hidden'); containerAsegurador.style.display = 'block'; if (btnAsegurador) btnAsegurador.classList.add('bg-brandBlue', 'text-white'); }
-            else if (tabId === 'salud-retiro-demografia' && containerSaludRetiro) { containerSaludRetiro.classList.remove('hidden'); containerSaludRetiro.style.display = 'block'; if (btnSaludRetiro) btnSaludRetiro.classList.add('bg-brandBlue', 'text-white'); }
-            else if (tabId === 'fuentes' && containerFuentes) { containerFuentes.classList.remove('hidden'); containerFuentes.style.display = 'block'; if (btnFuentes) btnFuentes.classList.add('bg-brandBlue', 'text-white'); }
-        }
+        // Replaced with window.switchGlobalTab
 
         function toggleBandsVisibility() {
             var chk = document.getElementById('chk-show-bands');
@@ -10690,6 +10660,54 @@ var bondDetailChartInstance = null;
     })();
     </script>
 
+
+
+    <script>
+        window.switchGlobalTab = function(tabId, saveToStorage) {
+            if (saveToStorage !== false) {
+                try { localStorage.setItem('globalTab', tabId); } catch(e) {}
+            }
+            var btnValores = document.getElementById('btn-global-valores');
+            var btnIndicadores = document.getElementById('btn-global-indicadores');
+            var btnAsegurador = document.getElementById('btn-global-asegurador');
+            var btnSaludRetiro = document.getElementById('btn-global-salud-retiro');
+            var btnFuentes = document.getElementById('btn-global-fuentes');
+
+            var containerValores = document.getElementById('container-valores-financieros');
+            var containerIndicadores = document.getElementById('container-indicadores-economicos');
+            var containerAsegurador = document.getElementById('container-mercado-asegurador');
+            var containerSaludRetiro = document.getElementById('container-salud-retiro-demografia');
+            var containerFuentes = document.getElementById('container-fuentes');
+
+            [containerValores, containerIndicadores, containerAsegurador, containerSaludRetiro, containerFuentes].forEach(c => {
+                if (c) {
+                    c.classList.add('hidden');
+                    c.style.display = '';
+                }
+            });
+
+            [btnValores, btnIndicadores, btnAsegurador, btnSaludRetiro, btnFuentes].forEach(b => {
+                if (b) b.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg');
+            });
+
+            var activeCont = null;
+            var activeBtn = null;
+
+            if (tabId === 'valores-financieros') { activeCont = containerValores; activeBtn = btnValores; }
+            else if (tabId === 'indicadores-economicos') { activeCont = containerIndicadores; activeBtn = btnIndicadores; }
+            else if (tabId === 'mercado-asegurador') { activeCont = containerAsegurador; activeBtn = btnAsegurador; }
+            else if (tabId === 'salud-retiro-demografia') { activeCont = containerSaludRetiro; activeBtn = btnSaludRetiro; }
+            else if (tabId === 'fuentes') { activeCont = containerFuentes; activeBtn = btnFuentes; }
+
+            if (activeCont) {
+                activeCont.classList.remove('hidden');
+                activeCont.style.display = '';
+            }
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-lg');
+            }
+        };
+    </script>
 
 </body>
 </html>
