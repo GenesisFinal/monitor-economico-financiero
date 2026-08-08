@@ -20013,9 +20013,8 @@ var bondDetailChartInstance = null;
         };
 
         window.renderSaludRetiroDemografiaView = function() {
-            if (typeof renderSaludRetiroDemografia === 'function') {
-                renderSaludRetiroDemografia();
-            }
+            var savedSubtab = localStorage.getItem('activeSubtab_salud-retiro-demografia') || 'actuaria';
+            window.switchSrSubtab(savedSubtab);
         };
 
 function switchSRSubTab(tabId) {
