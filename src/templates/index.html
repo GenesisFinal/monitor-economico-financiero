@@ -20011,6 +20011,7 @@ var bondDetailChartInstance = null;
                 if (cleanId === 'demografia' && typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
             }, 50);
         };
+        window.switchSRSubTab = window.switchSrSubtab;;
 
         window.renderSaludRetiroDemografiaView = function() {
             var savedSubtab = localStorage.getItem('activeSubtab_salud-retiro-demografia') || 'actuaria';
@@ -20199,14 +20200,12 @@ function switchSRSubTab(tabId) {
 <script>
 
         window.switchSrSubtab = function(subtabId) {
-            // Strip prefix if passed
             let cleanId = subtabId.replace('sr-tab-', '');
+            try { localStorage.setItem('activeSubtab_salud-retiro-demografia', cleanId); } catch(e) {}
             const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
-            
             allTabs.forEach(t => {
                 const cont = document.getElementById('sr-tab-' + t);
                 const btn = document.getElementById('btn-sr-tab-' + t);
-                
                 if (cont) {
                     if (t === cleanId) {
                         cont.classList.remove('hidden');
@@ -20216,7 +20215,6 @@ function switchSRSubTab(tabId) {
                         cont.style.display = 'none';
                     }
                 }
-                
                 if (btn) {
                     if (t === cleanId) {
                         btn.className = 'sr-subtab-btn px-4 py-2 rounded-xl text-xs font-bold transition-all shadow-md bg-emerald-500 text-white';
@@ -20225,18 +20223,19 @@ function switchSRSubTab(tabId) {
                     }
                 }
             });
-
-            // Trigger chart initialization when switching subtabs
-            if (cleanId === 'salud' && typeof renderSaludCharts === 'function') renderSaludCharts();
-            if (cleanId === 'pensiones' && typeof renderPensionesCharts === 'function') renderPensionesCharts();
-            if (cleanId === 'demografia' && typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
+            setTimeout(() => {
+                if (cleanId === 'salud' && typeof renderSaludCharts === 'function') renderSaludCharts();
+                if (cleanId === 'pensiones' && typeof renderPensionesCharts === 'function') renderPensionesCharts();
+                if (cleanId === 'demografia' && typeof renderDemografiaCharts === 'function') renderDemografiaCharts();
+            }, 50);
         };
+        window.switchSRSubTab = window.switchSrSubtab;;
 
         window.switchSRSubTab = window.switchSrSubtab;
 
         window.renderSaludRetiroDemografiaView = function() {
             // Default to actuarial tab active
-            window.switchSrSubtab('actuaria');
+            var savedSR = localStorage.getItem('activeSubtab_salud-retiro-demografia') || 'actuaria'; window.switchSrSubtab(savedSR);
         };
 
 </script>
