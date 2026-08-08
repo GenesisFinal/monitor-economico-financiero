@@ -12575,7 +12575,7 @@ function setSsnTimeRange(range) {
     
     <!-- Script para los datos mensuales y el Toggle -->
     <script>
-        const ssnMonthlyData = {{ ssn_monthly | tojson | safe if ssn_monthly else '{}' }};
+        window.ssnMonthlyData = {{ ssn_monthly | tojson | safe if ssn_monthly else '{}' }};
         let isConstantes = false;
         
         
