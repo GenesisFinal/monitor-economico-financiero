@@ -5328,7 +5328,7 @@ var activeTab = 'exchange';
         }
 
         function switchGlobalTab(tabId) {
-            localStorage.setItem('activeGlobalTab', tabId);
+            try { localStorage.setItem('activeGlobalTab', tabId); } catch(e) {}
             var btnValores = document.getElementById('btn-global-valores');
             var btnIndicadores = document.getElementById('btn-global-indicadores');
             var btnAsegurador = document.getElementById('btn-global-asegurador');
@@ -5341,58 +5341,22 @@ var activeTab = 'exchange';
             var containerSaludRetiro = document.getElementById('container-salud-retiro-demografia');
             var containerFuentes = document.getElementById('container-fuentes');
 
-            var body = document.body;
-            var isDark = body.classList.contains('dark');
+            // Hide all
+            [containerValores, containerIndicadores, containerAsegurador, containerSaludRetiro, containerFuentes].forEach(c => {
+                if (c) { c.classList.add('hidden'); c.style.display = 'none'; }
+            });
 
-            // Hide all global containers
-            if (containerValores) containerValores.classList.add('hidden');
-            if (containerIndicadores) containerIndicadores.classList.add('hidden');
-            if (containerAsegurador) containerAsegurador.classList.add('hidden');
-            if (containerSaludRetiro) containerSaludRetiro.classList.add('hidden');
-            if (containerFuentes) containerFuentes.classList.add('hidden');
+            // Reset active button styling
+            [btnValores, btnIndicadores, btnAsegurador, btnSaludRetiro, btnFuentes].forEach(b => {
+                if (b) b.classList.remove('bg-brandBlue', 'text-white', 'shadow-lg');
+            });
 
-            // Reset button classes to inactive
-            var inactiveClass = isDark
-                ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white"
-                : "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-600 hover:text-slate-900";
-
-            if (btnValores) btnValores.className = inactiveClass;
-            if (btnIndicadores) btnIndicadores.className = inactiveClass;
-            if (btnAsegurador) btnAsegurador.className = inactiveClass;
-            if (btnSaludRetiro) btnSaludRetiro.className = inactiveClass;
-            if (btnFuentes) btnFuentes.className = inactiveClass;
-
-            var activeClass = isDark ? "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-white bg-brandBlue/10 border border-brandBlue/20" : "px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
-
-            if (tabId === 'valores-financieros') {
-                if (containerValores) containerValores.classList.remove('hidden');
-                if (btnValores) btnValores.className = activeClass;
-                renderChart(activeTab);
-            } else if (tabId === 'indicadores-economicos') {
-                if (containerIndicadores) containerIndicadores.classList.remove('hidden');
-                if (btnIndicadores) btnIndicadores.className = activeClass;
-            } else if (tabId === 'mercado-asegurador') {
-                if (containerAsegurador) containerAsegurador.classList.remove('hidden');
-                if (btnAsegurador) btnAsegurador.className = activeClass;
-                switchAsegTab(activeAsegTab || 'aseg-tab-resumen');
-            } else if (tabId === 'salud-retiro-demografia') {
-                if (containerSaludRetiro) containerSaludRetiro.classList.remove('hidden');
-                if (btnSaludRetiro) btnSaludRetiro.className = activeClass;
-                setTimeout(() => {
-                    renderSaludRetiroDemografiaView();
-                }, 50);
-            } else if (tabId === 'fuentes') {
-                if (containerFuentes) containerFuentes.classList.remove('hidden');
-                if (btnFuentes) btnFuentes.className = activeClass;
-            }
-
-            if (tabId === 'valores-financieros' && !document.querySelector('.tab-btn.active:not(.econ-tab-btn):not(.aseg-tab-btn)')) {
-                switchTab('exchange');
-            } else if (tabId === 'indicadores-economicos' && !document.querySelector('.econ-tab-btn.active')) {
-                switchEconTab('econ-tab-precios-y-costo-de-vida');
-            } else if (tabId === 'mercado-asegurador') {
-                switchAsegTab('aseg-tab-primas');
-            }
+            // Show selected container and highlight button
+            if (tabId === 'valores-financieros' && containerValores) { containerValores.classList.remove('hidden'); containerValores.style.display = 'block'; if (btnValores) btnValores.classList.add('bg-brandBlue', 'text-white'); }
+            else if (tabId === 'indicadores-economicos' && containerIndicadores) { containerIndicadores.classList.remove('hidden'); containerIndicadores.style.display = 'block'; if (btnIndicadores) btnIndicadores.classList.add('bg-brandBlue', 'text-white'); }
+            else if (tabId === 'mercado-asegurador' && containerAsegurador) { containerAsegurador.classList.remove('hidden'); containerAsegurador.style.display = 'block'; if (btnAsegurador) btnAsegurador.classList.add('bg-brandBlue', 'text-white'); }
+            else if (tabId === 'salud-retiro-demografia' && containerSaludRetiro) { containerSaludRetiro.classList.remove('hidden'); containerSaludRetiro.style.display = 'block'; if (btnSaludRetiro) btnSaludRetiro.classList.add('bg-brandBlue', 'text-white'); }
+            else if (tabId === 'fuentes' && containerFuentes) { containerFuentes.classList.remove('hidden'); containerFuentes.style.display = 'block'; if (btnFuentes) btnFuentes.classList.add('bg-brandBlue', 'text-white'); }
         }
 
         function toggleBandsVisibility() {
