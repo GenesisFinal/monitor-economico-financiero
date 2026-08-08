@@ -10144,7 +10144,7 @@ var bondDetailChartInstance = null;
             currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
             var data = generateTableData(currentMortalityTable);
 
-            var tbody = document.getElementById('mortality-table-tbody');
+            var tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
                 var html = '';
                 for (var i = 0; i < data.length; i += 5) {
