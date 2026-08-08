@@ -9141,13 +9141,14 @@ function setSsnTimeRange(range) {
 
     <!-- Standalone Global Container: Salud, Retiro y Demografía -->
     <div id="container-salud-retiro-demografia" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p-8 overflow-y-auto max-w-[1700px] mx-auto w-full">
+        <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
             <div>
                 <h2 class="text-3xl font-black text-white light:text-slate-900 flex items-center gap-3">
                     <i class="fas fa-heart-pulse text-rose-500"></i> Salud, Retiro y Demografía
                 </h2>
-                <p class="text-xs text-slate-400 light:text-slate-600 mt-1">
-                    Indicadores actuariales de mortalidad (SOA / SSN), morbilidad (OMS / DEIS), tasas de reemplazo previsional (OCDE) y estructura demográfica (INDEC / UN Population).
+                <p class="text-slate-400 text-xs mt-1 light:text-slate-600">
+                    Tablas actuariales de mortalidad (SOA / SSN), morbilidad (OMS / DEIS), tasas de reemplazo previsional (OCDE) y estructura demográfica (INDEC / UN Population).
                 </p>
             </div>
             <span class="text-xs font-mono bg-rose-500/10 text-rose-400 light:bg-rose-50 light:text-rose-700 border border-rose-500/20 px-3 py-1.5 rounded-xl self-start md:self-auto">
@@ -9161,37 +9162,55 @@ function setSsnTimeRange(range) {
                 <i class="fas fa-dna mr-1.5"></i> Actuaría y Longevidad (SOA / SSN)
             </button>
             <button onclick="switchSrSubtab('sr-tab-salud')" id="btn-sr-tab-salud" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-darkCard text-slate-400 hover:text-white light:bg-slate-100 light:text-slate-600 transition-all shrink-0">
-                <i class="fas fa-hospital-user mr-1.5"></i> Salud y Morbilidad (OMS / DEIS)
+                <i class="fas fa-hospital mr-1.5"></i> Salud y Morbilidad (OMS / DEIS)
             </button>
             <button onclick="switchSrSubtab('sr-tab-pensiones')" id="btn-sr-tab-pensiones" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-darkCard text-slate-400 hover:text-white light:bg-slate-100 light:text-slate-600 transition-all shrink-0">
-                <i class="fas fa-piggy-bank mr-1.5"></i> Pensiones y Retiro (OCDE / SSN)
+                <i class="fas fa-piggy-bank mr-1.5"></i> Pensiones y Retiro (OCDE)
             </button>
             <button onclick="switchSrSubtab('sr-tab-demografia')" id="btn-sr-tab-demografia" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-darkCard text-slate-400 hover:text-white light:bg-slate-100 light:text-slate-600 transition-all shrink-0">
-                <i class="fas fa-users mr-1.5"></i> Demografía y Cobertura (INDEC / UN)
+                <i class="fas fa-users-line mr-1.5"></i> Demografía y Cobertura (INDEC)
             </button>
         </div>
 
-        <!-- SUBTAB 1: Actuaría y Longevidad -->
+        <!-- SUBTAB 1: Actuaría y Longevidad (EXCLUSIVAMENTE MÓDULOS ACTUARIALES) -->
         <div id="sr-tab-actuaria" class="sr-subtab-content space-y-6">
-            <!-- KPI Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Card 1: Esperanza de Vida al Nacer -->
+            <!-- Cards 1-3 Summary Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Card 1: Tabla Base GAM-94 SSN -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Esperanza de Vida al Nacer</span>
-                    <div class="text-2xl font-black text-white light:text-slate-900 mt-1">77.2 años</div>
-                    <span class="text-[11px] text-emerald-400 block mt-1"><i class="fas fa-venus text-rose-400"></i> 80.4 f | <i class="fas fa-mars text-blue-400"></i> 74.0 m</span>
-                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Tablas de Mortalidad de Argentina) & Banco Mundial / HMD</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Tabla Regulatoria SSN</span>
+                        <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400">
+                            <i class="fas fa-shield-halved"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">GAM 94</span>
+                        <span class="text-xs text-blue-400 font-bold ml-2">Res. 38.708</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Tabla base oficial exigida por la Superintendencia de Seguros de la Nación para reservas matemáticas de Seguros de Retiro.
+                    </p>
                 </div>
 
-                <!-- Card 2: Esperanza de Vida a los 65 años (e65) -->
+                <!-- Card 2: Esperanza de Vida al Nacer -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Esperanza de Vida a los 65 años (e65)</span>
-                    <div class="text-2xl font-black text-white light:text-slate-900 mt-1">17.8 años</div>
-                    <span class="text-[11px] text-emerald-400 block mt-1"><i class="fas fa-venus text-rose-400"></i> 19.5 f | <i class="fas fa-mars text-blue-400"></i> 15.8 m</span>
-                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Estadísticas Vitales) & Human Mortality Database</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Esperanza al Nacer (e₀)</span>
+                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">77.2 años</span>
+                    </div>
+                    <div class="flex items-center gap-3 mt-2 text-xs font-semibold">
+                        <span class="text-blue-400"><i class="fas fa-mars mr-1"></i>74.0 varón</span>
+                        <span class="text-rose-400"><i class="fas fa-venus mr-1"></i>80.4 mujer</span>
+                    </div>
                 </div>
 
-                <!-- Card 3: Tabla Actuarial Seleccionada + Interactive Hover Badge Card -->
+                <!-- Card 3: Selector de Tabla Actuarial Principal -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200 relative group" onmouseenter="showTableBadgeTooltip(document.getElementById('select-mortality-table').value)">
                     <span class="text-xs text-slate-400 font-medium flex items-center justify-between">
                         <span>Selector de Tabla Actuarial</span>
@@ -9217,20 +9236,11 @@ function setSsnTimeRange(range) {
                             <option value="DEIS / OMS 2022">DEIS / OMS 2022 (Min. Salud / OMS Arg.)</option>
                         </select>
                     </div>
-                    <span class="text-[10px] text-slate-400 block mt-2">Valuación de Reservas Matemáticas</span>
-                </div>
-
-                <!-- Card 4: Mejora Anual Longevidad -->
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Mejora Anual Longevidad (SOA MP-2021)</span>
-                    <div class="text-2xl font-black text-rose-400 light:text-rose-600 mt-1">1.5% p.a.</div>
-                    <span class="text-[11px] text-emerald-400 font-bold block mt-1">Año Base Actuarial (t₀): 2012</span>
-                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Protección frente a Riesgo de Longevidad (2012–2026)</span>
                 </div>
             </div>
 
-            <!-- Interactive Hover Badge Card for Selected Actuarial Table Usage Recommendation -->
-            <div id="badge-table-info-card" class="glass-card bg-slate-900/90 border border-brandBlue/40 rounded-2xl p-4 text-xs text-slate-200 shadow-xl transition-all duration-300 mb-4 light:bg-white light:border-blue-300 light:text-slate-800">
+            <!-- Interactive Hover Badge Card Component -->
+            <div id="badge-table-info-card" class="glass-card bg-slate-900/90 border border-brandBlue/40 rounded-2xl p-4 text-xs text-slate-200 shadow-xl transition-all duration-300 light:bg-white light:border-blue-300 light:text-slate-800">
                 <div class="flex items-start gap-3">
                     <div class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue shrink-0 mt-0.5">
                         <i class="fas fa-shield-halved text-lg"></i>
@@ -9251,487 +9261,436 @@ function setSsnTimeRange(range) {
             </div>
 
             <!-- Explanatory Alert Badge for Longevity Improvement Scale -->
-            <div class="glass-card bg-brandBlue/10 border border-brandBlue/30 rounded-2xl p-4 text-xs text-slate-200 light:text-slate-700 leading-relaxed flex items-start gap-3">
-                <i class="fas fa-circle-info text-brandBlue text-lg mt-0.5 shrink-0"></i>
-                <div>
-                    <strong class="text-brandBlue font-bold block mb-0.5">¿Qué es y cómo se aplica la Mejora Anual de Longevidad? (Año Base: 2012)</strong>
-                    La escala de mejora (SOA MP-2021 / MP-2026) mide la tasa porcentual anual de reducción en la mortalidad $q_x$ tomando como <strong>Año Base t₀ = 2012</strong>. Actuarialmente se proyecta como <code>q_x(t) = q_x(2012) * (1 - f_x)^(t - 2012)</code>. Su aplicación es crítica para actualizar tablas históricas (ej. GAM-94 o Pri-2012) y evitar que las aseguradoras de retiro subestimen los años de sobrevida de los beneficiarios, previniendo déficits en reservas matemáticas.
-                </div>
-            </div>
-
-            <!-- Charts & Table Container -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Chart 1: Curva de Mortalidad qx -->
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
-                        <span><i class="fas fa-chart-line text-brandBlue mr-2"></i> Curva de Mortalidad qx por Edad (Escala Logarítmica)</span>
-                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-lg">Por 1.000 hab.</span>
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Comparativa dinámica entre la tabla seleccionada en el menú y las tablas de referencia.</p>
-                    <div class="relative w-full h-[320px]">
-                        <canvas id="srMortalityChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
+            <div class="bg-brandBlue/10 border border-brandBlue/30 rounded-2xl p-4 text-xs text-slate-300 light:bg-blue-50 light:border-blue-200 light:text-slate-800">
+                <div class="flex items-start gap-3">
+                    <div class="p-2 rounded-xl bg-brandBlue/20 text-brandBlue shrink-0 mt-0.5">
+                        <i class="fas fa-lightbulb text-lg"></i>
                     </div>
-                </div>
-
-                <!-- Chart 2: Tasa de Invalidez ITP -->
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
-                        <span><i class="fas fa-wheelchair text-rose-400 mr-2"></i> Tasa de Invalidez Total y Permanente (ITP - SOA GLTD)</span>
-                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-lg">Por 1.000 asegurados</span>
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Incidencia actuarial por rango etario para tarificación de coberturas de Invalidez.</p>
-                    <div class="relative w-full h-[320px]">
-                        <canvas id="srDisabilityChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Interactive Actuarial Table (Single-Year Resolution 0-120 with Male & Female breakdown) -->
-            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-darkBorder/40 pb-3">
                     <div>
-                        <h3 id="tbl-mortality-title" class="text-md font-bold text-white light:text-slate-900 flex items-center gap-2">
-                            <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: GAM 94 (SSN Base Res. 38.708)
-                        </h3>
-                        <p id="tbl-mortality-desc" class="text-xs text-slate-400 light:text-slate-600 mt-0.5">
-                            Tabla completa año por año desde la edad 0 hasta la edad 120 (ω = 120), con diferenciación por género.
+                        <span class="font-bold text-white text-sm block mb-1 light:text-slate-900">¿Qué es y cómo se aplica la Mejora Anual de Longevidad (Escala fₓ)?</span>
+                        <p class="leading-relaxed text-slate-300 light:text-slate-700">
+                            La Escala de Mejora de Longevidad (ej. SOA MP-2021/2026) expresa la tasa porcentual anual (<span class="font-mono text-rose-400 light:text-rose-600 font-bold">fₓ</span>) en que se reduce la probabilidad de muerte (<span class="font-mono text-blue-400 light:text-blue-600 font-bold">qₓ</span>) para cada edad debido a avances médicos. Tomando como Año Base <span class="font-bold text-white light:text-slate-900">t₀ = 2012</span>, la probabilidad proyectada al año actual <span class="font-bold text-white light:text-slate-900">t = 2026</span> se proyecta como: <span class="font-mono text-emerald-400 light:text-emerald-700 font-bold">qₓ(2026) = qₓ(2012) × (1 - fₓ)¹⁴</span>. Esto incrementa progresivamente los sobrevivientes <span class="font-mono text-amber-400 light:text-amber-600 font-bold">lₓ</span> y el valor actual de las anualidades <span class="font-mono text-emerald-400 light:text-emerald-700 font-bold">äₓ</span>.
                         </p>
                     </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                        <button onclick="exportMortalityTableCSV()" class="px-3 py-1.5 rounded-xl bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500/30 text-xs font-semibold flex items-center gap-1.5 border border-emerald-500/30 transition-all cursor-pointer" title="Descargar tabla completa en formato CSV para Excel">
-                            <i class="fas fa-file-csv"></i> Exportar CSV / Excel
+                </div>
+            </div>
+
+            <!-- Main Single Table & Chart Layout (qx Log Chart + Single Year Table) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left: qx Mortality Curve Chart (Log) -->
+                <div class="lg:col-span-5 glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-chart-line text-blue-400"></i> Curva de Mortalidad qx (Escala Logarítmica)
+                            </h4>
+                        </div>
+                        <p class="text-slate-400 text-xs mb-4 light:text-slate-600">
+                            Comparación de la tasa qx por 1.000 hab. para Varones y Mujeres vs GAM 94 SSN.
+                        </p>
+                    </div>
+                    <div class="relative w-full" style="height: 320px; min-height: 320px;">
+                        <canvas id="srMortalityChart" style="height: 320px; min-height: 320px; width: 100%;"></canvas>
+                    </div>
+                </div>
+
+                <!-- Right: Single-Year Actuarial Table (0 to 120) with Male/Female qx, px, lx -->
+                <div class="lg:col-span-7 glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200 flex flex-col">
+                    <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
+                        <div>
+                            <h4 id="tbl-mortality-title" class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: GAM 94
+                            </h4>
+                            <p id="tbl-mortality-desc" class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                Tasas anuales de mortalidad qx (‰), supervivencia px (%) y cohorte lx (l₀=100.000) de 0 a 120 años.
+                            </p>
+                        </div>
+                        <button onclick="exportMortalityTableCSV()" class="px-3 py-1.5 rounded-xl bg-brandBlue/10 border border-brandBlue/30 text-brandBlue hover:bg-brandBlue hover:text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow">
+                            <i class="fas fa-file-csv text-sm"></i> Exportar CSV / Excel
                         </button>
-                        <span class="text-xs font-mono bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl">
-                            Edades 0 a 120 (121 filas)
-                        </span>
                     </div>
-                </div>
 
-                <div class="max-h-[500px] overflow-y-auto overflow-x-auto no-scrollbar border border-darkBorder/30 rounded-xl">
-                    <table class="w-full text-left border-collapse text-xs">
-                        <thead class="sticky top-0 bg-darkBg text-slate-300 light:bg-slate-100 light:text-slate-700 font-semibold shadow-sm z-10">
-                            <tr class="border-b border-darkBorder/60">
-                                <th class="py-2.5 px-4 whitespace-nowrap">Edad (x)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">qx Varones (‰)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">qx Mujeres (‰)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">px Varones (%)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">px Mujeres (%)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-blue-400">lx Varones (l₀=100.000)</th>
-                                <th class="py-2.5 px-4 text-right whitespace-nowrap text-rose-400">lx Mujeres (l₀=100.000)</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200 text-slate-200 light:text-slate-700 font-mono">
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 0</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">10.500</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">8.200</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.18%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 1</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.485</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.299</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 2</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.488</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.300</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 3</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.491</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.302</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 4</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.495</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.304</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 5</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.499</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.306</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 6</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.504</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.309</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 7</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.509</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.312</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 8</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.514</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.315</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 9</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.520</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.318</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 10</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.526</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.321</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 11</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.533</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.325</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 12</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.541</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.329</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 13</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.549</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.334</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 14</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.558</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.339</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 15</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.568</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.344</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 16</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.579</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.350</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 17</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.590</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.357</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 18</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.603</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.364</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 19</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.617</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.372</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 20</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.632</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.381</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 21</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.649</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.390</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 22</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.667</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.400</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 23</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.687</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.411</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 24</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.709</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.424</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 25</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.732</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.437</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 26</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.758</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.452</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.92%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 27</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.786</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.467</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.92%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 28</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.816</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.485</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.92%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 29</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.850</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.504</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.92%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 30</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.886</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.525</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.91%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 31</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.926</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.548</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.91%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 32</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">0.969</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.572</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.90%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 33</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.016</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.600</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.90%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 34</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.068</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.629</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.89%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.94%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 35</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.124</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.662</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.89%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 36</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.185</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.697</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.88%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 37</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.252</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.736</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.87%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.93%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 38</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.325</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.779</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.87%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.92%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 39</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.405</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.825</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.86%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.92%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 40</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.492</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.876</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.85%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.91%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 41</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.586</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.931</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.84%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.91%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 42</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.690</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">0.992</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.83%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.90%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 43</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.802</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.058</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.82%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.89%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 44</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">1.925</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.130</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.81%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.89%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 45</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">2.060</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.209</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.79%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.88%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 46</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">2.206</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.295</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.78%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.87%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 47</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">2.365</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.390</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.76%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.86%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 48</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">2.540</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.493</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.75%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.85%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 49</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">2.730</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.606</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.73%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.84%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 50</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">2.937</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.729</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.71%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.83%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 51</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">3.163</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">1.863</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.68%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.81%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 52</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">3.409</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">2.011</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.66%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.80%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 53</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">3.678</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">2.171</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.63%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.78%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 54</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">3.971</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">2.347</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.60%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.77%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 55</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">4.291</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">2.539</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.57%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.75%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 56</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">4.640</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">2.749</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.54%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.73%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 57</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">5.020</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">2.978</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.50%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.70%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 58</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">5.435</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">3.229</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.46%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.68%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 59</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">5.888</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">3.503</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.41%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.65%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 60</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">6.381</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">3.802</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.36%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.62%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 61</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">6.919</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">4.129</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.31%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.59%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 62</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">7.506</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">4.486</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.25%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.55%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 63</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">8.145</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">4.876</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.19%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.51%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 64</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">8.843</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">5.303</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.12%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.47%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 65</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">9.603</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">5.768</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.04%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.42%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 66</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">10.432</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">6.277</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.96%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.37%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 67</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">11.335</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">6.833</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.87%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.32%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 68</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">12.320</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">7.440</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.77%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.26%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 69</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">13.393</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">8.104</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.66%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.19%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 70</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">14.562</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">8.828</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.54%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.12%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 71</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">15.837</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">9.619</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.42%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">99.04%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 72</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">17.225</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">10.484</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.28%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.95%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 73</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">18.738</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">11.427</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.13%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.86%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 74</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">20.385</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">12.458</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.96%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.75%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 75</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">22.179</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">13.582</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.78%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.64%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 76</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">24.133</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">14.811</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.59%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.52%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 77</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">26.260</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">16.151</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.37%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.38%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 78</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">28.576</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">17.614</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.14%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.24%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 79</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">31.095</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">19.211</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">96.89%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">98.08%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 80</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">33.837</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">20.953</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">96.62%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.90%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 81</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">36.819</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">22.854</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">96.32%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.71%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 82</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">40.062</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">24.927</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">95.99%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.51%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 83</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">43.588</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">27.188</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">95.64%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.28%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 84</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">47.420</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">29.654</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">95.26%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">97.03%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Reserva Estándar</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 85</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">51.583</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">32.341</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">94.84%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">96.77%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 86</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">56.105</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">35.270</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">94.39%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">96.47%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 87</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">61.013</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">38.461</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">93.90%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">96.15%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 88</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">66.338</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">41.937</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">93.37%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">95.81%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 89</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">72.114</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">45.722</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">92.79%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">95.43%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 90</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">78.375</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">49.842</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">92.16%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">95.02%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 91</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">85.157</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">54.324</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">91.48%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">94.57%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 92</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">92.499</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">59.199</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">90.75%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">94.08%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 93</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">100.443</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">64.499</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">89.96%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">93.55%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 94</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">109.030</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">70.258</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">89.10%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">92.97%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 95</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">118.305</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">76.511</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">88.17%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">92.35%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 96</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">128.314</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">83.298</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">87.17%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">91.67%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 97</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">139.104</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">90.659</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">86.09%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">90.93%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 98</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">150.723</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">98.638</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">84.93%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">90.14%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 99</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">163.222</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">107.278</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">83.68%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">89.27%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 100</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">176.648</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">116.627</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">82.34%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">88.34%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 101</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">191.050</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">126.733</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">80.90%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">87.33%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 102</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">206.475</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">137.647</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">79.35%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">86.24%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 103</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">222.969</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">149.420</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">77.70%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">85.06%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 104</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">240.573</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">162.104</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">75.94%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">83.79%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 105</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">259.325</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">175.752</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">74.07%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">82.42%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 106</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">279.255</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">190.415</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">72.07%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">80.96%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 107</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">300.387</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">206.143</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">69.96%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">79.39%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 108</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">322.737</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">222.985</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">67.73%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">77.70%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 109</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">346.306</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">240.984</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">65.37%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">75.90%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 110</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">371.086</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">260.181</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">62.89%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">73.98%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 111</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">397.051</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">280.608</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">60.29%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">71.94%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 112</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">424.157</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">302.290</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">57.58%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">69.77%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 113</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">452.342</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">325.242</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">54.77%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">67.48%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 114</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">481.520</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">349.466</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">51.85%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">65.05%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 115</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">500.000</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">450.000</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">50.00%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">55.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 116</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">600.000</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">550.000</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">40.00%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">45.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 117</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">700.000</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">650.000</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">30.00%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">35.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 118</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">800.000</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">750.000</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">20.00%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">25.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 119</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">900.000</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">850.000</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">10.00%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">15.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-<tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-4 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 120</td><td class="py-2 px-4 text-right text-blue-400 font-bold whitespace-nowrap">999.000</td><td class="py-2 px-4 text-right text-rose-400 font-bold whitespace-nowrap">950.000</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">0.10%</td><td class="py-2 px-4 text-right text-emerald-400 light:text-emerald-600 whitespace-nowrap">5.00%</td><td class="py-2 px-4 text-right text-slate-400 text-[11px] whitespace-nowrap">Alta Recarga / Reserva Max</td></tr>
-</tbody>
-                    </table>
+                    <div class="overflow-x-auto max-h-[380px] overflow-y-auto rounded-xl border border-darkBorder/40 light:border-slate-200 mt-2">
+                        <table class="w-full text-xs text-left">
+                            <thead class="bg-darkBg text-slate-300 sticky top-0 z-10 light:bg-slate-100 light:text-slate-700">
+                                <tr>
+                                    <th class="py-2.5 px-4 font-bold">Edad (x)</th>
+                                    <th class="py-2.5 px-4 font-bold text-right text-blue-400">qx ♂ (‰)</th>
+                                    <th class="py-2.5 px-4 font-bold text-right text-rose-400">qx ♀ (‰)</th>
+                                    <th class="py-2.5 px-4 font-bold text-right text-emerald-400 light:text-emerald-600">px ♂ (%)</th>
+                                    <th class="py-2.5 px-4 font-bold text-right text-emerald-400 light:text-emerald-600">px ♀ (%)</th>
+                                    <th class="py-2.5 px-4 font-bold text-right text-blue-400">lx ♂ (l₀=100k)</th>
+                                    <th class="py-2.5 px-4 font-bold text-right text-rose-400">lx ♀ (l₀=100k)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200">
+                                <!-- Populated dynamically by renderMortalityTableAndChart -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        
-            <!-- NEW ACTUARIAL MODULE: Multi-Table lx & Commutation Annuities (Nx/Dx) Comparison -->
-            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 mt-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
+            <!-- Card: Tasa de Invalidez Total y Permanente (ITP) -->
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-lg font-bold text-white light:text-slate-900 flex items-center gap-2">
-                            <i class="fas fa-layer-group text-purple-400"></i> Comparativa Multitabla: Curvas lx y Rentas Vitalicias (Nx/Dx)
-                        </h3>
-                        <p class="text-xs text-slate-400 light:text-slate-600 mt-1">
-                            Seleccione múltiples tablas y géneros para comparar la velocidad de extinción de la cohorte lx y el Valor Actual Técnico de una Renta Vitalicia Anual (äx = Nx/Dx).
-                        </p>
-                    </div>
-
-                    <!-- Selector Controls: Interest Rate i & Longevity Improvement Scale fx -->
-                    <div class="flex items-center gap-3 flex-wrap">
-                        <!-- Tasa Técnica i -->
-                        <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
-                            <label for="select-tech-interest" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Tasa Técnica (i):</label>
-                            <select id="select-tech-interest" onchange="renderCommutationComparison()" class="bg-darkBg text-brandBlue text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-blue-700">
-                                <option value="0.01" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1% p.a.</option>
-                                <option value="0.02" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2% p.a.</option>
-                                <option value="0.03" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">3% p.a. (Estándar SSN)</option>
-                                <option value="0.04" class="bg-slate-900 text-white light:bg-white light:text-slate-900">4% p.a.</option>
-                                <option value="0.05" class="bg-slate-900 text-white light:bg-white light:text-slate-900">5% p.a.</option>
-                            </select>
-                        </div>
-
-                        <!-- Mejora Anual Longevidad fx -->
-                        <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
-                            <label for="select-longevity-scale" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Mejora Longevidad (fₓ):</label>
-                            <select id="select-longevity-scale" onchange="renderCommutationComparison()" class="bg-darkBg text-rose-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-rose-600">
-                                <option value="0.00" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.0% p.a. (Sin mejora)</option>
-                                <option value="0.005" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.5% p.a.</option>
-                                <option value="0.010" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.0% p.a.</option>
-                                <option value="0.015" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.5% p.a. (SOA MP-2021 Estándar)</option>
-                                <option value="0.020" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.0% p.a.</option>
-                                <option value="0.025" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.5% p.a.</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Multi-Series Checkboxes Matrix -->
-                <div class="mb-6 bg-darkBg/60 border border-darkBorder/40 rounded-xl p-4 light:bg-slate-50 light:border-slate-200">
-                    <span class="text-xs font-bold text-slate-300 light:text-slate-700 block mb-2.5">
-                        <i class="fas fa-check-double text-brandBlue mr-1"></i> Seleccione las series actuariales a comparar (Varones / Mujeres):
-                    </span>
-                    <div id="container-series-checkboxes" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 text-xs font-mono">
-<label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="GAM 94 Varones" checked onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #3b82f6"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">GAM 94 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="GAM 94 Mujeres" checked onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #f43f5e"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">GAM 94 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="SOA Pri-2012 Varones" checked onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #10b981"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">SOA Pri-2012 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="SOA Pri-2012 Mujeres" checked onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #ec4899"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">SOA Pri-2012 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="SOA Pub-2010 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #8b5cf6"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">SOA Pub-2010 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="SOA Pub-2010 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #d946ef"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">SOA Pub-2010 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="CSO 80 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #f59e0b"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">CSO 80 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="CSO 80 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #fbbf24"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">CSO 80 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="GAM 71 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #06b6d4"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">GAM 71 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="GAM 71 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #22d3ee"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">GAM 71 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="IAM 71 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #6366f1"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">IAM 71 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="IAM 71 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #818cf8"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">IAM 71 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="GAM 83 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #14b8a6"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">GAM 83 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="GAM 83 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #2dd4bf"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">GAM 83 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="IAM 83 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #a855f7"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">IAM 83 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="IAM 83 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #c084fc"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">IAM 83 ♀</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="IAM 94 Varones"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #ef4444"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">IAM 94 ♂</span></label><label class="flex items-center gap-1.5 p-1.5 rounded-lg border border-darkBorder/40 bg-darkCard hover:bg-brandBlue/10 cursor-pointer transition-all light:bg-white light:border-slate-300"><input type="checkbox" value="IAM 94 Mujeres"  onchange="renderCommutationComparison()" class="rounded border-darkBorder text-brandBlue focus:ring-0 cursor-pointer"><span class="w-2 h-2 rounded-full inline-block" style="background-color: #f87171"></span><span class="text-slate-200 light:text-slate-700 font-medium text-[11px] whitespace-nowrap">IAM 94 ♀</span></label>
-</div>
-                </div>
-
-                <!-- Section Outputs: lx Comparison Chart & Nx/Dx Annuity Table -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Chart: Comparativa Curvas de Supervivencia lx -->
-                    <div class="glass-card bg-darkBg/40 border border-darkBorder/40 rounded-xl p-5 shadow-sm light:bg-white light:border-slate-200">
-                        <h4 class="text-sm font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
-                            <span><i class="fas fa-chart-area text-blue-400 mr-2"></i> Curvas de Supervivencia lx (l₀ = 100.000)</span>
-                            <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-lg">Cohorte Teórica</span>
-                        </h4>
-                        <p class="text-[11px] text-slate-400 mb-4">Supervivientes por edad según la tabla y género seleccionados.</p>
-                        <div class="relative w-full h-[340px]">
-                            <canvas id="srLxComparisonChart" height="340" style="height: 340px; width: 100%; display: block;"></canvas>
-                        </div>
-                    </div>
-
-            <!-- Dynamic Conditional Survival Chart lx from Retirement Age x0 (lx0 = 100.000) -->
-            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg mb-6 light:bg-white light:border-slate-200 mt-6">
-                <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
-                    <div>
-                        <h4 class="font-bold text-white text-base light:text-slate-900">
-                            <i class="fas fa-user-clock text-emerald-400 mr-2 light:text-emerald-600"></i> Curva de Supervivencia Condicional de Retiro (lₓ dinámico con lₓ₀ = 100.000)
+                        <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-wheelchair text-rose-400"></i> Tabla de Invalidez Total y Permanente (ITP)
                         </h4>
                         <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
-                            Probabilidad actuarial de sobrevida condicional ₜpₓ₀ normalizada a 100.000 jubilados a la edad de inicio seleccionada (x₀).
+                            Incidencia anual de invalidez absoluta por cada 1.000 asegurados expuestos por tramo de edad.
                         </p>
                     </div>
-
-                    <!-- Selector de Edad de Inicio x0 -->
-                    <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
-                        <label for="select-retire-age-x0" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Edad de Inicio (x₀):</label>
-                        <select id="select-retire-age-x0" onchange="renderCommutationComparison()" class="bg-darkBg text-emerald-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-emerald-700">
-                            <option value="30" class="bg-slate-900 text-white light:bg-white light:text-slate-900">30 años</option>
-                            <option value="40" class="bg-slate-900 text-white light:bg-white light:text-slate-900">40 años</option>
-                            <option value="50" class="bg-slate-900 text-white light:bg-white light:text-slate-900">50 años</option>
-                            <option value="60" class="bg-slate-900 text-white light:bg-white light:text-slate-900">60 años</option>
-                            <option value="65" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">65 años (Jubilación Estándar)</option>
-                            <option value="70" class="bg-slate-900 text-white light:bg-white light:text-slate-900">70 años</option>
-                            <option value="75" class="bg-slate-900 text-white light:bg-white light:text-slate-900">75 años</option>
-                            <option value="80" class="bg-slate-900 text-white light:bg-white light:text-slate-900">80 años</option>
-                        </select>
-                    </div>
                 </div>
-                <div class="relative w-full" style="height: 340px; min-height: 340px;">
-                    <canvas id="srLxRetirementChart" style="height: 340px; min-height: 340px; width: 100%;"></canvas>
+                <div class="relative w-full" style="height: 320px; min-height: 320px;">
+                    <canvas id="srDisabilityChart" style="height: 320px; min-height: 320px; width: 100%;"></canvas>
                 </div>
             </div>
 
-                    <!-- Table: Valor Actual Renta Vitalicia Unitaria (äx = Nx/Dx) -->
-                    <div class="glass-card bg-darkBg/40 border border-darkBorder/40 rounded-xl p-5 shadow-sm light:bg-white light:border-slate-200 flex flex-col justify-between">
+            <!-- MÓDULO COMPARATIVO MULTITABLA Y CONMUTACIÓN ACTUARIAL -->
+            <div class="border-t-2 border-brandBlue/30 pt-6 mt-8">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-xl light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
                         <div>
-                            <h4 class="text-sm font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
-                                <span><i class="fas fa-calculator text-emerald-400 mr-2"></i> Renta Vitalicia Unitaria (äx = Nx / Dx)</span>
-                                <span id="badge-tech-interest" class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded-lg font-mono">i = 3.0%</span>
-                            </h4>
-                            <p class="text-[11px] text-slate-400 mb-4">Capital actuarial requerido por cada $1 de renta anual adelantada según la edad x.</p>
-                            
-                            <div class="overflow-x-auto no-scrollbar border border-darkBorder/30 rounded-xl max-h-[300px] overflow-y-auto">
-                                <table class="w-full text-left border-collapse text-xs font-mono">
-                                    <thead class="sticky top-0 bg-darkBg text-slate-300 light:bg-slate-100 light:text-slate-700 font-semibold shadow-sm z-10">
-                                        <tr id="tbl-annuity-head" class="border-b border-darkBorder/60">
-    <th class="py-2 px-3 whitespace-nowrap">Edad (x)</th>
-    <th class="py-2 px-3 text-right whitespace-nowrap text-[#3b82f6]">GAM 94 Varones</th>
-    <th class="py-2 px-3 text-right whitespace-nowrap text-[#f43f5e]">GAM 94 Mujeres</th>
-    <th class="py-2 px-3 text-right whitespace-nowrap text-[#10b981]">SOA Pri-2012 Varones</th>
-    <th class="py-2 px-3 text-right whitespace-nowrap text-[#ec4899]">SOA Pri-2012 Mujeres</th>
-</tr>
-                                    </thead>
-                                    <tbody id="tbl-annuity-body" class="divide-y divide-darkBorder/30 light:divide-slate-200 text-slate-200 light:text-slate-700">
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 30</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">22.85</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">23.68</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">23.12</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">23.95</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 40</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">20.42</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">21.50</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">20.78</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">21.82</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 50</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">17.21</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">18.64</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">17.65</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">19.02</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 60</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">13.25</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">14.95</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">13.80</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">15.42</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 65</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">11.08</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">12.82</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">11.65</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">13.35</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 70</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">8.95</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">10.60</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">9.50</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">11.15</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 75</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">6.92</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">8.38</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">7.45</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">8.92</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 80</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">5.08</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">6.25</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">5.55</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">6.72</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 85</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">3.52</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">4.35</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">3.92</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">4.75</td></tr>
-    <tr class="hover:bg-brandBlue/5 transition-colors"><td class="py-2 px-3 font-bold text-white light:text-slate-900 whitespace-nowrap">Edad 90</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">2.30</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">2.82</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">2.60</td><td class="py-2 px-3 text-right font-bold text-emerald-400 light:text-emerald-600">3.12</td></tr>
-</tbody>
-                                </table>
+                            <h3 class="text-xl font-black text-white light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-scale-balanced text-amber-400"></i> Módulo de Comparación Multitabla y Funciones de Conmutación (lx & Nx/Dx)
+                            </h3>
+                            <p class="text-slate-400 text-xs mt-1 light:text-slate-600">
+                                Seleccione múltiples tablas para comparar las curvas de supervivencia lx y el valor actual actuarial de una Renta Vitalicia Anual Unitaria (äₓ = Nx/Dx).
+                            </p>
+                        </div>
+
+                        <!-- Selector Controls: Interest Rate i & Longevity Improvement Scale fx -->
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
+                                <label for="select-tech-interest" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Tasa Técnica (i):</label>
+                                <select id="select-tech-interest" onchange="renderCommutationComparison()" class="bg-darkBg text-brandBlue text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-blue-700">
+                                    <option value="0.01" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1% p.a.</option>
+                                    <option value="0.02" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2% p.a.</option>
+                                    <option value="0.03" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">3% p.a. (Estándar SSN)</option>
+                                    <option value="0.04" class="bg-slate-900 text-white light:bg-white light:text-slate-900">4% p.a.</option>
+                                    <option value="0.05" class="bg-slate-900 text-white light:bg-white light:text-slate-900">5% p.a.</option>
+                                </select>
+                            </div>
+
+                            <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
+                                <label for="select-longevity-scale" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Mejora Longevidad (fₓ):</label>
+                                <select id="select-longevity-scale" onchange="renderCommutationComparison()" class="bg-darkBg text-rose-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-rose-600">
+                                    <option value="0.00" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.0% p.a. (Sin mejora)</option>
+                                    <option value="0.005" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.5% p.a.</option>
+                                    <option value="0.010" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.0% p.a.</option>
+                                    <option value="0.015" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.5% p.a. (SOA MP-2021 Estándar)</option>
+                                    <option value="0.020" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.0% p.a.</option>
+                                    <option value="0.025" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2.5% p.a.</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="mt-4 pt-3 border-t border-darkBorder/40 text-[10px] text-slate-400 leading-relaxed">
-                            <i class="fas fa-info-circle text-brandBlue mr-1"></i> <strong>Fórmula Actuarial:</strong> <code>äx = Nx / Dx = ∑ (v^k · lk) / (v^x · lx)</code> para <code>k = x…120</code> con factor de descuento <code>v = 1/(1+i)</code>.
+                    <!-- Checkboxes Grid (32 Gendered Series) -->
+                    <div class="mb-6">
+                        <span class="text-xs font-bold text-slate-300 light:text-slate-700 block mb-2">Seleccione las Series a Comparar:</span>
+                        <div id="container-series-checkboxes" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-[220px] overflow-y-auto p-2 bg-darkBg/60 border border-darkBorder/50 rounded-xl light:bg-slate-50 light:border-slate-200">
+                            <!-- Populated dynamically by initSeriesCheckboxes -->
+                        </div>
+                    </div>
+
+                    <!-- Multi-Table lx Cohort Survival Comparison Chart (Birth Cohort l0 = 100.000) -->
+                    <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg mb-6 light:bg-white light:border-slate-200">
+                        <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
+                            <div>
+                                <h4 class="font-bold text-white text-base light:text-slate-900">
+                                    <i class="fas fa-chart-line text-brandBlue mr-2"></i> Curvas de Supervivencia Comparativas lₓ (l₀ = 100.000 a Edad 0)
+                                </h4>
+                                <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                    Evolución de la cohorte de 100.000 nacidos vivos desde edad 0 hasta los 120 años para las series seleccionadas.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="relative w-full" style="height: 340px; min-height: 340px;">
+                            <canvas id="srLxComparisonChart" style="height: 340px; min-height: 340px; width: 100%;"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Dynamic Conditional Survival Chart lx from Retirement Age x0 (lx0 = 100.000) -->
+                    <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg mb-6 light:bg-white light:border-slate-200">
+                        <div class="flex items-center justify-between gap-4 mb-4 flex-wrap">
+                            <div>
+                                <h4 class="font-bold text-white text-base light:text-slate-900">
+                                    <i class="fas fa-user-clock text-emerald-400 mr-2 light:text-emerald-600"></i> Curva de Supervivencia Condicional de Retiro (lₓ dinámico con lₓ₀ = 100.000)
+                                </h4>
+                                <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                    Probabilidad actuarial de sobrevida condicional ₜpₓ₀ normalizada a 100.000 jubilados a la edad de inicio seleccionada (x₀).
+                                </p>
+                            </div>
+
+                            <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
+                                <label for="select-retire-age-x0" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Edad de Inicio (x₀):</label>
+                                <select id="select-retire-age-x0" onchange="renderCommutationComparison()" class="bg-darkBg text-emerald-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-emerald-700">
+                                    <option value="30" class="bg-slate-900 text-white light:bg-white light:text-slate-900">30 años</option>
+                                    <option value="40" class="bg-slate-900 text-white light:bg-white light:text-slate-900">40 años</option>
+                                    <option value="50" class="bg-slate-900 text-white light:bg-white light:text-slate-900">50 años</option>
+                                    <option value="60" class="bg-slate-900 text-white light:bg-white light:text-slate-900">60 años</option>
+                                    <option value="65" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">65 años (Jubilación Estándar)</option>
+                                    <option value="70" class="bg-slate-900 text-white light:bg-white light:text-slate-900">70 años</option>
+                                    <option value="75" class="bg-slate-900 text-white light:bg-white light:text-slate-900">75 años</option>
+                                    <option value="80" class="bg-slate-900 text-white light:bg-white light:text-slate-900">80 años</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="relative w-full" style="height: 340px; min-height: 340px;">
+                            <canvas id="srLxRetirementChart" style="height: 340px; min-height: 340px; width: 100%;"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Table: Valor Actual Renta Vitalicia Unitaria (äx = Nx/Dx) -->
+                    <div class="glass-card bg-darkBg/40 border border-darkBorder/60 rounded-2xl p-5 shadow-lg light:bg-slate-50 light:border-slate-200">
+                        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                    <i class="fas fa-coins text-emerald-400 light:text-emerald-600"></i> Tabla de Renta Vitalicia Anual Unitaria (äₓ = Nₓ / Dₓ)
+                                </h4>
+                                <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                    Valor actual actuarial necesario para abonar $1 anual vitalicio pagadero por adelantado a cada edad.
+                                </p>
+                            </div>
+                            <span id="badge-tech-interest" class="text-xs font-bold font-mono bg-emerald-500/10 text-emerald-400 light:bg-emerald-50 light:text-emerald-700 border border-emerald-500/20 px-3 py-1 rounded-lg">
+                                i = 3.0% | fₓ = 1.5% p.a.
+                            </span>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-darkBorder/40 light:border-slate-200">
+                            <table class="w-full text-xs text-left">
+                                <thead class="bg-darkBg text-slate-300 light:bg-slate-100 light:text-slate-700">
+                                    <tr id="tbl-annuity-head">
+                                        <!-- Dynamic Header Columns -->
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl-annuity-body" class="divide-y divide-darkBorder/30 light:divide-slate-200">
+                                    <!-- Dynamic Body Rows -->
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <!-- SUBTAB 2: Salud y Morbilidad (EXCLUSIVAMENTE MÓDULOS DE SALUD) -->
+        <div id="sr-tab-salud" class="sr-subtab-content space-y-6 hidden">
+            <!-- Health Indicators Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Gasto Directo de Bolsillo en Salud</span>
+                        <div class="p-2 rounded-xl bg-rose-500/10 text-rose-400">
+                            <i class="fas fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">28.4%</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Porcentaje del gasto total en salud financiado directamente por los hogares (Banco Mundial / OMS).
+                    </p>
+                </div>
 
-        <!-- SUBTAB 2: Salud y Morbilidad -->
-        <div id="sr-tab-salud" class="sr-subtab-content hidden space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Gasto de Bolsillo en Salud (Out-of-Pocket)</span>
-                    <div class="text-3xl font-black text-rose-400 light:text-rose-600 mt-1">28.4%</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Gasto directo pagado por hogares (Banco Mundial / OMS)</span>
-                </div>
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Tasa de Egresos / Internación Hospitalaria</span>
-                    <div class="text-3xl font-black text-white light:text-slate-900 mt-1">8.2 / 100 hab.</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Estadísticas Vitales DEIS / Min. Salud</span>
-                </div>
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Causa Principal de Defunción (CIE-10)</span>
-                    <div class="text-xl font-bold text-amber-400 light:text-amber-600 mt-1">Cardiovasculares (32.4%)</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Seguido por Cáncer/Neoplasias (21.8%)</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Tasa de Egresos e Internaciones</span>
+                        <div class="p-2 rounded-xl bg-blue-500/10 text-blue-400">
+                            <i class="fas fa-bed-pulse"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">8.2 por 100 hab.</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Tasa anual de internaciones y egresos hospitalarios en el sistema de salud argentino (DEIS).
+                    </p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
-                        <i class="fas fa-chart-pie text-brandBlue mr-2"></i> Distribución de DALYs (Años de Vida Ajustados por Discapacidad)
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Carga total de morbilidad en Argentina por grupo de enfermedades (OMS / Global Health Estimates).</p>
-                    <div class="relative w-full aspect-square max-h-[320px] mx-auto">
-                        <canvas id="srDalysChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
-                    </div>
-                </div>
-
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 flex flex-col justify-between">
+            <!-- Card: Carga de Enfermedad (AVISA / DALYs OMS) -->
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="text-md font-bold text-white light:text-slate-800 mb-4 flex items-center gap-2">
-                            <i class="fas fa-briefcase-medical text-rose-500"></i> Oportunidad Estratégica en Seguros de Salud
-                        </h3>
-                        <div class="space-y-3 text-xs text-slate-300 light:text-slate-700 leading-relaxed">
-                            <p class="p-3 bg-slate-800/40 light:bg-slate-100 rounded-xl border border-darkBorder/40">
-                                <strong>Brecha de Cobertura Privada:</strong> Con un gasto de bolsillo del 28.4%, existe una fuerte demanda insatisfecha para seguros médicos de alta complejidad, prótesis y coberturas de Enfermedades Graves (Critical Illness).
-                            </p>
-                            <p class="p-3 bg-slate-800/40 light:bg-slate-100 rounded-xl border border-darkBorder/40">
-                                <strong>Siniestralidad por Enfermedades Crónicas:</strong> El 54.2% de la carga de morbilidad proviene de patologías Cardiovasculares y Neoplasias, requiriendo modelos de suscripción basados en chequeos preventivos.
+                        <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-chart-pie text-rose-500"></i> Distribución de la Carga de Enfermedad (AVISA / DALYs OMS)
+                        </h4>
+                        <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                            Años de vida ajustados por discapacidad perdidos por grupo de causas principales en Argentina.
+                        </p>
+                    </div>
+                </div>
+                <div class="relative w-full" style="height: 320px; min-height: 320px;">
+                    <canvas id="srDalysChart" style="height: 320px; min-height: 320px; width: 100%;"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBTAB 3: Pensiones y Retiro (EXCLUSIVAMENTE MÓDULOS DE RETIRO Y PENSIONES) -->
+        <div id="sr-tab-pensiones" class="sr-subtab-content space-y-6 hidden">
+            <!-- Pension Indicators Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Esperanza al Nacer (e₀)</span>
+                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">77.2 años</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Fuente: INDEC (Tablas de Mortalidad de la Rep. Argentina) & Banco Mundial / HMD. Varón: 74.0 años | Mujer: 80.4 años.
+                    </p>
+                </div>
+
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Esperanza a los 65 Años (e₆₅)</span>
+                        <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">17.8 años</span>
+                    </div>
+                    <div class="flex items-center gap-3 mt-2 text-xs font-semibold">
+                        <span class="text-blue-400"><i class="fas fa-mars mr-1"></i>15.8 varón</span>
+                        <span class="text-rose-400"><i class="fas fa-venus mr-1"></i>19.5 mujer</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Fuente: INDEC (Estadísticas Vitales) & Human Mortality Database. Expectativa de vida restante a la edad de retiro de 65 años.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Pension Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-chart-bar text-amber-400"></i> Tasa de Reemplazo Neta Previsional (%)
+                            </h4>
+                            <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                Porcentaje del último haber en actividad cubierto por la jubilación (Argentina vs OCDE).
                             </p>
                         </div>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-darkBorder/30 text-[11px] text-slate-400 flex items-center justify-between">
-                        <span>Fuente: DEIS / Ministerio de Salud & OMS GHE 2026</span>
-                        <span class="text-rose-400 font-semibold">Salud Suplementaria</span>
+                    <div class="relative w-full" style="height: 300px; min-height: 300px;">
+                        <canvas id="srReplacementChart" style="height: 300px; min-height: 300px; width: 100%;"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-users-rectangle text-rose-400"></i> Proyección Tasa de Dependencia (+65 por 100 activos)
+                            </h4>
+                            <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                Proporción de adultos mayores respecto a la población en edad de trabajar (2025-2050).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative w-full" style="height: 300px; min-height: 300px;">
+                        <canvas id="srDependencyChart" style="height: 300px; min-height: 300px; width: 100%;"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SUBTAB 3: Pensiones y Retiro -->
-        <div id="sr-tab-pensiones" class="sr-subtab-content hidden space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- SUBTAB 4: Demografía y Cobertura (EXCLUSIVAMENTE MÓDULOS DEMOGRÁFICOS) -->
+        <div id="sr-tab-demografia" class="sr-subtab-content space-y-6 hidden">
+            <!-- Demographics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Tasa de Reemplazo Argentina vs OCDE</span>
-                    <div class="text-3xl font-black text-amber-400 light:text-amber-600 mt-1">48.5%</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Jubilación sobre último sueldo (vs 61.8% OCDE)</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Población Total (INDEC)</span>
+                        <div class="p-2 rounded-xl bg-purple-500/10 text-purple-400">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">46.8M</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Población total estimada de la República Argentina (INDEC / UN Population).
+                    </p>
                 </div>
+
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Ratio Dependencia Vejez (2050)</span>
-                    <div class="text-3xl font-black text-rose-400 light:text-rose-600 mt-1">31.4</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Adultos +65 por cada 100 activos (Banco Mundial)</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Población +65 Años</span>
+                        <div class="p-2 rounded-xl bg-indigo-500/10 text-indigo-400">
+                            <i class="fas fa-person-cane"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">5.6M</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Cantidad de adultos mayores de 65 años residentes en el país.
+                    </p>
                 </div>
+
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Fondos de Retiro Privados / PBI</span>
-                    <div class="text-3xl font-black text-brandBlue light:text-blue-600 mt-1">1.4%</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Profundidad del mercado en Argentina (vs 67.4% OCDE)</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-slate-400 font-medium">Esperanza de Vida Saludable (HALE)</span>
+                        <div class="p-2 rounded-xl bg-teal-500/10 text-teal-400">
+                            <i class="fas fa-heart-pulse"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <span class="text-2xl font-black text-white light:text-slate-900">67.5 años</span>
+                    </div>
+                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
+                        Años promedio vividos con buena salud y libre de discapacidades graves (OMS).
+                    </p>
                 </div>
             </div>
 
+            <!-- Demographics Charts Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
-                        <i class="fas fa-chart-bar text-brandBlue mr-2"></i> Tasa de Reemplazo Previsional Neta (% del Salario)
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Comparativa de jubilación promedio sobre último salario activo (OCDE Pensions at a Glance).</p>
-                    <div class="relative w-full h-[320px]">
-                        <canvas id="srReplacementChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-chart-line text-purple-400"></i> Proyección de Envejecimiento Poblacional (% +65 años)
+                            </h4>
+                            <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                Evolución porcentual proyectada de la población mayor de 65 años (2020-2050).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative w-full" style="height: 300px; min-height: 300px;">
+                        <canvas id="srAgingChart" style="height: 300px; min-height: 300px; width: 100%;"></canvas>
                     </div>
                 </div>
 
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
-                        <i class="fas fa-chart-line text-rose-400 mr-2"></i> Proyección del Ratio de Dependencia de la Vejez (2025-2050)
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Evolución proyectada de personas de +65 años por cada 100 personas en edad activa (15-64 años).</p>
-                    <div class="relative w-full h-[320px]">
-                        <canvas id="srDependencyChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-chart-pie text-emerald-400"></i> Cobertura de Salud por Subsector (%)
+                            </h4>
+                            <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                                Distribución de la población según tipo de cobertura sanitaria principal.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="relative w-full" style="height: 300px; min-height: 300px;">
+                        <canvas id="srCoverageChart" style="height: 300px; min-height: 300px; width: 100%;"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- SUBTAB 4: Demografía y Cobertura -->
-        <div id="sr-tab-demografia" class="sr-subtab-content hidden space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Población Total Argentina</span>
-                    <div class="text-3xl font-black text-white light:text-slate-900 mt-1">46.8 M</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Proyección Censo INDEC / UN 2026</span>
-                </div>
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Población Mayor a 65 años</span>
-                    <div class="text-3xl font-black text-emerald-400 light:text-emerald-600 mt-1">5.6 M (12.1%)</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">Envejecimiento continuo hacia 19.5% en 2050</span>
-                </div>
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <span class="text-xs text-slate-400 font-medium">Cobertura Medicina Prepaga</span>
-                    <div class="text-3xl font-black text-brandBlue light:text-blue-600 mt-1">14.2%</div>
-                    <span class="text-[11px] text-slate-400 block mt-1">EPH INDEC (Aglomerados Urbanos)</span>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
-                        <i class="fas fa-[#8b5cf6] fa-chart-area mr-2"></i> Proyección de Envejecimiento Poblacional (+65 años % 2020-2050)
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Evolución porcentual proyectada de la tercera edad en Argentina (UN Population Division).</p>
-                    <div class="relative w-full h-[320px]">
-                        <canvas id="srAgingChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
-                    </div>
-                </div>
-
-                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
-                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
-                        <i class="fas fa-chart-pie text-emerald-400 mr-2"></i> Cobertura de Salud por Tipo de Afiliación (INDEC EPH)
-                    </h3>
-                    <p class="text-xs text-slate-400 mb-4">Distribución porcentual de la población argentina según cobertura médica principal.</p>
-                    <div class="relative w-full aspect-square max-h-[320px] mx-auto">
-                        <canvas id="srCoverageChart" height="320" style="height: 320px; width: 100%; display: block;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- Global Tab Content 4: Fuentes -->
-    <div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
+    </div><div id="container-fuentes" class="hidden min-h-[calc(100vh-73px)] p-6 md:p-8 overflow-y-auto max-w-5xl mx-auto w-full">
         <h2 class="text-3xl font-black text-white light:text-slate-900 mb-6 flex items-center gap-3 border-b border-darkBorder/40 pb-4">
             <i class="fas fa-book-open text-brandBlue"></i> Directorio de Fuentes de Datos
         </h2>
