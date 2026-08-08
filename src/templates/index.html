@@ -10078,29 +10078,36 @@ var bondDetailChartInstance = null;
     <script>
     (function() {
         // --- COMPLETE ACTUARIAL MORTALITY & COMMUTATION ENGINE ---
-        var currentMortalityTable = 'GAM-71';
+        var currentMortalityTable = 'GAM 94';
         var mortalityChartInstance = null;
 
-        // Base mortality parameters (Gompertz-Makeham parameters per table)
         var tableParams = {
-            'GAM-71':   { A: 0.0007, B: 0.000045, c: 1.092 },
-            'GAM-83':   { A: 0.0005, B: 0.000035, c: 1.094 },
-            'GAM-94':   { A: 0.0004, B: 0.000028, c: 1.096 },
-            'CSO-80':   { A: 0.0008, B: 0.000050, c: 1.091 },
-            'CSO-2001': { A: 0.00045, B: 0.000030, c: 1.095 },
-            'CSO-2017': { A: 0.00035, B: 0.000022, c: 1.097 },
-            'Pri-2012': { A: 0.00030, B: 0.000020, c: 1.098 },
-            'Pub-2010': { A: 0.00038, B: 0.000025, c: 1.096 }
+            'GAM 94':           { A: 0.0004, B: 0.000028, c: 1.096 },
+            'SOA Pri-2012':     { A: 0.0003, B: 0.000020, c: 1.098 },
+            'SOA Pub-2010':     { A: 0.00038, B: 0.000025, c: 1.096 },
+            'CSO 80':           { A: 0.0008, B: 0.000050, c: 1.091 },
+            'CSO 2001':         { A: 0.00045, B: 0.000030, c: 1.095 },
+            'CSO 2017':         { A: 0.00035, B: 0.000022, c: 1.097 },
+            'GAM 71':           { A: 0.0007, B: 0.000045, c: 1.092 },
+            'IAM 71':           { A: 0.00065, B: 0.000042, c: 1.093 },
+            'GAM 83':           { A: 0.0005, B: 0.000035, c: 1.094 },
+            'IAM 83':           { A: 0.00048, B: 0.000033, c: 1.0945 },
+            'IAM 94':           { A: 0.00039, B: 0.000027, c: 1.096 },
+            'UP-94':            { A: 0.00042, B: 0.000029, c: 1.0955 },
+            'RP-2000':          { A: 0.00041, B: 0.000028, c: 1.0958 },
+            'RP-2014':          { A: 0.00032, B: 0.000021, c: 1.0975 },
+            'INDEC 2010':       { A: 0.00055, B: 0.000038, c: 1.0935 },
+            'DEIS / OMS 2022':  { A: 0.00049, B: 0.000034, c: 1.0942 }
         };
 
         function generateTableData(tableName) {
-            var params = tableParams[tableName] || tableParams['GAM-71'];
+            var normKey = tableName ? tableName.trim() : 'GAM 94';
+            var params = tableParams[normKey] || tableParams['GAM 94'];
             var data = [];
             var l = 100000;
             var interestRate = 0.04;
             var v = 1 / (1 + interestRate);
 
-            // Generate q_x, l_x, d_x
             for (var x = 0; x <= 100; x++) {
                 var q = Math.min(0.999, params.A + params.B * Math.pow(params.c, x));
                 var d = Math.round(l * q);
@@ -10108,7 +10115,6 @@ var bondDetailChartInstance = null;
                 l = Math.max(0, l - d);
             }
 
-            // Calculate e_x (life expectancy) & Commutations D_x, N_x, C_x, M_x
             var totalSurv = 0;
             for (var i = data.length - 1; i >= 0; i--) {
                 totalSurv += data[i].l;
@@ -10120,7 +10126,6 @@ var bondDetailChartInstance = null;
                 data[i].C = data[i].d * vx1;
             }
 
-            // Calculate N_x and M_x sums
             var sumD = 0;
             var sumC = 0;
             for (var j = data.length - 1; j >= 0; j--) {
@@ -10136,14 +10141,12 @@ var bondDetailChartInstance = null;
         }
 
         window.renderMortalityTableAndChart = function(tableName) {
-            currentMortalityTable = tableName || currentMortalityTable || 'GAM-71';
+            currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
             var data = generateTableData(currentMortalityTable);
 
-            // Populate HTML Table Tbody if present
             var tbody = document.getElementById('mortality-table-tbody');
             if (tbody) {
                 var html = '';
-                // Render sample ages for performance (ages 0, 10, 20, ..., 100)
                 for (var i = 0; i < data.length; i += 5) {
                     var row = data[i];
                     html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors">' +
@@ -10161,7 +10164,6 @@ var bondDetailChartInstance = null;
                 tbody.innerHTML = html;
             }
 
-            // Update Chart.js Mortality Chart
             var ctx = document.getElementById('mortalityChart');
             if (ctx && typeof Chart !== 'undefined') {
                 if (mortalityChartInstance) {
@@ -10217,12 +10219,12 @@ var bondDetailChartInstance = null;
         };
 
         window.onMortalityTableChange = function(tableName) {
-            currentMortalityTable = tableName || 'GAM-71';
+            currentMortalityTable = tableName || 'GAM 94';
             window.renderMortalityTableAndChart(currentMortalityTable);
         };
 
         window.exportMortalityTableCSV = function() {
-            var data = generateTableData(currentMortalityTable || 'GAM-71');
+            var data = generateTableData(currentMortalityTable || 'GAM 94');
             var csv = 'Edad (x),Tasa q_x,Supervivientes l_x,Fallecidos d_x,Esperanza e_x,D_x,N_x,C_x,M_x,Anualidad a_x,Prima A_x\n';
             data.forEach(function(r) {
                 csv += [r.x, r.q, r.l, r.d, r.e, Math.round(r.D), Math.round(r.N), Math.round(r.C), Math.round(r.M), r.ax, r.Ax].join(',') + '\n';
@@ -10231,7 +10233,7 @@ var bondDetailChartInstance = null;
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
-            a.download = 'tabla_mortalidad_' + (currentMortalityTable || 'GAM-71') + '.csv';
+            a.download = 'tabla_mortalidad_' + (currentMortalityTable || 'GAM 94').replace(/\s+/g, '_') + '.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
@@ -10243,7 +10245,6 @@ var bondDetailChartInstance = null;
         window.renderPensionesCharts = function() {};
         window.renderDemografiaCharts = function() {};
 
-        // Initial trigger when DOM is ready
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 if (typeof window.renderMortalityTableAndChart === 'function') {
