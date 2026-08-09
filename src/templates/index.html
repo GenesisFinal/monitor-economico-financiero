@@ -10168,7 +10168,7 @@ var bondDetailChartInstance = null;
             return data;
         }
 
-        // RICH METADATA HOVER TOOLTIP FOR MULTITABLE CHECKBOXES
+        // TOOLTIP FUNCTIONS
         window.showMultitableTableBadgeTooltip = function(val, sexStr, evt) {
             var existing = document.getElementById('table-badge-tooltip-popup');
             if (!existing) {
@@ -10178,7 +10178,7 @@ var bondDetailChartInstance = null;
                 document.body.appendChild(existing);
             }
             var meta = tableParams[val] || tableParams['GAM 94'];
-            var isMale = sexStr.indexOf('Varón') !== -1;
+            var isMale = sexStr ? sexStr.indexOf('Varón') !== -1 : true;
             var sexBadge = isMale ? '<span class="text-blue-400 font-bold ml-1">♂ Varón</span>' : '<span class="text-rose-400 font-bold ml-1">♀ Mujer</span>';
 
             existing.innerHTML = '<div class="font-bold text-emerald-400 mb-1.5 flex items-center gap-2 text-sm border-b border-slate-800 pb-1">' +
@@ -10203,7 +10203,7 @@ var bondDetailChartInstance = null;
 
         window.showTableBadgeTooltip = function(val, evt) {
             var meta = tableParams[val] || tableParams['GAM 94'];
-            window.showMultitableTableBadgeTooltip(val, 'Ambos Sexos', evt);
+            window.showMultitableTableBadgeTooltip(val, '♂ Varón', evt);
         };
 
         window.hideTableBadgeTooltip = function() {
@@ -10221,7 +10221,159 @@ var bondDetailChartInstance = null;
             }
         });
 
-        // 3. MULTITABLE CHECKBOXES WITH HOVER TOOLTIPS
+        // 1. INDEPENDENT TABLE TECH INTEREST EVENT
+        window.onTableTechInterestChange = function(rateStr) {
+            tableInterestRate = parseFloat(rateStr) || 0.04;
+            window.renderMortalityTableAndChart(currentMortalityTable);
+        };
+
+        // 2. RENDER MORTALITY TABLE
+        window.renderMortalityTableAndChart = function(tableName) {
+            currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
+            var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
+
+            var titleEl = document.getElementById('tbl-mortality-title');
+            if (titleEl) titleEl.innerText = 'Tabla Actuarial: ' + meta.name + ' (i = ' + (tableInterestRate*100).toFixed(1) + '%)';
+            var descEl = document.getElementById('tbl-mortality-desc');
+            if (descEl) descEl.innerText = meta.desc + ' (Tasa técnica independiente de la tabla: ' + (tableInterestRate*100).toFixed(1) + '% p.a. Edad por edad hasta los ' + (meta.male.omega || 105) + ' años).';
+
+            var maleData = generateSexCurve(meta.male, tableInterestRate);
+            var femaleData = generateSexCurve(meta.female, tableInterestRate);
+
+            var tbody = document.getElementById('tbl-mortality-body');
+            if (tbody) {
+                var html = '';
+                var maxLen = Math.max(maleData.length, femaleData.length);
+                for (var i = 0; i < maxLen; i++) {
+                    var m = maleData[i] || maleData[maleData.length - 1];
+                    var f = femaleData[i] || femaleData[femaleData.length - 1];
+                    var ageLabel = m.x;
+                    var highlight = (m.x % 5 === 0) ? 'bg-slate-800/30' : '';
+                    
+                    html += '<tr class="border-b border-darkBorder/20 hover:bg-emerald-500/10 transition-colors text-xs ' + highlight + '">' +
+                        '<td class="py-1.5 px-3 font-mono font-bold text-emerald-400 text-left">' + ageLabel + '</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-blue-400 text-right">' + (m.q * 1000).toFixed(2) + '‰</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-rose-400 text-right">' + (f.q * 1000).toFixed(2) + '‰</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-blue-300 font-semibold text-right">' + m.l.toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-rose-300 font-semibold text-right">' + f.l.toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-amber-400 font-bold text-right">' + m.e + 'a</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-amber-300 font-bold text-right">' + f.e + 'a</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-blue-400 font-bold text-right">' + m.ax + '</td>' +
+                        '<td class="py-1.5 px-3 font-mono text-rose-400 font-bold text-right">' + f.ax + '</td>' +
+                    '</tr>';
+                }
+                tbody.innerHTML = html;
+            }
+
+            var ctx = document.getElementById('srMortalityChart');
+            if (ctx && typeof Chart !== 'undefined') {
+                if (mortalityChartInstance) {
+                    mortalityChartInstance.destroy();
+                }
+                var ages = maleData.map(function(d) { return d.x; });
+                var maleSurv = maleData.map(function(d) { return d.l; });
+                var femaleSurv = femaleData.map(function(d) { return d.l; });
+
+                mortalityChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ages,
+                        datasets: [
+                            {
+                                label: 'Supervivientes l_x ♂ Varón (l₀=100.000)',
+                                data: maleSurv,
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                borderWidth: 2.5,
+                                fill: true,
+                                pointRadius: 0
+                            },
+                            {
+                                label: 'Supervivientes l_x ♀ Mujer (l₀=100.000)',
+                                data: femaleSurv,
+                                borderColor: '#ec4899',
+                                backgroundColor: 'rgba(236, 72, 153, 0.1)',
+                                borderWidth: 2.5,
+                                fill: true,
+                                pointRadius: 0
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Edad (x)', color: '#94a3b8' } },
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Supervivientes l_x', color: '#cbd5e1' }, min: 0, max: 100000 }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1' } },
+                            title: { display: true, text: 'Curva Comparativa de Supervivencia l_x ♂ Varón vs ♀ Mujer — ' + meta.name, color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+
+            window.renderAnnuityTableAndChart();
+            window.renderDisabilitySection();
+        };
+
+        window.onMortalityTableChange = function(tableName) {
+            currentMortalityTable = tableName || 'GAM 94';
+            window.renderMortalityTableAndChart(currentMortalityTable);
+        };
+
+        window.exportMortalityTableCSV = function() {
+            var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
+            var maleData = generateSexCurve(meta.male, tableInterestRate);
+            var femaleData = generateSexCurve(meta.female, tableInterestRate);
+
+            var csv = '\uFEFF"Tabla Actuarial: ' + meta.name + ' — Tasa Técnica Independiente: ' + (tableInterestRate*100).toFixed(1) + '%"\n';
+            csv += '"Edad (x)","qx Male (per 1000)","qx Female (per 1000)","lx Male (100k)","lx Female (100k)","dx Male","dx Female","ex Male (Years)","ex Female (Years)","Dx Male","Dx Female","Nx Male","Nx Female","Cx Male","Cx Female","Mx Male","Mx Female","ax Male (Annuity)","ax Female (Annuity)","Ax Male (Single Premium)","Ax Female (Single Premium)"\n';
+
+            var maxLen = Math.max(maleData.length, femaleData.length);
+            for (var i = 0; i < maxLen; i++) {
+                var m = maleData[i] || maleData[maleData.length - 1];
+                var f = femaleData[i] || femaleData[femaleData.length - 1];
+
+                csv += [
+                    m.x,
+                    (m.q * 1000).toFixed(4),
+                    (f.q * 1000).toFixed(4),
+                    m.l,
+                    f.l,
+                    m.d,
+                    f.d,
+                    m.e,
+                    f.e,
+                    Math.round(m.D),
+                    Math.round(f.D),
+                    Math.round(m.N),
+                    Math.round(f.N),
+                    Math.round(m.C),
+                    Math.round(f.C),
+                    Math.round(m.M),
+                    Math.round(f.M),
+                    m.ax,
+                    f.ax,
+                    m.Ax,
+                    f.Ax
+                ].join(',') + '\n';
+            }
+
+            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'tabla_actuarial_' + (currentMortalityTable || 'GAM_94').replace(/[^a-zA-Z0-9]/g, '_') + '_i_' + (tableInterestRate*100).toFixed(0) + 'pct.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        };
+
+        // 3. MULTITABLE CHECKBOXES
         window.initSeriesCheckboxes = function() {
             var container = document.getElementById('container-series-checkboxes');
             if (!container) return;
@@ -10260,7 +10412,9 @@ var bondDetailChartInstance = null;
             }
 
             window.renderCommutationComparison();
-        };window.renderCommutationComparison = function() {
+        };
+
+        window.renderCommutationComparison = function() {
             var ctx = document.getElementById('srLxComparisonChart');
             if (!ctx || typeof Chart === 'undefined') return;
 
