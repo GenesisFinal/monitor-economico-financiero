@@ -5324,7 +5324,7 @@ var activeTab = 'exchange';
             
             // Re-style global tab buttons based on new theme
             var currentGlobalTab = localStorage.getItem('globalTab') || 'valores-financieros';
-            switchGlobalTab(currentGlobalTab);
+            if (typeof switchGlobalTab === 'function') switchGlobalTab(currentGlobalTab);
             
             // Re-render only active chart to prevent size collapse in hidden divs
             if (currentGlobalTab === 'valores-financieros') {
