@@ -10077,35 +10077,38 @@ var bondDetailChartInstance = null;
 
     <script>
     (function() {
-        // --- COMPLETE ACTUARIAL MORTALITY & COMMUTATION ENGINE ---
+        // --- COMPLETE ACTUARIAL, COMMUTATION, ANNUITY & ITP ENGINE ---
         var currentMortalityTable = 'GAM 94';
         var mortalityChartInstance = null;
+        var comparisonChartInstance = null;
+        var retirementChartInstance = null;
+        var disabilityChartInstance = null;
 
         var tableParams = {
-            'GAM 94':           { A: 0.0004, B: 0.000028, c: 1.096 },
-            'SOA Pri-2012':     { A: 0.0003, B: 0.000020, c: 1.098 },
-            'SOA Pub-2010':     { A: 0.00038, B: 0.000025, c: 1.096 },
-            'CSO 80':           { A: 0.0008, B: 0.000050, c: 1.091 },
-            'CSO 2001':         { A: 0.00045, B: 0.000030, c: 1.095 },
-            'CSO 2017':         { A: 0.00035, B: 0.000022, c: 1.097 },
-            'GAM 71':           { A: 0.0007, B: 0.000045, c: 1.092 },
-            'IAM 71':           { A: 0.00065, B: 0.000042, c: 1.093 },
-            'GAM 83':           { A: 0.0005, B: 0.000035, c: 1.094 },
-            'IAM 83':           { A: 0.00048, B: 0.000033, c: 1.0945 },
-            'IAM 94':           { A: 0.00039, B: 0.000027, c: 1.096 },
-            'UP-94':            { A: 0.00042, B: 0.000029, c: 1.0955 },
-            'RP-2000':          { A: 0.00041, B: 0.000028, c: 1.0958 },
-            'RP-2014':          { A: 0.00032, B: 0.000021, c: 1.0975 },
-            'INDEC 2010':       { A: 0.00055, B: 0.000038, c: 1.0935 },
-            'DEIS / OMS 2022':  { A: 0.00049, B: 0.000034, c: 1.0942 }
+            'GAM 94':           { A: 0.00040, B: 0.000028, c: 1.0960, name: 'GAM 94 (SSN Res. 38.708)', desc: 'Tabla actuarial de mortalidad de anualidades de grupo 1994, base regulatoria obligatoria SSN Argentina.' },
+            'SOA Pri-2012':     { A: 0.00030, B: 0.000020, c: 1.0980, name: 'SOA Pri-2012', desc: 'Tabla de mortalidad para planes de retiro privados de la Society of Actuaries (EE.UU.).' },
+            'SOA Pub-2010':     { A: 0.00038, B: 0.000025, c: 1.0960, name: 'SOA Pub-2010', desc: 'Tabla de mortalidad para pensionados y empleados del sector público (Society of Actuaries).' },
+            'CSO 80':           { A: 0.00080, B: 0.000050, c: 1.0910, name: 'CSO 80', desc: 'Commissioners Standard Ordinary 1980, referencia tradicional para seguros de vida individuales.' },
+            'CSO 2001':         { A: 0.00045, B: 0.000030, c: 1.0950, name: 'CSO 2001', desc: 'Commissioners Standard Ordinary 2001, estándar estadounidense para reservas de vida.' },
+            'CSO 2017':         { A: 0.00035, B: 0.000022, c: 1.0970, name: 'CSO 2017 (PBR)', desc: 'Tabla moderna basada en principios de reserva según riesgo (Principle-Based Reserving).' },
+            'GAM 71':           { A: 0.00070, B: 0.000045, c: 1.0920, name: 'GAM 71', desc: 'Group Annuity Mortality 1971, tabla base histórica de anualidades colectivas.' },
+            'IAM 71':           { A: 0.00065, B: 0.000042, c: 1.0930, name: 'IAM 71', desc: 'Individual Annuity Mortality 1971, tabla para rentas vitalicias individuales.' },
+            'GAM 83':           { A: 0.00050, B: 0.000035, c: 1.0940, name: 'GAM 83', desc: 'Group Annuity Mortality 1983, referencia estándar para seguros colectivos y pensionales.' },
+            'IAM 83':           { A: 0.00048, B: 0.000033, c: 1.0945, name: 'IAM 83', desc: 'Individual Annuity Mortality 1983, renta vitalicia individual con proyecciones.' },
+            'IAM 94':           { A: 0.00039, B: 0.000027, c: 1.0960, name: 'IAM 94', desc: 'Individual Annuity Mortality 1994, tabla actuarial moderna para asegurados individuales.' },
+            'UP-94':            { A: 0.00042, B: 0.000029, c: 1.0955, name: 'UP-94', desc: 'Uninsured Pensioner 1994, tabla actuarial para pensionados no asegurados.' },
+            'RP-2000':          { A: 0.00041, B: 0.000028, c: 1.0958, name: 'RP-2000', desc: 'Retirement Plans 2000, estudio de experiencia en planes de jubilación.' },
+            'RP-2014':          { A: 0.00032, B: 0.000021, c: 1.0975, name: 'RP-2014', desc: 'Retirement Plans 2014, tabla con desglose detallado de longevidad.' },
+            'INDEC 2010':       { A: 0.00055, B: 0.000038, c: 1.0935, name: 'INDEC 2010', desc: 'Tabla de mortalidad demográfica de la República Argentina según Censo 2010.' },
+            'DEIS / OMS 2022':  { A: 0.00049, B: 0.000034, c: 1.0942, name: 'DEIS / OMS 2022', desc: 'Estadísticas vitales del Ministerio de Salud / OMS Argentina 2022.' }
         };
 
-        function generateTableData(tableName) {
+        function generateTableData(tableName, customInterest) {
             var normKey = tableName ? tableName.trim() : 'GAM 94';
             var params = tableParams[normKey] || tableParams['GAM 94'];
             var data = [];
             var l = 100000;
-            var interestRate = 0.04;
+            var interestRate = customInterest !== undefined ? customInterest : 0.04;
             var v = 1 / (1 + interestRate);
 
             for (var x = 0; x <= 100; x++) {
@@ -10140,10 +10143,24 @@ var bondDetailChartInstance = null;
             return data;
         }
 
+        // --- 1 & 2. RENDER SINGLE TABLE & QX LOG CHART ---
         window.renderMortalityTableAndChart = function(tableName) {
             currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
+            var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
+
+            // Update Table Title and Description (ITEM 2 FIX)
+            var titleEl = document.getElementById('tbl-mortality-title');
+            if (titleEl) {
+                titleEl.innerText = 'Tabla Actuarial: ' + meta.name;
+            }
+            var descEl = document.getElementById('tbl-mortality-desc');
+            if (descEl) {
+                descEl.innerText = meta.desc;
+            }
+
             var data = generateTableData(currentMortalityTable);
 
+            // Populate HTML Table Tbody
             var tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
                 var html = '';
@@ -10164,14 +10181,15 @@ var bondDetailChartInstance = null;
                 tbody.innerHTML = html;
             }
 
-            var ctx = document.getElementById('mortalityChart');
+            // Update Chart.js Mortality Chart with Logarithmic Scale (ITEM 1 FIX)
+            var ctx = document.getElementById('srMortalityChart');
             if (ctx && typeof Chart !== 'undefined') {
                 if (mortalityChartInstance) {
                     mortalityChartInstance.destroy();
                 }
                 var ages = data.map(function(d) { return d.x; });
                 var surv = data.map(function(d) { return d.l; });
-                var qx = data.map(function(d) { return d.q * 1000; });
+                var qxLog = data.map(function(d) { return Math.max(0.0001, d.q); });
 
                 mortalityChartInstance = new Chart(ctx, {
                     type: 'line',
@@ -10179,7 +10197,7 @@ var bondDetailChartInstance = null;
                         labels: ages,
                         datasets: [
                             {
-                                label: 'Supervivientes (l_x)',
+                                label: 'Supervivientes l_x (Escala Lineal)',
                                 data: surv,
                                 borderColor: '#10b981',
                                 backgroundColor: 'rgba(16, 185, 129, 0.1)',
@@ -10189,12 +10207,12 @@ var bondDetailChartInstance = null;
                                 pointRadius: 0
                             },
                             {
-                                label: 'Tasa de Mortalidad (q_x ‰)',
-                                data: qx,
+                                label: 'Mortalidad q_x (Escala Logarítmica)',
+                                data: qxLog,
                                 borderColor: '#ef4444',
                                 backgroundColor: 'transparent',
-                                yAxisID: 'yQx',
-                                borderWidth: 2,
+                                yAxisID: 'yQxLog',
+                                borderWidth: 2.5,
                                 borderDash: [4, 4],
                                 pointRadius: 0
                             }
@@ -10207,20 +10225,235 @@ var bondDetailChartInstance = null;
                         scales: {
                             x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Edad (x)', color: '#94a3b8' } },
                             ySurv: { type: 'linear', position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Supervivientes l_x', color: '#10b981' } },
-                            yQx: { type: 'linear', position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'q_x por 1.000', color: '#ef4444' } }
+                            yQxLog: { 
+                                type: 'logarithmic', 
+                                position: 'right', 
+                                grid: { drawOnChartArea: false }, 
+                                title: { display: true, text: 'Tasa q_x (Log)', color: '#ef4444' },
+                                ticks: {
+                                    callback: function(value) {
+                                        return (value * 1000).toFixed(value < 0.001 ? 2 : 1) + '‰';
+                                    }
+                                }
+                            }
                         },
                         plugins: {
                             legend: { labels: { color: '#cbd5e1' } },
-                            title: { display: true, text: 'Curva Actuarial de Mortalidad y Supervivencia (' + currentMortalityTable + ')', color: '#f8fafc' }
+                            title: { display: true, text: 'Curva Actuarial de Mortalidad (Escala Log q_x) — ' + meta.name, color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+
+            // Also refresh annuity table & retirement chart
+            window.renderAnnuityTableAndChart();
+            window.renderDisabilitySection();
+        };
+
+        window.onMortalityTableChange = function(tableName) {
+            currentMortalityTable = tableName || 'GAM 94';
+            window.renderMortalityTableAndChart(currentMortalityTable);
+        };
+
+        // --- 3. MULTITABLE CHECKBOXES & COMPARISON CHART --- (ITEM 3 FIX)
+        window.initSeriesCheckboxes = function() {
+            var container = document.getElementById('container-series-checkboxes');
+            if (!container) return;
+
+            var defaultSelected = ['GAM 94', 'CSO 2001', 'SOA Pri-2012', 'GAM 83'];
+            var html = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs">';
+            
+            Object.keys(tableParams).forEach(function(key) {
+                var checked = defaultSelected.indexOf(key) !== -1 ? 'checked' : '';
+                html += '<label class="flex items-center gap-1.5 p-1.5 rounded-lg bg-darkBg/60 border border-darkBorder/40 hover:border-brandBlue/50 cursor-pointer light:bg-slate-50 light:border-slate-200 transition-all">' +
+                    '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0" value="' + key + '" ' + checked + ' onchange="renderCommutationComparison()">' +
+                    '<span class="text-slate-200 light:text-slate-700 font-mono text-[11px] truncate">' + key + '</span>' +
+                '</label>';
+            });
+            html += '</div>';
+            container.innerHTML = html;
+            
+            window.renderCommutationComparison();
+        };
+
+        window.renderCommutationComparison = function() {
+            var ctx = document.getElementById('srLxComparisonChart');
+            if (!ctx || typeof Chart === 'undefined') return;
+
+            var checkboxes = document.querySelectorAll('.cb-mortality-table:checked');
+            var selectedKeys = [];
+            checkboxes.forEach(function(cb) { selectedKeys.push(cb.value); });
+
+            if (selectedKeys.length === 0) {
+                selectedKeys = ['GAM 94', 'CSO 2001', 'SOA Pri-2012'];
+            }
+
+            var techInterestEl = document.getElementById('select-tech-interest');
+            var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
+
+            var colors = ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7'];
+            var datasets = [];
+            var ages = [];
+            for (var a = 0; a <= 100; a++) ages.push(a);
+
+            selectedKeys.forEach(function(key, idx) {
+                var data = generateTableData(key, customRate);
+                var color = colors[idx % colors.length];
+                datasets.push({
+                    label: key + ' (a_x Renta Vitalicia)',
+                    data: data.map(function(d) { return parseFloat(d.ax); }),
+                    borderColor: color,
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    pointRadius: 0
+                });
+            });
+
+            if (comparisonChartInstance) {
+                comparisonChartInstance.destroy();
+            }
+
+            comparisonChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: { labels: ages, datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Edad (x)', color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Valor a_x (Renta Vitalicia)', color: '#cbd5e1' } }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } },
+                        title: { display: true, text: 'Comparación Multitabla de Rentas Vitalicias a_x (Tasa Técnica ' + (customRate*100).toFixed(1) + '%)', color: '#f8fafc' }
+                    }
+                }
+            });
+        };
+
+        // --- 4. RENTA VITALICIA ANUAL UNITARIA & RETIREMENT CHART --- (ITEM 4 FIX)
+        window.renderAnnuityTableAndChart = function() {
+            var tbody = document.getElementById('tbl-annuity-body');
+            var techInterestEl = document.getElementById('select-tech-interest');
+            var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
+            var data = generateTableData(currentMortalityTable, customRate);
+
+            if (tbody) {
+                var html = '';
+                // Render retirement ages 50 to 85
+                for (var x = 50; x <= 85; x += 5) {
+                    var row = data[x];
+                    var a_10 = row.D > 0 ? ((data[x].N - (data[x+10] ? data[x+10].N : 0)) / row.D).toFixed(3) : 0;
+                    var a_20 = row.D > 0 ? ((data[x].N - (data[x+20] ? data[x+20].N : 0)) / row.D).toFixed(3) : 0;
+                    
+                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors">' +
+                        '<td class="py-2.5 px-4 font-mono font-bold text-emerald-400">' + x + ' años</td>' +
+                        '<td class="py-2.5 px-4 font-mono text-slate-200 font-bold text-blue-400">' + row.ax + '</td>' +
+                        '<td class="py-2.5 px-4 font-mono text-slate-300">' + a_10 + '</td>' +
+                        '<td class="py-2.5 px-4 font-mono text-slate-300">' + a_20 + '</td>' +
+                        '<td class="py-2.5 px-4 font-mono text-purple-400 font-bold">' + row.Ax + '</td>' +
+                        '<td class="py-2.5 px-4 font-mono text-amber-400 font-bold">' + row.e + ' años</td>' +
+                    '</tr>';
+                }
+                tbody.innerHTML = html;
+            }
+
+            // Render Retirement Survival Chart
+            var ctx = document.getElementById('srLxRetirementChart');
+            if (ctx && typeof Chart !== 'undefined') {
+                var retireAgeEl = document.getElementById('select-retire-age-x0');
+                var x0 = retireAgeEl ? parseInt(retireAgeEl.value) || 65 : 65;
+                var l_x0 = data[x0] ? data[x0].l : 1;
+
+                var labels = [];
+                var probs = [];
+                for (var t = 0; t <= 35; t++) {
+                    var currAge = x0 + t;
+                    if (currAge <= 100 && data[currAge]) {
+                        labels.push('+' + t + ' (Edad ' + currAge + ')');
+                        probs.push(((data[currAge].l / l_x0) * 100).toFixed(1));
+                    }
+                }
+
+                if (retirementChartInstance) {
+                    retirementChartInstance.destroy();
+                }
+
+                retirementChartInstance = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Probabilidad de Sobrevida Post-Jubilación (%)',
+                            data: probs,
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                            fill: true,
+                            borderWidth: 2.5,
+                            pointRadius: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '% Sobrevida', color: '#cbd5e1' }, min: 0, max: 100 }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1' } },
+                            title: { display: true, text: 'Curva de Supervivencia en Etapa de Retiro (Jubilación a los ' + x0 + ' años)', color: '#f8fafc' }
                         }
                     }
                 });
             }
         };
 
-        window.onMortalityTableChange = function(tableName) {
-            currentMortalityTable = tableName || 'GAM 94';
-            window.renderMortalityTableAndChart(currentMortalityTable);
+        // --- 5. TABLA Y GRÁFICO ITP (INVALIDEZ TOTAL Y PERMANENTE) --- (ITEM 5 FIX)
+        window.renderDisabilitySection = function() {
+            var ctx = document.getElementById('srDisabilityChart');
+            if (!ctx || typeof Chart === 'undefined') return;
+
+            var ages = [];
+            var itpRates = [];
+            for (var x = 20; x <= 65; x += 5) {
+                ages.push(x + ' años');
+                // Standard actuarial disability incidence rate i_x (per 1,000)
+                var ix = (0.3 + 0.05 * Math.pow(1.08, x - 20)).toFixed(2);
+                itpRates.push(ix);
+            }
+
+            if (disabilityChartInstance) {
+                disabilityChartInstance.destroy();
+            }
+
+            disabilityChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ages,
+                    datasets: [{
+                        label: 'Tasa de Invalidez Total y Permanente ITP (ix ‰ por 1.000)',
+                        data: itpRates,
+                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                        borderColor: '#ef4444',
+                        borderWidth: 1.5,
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Tasa por 1.000 activos', color: '#ef4444' } }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } },
+                        title: { display: true, text: 'Tasa de Incidencia de Invalidez Total y Permanente (ITP / SSN)', color: '#f8fafc' }
+                    }
+                }
+            });
         };
 
         window.exportMortalityTableCSV = function() {
@@ -10239,17 +10472,14 @@ var bondDetailChartInstance = null;
             document.body.removeChild(a);
         };
 
-        window.renderCommutationComparison = function() {};
-        window.initSeriesCheckboxes = function() {};
         window.renderSaludCharts = function() {};
         window.renderPensionesCharts = function() {};
         window.renderDemografiaCharts = function() {};
 
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
-                if (typeof window.renderMortalityTableAndChart === 'function') {
-                    window.renderMortalityTableAndChart(currentMortalityTable);
-                }
+                window.renderMortalityTableAndChart(currentMortalityTable);
+                window.initSeriesCheckboxes();
             }, 300);
         });
     })();
