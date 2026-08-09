@@ -10101,31 +10101,31 @@ var bondDetailChartInstance = null;
 
     <script>
     (function() {
-        // --- COMPLETE ACTUARIAL JS ENGINE WITH INDEPENDENT TABLE INTEREST RATE & REACTIVE COMPARATOR ---
+        // --- COMPLETE ACTUARIAL JS ENGINE WITH RICH METADATA HOVER TOOLTIPS FOR MULTITABLE COMPARATOR ---
         var currentMortalityTable = 'GAM 94';
-        var tableInterestRate = 0.04; // Dedicated independent rate for single table & export
+        var tableInterestRate = 0.04;
         var mortalityChartInstance = null;
         var comparisonChartInstance = null;
         var retirementChartInstance = null;
         var disabilityChartInstance = null;
 
         var tableParams = {
-            'GAM 94':           { name: 'GAM 94 (SSN Res. 38.708)', desc: 'Tabla actuarial de mortalidad de anualidades de grupo 1994, base regulatoria obligatoria SSN Argentina.', male: { A: 0.00040, B: 0.000028, c: 1.0960, omega: 105 }, female: { A: 0.00025, B: 0.000018, c: 1.0970, omega: 105 } },
-            'SOA Pri-2012':     { name: 'SOA Pri-2012', desc: 'Tabla de mortalidad para planes de retiro privados de la Society of Actuaries (EE.UU.).', male: { A: 0.00030, B: 0.000020, c: 1.0980, omega: 110 }, female: { A: 0.00018, B: 0.000012, c: 1.0990, omega: 110 } },
-            'SOA Pub-2010':     { name: 'SOA Pub-2010', desc: 'Tabla de mortalidad para pensionados del sector público (Society of Actuaries).', male: { A: 0.00038, B: 0.000025, c: 1.0960, omega: 105 }, female: { A: 0.00022, B: 0.000015, c: 1.0975, omega: 105 } },
-            'CSO 80':           { name: 'CSO 80', desc: 'Commissioners Standard Ordinary 1980, referencia para seguros de vida individuales.', male: { A: 0.00080, B: 0.000050, c: 1.0910, omega: 100 }, female: { A: 0.00050, B: 0.000032, c: 1.0925, omega: 100 } },
-            'CSO 2001':         { name: 'CSO 2001', desc: 'Commissioners Standard Ordinary 2001, estándar estadounidense de reservas de vida.', male: { A: 0.00045, B: 0.000030, c: 1.0950, omega: 105 }, female: { A: 0.00028, B: 0.000019, c: 1.0962, omega: 105 } },
-            'CSO 2017':         { name: 'CSO 2017 (PBR)', desc: 'Tabla moderna basada en principios de reserva según riesgo (Principle-Based Reserving).', male: { A: 0.00035, B: 0.000022, c: 1.0970, omega: 110 }, female: { A: 0.00020, B: 0.000014, c: 1.0982, omega: 110 } },
-            'GAM 71':           { name: 'GAM 71', desc: 'Group Annuity Mortality 1971, tabla base histórica de anualidades colectivas.', male: { A: 0.00070, B: 0.000045, c: 1.0920, omega: 100 }, female: { A: 0.00042, B: 0.000028, c: 1.0935, omega: 100 } },
-            'IAM 71':           { name: 'IAM 71', desc: 'Individual Annuity Mortality 1971, tabla para rentas vitalicias individuales.', male: { A: 0.00065, B: 0.000042, c: 1.0930, omega: 100 }, female: { A: 0.00039, B: 0.000026, c: 1.0940, omega: 100 } },
-            'GAM 83':           { name: 'GAM 83', desc: 'Group Annuity Mortality 1983, referencia estándar para seguros colectivos.', male: { A: 0.00050, B: 0.000035, c: 1.0940, omega: 105 }, female: { A: 0.00030, B: 0.000021, c: 1.0952, omega: 105 } },
-            'IAM 83':           { name: 'IAM 83', desc: 'Individual Annuity Mortality 1983, renta vitalicia individual con proyecciones.', male: { A: 0.00048, B: 0.000033, c: 1.0945, omega: 105 }, female: { A: 0.00029, B: 0.000020, c: 1.0958, omega: 105 } },
-            'IAM 94':           { name: 'IAM 94', desc: 'Individual Annuity Mortality 1994, tabla actuarial moderna para asegurados individuales.', male: { A: 0.00039, B: 0.000027, c: 1.0960, omega: 105 }, female: { A: 0.00023, B: 0.000016, c: 1.0972, omega: 105 } },
-            'UP-94':            { name: 'UP-94', desc: 'Uninsured Pensioner 1994, tabla actuarial para pensionados no asegurados.', male: { A: 0.00042, B: 0.000029, c: 1.0955, omega: 105 }, female: { A: 0.00026, B: 0.000017, c: 1.0968, omega: 105 } },
-            'RP-2000':          { name: 'RP-2000', desc: 'Retirement Plans 2000, estudio de experiencia en planes de jubilación.', male: { A: 0.00041, B: 0.000028, c: 1.0958, omega: 105 }, female: { A: 0.00025, B: 0.000017, c: 1.0970, omega: 105 } },
-            'RP-2014':          { name: 'RP-2014', desc: 'Retirement Plans 2014, tabla con desglose detallado de longevidad.', male: { A: 0.00032, B: 0.000021, c: 1.0975, omega: 110 }, female: { A: 0.00019, B: 0.000013, c: 1.0986, omega: 110 } },
-            'INDEC 2010':       { name: 'INDEC 2010', desc: 'Tabla de mortalidad demográfica de la República Argentina según Censo 2010.', male: { A: 0.00055, B: 0.000038, c: 1.0935, omega: 100 }, female: { A: 0.00033, B: 0.000023, c: 1.0948, omega: 100 } },
-            'DEIS / OMS 2022':  { name: 'DEIS / OMS 2022', desc: 'Estadísticas vitales del Ministerio de Salud / OMS Argentina 2022.', male: { A: 0.00049, B: 0.000034, c: 1.0942, omega: 100 }, female: { A: 0.00029, B: 0.000020, c: 1.0955, omega: 100 } }
+            'GAM 94':           { name: 'GAM 94 (Group Annuity Mortality 1994)', creator: 'Society of Actuaries (SOA) / SSN Argentina', origin: 'Estados Unidos / Argentina', usage: 'Base regulatoria obligatoria en Argentina para reservas matemáticas de Seguros de Retiro y Rentas Vitalicias (Res. SSN 38.708).', desc: 'Tabla actuarial de mortalidad de anualidades de grupo 1994, base regulatoria obligatoria SSN Argentina.', male: { A: 0.00040, B: 0.000028, c: 1.0960, omega: 105 }, female: { A: 0.00025, B: 0.000018, c: 1.0970, omega: 105 } },
+            'SOA Pri-2012':     { name: 'SOA Pri-2012 (Private Retirement Plans 2012)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Evaluación actuarial de planes de pensiones privados corporativos y fondos de retiro de empleo.', desc: 'Tabla de mortalidad para planes de retiro privados de la Society of Actuaries (EE.UU.).', male: { A: 0.00030, B: 0.000020, c: 1.0980, omega: 110 }, female: { A: 0.00018, B: 0.000012, c: 1.0990, omega: 110 } },
+            'SOA Pub-2010':     { name: 'SOA Pub-2010 (Public Retirement Plans 2010)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Análisis de longevidad para empleados y pensionados del sector público, maestros y fuerzas de seguridad.', desc: 'Tabla de mortalidad para pensionados del sector público (Society of Actuaries).', male: { A: 0.00038, B: 0.000025, c: 1.0960, omega: 105 }, female: { A: 0.00022, B: 0.000015, c: 1.0975, omega: 105 } },
+            'CSO 80':           { name: 'CSO 80 (Commissioners Standard Ordinary 1980)', creator: 'National Association of Insurance Commissioners (NAIC)', origin: 'Estados Unidos', usage: 'Referencia actuarial tradicional para seguros de vida individuales y contratos de capitalización ordinarios.', desc: 'Commissioners Standard Ordinary 1980, referencia para seguros de vida individuales.', male: { A: 0.00080, B: 0.000050, c: 1.0910, omega: 100 }, female: { A: 0.00050, B: 0.000032, c: 1.0925, omega: 100 } },
+            'CSO 2001':         { name: 'CSO 2001 (Commissioners Standard Ordinary 2001)', creator: 'NAIC / Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Valuación estándar de reservas de seguros de vida individuales y productos de vida entero.', desc: 'Commissioners Standard Ordinary 2001, estándar estadounidense de reservas de vida.', male: { A: 0.00045, B: 0.000030, c: 1.0950, omega: 105 }, female: { A: 0.00028, B: 0.000019, c: 1.0962, omega: 105 } },
+            'CSO 2017':         { name: 'CSO 2017 (PBR Principle-Based Reserving)', creator: 'NAIC / Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Reservas actuariales modernas basadas en principios de riesgo y capital económico (PBR).', desc: 'Tabla moderna basada en principios de reserva según riesgo (Principle-Based Reserving).', male: { A: 0.00035, B: 0.000022, c: 1.0970, omega: 110 }, female: { A: 0.00020, B: 0.000014, c: 1.0982, omega: 110 } },
+            'GAM 71':           { name: 'GAM 71 (Group Annuity Mortality 1971)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Referencia actuarial histórica para seguros pensionales de grupo y estudios comparativos de longevidad.', desc: 'Group Annuity Mortality 1971, tabla base histórica de anualidades colectivas.', male: { A: 0.00070, B: 0.000045, c: 1.0920, omega: 100 }, female: { A: 0.00042, B: 0.000028, c: 1.0935, omega: 100 } },
+            'IAM 71':           { name: 'IAM 71 (Individual Annuity Mortality 1971)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Evaluación de mortalidad para asegurados de rentas vitalicias individuales tradicionales.', desc: 'Individual Annuity Mortality 1971, tabla para rentas vitalicias individuales.', male: { A: 0.00065, B: 0.000042, c: 1.0930, omega: 100 }, female: { A: 0.00039, B: 0.000026, c: 1.0940, omega: 100 } },
+            'GAM 83':           { name: 'GAM 83 (Group Annuity Mortality 1983)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Estándar pensional ampliamente utilizado para planes colectivos de jubilación y anuidades de grupo.', desc: 'Group Annuity Mortality 1983, referencia estándar para seguros colectivos.', male: { A: 0.00050, B: 0.000035, c: 1.0940, omega: 105 }, female: { A: 0.00030, B: 0.000021, c: 1.0952, omega: 105 } },
+            'IAM 83':           { name: 'IAM 83 (Individual Annuity Mortality 1983)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Análisis de contratos de renta vitalicia individual con factores de longevidad proyectada.', desc: 'Individual Annuity Mortality 1983, renta vitalicia individual con proyecciones.', male: { A: 0.00048, B: 0.000033, c: 1.0945, omega: 105 }, female: { A: 0.00029, B: 0.000020, c: 1.0958, omega: 105 } },
+            'IAM 94':           { name: 'IAM 94 (Individual Annuity Mortality 1994)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Anualidades individuales modernas y carteras privadas de rentas vitalicias.', desc: 'Individual Annuity Mortality 1994, tabla actuarial moderna para asegurados individuales.', male: { A: 0.00039, B: 0.000027, c: 1.0960, omega: 105 }, female: { A: 0.00023, B: 0.000016, c: 1.0972, omega: 105 } },
+            'UP-94':            { name: 'UP-94 (Uninsured Pensioner 1994)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Planes de pensión de empleo no asegurados y cajas de previsión profesionales.', desc: 'Uninsured Pensioner 1994, tabla actuarial para pensionados no asegurados.', male: { A: 0.00042, B: 0.000029, c: 1.0955, omega: 105 }, female: { A: 0.00026, B: 0.000017, c: 1.0968, omega: 105 } },
+            'RP-2000':          { name: 'RP-2000 (Retirement Plans 2000)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Estudio de experiencia de mortalidad para participantes de planes de jubilación corporativos.', desc: 'Retirement Plans 2000, estudio de experiencia en planes de jubilación.', male: { A: 0.00041, B: 0.000028, c: 1.0958, omega: 105 }, female: { A: 0.00025, B: 0.000017, c: 1.0970, omega: 105 } },
+            'RP-2014':          { name: 'RP-2014 (Retirement Plans 2014)', creator: 'Society of Actuaries (SOA)', origin: 'Estados Unidos', usage: 'Valuación pensional moderna con ajuste por proyecciones de mejora de longevidad (Escala MP).', desc: 'Retirement Plans 2014, tabla con desglose detallado de longevidad.', male: { A: 0.00032, B: 0.000021, c: 1.0975, omega: 110 }, female: { A: 0.00019, B: 0.000013, c: 1.0986, omega: 110 } },
+            'INDEC 2010':       { name: 'INDEC 2010 (Censo Nacional Argentina)', creator: 'Instituto Nacional de Estadística y Censos (INDEC)', origin: 'República Argentina', usage: 'Estudios demográficos de población general, esperanza de vida nacional y políticas sociales en Argentina.', desc: 'Tabla de mortalidad demográfica de la República Argentina según Censo 2010.', male: { A: 0.00055, B: 0.000038, c: 1.0935, omega: 100 }, female: { A: 0.00033, B: 0.000023, c: 1.0948, omega: 100 } },
+            'DEIS / OMS 2022':  { name: 'DEIS / OMS 2022 (Ministerio de Salud / OMS)', creator: 'Dirección de Estadística e Información de Salud (DEIS) / OMS', origin: 'República Argentina / OMS', usage: 'Análisis sanitario epidemiológico de mortalidad general y proyecciones de salud pública.', desc: 'Estadísticas vitales del Ministerio de Salud / OMS Argentina 2022.', male: { A: 0.00049, B: 0.000034, c: 1.0942, omega: 100 }, female: { A: 0.00029, B: 0.000020, c: 1.0955, omega: 100 } }
         };
 
         function generateSexCurve(params, customInterest, longevityImprovement) {
@@ -10137,7 +10137,6 @@ var bondDetailChartInstance = null;
             var maxAge = params.omega || 105;
 
             for (var x = 0; x <= maxAge; x++) {
-                // Apply longevity improvement factor (1 - fx)^x to qx
                 var baseQ = (x === maxAge) ? 1.0 : Math.min(0.999, params.A + params.B * Math.pow(params.c, x));
                 var q = (x === maxAge) ? 1.0 : Math.max(0.00001, baseQ * Math.pow(1 - fx, x));
                 var d = Math.round(l * q);
@@ -10169,27 +10168,42 @@ var bondDetailChartInstance = null;
             return data;
         }
 
-        // TOOLTIP AUTO-HIDE
-        window.showTableBadgeTooltip = function(val, evt) {
+        // RICH METADATA HOVER TOOLTIP FOR MULTITABLE CHECKBOXES
+        window.showMultitableTableBadgeTooltip = function(val, sexStr, evt) {
             var existing = document.getElementById('table-badge-tooltip-popup');
             if (!existing) {
                 existing = document.createElement('div');
                 existing.id = 'table-badge-tooltip-popup';
-                existing.className = 'fixed z-[9999] px-3.5 py-2.5 text-xs font-sans rounded-xl bg-slate-900/95 text-slate-100 border border-slate-700/80 shadow-2xl backdrop-blur-md pointer-events-none transition-opacity duration-200 opacity-0 max-w-xs';
+                existing.className = 'fixed z-[9999] px-4 py-3 text-xs font-sans rounded-2xl bg-slate-900/95 text-slate-100 border border-slate-700/80 shadow-2xl backdrop-blur-md pointer-events-none transition-opacity duration-200 opacity-0 max-w-sm';
                 document.body.appendChild(existing);
             }
             var meta = tableParams[val] || tableParams['GAM 94'];
-            existing.innerHTML = '<div class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5"><i class="fas fa-info-circle"></i> ' + (meta.name || val) + '</div><div class="text-[11px] text-slate-300 leading-relaxed">' + meta.desc + '</div>';
+            var isMale = sexStr.indexOf('Varón') !== -1;
+            var sexBadge = isMale ? '<span class="text-blue-400 font-bold ml-1">♂ Varón</span>' : '<span class="text-rose-400 font-bold ml-1">♀ Mujer</span>';
+
+            existing.innerHTML = '<div class="font-bold text-emerald-400 mb-1.5 flex items-center gap-2 text-sm border-b border-slate-800 pb-1">' +
+                '<i class="fas fa-book-bookmark text-emerald-400"></i> ' + (meta.name || val) + ' ' + sexBadge +
+            '</div>' +
+            '<div class="space-y-1 text-[11px] text-slate-300 leading-relaxed">' +
+                '<div><strong class="text-slate-400">Creador / Entidad:</strong> ' + (meta.creator || 'Society of Actuaries') + '</div>' +
+                '<div><strong class="text-slate-400">Origen / Jurisdicción:</strong> ' + (meta.origin || 'Internacional') + '</div>' +
+                '<div><strong class="text-slate-400">Uso Recomendado:</strong> ' + (meta.usage || meta.desc) + '</div>' +
+            '</div>';
             
             if (evt && evt.clientX) {
-                existing.style.left = Math.min(window.innerWidth - 300, evt.clientX + 15) + 'px';
-                existing.style.top = (evt.clientY + 15) + 'px';
+                existing.style.left = Math.min(window.innerWidth - 320, evt.clientX + 15) + 'px';
+                existing.style.top = Math.min(window.innerHeight - 200, evt.clientY + 15) + 'px';
             } else {
                 existing.style.left = '50%';
                 existing.style.top = '25%';
                 existing.style.transform = 'translateX(-50%)';
             }
             existing.style.opacity = '1';
+        };
+
+        window.showTableBadgeTooltip = function(val, evt) {
+            var meta = tableParams[val] || tableParams['GAM 94'];
+            window.showMultitableTableBadgeTooltip(val, 'Ambos Sexos', evt);
         };
 
         window.hideTableBadgeTooltip = function() {
@@ -10201,18 +10215,58 @@ var bondDetailChartInstance = null;
 
         document.addEventListener('mousemove', function(e) {
             var sel = document.getElementById('select-mortality-table');
-            if (sel && !sel.contains(e.target)) {
+            var cbCont = document.getElementById('container-series-checkboxes');
+            if (sel && !sel.contains(e.target) && cbCont && !cbCont.contains(e.target)) {
                 window.hideTableBadgeTooltip();
             }
         });
 
-        // 1. INDEPENDENT TABLE TECH INTEREST EVENT
+        // 3. MULTITABLE CHECKBOXES WITH HOVER TOOLTIPS
+        window.initSeriesCheckboxes = function() {
+            var container = document.getElementById('container-series-checkboxes');
+            if (!container) return;
+
+            var defaultSelected = ['GAM 94 ♂', 'GAM 94 ♀', 'CSO 2001 ♂', 'SOA Pri-2012 ♀'];
+            var html = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 w-full text-xs">';
+            
+            Object.keys(tableParams).forEach(function(key) {
+                ['♂ Varón', '♀ Mujer'].forEach(function(sex) {
+                    var fullId = key + ' ' + (sex.indexOf('Varón') !== -1 ? '♂' : '♀');
+                    var checked = defaultSelected.indexOf(fullId) !== -1 ? 'checked' : '';
+                    var isMale = sex.indexOf('Varón') !== -1;
+                    var colorClass = isMale ? 'text-blue-400 border-blue-500/30 hover:border-blue-400' : 'text-rose-400 border-rose-500/30 hover:border-rose-400';
+                    var bgClass = isMale ? 'bg-blue-500/5 light:bg-blue-50/50' : 'bg-rose-500/5 light:bg-rose-50/50';
+                    
+                    html += '<label onmouseenter="showMultitableTableBadgeTooltip('' + key + '', '' + sex + '', event)" onmouseleave="hideTableBadgeTooltip()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border ' + colorClass + ' ' + bgClass + ' cursor-pointer transition-all w-full light:bg-white shadow-sm hover:shadow group relative">' +
+                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0 shrink-0 cursor-pointer" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison()">' +
+                        '<span class="font-mono text-[11px] font-semibold text-slate-200 light:text-slate-800 truncate">' + key + ' <span class="' + (isMale ? 'text-blue-400' : 'text-rose-400') + '">' + (isMale ? '♂' : '♀') + '</span></span>' +
+                    '</label>';
+                });
+            });
+            html += '</div>';
+            container.innerHTML = html;
+            
+            var compRateEl = document.getElementById('select-tech-interest');
+            if (compRateEl) {
+                compRateEl.onchange = function() { window.renderCommutationComparison(); };
+            }
+            var compLongEl = document.getElementById('select-longevity-scale');
+            if (compLongEl) {
+                compLongEl.onchange = function() { window.renderCommutationComparison(); };
+            }
+            var retireAgeEl = document.getElementById('select-retire-age-x0');
+            if (retireAgeEl) {
+                retireAgeEl.onchange = function() { window.renderCommutationComparison(); };
+            }
+
+            window.renderCommutationComparison();
+        };
+
         window.onTableTechInterestChange = function(rateStr) {
             tableInterestRate = parseFloat(rateStr) || 0.04;
             window.renderMortalityTableAndChart(currentMortalityTable);
         };
 
-        // 2. RENDER MORTALITY TABLE WITH INDEPENDENT TABLE INTEREST RATE
         window.renderMortalityTableAndChart = function(tableName) {
             currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
@@ -10225,7 +10279,6 @@ var bondDetailChartInstance = null;
             var maleData = generateSexCurve(meta.male, tableInterestRate);
             var femaleData = generateSexCurve(meta.female, tableInterestRate);
 
-            // Populate HTML Table Tbody
             var tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
                 var html = '';
@@ -10251,7 +10304,6 @@ var bondDetailChartInstance = null;
                 tbody.innerHTML = html;
             }
 
-            // Render Both Survivor Curves l_x ♂ and l_x ♀
             var ctx = document.getElementById('srMortalityChart');
             if (ctx && typeof Chart !== 'undefined') {
                 if (mortalityChartInstance) {
@@ -10311,7 +10363,6 @@ var bondDetailChartInstance = null;
             window.renderMortalityTableAndChart(currentMortalityTable);
         };
 
-        // EXPORT MORTALITY TABLE CSV WITH INDEPENDENT DEDICATED RATE
         window.exportMortalityTableCSV = function() {
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
             var maleData = generateSexCurve(meta.male, tableInterestRate);
@@ -10361,47 +10412,6 @@ var bondDetailChartInstance = null;
             URL.revokeObjectURL(url);
         };
 
-        // 3. REACTIVE MULTITABLE COMPARATOR (PLOTS SURVIVORS lx STARTING AT l0 = 100.000)
-        window.initSeriesCheckboxes = function() {
-            var container = document.getElementById('container-series-checkboxes');
-            if (!container) return;
-
-            var defaultSelected = ['GAM 94 ♂', 'GAM 94 ♀', 'CSO 2001 ♂', 'SOA Pri-2012 ♀'];
-            var html = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 w-full text-xs">';
-            
-            Object.keys(tableParams).forEach(function(key) {
-                ['♂ Varón', '♀ Mujer'].forEach(function(sex) {
-                    var fullId = key + ' ' + (sex.indexOf('Varón') !== -1 ? '♂' : '♀');
-                    var checked = defaultSelected.indexOf(fullId) !== -1 ? 'checked' : '';
-                    var isMale = sex.indexOf('Varón') !== -1;
-                    var colorClass = isMale ? 'text-blue-400 border-blue-500/30 hover:border-blue-400' : 'text-rose-400 border-rose-500/30 hover:border-rose-400';
-                    var bgClass = isMale ? 'bg-blue-500/5 light:bg-blue-50/50' : 'bg-rose-500/5 light:bg-rose-50/50';
-                    
-                    html += '<label class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border ' + colorClass + ' ' + bgClass + ' cursor-pointer transition-all w-full light:bg-white shadow-sm hover:shadow">' +
-                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0 shrink-0 cursor-pointer" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison()">' +
-                        '<span class="font-mono text-[11px] font-semibold text-slate-200 light:text-slate-800 truncate" title="' + fullId + '">' + key + ' <span class="' + (isMale ? 'text-blue-400' : 'text-rose-400') + '">' + (isMale ? '♂' : '♀') + '</span></span>' +
-                    '</label>';
-                });
-            });
-            html += '</div>';
-            container.innerHTML = html;
-            
-            var compRateEl = document.getElementById('select-tech-interest');
-            if (compRateEl) {
-                compRateEl.onchange = function() { window.renderCommutationComparison(); };
-            }
-            var compLongEl = document.getElementById('select-longevity-scale');
-            if (compLongEl) {
-                compLongEl.onchange = function() { window.renderCommutationComparison(); };
-            }
-            var retireAgeEl = document.getElementById('select-retire-age-x0');
-            if (retireAgeEl) {
-                retireAgeEl.onchange = function() { window.renderCommutationComparison(); };
-            }
-
-            window.renderCommutationComparison();
-        };
-
         window.renderCommutationComparison = function() {
             var ctx = document.getElementById('srLxComparisonChart');
             if (!ctx || typeof Chart === 'undefined') return;
@@ -10433,7 +10443,6 @@ var bondDetailChartInstance = null;
                 var data = generateSexCurve(params, compInterest, compLongevity);
                 var color = colors[idx % colors.length];
 
-                // Plot lx starting at l0 = 100.000 at age 0 (REQUERIMIENTO 1 FIX)
                 datasets.push({
                     label: fullId + ' (l_x Supervivientes)',
                     data: data.map(function(d) { return d.l; }),
@@ -10466,11 +10475,9 @@ var bondDetailChartInstance = null;
                 }
             });
 
-            // Also trigger conditional retirement chart for ALL selected tables!
             window.renderConditionalRetirementChart(selectedKeys, compInterest, compLongevity);
         };
 
-        // 4. CONDITIONAL RETIREMENT SURVIVAL CHART FOR ALL CHECKED TABLES (l_x0 = 100.000 at retirement age x0) (REQUERIMIENTO 2 FIX)
         window.renderConditionalRetirementChart = function(selectedKeys, compInterest, compLongevity) {
             var ctx = document.getElementById('srLxRetirementChart');
             if (!ctx || typeof Chart === 'undefined') return;
@@ -10499,7 +10506,6 @@ var bondDetailChartInstance = null;
                 for (var t = 0; t <= 35; t++) {
                     var currAge = x0 + t;
                     if (currAge < data.length) {
-                        // Conditional survivors starting at l_x0 = 100.000 at age x0
                         var survRatio = Math.round((data[currAge].l / l_x0) * 100000);
                         condLx.push(survRatio);
                     } else {
@@ -10540,7 +10546,6 @@ var bondDetailChartInstance = null;
             });
         };
 
-        // ANNUITY TABLE VALUES
         window.renderAnnuityTableAndChart = function() {
             var thead = document.getElementById('tbl-annuity-head');
             if (thead) {
@@ -10582,7 +10587,6 @@ var bondDetailChartInstance = null;
             }
         };
 
-        // ITP DISABILITY SECTION
         window.renderDisabilitySection = function() {
             var ctx = document.getElementById('srDisabilityChart');
             if (!ctx || typeof Chart === 'undefined') return;
