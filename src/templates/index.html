@@ -10625,9 +10625,166 @@ var bondDetailChartInstance = null;
             });
         };
 
-        window.renderSaludCharts = function() {};
-        window.renderPensionesCharts = function() {};
-        window.renderDemografiaCharts = function() {};
+        var saludChartInstance = null;
+        var replacementChartInstance = null;
+        var dependencyChartInstance = null;
+        var agingChartInstance = null;
+        var coverageChartInstance = null;
+
+        window.renderSaludCharts = function() {
+            var ctx = document.getElementById('srDalysChart');
+            if (!ctx || typeof Chart === 'undefined') return;
+
+            if (saludChartInstance) {
+                saludChartInstance.destroy();
+            }
+
+            saludChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [
+                        'Enfermedades No Transmisibles (Cardiovasculares, Cáncer, Diabetes)',
+                        'Lesiones y Traumatismos',
+                        'Enfermedades Infecciosas, Maternas y Nutricionales'
+                    ],
+                    datasets: [{
+                        data: [72.4, 14.2, 13.4],
+                        backgroundColor: ['#f43f5e', '#f59e0b', '#3b82f6'],
+                        borderWidth: 2,
+                        borderColor: '#0f172a'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } },
+                        title: { display: true, text: 'Distribución AVISA / DALYs OMS Argentina (% Total Carga Enfermedad)', color: '#f8fafc' }
+                    }
+                }
+            });
+        };
+
+        window.renderPensionesCharts = function() {
+            var ctxR = document.getElementById('srReplacementChart');
+            if (ctxR && typeof Chart !== 'undefined') {
+                if (replacementChartInstance) replacementChartInstance.destroy();
+
+                replacementChartInstance = new Chart(ctxR, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Brasil (68.4%)', 'Argentina SIPA (62.5%)', 'Promedio OCDE (58.9%)', 'México (56.8%)', 'América Latina (52.3%)', 'Chile (42.1%)'],
+                        datasets: [{
+                            label: 'Tasa de Reemplazo Neta Previsional (%)',
+                            data: [68.4, 62.5, 58.9, 56.8, 52.3, 42.1],
+                            backgroundColor: ['#10b981', '#3b82f6', '#94a3b8', '#8b5cf6', '#f59e0b', '#f43f5e'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } },
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '% del Último Salario', color: '#cbd5e1' }, min: 0, max: 100 }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: 'Tasa de Reemplazo Neta Previsional (Argentina vs OCDE / LatAm)', color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+
+            var ctxD = document.getElementById('srDependencyChart');
+            if (ctxD && typeof Chart !== 'undefined') {
+                if (dependencyChartInstance) dependencyChartInstance.destroy();
+
+                dependencyChartInstance = new Chart(ctxD, {
+                    type: 'line',
+                    data: {
+                        labels: ['2025', '2030', '2035', '2040', '2045', '2050'],
+                        datasets: [
+                            { label: 'Argentina (INDEC / UN)', data: [18.2, 20.8, 23.9, 27.5, 31.4, 35.8], borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, borderWidth: 2.2 },
+                            { label: 'América Latina (CELADE)', data: [14.5, 17.2, 20.8, 25.1, 29.8, 34.6], borderColor: '#f59e0b', backgroundColor: 'transparent', borderWidth: 2 },
+                            { label: 'Promedio OCDE', data: [31.2, 35.4, 39.8, 43.5, 46.8, 49.5], borderColor: '#10b981', backgroundColor: 'transparent', borderWidth: 2 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '+65 por 100 Activos (15-64a)', color: '#cbd5e1' }, min: 0, max: 60 }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1' } },
+                            title: { display: true, text: 'Proyección Tasa de Dependencia de Adultos Mayores (2025-2050)', color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+        };
+
+        window.renderDemografiaCharts = function() {
+            var ctxA = document.getElementById('srAgingChart');
+            if (ctxA && typeof Chart !== 'undefined') {
+                if (agingChartInstance) agingChartInstance.destroy();
+
+                agingChartInstance = new Chart(ctxA, {
+                    type: 'line',
+                    data: {
+                        labels: ['1990', '2000', '2010', '2022', '2035', '2050'],
+                        datasets: [
+                            { label: 'Población +65 Años (%)', data: [8.9, 9.7, 10.2, 11.9, 14.8, 18.5], borderColor: '#8b5cf6', backgroundColor: 'rgba(139,92,246,0.15)', fill: true, borderWidth: 2.5 },
+                            { label: 'Población 0-14 Años (%)', data: [30.6, 28.3, 25.5, 22.1, 19.2, 16.4], borderColor: '#06b6d4', backgroundColor: 'transparent', borderWidth: 2.2 }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '% del Total de Población', color: '#cbd5e1' }, min: 0, max: 40 }
+                        },
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1' } },
+                            title: { display: true, text: 'Evolución Transición Demográfica en Argentina (1990-2050 INDEC)', color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+
+            var ctxC = document.getElementById('srCoverageChart');
+            if (ctxC && typeof Chart !== 'undefined') {
+                if (coverageChartInstance) coverageChartInstance.destroy();
+
+                coverageChartInstance = new Chart(ctxC, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jubilados SIPA / Moratoria (88.5%)', 'Seguro de Retiro Colectivo (8.2%)', 'Rentas Vitalicias Privadas (3.3%)'],
+                        datasets: [{
+                            label: 'Cobertura Previsional y Aseguradora (%)',
+                            data: [88.5, 8.2, 3.3],
+                            backgroundColor: ['#10b981', '#3b82f6', '#f59e0b'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '% Cobertura', color: '#cbd5e1' }, min: 0, max: 100 }
+                        },
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: 'Cobertura Previsional y de Seguros de Retiro en Argentina (SSN / INDEC)', color: '#f8fafc' }
+                        }
+                    }
+                });
+            }
+        };
 
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
