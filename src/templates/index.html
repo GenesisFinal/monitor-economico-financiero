@@ -9164,8 +9164,8 @@ var bondDetailChartInstance = null;
                     <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-2">
                         <div class="sm:col-span-2">
                             <select id="select-mortality-table" onchange="onMortalityTableChange(this.value); hideTableBadgeTooltip();" onmouseenter="showTableBadgeTooltip(this.value)" onmouseleave="hideTableBadgeTooltip()" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
-                            <option value="GAM 94" selected>GAM 94 (SOA / Aprobada SSN)</option>
-                            <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement Plans)</option>
+                            <option value="GAM 94">GAM 94 (SOA / Aprobada SSN)</option>
+                            <option value="SOA Pri-2012" selected>SOA Pri-2012 (Private Retirement Plans)</option>
                             <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement Plans)</option>
                             <option value="CSO 80">CSO 80 (Ordinary Life 1980)</option>
                             <option value="CSO 2001">CSO 2001 (Ordinary Life 2001)</option>
@@ -10102,7 +10102,7 @@ var bondDetailChartInstance = null;
     <script>
     (function() {
         // --- COMPLETE ACTUARIAL JS ENGINE WITH RICH METADATA HOVER TOOLTIPS FOR MULTITABLE COMPARATOR ---
-        var currentMortalityTable = 'GAM 94';
+        var currentMortalityTable = 'SOA Pri-2012';
         var tableInterestRate = 0.04;
         var mortalityChartInstance = null;
         var comparisonChartInstance = null;
@@ -10400,18 +10400,22 @@ var bondDetailChartInstance = null;
             
             var compRateEl = document.getElementById('select-tech-interest');
             if (compRateEl) {
-                compRateEl.onchange = function() { window.renderCommutationComparison(); };
+                compRateEl.onchange = function() { window.renderCommutationComparison();
+            window.renderAnnuityTableAndChart(); };
             }
             var compLongEl = document.getElementById('select-longevity-scale');
             if (compLongEl) {
-                compLongEl.onchange = function() { window.renderCommutationComparison(); };
+                compLongEl.onchange = function() { window.renderCommutationComparison();
+            window.renderAnnuityTableAndChart(); };
             }
             var retireAgeEl = document.getElementById('select-retire-age-x0');
             if (retireAgeEl) {
-                retireAgeEl.onchange = function() { window.renderCommutationComparison(); };
+                retireAgeEl.onchange = function() { window.renderCommutationComparison();
+            window.renderAnnuityTableAndChart(); };
             }
 
             window.renderCommutationComparison();
+            window.renderAnnuityTableAndChart();
         };
 
         window.renderCommutationComparison = function() {
@@ -10550,43 +10554,97 @@ var bondDetailChartInstance = null;
 
         window.renderAnnuityTableAndChart = function() {
             var thead = document.getElementById('tbl-annuity-head');
-            if (thead) {
-                thead.innerHTML = '<th class="py-2.5 px-3 font-bold text-left text-emerald-400">Edad Jubilación (x)</th>' +
-                    '<th class="py-2.5 px-3 font-bold text-right text-blue-400">Renta Vit ♂ (ax)</th>' +
-                    '<th class="py-2.5 px-3 font-bold text-right text-rose-400">Renta Vit ♀ (ax)</th>' +
-                    '<th class="py-2.5 px-3 font-bold text-right text-blue-300">Temp 10a ♂ (ax:10)</th>' +
-                    '<th class="py-2.5 px-3 font-bold text-right text-rose-300">Temp 10a ♀ (ax:10)</th>' +
-                    '<th class="py-2.5 px-3 font-bold text-right text-amber-400">Prima Única ♂ (Ax)</th>' +
-                    '<th class="py-2.5 px-3 font-bold text-right text-amber-300">Prima Única ♀ (Ax)</th>';
-            }
-
             var tbody = document.getElementById('tbl-annuity-body');
-            var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
-            var maleData = generateSexCurve(meta.male, tableInterestRate);
-            var femaleData = generateSexCurve(meta.female, tableInterestRate);
+            if (!thead || !tbody) return;
 
-            if (tbody) {
-                var html = '';
-                for (var x = 50; x <= 85; x += 5) {
-                    var m = maleData[x];
-                    var f = femaleData[x];
-                    var m10 = (m && m.D > 0) ? ((m.N - (maleData[x+10] ? maleData[x+10].N : 0)) / m.D).toFixed(3) : '0.000';
-                    var f10 = (f && f.D > 0) ? ((f.N - (femaleData[x+10] ? femaleData[x+10].N : 0)) / f.D).toFixed(3) : '0.000';
-                    var mAx = m ? (1 - (tableInterestRate * parseFloat(m.ax))).toFixed(4) : '1.0000';
-                    var fAx = f ? (1 - (tableInterestRate * parseFloat(f.ax))).toFixed(4) : '1.0000';
+            var compRateEl = document.getElementById('select-tech-interest');
+            var interest = compRateEl ? parseFloat(compRateEl.value) : (tableInterestRate || 0.04);
 
-                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors text-xs">' +
-                        '<td class="py-2.5 px-3 font-mono font-bold text-emerald-400 text-left">' + x + ' años</td>' +
-                        '<td class="py-2.5 px-3 font-mono text-blue-400 font-bold text-right">' + (m ? m.ax : '0') + '</td>' +
-                        '<td class="py-2.5 px-3 font-mono text-rose-400 font-bold text-right">' + (f ? f.ax : '0') + '</td>' +
-                        '<td class="py-2.5 px-3 font-mono text-blue-300 text-right">' + m10 + '</td>' +
-                        '<td class="py-2.5 px-3 font-mono text-rose-300 text-right">' + f10 + '</td>' +
-                        '<td class="py-2.5 px-3 font-mono text-amber-400 font-bold text-right">' + mAx + '</td>' +
-                        '<td class="py-2.5 px-3 font-mono text-amber-300 font-bold text-right">' + fAx + '</td>' +
-                    '</tr>';
-                }
-                tbody.innerHTML = html;
+            var compLongEl = document.getElementById('select-longevity-scale');
+            var longevity = compLongEl ? parseFloat(compLongEl.value) : 0.0;
+
+            // Get selected series from checkboxes
+            var checkboxes = document.querySelectorAll('.cb-mortality-table:checked');
+            var selectedKeys = [];
+            checkboxes.forEach(function(cb) { selectedKeys.push(cb.value); });
+
+            if (selectedKeys.length === 0) {
+                // Fallback to default Pri-2012 vs GAM 94 if none checked
+                selectedKeys = ['GAM 94 ♂', 'SOA Pri-2012 ♂'];
             }
+
+            // Calculate curves and average ax at age 65 for sorting
+            var seriesData = [];
+            selectedKeys.forEach(function(fullId) {
+                var isFemale = fullId.indexOf('♀') !== -1;
+                var baseKey = fullId.replace(' ♂', '').replace(' ♀', '').trim();
+                var meta = tableParams[baseKey] || tableParams['SOA Pri-2012'] || tableParams['GAM 94'];
+                var params = isFemale ? meta.female : meta.male;
+                var curve = generateSexCurve(params, interest, longevity);
+
+                var ax65 = (curve[65] && curve[65].D > 0) ? (curve[65].N / curve[65].D) : 0;
+                seriesData.push({
+                    fullId: fullId,
+                    baseKey: baseKey,
+                    isFemale: isFemale,
+                    curve: curve,
+                    ax65: ax65
+                });
+            });
+
+            // Sort series from lowest ax65 to highest ax65
+            seriesData.sort(function(a, b) { return a.ax65 - b.ax65; });
+
+            // Build Header
+            var headHtml = '<th class="py-2.5 px-3 font-bold text-left text-emerald-400 border-b border-darkBorder/40">Edad Jubilación (x)</th>';
+            var colors = ['text-blue-400', 'text-emerald-400', 'text-amber-400', 'text-purple-400', 'text-cyan-400', 'text-rose-400', 'text-indigo-400'];
+
+            seriesData.forEach(function(s, idx) {
+                var color = s.isFemale ? 'text-rose-400' : colors[idx % colors.length];
+                headHtml += '<th class="py-2.5 px-3 font-bold text-right ' + color + ' border-b border-darkBorder/40">äₓ (' + s.fullId + ')</th>';
+            });
+
+            var isPair = (seriesData.length === 2);
+            if (isPair) {
+                headHtml += '<th class="py-2.5 px-3 font-bold text-right text-cyan-300 border-b border-darkBorder/40">Diferencia (Δäₓ)</th>';
+                headHtml += '<th class="py-2.5 px-3 font-bold text-right text-amber-300 border-b border-darkBorder/40">Variación % (%Δ)</th>';
+            }
+            thead.innerHTML = headHtml;
+
+            // Build Body Rows (x = 50, 55, 60, 65, 70, 75, 80, 85)
+            var bodyHtml = '';
+            var ages = [50, 55, 60, 65, 70, 75, 80, 85];
+
+            ages.forEach(function(x) {
+                bodyHtml += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors text-xs">';
+                bodyHtml += '<td class="py-2.5 px-3 font-mono font-bold text-emerald-400 text-left">' + x + ' años</td>';
+
+                var vals = [];
+                seriesData.forEach(function(s, idx) {
+                    var pt = s.curve[x];
+                    var axVal = (pt && pt.D > 0) ? (pt.N / pt.D) : 0;
+                    vals.push(axVal);
+                    var color = s.isFemale ? 'text-rose-400' : colors[idx % colors.length];
+                    bodyHtml += '<td class="py-2.5 px-3 font-mono font-bold ' + color + ' text-right">' + axVal.toFixed(3) + '</td>';
+                });
+
+                if (isPair) {
+                    var diff = vals[1] - vals[0];
+                    var pct = vals[0] > 0 ? ((diff / vals[0]) * 100) : 0;
+                    var diffSign = diff >= 0 ? '+' : '';
+                    var pctSign = pct >= 0 ? '+' : '';
+
+                    var diffColor = diff >= 0 ? 'text-emerald-400' : 'text-rose-400';
+                    var pctColor = pct >= 0 ? 'text-amber-400' : 'text-rose-400';
+
+                    bodyHtml += '<td class="py-2.5 px-3 font-mono font-bold ' + diffColor + ' text-right">' + diffSign + diff.toFixed(3) + '</td>';
+                    bodyHtml += '<td class="py-2.5 px-3 font-mono font-bold ' + pctColor + ' text-right">' + pctSign + pct.toFixed(2) + '%</td>';
+                }
+
+                bodyHtml += '</tr>';
+            });
+
+            tbody.innerHTML = bodyHtml;
         };
 
         window.renderDisabilitySection = function() {
@@ -10859,6 +10917,7 @@ Stack: ${error ? error.stack : 'N/A'}`;
             }
             return false;
         };
+    setTimeout(function() { if (typeof initSeriesCheckboxes === 'function') initSeriesCheckboxes(); }, 50);
     })();
     </script>
 </body>
