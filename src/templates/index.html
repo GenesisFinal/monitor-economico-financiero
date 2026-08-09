@@ -9225,7 +9225,7 @@ var bondDetailChartInstance = null;
                     <div class="flex items-center justify-between mb-2 flex-wrap gap-2">
                         <div>
                             <h4 id="tbl-mortality-title" class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
-                                <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: GAM 94
+                                <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: SOA Pri-2012
                             </h4>
                             <p id="tbl-mortality-desc" class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
                                 Tasas anuales de mortalidad qx (‰), supervivencia px (%) y cohorte lx (l₀=100.000) de 0 a 120 años.
@@ -9278,7 +9278,7 @@ var bondDetailChartInstance = null;
                         <div class="flex items-center gap-3 flex-wrap">
                             <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
                                 <label for="select-tech-interest" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Tasa Técnica (i):</label>
-                                <select id="select-tech-interest" onchange="renderCommutationComparison()" class="bg-darkBg text-brandBlue text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-blue-700">
+                                <select id="select-tech-interest" onchange="renderCommutationComparison(); renderAnnuityTableAndChart();" class="bg-darkBg text-brandBlue text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-blue-700">
                                     <option value="0.01" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1% p.a.</option>
                                     <option value="0.02" class="bg-slate-900 text-white light:bg-white light:text-slate-900">2% p.a.</option>
                                     <option value="0.03"  class="bg-slate-900 text-white light:bg-white light:text-slate-900">3% p.a. (Estándar SSN)</option>
@@ -9289,7 +9289,7 @@ var bondDetailChartInstance = null;
 
                             <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
                                 <label for="select-longevity-scale" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Mejora Longevidad (fₓ):</label>
-                                <select id="select-longevity-scale" onchange="renderCommutationComparison()" class="bg-darkBg text-rose-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-rose-600">
+                                <select id="select-longevity-scale" onchange="renderCommutationComparison(); renderAnnuityTableAndChart();" class="bg-darkBg text-rose-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-rose-600">
                                     <option value="0.00" selected class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.0% p.a. (Sin mejora)</option>
                                     <option value="0.005" class="bg-slate-900 text-white light:bg-white light:text-slate-900">0.5% p.a.</option>
                                     <option value="0.010" class="bg-slate-900 text-white light:bg-white light:text-slate-900">1.0% p.a.</option>
@@ -9340,7 +9340,7 @@ var bondDetailChartInstance = null;
 
                             <div class="flex items-center gap-2 bg-darkBg border border-darkBorder/60 rounded-xl px-3 py-1.5 light:bg-slate-100 light:border-slate-300">
                                 <label for="select-retire-age-x0" class="text-xs font-semibold text-slate-300 light:text-slate-700 whitespace-nowrap">Edad de Inicio (x₀):</label>
-                                <select id="select-retire-age-x0" onchange="renderCommutationComparison()" class="bg-darkBg text-emerald-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-emerald-700">
+                                <select id="select-retire-age-x0" onchange="renderCommutationComparison(); renderAnnuityTableAndChart();" class="bg-darkBg text-emerald-400 text-xs font-bold rounded-lg p-1 border border-darkBorder/60 cursor-pointer focus:outline-none light:bg-white light:text-emerald-700">
                                     <option value="30" class="bg-slate-900 text-white light:bg-white light:text-slate-900">30 años</option>
                                     <option value="40" class="bg-slate-900 text-white light:bg-white light:text-slate-900">40 años</option>
                                     <option value="50" class="bg-slate-900 text-white light:bg-white light:text-slate-900">50 años</option>
@@ -9850,6 +9850,7 @@ var bondDetailChartInstance = null;
                     if (t === cleanId) {
                         cont.classList.remove('hidden');
                         cont.style.display = 'block';
+                        if (t === 'actuaria' && typeof renderActuarialView === 'function') renderActuarialView();
                     } else {
                         cont.classList.add('hidden');
                         cont.style.display = 'none';
@@ -10228,6 +10229,32 @@ var bondDetailChartInstance = null;
         };
 
         // 2. RENDER MORTALITY TABLE
+        window.renderActuarialView = function() {
+            var cont = document.getElementById('sr-tab-actuaria');
+            if (cont) {
+                cont.classList.remove('hidden');
+                cont.style.display = 'block';
+            }
+
+            requestAnimationFrame(function() {
+                setTimeout(function() {
+                    var tableName = currentMortalityTable || 'SOA Pri-2012';
+                    var selEl = document.getElementById('select-mortality-table');
+                    if (selEl) selEl.value = tableName;
+
+                    if (typeof renderMortalityTableAndChart === 'function') {
+                        renderMortalityTableAndChart(tableName);
+                    }
+                    if (typeof initSeriesCheckboxes === 'function') {
+                        initSeriesCheckboxes();
+                    }
+                    if (typeof renderAnnuityTableAndChart === 'function') {
+                        renderAnnuityTableAndChart();
+                    }
+                }, 50);
+            });
+        };
+
         window.renderMortalityTableAndChart = function(tableName) {
             currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
@@ -10320,7 +10347,7 @@ var bondDetailChartInstance = null;
         };
 
         window.onMortalityTableChange = function(tableName) {
-            currentMortalityTable = tableName || 'GAM 94';
+            currentMortalityTable = tableName || 'SOA Pri-2012';
             window.renderMortalityTableAndChart(currentMortalityTable);
         };
 
@@ -10390,7 +10417,7 @@ var bondDetailChartInstance = null;
                     var bgClass = isMale ? 'bg-blue-500/5 light:bg-blue-50/50' : 'bg-rose-500/5 light:bg-rose-50/50';
                     
                     html += '<label data-key="' + key + '" data-sex="' + sex + '" onmouseenter="showMultitableTableBadgeTooltip(this.getAttribute(\'data-key\'), this.getAttribute(\'data-sex\'), event)" onmouseleave="hideTableBadgeTooltip()" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border ' + colorClass + ' ' + bgClass + ' cursor-pointer transition-all w-full light:bg-white shadow-sm hover:shadow group relative">' +
-                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0 shrink-0 cursor-pointer" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison()">' +
+                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0 shrink-0 cursor-pointer" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison(); renderAnnuityTableAndChart();">' +
                         '<span class="font-mono text-[11px] font-semibold text-slate-200 light:text-slate-800 truncate">' + key + ' <span class="' + (isMale ? 'text-blue-400' : 'text-rose-400') + '">' + (isMale ? '♂' : '♀') + '</span></span>' +
                     '</label>';
                 });
@@ -10694,6 +10721,7 @@ var bondDetailChartInstance = null;
             if (cont) {
                 cont.classList.remove('hidden');
                 cont.style.display = 'block';
+                        if (t === 'actuaria' && typeof renderActuarialView === 'function') renderActuarialView();
             }
 
             requestAnimationFrame(function() {
@@ -10738,6 +10766,7 @@ var bondDetailChartInstance = null;
             if (cont) {
                 cont.classList.remove('hidden');
                 cont.style.display = 'block';
+                        if (t === 'actuaria' && typeof renderActuarialView === 'function') renderActuarialView();
             }
 
             requestAnimationFrame(function() {
@@ -10809,6 +10838,7 @@ var bondDetailChartInstance = null;
             if (cont) {
                 cont.classList.remove('hidden');
                 cont.style.display = 'block';
+                        if (t === 'actuaria' && typeof renderActuarialView === 'function') renderActuarialView();
             }
 
             requestAnimationFrame(function() {
