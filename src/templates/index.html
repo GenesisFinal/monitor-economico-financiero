@@ -9304,7 +9304,7 @@ var bondDetailChartInstance = null;
                     <!-- Checkboxes Grid (32 Gendered Series) -->
                     <div class="mb-6">
                         <span class="text-xs font-bold text-slate-300 light:text-slate-700 block mb-2">Seleccione las Series a Comparar:</span>
-                        <div id="container-series-checkboxes" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 max-h-[220px] overflow-y-auto p-2 bg-darkBg/60 border border-darkBorder/50 rounded-xl light:bg-slate-50 light:border-slate-200">
+                        <div id="container-series-checkboxes" class="w-full p-3 bg-darkBg/60 border border-darkBorder/50 rounded-2xl light:bg-slate-50 light:border-slate-200">
                             <!-- Populated dynamically by initSeriesCheckboxes -->
                         </div>
                     </div>
@@ -10367,17 +10367,19 @@ var bondDetailChartInstance = null;
             if (!container) return;
 
             var defaultSelected = ['GAM 94 ♂', 'GAM 94 ♀', 'CSO 2001 ♂', 'SOA Pri-2012 ♀'];
-            var html = '<div class="flex flex-wrap gap-2 text-xs p-1">';
+            var html = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 w-full text-xs">';
             
             Object.keys(tableParams).forEach(function(key) {
                 ['♂ Varón', '♀ Mujer'].forEach(function(sex) {
                     var fullId = key + ' ' + (sex.indexOf('Varón') !== -1 ? '♂' : '♀');
                     var checked = defaultSelected.indexOf(fullId) !== -1 ? 'checked' : '';
-                    var colorClass = sex.indexOf('Varón') !== -1 ? 'text-blue-400 border-blue-500/30' : 'text-rose-400 border-rose-500/30';
+                    var isMale = sex.indexOf('Varón') !== -1;
+                    var colorClass = isMale ? 'text-blue-400 border-blue-500/30 hover:border-blue-400' : 'text-rose-400 border-rose-500/30 hover:border-rose-400';
+                    var bgClass = isMale ? 'bg-blue-500/5 light:bg-blue-50/50' : 'bg-rose-500/5 light:bg-rose-50/50';
                     
-                    html += '<label class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-darkCard border ' + colorClass + ' hover:border-brandBlue cursor-pointer transition-all shrink-0 light:bg-white">' +
-                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison()">' +
-                        '<span class="font-mono text-[11px] font-semibold text-slate-200 light:text-slate-800">' + key + ' <span class="' + (sex.indexOf('Varón') !== -1 ? 'text-blue-400' : 'text-rose-400') + '">' + sex + '</span></span>' +
+                    html += '<label class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border ' + colorClass + ' ' + bgClass + ' cursor-pointer transition-all w-full light:bg-white shadow-sm hover:shadow">' +
+                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0 shrink-0 cursor-pointer" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison()">' +
+                        '<span class="font-mono text-[11px] font-semibold text-slate-200 light:text-slate-800 truncate" title="' + fullId + '">' + key + ' <span class="' + (isMale ? 'text-blue-400' : 'text-rose-400') + '">' + (isMale ? '♂' : '♀') + '</span></span>' +
                     '</label>';
                 });
             });
