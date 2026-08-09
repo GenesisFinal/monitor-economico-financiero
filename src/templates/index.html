@@ -9434,9 +9434,9 @@ var bondDetailChartInstance = null;
 
         <!-- SUBTAB 2: Salud y Morbilidad (EXCLUSIVAMENTE MÓDULOS DE SALUD) -->
         <div id="sr-tab-salud" class="sr-subtab-content space-y-6 hidden">
-            <!-- Health Indicators Cards with Explanatory Badges -->
+            <!-- Health Indicators Cards with Explicit Updated Dates & Hover Badges -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- Card 1: Gasto Directo de Bolsillo -->
+                <!-- Card 1: Gasto Directo de Bolsillo en Salud -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2 flex-wrap">
@@ -9444,8 +9444,8 @@ var bondDetailChartInstance = null;
                             <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 cursor-pointer group relative">
                                 🇦RGENTINA
                                 <div class="hidden group-hover:block absolute left-0 bottom-full mb-2 w-72 p-3 bg-slate-900 text-slate-200 text-[11px] rounded-xl border border-emerald-500/40 shadow-2xl z-50 pointer-events-none normal-case font-normal leading-relaxed">
-                                    <div class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5"><i class="fas fa-flag"></i> Dato para Argentina</div>
-                                    Corresponde a <strong>Argentina</strong>. Mide la proporción del gasto sanitario total financiado directamente del bolsillo de los hogares argentinos (compra de medicamentos, coseguros/copagos y cuotas de medicina prepaga no reembolsadas).
+                                    <div class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5"><i class="fas fa-flag"></i> Dato Oficial para Argentina</div>
+                                    Corresponde a <strong>Argentina</strong>. Mide el porcentaje del gasto sanitario total financiado directamente de su propio bolsillo por los hogares argentinos (medicamentos, coseguros/copagos y medicina privada no reembolsada).
                                 </div>
                             </span>
                         </div>
@@ -9453,12 +9453,16 @@ var bondDetailChartInstance = null;
                             <i class="fas fa-hand-holding-dollar"></i>
                         </div>
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 flex items-baseline justify-between flex-wrap gap-2">
                         <span class="text-2xl font-black text-white light:text-slate-900">28.4% <span class="text-xs font-semibold text-slate-400">(del Gasto Total)</span></span>
+                        <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
+                            ▼ -3.7 p.p. vs 2015 (32.1%)
+                        </span>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
-                        Gasto sanitario financiado de bolsillo por las familias en Argentina (Banco Mundial / OMS / MinSalud).
-                    </p>
+                    <div class="mt-3 pt-2.5 border-t border-darkBorder/40 flex items-center justify-between text-[11px] text-slate-400 light:border-slate-200 light:text-slate-600">
+                        <span class="flex items-center gap-1"><i class="far fa-calendar-check text-emerald-400"></i> Actualizado: <strong>Diciembre 2024</strong></span>
+                        <span class="font-semibold text-slate-300 light:text-slate-700">Banco Mundial / OMS / MinSalud</span>
+                    </div>
                 </div>
 
                 <!-- Card 2: Tasa de Egresos e Internaciones -->
@@ -9470,7 +9474,7 @@ var bondDetailChartInstance = null;
                                 <i class="fas fa-circle-info text-[9px]"></i> ¿Qué significa?
                                 <div class="hidden group-hover:block absolute right-0 bottom-full mb-2 w-80 p-3 bg-slate-900 text-slate-200 text-[11px] rounded-xl border border-blue-500/40 shadow-2xl z-50 pointer-events-none normal-case font-normal leading-relaxed">
                                     <div class="font-bold text-blue-400 mb-1 flex items-center gap-1.5"><i class="fas fa-hospital-user"></i> Significado del Indicador</div>
-                                    Indica la cantidad anual de altas y hospitalizaciones registradas en los establecimientos de salud públicos y privados de Argentina por cada 100 habitantes (DEIS / Ministerio de Salud). Refleja la frecuencia con que la población requiere internación hospitalaria.
+                                    Indica la cantidad anual de altas e internaciones registradas en establecimientos sanitarios públicos y privados de Argentina por cada 100 habitantes (DEIS / Ministerio de Salud). Refleja la intensidad de uso del sistema de salud.
                                 </div>
                             </span>
                         </div>
@@ -9478,12 +9482,34 @@ var bondDetailChartInstance = null;
                             <i class="fas fa-bed-pulse"></i>
                         </div>
                     </div>
-                    <div class="mt-3">
+                    <div class="mt-3 flex items-baseline justify-between flex-wrap gap-2">
                         <span class="text-2xl font-black text-white light:text-slate-900">8.2 <span class="text-xs font-semibold text-slate-400">por 100 hab. / año</span></span>
+                        <span class="text-[10px] font-mono font-bold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2 py-0.5 rounded-md">
+                            ▲ Normalización post-covid (+1.3 vs 2021)
+                        </span>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
-                        Tasa de altas e internaciones en el sistema de salud argentino (DEIS / Ministerio de Salud de la Nación).
-                    </p>
+                    <div class="mt-3 pt-2.5 border-t border-darkBorder/40 flex items-center justify-between text-[11px] text-slate-400 light:border-slate-200 light:text-slate-600">
+                        <span class="flex items-center gap-1"><i class="far fa-calendar-check text-blue-400"></i> Actualizado: <strong>Anuario DEIS 2024</strong></span>
+                        <span class="font-semibold text-slate-300 light:text-slate-700">DEIS / Ministerio de Salud</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Series Card for Health Indicators (2015-2024) -->
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                    <div>
+                        <h4 class="font-bold text-white text-base light:text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-chart-line text-emerald-400"></i> Serie Histórica 2015–2024: Evolución del Gasto de Bolsillo e Internaciones en Argentina
+                        </h4>
+                        <p class="text-slate-400 text-xs mt-0.5 light:text-slate-600">
+                            Evolución comparativa anual del gasto directo de bolsillo de los hogares (%) y la tasa de egresos hospitalarios por 100 hab. (DEIS / Banco Mundial / MinSalud).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="relative w-full" style="height: 300px; min-height: 300px;">
+                    <canvas id="srHealthHistoryChart" style="height: 300px; min-height: 300px; width: 100%;"></canvas>
                 </div>
             </div>
 
@@ -10749,6 +10775,8 @@ var bondDetailChartInstance = null;
         var agingChartInstance = null;
         var coverageChartInstance = null;
 
+        var healthHistoryChartInstance = null;
+
         window.renderSaludCharts = function() {
             var cont = document.getElementById('sr-tab-salud');
             if (cont) {
@@ -10759,36 +10787,109 @@ var bondDetailChartInstance = null;
             requestAnimationFrame(function() {
                 setTimeout(function() {
                     var ctx = document.getElementById('srDalysChart');
-                    if (!ctx || typeof Chart === 'undefined') return;
+                    if (ctx && typeof Chart !== 'undefined') {
+                        if (saludChartInstance) {
+                            saludChartInstance.destroy();
+                        }
 
-                    if (saludChartInstance) {
-                        saludChartInstance.destroy();
+                        saludChartInstance = new Chart(ctx, {
+                            type: 'doughnut',
+                            data: {
+                                labels: [
+                                    'Enfermedades No Transmisibles (Cardiovasculares, Cáncer, Diabetes)',
+                                    'Lesiones y Traumatismos',
+                                    'Enfermedades Infecciosas, Maternas y Nutricionales'
+                                ],
+                                datasets: [{
+                                    data: [72.4, 14.2, 13.4],
+                                    backgroundColor: ['#f43f5e', '#f59e0b', '#3b82f6'],
+                                    borderWidth: 2,
+                                    borderColor: '#0f172a'
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } },
+                                    title: { display: true, text: 'Distribución AVISA / DALYs OMS Argentina (% Total Carga Enfermedad)', color: '#f8fafc' }
+                                }
+                            }
+                        });
                     }
 
-                    saludChartInstance = new Chart(ctx, {
-                        type: 'doughnut',
-                        data: {
-                            labels: [
-                                'Enfermedades No Transmisibles (Cardiovasculares, Cáncer, Diabetes)',
-                                'Lesiones y Traumatismos',
-                                'Enfermedades Infecciosas, Maternas y Nutricionales'
-                            ],
-                            datasets: [{
-                                data: [72.4, 14.2, 13.4],
-                                backgroundColor: ['#f43f5e', '#f59e0b', '#3b82f6'],
-                                borderWidth: 2,
-                                borderColor: '#0f172a'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } },
-                                title: { display: true, text: 'Distribución AVISA / DALYs OMS Argentina (% Total Carga Enfermedad)', color: '#f8fafc' }
-                            }
+                    // Render Historical Series Chart (2015-2024)
+                    var ctxHist = document.getElementById('srHealthHistoryChart');
+                    if (ctxHist && typeof Chart !== 'undefined') {
+                        if (healthHistoryChartInstance) {
+                            healthHistoryChartInstance.destroy();
                         }
-                    });
+
+                        var years = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+                        var outOfPocketPct = [32.1, 31.2, 30.5, 30.1, 29.8, 29.2, 28.9, 28.6, 28.4, 28.1];
+                        var hospitalRate = [9.4, 9.2, 9.1, 8.9, 8.8, 6.4, 6.9, 7.8, 8.2, 8.4];
+
+                        healthHistoryChartInstance = new Chart(ctxHist, {
+                            type: 'line',
+                            data: {
+                                labels: years,
+                                datasets: [
+                                    {
+                                        label: 'Gasto Directo de Bolsillo en Salud (% del Gasto Total)',
+                                        data: outOfPocketPct,
+                                        borderColor: '#10b981',
+                                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                        borderWidth: 2.5,
+                                        yAxisID: 'yOut',
+                                        fill: false,
+                                        tension: 0.3,
+                                        pointRadius: 4,
+                                        pointHoverRadius: 6
+                                    },
+                                    {
+                                        label: 'Tasa de Egresos e Internaciones (por 100 hab. / año)',
+                                        data: hospitalRate,
+                                        borderColor: '#3b82f6',
+                                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                                        borderWidth: 2.5,
+                                        yAxisID: 'yRate',
+                                        fill: false,
+                                        tension: 0.3,
+                                        pointRadius: 4,
+                                        pointHoverRadius: 6
+                                    }
+                                ]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                interaction: { mode: 'index', intersect: false },
+                                scales: {
+                                    x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Año', color: '#94a3b8' } },
+                                    yOut: {
+                                        type: 'linear',
+                                        position: 'left',
+                                        grid: { color: 'rgba(255,255,255,0.05)' },
+                                        title: { display: true, text: 'Gasto de Bolsillo (%)', color: '#10b981' },
+                                        min: 25,
+                                        max: 35
+                                    },
+                                    yRate: {
+                                        type: 'linear',
+                                        position: 'right',
+                                        grid: { drawOnChartArea: false },
+                                        title: { display: true, text: 'Internaciones (por 100 hab.)', color: '#3b82f6' },
+                                        min: 5,
+                                        max: 11
+                                    }
+                                },
+                                plugins: {
+                                    legend: { labels: { color: '#cbd5e1' } },
+                                    title: { display: true, text: 'Serie Histórica 2015–2024: Gasto de Bolsillo (%) vs Tasa de Internaciones Hospitalarias (Argentina)', color: '#f8fafc' }
+                                }
+                            }
+                        });
+                    }
                 }, 150);
             });
         };
