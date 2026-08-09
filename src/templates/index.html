@@ -10580,6 +10580,19 @@ var bondDetailChartInstance = null;
         };
 
         window.renderAnnuityTableAndChart = function() {
+            var compRateEl = document.getElementById('select-tech-interest');
+            var interest = compRateEl ? parseFloat(compRateEl.value) : (tableInterestRate || 0.04);
+
+            var compLongEl = document.getElementById('select-longevity-scale');
+            var longevity = compLongEl ? parseFloat(compLongEl.value) : 0.0;
+
+            var subTitleEl = document.getElementById('tbl-annuity-subtitle');
+            if (subTitleEl) {
+                var iPct = (interest * 100).toFixed(1);
+                var fPct = (longevity * 100).toFixed(1);
+                subTitleEl.innerHTML = 'Valor presente actuarial descontado a la Tasa Técnica <span class="font-semibold text-emerald-400">i = ' + iPct + '%</span> | Mejora Longevidad <span class="font-semibold text-rose-400">fₓ = ' + fPct + '% p.a.</span>';
+            }
+
             var thead = document.getElementById('tbl-annuity-head');
             var tbody = document.getElementById('tbl-annuity-body');
             if (!thead || !tbody) return;
