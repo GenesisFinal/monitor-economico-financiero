@@ -9158,11 +9158,12 @@ var bondDetailChartInstance = null;
                 <!-- Card 3: Selector de Tabla Actuarial Principal -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200 relative group" onmouseenter="showTableBadgeTooltip(document.getElementById('select-mortality-table').value)">
                     <span class="text-xs text-slate-400 font-medium flex items-center justify-between">
-                        <span>Selector de Tabla Actuarial</span>
+                        <span>Selector de Tabla Actuarial & Tasa Técnica (Tabla)</span>
                         <i class="fas fa-circle-info text-brandBlue text-xs cursor-pointer" title="Pase el mouse para ver la recomendación actuarial de uso"></i>
                     </span>
-                    <div class="mt-2">
-                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value); hideTableBadgeTooltip();" onmouseenter="showTableBadgeTooltip(this.value)" onmouseleave="hideTableBadgeTooltip()" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
+                    <div class="mt-2 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <div class="sm:col-span-2">
+                            <select id="select-mortality-table" onchange="onMortalityTableChange(this.value); hideTableBadgeTooltip();" onmouseenter="showTableBadgeTooltip(this.value)" onmouseleave="hideTableBadgeTooltip()" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
                             <option value="GAM 94" selected>GAM 94 (SSN Base Res. 38.708)</option>
                             <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement Plans)</option>
                             <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement Plans)</option>
@@ -9180,6 +9181,18 @@ var bondDetailChartInstance = null;
                             <option value="INDEC 2010">INDEC 2010 (Censo & Estadísticas Vitales Arg.)</option>
                             <option value="DEIS / OMS 2022">DEIS / OMS 2022 (Min. Salud / OMS Arg.)</option>
                         </select>
+                        </div>
+                        <div>
+                            <select id="select-table-tech-interest" onchange="onTableTechInterestChange(this.value)" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-emerald-400 light:bg-slate-100 light:text-emerald-700 p-2 cursor-pointer focus:outline-none" title="Tasa de Interés Técnico independiente para esta Tabla (0% a 6%)">
+                                <option value="0.00">i = 0.0% p.a.</option>
+                                <option value="0.01">i = 1.0% p.a.</option>
+                                <option value="0.02">i = 2.0% p.a.</option>
+                                <option value="0.03">i = 3.0% p.a.</option>
+                                <option value="0.04" selected>i = 4.0% p.a. (SSN)</option>
+                                <option value="0.05">i = 5.0% p.a.</option>
+                                <option value="0.06">i = 6.0% p.a.</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -10088,8 +10101,9 @@ var bondDetailChartInstance = null;
 
     <script>
     (function() {
-        // --- COMPLETE ACTUARIAL JS ENGINE (EVERY AGE 0-105 & COMPLETE CSV EXPORT) ---
+        // --- COMPLETE ACTUARIAL JS ENGINE WITH INDEPENDENT TABLE INTEREST RATE & REACTIVE COMPARATOR ---
         var currentMortalityTable = 'GAM 94';
+        var tableInterestRate = 0.04; // Dedicated independent rate for single table & export
         var mortalityChartInstance = null;
         var comparisonChartInstance = null;
         var retirementChartInstance = null;
@@ -10114,15 +10128,18 @@ var bondDetailChartInstance = null;
             'DEIS / OMS 2022':  { name: 'DEIS / OMS 2022', desc: 'Estadísticas vitales del Ministerio de Salud / OMS Argentina 2022.', male: { A: 0.00049, B: 0.000034, c: 1.0942, omega: 100 }, female: { A: 0.00029, B: 0.000020, c: 1.0955, omega: 100 } }
         };
 
-        function generateSexCurve(params, customInterest) {
+        function generateSexCurve(params, customInterest, longevityImprovement) {
             var data = [];
             var l = 100000;
             var interestRate = customInterest !== undefined ? customInterest : 0.04;
+            var fx = longevityImprovement || 0.0;
             var v = 1 / (1 + interestRate);
             var maxAge = params.omega || 105;
 
             for (var x = 0; x <= maxAge; x++) {
-                var q = (x === maxAge) ? 1.0 : Math.min(0.999, params.A + params.B * Math.pow(params.c, x));
+                // Apply longevity improvement factor (1 - fx)^x to qx
+                var baseQ = (x === maxAge) ? 1.0 : Math.min(0.999, params.A + params.B * Math.pow(params.c, x));
+                var q = (x === maxAge) ? 1.0 : Math.max(0.00001, baseQ * Math.pow(1 - fx, x));
                 var d = Math.round(l * q);
                 data.push({ x: x, q: q, l: Math.round(l), d: d });
                 l = Math.max(0, l - d);
@@ -10152,7 +10169,7 @@ var bondDetailChartInstance = null;
             return data;
         }
 
-        // TOOLTIP POPUP AUTO-HIDE
+        // TOOLTIP AUTO-HIDE
         window.showTableBadgeTooltip = function(val, evt) {
             var existing = document.getElementById('table-badge-tooltip-popup');
             if (!existing) {
@@ -10189,20 +10206,26 @@ var bondDetailChartInstance = null;
             }
         });
 
-        // RENDER MORTALITY TABLE FOR EVERY SINGLE AGE 0 TO OMEGA
+        // 1. INDEPENDENT TABLE TECH INTEREST EVENT
+        window.onTableTechInterestChange = function(rateStr) {
+            tableInterestRate = parseFloat(rateStr) || 0.04;
+            window.renderMortalityTableAndChart(currentMortalityTable);
+        };
+
+        // 2. RENDER MORTALITY TABLE WITH INDEPENDENT TABLE INTEREST RATE
         window.renderMortalityTableAndChart = function(tableName) {
             currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
 
             var titleEl = document.getElementById('tbl-mortality-title');
-            if (titleEl) titleEl.innerText = 'Tabla Actuarial: ' + meta.name;
+            if (titleEl) titleEl.innerText = 'Tabla Actuarial: ' + meta.name + ' (i = ' + (tableInterestRate*100).toFixed(1) + '%)';
             var descEl = document.getElementById('tbl-mortality-desc');
-            if (descEl) descEl.innerText = meta.desc + ' (Valores presentados edad por edad hasta la última edad ' + (meta.male.omega || 105) + ' años).';
+            if (descEl) descEl.innerText = meta.desc + ' (Tasa técnica independiente de la tabla: ' + (tableInterestRate*100).toFixed(1) + '% p.a. Edad por edad hasta los ' + (meta.male.omega || 105) + ' años).';
 
-            var maleData = generateSexCurve(meta.male);
-            var femaleData = generateSexCurve(meta.female);
+            var maleData = generateSexCurve(meta.male, tableInterestRate);
+            var femaleData = generateSexCurve(meta.female, tableInterestRate);
 
-            // Populate HTML Table Tbody FOR EVERY SINGLE AGE 0, 1, 2, 3, ..., OMEGA
+            // Populate HTML Table Tbody
             var tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
                 var html = '';
@@ -10288,17 +10311,13 @@ var bondDetailChartInstance = null;
             window.renderMortalityTableAndChart(currentMortalityTable);
         };
 
-        // EXPORT COMPLETE MORTALITY TABLE CSV EDAD POR EDAD 0 TO OMEGA
+        // EXPORT MORTALITY TABLE CSV WITH INDEPENDENT DEDICATED RATE
         window.exportMortalityTableCSV = function() {
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
-            var techInterestEl = document.getElementById('select-tech-interest');
-            var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
+            var maleData = generateSexCurve(meta.male, tableInterestRate);
+            var femaleData = generateSexCurve(meta.female, tableInterestRate);
 
-            var maleData = generateSexCurve(meta.male, customRate);
-            var femaleData = generateSexCurve(meta.female, customRate);
-
-            // UTF-8 BOM for Excel compatibility
-            var csv = '\uFEFF"Tabla Actuarial: ' + meta.name + ' — Tasa Técnica: ' + (customRate*100).toFixed(1) + '%"\n';
+            var csv = '\uFEFF"Tabla Actuarial: ' + meta.name + ' — Tasa Técnica Independiente: ' + (tableInterestRate*100).toFixed(1) + '%"\n';
             csv += '"Edad (x)","qx Male (per 1000)","qx Female (per 1000)","lx Male (100k)","lx Female (100k)","dx Male","dx Female","ex Male (Years)","ex Female (Years)","Dx Male","Dx Female","Nx Male","Nx Female","Cx Male","Cx Female","Mx Male","Mx Female","ax Male (Annuity)","ax Female (Annuity)","Ax Male (Single Premium)","Ax Female (Single Premium)"\n';
 
             var maxLen = Math.max(maleData.length, femaleData.length);
@@ -10335,14 +10354,14 @@ var bondDetailChartInstance = null;
             var url = URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
-            a.download = 'tabla_actuarial_' + (currentMortalityTable || 'GAM_94').replace(/[^a-zA-Z0-9]/g, '_') + '_edad_por_edad.csv';
+            a.download = 'tabla_actuarial_' + (currentMortalityTable || 'GAM_94').replace(/[^a-zA-Z0-9]/g, '_') + '_i_' + (tableInterestRate*100).toFixed(0) + 'pct.csv';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         };
 
-        // MULTITABLE CHECKBOXES & COMPARISON
+        // 3. REACTIVE MULTITABLE COMPARATOR (UPDATES DYNAMICALLY ON ANY SELECTOR CHANGE)
         window.initSeriesCheckboxes = function() {
             var container = document.getElementById('container-series-checkboxes');
             if (!container) return;
@@ -10365,6 +10384,16 @@ var bondDetailChartInstance = null;
             html += '</div>';
             container.innerHTML = html;
             
+            // Attach event listeners to tech interest and longevity scale selectors
+            var compRateEl = document.getElementById('select-tech-interest');
+            if (compRateEl) {
+                compRateEl.onchange = function() { window.renderCommutationComparison(); };
+            }
+            var compLongEl = document.getElementById('select-longevity-scale');
+            if (compLongEl) {
+                compLongEl.onchange = function() { window.renderCommutationComparison(); };
+            }
+
             window.renderCommutationComparison();
         };
 
@@ -10380,8 +10409,12 @@ var bondDetailChartInstance = null;
                 selectedKeys = ['GAM 94 ♂', 'CSO 2001 ♀'];
             }
 
-            var techInterestEl = document.getElementById('select-tech-interest');
-            var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
+            // Read interest rate and longevity improvement from Multitable Comparator selectors
+            var compRateEl = document.getElementById('select-tech-interest');
+            var compInterest = compRateEl ? parseFloat(compRateEl.value) : 0.04;
+
+            var compLongEl = document.getElementById('select-longevity-scale');
+            var compLongevity = compLongEl ? parseFloat(compLongEl.value) : 0.0;
 
             var colors = ['#3b82f6', '#ec4899', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7', '#14b8a6', '#f43f5e'];
             var datasets = [];
@@ -10393,11 +10426,11 @@ var bondDetailChartInstance = null;
                 var baseKey = fullId.replace(' ♂', '').replace(' ♀', '').trim();
                 var meta = tableParams[baseKey] || tableParams['GAM 94'];
                 var params = isFemale ? meta.female : meta.male;
-                var data = generateSexCurve(params, customRate);
+                var data = generateSexCurve(params, compInterest, compLongevity);
                 var color = colors[idx % colors.length];
 
                 datasets.push({
-                    label: fullId + ' (Renta a_x)',
+                    label: fullId + ' (Renta a_x, i=' + (compInterest*100).toFixed(1) + '%)',
                     data: data.map(function(d) { return parseFloat(d.ax); }),
                     borderColor: color,
                     backgroundColor: 'transparent',
@@ -10423,7 +10456,7 @@ var bondDetailChartInstance = null;
                     },
                     plugins: {
                         legend: { labels: { color: '#cbd5e1' } },
-                        title: { display: true, text: 'Comparación Multitabla de Rentas Vitalicias a_x (Tasa Técnica ' + (customRate*100).toFixed(1) + '%)', color: '#f8fafc' }
+                        title: { display: true, text: 'Comparación Multitabla de Rentas Vitalicias a_x — Tasa Técnica: ' + (compInterest*100).toFixed(1) + '% p.a., Longevidad fx: ' + (compLongevity*100).toFixed(1) + '%', color: '#f8fafc' }
                     }
                 }
             });
@@ -10443,11 +10476,9 @@ var bondDetailChartInstance = null;
             }
 
             var tbody = document.getElementById('tbl-annuity-body');
-            var techInterestEl = document.getElementById('select-tech-interest');
-            var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
-            var maleData = generateSexCurve(meta.male, customRate);
-            var femaleData = generateSexCurve(meta.female, customRate);
+            var maleData = generateSexCurve(meta.male, tableInterestRate);
+            var femaleData = generateSexCurve(meta.female, tableInterestRate);
 
             if (tbody) {
                 var html = '';
@@ -10456,8 +10487,8 @@ var bondDetailChartInstance = null;
                     var f = femaleData[x];
                     var m10 = (m && m.D > 0) ? ((m.N - (maleData[x+10] ? maleData[x+10].N : 0)) / m.D).toFixed(3) : '0.000';
                     var f10 = (f && f.D > 0) ? ((f.N - (femaleData[x+10] ? femaleData[x+10].N : 0)) / f.D).toFixed(3) : '0.000';
-                    var mAx = m ? (1 - (customRate * parseFloat(m.ax))).toFixed(4) : '1.0000';
-                    var fAx = f ? (1 - (customRate * parseFloat(f.ax))).toFixed(4) : '1.0000';
+                    var mAx = m ? (1 - (tableInterestRate * parseFloat(m.ax))).toFixed(4) : '1.0000';
+                    var fAx = f ? (1 - (tableInterestRate * parseFloat(f.ax))).toFixed(4) : '1.0000';
 
                     html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors text-xs">' +
                         '<td class="py-2.5 px-3 font-mono font-bold text-emerald-400 text-left">' + x + ' años</td>' +
@@ -10477,6 +10508,9 @@ var bondDetailChartInstance = null;
             if (ctx && typeof Chart !== 'undefined') {
                 var retireAgeEl = document.getElementById('select-retire-age-x0');
                 var x0 = retireAgeEl ? parseInt(retireAgeEl.value) || 65 : 65;
+                if (retireAgeEl) {
+                    retireAgeEl.onchange = function() { window.renderAnnuityTableAndChart(); };
+                }
                 var ml_x0 = maleData[x0] ? maleData[x0].l : 1;
                 var fl_x0 = femaleData[x0] ? femaleData[x0].l : 1;
 
