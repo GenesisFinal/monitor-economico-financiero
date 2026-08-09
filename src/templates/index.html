@@ -9640,38 +9640,138 @@ var bondDetailChartInstance = null;
         <div id="sr-tab-pensiones" class="sr-subtab-content space-y-6 hidden">
             <!-- Pension Indicators Cards -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <!-- Card 1: Esperanza al Nacer (e0) with Clickable Expander -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-slate-400 font-medium">Esperanza al Nacer (e₀)</span>
-                        <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
-                            <i class="fas fa-baby"></i>
+                    <div onclick="toggleLifeExpectancyDetails('e0-details-accordion')" class="cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-xs text-slate-400 font-medium group-hover:text-emerald-400 transition-colors">Esperanza al Nacer (e₀)</span>
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                    🇦RGENTINA
+                                </span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-baby"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3 flex items-baseline justify-between flex-wrap gap-2">
+                            <span class="text-2xl font-black text-white light:text-slate-900">77.2 años</span>
+                            <span class="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                <i class="fas fa-chevron-down text-[9px] group-hover:translate-y-0.5 transition-transform"></i> Click para ver Evolución
+                            </span>
+                        </div>
+                        
+                        <div class="flex items-center gap-3 mt-2 text-xs font-semibold">
+                            <span class="text-blue-400"><i class="fas fa-mars mr-1"></i>74.0 varón</span>
+                            <span class="text-rose-400"><i class="fas fa-venus mr-1"></i>80.4 mujer</span>
+                        </div>
+
+                        <div class="mt-3 pt-2.5 border-t border-darkBorder/40 flex items-center justify-between text-[11px] text-slate-400 light:border-slate-200 light:text-slate-600">
+                            <span class="flex items-center gap-1"><i class="far fa-calendar-check text-emerald-400"></i> Cálculo: <strong>Edición 2025/2026</strong></span>
+                            <span class="font-semibold text-slate-300 light:text-slate-700">INDEC / UN Population / HMD</span>
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <span class="text-2xl font-black text-white light:text-slate-900">77.2 años</span>
+
+                    <!-- Expandable Historical Accordion Container for e0 -->
+                    <div id="e0-details-accordion" class="hidden mt-4 pt-4 border-t border-darkBorder/60 space-y-3 light:border-slate-300">
+                        <div class="flex items-center justify-between text-xs font-bold text-emerald-400">
+                            <span><i class="fas fa-clock-rotate-left mr-1.5"></i> Evolución Histórica Esperanza al Nacer en Argentina (1980–2026)</span>
+                            <span class="text-[10px] font-normal text-slate-400">(en años)</span>
+                        </div>
+                        <div class="overflow-x-auto rounded-xl border border-darkBorder/40 light:border-slate-200">
+                            <table class="w-full text-xs text-left">
+                                <thead class="bg-darkBg text-slate-300 light:bg-slate-100 light:text-slate-700 text-[11px]">
+                                    <tr>
+                                        <th class="py-1.5 px-2.5 font-bold">Año</th>
+                                        <th class="py-1.5 px-2 font-mono text-center">Total (e₀)</th>
+                                        <th class="py-1.5 px-2 font-mono text-center text-blue-400">Varones</th>
+                                        <th class="py-1.5 px-2 font-mono text-center text-rose-400">Mujeres</th>
+                                        <th class="py-1.5 px-2 font-mono text-right text-emerald-400">Brecha F-M</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-darkBorder/30 text-[11px] font-mono">
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">1980</td><td class="text-center">69.6</td><td class="text-center text-slate-400">66.1</td><td class="text-center text-slate-400">73.2</td><td class="text-right text-emerald-400">+7.1 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">1990</td><td class="text-center">71.8</td><td class="text-center text-slate-400">68.3</td><td class="text-center text-slate-400">75.4</td><td class="text-right text-emerald-400">+7.1 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">2000</td><td class="text-center">73.9</td><td class="text-center text-slate-400">70.2</td><td class="text-center text-slate-400">77.7</td><td class="text-right text-emerald-400">+7.5 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">2010</td><td class="text-center">75.7</td><td class="text-center text-slate-400">72.1</td><td class="text-center text-slate-400">79.4</td><td class="text-right text-emerald-400">+7.3 años</td></tr>
+                                    <tr class="bg-rose-500/5"><td class="py-1 px-2.5 text-rose-400 font-bold">2020 (Covid)</td><td class="text-center text-rose-400">75.2</td><td class="text-center text-slate-400">71.5</td><td class="text-center text-slate-400">79.0</td><td class="text-right text-emerald-400">+7.5 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">2024</td><td class="text-center">77.0</td><td class="text-center text-slate-400">73.8</td><td class="text-center text-slate-400">80.2</td><td class="text-right text-emerald-400">+6.4 años</td></tr>
+                                    <tr class="bg-emerald-500/10 font-bold"><td class="py-1.5 px-2.5 text-emerald-400">2025/2026</td><td class="text-center text-emerald-400">77.2</td><td class="text-center text-blue-400">74.0</td><td class="text-center text-rose-400">80.4</td><td class="text-right text-emerald-400">+6.4 años</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">
+                            * Fuente: INDEC (Tablas de Mortalidad de la Rep. Argentina, Censo 2022 Rev. 2025) y Human Mortality Database (HMD).
+                        </p>
                     </div>
-                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
-                        Fuente: INDEC (Tablas de Mortalidad de la Rep. Argentina) & Banco Mundial / HMD. Varón: 74.0 años | Mujer: 80.4 años.
-                    </p>
                 </div>
 
+                <!-- Card 2: Esperanza a los 65 Años (e65) with Clickable Expander -->
                 <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-slate-400 font-medium">Esperanza a los 65 Años (e₆₅)</span>
-                        <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400">
-                            <i class="fas fa-user-clock"></i>
+                    <div onclick="toggleLifeExpectancyDetails('e65-details-accordion')" class="cursor-pointer group">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2 flex-wrap">
+                                <span class="text-xs text-slate-400 font-medium group-hover:text-amber-400 transition-colors">Esperanza a los 65 Años (e₆₅)</span>
+                                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                    🇦RGENTINA
+                                </span>
+                            </div>
+                            <div class="p-2 rounded-xl bg-amber-500/10 text-amber-400 group-hover:scale-110 transition-transform">
+                                <i class="fas fa-user-clock"></i>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 flex items-baseline justify-between flex-wrap gap-2">
+                            <span class="text-2xl font-black text-white light:text-slate-900">17.8 años</span>
+                            <span class="text-[10px] font-mono font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md flex items-center gap-1">
+                                <i class="fas fa-chevron-down text-[9px] group-hover:translate-y-0.5 transition-transform"></i> Click para ver Evolución
+                            </span>
+                        </div>
+
+                        <div class="flex items-center gap-3 mt-2 text-xs font-semibold">
+                            <span class="text-blue-400"><i class="fas fa-mars mr-1"></i>15.8 varón</span>
+                            <span class="text-rose-400"><i class="fas fa-venus mr-1"></i>19.5 mujer</span>
+                        </div>
+
+                        <div class="mt-3 pt-2.5 border-t border-darkBorder/40 flex items-center justify-between text-[11px] text-slate-400 light:border-slate-200 light:text-slate-600">
+                            <span class="flex items-center gap-1"><i class="far fa-calendar-check text-amber-400"></i> Cálculo: <strong>Edición 2025/2026</strong></span>
+                            <span class="font-semibold text-slate-300 light:text-slate-700">INDEC / CELADE UN Population</span>
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <span class="text-2xl font-black text-white light:text-slate-900">17.8 años</span>
+
+                    <!-- Expandable Historical Accordion Container for e65 -->
+                    <div id="e65-details-accordion" class="hidden mt-4 pt-4 border-t border-darkBorder/60 space-y-3 light:border-slate-300">
+                        <div class="flex items-center justify-between text-xs font-bold text-amber-400">
+                            <span><i class="fas fa-clock-rotate-left mr-1.5"></i> Evolución Histórica Esperanza a los 65 Años en Argentina (1980–2026)</span>
+                            <span class="text-[10px] font-normal text-slate-400">(años restantes)</span>
+                        </div>
+                        <div class="overflow-x-auto rounded-xl border border-darkBorder/40 light:border-slate-200">
+                            <table class="w-full text-xs text-left">
+                                <thead class="bg-darkBg text-slate-300 light:bg-slate-100 light:text-slate-700 text-[11px]">
+                                    <tr>
+                                        <th class="py-1.5 px-2.5 font-bold">Año</th>
+                                        <th class="py-1.5 px-2 font-mono text-center">Restante (e₆₅)</th>
+                                        <th class="py-1.5 px-2 font-mono text-center text-blue-400">Varones</th>
+                                        <th class="py-1.5 px-2 font-mono text-center text-rose-400">Mujeres</th>
+                                        <th class="py-1.5 px-2 font-mono text-right text-amber-400">Edad Media Muerte</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-darkBorder/30 text-[11px] font-mono">
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">1980</td><td class="text-center">14.2</td><td class="text-center text-slate-400">12.8</td><td class="text-center text-slate-400">15.6</td><td class="text-right text-amber-400">79.2 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">1990</td><td class="text-center">15.1</td><td class="text-center text-slate-400">13.5</td><td class="text-center text-slate-400">16.7</td><td class="text-right text-amber-400">80.1 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">2000</td><td class="text-center">16.0</td><td class="text-center text-slate-400">14.3</td><td class="text-center text-slate-400">17.7</td><td class="text-right text-amber-400">81.0 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">2010</td><td class="text-center">16.9</td><td class="text-center text-slate-400">15.0</td><td class="text-center text-slate-400">18.7</td><td class="text-right text-amber-400">81.9 años</td></tr>
+                                    <tr class="bg-rose-500/5"><td class="py-1 px-2.5 text-rose-400 font-bold">2020 (Covid)</td><td class="text-center text-rose-400">16.5</td><td class="text-center text-slate-400">14.6</td><td class="text-center text-slate-400">18.3</td><td class="text-right text-amber-400">81.5 años</td></tr>
+                                    <tr><td class="py-1 px-2.5 text-slate-300 font-bold">2024</td><td class="text-center">17.6</td><td class="text-center text-slate-400">15.6</td><td class="text-center text-slate-400">19.3</td><td class="text-right text-amber-400">82.6 años</td></tr>
+                                    <tr class="bg-amber-500/10 font-bold"><td class="py-1.5 px-2.5 text-amber-400">2025/2026</td><td class="text-center text-amber-400">17.8</td><td class="text-center text-blue-400">15.8</td><td class="text-center text-rose-400">19.5</td><td class="text-right text-amber-400">82.8 años</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="text-[10px] text-slate-400 leading-tight">
+                            * Fuente: INDEC (Tablas de Mortalidad de la Rep. Argentina) y CELADE / UN Population Division (Revisión 2025/2026).
+                        </p>
                     </div>
-                    <div class="flex items-center gap-3 mt-2 text-xs font-semibold">
-                        <span class="text-blue-400"><i class="fas fa-mars mr-1"></i>15.8 varón</span>
-                        <span class="text-rose-400"><i class="fas fa-venus mr-1"></i>19.5 mujer</span>
-                    </div>
-                    <p class="text-[11px] text-slate-400 mt-2 leading-relaxed light:text-slate-600">
-                        Fuente: INDEC (Estadísticas Vitales) & Human Mortality Database. Expectativa de vida restante a la edad de retiro de 65 años.
-                    </p>
                 </div>
             </div>
 
@@ -9990,7 +10090,14 @@ var bondDetailChartInstance = null;
 
 <script>
 
-        window.switchSrSubtab = function(subtabId) {
+        
+        window.toggleLifeExpectancyDetails = function(detailsId) {
+            var el = document.getElementById(detailsId);
+            if (el) {
+                el.classList.toggle('hidden');
+            }
+        };
+window.switchSrSubtab = function(subtabId) {
             let cleanId = subtabId.replace('sr-tab-', '');
             try { localStorage.setItem('activeSubtab_salud-retiro-demografia', cleanId); } catch(e) {}
             const allTabs = ['actuaria', 'salud', 'pensiones', 'demografia'];
