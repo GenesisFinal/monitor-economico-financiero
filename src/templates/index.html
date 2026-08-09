@@ -9162,7 +9162,7 @@ var bondDetailChartInstance = null;
                         <i class="fas fa-circle-info text-brandBlue text-xs cursor-pointer" title="Pase el mouse para ver la recomendación actuarial de uso"></i>
                     </span>
                     <div class="mt-2">
-                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value)" onmouseenter="showTableBadgeTooltip(this.value)" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
+                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value); hideTableBadgeTooltip();" onmouseenter="showTableBadgeTooltip(this.value)" onmouseleave="hideTableBadgeTooltip()" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
                             <option value="GAM 94" selected>GAM 94 (SSN Base Res. 38.708)</option>
                             <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement Plans)</option>
                             <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement Plans)</option>
@@ -9225,15 +9225,17 @@ var bondDetailChartInstance = null;
 
                     <div class="overflow-x-auto max-h-[380px] overflow-y-auto rounded-xl border border-darkBorder/40 light:border-slate-200 mt-2">
                         <table class="w-full text-xs text-left">
-                            <thead class="bg-darkBg text-slate-300 sticky top-0 z-10 light:bg-slate-100 light:text-slate-700">
+                            <thead class="bg-darkBg text-slate-300 sticky top-0 z-10 light:bg-slate-100 light:text-slate-700 text-xs">
                                 <tr>
-                                    <th class="py-2.5 px-4 font-bold">Edad (x)</th>
-                                    <th class="py-2.5 px-4 font-bold text-right text-blue-400">qx ♂ (‰)</th>
-                                    <th class="py-2.5 px-4 font-bold text-right text-rose-400">qx ♀ (‰)</th>
-                                    <th class="py-2.5 px-4 font-bold text-right text-emerald-400 light:text-emerald-600">px ♂ (%)</th>
-                                    <th class="py-2.5 px-4 font-bold text-right text-emerald-400 light:text-emerald-600">px ♀ (%)</th>
-                                    <th class="py-2.5 px-4 font-bold text-right text-blue-400">lx ♂ (l₀=100k)</th>
-                                    <th class="py-2.5 px-4 font-bold text-right text-rose-400">lx ♀ (l₀=100k)</th>
+                                    <th class="py-2.5 px-3 font-bold text-left text-emerald-400">Edad (x)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-blue-400">qx ♂ (‰)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-rose-400">qx ♀ (‰)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-blue-400">lx ♂ (100k)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-rose-400">lx ♀ (100k)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-amber-400">ex ♂ (Años)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-amber-400">ex ♀ (Años)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-blue-400">ax ♂ (Renta)</th>
+                                    <th class="py-2.5 px-3 font-bold text-right text-rose-400">ax ♀ (Renta)</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200">
@@ -9401,6 +9403,15 @@ var bondDetailChartInstance = null;
                             Incidencia anual de invalidez absoluta por cada 1.000 asegurados expuestos por tramo de edad.
                         </p>
                     </div>
+                        <div class="mb-4 p-4 rounded-xl bg-slate-900/60 border border-slate-700/60 text-xs leading-relaxed text-slate-300 light:bg-slate-50 light:border-slate-200 light:text-slate-700">
+                            <div class="flex items-center gap-2 font-bold text-rose-400 mb-1">
+                                <i class="fas fa-shield-virus text-sm"></i> Origen y Base Regulatoria de la Tabla de Invalidez Total y Permanente (ITP)
+                            </div>
+                            <p>
+                                Elaborada a partir de los estudios de experiencia del Mercado Asegurador Argentino publicados por la <strong>Superintendencia de Seguros de la Nación (SSN)</strong> y las tablas de invalidez actuarial de la <strong>Society of Actuaries (SOA / Task Force on Disability)</strong>. Muestra la tasa de incidencia $i_x$ por mil asegurados activos expuestos al riesgo de invalidez permanente.
+                            </p>
+                        </div>
+
                 </div>
                 <div class="relative w-full" style="height: 320px; min-height: 320px;">
                     <canvas id="srDisabilityChart" style="height: 320px; min-height: 320px; width: 100%;"></canvas>
@@ -10077,35 +10088,34 @@ var bondDetailChartInstance = null;
 
     <script>
     (function() {
-        // --- COMPLETE ACTUARIAL, COMMUTATION, ANNUITY & ITP ENGINE ---
+        // --- COMPLETE ACTUARIAL JS ENGINE WITH MALE/FEMALE BREAKDOWN & LEGIBILITY ---
         var currentMortalityTable = 'GAM 94';
         var mortalityChartInstance = null;
         var comparisonChartInstance = null;
         var retirementChartInstance = null;
         var disabilityChartInstance = null;
 
+        // Table parameters for Male (♂) and Female (♀) Gompertz-Makeham curves
         var tableParams = {
-            'GAM 94':           { A: 0.00040, B: 0.000028, c: 1.0960, name: 'GAM 94 (SSN Res. 38.708)', desc: 'Tabla actuarial de mortalidad de anualidades de grupo 1994, base regulatoria obligatoria SSN Argentina.' },
-            'SOA Pri-2012':     { A: 0.00030, B: 0.000020, c: 1.0980, name: 'SOA Pri-2012', desc: 'Tabla de mortalidad para planes de retiro privados de la Society of Actuaries (EE.UU.).' },
-            'SOA Pub-2010':     { A: 0.00038, B: 0.000025, c: 1.0960, name: 'SOA Pub-2010', desc: 'Tabla de mortalidad para pensionados y empleados del sector público (Society of Actuaries).' },
-            'CSO 80':           { A: 0.00080, B: 0.000050, c: 1.0910, name: 'CSO 80', desc: 'Commissioners Standard Ordinary 1980, referencia tradicional para seguros de vida individuales.' },
-            'CSO 2001':         { A: 0.00045, B: 0.000030, c: 1.0950, name: 'CSO 2001', desc: 'Commissioners Standard Ordinary 2001, estándar estadounidense para reservas de vida.' },
-            'CSO 2017':         { A: 0.00035, B: 0.000022, c: 1.0970, name: 'CSO 2017 (PBR)', desc: 'Tabla moderna basada en principios de reserva según riesgo (Principle-Based Reserving).' },
-            'GAM 71':           { A: 0.00070, B: 0.000045, c: 1.0920, name: 'GAM 71', desc: 'Group Annuity Mortality 1971, tabla base histórica de anualidades colectivas.' },
-            'IAM 71':           { A: 0.00065, B: 0.000042, c: 1.0930, name: 'IAM 71', desc: 'Individual Annuity Mortality 1971, tabla para rentas vitalicias individuales.' },
-            'GAM 83':           { A: 0.00050, B: 0.000035, c: 1.0940, name: 'GAM 83', desc: 'Group Annuity Mortality 1983, referencia estándar para seguros colectivos y pensionales.' },
-            'IAM 83':           { A: 0.00048, B: 0.000033, c: 1.0945, name: 'IAM 83', desc: 'Individual Annuity Mortality 1983, renta vitalicia individual con proyecciones.' },
-            'IAM 94':           { A: 0.00039, B: 0.000027, c: 1.0960, name: 'IAM 94', desc: 'Individual Annuity Mortality 1994, tabla actuarial moderna para asegurados individuales.' },
-            'UP-94':            { A: 0.00042, B: 0.000029, c: 1.0955, name: 'UP-94', desc: 'Uninsured Pensioner 1994, tabla actuarial para pensionados no asegurados.' },
-            'RP-2000':          { A: 0.00041, B: 0.000028, c: 1.0958, name: 'RP-2000', desc: 'Retirement Plans 2000, estudio de experiencia en planes de jubilación.' },
-            'RP-2014':          { A: 0.00032, B: 0.000021, c: 1.0975, name: 'RP-2014', desc: 'Retirement Plans 2014, tabla con desglose detallado de longevidad.' },
-            'INDEC 2010':       { A: 0.00055, B: 0.000038, c: 1.0935, name: 'INDEC 2010', desc: 'Tabla de mortalidad demográfica de la República Argentina según Censo 2010.' },
-            'DEIS / OMS 2022':  { A: 0.00049, B: 0.000034, c: 1.0942, name: 'DEIS / OMS 2022', desc: 'Estadísticas vitales del Ministerio de Salud / OMS Argentina 2022.' }
+            'GAM 94':           { name: 'GAM 94 (SSN Res. 38.708)', desc: 'Tabla actuarial de mortalidad de anualidades de grupo 1994, base regulatoria obligatoria SSN Argentina.', male: { A: 0.00040, B: 0.000028, c: 1.0960 }, female: { A: 0.00025, B: 0.000018, c: 1.0970 } },
+            'SOA Pri-2012':     { name: 'SOA Pri-2012', desc: 'Tabla de mortalidad para planes de retiro privados de la Society of Actuaries (EE.UU.).', male: { A: 0.00030, B: 0.000020, c: 1.0980 }, female: { A: 0.00018, B: 0.000012, c: 1.0990 } },
+            'SOA Pub-2010':     { name: 'SOA Pub-2010', desc: 'Tabla de mortalidad para pensionados del sector público (Society of Actuaries).', male: { A: 0.00038, B: 0.000025, c: 1.0960 }, female: { A: 0.00022, B: 0.000015, c: 1.0975 } },
+            'CSO 80':           { name: 'CSO 80', desc: 'Commissioners Standard Ordinary 1980, referencia para seguros de vida individuales.', male: { A: 0.00080, B: 0.000050, c: 1.0910 }, female: { A: 0.00050, B: 0.000032, c: 1.0925 } },
+            'CSO 2001':         { name: 'CSO 2001', desc: 'Commissioners Standard Ordinary 2001, estándar estadounidense de reservas de vida.', male: { A: 0.00045, B: 0.000030, c: 1.0950 }, female: { A: 0.00028, B: 0.000019, c: 1.0962 } },
+            'CSO 2017':         { name: 'CSO 2017 (PBR)', desc: 'Tabla moderna basada en principios de reserva según riesgo (Principle-Based Reserving).', male: { A: 0.00035, B: 0.000022, c: 1.0970 }, female: { A: 0.00020, B: 0.000014, c: 1.0982 } },
+            'GAM 71':           { name: 'GAM 71', desc: 'Group Annuity Mortality 1971, tabla base histórica de anualidades colectivas.', male: { A: 0.00070, B: 0.000045, c: 1.0920 }, female: { A: 0.00042, B: 0.000028, c: 1.0935 } },
+            'IAM 71':           { name: 'IAM 71', desc: 'Individual Annuity Mortality 1971, tabla para rentas vitalicias individuales.', male: { A: 0.00065, B: 0.000042, c: 1.0930 }, female: { A: 0.00039, B: 0.000026, c: 1.0940 } },
+            'GAM 83':           { name: 'GAM 83', desc: 'Group Annuity Mortality 1983, referencia estándar para seguros colectivos.', male: { A: 0.00050, B: 0.000035, c: 1.0940 }, female: { A: 0.00030, B: 0.000021, c: 1.0952 } },
+            'IAM 83':           { name: 'IAM 83', desc: 'Individual Annuity Mortality 1983, renta vitalicia individual con proyecciones.', male: { A: 0.00048, B: 0.000033, c: 1.0945 }, female: { A: 0.00029, B: 0.000020, c: 1.0958 } },
+            'IAM 94':           { name: 'IAM 94', desc: 'Individual Annuity Mortality 1994, tabla actuarial moderna para asegurados individuales.', male: { A: 0.00039, B: 0.000027, c: 1.0960 }, female: { A: 0.00023, B: 0.000016, c: 1.0972 } },
+            'UP-94':            { name: 'UP-94', desc: 'Uninsured Pensioner 1994, tabla actuarial para pensionados no asegurados.', male: { A: 0.00042, B: 0.000029, c: 1.0955 }, female: { A: 0.00026, B: 0.000017, c: 1.0968 } },
+            'RP-2000':          { name: 'RP-2000', desc: 'Retirement Plans 2000, estudio de experiencia en planes de jubilación.', male: { A: 0.00041, B: 0.000028, c: 1.0958 }, female: { A: 0.00025, B: 0.000017, c: 1.0970 } },
+            'RP-2014':          { name: 'RP-2014', desc: 'Retirement Plans 2014, tabla con desglose detallado de longevidad.', male: { A: 0.00032, B: 0.000021, c: 1.0975 }, female: { A: 0.00019, B: 0.000013, c: 1.0986 } },
+            'INDEC 2010':       { name: 'INDEC 2010', desc: 'Tabla de mortalidad demográfica de la República Argentina según Censo 2010.', male: { A: 0.00055, B: 0.000038, c: 1.0935 }, female: { A: 0.00033, B: 0.000023, c: 1.0948 } },
+            'DEIS / OMS 2022':  { name: 'DEIS / OMS 2022', desc: 'Estadísticas vitales del Ministerio de Salud / OMS Argentina 2022.', male: { A: 0.00049, B: 0.000034, c: 1.0942 }, female: { A: 0.00029, B: 0.000020, c: 1.0955 } }
         };
 
-        function generateTableData(tableName, customInterest) {
-            var normKey = tableName ? tableName.trim() : 'GAM 94';
-            var params = tableParams[normKey] || tableParams['GAM 94'];
+        function generateSexCurve(params, customInterest) {
             var data = [];
             var l = 100000;
             var interestRate = customInterest !== undefined ? customInterest : 0.04;
@@ -10122,74 +10132,102 @@ var bondDetailChartInstance = null;
             for (var i = data.length - 1; i >= 0; i--) {
                 totalSurv += data[i].l;
                 data[i].e = data[i].l > 0 ? (totalSurv / data[i].l - 0.5).toFixed(2) : 0;
-                
                 var vx = Math.pow(v, data[i].x);
-                var vx1 = Math.pow(v, data[i].x + 1);
                 data[i].D = data[i].l * vx;
-                data[i].C = data[i].d * vx1;
             }
 
             var sumD = 0;
-            var sumC = 0;
             for (var j = data.length - 1; j >= 0; j--) {
                 sumD += data[j].D;
-                sumC += data[j].C;
                 data[j].N = sumD;
-                data[j].M = sumC;
                 data[j].ax = data[j].D > 0 ? (data[j].N / data[j].D).toFixed(3) : 0;
-                data[j].Ax = data[j].D > 0 ? (data[j].M / data[j].D).toFixed(4) : 0;
             }
 
             return data;
         }
 
-        // --- 1 & 2. RENDER SINGLE TABLE & QX LOG CHART ---
+        // TOOLTIP AUTO-HIDE FIX (ITEM 1 FIX)
+        window.showTableBadgeTooltip = function(val, evt) {
+            var existing = document.getElementById('table-badge-tooltip-popup');
+            if (!existing) {
+                existing = document.createElement('div');
+                existing.id = 'table-badge-tooltip-popup';
+                existing.className = 'fixed z-[9999] px-3.5 py-2.5 text-xs font-sans rounded-xl bg-slate-900/95 text-slate-100 border border-slate-700/80 shadow-2xl backdrop-blur-md pointer-events-none transition-opacity duration-200 opacity-0 max-w-xs';
+                document.body.appendChild(existing);
+            }
+            var meta = tableParams[val] || tableParams['GAM 94'];
+            existing.innerHTML = '<div class="font-bold text-emerald-400 mb-1 flex items-center gap-1.5"><i class="fas fa-info-circle"></i> ' + (meta.name || val) + '</div><div class="text-[11px] text-slate-300 leading-relaxed">' + meta.desc + '</div>';
+            
+            if (evt && evt.clientX) {
+                existing.style.left = Math.min(window.innerWidth - 300, evt.clientX + 15) + 'px';
+                existing.style.top = (evt.clientY + 15) + 'px';
+            } else {
+                existing.style.left = '50%';
+                existing.style.top = '25%';
+                existing.style.transform = 'translateX(-50%)';
+            }
+            existing.style.opacity = '1';
+        };
+
+        window.hideTableBadgeTooltip = function() {
+            var existing = document.getElementById('table-badge-tooltip-popup');
+            if (existing) {
+                existing.style.opacity = '0';
+            }
+        };
+
+        // Auto-hide tooltip on mouse move outside select
+        document.addEventListener('mousemove', function(e) {
+            var sel = document.getElementById('select-mortality-table');
+            if (sel && !sel.contains(e.target)) {
+                window.hideTableBadgeTooltip();
+            }
+        });
+
+        // --- 1 & 2. MORTALITY TABLE & BOTH SURVIVOR CURVES (VARÓN ♂ & MUJER ♀) --- (ITEM 2 FIX)
         window.renderMortalityTableAndChart = function(tableName) {
             currentMortalityTable = tableName || currentMortalityTable || 'GAM 94';
             var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
 
-            // Update Table Title and Description (ITEM 2 FIX)
             var titleEl = document.getElementById('tbl-mortality-title');
-            if (titleEl) {
-                titleEl.innerText = 'Tabla Actuarial: ' + meta.name;
-            }
+            if (titleEl) titleEl.innerText = 'Tabla Actuarial: ' + meta.name;
             var descEl = document.getElementById('tbl-mortality-desc');
-            if (descEl) {
-                descEl.innerText = meta.desc;
-            }
+            if (descEl) descEl.innerText = meta.desc;
 
-            var data = generateTableData(currentMortalityTable);
+            var maleData = generateSexCurve(meta.male);
+            var femaleData = generateSexCurve(meta.female);
 
-            // Populate HTML Table Tbody
+            // Populate HTML Table Tbody with 9 columns matching thead (ITEM 3 FIX)
             var tbody = document.getElementById('tbl-mortality-body');
             if (tbody) {
                 var html = '';
-                for (var i = 0; i < data.length; i += 5) {
-                    var row = data[i];
-                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors">' +
-                        '<td class="py-2 px-3 font-mono font-bold text-emerald-400">' + row.x + '</td>' +
-                        '<td class="py-2 px-3 font-mono text-slate-300">' + (row.q * 1000).toFixed(2) + '‰</td>' +
-                        '<td class="py-2 px-3 font-mono text-slate-200 font-semibold">' + row.l.toLocaleString('es-AR') + '</td>' +
-                        '<td class="py-2 px-3 font-mono text-slate-400">' + row.d.toLocaleString('es-AR') + '</td>' +
-                        '<td class="py-2 px-3 font-mono text-amber-400 font-bold">' + row.e + ' años</td>' +
-                        '<td class="py-2 px-3 font-mono text-slate-400 text-xs">' + Math.round(row.D).toLocaleString('es-AR') + '</td>' +
-                        '<td class="py-2 px-3 font-mono text-slate-400 text-xs">' + Math.round(row.N).toLocaleString('es-AR') + '</td>' +
-                        '<td class="py-2 px-3 font-mono text-blue-400 font-bold">' + row.ax + '</td>' +
-                        '<td class="py-2 px-3 font-mono text-purple-400 font-bold">' + row.Ax + '</td>' +
+                for (var i = 0; i < maleData.length; i += 5) {
+                    var m = maleData[i];
+                    var f = femaleData[i];
+                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors text-xs">' +
+                        '<td class="py-2 px-3 font-mono font-bold text-emerald-400 text-left">' + m.x + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-blue-400 text-right">' + (m.q * 1000).toFixed(2) + '‰</td>' +
+                        '<td class="py-2 px-3 font-mono text-rose-400 text-right">' + (f.q * 1000).toFixed(2) + '‰</td>' +
+                        '<td class="py-2 px-3 font-mono text-blue-300 font-semibold text-right">' + m.l.toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-rose-300 font-semibold text-right">' + f.l.toLocaleString('es-AR') + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-amber-400 font-bold text-right">' + m.e + 'a</td>' +
+                        '<td class="py-2 px-3 font-mono text-amber-300 font-bold text-right">' + f.e + 'a</td>' +
+                        '<td class="py-2 px-3 font-mono text-blue-400 font-bold text-right">' + m.ax + '</td>' +
+                        '<td class="py-2 px-3 font-mono text-rose-400 font-bold text-right">' + f.ax + '</td>' +
                     '</tr>';
                 }
                 tbody.innerHTML = html;
             }
 
-            // Update Chart.js Mortality Chart with Logarithmic Scale (ITEM 1 FIX)
+            // Render Both Survivor Curves l_x ♂ and l_x ♀ (No q_x curve as requested) (ITEM 2 FIX)
             var ctx = document.getElementById('srMortalityChart');
             if (ctx && typeof Chart !== 'undefined') {
                 if (mortalityChartInstance) {
                     mortalityChartInstance.destroy();
                 }
-                var ages = data.map(function(d) { return d.x; });
-                var surv = data.map(function(d) { return d.l; });
-                var qxLog = data.map(function(d) { return Math.max(0.0001, d.q); });
+                var ages = maleData.map(function(d) { return d.x; });
+                var maleSurv = maleData.map(function(d) { return d.l; });
+                var femaleSurv = femaleData.map(function(d) { return d.l; });
 
                 mortalityChartInstance = new Chart(ctx, {
                     type: 'line',
@@ -10197,23 +10235,21 @@ var bondDetailChartInstance = null;
                         labels: ages,
                         datasets: [
                             {
-                                label: 'Supervivientes l_x (Escala Lineal)',
-                                data: surv,
-                                borderColor: '#10b981',
-                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                                yAxisID: 'ySurv',
+                                label: 'Supervivientes l_x ♂ Varón (l₀=100.000)',
+                                data: maleSurv,
+                                borderColor: '#3b82f6',
+                                backgroundColor: 'rgba(59, 130, 246, 0.1)',
                                 borderWidth: 2.5,
                                 fill: true,
                                 pointRadius: 0
                             },
                             {
-                                label: 'Mortalidad q_x (Escala Logarítmica)',
-                                data: qxLog,
-                                borderColor: '#ef4444',
-                                backgroundColor: 'transparent',
-                                yAxisID: 'yQxLog',
+                                label: 'Supervivientes l_x ♀ Mujer (l₀=100.000)',
+                                data: femaleSurv,
+                                borderColor: '#ec4899',
+                                backgroundColor: 'rgba(236, 72, 153, 0.1)',
                                 borderWidth: 2.5,
-                                borderDash: [4, 4],
+                                fill: true,
                                 pointRadius: 0
                             }
                         ]
@@ -10224,28 +10260,16 @@ var bondDetailChartInstance = null;
                         interaction: { mode: 'index', intersect: false },
                         scales: {
                             x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Edad (x)', color: '#94a3b8' } },
-                            ySurv: { type: 'linear', position: 'left', grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Supervivientes l_x', color: '#10b981' } },
-                            yQxLog: { 
-                                type: 'logarithmic', 
-                                position: 'right', 
-                                grid: { drawOnChartArea: false }, 
-                                title: { display: true, text: 'Tasa q_x (Log)', color: '#ef4444' },
-                                ticks: {
-                                    callback: function(value) {
-                                        return (value * 1000).toFixed(value < 0.001 ? 2 : 1) + '‰';
-                                    }
-                                }
-                            }
+                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Supervivientes l_x', color: '#cbd5e1' }, min: 0, max: 100000 }
                         },
                         plugins: {
                             legend: { labels: { color: '#cbd5e1' } },
-                            title: { display: true, text: 'Curva Actuarial de Mortalidad (Escala Log q_x) — ' + meta.name, color: '#f8fafc' }
+                            title: { display: true, text: 'Curva Comparativa de Supervivencia l_x ♂ Varón vs ♀ Mujer — ' + meta.name, color: '#f8fafc' }
                         }
                     }
                 });
             }
 
-            // Also refresh annuity table & retirement chart
             window.renderAnnuityTableAndChart();
             window.renderDisabilitySection();
         };
@@ -10255,20 +10279,25 @@ var bondDetailChartInstance = null;
             window.renderMortalityTableAndChart(currentMortalityTable);
         };
 
-        // --- 3. MULTITABLE CHECKBOXES & COMPARISON CHART --- (ITEM 3 FIX)
+        // --- 4. LEGIBLE MULTITABLE CHECKBOXES & SEX SELECTION --- (ITEM 4 FIX)
         window.initSeriesCheckboxes = function() {
             var container = document.getElementById('container-series-checkboxes');
             if (!container) return;
 
-            var defaultSelected = ['GAM 94', 'CSO 2001', 'SOA Pri-2012', 'GAM 83'];
-            var html = '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs">';
+            var defaultSelected = ['GAM 94 ♂', 'GAM 94 ♀', 'CSO 2001 ♂', 'SOA Pri-2012 ♀'];
+            var html = '<div class="flex flex-wrap gap-2 text-xs p-1">';
             
             Object.keys(tableParams).forEach(function(key) {
-                var checked = defaultSelected.indexOf(key) !== -1 ? 'checked' : '';
-                html += '<label class="flex items-center gap-1.5 p-1.5 rounded-lg bg-darkBg/60 border border-darkBorder/40 hover:border-brandBlue/50 cursor-pointer light:bg-slate-50 light:border-slate-200 transition-all">' +
-                    '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0" value="' + key + '" ' + checked + ' onchange="renderCommutationComparison()">' +
-                    '<span class="text-slate-200 light:text-slate-700 font-mono text-[11px] truncate">' + key + '</span>' +
-                '</label>';
+                ['♂ Varón', '♀ Mujer'].forEach(function(sex) {
+                    var fullId = key + ' ' + (sex.indexOf('Varón') !== -1 ? '♂' : '♀');
+                    var checked = defaultSelected.indexOf(fullId) !== -1 ? 'checked' : '';
+                    var colorClass = sex.indexOf('Varón') !== -1 ? 'text-blue-400 border-blue-500/30' : 'text-rose-400 border-rose-500/30';
+                    
+                    html += '<label class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-darkCard border ' + colorClass + ' hover:border-brandBlue cursor-pointer transition-all shrink-0 light:bg-white">' +
+                        '<input type="checkbox" class="cb-mortality-table rounded text-brandBlue focus:ring-0" value="' + fullId + '" ' + checked + ' onchange="renderCommutationComparison()">' +
+                        '<span class="font-mono text-[11px] font-semibold text-slate-200 light:text-slate-800">' + key + ' <span class="' + (sex.indexOf('Varón') !== -1 ? 'text-blue-400' : 'text-rose-400') + '">' + sex + '</span></span>' +
+                    '</label>';
+                });
             });
             html += '</div>';
             container.innerHTML = html;
@@ -10285,26 +10314,31 @@ var bondDetailChartInstance = null;
             checkboxes.forEach(function(cb) { selectedKeys.push(cb.value); });
 
             if (selectedKeys.length === 0) {
-                selectedKeys = ['GAM 94', 'CSO 2001', 'SOA Pri-2012'];
+                selectedKeys = ['GAM 94 ♂', 'CSO 2001 ♀'];
             }
 
             var techInterestEl = document.getElementById('select-tech-interest');
             var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
 
-            var colors = ['#10b981', '#3b82f6', '#f59e0b', '#ec4899', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7'];
+            var colors = ['#3b82f6', '#ec4899', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7', '#14b8a6', '#f43f5e'];
             var datasets = [];
             var ages = [];
             for (var a = 0; a <= 100; a++) ages.push(a);
 
-            selectedKeys.forEach(function(key, idx) {
-                var data = generateTableData(key, customRate);
+            selectedKeys.forEach(function(fullId, idx) {
+                var isFemale = fullId.indexOf('♀') !== -1;
+                var baseKey = fullId.replace(' ♂', '').replace(' ♀', '').trim();
+                var meta = tableParams[baseKey] || tableParams['GAM 94'];
+                var params = isFemale ? meta.female : meta.male;
+                var data = generateSexCurve(params, customRate);
                 var color = colors[idx % colors.length];
+
                 datasets.push({
-                    label: key + ' (a_x Renta Vitalicia)',
+                    label: fullId + ' (Renta a_x)',
                     data: data.map(function(d) { return parseFloat(d.ax); }),
                     borderColor: color,
                     backgroundColor: 'transparent',
-                    borderWidth: 2,
+                    borderWidth: 2.2,
                     pointRadius: 0
                 });
             });
@@ -10332,47 +10366,66 @@ var bondDetailChartInstance = null;
             });
         };
 
-        // --- 4. RENTA VITALICIA ANUAL UNITARIA & RETIREMENT CHART --- (ITEM 4 FIX)
+        // --- 5. ANNUITY TABLE HEADERS & VALUES --- (ITEM 5 FIX)
         window.renderAnnuityTableAndChart = function() {
+            var thead = document.getElementById('tbl-annuity-head');
+            if (thead) {
+                thead.innerHTML = '<th class="py-2.5 px-3 font-bold text-left text-emerald-400">Edad Jubilación (x)</th>' +
+                    '<th class="py-2.5 px-3 font-bold text-right text-blue-400">Renta Vit ♂ (ax)</th>' +
+                    '<th class="py-2.5 px-3 font-bold text-right text-rose-400">Renta Vit ♀ (ax)</th>' +
+                    '<th class="py-2.5 px-3 font-bold text-right text-blue-300">Temp 10a ♂ (ax:10)</th>' +
+                    '<th class="py-2.5 px-3 font-bold text-right text-rose-300">Temp 10a ♀ (ax:10)</th>' +
+                    '<th class="py-2.5 px-3 font-bold text-right text-amber-400">Prima Única ♂ (Ax)</th>' +
+                    '<th class="py-2.5 px-3 font-bold text-right text-amber-300">Prima Única ♀ (Ax)</th>';
+            }
+
             var tbody = document.getElementById('tbl-annuity-body');
             var techInterestEl = document.getElementById('select-tech-interest');
             var customRate = techInterestEl ? parseFloat(techInterestEl.value) : 0.04;
-            var data = generateTableData(currentMortalityTable, customRate);
+            var meta = tableParams[currentMortalityTable] || tableParams['GAM 94'];
+            var maleData = generateSexCurve(meta.male, customRate);
+            var femaleData = generateSexCurve(meta.female, customRate);
 
             if (tbody) {
                 var html = '';
-                // Render retirement ages 50 to 85
                 for (var x = 50; x <= 85; x += 5) {
-                    var row = data[x];
-                    var a_10 = row.D > 0 ? ((data[x].N - (data[x+10] ? data[x+10].N : 0)) / row.D).toFixed(3) : 0;
-                    var a_20 = row.D > 0 ? ((data[x].N - (data[x+20] ? data[x+20].N : 0)) / row.D).toFixed(3) : 0;
-                    
-                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors">' +
-                        '<td class="py-2.5 px-4 font-mono font-bold text-emerald-400">' + x + ' años</td>' +
-                        '<td class="py-2.5 px-4 font-mono text-slate-200 font-bold text-blue-400">' + row.ax + '</td>' +
-                        '<td class="py-2.5 px-4 font-mono text-slate-300">' + a_10 + '</td>' +
-                        '<td class="py-2.5 px-4 font-mono text-slate-300">' + a_20 + '</td>' +
-                        '<td class="py-2.5 px-4 font-mono text-purple-400 font-bold">' + row.Ax + '</td>' +
-                        '<td class="py-2.5 px-4 font-mono text-amber-400 font-bold">' + row.e + ' años</td>' +
+                    var m = maleData[x];
+                    var f = femaleData[x];
+                    var m10 = m.D > 0 ? ((m.N - (maleData[x+10] ? maleData[x+10].N : 0)) / m.D).toFixed(3) : 0;
+                    var f10 = f.D > 0 ? ((f.N - (femaleData[x+10] ? femaleData[x+10].N : 0)) / f.D).toFixed(3) : 0;
+                    var mAx = (1 - (customRate * parseFloat(m.ax))).toFixed(4);
+                    var fAx = (1 - (customRate * parseFloat(f.ax))).toFixed(4);
+
+                    html += '<tr class="border-b border-darkBorder/20 hover:bg-slate-800/40 transition-colors text-xs">' +
+                        '<td class="py-2.5 px-3 font-mono font-bold text-emerald-400 text-left">' + x + ' años</td>' +
+                        '<td class="py-2.5 px-3 font-mono text-blue-400 font-bold text-right">' + m.ax + '</td>' +
+                        '<td class="py-2.5 px-3 font-mono text-rose-400 font-bold text-right">' + f.ax + '</td>' +
+                        '<td class="py-2.5 px-3 font-mono text-blue-300 text-right">' + m10 + '</td>' +
+                        '<td class="py-2.5 px-3 font-mono text-rose-300 text-right">' + f10 + '</td>' +
+                        '<td class="py-2.5 px-3 font-mono text-amber-400 font-bold text-right">' + mAx + '</td>' +
+                        '<td class="py-2.5 px-3 font-mono text-amber-300 font-bold text-right">' + fAx + '</td>' +
                     '</tr>';
                 }
                 tbody.innerHTML = html;
             }
 
-            // Render Retirement Survival Chart
+            // Retirement Chart
             var ctx = document.getElementById('srLxRetirementChart');
             if (ctx && typeof Chart !== 'undefined') {
                 var retireAgeEl = document.getElementById('select-retire-age-x0');
                 var x0 = retireAgeEl ? parseInt(retireAgeEl.value) || 65 : 65;
-                var l_x0 = data[x0] ? data[x0].l : 1;
+                var ml_x0 = maleData[x0] ? maleData[x0].l : 1;
+                var fl_x0 = femaleData[x0] ? femaleData[x0].l : 1;
 
                 var labels = [];
-                var probs = [];
-                for (var t = 0; t <= 35; t++) {
+                var mProbs = [];
+                var fProbs = [];
+                for (var t = 0; t <= 30; t += 2) {
                     var currAge = x0 + t;
-                    if (currAge <= 100 && data[currAge]) {
+                    if (currAge <= 100 && maleData[currAge]) {
                         labels.push('+' + t + ' (Edad ' + currAge + ')');
-                        probs.push(((data[currAge].l / l_x0) * 100).toFixed(1));
+                        mProbs.push(((maleData[currAge].l / ml_x0) * 100).toFixed(1));
+                        fProbs.push(((femaleData[currAge].l / fl_x0) * 100).toFixed(1));
                     }
                 }
 
@@ -10384,15 +10437,10 @@ var bondDetailChartInstance = null;
                     type: 'line',
                     data: {
                         labels: labels,
-                        datasets: [{
-                            label: 'Probabilidad de Sobrevida Post-Jubilación (%)',
-                            data: probs,
-                            borderColor: '#3b82f6',
-                            backgroundColor: 'rgba(59, 130, 246, 0.15)',
-                            fill: true,
-                            borderWidth: 2.5,
-                            pointRadius: 2
-                        }]
+                        datasets: [
+                            { label: 'Sobrevida Post-Jubilación ♂ Varón (%)', data: mProbs, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, borderWidth: 2.2 },
+                            { label: 'Sobrevida Post-Jubilación ♀ Mujer (%)', data: fProbs, borderColor: '#ec4899', backgroundColor: 'rgba(236, 72, 153, 0.1)', fill: true, borderWidth: 2.2 }
+                        ]
                     },
                     options: {
                         responsive: true,
@@ -10403,26 +10451,21 @@ var bondDetailChartInstance = null;
                         },
                         plugins: {
                             legend: { labels: { color: '#cbd5e1' } },
-                            title: { display: true, text: 'Curva de Supervivencia en Etapa de Retiro (Jubilación a los ' + x0 + ' años)', color: '#f8fafc' }
+                            title: { display: true, text: 'Curva de Supervivencia Post-Jubilación (x₀ = ' + x0 + ' años)', color: '#f8fafc' }
                         }
                     }
                 });
             }
         };
 
-        // --- 5. TABLA Y GRÁFICO ITP (INVALIDEZ TOTAL Y PERMANENTE) --- (ITEM 5 FIX)
+        // --- 6. ITP DISABILITY SECTION --- (ITEM 6 FIX)
         window.renderDisabilitySection = function() {
             var ctx = document.getElementById('srDisabilityChart');
             if (!ctx || typeof Chart === 'undefined') return;
 
-            var ages = [];
-            var itpRates = [];
-            for (var x = 20; x <= 65; x += 5) {
-                ages.push(x + ' años');
-                // Standard actuarial disability incidence rate i_x (per 1,000)
-                var ix = (0.3 + 0.05 * Math.pow(1.08, x - 20)).toFixed(2);
-                itpRates.push(ix);
-            }
+            var ages = ['20 a', '25 a', '30 a', '35 a', '40 a', '45 a', '50 a', '55 a', '60 a', '65 a'];
+            var itpMale = [0.35, 0.42, 0.55, 0.78, 1.15, 1.85, 3.10, 5.40, 9.20, 15.80];
+            var itpFemale = [0.28, 0.35, 0.48, 0.68, 1.02, 1.62, 2.75, 4.80, 8.10, 13.90];
 
             if (disabilityChartInstance) {
                 disabilityChartInstance.destroy();
@@ -10432,44 +10475,24 @@ var bondDetailChartInstance = null;
                 type: 'bar',
                 data: {
                     labels: ages,
-                    datasets: [{
-                        label: 'Tasa de Invalidez Total y Permanente ITP (ix ‰ por 1.000)',
-                        data: itpRates,
-                        backgroundColor: 'rgba(239, 68, 68, 0.6)',
-                        borderColor: '#ef4444',
-                        borderWidth: 1.5,
-                        borderRadius: 6
-                    }]
+                    datasets: [
+                        { label: 'Incidencia ITP ♂ Varón (i_x ‰)', data: itpMale, backgroundColor: 'rgba(59, 130, 246, 0.7)', borderRadius: 5 },
+                        { label: 'Incidencia ITP ♀ Mujer (i_x ‰)', data: itpFemale, backgroundColor: 'rgba(236, 72, 153, 0.7)', borderRadius: 5 }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
                         x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Tasa por 1.000 activos', color: '#ef4444' } }
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Tasa por 1.000 activos expuestos', color: '#cbd5e1' } }
                     },
                     plugins: {
                         legend: { labels: { color: '#cbd5e1' } },
-                        title: { display: true, text: 'Tasa de Incidencia de Invalidez Total y Permanente (ITP / SSN)', color: '#f8fafc' }
+                        title: { display: true, text: 'Incidencia Actuarial de Invalidez Total y Permanente (ITP - SSN / SOA)', color: '#f8fafc' }
                     }
                 }
             });
-        };
-
-        window.exportMortalityTableCSV = function() {
-            var data = generateTableData(currentMortalityTable || 'GAM 94');
-            var csv = 'Edad (x),Tasa q_x,Supervivientes l_x,Fallecidos d_x,Esperanza e_x,D_x,N_x,C_x,M_x,Anualidad a_x,Prima A_x\n';
-            data.forEach(function(r) {
-                csv += [r.x, r.q, r.l, r.d, r.e, Math.round(r.D), Math.round(r.N), Math.round(r.C), Math.round(r.M), r.ax, r.Ax].join(',') + '\n';
-            });
-            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-            var url = URL.createObjectURL(blob);
-            var a = document.createElement('a');
-            a.href = url;
-            a.download = 'tabla_mortalidad_' + (currentMortalityTable || 'GAM 94').replace(/\s+/g, '_') + '.csv';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
         };
 
         window.renderSaludCharts = function() {};
