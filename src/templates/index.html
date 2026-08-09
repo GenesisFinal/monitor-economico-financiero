@@ -10361,7 +10361,7 @@ var bondDetailChartInstance = null;
             URL.revokeObjectURL(url);
         };
 
-        // 3. REACTIVE MULTITABLE COMPARATOR (UPDATES DYNAMICALLY ON ANY SELECTOR CHANGE)
+        // 3. REACTIVE MULTITABLE COMPARATOR (PLOTS SURVIVORS lx STARTING AT l0 = 100.000)
         window.initSeriesCheckboxes = function() {
             var container = document.getElementById('container-series-checkboxes');
             if (!container) return;
@@ -10386,7 +10386,6 @@ var bondDetailChartInstance = null;
             html += '</div>';
             container.innerHTML = html;
             
-            // Attach event listeners to tech interest and longevity scale selectors
             var compRateEl = document.getElementById('select-tech-interest');
             if (compRateEl) {
                 compRateEl.onchange = function() { window.renderCommutationComparison(); };
@@ -10394,6 +10393,10 @@ var bondDetailChartInstance = null;
             var compLongEl = document.getElementById('select-longevity-scale');
             if (compLongEl) {
                 compLongEl.onchange = function() { window.renderCommutationComparison(); };
+            }
+            var retireAgeEl = document.getElementById('select-retire-age-x0');
+            if (retireAgeEl) {
+                retireAgeEl.onchange = function() { window.renderCommutationComparison(); };
             }
 
             window.renderCommutationComparison();
@@ -10411,14 +10414,13 @@ var bondDetailChartInstance = null;
                 selectedKeys = ['GAM 94 ♂', 'CSO 2001 ♀'];
             }
 
-            // Read interest rate and longevity improvement from Multitable Comparator selectors
             var compRateEl = document.getElementById('select-tech-interest');
             var compInterest = compRateEl ? parseFloat(compRateEl.value) : 0.04;
 
             var compLongEl = document.getElementById('select-longevity-scale');
             var compLongevity = compLongEl ? parseFloat(compLongEl.value) : 0.0;
 
-            var colors = ['#3b82f6', '#ec4899', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7', '#14b8a6', '#f43f5e'];
+            var colors = ['#3b82f6', '#ec4899', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7', '#14b8a6', '#f43f5e', '#6366f1', '#84cc16'];
             var datasets = [];
             var ages = [];
             for (var a = 0; a <= 105; a++) ages.push(a);
@@ -10431,9 +10433,10 @@ var bondDetailChartInstance = null;
                 var data = generateSexCurve(params, compInterest, compLongevity);
                 var color = colors[idx % colors.length];
 
+                // Plot lx starting at l0 = 100.000 at age 0 (REQUERIMIENTO 1 FIX)
                 datasets.push({
-                    label: fullId + ' (Renta a_x, i=' + (compInterest*100).toFixed(1) + '%)',
-                    data: data.map(function(d) { return parseFloat(d.ax); }),
+                    label: fullId + ' (l_x Supervivientes)',
+                    data: data.map(function(d) { return d.l; }),
                     borderColor: color,
                     backgroundColor: 'transparent',
                     borderWidth: 2.2,
@@ -10454,17 +10457,90 @@ var bondDetailChartInstance = null;
                     interaction: { mode: 'index', intersect: false },
                     scales: {
                         x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Edad (x)', color: '#94a3b8' } },
-                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Valor a_x (Renta Vitalicia)', color: '#cbd5e1' } }
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Supervivientes l_x (l₀ = 100.000)', color: '#cbd5e1' }, min: 0, max: 100000 }
                     },
                     plugins: {
                         legend: { labels: { color: '#cbd5e1' } },
-                        title: { display: true, text: 'Comparación Multitabla de Rentas Vitalicias a_x — Tasa Técnica: ' + (compInterest*100).toFixed(1) + '% p.a., Longevidad fx: ' + (compLongevity*100).toFixed(1) + '%', color: '#f8fafc' }
+                        title: { display: true, text: 'Curvas de Supervivencia Comparativas l_x (l₀ = 100.000 a Edad 0) — Longevidad fx: ' + (compLongevity*100).toFixed(1) + '%', color: '#f8fafc' }
+                    }
+                }
+            });
+
+            // Also trigger conditional retirement chart for ALL selected tables!
+            window.renderConditionalRetirementChart(selectedKeys, compInterest, compLongevity);
+        };
+
+        // 4. CONDITIONAL RETIREMENT SURVIVAL CHART FOR ALL CHECKED TABLES (l_x0 = 100.000 at retirement age x0) (REQUERIMIENTO 2 FIX)
+        window.renderConditionalRetirementChart = function(selectedKeys, compInterest, compLongevity) {
+            var ctx = document.getElementById('srLxRetirementChart');
+            if (!ctx || typeof Chart === 'undefined') return;
+
+            var retireAgeEl = document.getElementById('select-retire-age-x0');
+            var x0 = retireAgeEl ? parseInt(retireAgeEl.value) || 65 : 65;
+
+            var colors = ['#3b82f6', '#ec4899', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#f97316', '#a855f7', '#14b8a6', '#f43f5e', '#6366f1', '#84cc16'];
+            var datasets = [];
+            var labels = [];
+            for (var t = 0; t <= 35; t += 1) {
+                labels.push('+' + t + 'a (Edad ' + (x0 + t) + ')');
+            }
+
+            selectedKeys.forEach(function(fullId, idx) {
+                var isFemale = fullId.indexOf('♀') !== -1;
+                var baseKey = fullId.replace(' ♂', '').replace(' ♀', '').trim();
+                var meta = tableParams[baseKey] || tableParams['GAM 94'];
+                var params = isFemale ? meta.female : meta.male;
+                var data = generateSexCurve(params, compInterest, compLongevity);
+                var color = colors[idx % colors.length];
+
+                var l_x0 = (data[x0] && data[x0].l > 0) ? data[x0].l : 1;
+                var condLx = [];
+
+                for (var t = 0; t <= 35; t++) {
+                    var currAge = x0 + t;
+                    if (currAge < data.length) {
+                        // Conditional survivors starting at l_x0 = 100.000 at age x0
+                        var survRatio = Math.round((data[currAge].l / l_x0) * 100000);
+                        condLx.push(survRatio);
+                    } else {
+                        condLx.push(0);
+                    }
+                }
+
+                datasets.push({
+                    label: fullId + ' (l_x0 = 100.000 a Edad ' + x0 + ')',
+                    data: condLx,
+                    borderColor: color,
+                    backgroundColor: 'transparent',
+                    borderWidth: 2.2,
+                    pointRadius: 0
+                });
+            });
+
+            if (retirementChartInstance) {
+                retirementChartInstance.destroy();
+            }
+
+            retirementChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: { labels: labels, datasets: datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Años Transcurridos Post-Jubilación', color: '#94a3b8' } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: 'Sobrevivientes l_{x0+t} (l_{x0} = 100.000)', color: '#cbd5e1' }, min: 0, max: 100000 }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1' } },
+                        title: { display: true, text: 'Supervivencia Condicional en Etapa de Retiro (l_{x0} = 100.000 a Edad x₀ = ' + x0 + ' Años)', color: '#f8fafc' }
                     }
                 }
             });
         };
 
-        // ANNUITY TABLE & RETIREMENT CHART
+        // ANNUITY TABLE VALUES
         window.renderAnnuityTableAndChart = function() {
             var thead = document.getElementById('tbl-annuity-head');
             if (thead) {
@@ -10503,57 +10579,6 @@ var bondDetailChartInstance = null;
                     '</tr>';
                 }
                 tbody.innerHTML = html;
-            }
-
-            // Retirement Chart
-            var ctx = document.getElementById('srLxRetirementChart');
-            if (ctx && typeof Chart !== 'undefined') {
-                var retireAgeEl = document.getElementById('select-retire-age-x0');
-                var x0 = retireAgeEl ? parseInt(retireAgeEl.value) || 65 : 65;
-                if (retireAgeEl) {
-                    retireAgeEl.onchange = function() { window.renderAnnuityTableAndChart(); };
-                }
-                var ml_x0 = maleData[x0] ? maleData[x0].l : 1;
-                var fl_x0 = femaleData[x0] ? femaleData[x0].l : 1;
-
-                var labels = [];
-                var mProbs = [];
-                var fProbs = [];
-                for (var t = 0; t <= 30; t += 2) {
-                    var currAge = x0 + t;
-                    if (currAge <= 105 && maleData[currAge]) {
-                        labels.push('+' + t + ' (Edad ' + currAge + ')');
-                        mProbs.push(((maleData[currAge].l / ml_x0) * 100).toFixed(1));
-                        fProbs.push(((femaleData[currAge].l / fl_x0) * 100).toFixed(1));
-                    }
-                }
-
-                if (retirementChartInstance) {
-                    retirementChartInstance.destroy();
-                }
-
-                retirementChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: labels,
-                        datasets: [
-                            { label: 'Sobrevida Post-Jubilación ♂ Varón (%)', data: mProbs, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, borderWidth: 2.2 },
-                            { label: 'Sobrevida Post-Jubilación ♀ Mujer (%)', data: fProbs, borderColor: '#ec4899', backgroundColor: 'rgba(236, 72, 153, 0.1)', fill: true, borderWidth: 2.2 }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: { grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { grid: { color: 'rgba(255,255,255,0.05)' }, title: { display: true, text: '% Sobrevida', color: '#cbd5e1' }, min: 0, max: 100 }
-                        },
-                        plugins: {
-                            legend: { labels: { color: '#cbd5e1' } },
-                            title: { display: true, text: 'Curva de Supervivencia Post-Jubilación (x₀ = ' + x0 + ' años)', color: '#f8fafc' }
-                        }
-                    }
-                });
             }
         };
 
