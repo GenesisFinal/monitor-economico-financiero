@@ -37877,26 +37877,29 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
 
         function toggleTheme() {
-
             const body = document.body;
-
             const icon = document.getElementById('theme-icon');
-
             if (body.classList.contains('dark')) {
-
-                // Switching to LIGHT mode
-
                 body.classList.remove('dark');
-
                 body.classList.add('light');
-
                 body.classList.replace('bg-darkBg', 'bg-slate-50');
-
+                if (icon) {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.classList.remove('light');
+                body.classList.add('dark');
+                body.classList.replace('bg-slate-50', 'bg-darkBg');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+                localStorage.setItem('theme', 'dark');
+            }
             renderSparklines();
-
         }
-
-
 
         function switchGlobalTab(tabId) {
             const btnValores = document.getElementById('btn-global-valores');
@@ -42116,4 +42119,4 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
 </html>
 
-<!-- Cache Busting Timestamp: 1786382861.166223 -->
+<!-- Deploy timestamp: 1786394219.2316473 -->
