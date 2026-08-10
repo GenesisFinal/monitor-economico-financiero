@@ -1801,6 +1801,9 @@ Stack: ${error ? error.stack : 'N/A'}`;
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
 
                     </button>
+                    <button onclick="switchGlobalTab('salud-retiro-demografia')" id="btn-global-salud-retiro-demografia" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                        <i class="fas fa-heart-pulse text-brandBlue"></i> Salud, Retiro & Demografía
+                    </button>
 
                     <button onclick="switchGlobalTab('salud-retiro-demografia')" id="btn-global-salud-retiro-demografia" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
 
@@ -6874,6 +6877,298 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
 
 
+    
+
+    <!-- Global Tab Content 4: Salud, Retiro & Demografía -->
+    <div id="container-salud-retiro-demografia" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p-8 overflow-y-auto max-w-[1700px] mx-auto w-full">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-darkBorder/40 pb-4 mb-6">
+            <div>
+                <h2 class="text-3xl font-black text-white light:text-slate-900 flex items-center gap-3">
+                    <i class="fas fa-heart-pulse text-rose-500"></i> Salud, Retiro y Demografía
+                </h2>
+                <p class="text-xs text-slate-400 light:text-slate-600 mt-1">
+                    Indicadores actuariales de mortalidad (SOA / SSN), morbilidad (OMS / DEIS), tasas de reemplazo previsional (OCDE) y estructura demográfica (INDEC / UN Population).
+                </p>
+            </div>
+            <span class="text-xs font-mono bg-rose-500/10 text-rose-400 light:bg-rose-50 light:text-rose-700 border border-rose-500/20 px-3 py-1.5 rounded-xl self-start md:self-auto">
+                <i class="fas fa-database text-xs mr-1"></i> SOA • OMS • OCDE • SSN • INDEC
+            </span>
+        </div>
+
+        <!-- Sub-Tabs Navigation Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 mb-6 border-b border-darkBorder/30">
+            <button onclick="switchSrSubtab('sr-tab-actuaria')" id="btn-sr-tab-actuaria" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-brandBlue text-white shadow transition-all shrink-0">
+                <i class="fas fa-dna mr-1.5"></i> Actuaría y Longevidad (SOA / SSN)
+            </button>
+            <button onclick="switchSrSubtab('sr-tab-salud')" id="btn-sr-tab-salud" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-darkCard text-slate-400 hover:text-white light:bg-slate-100 light:text-slate-600 transition-all shrink-0">
+                <i class="fas fa-hospital-user mr-1.5"></i> Salud y Morbilidad (OMS / DEIS)
+            </button>
+            <button onclick="switchSrSubtab('sr-tab-pensiones')" id="btn-sr-tab-pensiones" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-darkCard text-slate-400 hover:text-white light:bg-slate-100 light:text-slate-600 transition-all shrink-0">
+                <i class="fas fa-piggy-bank mr-1.5"></i> Pensiones y Retiro (OCDE / SSN)
+            </button>
+            <button onclick="switchSrSubtab('sr-tab-demografia')" id="btn-sr-tab-demografia" class="sr-subtab-btn px-4 py-2 rounded-xl text-xs font-semibold bg-darkCard text-slate-400 hover:text-white light:bg-slate-100 light:text-slate-600 transition-all shrink-0">
+                <i class="fas fa-users mr-1.5"></i> Demografía y Cobertura (INDEC / UN)
+            </button>
+        </div>
+
+        <!-- SUBTAB 1: Actuaría y Longevidad -->
+        <div id="sr-tab-actuaria" class="sr-subtab-content space-y-6">
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Card 1: Esperanza de Vida al Nacer -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Esperanza de Vida al Nacer</span>
+                    <div class="text-2xl font-black text-white light:text-slate-900 mt-1">77.2 años</div>
+                    <span class="text-[11px] text-emerald-400 block mt-1"><i class="fas fa-venus text-rose-400"></i> 80.4 f | <i class="fas fa-mars text-blue-400"></i> 74.0 m</span>
+                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Tablas de Mortalidad de Argentina) & Banco Mundial / HMD</span>
+                </div>
+
+                <!-- Card 2: Esperanza de Vida a los 65 años (e65) -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Esperanza de Vida a los 65 años (e65)</span>
+                    <div class="text-2xl font-black text-white light:text-slate-900 mt-1">17.8 años</div>
+                    <span class="text-[11px] text-emerald-400 block mt-1"><i class="fas fa-venus text-rose-400"></i> 19.5 f | <i class="fas fa-mars text-blue-400"></i> 15.8 m</span>
+                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Fuente: INDEC (Estadísticas Vitales) & Human Mortality Database</span>
+                </div>
+
+                <!-- Card 3: Tabla Actuarial Seleccionada -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Selector de Tabla Actuarial</span>
+                    <div class="mt-2">
+                        <select id="select-mortality-table" onchange="onMortalityTableChange(this.value)" class="w-full text-xs font-bold rounded-xl bg-darkBg border border-darkBorder text-brandBlue light:bg-slate-100 light:text-blue-700 p-2 cursor-pointer focus:outline-none">
+                            <option value="GAM 94" selected>GAM 94 (SSN Base Res. 38.708)</option>
+                            <option value="SOA Pri-2012">SOA Pri-2012 (Private Retirement)</option>
+                            <option value="SOA Pub-2010">SOA Pub-2010 (Public Retirement)</option>
+                            <option value="CSO 80">CSO 80 (Ordinary Life)</option>
+                            <option value="GAM 71">GAM 71 (Group Annuity 1971)</option>
+                            <option value="IAM 71">IAM 71 (Individual Annuity 1971)</option>
+                            <option value="GAM 83">GAM 83 (Group Annuity 1983)</option>
+                            <option value="IAM 83">IAM 83 (Individual Annuity 1983)</option>
+                            <option value="IAM 94">IAM 94 (Individual Annuity 1994)</option>
+                        </select>
+                    </div>
+                    <span class="text-[10px] text-slate-400 block mt-2">Valuación de Reservas Matemáticas</span>
+                </div>
+
+                <!-- Card 4: Mejora Anual Longevidad -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Mejora Anual Longevidad (SOA MP-2021)</span>
+                    <div class="text-2xl font-black text-rose-400 light:text-rose-600 mt-1">1.5% p.a.</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Reducción qx en edades 50-64</span>
+                    <span class="text-[10px] text-slate-400 block mt-2 border-t border-darkBorder/40 pt-1">Protección frente a Riesgo de Longevidad</span>
+                </div>
+            </div>
+
+            <!-- Explanatory Alert Badge for Longevity Improvement Scale -->
+            <div class="glass-card bg-brandBlue/10 border border-brandBlue/30 rounded-2xl p-4 text-xs text-slate-200 light:text-slate-700 leading-relaxed flex items-start gap-3">
+                <i class="fas fa-circle-info text-brandBlue text-lg mt-0.5 shrink-0"></i>
+                <div>
+                    <strong class="text-brandBlue font-bold block mb-0.5">¿Qué es y cómo se aplica la Mejora Anual de Longevidad?</strong>
+                    La escala de mejora (SOA MP-2021 / MP-2026) mide la tasa porcentual anual de reducción en la mortalidad $q_x$. Se aplica actuarialmente mediante $q_x(t) = q_x(0) \\cdot (1 - f_x)^t$. Su uso es crítico para ajustar las tablas de anualidades y evitar que las aseguradoras de retiro subestimen los años de pago a los beneficiarios, previniendo insuficiencias en las reservas matemáticas.
+                </div>
+            </div>
+
+            <!-- Charts & Table Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Chart 1: Curva de Mortalidad qx -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
+                        <span><i class="fas fa-chart-line text-brandBlue mr-2"></i> Curva de Mortalidad qx por Edad (Escala Logarítmica)</span>
+                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-lg">Por 1.000 hab.</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Comparativa dinámica entre la tabla seleccionada en el menú y las tablas de referencia.</p>
+                    <div class="relative w-full h-[320px]">
+                        <canvas id="srMortalityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Tasa de Invalidez ITP -->
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2 flex items-center justify-between">
+                        <span><i class="fas fa-wheelchair text-rose-400 mr-2"></i> Tasa de Invalidez Total y Permanente (ITP - SOA GLTD)</span>
+                        <span class="text-[10px] bg-slate-800 text-slate-400 px-2 py-0.5 rounded-lg">Por 1.000 asegurados</span>
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Incidencia actuarial por rango etario para tarificación de coberturas de Invalidez.</p>
+                    <div class="relative w-full h-[320px]">
+                        <canvas id="srDisabilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Actuarial Table -->
+            <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 border-b border-darkBorder/40 pb-3">
+                    <div>
+                        <h3 id="tbl-mortality-title" class="text-md font-bold text-white light:text-slate-900 flex items-center gap-2">
+                            <i class="fas fa-table text-brandBlue"></i> Tabla Actuarial: GAM 94 (SSN Base Res. 38.708)
+                        </h3>
+                        <p id="tbl-mortality-desc" class="text-xs text-slate-400 light:text-slate-600 mt-0.5">
+                            Valores de probabilidad de muerte qx por cada 1.000 personas por rango etario.
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl shrink-0">
+                        Norma SSN / SOA
+                    </span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="border-b border-darkBorder/60 text-slate-400 light:text-slate-500 font-semibold bg-darkBg/50 light:bg-slate-100">
+                                <th class="py-2.5 px-4">Edad (x)</th>
+                                <th class="py-2.5 px-4 text-right">Probabilidad de Muerte qx (por 1.000)</th>
+                                <th class="py-2.5 px-4 text-right">Tasa de Supervivencia px (%)</th>
+                                <th class="py-2.5 px-4 text-right">Impacto en Reservas Matemáticas</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl-mortality-body" class="divide-y divide-darkBorder/30 light:divide-slate-200 text-slate-200 light:text-slate-700 font-mono">
+                            <!-- Populated dynamically by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBTAB 2: Salud y Morbilidad -->
+        <div id="sr-tab-salud" class="sr-subtab-content hidden space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Gasto de Bolsillo en Salud (Out-of-Pocket)</span>
+                    <div class="text-3xl font-black text-rose-400 light:text-rose-600 mt-1">28.4%</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Gasto directo pagado por hogares (Banco Mundial / OMS)</span>
+                </div>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Tasa de Egresos / Internación Hospitalaria</span>
+                    <div class="text-3xl font-black text-white light:text-slate-900 mt-1">8.2 / 100 hab.</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Estadísticas Vitales DEIS / Min. Salud</span>
+                </div>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Causa Principal de Defunción (CIE-10)</span>
+                    <div class="text-xl font-bold text-amber-400 light:text-amber-600 mt-1">Cardiovasculares (32.4%)</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Seguido por Cáncer/Neoplasias (21.8%)</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
+                        <i class="fas fa-chart-pie text-brandBlue mr-2"></i> Distribución de DALYs (Años de Vida Ajustados por Discapacidad)
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Carga total de morbilidad en Argentina por grupo de enfermedades (OMS / Global Health Estimates).</p>
+                    <div class="relative w-full aspect-square max-h-[320px] mx-auto">
+                        <canvas id="srDalysChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-md font-bold text-white light:text-slate-800 mb-4 flex items-center gap-2">
+                            <i class="fas fa-briefcase-medical text-rose-500"></i> Oportunidad Estratégica en Seguros de Salud
+                        </h3>
+                        <div class="space-y-3 text-xs text-slate-300 light:text-slate-700 leading-relaxed">
+                            <p class="p-3 bg-slate-800/40 light:bg-slate-100 rounded-xl border border-darkBorder/40">
+                                <strong>Brecha de Cobertura Privada:</strong> Con un gasto de bolsillo del 28.4%, existe una fuerte demanda insatisfecha para seguros médicos de alta complejidad, prótesis y coberturas de Enfermedades Graves (Critical Illness).
+                            </p>
+                            <p class="p-3 bg-slate-800/40 light:bg-slate-100 rounded-xl border border-darkBorder/40">
+                                <strong>Siniestralidad por Enfermedades Crónicas:</strong> El 54.2% de la carga de morbilidad proviene de patologías Cardiovasculares y Neoplasias, requiriendo modelos de suscripción basados en chequeos preventivos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-darkBorder/30 text-[11px] text-slate-400 flex items-center justify-between">
+                        <span>Fuente: DEIS / Ministerio de Salud & OMS GHE 2026</span>
+                        <span class="text-rose-400 font-semibold">Salud Suplementaria</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBTAB 3: Pensiones y Retiro -->
+        <div id="sr-tab-pensiones" class="sr-subtab-content hidden space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Tasa de Reemplazo Argentina vs OCDE</span>
+                    <div class="text-3xl font-black text-amber-400 light:text-amber-600 mt-1">48.5%</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Jubilación sobre último sueldo (vs 61.8% OCDE)</span>
+                </div>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Ratio Dependencia Vejez (2050)</span>
+                    <div class="text-3xl font-black text-rose-400 light:text-rose-600 mt-1">31.4</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Adultos +65 por cada 100 activos (Banco Mundial)</span>
+                </div>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Fondos de Retiro Privados / PBI</span>
+                    <div class="text-3xl font-black text-brandBlue light:text-blue-600 mt-1">1.4%</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Profundidad del mercado en Argentina (vs 67.4% OCDE)</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
+                        <i class="fas fa-chart-bar text-brandBlue mr-2"></i> Tasa de Reemplazo Previsional Neta (% del Salario)
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Comparativa de jubilación promedio sobre último salario activo (OCDE Pensions at a Glance).</p>
+                    <div class="relative w-full h-[320px]">
+                        <canvas id="srReplacementChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
+                        <i class="fas fa-chart-line text-rose-400 mr-2"></i> Proyección del Ratio de Dependencia de la Vejez (2025-2050)
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Evolución proyectada de personas de +65 años por cada 100 personas en edad activa (15-64 años).</p>
+                    <div class="relative w-full h-[320px]">
+                        <canvas id="srDependencyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBTAB 4: Demografía y Cobertura -->
+        <div id="sr-tab-demografia" class="sr-subtab-content hidden space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Población Total Argentina</span>
+                    <div class="text-3xl font-black text-white light:text-slate-900 mt-1">46.8 M</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Proyección Censo INDEC / UN 2026</span>
+                </div>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Población Mayor a 65 años</span>
+                    <div class="text-3xl font-black text-emerald-400 light:text-emerald-600 mt-1">5.6 M (12.1%)</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">Envejecimiento continuo hacia 19.5% en 2050</span>
+                </div>
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-5 shadow-lg light:bg-white light:border-slate-200">
+                    <span class="text-xs text-slate-400 font-medium">Cobertura Medicina Prepaga</span>
+                    <div class="text-3xl font-black text-brandBlue light:text-blue-600 mt-1">14.2%</div>
+                    <span class="text-[11px] text-slate-400 block mt-1">EPH INDEC (Aglomerados Urbanos)</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
+                        <i class="fas fa-[#8b5cf6] fa-chart-area mr-2"></i> Proyección de Envejecimiento Poblacional (+65 años % 2020-2050)
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Evolución porcentual proyectada de la tercera edad en Argentina (UN Population Division).</p>
+                    <div class="relative w-full h-[320px]">
+                        <canvas id="srAgingChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="glass-card bg-darkCard border border-darkBorder rounded-2xl p-6 shadow-lg light:bg-white light:border-slate-200">
+                    <h3 class="text-md font-bold text-white light:text-slate-800 mb-2">
+                        <i class="fas fa-chart-pie text-emerald-400 mr-2"></i> Cobertura de Salud por Tipo de Afiliación (INDEC EPH)
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">Distribución porcentual de la población argentina según cobertura médica principal.</p>
+                    <div class="relative w-full aspect-square max-h-[320px] mx-auto">
+                        <canvas id="srCoverageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>\n\n
+
     <!-- Data Object Embedded -->
 
     <script>
@@ -10168,6 +10463,32 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
 
 
+        function switchTab(tabId) {
+            activeTab = tabId;
+            localStorage.setItem('activeTab', tabId);
+
+            const containerVF = document.getElementById('container-valores-financieros') || document;
+            const panels = containerVF.querySelectorAll('#container-valores-financieros > main .tab-panel, #container-valores-financieros > main > div[id^="panel-"]');
+            panels.forEach(p => p.classList.add('hidden'));
+
+            const buttons = containerVF.querySelectorAll('.tab-btn');
+            buttons.forEach(b => {
+                b.classList.remove('active');
+            });
+
+            const activePanel = document.getElementById('panel-' + tabId);
+            if (activePanel) {
+                activePanel.classList.remove('hidden');
+            }
+
+            const activeBtn = document.getElementById('btn-tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            if (typeof renderChart === 'function') renderChart(tabId);
+        }
+
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('theme-icon');
@@ -10265,4 +10586,4 @@ function switchSrSubtab(tabId) {
 </body>
 </html>
 
-<!-- Build task 872 timestamp: 1786398701.7062337 -->
+<!-- Fix switchTab timestamp: 1786399407.8972998 -->
