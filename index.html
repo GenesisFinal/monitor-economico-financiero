@@ -39496,9 +39496,9 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
                 const type = canvas.dataset.type || 'line';
 
-                const minVal = canvas.dataset.min !== undefined ? parseFloat(canvas.dataset.min) : undefined;
+                let minVal = canvas.dataset.min !== undefined ? parseFloat(canvas.dataset.min) : undefined;
 
-                const maxVal = canvas.dataset.max !== undefined ? parseFloat(canvas.dataset.max) : undefined;
+                let maxVal = canvas.dataset.max !== undefined ? parseFloat(canvas.dataset.max) : undefined;
 
                 
 
@@ -42119,4 +42119,4 @@ Stack: ${error ? error.stack : 'N/A'}`;
 
 </html>
 
-<!-- Deploy timestamp: 1786394219.2316473 -->
+<!-- Deploy timestamp: 1786394855.8676286 -->
