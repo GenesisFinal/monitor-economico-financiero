@@ -10738,3 +10738,155 @@ var bondDetailChartInstance = null;
         </div>
     </div>
     
+
+
+<!-- BOND DETAIL MODAL -->
+<div id="bond-detail-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none hidden" onclick="if(event.target === this) closeBondDetailsModal()">
+    <div class="bg-darkCard border border-darkBorder rounded-2xl w-full max-w-6xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden relative light:bg-white light:border-slate-200">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-darkBorder/60 light:border-slate-100 bg-slate-900/40 light:bg-slate-50/50">
+            <div class="flex items-center gap-3">
+                <div class="p-2.5 rounded-xl bg-brandBlue/10 border border-brandBlue/20 text-brandBlue">
+                    <i class="fas fa-file-contract text-xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h3 id="bond-modal-ticker" class="text-2xl font-bold font-mono text-white light:text-slate-900">--</h3>
+                        <span id="bond-modal-family" class="text-xs px-2.5 py-0.5 rounded-full bg-brandBlue/15 text-brandBlue font-medium border border-brandBlue/20">--</span>
+                    </div>
+                    <p id="bond-modal-name" class="text-xs text-slate-400 light:text-slate-500 mt-0.5 font-medium">--</p>
+                </div>
+            </div>
+            <button onclick="closeBondDetailsModal()" class="p-2 rounded-xl text-slate-400 hover:text-white light:hover:text-slate-900 hover:bg-slate-800/60 light:hover:bg-slate-200/60 transition-all">
+                <i class="fas fa-times text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Scrollable Modal Body -->
+        <div class="p-6 overflow-y-auto space-y-6 custom-scrollbar">
+            
+            <!-- Top Metric Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-darkBorder/50 light:bg-slate-50 light:border-slate-200/80">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 light:text-slate-500">Último Precio</div>
+                    <div id="bond-metric-price" class="text-2xl font-extrabold font-mono text-white light:text-slate-900 mt-1">--</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-darkBorder/50 light:bg-slate-50 light:border-slate-200/80">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 light:text-slate-500">TIR Anual</div>
+                    <div id="bond-metric-tir" class="text-2xl font-extrabold font-mono text-brandGreen mt-1">--</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-darkBorder/50 light:bg-slate-50 light:border-slate-200/80">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 light:text-slate-500">Valor Técnico (VR)</div>
+                    <div id="bond-metric-tv" class="text-2xl font-extrabold font-mono text-brandBlue mt-1">--</div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-darkBorder/50 light:bg-slate-50 light:border-slate-200/80">
+                    <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 light:text-slate-500">Mod. Duration (Años)</div>
+                    <div id="bond-metric-dm" class="text-2xl font-extrabold font-mono text-purple-400 mt-1">--</div>
+                </div>
+            </div>
+
+            <!-- Content Split: Left Interactive Chart & Right Tech Sheet + Sensitivity -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <!-- Chart Panel (7 Cols) -->
+                <div class="lg:col-span-7 p-5 rounded-xl bg-slate-900/40 border border-darkBorder/50 light:bg-slate-50/50 light:border-slate-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 light:text-slate-700 flex items-center gap-2">
+                                <i class="fas fa-chart-line text-brandBlue"></i> Evolución Histórica
+                            </h4>
+                            <div class="flex flex-wrap gap-1">
+                                <button id="btn-bm-tir" onclick="changeBondDetailChartMetric('tir')" class="px-2.5 py-1 text-xs rounded-lg font-medium transition-all bg-brandBlue text-white shadow-sm">TIR</button>
+                                <button id="btn-bm-paridad" onclick="changeBondDetailChartMetric('paridad')" class="px-2.5 py-1 text-xs rounded-lg font-medium transition-all text-slate-400 hover:text-white light:text-slate-600">Paridad</button>
+                                <button id="btn-bm-close" onclick="changeBondDetailChartMetric('close')" class="px-2.5 py-1 text-xs rounded-lg font-medium transition-all text-slate-400 hover:text-white light:text-slate-600">Precio</button>
+                                <button id="btn-bm-clean" onclick="changeBondDetailChartMetric('clean')" class="px-2.5 py-1 text-xs rounded-lg font-medium transition-all text-slate-400 hover:text-white light:text-slate-600">Clean</button>
+                                <button id="btn-bm-cC" onclick="changeBondDetailChartMetric('cC')" class="px-2.5 py-1 text-xs rounded-lg font-medium transition-all text-slate-400 hover:text-white light:text-slate-600">CC</button>
+                                <button id="btn-bm-fair_value" onclick="changeBondDetailChartMetric('fair_value')" class="px-2.5 py-1 text-xs rounded-lg font-medium transition-all text-slate-400 hover:text-white light:text-slate-600">V. Técnico</button>
+                            </div>
+                        </div>
+                        <div class="h-72 w-full relative">
+                            <canvas id="bond-detail-chart-canvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Tech Sheet & Sensitivity Matrix (5 Cols) -->
+                <div class="lg:col-span-5 space-y-5">
+                    
+                    <!-- Ficha Técnica -->
+                    <div class="p-4 rounded-xl bg-slate-900/40 border border-darkBorder/50 light:bg-slate-50/50 light:border-slate-200">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 light:text-slate-700 mb-3 flex items-center gap-2">
+                            <i class="fas fa-info-circle text-brandGreen"></i> Ficha Técnica del Título
+                        </h4>
+                        <div class="divide-y divide-darkBorder/40 light:divide-slate-200 text-xs">
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Precio Cotización</span>
+                                <span id="bond-detail-price" class="font-mono font-bold text-white light:text-slate-900">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Variación Día</span>
+                                <span id="bond-detail-change" class="font-mono font-bold">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Apertura / Cierre</span>
+                                <span id="bond-detail-opencolse" class="font-mono text-slate-300 light:text-slate-700">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Mínimo / Máximo (Día)</span>
+                                <span id="bond-detail-minmax" class="font-mono text-slate-300 light:text-slate-700">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Emisión / Vencimiento</span>
+                                <span class="font-mono text-slate-300 light:text-slate-700"><span id="bond-detail-start">--</span> - <span id="bond-detail-end">--</span></span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Valor Técnico</span>
+                                <span id="bond-detail-tv" class="font-mono font-semibold text-slate-200 light:text-slate-800">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">Paridad</span>
+                                <span id="bond-detail-parity" class="font-mono font-semibold text-brandGreen">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">TIR / Mod. Duration</span>
+                                <span id="bond-detail-tirdm" class="font-mono text-slate-300 light:text-slate-700">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">TIR Promedio (365d)</span>
+                                <span id="bond-detail-tiravg" class="font-mono text-slate-300 light:text-slate-700">--</span>
+                            </div>
+                            <div class="flex justify-between py-1.5">
+                                <span class="text-slate-400 light:text-slate-500">TIR Mín / Máx (365d)</span>
+                                <span class="font-mono text-slate-300 light:text-slate-700"><span id="bond-detail-tirmin">--</span> / <span id="bond-detail-tirmax">--</span></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sensibilidad de Precio por Desplazamiento de TIR -->
+                    <div class="p-4 rounded-xl bg-slate-900/40 border border-darkBorder/50 light:bg-slate-50/50 light:border-slate-200">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 light:text-slate-700 mb-2 flex items-center gap-2">
+                            <i class="fas fa-sliders-h text-purple-400"></i> Matriz de Sensibilidad de Precio
+                        </h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left">
+                                <thead>
+                                    <tr class="text-slate-400 light:text-slate-500 border-b border-darkBorder/40 light:border-slate-200">
+                                        <th class="px-4 py-1 font-semibold">Escenario TIR</th>
+                                        <th class="px-4 py-1 text-right font-semibold">Var. Est. Precio %</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bond-sensitivity-tbody" class="divide-y divide-darkBorder/30 light:divide-slate-200">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
