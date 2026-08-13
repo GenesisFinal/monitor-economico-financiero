@@ -2105,7 +2105,7 @@
 
             <!-- SECTION 1: TIPOS DE CAMBIO -->
 
-            <div id="panel-exchange" class="tab-panel hidden">
+            <div id="panel-exchange" class="tab-panel">
 
             <section class="mb-12">
 
@@ -42610,8 +42610,7 @@
             }
         }
 
-        let customSearchedCedear = null;
-        // CEDEARs Search Engine Directory & Aliases
+                // CEDEARs Search Engine Directory & Aliases
         const CEDEAR_ALIASES = {
             'APPL': 'AAPL', 'APPLE': 'AAPL',
             'FB': 'META', 'FACEBOOK': 'META',
@@ -42755,6 +42754,10 @@ function toggleCustomCedearSelect(evt) {
         }
 
         function switchTab(tabId) {
+            const validTabs = ['exchange', 'fci', 'indices', 'forex', 'commodities', 'rates', 'local_rates', 'bonds', 'lecaps', 'corporate', 'cedears', 'stocks', 'etfs', 'acciones_arg', 'cryptos'];
+            if (!tabId || !validTabs.includes(tabId)) {
+                tabId = 'exchange';
+            }
             activeTab = tabId;
             localStorage.setItem('activeTab', tabId);
             
@@ -42904,7 +42907,7 @@ function toggleCustomCedearSelect(evt) {
             activeAsegTab = savedAsegTab;
             
             // Restore global tab
-            const savedGlobalTab = localStorage.getItem('globalTab') || 'valores-financieros';
+            const savedGlobalTab = localStorage.getItem('activeGlobalTab') || 'valores-financieros';
             switchGlobalTab(savedGlobalTab);
             
             if (savedGlobalTab === 'valores-financieros') {
@@ -44903,4 +44906,4 @@ const companies = Object.keys(balancesData[seg]);
     </script>
 </body>
 </html>
-<!-- Deploy timestamp: 1786580259.2785375 -->
+<!-- Deploy timestamp: 1786580981.1411254 -->
