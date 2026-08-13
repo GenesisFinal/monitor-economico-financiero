@@ -40236,8 +40236,8 @@
         // Current state for each section: active period, scale, and array of active tickers
         const state = {
             exchange: { period: '12M', tickers: ['Oficial Billete'], showBands: true, chartType: 'ohlc' , mas: {ma20: false, ma50: false, ma200: false} },
-            commodities: { period: '12M', tickers: [], chartType: 'ohlc' },
-            indices: { period: '12M', tickers: [], chartType: 'ohlc' },
+            commodities: { period: '12M', tickers: [], chartType: 'ohlc', mas: {ma20: false, ma50: false, ma200: false} },
+            indices: { period: '12M', tickers: [], chartType: 'ohlc', mas: {ma20: false, ma50: false, ma200: false} },
             stocks: { period: '12M', tickers: [], chartType: 'ohlc' , mas: {ma20: false, ma50: false, ma200: false} },
             etfs: { period: '12M', tickers: [], chartType: 'ohlc' , mas: {ma20: false, ma50: false, ma200: false} },
             acciones_arg: { period: '12M', tickers: [], chartType: 'ohlc' , mas: {ma20: false, ma50: false, ma200: false} },
@@ -41012,6 +41012,15 @@
             renderChart(section);
         }
 
+        function toggleMAToggle(section, maKey) {
+            if (!state[section]) return;
+            if (!state[section].mas) {
+                state[section].mas = { ma20: false, ma50: false, ma200: false };
+            }
+            state[section].mas[maKey] = !state[section].mas[maKey];
+            renderChart(section);
+        }
+
         function changeChartType(section, type) {
             state[section].chartType = type;
             
@@ -41563,6 +41572,38 @@
                     });
                 } else {
                     chartTypeSelector.classList.add('hidden');
+                }
+            }
+
+            // Dynamically inject MA 50 & MA 200 toggle buttons for the 7 asset sections
+            const maSections = ['indices', 'forex', 'commodities', 'stocks', 'cedears', 'acciones_arg', 'cryptos'];
+            if (periodsDiv && maSections.includes(section)) {
+                let maSelector = document.getElementById('ma-selector-' + section);
+                const is50 = state[section] && state[section].mas && state[section].mas.ma50;
+                const is200 = state[section] && state[section].mas && state[section].mas.ma200;
+                
+                if (!maSelector) {
+                    maSelector = document.createElement('div');
+                    maSelector.id = 'ma-selector-' + section;
+                    maSelector.className = 'flex gap-1 items-center bg-darkBg/60 light:bg-slate-200 border border-darkBorder/40 light:border-slate-300 p-0.5 rounded-lg mr-2 select-none';
+                    maSelector.innerHTML = `
+                        <button onclick="toggleMAToggle('${section}', 'ma50')" id="btn-ma50-${section}" class="text-[10px] px-2 py-0.5 rounded font-semibold transition-all flex items-center gap-1 ${is50 ? 'bg-amber-500 text-white font-bold' : 'text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900'}" title="Promedio Móvil 50 ruedas (MA 50)">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400 inline-block"></span> MA 50
+                        </button>
+                        <button onclick="toggleMAToggle('${section}', 'ma200')" id="btn-ma200-${section}" class="text-[10px] px-2 py-0.5 rounded font-semibold transition-all flex items-center gap-1 ${is200 ? 'bg-purple-600 text-white font-bold' : 'text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900'}" title="Promedio Móvil 200 ruedas (MA 200)">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400 inline-block"></span> MA 200
+                        </button>
+                    `;
+                    periodsDiv.parentNode.insertBefore(maSelector, periodsDiv);
+                } else {
+                    const btn50 = document.getElementById('btn-ma50-' + section);
+                    const btn200 = document.getElementById('btn-ma200-' + section);
+                    if (btn50) {
+                        btn50.className = `text-[10px] px-2 py-0.5 rounded font-semibold transition-all flex items-center gap-1 ${is50 ? 'bg-amber-500 text-white font-bold' : 'text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900'}`;
+                    }
+                    if (btn200) {
+                        btn200.className = `text-[10px] px-2 py-0.5 rounded font-semibold transition-all flex items-center gap-1 ${is200 ? 'bg-purple-600 text-white font-bold' : 'text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900'}`;
+                    }
                 }
             }
 
@@ -44919,4 +44960,4 @@ const companies = Object.keys(balancesData[seg]);
     </script>
 </body>
 </html>
-<!-- Deploy timestamp: 1786582516.1082153 -->
+<!-- Deploy timestamp: 1786582945.9561841 -->
