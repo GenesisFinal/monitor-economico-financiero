@@ -23,6 +23,210 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
+// === CORE SECTION & SUBTAB NAVIGATION FUNCTIONS ===
+        var activeTab = 'exchange';
+        var activeEconTab = null;
+        let aseguradorPieCharts = {};
+
+        function switchGlobalTab(tabId) {
+            if (!tabId) tabId = 'valores-financieros';
+            try { localStorage.setItem('active_global_tab', tabId); } catch(e) {}
+
+            const cValores = document.getElementById('container-valores-financieros');
+            const cIndicadores = document.getElementById('container-indicadores-economicos');
+            const cAsegurador = document.getElementById('container-mercado-asegurador');
+
+            const bValores = document.getElementById('btn-global-valores');
+            const bIndicadores = document.getElementById('btn-global-indicadores');
+            const bAsegurador = document.getElementById('btn-global-asegurador');
+
+            // 1. Hide all top-level global containers
+            if (cValores) cValores.classList.add('hidden');
+            if (cIndicadores) cIndicadores.classList.add('hidden');
+            if (cAsegurador) cAsegurador.classList.add('hidden');
+
+            // 2. Reset button classes
+            const isDark = document.body.classList.contains('dark');
+            const inactiveClass = isDark 
+                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900" 
+                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900";
+            const activeClass = isDark 
+                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shadow-sm" 
+                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20 shadow-sm";
+
+            if (bValores) bValores.className = inactiveClass;
+            if (bIndicadores) bIndicadores.className = inactiveClass;
+            if (bAsegurador) bAsegurador.className = inactiveClass;
+
+            // 3. Activate target container
+            if (tabId === 'valores-financieros') {
+                if (cValores) cValores.classList.remove('hidden');
+                if (bValores) bValores.className = activeClass;
+                if (typeof renderChart === 'function') {
+                    renderChart(activeTab);
+                }
+            } else if (tabId === 'indicadores-economicos') {
+                if (cIndicadores) cIndicadores.classList.remove('hidden');
+                if (bIndicadores) bIndicadores.className = activeClass;
+                if (typeof activeEconTab !== 'undefined' && activeEconTab) {
+                    switchEconTab(activeEconTab);
+                } else {
+                    const firstEconBtn = document.querySelector('.econ-tab-btn');
+                    if (firstEconBtn) firstEconBtn.click();
+                }
+            } else if (tabId === 'mercado-asegurador') {
+                if (cAsegurador) cAsegurador.classList.remove('hidden');
+                if (bAsegurador) bAsegurador.className = activeClass;
+                if (typeof renderAsegPieCharts === 'function') {
+                    setTimeout(renderAsegPieCharts, 100);
+                }
+            }
+        }
+
+        function switchTab(tabId) {
+            const validTabs = ['exchange', 'fci', 'indices', 'forex', 'commodities', 'rates', 'local_rates', 'bonds', 'lecaps', 'corporate', 'cedears', 'stocks', 'etfs', 'acciones_arg', 'cryptos'];
+            if (!tabId || !validTabs.includes(tabId)) {
+                tabId = 'exchange';
+            }
+            activeTab = tabId;
+            try { localStorage.setItem('activeTab', tabId); } catch(e) {}
+
+            const container = document.getElementById('container-valores-financieros');
+            if (!container) return;
+
+            // Hide only panels inside Valores Financieros
+            const panels = container.querySelectorAll('.tab-panel');
+            panels.forEach(p => p.classList.add('hidden'));
+
+            // Reset button styles inside Valores Financieros
+            const buttons = container.querySelectorAll('.tab-btn');
+            buttons.forEach(b => {
+                b.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
+                b.classList.add('text-slate-400');
+            });
+
+            // Show active panel inside Valores Financieros
+            const activePanel = document.getElementById('panel-' + tabId);
+            if (activePanel) activePanel.classList.remove('hidden');
+
+            const activeBtn = document.getElementById('btn-tab-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-slate-400');
+            }
+
+            if (typeof renderChart === 'function') {
+                renderChart(tabId);
+            }
+        }
+
+        function switchEconTab(tabId) {
+            activeEconTab = tabId;
+            const container = document.getElementById('container-indicadores-economicos');
+            if (!container) return;
+
+            // Hide only panels inside Indicadores Económicos
+            const panels = container.querySelectorAll('.econ-tab-panel');
+            panels.forEach(p => p.classList.add('hidden'));
+
+            // Reset button styles inside Indicadores Económicos
+            const buttons = container.querySelectorAll('.econ-tab-btn');
+            buttons.forEach(b => {
+                b.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
+                b.classList.add('text-slate-400');
+            });
+
+            // Show active panel inside Indicadores Económicos
+            const activePanel = document.getElementById(tabId);
+            if (activePanel) activePanel.classList.remove('hidden');
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-slate-400');
+            }
+        }
+
+        function switchAsegSubtab(subtabId) {
+            document.querySelectorAll('.aseg-subtab-panel').forEach(panel => panel.classList.add('hidden'));
+            document.querySelectorAll('.aseg-subtab-btn').forEach(btn => {
+                btn.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-400');
+            });
+
+            const activePanel = document.getElementById('aseg-subtab-' + subtabId);
+            if (activePanel) activePanel.classList.remove('hidden');
+
+            const activeBtn = document.getElementById('btn-aseg-subtab-' + subtabId);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-slate-400');
+            }
+            if (typeof renderAsegPieCharts === 'function') renderAsegPieCharts();
+        }
+
+        function renderAsegPieCharts() {
+            if (typeof appData === 'undefined' || !appData || !appData.ssn_data || !appData.ssn_data.subsections) return;
+
+            const subsections = appData.ssn_data.subsections;
+            const keys = ['mercado_total', 'seguros_patrimoniales', 'seguros_personas'];
+            const colors = ['#3b82f6', '#06b6d4', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#f97316', '#14b8a6', '#6366f1', '#a855f7', '#64748b'];
+
+            keys.forEach(k => {
+                const sub = subsections[k];
+                const canvas = document.getElementById('chart-pie-' + k.replace('_', '-'));
+                if (!canvas || !sub) return;
+
+                if (aseguradorPieCharts[k]) {
+                    aseguradorPieCharts[k].destroy();
+                }
+
+                const top10 = sub.top20.slice(0, 10);
+                const labels = top10.map(x => x.name);
+                const dataVals = top10.map(x => x.share);
+
+                labels.push('Resto del Mercado');
+                dataVals.push(Math.round((100.0 - dataVals.reduce((a, b) => a + b, 0)) * 100) / 100);
+
+                const ctx = canvas.getContext('2d');
+                aseguradorPieCharts[k] = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: dataVals,
+                            backgroundColor: colors,
+                            borderWidth: 2,
+                            borderColor: document.body.classList.contains('dark') ? '#0f172a' : '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    boxWidth: 12,
+                                    padding: 10,
+                                    font: { size: 11, weight: 'bold' },
+                                    color: document.body.classList.contains('dark') ? '#94a3b8' : '#334155'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(ctx) {
+                                        return ' ' + ctx.label + ': ' + ctx.parsed + '%';
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '65%'
+                    }
+                });
+            });
+        }
+
 
         tailwind.config = {
 
@@ -2075,7 +2279,7 @@
 
                 </h1>
 
-                <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-1">Actualizado: 13/08/2026 21:42:09 hs</span>
+                <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-1">Actualizado: 13/08/2026 21:48:13 hs</span>
 
                 <span class="text-[9px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización lunes a viernes, 21:00 hs)</span>
 
@@ -6831,7 +7035,7 @@
                         <i class="fas fa-globe text-brandBlue"></i> Índices Globales
                     </h2>
                     <span id="last-updated-indices" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -7356,13 +7560,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Nikkei 225">Nikkei 225</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^N225" data-close-price="69316.39">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^N225" data-close-price="69506.61">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $69.316,39
+                                            $69.506,61
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -7370,7 +7574,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.73%
+                                            1.01%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -7378,7 +7582,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            0.82%
+                                            1.10%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -7386,7 +7590,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            37.70%
+                                            38.08%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -7394,7 +7598,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            62.53%
+                                            62.97%
                                         </td>
                                     </tr>
                                     
@@ -7762,13 +7966,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="ASX 200">ASX 200</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^AXJO" data-close-price="9134.6">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^AXJO" data-close-price="9131.2">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $9.134,60
+                                            $9.131,20
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -7776,7 +7980,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.59%
+                                            0.62%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -7784,7 +7988,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            3.32%
+                                            3.28%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -7792,7 +7996,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            4.66%
+                                            4.62%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -7800,7 +8004,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            2.94%
+                                            2.90%
                                         </td>
                                     </tr>
                                     
@@ -7847,7 +8051,7 @@
                         <i class="fas fa-coins text-brandBlue"></i> Divisas
                     </h2>
                     <span id="last-updated-forex" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -7907,7 +8111,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.08%
+                                            0.07%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -7915,7 +8119,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            1.02%
+                                            1.00%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -7923,7 +8127,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            1.79%
+                                            1.80%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -7931,7 +8135,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            1.47%
+                                            1.48%
                                         </td>
                                     </tr>
                                     
@@ -8023,13 +8227,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="USD/JPY (Yen)">USD/JPY (Yen)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPY=X" data-close-price="159.4">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPY=X" data-close-price="159.41">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $159,40
+                                            $159,41
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8037,7 +8241,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.06%
+                                            0.05%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8045,7 +8249,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            1.72%
+                                            1.71%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8053,7 +8257,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            1.70%
+                                            1.71%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8061,7 +8265,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            8.34%
+                                            8.35%
                                         </td>
                                     </tr>
                                     
@@ -8232,7 +8436,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.06%
+                                            0.05%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8240,7 +8444,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            2.23%
+                                            2.24%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8248,7 +8452,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            5.30%
+                                            5.31%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8256,7 +8460,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            8.53%
+                                            8.54%
                                         </td>
                                     </tr>
                                     
@@ -8368,7 +8572,7 @@
                         <i class="fas fa-wheat-awn text-brandBlue"></i> Commodities
                     </h2>
                     <span id="last-updated-commodities" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -8422,13 +8626,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Oro (USD/Oz)">Oro (USD/Oz)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GC=F" data-close-price="4398.0">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GC=F" data-close-price="4396.0">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $4.398,00
+                                            $4.396,00
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8436,7 +8640,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.23%
+                                            0.28%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8444,7 +8648,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            8.30%
+                                            8.25%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8452,7 +8656,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            1.94%
+                                            1.89%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8460,7 +8664,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            30.94%
+                                            30.88%
                                         </td>
                                     </tr>
                                     
@@ -8487,13 +8691,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Plata (USD/Oz)">Plata (USD/Oz)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SI=F" data-close-price="64.54">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SI=F" data-close-price="64.46">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $64,54
+                                            $64,46
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8501,7 +8705,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.15%
+                                            0.26%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8509,7 +8713,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            9.81%
+                                            9.69%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8517,7 +8721,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            8.53%
+                                            8.63%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8525,7 +8729,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            67.63%
+                                            67.45%
                                         </td>
                                     </tr>
                                     
@@ -8552,13 +8756,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Platino (USD/Oz)">Platino (USD/Oz)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PL=F" data-close-price="1720.0">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PL=F" data-close-price="1720.6">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $1.720,00
+                                            $1.720,60
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8566,7 +8770,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.12%
+                                            0.08%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8574,7 +8778,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            5.42%
+                                            5.46%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8582,7 +8786,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            19.09%
+                                            19.06%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8590,7 +8794,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            29.18%
+                                            29.22%
                                         </td>
                                     </tr>
                                     
@@ -8617,13 +8821,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Cobre (USD/Lb)">Cobre (USD/Lb)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HG=F" data-close-price="6.59">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HG=F" data-close-price="6.58">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $6,59
+                                            $6,58
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8631,7 +8835,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.06%
+                                            0.10%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8639,7 +8843,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            4.05%
+                                            4.01%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8647,7 +8851,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            16.78%
+                                            16.74%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8655,7 +8859,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            46.95%
+                                            46.90%
                                         </td>
                                     </tr>
                                     
@@ -8755,13 +8959,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Petróleo WTI (USD/Bbl)">Petróleo WTI (USD/Bbl)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CL=F" data-close-price="81.24">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CL=F" data-close-price="81.25">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $81,24
+                                            $81,25
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8769,7 +8973,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.04%
+                                            0.02%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8777,7 +8981,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            2.39%
+                                            2.41%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8785,7 +8989,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            41.73%
+                                            41.75%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8793,7 +8997,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            29.67%
+                                            29.69%
                                         </td>
                                     </tr>
                                     
@@ -8820,13 +9024,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Petróleo Brent (USD/Bbl)">Petróleo Brent (USD/Bbl)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BZ=F" data-close-price="87.04">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BZ=F" data-close-price="87.01">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $87,04
+                                            $87,01
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8834,7 +9038,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.18%
+                                            0.15%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8842,7 +9046,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            2.73%
+                                            2.69%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8850,7 +9054,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            43.28%
+                                            43.23%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8858,7 +9062,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            32.62%
+                                            32.58%
                                         </td>
                                     </tr>
                                     
@@ -8899,7 +9103,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.15%
+                                            0.11%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8907,7 +9111,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            5.65%
+                                            5.68%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8915,7 +9119,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            24.27%
+                                            24.30%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8923,7 +9127,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            3.11%
+                                            3.15%
                                         </td>
                                     </tr>
                                     
@@ -8950,13 +9154,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Gasolina (USD/Gal)">Gasolina (USD/Gal)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RB=F" data-close-price="2.86">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RB=F" data-close-price="2.85">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $2,86
+                                            $2,85
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -8964,7 +9168,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.25%
+                                            0.17%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -8972,7 +9176,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            11.49%
+                                            11.55%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -8980,7 +9184,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            68.21%
+                                            68.09%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -8988,7 +9192,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            37.97%
+                                            37.87%
                                         </td>
                                     </tr>
                                     
@@ -9023,13 +9227,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Soja Chicago (USD/Ton)">Soja Chicago (USD/Ton)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZS=F" data-close-price="435.5">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZS=F" data-close-price="435.23">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $435,50
+                                            $435,23
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -9037,7 +9241,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.15%
+                                            0.08%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -9045,7 +9249,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            1.82%
+                                            1.88%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -9053,7 +9257,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            15.13%
+                                            15.06%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -9061,7 +9265,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            15.80%
+                                            15.73%
                                         </td>
                                     </tr>
                                     
@@ -9088,13 +9292,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Maíz Chicago (USD/Ton)">Maíz Chicago (USD/Ton)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZC=F" data-close-price="186.31">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZC=F" data-close-price="186.21">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $186,31
+                                            $186,21
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -9102,7 +9306,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.26%
+                                            0.21%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -9110,7 +9314,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            9.11%
+                                            9.05%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -9118,7 +9322,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            8.17%
+                                            8.11%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -9126,7 +9330,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            26.54%
+                                            26.47%
                                         </td>
                                     </tr>
                                     
@@ -9153,13 +9357,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Trigo Chicago (USD/Ton)">Trigo Chicago (USD/Ton)</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZW=F" data-close-price="247.56">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZW=F" data-close-price="247.38">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $247,56
+                                            $247,38
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -9167,7 +9371,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.82%
+                                            0.75%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -9175,7 +9379,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            6.73%
+                                            6.65%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -9183,7 +9387,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            33.02%
+                                            32.92%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -9191,7 +9395,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            32.82%
+                                            32.73%
                                         </td>
                                     </tr>
                                     
@@ -15302,7 +15506,7 @@
                         <i class="fas fa-certificate text-amber-400"></i> CEDEARs (Certificados de Depósito Argentinos)
                     </h2>
                     <span id="last-updated-cedears" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -16587,13 +16791,13 @@
                                             </td>
                                             
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                16.71%
+                                                14.16%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                16.71%
+                                                126.65%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                16.71%
+                                                167.09%
                                             </td>
                                         </tr>
                                         
@@ -16792,13 +16996,13 @@
                                             </td>
                                             
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                35.98%
+                                                36.28%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                35.98%
+                                                9.68%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                35.98%
+                                                16.26%
                                             </td>
                                         </tr>
                                         
@@ -17420,13 +17624,13 @@
                                             </td>
                                             
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                35.98%
+                                                36.28%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                35.98%
+                                                9.68%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                35.98%
+                                                16.26%
                                             </td>
                                         </tr>
                                         
@@ -17461,13 +17665,13 @@
                                             </td>
                                             
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                16.71%
+                                                14.16%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                16.71%
+                                                126.65%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                16.71%
+                                                167.09%
                                             </td>
                                         </tr>
                                         
@@ -17543,13 +17747,13 @@
                                             </td>
                                             
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                19.25%
+                                                9.50%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                19.25%
+                                                61.52%
                                             </td>
                                             <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                                19.25%
+                                                61.52%
                                             </td>
                                         </tr>
                                         
@@ -21892,7 +22096,7 @@
 
                                                 
 
-                                                    111.9M
+                                                    112.0M
 
                                                 
 
@@ -22394,7 +22598,7 @@
                         <i class="fas fa-chart-pie text-brandBlue"></i> ETFs (CEDEARs)
                     </h2>
                     <span id="last-updated-etfs" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -23760,7 +23964,7 @@
                         <i class="fas fa-flag text-brandBlue"></i> Acciones Argentinas
                     </h2>
                     <span id="last-updated-acciones_arg" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -24283,7 +24487,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            6.98%
+                                            7.36%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -24291,7 +24495,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            12.03%
+                                            7.36%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -24299,7 +24503,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            88.83%
+                                            7.36%
                                         </td>
                                     </tr>
                                     
@@ -25126,7 +25330,7 @@
                         <i class="fas fa-bitcoin text-brandBlue"></i> Criptomonedas
                     </h2>
                     <span id="last-updated-cryptos" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 13/08/2026 21:42:09 hs
+                        Actualizado: 13/08/2026 21:48:13 hs
                     </span>
                 </div>
 
@@ -25172,21 +25376,21 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Bitcoin">Bitcoin</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTC-USD" data-close-price="63369.62">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTC-USD" data-close-price="63462.35">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $63.369,62
+                                            $63.462,35
                                         </td>
 
                                         <!-- 6. VAR % -->
                                         
                                         
                                         
-                                        <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.08%
+                                        <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
+                                            0.07%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -25194,7 +25398,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            2.07%
+                                            1.93%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -25202,7 +25406,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            28.58%
+                                            28.48%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -25210,7 +25414,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            46.46%
+                                            46.38%
                                         </td>
                                     </tr>
                                     
@@ -25237,13 +25441,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Ethereum">Ethereum</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ETH-USD" data-close-price="1884.42">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ETH-USD" data-close-price="1887.39">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $1.884,42
+                                            $1.887,39
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -25251,7 +25455,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.00%
+                                            0.16%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -25259,7 +25463,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            1.70%
+                                            1.54%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -25267,7 +25471,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            37.19%
+                                            37.10%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -25275,7 +25479,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            58.57%
+                                            58.50%
                                         </td>
                                     </tr>
                                     
@@ -25302,21 +25506,21 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Tether USDt">Tether USDt</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USDT-USD" data-close-price="0.999">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USDT-USD" data-close-price="0.9991">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $0,9990
+                                            $0,9991
                                         </td>
 
                                         <!-- 6. VAR % -->
                                         
                                         
                                         
-                                        <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.01%
+                                        <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
+                                            0.00%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -25324,7 +25528,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            0.03%
+                                            0.02%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -25332,7 +25536,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            0.03%
+                                            0.04%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -25367,13 +25571,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="BNB">BNB</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BNB-USD" data-close-price="610.47">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BNB-USD" data-close-price="610.32">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $610,47
+                                            $610,32
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -25381,7 +25585,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.07%
+                                            0.05%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -25389,7 +25593,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-emerald-400 light:text-emerald-600">
-                                            5.23%
+                                            5.21%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -25397,7 +25601,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            29.27%
+                                            29.28%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -25405,7 +25609,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            27.41%
+                                            27.42%
                                         </td>
                                     </tr>
                                     
@@ -25446,7 +25650,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-emerald-400 light:text-emerald-600">
-                                            0.12%
+                                            0.24%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -25454,7 +25658,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            9.29%
+                                            9.18%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -25462,7 +25666,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            46.25%
+                                            46.19%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -25470,7 +25674,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            67.26%
+                                            67.23%
                                         </td>
                                     </tr>
                                     
@@ -25497,13 +25701,13 @@
                                         <td class="px-4 py-2.5 text-slate-300 light:text-slate-700 truncate max-w-[200px]" title="Solana">Solana</td>
 
                                         <!-- 4. PRECIO ACTUAL (Intradía, a la izquierda) -->
-                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SOL-USD" data-close-price="75.97">
+                                        <td class="px-4 py-2.5 text-right font-semibold font-mono live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SOL-USD" data-close-price="76.08">
                                             -.-
                                         </td>
 
                                         <!-- 5. PRECIO CIERRE (Siempre Blanco, a la derecha) -->
                                         <td class="px-4 py-2.5 text-right font-semibold font-mono text-white light:text-slate-900">
-                                            $75,97
+                                            $76,08
                                         </td>
 
                                         <!-- 6. VAR % -->
@@ -25511,7 +25715,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-bold font-mono text-rose-400 light:text-rose-600">
-                                            0.28%
+                                            0.13%
                                         </td>
 
                                         <!-- 7. 1M -->
@@ -25519,7 +25723,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            1.67%
+                                            1.53%
                                         </td>
 
                                         <!-- 8. YTD -->
@@ -25527,7 +25731,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            40.07%
+                                            39.98%
                                         </td>
 
                                         <!-- 9. 12M -->
@@ -25535,7 +25739,7 @@
                                         
                                         
                                         <td class="px-4 py-2.5 text-right font-semibold hidden md:table-cell font-mono text-rose-400 light:text-rose-600">
-                                            60.55%
+                                            60.50%
                                         </td>
                                     </tr>
                                     
@@ -25596,7 +25800,7 @@
 
                     <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Categorías Económicas</span>
 
-                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: 13/08/2026 21:42:09 hs</span>
+                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: 13/08/2026 21:48:13 hs</span>
 
                     <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
 
@@ -35875,132 +36079,8 @@
     
     </script>
 
-    <script>
-        // === GLOBAL SECTION SWITCHING (VALORES FINANCIEROS, INDICADORES ECONOMICOS, MERCADO ASEGURADOR) ===
-        function switchGlobalTab(tabId) {
-            if (!tabId) tabId = 'valores-financieros';
-            try { localStorage.setItem('active_global_tab', tabId); } catch(e) {}
-
-            const cValores = document.getElementById('container-valores-financieros');
-            const cIndicadores = document.getElementById('container-indicadores-economicos');
-            const cAsegurador = document.getElementById('container-mercado-asegurador');
-
-            const bValores = document.getElementById('btn-global-valores');
-            const bIndicadores = document.getElementById('btn-global-indicadores');
-            const bAsegurador = document.getElementById('btn-global-asegurador');
-
-            // 1. Hide all top-level global containers
-            if (cValores) cValores.classList.add('hidden');
-            if (cIndicadores) cIndicadores.classList.add('hidden');
-            if (cAsegurador) cAsegurador.classList.add('hidden');
-
-            // 2. Reset button classes
-            const isDark = document.body.classList.contains('dark');
-            const inactiveClass = isDark 
-                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900" 
-                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900";
-            const activeClass = isDark 
-                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20 shadow-sm" 
-                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20 shadow-sm";
-
-            if (bValores) bValores.className = inactiveClass;
-            if (bIndicadores) bIndicadores.className = inactiveClass;
-            if (bAsegurador) bAsegurador.className = inactiveClass;
-
-            // 3. Activate target container
-            if (tabId === 'valores-financieros') {
-                if (cValores) cValores.classList.remove('hidden');
-                if (bValores) bValores.className = activeClass;
-                if (typeof activeTab !== 'undefined' && typeof renderChart === 'function') {
-                    renderChart(activeTab);
-                }
-            } else if (tabId === 'indicadores-economicos') {
-                if (cIndicadores) cIndicadores.classList.remove('hidden');
-                if (bIndicadores) bIndicadores.className = activeClass;
-                if (typeof activeEconTab !== 'undefined' && activeEconTab) {
-                    switchEconTab(activeEconTab);
-                } else {
-                    const firstEconBtn = document.querySelector('.econ-tab-btn');
-                    if (firstEconBtn) firstEconBtn.click();
-                }
-            } else if (tabId === 'mercado-asegurador') {
-                if (cAsegurador) cAsegurador.classList.remove('hidden');
-                if (bAsegurador) bAsegurador.className = activeClass;
-                if (typeof renderAsegPieCharts === 'function') {
-                    setTimeout(renderAsegPieCharts, 100);
-                }
-            }
-        }
-
-        // === SUBTAB SWITCHING FOR SECTION 1: VALORES FINANCIEROS ===
-        var activeTab = 'exchange';
-        function switchTab(tabId) {
-            const validTabs = ['exchange', 'fci', 'indices', 'forex', 'commodities', 'rates', 'local_rates', 'bonds', 'lecaps', 'corporate', 'cedears', 'stocks', 'etfs', 'acciones_arg', 'cryptos'];
-            if (!tabId || !validTabs.includes(tabId)) {
-                tabId = 'exchange';
-            }
-            activeTab = tabId;
-            try { localStorage.setItem('activeTab', tabId); } catch(e) {}
-
-            const container = document.getElementById('container-valores-financieros');
-            if (!container) return;
-
-            // Hide only panels inside Valores Financieros
-            const panels = container.querySelectorAll('.tab-panel');
-            panels.forEach(p => p.classList.add('hidden'));
-
-            // Reset button styles inside Valores Financieros
-            const buttons = container.querySelectorAll('.tab-btn');
-            buttons.forEach(b => {
-                b.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
-                b.classList.add('text-slate-400');
-            });
-
-            // Show active panel inside Valores Financieros
-            const activePanel = document.getElementById('panel-' + tabId);
-            if (activePanel) activePanel.classList.remove('hidden');
-
-            const activeBtn = document.getElementById('btn-tab-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
-                activeBtn.classList.remove('text-slate-400');
-            }
-
-            if (typeof renderChart === 'function') {
-                renderChart(tabId);
-            }
-        }
-
-        // === SUBTAB SWITCHING FOR SECTION 2: INDICADORES ECONOMICOS ===
-        var activeEconTab = null;
-        function switchEconTab(tabId) {
-            activeEconTab = tabId;
-            const container = document.getElementById('container-indicadores-economicos');
-            if (!container) return;
-
-            // Hide only panels inside Indicadores Económicos
-            const panels = container.querySelectorAll('.econ-tab-panel');
-            panels.forEach(p => p.classList.add('hidden'));
-
-            // Reset button styles inside Indicadores Económicos
-            const buttons = container.querySelectorAll('.econ-tab-btn');
-            buttons.forEach(b => {
-                b.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
-                b.classList.add('text-slate-400');
-            });
-
-            // Show active panel inside Indicadores Económicos
-            const activePanel = document.getElementById(tabId);
-            if (activePanel) activePanel.classList.remove('hidden');
-
-            const activeBtn = document.getElementById('btn-' + tabId);
-            if (activeBtn) {
-                activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
-                activeBtn.classList.remove('text-slate-400');
-            }
-        }
-    </script>
+    
 
 </body>
 </html>
-<!-- Deploy timestamp: 1786668153.1893854 -->
+<!-- Deploy timestamp: 1786668516.7939398 -->
