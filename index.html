@@ -168,19 +168,22 @@ window.activeTab = 'exchange';
             if (typeof renderAsegPieCharts === 'function') renderAsegPieCharts();
         }
 
-        function renderAsegPieCharts() {
-            if (typeof appData === 'undefined' || !appData || !appData.ssn_data || !appData.ssn_data.subsections) return;
+        window.renderAsegPieCharts = function renderAsegPieCharts() {
+            const dataObj = window.appData || window.finalData || (typeof appData !== 'undefined' ? appData : null);
+            if (!dataObj || !dataObj.ssn_data || !dataObj.ssn_data.subsections) return;
 
-            const subsections = appData.ssn_data.subsections;
+            const subsections = dataObj.ssn_data.subsections;
             const keys = ['mercado_total', 'seguros_patrimoniales', 'seguros_personas'];
             const colors = ['#3b82f6', '#06b6d4', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#f97316', '#14b8a6', '#6366f1', '#a855f7', '#64748b'];
+
+            window.aseguradorPieCharts = window.aseguradorPieCharts || {};
 
             keys.forEach(k => {
                 const sub = subsections[k];
                 const canvas = document.getElementById('chart-pie-' + k.replace('_', '-'));
                 if (!canvas || !sub) return;
 
-                if (window.aseguradorPieCharts && window.aseguradorPieCharts[k]) {
+                if (window.aseguradorPieCharts[k]) {
                     window.aseguradorPieCharts[k].destroy();
                 }
 
@@ -231,21 +234,7 @@ window.activeTab = 'exchange';
                     }
                 });
             });
-        },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(ctx) {
-                                        return ' ' + ctx.label + ': ' + ctx.parsed + '%';
-                                    }
-                                }
-                            }
-                        },
-                        cutout: '65%'
-                    }
-                });
-            });
-        }
-
+        };
 
         tailwind.config = {
 
@@ -35215,7 +35204,7 @@ window.activeTab = 'exchange';
             </div>
 
             <!-- Pie Chart Canvas (40% Width / Col 5) -->
-            <div class="lg:col-span-5 glass-card bg-darkCard rounded-2xl p-6 border border-darkBorder shadow-xl flex flex-col justify-between">
+            <div class="lg:col-span-5 glass-card bg-darkCard rounded-2xl p-6 border border-darkBorder shadow-xl h-fit self-start sticky top-6 flex flex-col gap-4">
                 <div>
                     <h3 class="text-base font-bold text-white light:text-slate-900 mb-1 flex items-center gap-2">
                         <i class="fas fa-chart-pie text-brandBlue"></i> Distribución de Participación
@@ -35492,7 +35481,7 @@ window.activeTab = 'exchange';
             </div>
 
             <!-- Pie Chart Canvas -->
-            <div class="lg:col-span-5 glass-card bg-darkCard rounded-2xl p-6 border border-darkBorder shadow-xl flex flex-col justify-between">
+            <div class="lg:col-span-5 glass-card bg-darkCard rounded-2xl p-6 border border-darkBorder shadow-xl h-fit self-start sticky top-6 flex flex-col gap-4">
                 <div>
                     <h3 class="text-base font-bold text-white light:text-slate-900 mb-1 flex items-center gap-2">
                         <i class="fas fa-chart-pie text-cyan-400"></i> Distribución Patrimoniales
@@ -35767,7 +35756,7 @@ window.activeTab = 'exchange';
             </div>
 
             <!-- Pie Chart Canvas -->
-            <div class="lg:col-span-5 glass-card bg-darkCard rounded-2xl p-6 border border-darkBorder shadow-xl flex flex-col justify-between">
+            <div class="lg:col-span-5 glass-card bg-darkCard rounded-2xl p-6 border border-darkBorder shadow-xl h-fit self-start sticky top-6 flex flex-col gap-4">
                 <div>
                     <h3 class="text-base font-bold text-white light:text-slate-900 mb-1 flex items-center gap-2">
                         <i class="fas fa-chart-pie text-indigo-400"></i> Distribución Seguros de Personas
@@ -36662,6 +36651,7 @@ window.activeTab = 'exchange';
         window.appData = appData;
 
         window.finalData = appData;
+        if (typeof renderAsegPieCharts === 'function') setTimeout(renderAsegPieCharts, 50);
 
 
 
@@ -42299,48 +42289,33 @@ window.activeTab = 'exchange';
 
                             let lastValid20 = null;
 
-                            const alignedMA20 = mas.ma20 ? commonLabels.map(d => {
-
+                            const alignedMA20 = mas.ma20 ? commonLabels.map((d, idx) => {
                                 const i = rawDates.indexOf(d);
-
                                 let rawMAVal = (i !== -1 && fullMA20[i] !== null && fullMA20[i] !== undefined) ? fullMA20[i] : lastValid20;
-
                                 if (i !== -1 && fullMA20[i] !== null && fullMA20[i] !== undefined) { lastValid20 = fullMA20[i]; }
-
-                                return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal) : null;
-
+                                return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal, idx) : null;
                             }) : null;
 
                             
 
                             let lastValid50 = null;
 
-                            const alignedMA50 = mas.ma50 ? commonLabels.map(d => {
-
+                            const alignedMA50 = mas.ma50 ? commonLabels.map((d, idx) => {
                                 const i = rawDates.indexOf(d);
-
                                 let rawMAVal = (i !== -1 && fullMA50[i] !== null && fullMA50[i] !== undefined) ? fullMA50[i] : lastValid50;
-
                                 if (i !== -1 && fullMA50[i] !== null && fullMA50[i] !== undefined) { lastValid50 = fullMA50[i]; }
-
-                                return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal) : null;
-
+                                return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal, idx) : null;
                             }) : null;
 
                             
 
                             let lastValid200 = null;
 
-                            const alignedMA200 = mas.ma200 ? commonLabels.map(d => {
-
+                            const alignedMA200 = mas.ma200 ? commonLabels.map((d, idx) => {
                                 const i = rawDates.indexOf(d);
-
                                 let rawMAVal = (i !== -1 && fullMA200[i] !== null && fullMA200[i] !== undefined) ? fullMA200[i] : lastValid200;
-
                                 if (i !== -1 && fullMA200[i] !== null && fullMA200[i] !== undefined) { lastValid200 = fullMA200[i]; }
-
-                                return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal) : null;
-
+                                return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal, idx) : null;
                             }) : null;
 
                             
@@ -46554,10 +46529,11 @@ window.activeTab = 'exchange';
         }
 
         window.aseguradorPieCharts = window.aseguradorPieCharts || {};
-        function renderAsegPieCharts() {
-            if (typeof appData === 'undefined' || !appData || !appData.ssn_data || !appData.ssn_data.subsections) return;
+        window.renderAsegPieCharts = function renderAsegPieCharts() {
+            const dataObj = window.appData || window.finalData || (typeof appData !== 'undefined' ? appData : null);
+            if (!dataObj || !dataObj.ssn_data || !dataObj.ssn_data.subsections) return;
 
-            const subsections = appData.ssn_data.subsections;
+            const subsections = dataObj.ssn_data.subsections;
             const keys = ['mercado_total', 'seguros_patrimoniales', 'seguros_personas'];
             const colors = ['#3b82f6', '#06b6d4', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#f97316', '#14b8a6', '#6366f1', '#a855f7', '#64748b'];
 
@@ -46617,21 +46593,7 @@ window.activeTab = 'exchange';
                     }
                 });
             });
-        },
-                            tooltip: {
-                                callbacks: {
-                                    label: function(ctx) {
-                                        return ' ' + ctx.label + ': ' + ctx.parsed + '%';
-                                    }
-                                }
-                            }
-                        },
-                        cutout: '65%'
-                    }
-                });
-            });
         }
     </script>
 </body>
 </html>
-<!-- Deploy timestamp: 1786704856.3921516 -->
