@@ -3369,11 +3369,7 @@ function toggleSMA(section, period) {
     const btn = document.getElementById(`btn-sma-${section}-${period}`);
     if (btn) {
         const isActive = ctrl[key];
-        if (period === 20) {
-            btn.className = isActive 
-                ? "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-slate-950 border border-amber-400 shadow"
-                : "px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all";
-        } else if (period === 50) {
+        if (period === 50) {
             btn.className = isActive
                 ? "px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500 text-white border border-purple-400 shadow"
                 : "px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all";
@@ -3607,48 +3603,155 @@ function renderSparklines() {
 window.renderSparklines = renderSparklines;
 
 // ITEM 8: MERCADO ASEGURADOR COMPLETE RENDERER
+
+// ============================================================================
+// MERCADO ASEGURADOR COMPLETE RENDERER (SSN AUTHENTIC DATA)
+// ============================================================================
 function renderAseguradorData() {
     if (!window.appData || !window.appData.insurance_data) return;
     const ins = window.appData.insurance_data;
     
-    // 1. Populate Primas Acumuladas Ranking Table
-    const tbody = document.getElementById('aseg-table-body');
-    if (tbody && ins.market_breakdown_accumulated) {
-        tbody.innerHTML = '';
+    // 1. Populate Primas Acumuladas Breakdown Table
+    const tbodyPrimas = document.getElementById('aseg-table-body');
+    if (tbodyPrimas && ins.market_breakdown_accumulated) {
+        tbodyPrimas.innerHTML = '';
         ins.market_breakdown_accumulated.forEach((row, idx) => {
             const tr = document.createElement('tr');
-            tr.className = "hover:bg-slate-800/40 light:hover:bg-slate-50 transition-colors border-b border-darkBorder/30";
+            tr.className = "hover:bg-slate-800/40 light:hover:bg-slate-50 transition-colors border-b border-darkBorder/30 text-xs";
             tr.innerHTML = `
                 <td class="px-4 py-3 font-bold text-center text-slate-400">${idx + 1}</td>
-                <td class="px-4 py-3 font-semibold text-white light:text-slate-900">${row.ramo || row.sub_ramo || 'Ramo'}</td>
+                <td class="px-4 py-3 font-bold text-white light:text-slate-900">${row.ramo || row.sub_ramo || 'Ramo'}</td>
                 <td class="px-4 py-3 text-right font-bold text-brandBlue">${row.premiums || '-'}</td>
                 <td class="px-4 py-3 text-right font-semibold text-emerald-400">${row.share || '-'}</td>
                 <td class="px-4 py-3 text-right text-slate-300">${row.change_yoy || '-'}</td>
             `;
-            tbody.appendChild(tr);
+            tbodyPrimas.appendChild(tr);
         });
     }
 
-    // 2. Populate Company Balances Table
+    // 2. Populate Ranking & Balances of Insurance Groups
     const tbodyBal = document.getElementById('aseg-balances-table-body');
     if (tbodyBal && ins.insurance_groups_comparison) {
         tbodyBal.innerHTML = '';
         ins.insurance_groups_comparison.forEach((group, idx) => {
             const tr = document.createElement('tr');
-            tr.className = "hover:bg-slate-800/40 light:hover:bg-slate-50 transition-colors border-b border-darkBorder/30";
+            tr.className = "hover:bg-slate-800/40 light:hover:bg-slate-50 transition-colors border-b border-darkBorder/30 text-xs";
             tr.innerHTML = `
                 <td class="px-4 py-3 font-bold text-center text-brandBlue">${group.rank || (idx + 1)}</td>
                 <td class="px-4 py-3 font-bold text-white light:text-slate-900">${group.group}</td>
-                <td class="px-4 py-3 text-sm text-slate-400">${group.companies || '-'}</td>
+                <td class="px-4 py-3 text-slate-400">${group.companies || '-'}</td>
                 <td class="px-4 py-3 text-right font-bold text-brandBlue">${group.premiums}</td>
                 <td class="px-4 py-3 text-right font-semibold text-emerald-400">${group.share}</td>
             `;
             tbodyBal.appendChild(tr);
         });
     }
+
+    // 3. Render Insurance Market Breakdown Donut Chart
+    const canvasPie = document.getElementById('aseg-pie-chart');
+    if (canvasPie && ins.market_breakdown_accumulated) {
+        const ctx = canvasPie.getContext('2d');
+        const topRamos = ins.market_breakdown_accumulated.slice(0, 6);
+        const labels = topRamos.map(r => r.ramo);
+        const shares = topRamos.map(r => floatVal(r.share));
+        
+        if (window.asegPieChartInstance) window.asegPieChartInstance.destroy();
+        window.asegPieChartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: shares,
+                    backgroundColor: ['#00F0FF', '#10B981', '#F59E0B', '#A855F7', '#EC4899', '#6366F1'],
+                    borderWidth: 1,
+                    borderColor: '#1e293b'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { color: '#94a3b8', font: { size: 10 } } }
+                }
+            }
+        });
+    }
+}
+
+function floatVal(str) {
+    if (!str) return 0;
+    const cleaned = str.replace('%', '').replace(',', '.').trim();
+    return parseFloat(cleaned) || 0;
 }
 
 window.renderAseguradorData = renderAseguradorData;
+
+
+
+function openEconModal(key) {
+    if (!key) return;
+    const modal = document.getElementById('econ-detail-modal');
+    if (!modal) return;
+    
+    const keyEl = document.getElementById('econ-modal-key');
+    if (keyEl) keyEl.textContent = key;
+
+    const titleEl = document.getElementById('econ-modal-title');
+    if (titleEl) titleEl.textContent = (window.appData && window.appData.names) ? (window.appData.names[key] || key) : key;
+
+    const canvas = document.getElementById('econ-modal-chart-canvas');
+    if (canvas && window.appData && window.appData.historical_db) {
+        const hist = window.appData.historical_db[key];
+        if (hist && hist.prices) {
+            const ctx = canvas.getContext('2d');
+            if (window.econModalChart) window.econModalChart.destroy();
+            window.econModalChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: hist.dates || [],
+                    datasets: [{
+                        label: key + ' - Evolución Histórica',
+                        data: hist.prices || [],
+                        borderColor: '#00F0FF',
+                        borderWidth: 2,
+                        fill: true,
+                        backgroundColor: 'rgba(0, 240, 255, 0.08)',
+                        tension: 0.2,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', maxTicksLimit: 8 } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    }
+                }
+            });
+        }
+    }
+
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.style.pointerEvents = 'auto';
+    }, 10);
+}
+
+function closeEconModal() {
+    const modal = document.getElementById('econ-detail-modal');
+    if (!modal) return;
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+window.openEconModal = openEconModal;
+window.closeEconModal = closeEconModal;
 
 
 window.switchTab = function(tabId) {
@@ -4219,9 +4322,9 @@ window.switchAsegSection = function(secId) {
 
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
 
-                                    <span id="chart-title-text-exchange">Evolución Cambiaria</span>
+                                    <span id="chart-title-exchange">Evolución Cambiaria</span>
 
-                                    <span id="scale-badge-exchange" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="scale-badge-exchange" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                 </span>
 
@@ -4264,6 +4367,7 @@ window.switchAsegSection = function(secId) {
                         <div class="h-[350px]">
 
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -4276,18 +4380,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('exchange', 20)" id="btn-sma-exchange-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('exchange', 50)" id="btn-sma-exchange-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('exchange', 200)" id="btn-sma-exchange-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('exchange', 50)" id="btn-sma-exchange-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('exchange', 200)" id="btn-sma-exchange-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-exchange"></canvas>
 
-                        </div>
-
-                    </div>
-
-                </div>
 
             </div>
 
@@ -6637,7 +6734,7 @@ window.switchAsegSection = function(secId) {
 
                                         <span id="chart-title-text-fci-pesos">Evoluci&oacute;n Valor Cuotaparte &middot; FCI Pesos</span>
 
-                                        <span id="scale-badge-fci-pesos" class="text-[10px] px-1.5 py-0.5 rounded font-semibold transition-all ml-2"></span>
+                                        <span id="scale-badge-fci-pesos" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                     </span>
 
@@ -8641,7 +8738,7 @@ window.switchAsegSection = function(secId) {
 
                                         <span id="chart-title-text-fci-dolares">Evoluci&oacute;n Valor Cuotaparte &middot; FCI D&oacute;lares</span>
 
-                                        <span id="scale-badge-fci-dolares" class="text-[10px] px-1.5 py-0.5 rounded font-semibold transition-all ml-2"></span>
+                                        <span id="scale-badge-fci-dolares" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                     </span>
 
@@ -9687,8 +9784,8 @@ window.switchAsegSection = function(secId) {
                         <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                                    <span id="chart-title-text-indices">Evolución</span>
-                                    <span id="scale-badge-indices" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="chart-title-indices">Evolución</span>
+                                    <span id="scale-badge-indices" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-indices" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná activos para graficar</span>
@@ -9704,6 +9801,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[350px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -9716,15 +9814,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('indices', 20)" id="btn-sma-indices-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('indices', 50)" id="btn-sma-indices-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('indices', 200)" id="btn-sma-indices-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('indices', 50)" id="btn-sma-indices-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('indices', 200)" id="btn-sma-indices-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-indices"></canvas>
-                        </div>
-                    </div>
-                </div>
+
             </section>
             </div>
             
@@ -10226,8 +10320,8 @@ window.switchAsegSection = function(secId) {
                         <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                                    <span id="chart-title-text-forex">Evolución</span>
-                                    <span id="scale-badge-forex" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="chart-title-forex">Evolución</span>
+                                    <span id="scale-badge-forex" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-forex" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná activos para graficar</span>
@@ -10243,6 +10337,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[350px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -10255,15 +10350,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('forex', 20)" id="btn-sma-forex-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('forex', 50)" id="btn-sma-forex-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('forex', 200)" id="btn-sma-forex-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('forex', 50)" id="btn-sma-forex-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('forex', 200)" id="btn-sma-forex-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-forex"></canvas>
-                        </div>
-                    </div>
-                </div>
+
             </section>
             </div>
             
@@ -11447,8 +11538,8 @@ window.switchAsegSection = function(secId) {
                         <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                                    <span id="chart-title-text-commodities">Evolución</span>
-                                    <span id="scale-badge-commodities" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="chart-title-commodities">Evolución</span>
+                                    <span id="scale-badge-commodities" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-commodities" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná activos para graficar</span>
@@ -11464,6 +11555,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[350px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -11476,15 +11568,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('commodities', 20)" id="btn-sma-commodities-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('commodities', 50)" id="btn-sma-commodities-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('commodities', 200)" id="btn-sma-commodities-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('commodities', 50)" id="btn-sma-commodities-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('commodities', 200)" id="btn-sma-commodities-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-commodities"></canvas>
-                        </div>
-                    </div>
-                </div>
+
             </section>
             </div>
             
@@ -11753,9 +11841,9 @@ window.switchAsegSection = function(secId) {
 
                                         <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
 
-                                            <span id="chart-title-text-rates">Evolución</span>
+                                            <span id="chart-title-rates">Evolución</span>
 
-                                            <span id="scale-badge-rates" class="text-[10px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-rates" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -11790,6 +11878,7 @@ window.switchAsegSection = function(secId) {
                                 <div class="h-[350px]">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -11802,18 +11891,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('rates', 20)" id="btn-sma-rates-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('rates', 50)" id="btn-sma-rates-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('rates', 200)" id="btn-sma-rates-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('rates', 50)" id="btn-sma-rates-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('rates', 200)" id="btn-sma-rates-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-rates"></canvas>
 
-                                </div>
-
-                            </div>
-
-                        </div>
 
                     </div>
 
@@ -12105,9 +12187,9 @@ window.switchAsegSection = function(secId) {
 
                                         <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
 
-                                            <span id="chart-title-text-local_rates">Evolución</span>
+                                            <span id="chart-title-local_rates">Evolución</span>
 
-                                            <span id="scale-badge-local_rates" class="text-[10px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-local_rates" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -12142,6 +12224,7 @@ window.switchAsegSection = function(secId) {
                                 <div class="h-[350px]">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -12154,18 +12237,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('local_rates', 20)" id="btn-sma-local_rates-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('local_rates', 50)" id="btn-sma-local_rates-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('local_rates', 200)" id="btn-sma-local_rates-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('local_rates', 50)" id="btn-sma-local_rates-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('local_rates', 200)" id="btn-sma-local_rates-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-local_rates"></canvas>
 
-                                </div>
-
-                            </div>
-
-                        </div>
 
                     </div>
 
@@ -13529,7 +13605,7 @@ window.switchAsegSection = function(secId) {
 
                                             <span id="chart-title-text-bonds_usd">Curva USD</span>
 
-                                            <span id="scale-badge-bonds_usd" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-bonds_usd" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -13562,6 +13638,7 @@ window.switchAsegSection = function(secId) {
                                 <div id="container-history-bonds_usd" class="h-[380px] relative w-full mb-3 hidden">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -13574,34 +13651,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('bonds_usd', 20)" id="btn-sma-bonds_usd-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('bonds_usd', 50)" id="btn-sma-bonds_usd-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('bonds_usd', 200)" id="btn-sma-bonds_usd-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('bonds_usd', 50)" id="btn-sma-bonds_usd-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('bonds_usd', 200)" id="btn-sma-bonds_usd-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-bonds_usd"></canvas>
 
-                                </div>
-
-                                <div class="flex justify-between items-center mt-2 border-t border-darkBorder/20 pt-2 hidden" id="controls-history-bonds_usd">
-
-                                    <div class="flex gap-1 items-center" id="periods-bonds_usd">
-
-                                        <button onclick="changePeriod('bonds_usd', '1M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">1M</button>
-
-                                        <button onclick="changePeriod('bonds_usd', '6M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">6M</button>
-
-                                        <button onclick="changePeriod('bonds_usd', '12M')" class="text-[10px] px-2 py-0.5 rounded bg-brandBlue text-white font-bold">12M</button>
-
-                                        <button onclick="changePeriod('bonds_usd', '2A')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">2A</button>
-
-                                        <button onclick="changePeriod('bonds_usd', '5A')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">5A</button>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
 
                         </div>
 
@@ -14656,7 +14710,7 @@ window.switchAsegSection = function(secId) {
 
                                             <span id="chart-title-text-bonds_cer">Curva CER</span>
 
-                                            <span id="scale-badge-bonds_cer" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-bonds_cer" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -14689,6 +14743,7 @@ window.switchAsegSection = function(secId) {
                                 <div id="container-history-bonds_cer" class="h-[380px] relative w-full mb-3 hidden">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -14701,34 +14756,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('bonds_cer', 20)" id="btn-sma-bonds_cer-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('bonds_cer', 50)" id="btn-sma-bonds_cer-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('bonds_cer', 200)" id="btn-sma-bonds_cer-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('bonds_cer', 50)" id="btn-sma-bonds_cer-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('bonds_cer', 200)" id="btn-sma-bonds_cer-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-bonds_cer"></canvas>
 
-                                </div>
-
-                                <div class="flex justify-between items-center mt-2 border-t border-darkBorder/20 pt-2 hidden" id="controls-history-bonds_cer">
-
-                                    <div class="flex gap-1 items-center" id="periods-bonds_cer">
-
-                                        <button onclick="changePeriod('bonds_cer', '1M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">1M</button>
-
-                                        <button onclick="changePeriod('bonds_cer', '6M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">6M</button>
-
-                                        <button onclick="changePeriod('bonds_cer', '12M')" class="text-[10px] px-2 py-0.5 rounded bg-brandBlue text-white font-bold">12M</button>
-
-                                        <button onclick="changePeriod('bonds_cer', '2A')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">2A</button>
-
-                                        <button onclick="changePeriod('bonds_cer', '5A')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">5A</button>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
 
                         </div>
 
@@ -15918,7 +15950,7 @@ window.switchAsegSection = function(secId) {
 
                                             <span id="chart-title-text-bonds_pesos">Curva Pesos</span>
 
-                                            <span id="scale-badge-bonds_pesos" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-bonds_pesos" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -15951,6 +15983,7 @@ window.switchAsegSection = function(secId) {
                                 <div id="container-history-bonds_pesos" class="h-[380px] relative w-full mb-3 hidden">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -15963,34 +15996,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('bonds_pesos', 20)" id="btn-sma-bonds_pesos-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('bonds_pesos', 50)" id="btn-sma-bonds_pesos-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('bonds_pesos', 200)" id="btn-sma-bonds_pesos-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('bonds_pesos', 50)" id="btn-sma-bonds_pesos-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('bonds_pesos', 200)" id="btn-sma-bonds_pesos-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-bonds_pesos"></canvas>
 
-                                </div>
-
-                                <div class="flex justify-between items-center mt-2 border-t border-darkBorder/20 pt-2 hidden" id="controls-history-bonds_pesos">
-
-                                    <div class="flex gap-1 items-center" id="periods-bonds_pesos">
-
-                                        <button onclick="changePeriod('bonds_pesos', '1M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">1M</button>
-
-                                        <button onclick="changePeriod('bonds_pesos', '6M')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">6M</button>
-
-                                        <button onclick="changePeriod('bonds_pesos', '12M')" class="text-[10px] px-2 py-0.5 rounded bg-brandBlue text-white font-bold">12M</button>
-
-                                        <button onclick="changePeriod('bonds_pesos', '2A')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">2A</button>
-
-                                        <button onclick="changePeriod('bonds_pesos', '5A')" class="text-[10px] px-2 py-0.5 rounded bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-slate-300 light:text-slate-600 light:hover:text-slate-900">5A</button>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
 
                         </div>
 
@@ -17214,7 +17224,7 @@ window.switchAsegSection = function(secId) {
 
                                             <span id="chart-title-text-corporate">Evolución</span>
 
-                                            <span id="scale-badge-corporate" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-corporate" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -17249,6 +17259,7 @@ window.switchAsegSection = function(secId) {
                                 <div class="h-[420px]">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -17261,18 +17272,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('corporate', 20)" id="btn-sma-corporate-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('corporate', 50)" id="btn-sma-corporate-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('corporate', 200)" id="btn-sma-corporate-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('corporate', 50)" id="btn-sma-corporate-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('corporate', 200)" id="btn-sma-corporate-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-corporate"></canvas>
 
-                                </div>
-
-                            </div>
-
-                        </div>
 
                     </div>
 
@@ -20687,7 +20691,7 @@ window.switchAsegSection = function(secId) {
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
                                     <span id="chart-title-text-cedears">Evolución</span>
-                                    <span id="scale-badge-cedears" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="scale-badge-cedears" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-cedears" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná CEDEARs para graficar</span>
@@ -20703,6 +20707,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[400px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -20715,25 +20720,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('cedears', 20)" id="btn-sma-cedears-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('cedears', 50)" id="btn-sma-cedears-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('cedears', 200)" id="btn-sma-cedears-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('cedears', 50)" id="btn-sma-cedears-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('cedears', 200)" id="btn-sma-cedears-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-cedears"></canvas>
-                        </div>
-                   
-                    <!-- Chart Column for Corporate ONs Yield Curve -->
-                    <div class="w-full lg:w-1/2 lg:sticky lg:top-6 lg:self-start mt-6">
-                        <div class="glass-card rounded-2xl p-5 border border-darkBorder/40">
-                            <h4 class="text-sm font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
-                                <i class="fas fa-chart-line text-brandGreen"></i> Curva de Rendimientos (TIR vs Duration) - ONs
-                            </h4>
-                            <div class="h-[320px] relative w-full mb-3">
-                                <canvas id="chart-ons-curve"></canvas>
-                            </div>
-                        </div>
-                    </div>
+
  </div>
                 </div>
             </section>
@@ -24357,7 +24348,7 @@ window.switchAsegSection = function(secId) {
 
                                             <span id="chart-title-text-stocks">Evolución</span>
 
-                                            <span id="scale-badge-stocks" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                            <span id="scale-badge-stocks" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
 
                                         </span>
 
@@ -24392,6 +24383,7 @@ window.switchAsegSection = function(secId) {
                                 <div class="h-[350px]">
 
                                     
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -24404,18 +24396,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('stocks', 20)" id="btn-sma-stocks-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('stocks', 50)" id="btn-sma-stocks-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('stocks', 200)" id="btn-sma-stocks-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('stocks', 50)" id="btn-sma-stocks-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('stocks', 200)" id="btn-sma-stocks-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-stocks"></canvas>
 
-                                </div>
-
-                            </div>
-
-                        </div>
 
                     </div>
 
@@ -25767,8 +25752,8 @@ window.switchAsegSection = function(secId) {
                         <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                                    <span id="chart-title-text-etfs">Evolución</span>
-                                    <span id="scale-badge-etfs" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="chart-title-etfs">Evolución</span>
+                                    <span id="scale-badge-etfs" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-etfs" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná activos para graficar</span>
@@ -25784,6 +25769,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[350px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -25796,15 +25782,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('etfs', 20)" id="btn-sma-etfs-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('etfs', 50)" id="btn-sma-etfs-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('etfs', 200)" id="btn-sma-etfs-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('etfs', 50)" id="btn-sma-etfs-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('etfs', 200)" id="btn-sma-etfs-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-etfs"></canvas>
-                        </div>
-                    </div>
-                </div>
+
             </section>
             </div>
             
@@ -27151,8 +27133,8 @@ window.switchAsegSection = function(secId) {
                         <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                                    <span id="chart-title-text-acciones_arg">Evolución</span>
-                                    <span id="scale-badge-acciones_arg" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="chart-title-acciones_arg">Evolución</span>
+                                    <span id="scale-badge-acciones_arg" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-acciones_arg" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná activos para graficar</span>
@@ -27168,6 +27150,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[350px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -27180,15 +27163,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('acciones_arg', 20)" id="btn-sma-acciones_arg-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('acciones_arg', 50)" id="btn-sma-acciones_arg-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('acciones_arg', 200)" id="btn-sma-acciones_arg-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('acciones_arg', 50)" id="btn-sma-acciones_arg-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('acciones_arg', 200)" id="btn-sma-acciones_arg-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-acciones_arg"></canvas>
-                        </div>
-                    </div>
-                </div>
+
             </section>
             </div>
             
@@ -27625,8 +27604,8 @@ window.switchAsegSection = function(secId) {
                         <div class="flex items-center justify-between border-b border-darkBorder light:border-gray-200 pb-2 mb-3">
                             <div class="flex flex-col">
                                 <span class="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                                    <span id="chart-title-text-cryptos">Evolución</span>
-                                    <span id="scale-badge-cryptos" class="text-[9px] px-1.5 py-0.5 rounded font-semibold transition-all"></span>
+                                    <span id="chart-title-cryptos">Evolución</span>
+                                    <span id="scale-badge-cryptos" class="text-[10px] px-2 py-0.5 rounded font-semibold hidden"></span>
                                 </span>
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
                                     <span id="range-badge-cryptos" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Seleccioná activos para graficar</span>
@@ -27642,6 +27621,7 @@ window.switchAsegSection = function(secId) {
                         </div>
                         <div class="h-[350px]">
                             
+
 <!-- CHART CONTROL TOOLBAR -->
 <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
     <div class="flex items-center gap-2">
@@ -27654,15 +27634,11 @@ window.switchAsegSection = function(secId) {
     </div>
     <div class="flex items-center gap-1.5">
         <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
-        <button type="button" onclick="toggleSMA('cryptos', 20)" id="btn-sma-cryptos-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
-        <button type="button" onclick="toggleSMA('cryptos', 50)" id="btn-sma-cryptos-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
-        <button type="button" onclick="toggleSMA('cryptos', 200)" id="btn-sma-cryptos-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+        <button type="button" onclick="toggleSMA('cryptos', 50)" id="btn-sma-cryptos-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">MA 50</button>
+        <button type="button" onclick="toggleSMA('cryptos', 200)" id="btn-sma-cryptos-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">MA 200</button>
     </div>
 </div>
-<canvas id="chart-cryptos"></canvas>
-                        </div>
-                    </div>
-                </div>
+
             </section>
             </div>
             
@@ -37460,6 +37436,24 @@ window.switchAsegSection = function(secId) {
         }
     
     </script>
+
+    <!-- ECONOMIC INDICATOR DETAIL MODAL -->
+    <div id="econ-detail-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 999999; display: none; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out;" onclick="if(event.target === this) closeEconModal()">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 w-[95%] max-w-4xl max-h-[90vh] overflow-y-auto flex flex-col gap-6 relative shadow-2xl border border-darkBorder/40 light:bg-white light:border-slate-200">
+            <button onclick="closeEconModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors w-8 h-8 rounded-full flex items-center justify-center bg-darkBg/40 border border-darkBorder/40">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="flex flex-col gap-1">
+                <span id="econ-modal-key" class="text-xs font-bold text-brandBlue uppercase tracking-wider"></span>
+                <h3 id="econ-modal-title" class="text-2xl font-black text-white light:text-slate-900"></h3>
+                <p id="econ-modal-desc" class="text-sm text-slate-400 mt-1"></p>
+            </div>
+            <div class="h-[360px] relative w-full">
+                <canvas id="econ-modal-chart-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
-<!-- Deploy timestamp: 1786827963.202045 -->
+<!-- Deploy timestamp: 1786828875.206839 -->
