@@ -326,6 +326,9 @@ window.activeTab = 'exchange';
                 }
             },
             afterDraw(chart) {
+                if (chart.config.type === 'doughnut' || chart.config.type === 'pie') return;
+                if (chart.options?.plugins?.crosshair?.enabled === false) return;
+                if (chart.options?.plugins?.verticalLine?.enabled === false) return;
                 // 1. Draw crosshair lines if active
                 if (chart.options?.plugins?.crosshair?.enabled !== false) {
                     const x = chart._crosshairX;
@@ -46704,6 +46707,7 @@ function renderAseguradorData() {
                 maintainAspectRatio: false,
                 cutout: '62%',
                 plugins: {
+                    crosshair: { enabled: false },
                     legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9, weight: '600' }, color: '#94a3b8' } }
                 }
             }
@@ -46735,6 +46739,7 @@ function renderAseguradorData() {
                 maintainAspectRatio: false,
                 cutout: '62%',
                 plugins: {
+                    crosshair: { enabled: false },
                     legend: { position: 'bottom', labels: { boxWidth: 8, font: { size: 9, weight: '600' }, color: '#94a3b8' } }
                 }
             }
@@ -46765,6 +46770,7 @@ function renderAseguradorData() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
+                    crosshair: { enabled: false },
                     legend: { position: 'top', labels: { font: { size: 10, weight: '600' }, color: '#94a3b8' } }
                 },
                 scales: {
@@ -46847,4 +46853,4 @@ if (document.readyState === 'loading') {
 
 </body>
 </html>
-<!-- Deploy timestamp: 1786836881.9769804 -->
+<!-- Deploy timestamp: 1786837383.4221535 -->
