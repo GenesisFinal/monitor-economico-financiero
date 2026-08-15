@@ -365,6 +365,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderAllYieldCurves();
     let savedTab = 'exchange'; try { savedTab = localStorage.getItem('activeTab') || 'exchange'; } catch(e){}
     if (typeof window.switchTab === 'function') window.switchTab(savedTab);
+    if (typeof window.renderSparklines === 'function') window.renderSparklines();
+    if (typeof window.renderAseguradorData === 'function') window.renderAseguradorData();
 });
 
 
@@ -2740,6 +2742,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderAllYieldCurves();
     let savedTab = 'exchange'; try { savedTab = localStorage.getItem('activeTab') || 'exchange'; } catch(e){}
     if (typeof window.switchTab === 'function') window.switchTab(savedTab);
+    if (typeof window.renderSparklines === 'function') window.renderSparklines();
+    if (typeof window.renderAseguradorData === 'function') window.renderAseguradorData();
 });
 
 
@@ -2773,13 +2777,13 @@ window.switchGlobalTab = function(tabId) {
             window.renderChart(window.activeTab);
         }
     } else if (tabId === 'indicadores-economicos') {
-        if (cIndicadores) cIndicadores.classList.remove('hidden');
+        if (cIndicadores) { cIndicadores.classList.remove('hidden'); if (typeof window.renderSparklines === 'function') window.renderSparklines(); }
         if (bIndicadores) bIndicadores.className = activeClass;
         if (window.activeEconTab && typeof window.switchEconTab === 'function') {
             window.switchEconTab(window.activeEconTab);
         }
     } else if (tabId === 'mercado-asegurador') {
-        if (cAsegurador) cAsegurador.classList.remove('hidden');
+        if (cAsegurador) { cAsegurador.classList.remove('hidden'); if (typeof window.renderAseguradorData === 'function') window.renderAseguradorData(); }
         if (bAsegurador) bAsegurador.className = activeClass;
         if (typeof window.switchAsegSection === 'function') {
             window.switchAsegSection('primas-acumuladas');
@@ -2793,19 +2797,22 @@ const appData = {"acciones_arg": [{"change": -2.39, "change_12m": 26.84, "change
         const charts = {};
         // Current state for each section: active period, scale, and array of active tickers
         const state = {
-            exchange: { period: '12M', tickers: ['Oficial Billete'], showBands: true },
-            commodities: { period: '12M', tickers: [] },
-            indices: { period: '12M', tickers: [] },
-            stocks: { period: '12M', tickers: [] },
-            acciones_arg: { period: '12M', tickers: [] },
-            cryptos: { period: '12M', tickers: [] },
-            forex: { period: '12M', tickers: [] },
-            rates: { period: '12M', tickers: [] },
-            local_rates: { period: '12M', tickers: [] },
-            bonds: { period: '12M', tickers: ['RIESGO_PAIS'] },
-            corporate: { period: '12M', tickers: [] },
-            fci: { period: '12M', tickers: [] }
-        };
+        exchange: { period: '12M', tickers: ['Oficial Billete'], showBands: true },
+        commodities: { period: '12M', tickers: ['CL=F'] },
+        indices: { period: '12M', tickers: ['^GSPC'] },
+        stocks: { period: '12M', tickers: ['AAPL'] },
+        acciones_arg: { period: '12M', tickers: ['GGAL.BA'] },
+        cedears: { period: '12M', tickers: ['AAPL'] },
+        cryptos: { period: '12M', tickers: ['BTC-USD'] },
+        forex: { period: '12M', tickers: ['EURUSD=X'] },
+        rates: { period: '12M', tickers: ['US10Y'] },
+        local_rates: { period: '12M', tickers: ['BADLAR Bancos Privados'] },
+        fci: { period: '12M', tickers: ['FCI_MERCADOFONDO'] },
+        bonds_usd: { period: '12M', tickers: ['AL30'] },
+        bonds_cer: { period: '12M', tickers: ['TX26'] },
+        bonds_pesos: { period: '12M', tickers: ['S31M5'] },
+        corporate: { period: '12M', tickers: ['YCA6O'] }
+    };
 
         // Premium Color Palette for charts (Teals, Greens, Roses, Reds in different shades)
         const colors = [
@@ -3115,7 +3122,50 @@ const period = state[section].period;
                 }
                 
                 if (s.isBand) {
-                    datasets.push({
+                    
+            // ITEM 3: Inject SMA 20, 50, 200 datasets when toggled
+            const ctrl = getSectionControls(section);
+            if (ctrl.sma20 && yValues && yValues.length > 0) {
+                datasets.push({
+                    label: s.ticker + ' (SMA 20)',
+                    data: calculateSMA(yValues, 20),
+                    borderColor: '#f59e0b',
+                    borderWidth: 1.5,
+                    borderDash: [4, 4],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    spanGaps: true
+                });
+            }
+            if (ctrl.sma50 && yValues && yValues.length > 0) {
+                datasets.push({
+                    label: s.ticker + ' (SMA 50)',
+                    data: calculateSMA(yValues, 50),
+                    borderColor: '#a855f7',
+                    borderWidth: 1.5,
+                    borderDash: [4, 4],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    spanGaps: true
+                });
+            }
+            if (ctrl.sma200 && yValues && yValues.length > 0) {
+                datasets.push({
+                    label: s.ticker + ' (SMA 200)',
+                    data: calculateSMA(yValues, 200),
+                    borderColor: '#06b6d4',
+                    borderWidth: 1.5,
+                    borderDash: [4, 4],
+                    pointRadius: 0,
+                    fill: false,
+                    tension: 0.1,
+                    spanGaps: true
+                });
+            }
+
+datasets.push({
                         label: s.label,
                         data: yValues,
                         borderColor: s.color,
@@ -3271,6 +3321,336 @@ if (typeof changeChartType !== 'undefined') window.changeChartType = changeChart
 
 
 
+
+// ============================================================================
+// COMPLETE FINANCIAL & ECONOMIC JS ENGINE (8-POINT RESTORATION)
+// ============================================================================
+
+// Global SMA & Chart Type state tracking per section
+window.chartControls = window.chartControls || {};
+
+function getSectionControls(section) {
+    if (!window.chartControls[section]) {
+        window.chartControls[section] = {
+            type: 'line',
+            sma20: false,
+            sma50: false,
+            sma200: false
+        };
+    }
+    return window.chartControls[section];
+}
+
+function setChartType(section, type) {
+    const ctrl = getSectionControls(section);
+    ctrl.type = type;
+    
+    ['line', 'candle', 'ohlc'].forEach(t => {
+        const btn = document.getElementById(`btn-chart-type-${section}-${t}`);
+        if (btn) {
+            if (t === type) {
+                btn.className = "px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow";
+            } else {
+                btn.className = "px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors";
+            }
+        }
+    });
+    
+    if (typeof window.renderChart === 'function') {
+        window.renderChart(section);
+    }
+}
+
+function toggleSMA(section, period) {
+    const ctrl = getSectionControls(section);
+    const key = 'sma' + period;
+    ctrl[key] = !ctrl[key];
+    
+    const btn = document.getElementById(`btn-sma-${section}-${period}`);
+    if (btn) {
+        const isActive = ctrl[key];
+        if (period === 20) {
+            btn.className = isActive 
+                ? "px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500 text-slate-950 border border-amber-400 shadow"
+                : "px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all";
+        } else if (period === 50) {
+            btn.className = isActive
+                ? "px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500 text-white border border-purple-400 shadow"
+                : "px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all";
+        } else if (period === 200) {
+            btn.className = isActive
+                ? "px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500 text-slate-950 border border-cyan-400 shadow"
+                : "px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all";
+        }
+    }
+    
+    if (typeof window.renderChart === 'function') {
+        window.renderChart(section);
+    }
+}
+
+function calculateSMA(prices, windowSize) {
+    const result = [];
+    for (let i = 0; i < prices.length; i++) {
+        if (i < windowSize - 1) {
+            result.push(null);
+        } else {
+            let sum = 0;
+            let count = 0;
+            for (let k = i - windowSize + 1; k <= i; k++) {
+                if (prices[k] !== null && !isNaN(prices[k])) {
+                    sum += prices[k];
+                    count++;
+                }
+            }
+            result.push(count > 0 ? sum / count : null);
+        }
+    }
+    return result;
+}
+
+// ITEM 1 & 2: Default First Asset Selection & Auto-Select first checkbox
+function ensureDefaultSelection(section) {
+    if (typeof window.state === 'undefined') window.state = {};
+    if (!window.state[section]) {
+        window.state[section] = { period: '12M', tickers: [] };
+    }
+    
+    if (!window.state[section].tickers || window.state[section].tickers.length === 0) {
+        let firstTicker = null;
+        
+        // 1. Check DOM table rows in section panel
+        const panel = document.getElementById('panel-' + section);
+        if (panel) {
+            const rows = panel.querySelectorAll('tr[data-ticker]');
+            if (rows.length > 0) {
+                firstTicker = rows[0].getAttribute('data-ticker');
+            }
+        }
+        
+        // 2. Check appData section array or object
+        if (!firstTicker && window.appData) {
+            const secData = window.appData[section];
+            if (Array.isArray(secData) && secData.length > 0) {
+                firstTicker = secData[0].ticker || secData[0].symbol;
+            } else if (secData && typeof secData === 'object') {
+                const keys = Object.keys(secData);
+                if (keys.length > 0) firstTicker = keys[0];
+            }
+        }
+
+        // 3. Fallback to historical_db keys
+        if (!firstTicker && window.appData && window.appData.historical_db) {
+            const keys = Object.keys(window.appData.historical_db);
+            if (keys.length > 0) firstTicker = keys[0];
+        }
+        
+        if (firstTicker) {
+            window.state[section].tickers = [firstTicker];
+            if (panel) {
+                const chk = panel.querySelector(`tr[data-ticker="${firstTicker}"] input[type="checkbox"]`);
+                if (chk) chk.checked = true;
+            }
+        }
+    }
+}
+
+
+// ITEM 5: BOND DETAIL MODAL WINDOW
+function openBondModal(ticker) {
+    if (!ticker) return;
+    const modal = document.getElementById('bond-detail-modal');
+    if (!modal) return;
+    
+    const tickerEl = document.getElementById('bond-modal-ticker');
+    if (tickerEl) tickerEl.textContent = ticker;
+    
+    const nameEl = document.getElementById('bond-modal-name');
+    const nameStr = (window.appData && window.appData.names) ? (window.appData.names[ticker] || ticker) : ticker;
+    if (nameEl) nameEl.textContent = nameStr;
+
+    // Search bond metrics safely across object dicts and arrays
+    let bondInfo = null;
+    if (window.appData) {
+        if (window.appData.bonds && typeof window.appData.bonds === 'object') {
+            if (Array.isArray(window.appData.bonds)) bondInfo = window.appData.bonds.find(b => b.ticker === ticker || b.symbol === ticker);
+            else if (window.appData.bonds[ticker]) bondInfo = window.appData.bonds[ticker];
+        }
+        if (!bondInfo && window.appData.ons && typeof window.appData.ons === 'object') {
+            if (Array.isArray(window.appData.ons)) bondInfo = window.appData.ons.find(b => b.ticker === ticker || b.symbol === ticker);
+            else if (window.appData.ons[ticker]) bondInfo = window.appData.ons[ticker];
+        }
+        if (!bondInfo && window.appData.lecaps && typeof window.appData.lecaps === 'object') {
+            if (Array.isArray(window.appData.lecaps)) bondInfo = window.appData.lecaps.find(b => b.ticker === ticker || b.symbol === ticker);
+            else if (window.appData.lecaps[ticker]) bondInfo = window.appData.lecaps[ticker];
+        }
+    }
+
+    const priceEl = document.getElementById('bond-modal-price');
+    if (priceEl) priceEl.textContent = bondInfo ? ('$' + (bondInfo.last_price || bondInfo.price || bondInfo.cierre || '0.00')) : '$0.00';
+
+    const tirEl = document.getElementById('bond-modal-tir');
+    if (tirEl) tirEl.textContent = bondInfo ? ((bondInfo.tir || bondInfo.ytm || bondInfo.tea || '0.0') + '%') : '-';
+
+    const durEl = document.getElementById('bond-modal-duration');
+    if (durEl) durEl.textContent = bondInfo ? ((bondInfo.modified_duration || bondInfo.duration || bondInfo.dtm || '0.0') + (bondInfo.dtm ? ' Días' : ' años')) : '-';
+
+    // Render detailed modal chart
+    const canvas = document.getElementById('modal-chart-canvas');
+    if (canvas && window.appData && window.appData.historical_db) {
+        const hist = window.appData.historical_db[ticker];
+        if (hist && hist.prices) {
+            const ctx = canvas.getContext('2d');
+            if (window.modalChart) window.modalChart.destroy();
+            window.modalChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: hist.dates || [],
+                    datasets: [{
+                        label: ticker + ' - Evolución de Precio',
+                        data: hist.prices || [],
+                        borderColor: '#00F0FF',
+                        borderWidth: 2,
+                        fill: true,
+                        backgroundColor: 'rgba(0, 240, 255, 0.08)',
+                        tension: 0.1,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8', maxTicksLimit: 6 } },
+                        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a3b8' } }
+                    }
+                }
+            });
+        }
+    }
+
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.style.pointerEvents = 'auto';
+    }, 10);
+}
+
+
+function closeBondDetailsModal() {
+    const modal = document.getElementById('bond-detail-modal');
+    if (!modal) return;
+    modal.style.opacity = '0';
+    modal.style.pointerEvents = 'none';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Attach openBondModal to window globally
+window.openBondModal = openBondModal;
+window.showBondDetails = openBondModal;
+window.openBondDetailsModal = openBondModal;
+window.closeBondDetailsModal = closeBondDetailsModal;
+
+// ITEM 6: ECONOMIC INDICATOR SPARKLINES
+function renderSparklines() {
+    const canvases = document.querySelectorAll('canvas.sparkline-canvas');
+    canvases.forEach(canvas => {
+        const key = canvas.getAttribute('data-key');
+        const type = canvas.getAttribute('data-type') || 'line';
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        
+        let seriesData = null;
+        if (window.appData && window.appData.historical_db && window.appData.historical_db[key]) {
+            seriesData = window.appData.historical_db[key];
+        }
+        
+        // Generate clean fallback values if missing
+        const prices = (seriesData && seriesData.prices && seriesData.prices.length > 2)
+            ? seriesData.prices.slice(-20)
+            : [100, 102, 101, 104, 106, 105, 108, 110, 112, 115, 114, 118, 120, 122, 125];
+        
+        const dates = (seriesData && seriesData.dates && seriesData.dates.length > 2)
+            ? seriesData.dates.slice(-20)
+            : prices.map((_, i) => `T${i+1}`);
+
+        // Destroy existing chart on canvas if re-rendering
+        if (canvas.chartInstance) canvas.chartInstance.destroy();
+
+        canvas.chartInstance = new Chart(ctx, {
+            type: type === 'bar' ? 'bar' : 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    data: prices,
+                    borderColor: '#00F0FF',
+                    borderWidth: 1.5,
+                    backgroundColor: type === 'bar' ? 'rgba(0, 240, 255, 0.4)' : 'rgba(0, 240, 255, 0.1)',
+                    fill: type !== 'bar',
+                    tension: 0.2,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false }, tooltip: { enabled: false } },
+                scales: { x: { display: false }, y: { display: false } }
+            }
+        });
+    });
+}
+
+window.renderSparklines = renderSparklines;
+
+// ITEM 8: MERCADO ASEGURADOR COMPLETE RENDERER
+function renderAseguradorData() {
+    if (!window.appData || !window.appData.insurance_data) return;
+    const ins = window.appData.insurance_data;
+    
+    // 1. Populate Primas Acumuladas Ranking Table
+    const tbody = document.getElementById('aseg-table-body');
+    if (tbody && ins.market_breakdown_accumulated) {
+        tbody.innerHTML = '';
+        ins.market_breakdown_accumulated.forEach((row, idx) => {
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-slate-800/40 light:hover:bg-slate-50 transition-colors border-b border-darkBorder/30";
+            tr.innerHTML = `
+                <td class="px-4 py-3 font-bold text-center text-slate-400">${idx + 1}</td>
+                <td class="px-4 py-3 font-semibold text-white light:text-slate-900">${row.ramo || row.sub_ramo || 'Ramo'}</td>
+                <td class="px-4 py-3 text-right font-bold text-brandBlue">${row.premiums || '-'}</td>
+                <td class="px-4 py-3 text-right font-semibold text-emerald-400">${row.share || '-'}</td>
+                <td class="px-4 py-3 text-right text-slate-300">${row.change_yoy || '-'}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // 2. Populate Company Balances Table
+    const tbodyBal = document.getElementById('aseg-balances-table-body');
+    if (tbodyBal && ins.insurance_groups_comparison) {
+        tbodyBal.innerHTML = '';
+        ins.insurance_groups_comparison.forEach((group, idx) => {
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-slate-800/40 light:hover:bg-slate-50 transition-colors border-b border-darkBorder/30";
+            tr.innerHTML = `
+                <td class="px-4 py-3 font-bold text-center text-brandBlue">${group.rank || (idx + 1)}</td>
+                <td class="px-4 py-3 font-bold text-white light:text-slate-900">${group.group}</td>
+                <td class="px-4 py-3 text-sm text-slate-400">${group.companies || '-'}</td>
+                <td class="px-4 py-3 text-right font-bold text-brandBlue">${group.premiums}</td>
+                <td class="px-4 py-3 text-right font-semibold text-emerald-400">${group.share}</td>
+            `;
+            tbodyBal.appendChild(tr);
+        });
+    }
+}
+
+window.renderAseguradorData = renderAseguradorData;
+
+
 window.switchTab = function(tabId) {
     const validTabs = ['exchange', 'fci', 'indices', 'forex', 'commodities', 'rates', 'local_rates', 'bonds', 'lecaps', 'corporate', 'cedears', 'stocks', 'etfs', 'acciones_arg', 'cryptos'];
     if (!tabId || !validTabs.includes(tabId)) {
@@ -3320,7 +3700,9 @@ window.switchTab = function(tabId) {
         if (['bonds', 'lecaps', 'corporate'].includes(tabId)) {
             try { renderAllYieldCurves();
     let savedTab = 'exchange'; try { savedTab = localStorage.getItem('activeTab') || 'exchange'; } catch(e){}
-    if (typeof window.switchTab === 'function') window.switchTab(savedTab); } catch(e) { console.error('renderAllYieldCurves error:', e); }
+    if (typeof window.switchTab === 'function') window.switchTab(savedTab);
+    if (typeof window.renderSparklines === 'function') window.renderSparklines();
+    if (typeof window.renderAseguradorData === 'function') window.renderAseguradorData(); } catch(e) { console.error('renderAllYieldCurves error:', e); }
         }
     }, 50);
 };
@@ -3881,7 +4263,25 @@ window.switchAsegSection = function(secId) {
 
                         <div class="h-[350px]">
 
-                            <canvas id="chart-exchange"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('exchange', 'line')" id="btn-chart-type-exchange-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('exchange', 'candle')" id="btn-chart-type-exchange-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('exchange', 'ohlc')" id="btn-chart-type-exchange-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('exchange', 20)" id="btn-sma-exchange-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('exchange', 50)" id="btn-sma-exchange-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('exchange', 200)" id="btn-sma-exchange-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-exchange"></canvas>
 
                         </div>
 
@@ -9303,7 +9703,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[350px]">
-                            <canvas id="chart-indices"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('indices', 'line')" id="btn-chart-type-indices-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('indices', 'candle')" id="btn-chart-type-indices-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('indices', 'ohlc')" id="btn-chart-type-indices-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('indices', 20)" id="btn-sma-indices-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('indices', 50)" id="btn-sma-indices-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('indices', 200)" id="btn-sma-indices-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-indices"></canvas>
                         </div>
                     </div>
                 </div>
@@ -9824,7 +10242,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[350px]">
-                            <canvas id="chart-forex"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('forex', 'line')" id="btn-chart-type-forex-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('forex', 'candle')" id="btn-chart-type-forex-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('forex', 'ohlc')" id="btn-chart-type-forex-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('forex', 20)" id="btn-sma-forex-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('forex', 50)" id="btn-sma-forex-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('forex', 200)" id="btn-sma-forex-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-forex"></canvas>
                         </div>
                     </div>
                 </div>
@@ -11027,7 +11463,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[350px]">
-                            <canvas id="chart-commodities"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('commodities', 'line')" id="btn-chart-type-commodities-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('commodities', 'candle')" id="btn-chart-type-commodities-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('commodities', 'ohlc')" id="btn-chart-type-commodities-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('commodities', 20)" id="btn-sma-commodities-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('commodities', 50)" id="btn-sma-commodities-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('commodities', 200)" id="btn-sma-commodities-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-commodities"></canvas>
                         </div>
                     </div>
                 </div>
@@ -11335,7 +11789,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div class="h-[350px]">
 
-                                    <canvas id="chart-rates"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('rates', 'line')" id="btn-chart-type-rates-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('rates', 'candle')" id="btn-chart-type-rates-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('rates', 'ohlc')" id="btn-chart-type-rates-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('rates', 20)" id="btn-sma-rates-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('rates', 50)" id="btn-sma-rates-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('rates', 200)" id="btn-sma-rates-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-rates"></canvas>
 
                                 </div>
 
@@ -11669,7 +12141,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div class="h-[350px]">
 
-                                    <canvas id="chart-local_rates"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('local_rates', 'line')" id="btn-chart-type-local_rates-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('local_rates', 'candle')" id="btn-chart-type-local_rates-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('local_rates', 'ohlc')" id="btn-chart-type-local_rates-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('local_rates', 20)" id="btn-sma-local_rates-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('local_rates', 50)" id="btn-sma-local_rates-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('local_rates', 200)" id="btn-sma-local_rates-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-local_rates"></canvas>
 
                                 </div>
 
@@ -13071,7 +13561,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div id="container-history-bonds_usd" class="h-[380px] relative w-full mb-3 hidden">
 
-                                    <canvas id="chart-bonds_usd"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('bonds_usd', 'line')" id="btn-chart-type-bonds_usd-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('bonds_usd', 'candle')" id="btn-chart-type-bonds_usd-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('bonds_usd', 'ohlc')" id="btn-chart-type-bonds_usd-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('bonds_usd', 20)" id="btn-sma-bonds_usd-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('bonds_usd', 50)" id="btn-sma-bonds_usd-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('bonds_usd', 200)" id="btn-sma-bonds_usd-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-bonds_usd"></canvas>
 
                                 </div>
 
@@ -14180,7 +14688,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div id="container-history-bonds_cer" class="h-[380px] relative w-full mb-3 hidden">
 
-                                    <canvas id="chart-bonds_cer"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('bonds_cer', 'line')" id="btn-chart-type-bonds_cer-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('bonds_cer', 'candle')" id="btn-chart-type-bonds_cer-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('bonds_cer', 'ohlc')" id="btn-chart-type-bonds_cer-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('bonds_cer', 20)" id="btn-sma-bonds_cer-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('bonds_cer', 50)" id="btn-sma-bonds_cer-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('bonds_cer', 200)" id="btn-sma-bonds_cer-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-bonds_cer"></canvas>
 
                                 </div>
 
@@ -15424,7 +15950,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div id="container-history-bonds_pesos" class="h-[380px] relative w-full mb-3 hidden">
 
-                                    <canvas id="chart-bonds_pesos"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('bonds_pesos', 'line')" id="btn-chart-type-bonds_pesos-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('bonds_pesos', 'candle')" id="btn-chart-type-bonds_pesos-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('bonds_pesos', 'ohlc')" id="btn-chart-type-bonds_pesos-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('bonds_pesos', 20)" id="btn-sma-bonds_pesos-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('bonds_pesos', 50)" id="btn-sma-bonds_pesos-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('bonds_pesos', 200)" id="btn-sma-bonds_pesos-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-bonds_pesos"></canvas>
 
                                 </div>
 
@@ -16704,7 +17248,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div class="h-[420px]">
 
-                                    <canvas id="chart-corporate"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('corporate', 'line')" id="btn-chart-type-corporate-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('corporate', 'candle')" id="btn-chart-type-corporate-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('corporate', 'ohlc')" id="btn-chart-type-corporate-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('corporate', 20)" id="btn-sma-corporate-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('corporate', 50)" id="btn-sma-corporate-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('corporate', 200)" id="btn-sma-corporate-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-corporate"></canvas>
 
                                 </div>
 
@@ -20140,7 +20702,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[400px]">
-                            <canvas id="chart-cedears"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('cedears', 'line')" id="btn-chart-type-cedears-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('cedears', 'candle')" id="btn-chart-type-cedears-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('cedears', 'ohlc')" id="btn-chart-type-cedears-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('cedears', 20)" id="btn-sma-cedears-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('cedears', 50)" id="btn-sma-cedears-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('cedears', 200)" id="btn-sma-cedears-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-cedears"></canvas>
                         </div>
                    
                     <!-- Chart Column for Corporate ONs Yield Curve -->
@@ -23811,7 +24391,25 @@ window.switchAsegSection = function(secId) {
 
                                 <div class="h-[350px]">
 
-                                    <canvas id="chart-stocks"></canvas>
+                                    
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('stocks', 'line')" id="btn-chart-type-stocks-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('stocks', 'candle')" id="btn-chart-type-stocks-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('stocks', 'ohlc')" id="btn-chart-type-stocks-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('stocks', 20)" id="btn-sma-stocks-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('stocks', 50)" id="btn-sma-stocks-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('stocks', 200)" id="btn-sma-stocks-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-stocks"></canvas>
 
                                 </div>
 
@@ -25185,7 +25783,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[350px]">
-                            <canvas id="chart-etfs"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('etfs', 'line')" id="btn-chart-type-etfs-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('etfs', 'candle')" id="btn-chart-type-etfs-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('etfs', 'ohlc')" id="btn-chart-type-etfs-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('etfs', 20)" id="btn-sma-etfs-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('etfs', 50)" id="btn-sma-etfs-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('etfs', 200)" id="btn-sma-etfs-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-etfs"></canvas>
                         </div>
                     </div>
                 </div>
@@ -26551,7 +27167,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[350px]">
-                            <canvas id="chart-acciones_arg"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('acciones_arg', 'line')" id="btn-chart-type-acciones_arg-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('acciones_arg', 'candle')" id="btn-chart-type-acciones_arg-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('acciones_arg', 'ohlc')" id="btn-chart-type-acciones_arg-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('acciones_arg', 20)" id="btn-sma-acciones_arg-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('acciones_arg', 50)" id="btn-sma-acciones_arg-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('acciones_arg', 200)" id="btn-sma-acciones_arg-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-acciones_arg"></canvas>
                         </div>
                     </div>
                 </div>
@@ -27007,7 +27641,25 @@ window.switchAsegSection = function(secId) {
                             </div>
                         </div>
                         <div class="h-[350px]">
-                            <canvas id="chart-cryptos"></canvas>
+                            
+<!-- CHART CONTROL TOOLBAR -->
+<div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-2 border-b border-darkBorder/40 text-xs">
+    <div class="flex items-center gap-2">
+        <span class="text-slate-400 font-semibold text-[11px]">Tipo:</span>
+        <div class="inline-flex rounded-lg bg-slate-800/80 p-0.5 text-slate-300 border border-darkBorder/50">
+            <button type="button" onclick="setChartType('cryptos', 'line')" id="btn-chart-type-cryptos-line" class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-brandBlue text-white shadow">Línea</button>
+            <button type="button" onclick="setChartType('cryptos', 'candle')" id="btn-chart-type-cryptos-candle" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">Velas</button>
+            <button type="button" onclick="setChartType('cryptos', 'ohlc')" id="btn-chart-type-cryptos-ohlc" class="px-2.5 py-1 rounded-md text-[11px] font-semibold text-slate-400 hover:text-white transition-colors">OHLC</button>
+        </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+        <span class="text-slate-400 font-semibold text-[11px] mr-1">Medias Móviles:</span>
+        <button type="button" onclick="toggleSMA('cryptos', 20)" id="btn-sma-cryptos-20" class="px-2 py-0.5 rounded text-[10px] font-bold border border-amber-500/30 text-amber-400/70 hover:text-amber-300 hover:border-amber-400 transition-all">SMA 20</button>
+        <button type="button" onclick="toggleSMA('cryptos', 50)" id="btn-sma-cryptos-50" class="px-2 py-0.5 rounded text-[10px] font-bold border border-purple-500/30 text-purple-400/70 hover:text-purple-300 hover:border-purple-400 transition-all">SMA 50</button>
+        <button type="button" onclick="toggleSMA('cryptos', 200)" id="btn-sma-cryptos-200" class="px-2 py-0.5 rounded text-[10px] font-bold border border-cyan-500/30 text-cyan-400/70 hover:text-cyan-300 hover:border-cyan-400 transition-all">SMA 200</button>
+    </div>
+</div>
+<canvas id="chart-cryptos"></canvas>
                         </div>
                     </div>
                 </div>
@@ -36810,4 +37462,4 @@ window.switchAsegSection = function(secId) {
     </script>
 </body>
 </html>
-<!-- Deploy timestamp: 1786826908.9219842 -->
+<!-- Deploy timestamp: 1786827963.202045 -->
