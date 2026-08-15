@@ -28,11 +28,418 @@
 
     
 document.addEventListener('DOMContentLoaded', function() {
-    window.renderChart = renderChart;
-    window.changeChartType = changeChartType;
+    if (typeof renderChart !== 'undefined') window.renderChart = renderChart;
+    if (typeof changeChartType !== 'undefined') window.changeChartType = changeChartType;
     window.switchTab = switchTab;
-    window.switchGlobalTab = switchGlobalTab;
-    window.switchAsegTab = switchAsegTab;
+    
+// Mercado Asegurador Section Switcher
+
+// Global Tab Switcher
+
+// ============================================================================
+// 5-MODEL REGRESSION & YIELD CURVE ENGINE (Linear, Quadratic, Logarithmic, Exponential, Cubic)
+// ============================================================================
+function fitBestYieldCurveModel(points) {
+    if (!points || points.length < 2) return null;
+
+    const validPts = points.filter(p => typeof p.x === 'number' && !isNaN(p.x) && isFinite(p.x) && typeof p.y === 'number' && !isNaN(p.y) && isFinite(p.y));
+    if (validPts.length < 2) return null;
+
+    const n = validPts.length;
+    const yVals = validPts.map(p => p.y);
+    const meanY = yVals.reduce((a, b) => a + b, 0) / n;
+    const ssTot = yVals.reduce((sum, y) => sum + Math.pow(y - meanY, 2), 0);
+
+    function calcR2(predictFn) {
+        if (ssTot === 0) return 0;
+        let ssRes = 0;
+        for (let p of validPts) {
+            let pred = predictFn(p.x);
+            if (isNaN(pred) || !isFinite(pred)) return -999;
+            ssRes += Math.pow(p.y - pred, 2);
+        }
+        let r2 = 1 - (ssRes / ssTot);
+        return isNaN(r2) ? 0 : Math.max(0, Math.min(1, r2));
+    }
+
+    const models = [];
+
+    // 1. Linear Model: y = a * x + b
+    let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+    for (let p of validPts) {
+        sumX += p.x; sumY += p.y; sumXY += p.x * p.y; sumXX += p.x * p.x;
+    }
+    const denomLin = (n * sumXX - sumX * sumX);
+    if (Math.abs(denomLin) > 1e-9) {
+        const aLin = (n * sumXY - sumX * sumY) / denomLin;
+        const bLin = (sumY - aLin * sumX) / n;
+        const fnLin = x => aLin * x + bLin;
+        models.push({
+            name: 'Lineal',
+            r2: calcR2(fnLin),
+            predict: fnLin,
+            equationText: `y = ${aLin.toFixed(2)}x ${bLin >= 0 ? '+' : '-'} ${Math.abs(bLin).toFixed(2)}`
+        });
+    }
+
+    // Helper for matrix solving (Gaussian elimination)
+    function solveLinearSystem(A, B) {
+        const dim = A.length;
+        for (let i = 0; i < dim; i++) {
+            let maxRow = i;
+            for (let k = i + 1; k < dim; k++) {
+                if (Math.abs(A[k][i]) > Math.abs(A[maxRow][i])) maxRow = k;
+            }
+            [A[i], A[maxRow]] = [A[maxRow], A[i]];
+            [B[i], B[maxRow]] = [B[maxRow], B[i]];
+            if (Math.abs(A[i][i]) < 1e-12) return null;
+            for (let k = i + 1; k < dim; k++) {
+                const factor = A[k][i] / A[i][i];
+                for (let j = i; j < dim; j++) A[k][j] -= factor * A[i][j];
+                B[k] -= factor * B[i];
+            }
+        }
+        const x = new Array(dim);
+        for (let i = dim - 1; i >= 0; i--) {
+            let s = B[i];
+            for (let j = i + 1; j < dim; j++) s -= A[i][j] * x[j];
+            x[i] = s / A[i][i];
+        }
+        return x;
+    }
+
+    // 2. Polynomial fitting (Quadratic degree 2 and Cubic degree 3)
+    function fitPolynomial(degree) {
+        if (n <= degree) return null;
+        const matrixSize = degree + 1;
+        const A = Array.from({ length: matrixSize }, () => new Array(matrixSize).fill(0));
+        const B = new Array(matrixSize).fill(0);
+
+        for (let r = 0; r < matrixSize; r++) {
+            for (let c = 0; c < matrixSize; c++) {
+                const pow = (matrixSize - 1 - r) + (matrixSize - 1 - c);
+                A[r][c] = validPts.reduce((sum, p) => sum + Math.pow(p.x, pow), 0);
+            }
+            const powY = matrixSize - 1 - r;
+            B[r] = validPts.reduce((sum, p) => sum + Math.pow(p.x, powY) * p.y, 0);
+        }
+
+        const coeffs = solveLinearSystem(A, B);
+        if (!coeffs) return null;
+
+        const fn = x => coeffs.reduce((sum, c, idx) => sum + c * Math.pow(x, degree - idx), 0);
+        const eqStr = coeffs.map((c, i) => {
+            const p = degree - i;
+            if (p === 0) return `${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(2)}`;
+            if (p === 1) return `${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(2)}x`;
+            return `${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(2)}x^${p}`;
+        }).join(' ');
+
+        const nameMap = { 2: 'Cuadrática', 3: 'Cúbica' };
+        return {
+            name: nameMap[degree] || `Polinómica ${degree}`,
+            r2: calcR2(fn),
+            predict: fn,
+            equationText: `y = ${eqStr}`
+        };
+    }
+
+    const quad = fitPolynomial(2);
+    if (quad) models.push(quad);
+
+    const cubic = fitPolynomial(3);
+    if (cubic) models.push(cubic);
+
+    // 3. Logarithmic Model: y = a * ln(x) + b (for x > 0)
+    const logPts = validPts.filter(p => p.x > 0);
+    if (logPts.length >= 2) {
+        let sLnX = 0, sY = 0, sLnXY = 0, sLnXLnX = 0;
+        const nLog = logPts.length;
+        for (let p of logPts) {
+            const lnx = Math.log(p.x);
+            sLnX += lnx; sY += p.y; sLnXY += lnx * p.y; sLnXLnX += lnx * lnx;
+        }
+        const denomLog = (nLog * sLnXLnX - sLnX * sLnX);
+        if (Math.abs(denomLog) > 1e-9) {
+            const aLog = (nLog * sLnXY - sLnX * sY) / denomLog;
+            const bLog = (sY - aLog * sLnX) / nLog;
+            const fnLog = x => (x > 0 ? aLog * Math.log(x) + bLog : bLog);
+            models.push({
+                name: 'Logarítmica',
+                r2: calcR2(fnLog),
+                predict: fnLog,
+                equationText: `y = ${aLog.toFixed(2)} * ln(x) ${bLog >= 0 ? '+' : '-'} ${Math.abs(bLog).toFixed(2)}`
+            });
+        }
+    }
+
+    // 4. Exponential Model: y = a * e^(b * x) -> ln(y) = ln(a) + b * x (for y > 0)
+    const expPts = validPts.filter(p => p.y > 0);
+    if (expPts.length >= 2) {
+        let sX = 0, sLnY = 0, sXLnY = 0, sXX = 0;
+        const nExp = expPts.length;
+        for (let p of expPts) {
+            const lny = Math.log(p.y);
+            sX += p.x; sLnY += lny; sXLnY += p.x * lny; sXX += p.x * p.x;
+        }
+        const denomExp = (nExp * sXX - sX * sX);
+        if (Math.abs(denomExp) > 1e-9) {
+            const bExp = (nExp * sXLnY - sX * sLnY) / denomExp;
+            const lnA = (sLnY - bExp * sX) / nExp;
+            const aExp = Math.exp(lnA);
+            const fnExp = x => aExp * Math.exp(bExp * x);
+            models.push({
+                name: 'Exponencial',
+                r2: calcR2(fnExp),
+                predict: fnExp,
+                equationText: `y = ${aExp.toFixed(2)} * e^(${bExp.toFixed(3)}x)`
+            });
+        }
+    }
+
+    if (models.length === 0) return null;
+
+    models.sort((m1, m2) => m2.r2 - m1.r2);
+    return models[0];
+}
+
+window.yieldCurveInstances = window.yieldCurveInstances || {};
+
+function renderYieldCurveChart(canvasId, tbodyId, xAttr, yAttr, xTitle, yTitle, chartTitle) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    const tbody = document.getElementById(tbodyId);
+    if (!tbody) return;
+
+    const rows = tbody.querySelectorAll('tr[data-ticker]');
+    const points = [];
+
+    rows.forEach(tr => {
+        const ticker = tr.getAttribute('data-ticker') || '';
+        let xVal = parseFloat(tr.getAttribute(xAttr) || 'NaN');
+        let yVal = parseFloat(tr.getAttribute(yAttr) || 'NaN');
+
+        // Fallback text parsing if attribute is missing or string
+        if (isNaN(xVal) || isNaN(yVal)) {
+            const tds = tr.querySelectorAll('td');
+            if (tds.length >= 7) {
+                if (isNaN(yVal)) {
+                    const tirText = tds[tds.length - 2].textContent.replace('%', '').replace(',', '.').trim();
+                    yVal = parseFloat(tirText);
+                }
+                if (isNaN(xVal)) {
+                    const durText = tds[tds.length - 1].textContent.replace('d', '').replace(',', '.').trim();
+                    xVal = parseFloat(durText);
+                }
+            }
+        }
+
+        if (!isNaN(xVal) && !isNaN(yVal) && isFinite(xVal) && isFinite(yVal)) {
+            points.push({ x: xVal, y: yVal, label: ticker });
+        }
+    });
+
+    if (points.length < 2) return;
+
+    const bestModel = fitBestYieldCurveModel(points);
+
+    // Generate smooth curve dataset
+    const xVals = points.map(p => p.x);
+    const minX = Math.min(...xVals);
+    const maxX = Math.max(...xVals);
+    const rangeX = maxX - minX || 1;
+    
+    const curvePoints = [];
+    if (bestModel) {
+        const steps = 80;
+        const startX = Math.max(0.01, minX - rangeX * 0.05);
+        const endX = maxX + rangeX * 0.05;
+        const stepSize = (endX - startX) / steps;
+
+        for (let i = 0; i <= steps; i++) {
+            const x = startX + i * stepSize;
+            const y = bestModel.predict(x);
+            if (!isNaN(y) && isFinite(y)) {
+                curvePoints.push({ x: x, y: y });
+            }
+        }
+    }
+
+    if (window.yieldCurveInstances[canvasId]) {
+        window.yieldCurveInstances[canvasId].destroy();
+    }
+
+    const isDark = document.body.classList.contains('dark') || !document.body.classList.contains('light');
+
+    const ctx = canvas.getContext('2d');
+    
+    const scatterDataset = {
+        label: 'Puntos ' + chartTitle,
+        data: points,
+        backgroundColor: isDark ? '#3b82f6' : '#2563eb',
+        borderColor: isDark ? '#60a5fa' : '#1d4ed8',
+        borderWidth: 2,
+        pointRadius: 6,
+        pointHoverRadius: 9,
+        type: 'scatter'
+    };
+
+    const curveDataset = {
+        label: bestModel ? `Ajuste ${bestModel.name} (R² = ${(bestModel.r2 * 100).toFixed(1)}%)` : 'Curva de Rendimientos',
+        data: curvePoints,
+        borderColor: isDark ? '#f59e0b' : '#d97706',
+        borderWidth: 2.5,
+        fill: false,
+        pointRadius: 0,
+        tension: 0.3,
+        type: 'line'
+    };
+
+    const config = {
+        type: 'scatter',
+        data: {
+            datasets: [scatterDataset, curveDataset]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: isDark ? '#cbd5e1' : '#334155',
+                        font: { size: 11, weight: '600' }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            if (ctx.dataset.type === 'scatter') {
+                                const pt = ctx.raw;
+                                return `${pt.label}: ${xTitle}=${pt.x.toFixed(2)}, ${yTitle}=${pt.y.toFixed(2)}%`;
+                            }
+                            return `${ctx.dataset.label}: ${yTitle}=${ctx.raw.y.toFixed(2)}%`;
+                        }
+                    }
+                },
+                regressionBadge: {
+                    enabled: true
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: xTitle, color: isDark ? '#94a3b8' : '#64748b' },
+                    grid: { color: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' },
+                    ticks: { color: isDark ? '#cbd5e1' : '#334155' }
+                },
+                y: {
+                    title: { display: true, text: yTitle + ' (%)', color: isDark ? '#94a3b8' : '#64748b' },
+                    grid: { color: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' },
+                    ticks: { color: isDark ? '#cbd5e1' : '#334155' }
+                }
+            }
+        }
+    };
+
+    // Store best model on chart options for regressionBadge plugin
+    config.options.plugins.regressionBadge.bestModel = bestModel;
+
+    const chartInstance = new Chart(ctx, config);
+    chartInstance.options.plugins.regressionBadge.enabled = true;
+    window.bestModelForChart = bestModel;
+    window.yieldCurveInstances[canvasId] = chartInstance;
+}
+
+function renderAllYieldCurves() {
+    setTimeout(() => {
+        renderYieldCurveChart('chart-bonds-usd-curve', 'tbl-bonds_usd', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'Bonos USD');
+        renderYieldCurveChart('chart-bonds-cer-curve', 'tbl-bonds_cer', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'Bonos CER');
+        renderYieldCurveChart('chart-bonds-pesos-curve', 'tbl-bonds_pesos', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'Bonos Pesos');
+        renderYieldCurveChart('chart-ons-curve', 'tbl-corporate', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'ONs Corporativas');
+        renderYieldCurveChart('chart-lecaps-yield-curve', 'tbl-lecaps', 'data-dtm', 'data-tea', 'DTM (Días)', 'TEA', 'LECAPs / BONCAPs');
+    }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderAllYieldCurves();
+    let savedTab = 'exchange'; try { savedTab = localStorage.getItem('activeTab') || 'exchange'; } catch(e){}
+    if (typeof window.switchTab === 'function') window.switchTab(savedTab);
+});
+
+
+window.switchGlobalTab = function(tabId) {
+    console.log("switchGlobalTab called with:", tabId);
+    const globalTabs = [
+        { id: 'valores-financieros', container: 'container-valores-financieros', btn: 'btn-global-valores' },
+        { id: 'indicadores-economicos', container: 'container-indicadores-economicos', btn: 'btn-global-indicadores' },
+        { id: 'mercado-asegurador', container: 'container-mercado-asegurador', btn: 'btn-global-asegurador' },
+        { id: 'salud-retiro-demografia', container: 'container-salud-retiro-demografia', btn: 'btn-global-salud-retiro-demografia' }
+    ];
+
+    globalTabs.forEach(tab => {
+        const c = document.getElementById(tab.container);
+        const b = document.getElementById(tab.btn);
+        if (c) {
+            if (tab.id === tabId) {
+                c.classList.remove('hidden');
+            } else {
+                c.classList.add('hidden');
+            }
+        }
+        if (b) {
+            if (tab.id === tabId) {
+                b.className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all bg-brandBlue text-white shadow-lg";
+            } else {
+                b.className = "px-4 py-2 rounded-lg text-sm font-semibold transition-all text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900";
+            }
+        }
+    });
+
+    if (tabId === 'mercado-asegurador') {
+        if (typeof window.switchAsegSection === 'function') {
+            window.switchAsegSection('primas-acumuladas');
+        }
+    }
+};
+
+
+window.switchAsegSection = function(secId) {
+    console.log("switchAsegSection called with:", secId);
+    // Map aliases
+    if (secId === 'primas-acum') secId = 'primas-acumuladas';
+    if (secId === 'evolucion') secId = 'evolucion-primas';
+
+    const sections = ['primas-acumuladas', 'evolucion-primas', 'balances'];
+    sections.forEach(s => {
+        const el = document.getElementById('aseg-sec-' + s);
+        const btnKey = (s === 'primas-acumuladas' ? 'primas-acum' : (s === 'evolucion-primas' ? 'evolucion' : s));
+        const btn = document.getElementById('btn-aseg-sec-' + btnKey);
+        if (el) {
+            if (s === secId) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+        if (btn) {
+            if (s === secId) {
+                btn.className = "px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 bg-brandBlue text-white shadow-lg";
+            } else {
+                btn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900";
+            }
+        }
+    });
+    if (secId === 'evolucion-primas' && typeof window.renderInsuranceCharts === 'function') {
+        window.renderInsuranceCharts();
+    } else if (secId === 'balances' && typeof window.renderAsegBalancesTable === 'function') {
+        window.renderAsegBalancesTable();
+    }
+};
+
+
+
+    window.switchAsegTab = typeof switchAsegTab !== 'undefined' ? switchAsegTab : window.switchAsegSection;
     window.switchEconTab = switchEconTab;
 });
 </script>
@@ -1997,6 +2404,498 @@ document.addEventListener('DOMContentLoaded', function() {
     color: var(--title-color) !important;
   }
 </style>
+
+
+<script>
+// Global Scope Tab Functions Attached to Window
+window.activeTab = 'exchange';
+
+
+// ============================================================================
+// 5-MODEL REGRESSION & YIELD CURVE ENGINE (Linear, Quadratic, Logarithmic, Exponential, Cubic)
+// ============================================================================
+function fitBestYieldCurveModel(points) {
+    if (!points || points.length < 2) return null;
+
+    const validPts = points.filter(p => typeof p.x === 'number' && !isNaN(p.x) && isFinite(p.x) && typeof p.y === 'number' && !isNaN(p.y) && isFinite(p.y));
+    if (validPts.length < 2) return null;
+
+    const n = validPts.length;
+    const yVals = validPts.map(p => p.y);
+    const meanY = yVals.reduce((a, b) => a + b, 0) / n;
+    const ssTot = yVals.reduce((sum, y) => sum + Math.pow(y - meanY, 2), 0);
+
+    function calcR2(predictFn) {
+        if (ssTot === 0) return 0;
+        let ssRes = 0;
+        for (let p of validPts) {
+            let pred = predictFn(p.x);
+            if (isNaN(pred) || !isFinite(pred)) return -999;
+            ssRes += Math.pow(p.y - pred, 2);
+        }
+        let r2 = 1 - (ssRes / ssTot);
+        return isNaN(r2) ? 0 : Math.max(0, Math.min(1, r2));
+    }
+
+    const models = [];
+
+    // 1. Linear Model: y = a * x + b
+    let sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+    for (let p of validPts) {
+        sumX += p.x; sumY += p.y; sumXY += p.x * p.y; sumXX += p.x * p.x;
+    }
+    const denomLin = (n * sumXX - sumX * sumX);
+    if (Math.abs(denomLin) > 1e-9) {
+        const aLin = (n * sumXY - sumX * sumY) / denomLin;
+        const bLin = (sumY - aLin * sumX) / n;
+        const fnLin = x => aLin * x + bLin;
+        models.push({
+            name: 'Lineal',
+            r2: calcR2(fnLin),
+            predict: fnLin,
+            equationText: `y = ${aLin.toFixed(2)}x ${bLin >= 0 ? '+' : '-'} ${Math.abs(bLin).toFixed(2)}`
+        });
+    }
+
+    // Helper for matrix solving (Gaussian elimination)
+    function solveLinearSystem(A, B) {
+        const dim = A.length;
+        for (let i = 0; i < dim; i++) {
+            let maxRow = i;
+            for (let k = i + 1; k < dim; k++) {
+                if (Math.abs(A[k][i]) > Math.abs(A[maxRow][i])) maxRow = k;
+            }
+            [A[i], A[maxRow]] = [A[maxRow], A[i]];
+            [B[i], B[maxRow]] = [B[maxRow], B[i]];
+            if (Math.abs(A[i][i]) < 1e-12) return null;
+            for (let k = i + 1; k < dim; k++) {
+                const factor = A[k][i] / A[i][i];
+                for (let j = i; j < dim; j++) A[k][j] -= factor * A[i][j];
+                B[k] -= factor * B[i];
+            }
+        }
+        const x = new Array(dim);
+        for (let i = dim - 1; i >= 0; i--) {
+            let s = B[i];
+            for (let j = i + 1; j < dim; j++) s -= A[i][j] * x[j];
+            x[i] = s / A[i][i];
+        }
+        return x;
+    }
+
+    // 2. Polynomial fitting (Quadratic degree 2 and Cubic degree 3)
+    function fitPolynomial(degree) {
+        if (n <= degree) return null;
+        const matrixSize = degree + 1;
+        const A = Array.from({ length: matrixSize }, () => new Array(matrixSize).fill(0));
+        const B = new Array(matrixSize).fill(0);
+
+        for (let r = 0; r < matrixSize; r++) {
+            for (let c = 0; c < matrixSize; c++) {
+                const pow = (matrixSize - 1 - r) + (matrixSize - 1 - c);
+                A[r][c] = validPts.reduce((sum, p) => sum + Math.pow(p.x, pow), 0);
+            }
+            const powY = matrixSize - 1 - r;
+            B[r] = validPts.reduce((sum, p) => sum + Math.pow(p.x, powY) * p.y, 0);
+        }
+
+        const coeffs = solveLinearSystem(A, B);
+        if (!coeffs) return null;
+
+        const fn = x => coeffs.reduce((sum, c, idx) => sum + c * Math.pow(x, degree - idx), 0);
+        const eqStr = coeffs.map((c, i) => {
+            const p = degree - i;
+            if (p === 0) return `${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(2)}`;
+            if (p === 1) return `${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(2)}x`;
+            return `${c >= 0 ? '+' : '-'} ${Math.abs(c).toFixed(2)}x^${p}`;
+        }).join(' ');
+
+        const nameMap = { 2: 'Cuadrática', 3: 'Cúbica' };
+        return {
+            name: nameMap[degree] || `Polinómica ${degree}`,
+            r2: calcR2(fn),
+            predict: fn,
+            equationText: `y = ${eqStr}`
+        };
+    }
+
+    const quad = fitPolynomial(2);
+    if (quad) models.push(quad);
+
+    const cubic = fitPolynomial(3);
+    if (cubic) models.push(cubic);
+
+    // 3. Logarithmic Model: y = a * ln(x) + b (for x > 0)
+    const logPts = validPts.filter(p => p.x > 0);
+    if (logPts.length >= 2) {
+        let sLnX = 0, sY = 0, sLnXY = 0, sLnXLnX = 0;
+        const nLog = logPts.length;
+        for (let p of logPts) {
+            const lnx = Math.log(p.x);
+            sLnX += lnx; sY += p.y; sLnXY += lnx * p.y; sLnXLnX += lnx * lnx;
+        }
+        const denomLog = (nLog * sLnXLnX - sLnX * sLnX);
+        if (Math.abs(denomLog) > 1e-9) {
+            const aLog = (nLog * sLnXY - sLnX * sY) / denomLog;
+            const bLog = (sY - aLog * sLnX) / nLog;
+            const fnLog = x => (x > 0 ? aLog * Math.log(x) + bLog : bLog);
+            models.push({
+                name: 'Logarítmica',
+                r2: calcR2(fnLog),
+                predict: fnLog,
+                equationText: `y = ${aLog.toFixed(2)} * ln(x) ${bLog >= 0 ? '+' : '-'} ${Math.abs(bLog).toFixed(2)}`
+            });
+        }
+    }
+
+    // 4. Exponential Model: y = a * e^(b * x) -> ln(y) = ln(a) + b * x (for y > 0)
+    const expPts = validPts.filter(p => p.y > 0);
+    if (expPts.length >= 2) {
+        let sX = 0, sLnY = 0, sXLnY = 0, sXX = 0;
+        const nExp = expPts.length;
+        for (let p of expPts) {
+            const lny = Math.log(p.y);
+            sX += p.x; sLnY += lny; sXLnY += p.x * lny; sXX += p.x * p.x;
+        }
+        const denomExp = (nExp * sXX - sX * sX);
+        if (Math.abs(denomExp) > 1e-9) {
+            const bExp = (nExp * sXLnY - sX * sLnY) / denomExp;
+            const lnA = (sLnY - bExp * sX) / nExp;
+            const aExp = Math.exp(lnA);
+            const fnExp = x => aExp * Math.exp(bExp * x);
+            models.push({
+                name: 'Exponencial',
+                r2: calcR2(fnExp),
+                predict: fnExp,
+                equationText: `y = ${aExp.toFixed(2)} * e^(${bExp.toFixed(3)}x)`
+            });
+        }
+    }
+
+    if (models.length === 0) return null;
+
+    models.sort((m1, m2) => m2.r2 - m1.r2);
+    return models[0];
+}
+
+window.yieldCurveInstances = window.yieldCurveInstances || {};
+
+function renderYieldCurveChart(canvasId, tbodyId, xAttr, yAttr, xTitle, yTitle, chartTitle) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
+
+    const tbody = document.getElementById(tbodyId);
+    if (!tbody) return;
+
+    const rows = tbody.querySelectorAll('tr[data-ticker]');
+    const points = [];
+
+    rows.forEach(tr => {
+        const ticker = tr.getAttribute('data-ticker') || '';
+        let xVal = parseFloat(tr.getAttribute(xAttr) || 'NaN');
+        let yVal = parseFloat(tr.getAttribute(yAttr) || 'NaN');
+
+        // Fallback text parsing if attribute is missing or string
+        if (isNaN(xVal) || isNaN(yVal)) {
+            const tds = tr.querySelectorAll('td');
+            if (tds.length >= 7) {
+                if (isNaN(yVal)) {
+                    const tirText = tds[tds.length - 2].textContent.replace('%', '').replace(',', '.').trim();
+                    yVal = parseFloat(tirText);
+                }
+                if (isNaN(xVal)) {
+                    const durText = tds[tds.length - 1].textContent.replace('d', '').replace(',', '.').trim();
+                    xVal = parseFloat(durText);
+                }
+            }
+        }
+
+        if (!isNaN(xVal) && !isNaN(yVal) && isFinite(xVal) && isFinite(yVal)) {
+            points.push({ x: xVal, y: yVal, label: ticker });
+        }
+    });
+
+    if (points.length < 2) return;
+
+    const bestModel = fitBestYieldCurveModel(points);
+
+    // Generate smooth curve dataset
+    const xVals = points.map(p => p.x);
+    const minX = Math.min(...xVals);
+    const maxX = Math.max(...xVals);
+    const rangeX = maxX - minX || 1;
+    
+    const curvePoints = [];
+    if (bestModel) {
+        const steps = 80;
+        const startX = Math.max(0.01, minX - rangeX * 0.05);
+        const endX = maxX + rangeX * 0.05;
+        const stepSize = (endX - startX) / steps;
+
+        for (let i = 0; i <= steps; i++) {
+            const x = startX + i * stepSize;
+            const y = bestModel.predict(x);
+            if (!isNaN(y) && isFinite(y)) {
+                curvePoints.push({ x: x, y: y });
+            }
+        }
+    }
+
+    if (window.yieldCurveInstances[canvasId]) {
+        window.yieldCurveInstances[canvasId].destroy();
+    }
+
+    const isDark = document.body.classList.contains('dark') || !document.body.classList.contains('light');
+
+    const ctx = canvas.getContext('2d');
+    
+    const scatterDataset = {
+        label: 'Puntos ' + chartTitle,
+        data: points,
+        backgroundColor: isDark ? '#3b82f6' : '#2563eb',
+        borderColor: isDark ? '#60a5fa' : '#1d4ed8',
+        borderWidth: 2,
+        pointRadius: 6,
+        pointHoverRadius: 9,
+        type: 'scatter'
+    };
+
+    const curveDataset = {
+        label: bestModel ? `Ajuste ${bestModel.name} (R² = ${(bestModel.r2 * 100).toFixed(1)}%)` : 'Curva de Rendimientos',
+        data: curvePoints,
+        borderColor: isDark ? '#f59e0b' : '#d97706',
+        borderWidth: 2.5,
+        fill: false,
+        pointRadius: 0,
+        tension: 0.3,
+        type: 'line'
+    };
+
+    const config = {
+        type: 'scatter',
+        data: {
+            datasets: [scatterDataset, curveDataset]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: isDark ? '#cbd5e1' : '#334155',
+                        font: { size: 11, weight: '600' }
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(ctx) {
+                            if (ctx.dataset.type === 'scatter') {
+                                const pt = ctx.raw;
+                                return `${pt.label}: ${xTitle}=${pt.x.toFixed(2)}, ${yTitle}=${pt.y.toFixed(2)}%`;
+                            }
+                            return `${ctx.dataset.label}: ${yTitle}=${ctx.raw.y.toFixed(2)}%`;
+                        }
+                    }
+                },
+                regressionBadge: {
+                    enabled: true
+                }
+            },
+            scales: {
+                x: {
+                    title: { display: true, text: xTitle, color: isDark ? '#94a3b8' : '#64748b' },
+                    grid: { color: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' },
+                    ticks: { color: isDark ? '#cbd5e1' : '#334155' }
+                },
+                y: {
+                    title: { display: true, text: yTitle + ' (%)', color: isDark ? '#94a3b8' : '#64748b' },
+                    grid: { color: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)' },
+                    ticks: { color: isDark ? '#cbd5e1' : '#334155' }
+                }
+            }
+        }
+    };
+
+    // Store best model on chart options for regressionBadge plugin
+    config.options.plugins.regressionBadge.bestModel = bestModel;
+
+    const chartInstance = new Chart(ctx, config);
+    chartInstance.options.plugins.regressionBadge.enabled = true;
+    window.bestModelForChart = bestModel;
+    window.yieldCurveInstances[canvasId] = chartInstance;
+}
+
+function renderAllYieldCurves() {
+    setTimeout(() => {
+        renderYieldCurveChart('chart-bonds-usd-curve', 'tbl-bonds_usd', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'Bonos USD');
+        renderYieldCurveChart('chart-bonds-cer-curve', 'tbl-bonds_cer', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'Bonos CER');
+        renderYieldCurveChart('chart-bonds-pesos-curve', 'tbl-bonds_pesos', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'Bonos Pesos');
+        renderYieldCurveChart('chart-ons-curve', 'tbl-corporate', 'data-duration', 'data-tir', 'Duration (Años)', 'TIR', 'ONs Corporativas');
+        renderYieldCurveChart('chart-lecaps-yield-curve', 'tbl-lecaps', 'data-dtm', 'data-tea', 'DTM (Días)', 'TEA', 'LECAPs / BONCAPs');
+    }, 100);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    renderAllYieldCurves();
+    let savedTab = 'exchange'; try { savedTab = localStorage.getItem('activeTab') || 'exchange'; } catch(e){}
+    if (typeof window.switchTab === 'function') window.switchTab(savedTab);
+});
+
+
+window.switchGlobalTab = function(tabId) {
+    if (!tabId) tabId = 'valores-financieros';
+    try { localStorage.setItem('active_global_tab', tabId); } catch(e) {}
+
+    const cValores = document.getElementById('container-valores-financieros');
+    const cIndicadores = document.getElementById('container-indicadores-economicos');
+    const cAsegurador = document.getElementById('container-mercado-asegurador');
+
+    const bValores = document.getElementById('btn-global-valores');
+    const bIndicadores = document.getElementById('btn-global-indicadores');
+    const bAsegurador = document.getElementById('btn-global-asegurador');
+
+    if (cValores) cValores.classList.add('hidden');
+    if (cIndicadores) cIndicadores.classList.add('hidden');
+    if (cAsegurador) cAsegurador.classList.add('hidden');
+
+    const inactiveClass = "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900";
+    const activeClass = "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue shadow-md";
+
+    if (bValores) bValores.className = inactiveClass;
+    if (bIndicadores) bIndicadores.className = inactiveClass;
+    if (bAsegurador) bAsegurador.className = inactiveClass;
+
+    if (tabId === 'valores-financieros') {
+        if (cValores) cValores.classList.remove('hidden');
+        if (bValores) bValores.className = activeClass;
+        if (window.activeTab && typeof window.renderChart === 'function') {
+            window.renderChart(window.activeTab);
+        }
+    } else if (tabId === 'indicadores-economicos') {
+        if (cIndicadores) cIndicadores.classList.remove('hidden');
+        if (bIndicadores) bIndicadores.className = activeClass;
+        if (window.activeEconTab && typeof window.switchEconTab === 'function') {
+            window.switchEconTab(window.activeEconTab);
+        }
+    } else if (tabId === 'mercado-asegurador') {
+        if (cAsegurador) cAsegurador.classList.remove('hidden');
+        if (bAsegurador) bAsegurador.className = activeClass;
+        if (typeof window.switchAsegSection === 'function') {
+            window.switchAsegSection('primas-acumuladas');
+        }
+    }
+};
+
+window.switchTab = function(tabId) {
+    const validTabs = ['exchange', 'fci', 'indices', 'forex', 'commodities', 'rates', 'local_rates', 'bonds', 'lecaps', 'corporate', 'cedears', 'stocks', 'etfs', 'acciones_arg', 'cryptos'];
+    if (!tabId || !validTabs.includes(tabId)) {
+        try {
+            const saved = localStorage.getItem('activeTab');
+            if (saved && validTabs.includes(saved)) tabId = saved;
+            else tabId = 'exchange';
+        } catch(e) {
+            tabId = 'exchange';
+        }
+    }
+    window.activeTab = tabId;
+    try { localStorage.setItem('activeTab', tabId); } catch(e) {}
+
+    const container = document.getElementById('container-valores-financieros');
+    if (!container) return;
+
+    // 1. Hide all tab panels
+    const panels = container.querySelectorAll('.tab-panel');
+    panels.forEach(p => p.classList.add('hidden'));
+
+    // 2. Reset sidebar button styles
+    const buttons = container.querySelectorAll('.tab-btn');
+    buttons.forEach(b => {
+        b.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
+        b.classList.add('text-slate-400');
+    });
+
+    // 3. Un-hide target active panel FIRST
+    const activePanel = document.getElementById('panel-' + tabId);
+    if (activePanel) {
+        activePanel.classList.remove('hidden');
+    }
+
+    // 4. Highlight target button
+    const activeBtn = document.getElementById('btn-tab-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('text-slate-400');
+    }
+
+    // 5. Safely render charts after panel is visible
+    setTimeout(() => {
+        if (typeof window.renderChart === 'function') {
+            try { window.renderChart(tabId); } catch(e) { console.error('renderChart error:', e); }
+        }
+        if (['bonds', 'lecaps', 'corporate'].includes(tabId)) {
+            try { renderAllYieldCurves();
+    let savedTab = 'exchange'; try { savedTab = localStorage.getItem('activeTab') || 'exchange'; } catch(e){}
+    if (typeof window.switchTab === 'function') window.switchTab(savedTab); } catch(e) { console.error('renderAllYieldCurves error:', e); }
+        }
+    }, 50);
+};
+
+window.switchEconTab = function(tabId) {
+    window.activeEconTab = tabId;
+    const container = document.getElementById('container-indicadores-economicos');
+    if (!container) return;
+
+    const panels = container.querySelectorAll('.econ-tab-panel');
+    panels.forEach(p => p.classList.add('hidden'));
+
+    const buttons = container.querySelectorAll('.econ-tab-btn');
+    buttons.forEach(b => {
+        b.classList.remove('bg-brandBlue', 'text-white', 'shadow-md');
+        b.classList.add('text-slate-400');
+    });
+
+    const activePanel = document.getElementById(tabId);
+    if (activePanel) activePanel.classList.remove('hidden');
+
+    const activeBtn = document.getElementById('btn-' + tabId);
+    if (activeBtn) {
+        activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
+        activeBtn.classList.remove('text-slate-400');
+    }
+};
+
+window.switchAsegSection = function(secId) {
+    if (secId === 'primas-acum') secId = 'primas-acumuladas';
+    if (secId === 'evolucion') secId = 'evolucion-primas';
+
+    const sections = ['primas-acumuladas', 'evolucion-primas', 'balances'];
+    sections.forEach(s => {
+        const el = document.getElementById('aseg-sec-' + s);
+        const btnKey = (s === 'primas-acumuladas' ? 'primas-acum' : (s === 'evolucion-primas' ? 'evolucion' : s));
+        const btn = document.getElementById('btn-aseg-sec-' + btnKey);
+        if (el) {
+            if (s === secId) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+        if (btn) {
+            if (s === secId) {
+                btn.className = "px-5 py-2.5 rounded-lg text-sm font-bold transition-all flex items-center gap-2 bg-brandBlue text-white shadow-lg";
+            } else {
+                btn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900";
+            }
+        }
+    });
+    if (secId === 'evolucion-primas' && typeof window.renderInsuranceCharts === 'function') {
+        window.renderInsuranceCharts();
+    } else if (secId === 'balances' && typeof window.renderAsegBalancesTable === 'function') {
+        window.renderAsegBalancesTable();
+    }
+};
+</script>
 
 </head>
 
@@ -18759,7 +19658,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div class="h-[400px]">
                             <canvas id="chart-cedears"></canvas>
                         </div>
+                   
+                    <!-- Chart Column for Corporate ONs Yield Curve -->
+                    <div class="w-full lg:w-1/2 lg:sticky lg:top-6 lg:self-start mt-6">
+                        <div class="glass-card rounded-2xl p-5 border border-darkBorder/40">
+                            <h4 class="text-sm font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
+                                <i class="fas fa-chart-line text-brandGreen"></i> Curva de Rendimientos (TIR vs Duration) - ONs
+                            </h4>
+                            <div class="h-[320px] relative w-full mb-3">
+                                <canvas id="chart-ons-curve"></canvas>
+                            </div>
+                        </div>
                     </div>
+ </div>
                 </div>
             </section>
             </div>
@@ -35415,4 +36326,4 @@ document.addEventListener('DOMContentLoaded', function() {
     </script>
 </body>
 </html>
-<!-- Deploy timestamp: 1786820837.4550943 -->
+<!-- Deploy timestamp: 1786826049.3248842 -->
