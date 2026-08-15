@@ -34851,157 +34851,19 @@ window.activeTab = 'exchange';
 
         <!-- Global Tab Content 3: Mercado Asegurador -->
         <!-- Tab Content 3: Mercado Asegurador -->
+        <!-- Tab Content 3: Mercado Asegurador (Empty slate ready for rebuilding from scratch) -->
     <div id="container-mercado-asegurador" class="tab-panel hidden min-h-[calc(100vh-73px)] p-4 md:p-8 overflow-y-auto max-w-[1700px] mx-auto w-full">
-        <!-- Header Section -->
-        <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 glass-card bg-darkCard/90 p-6 rounded-2xl border border-darkBorder shadow-2xl">
-            <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-white light:text-slate-900 tracking-tight flex items-center gap-3">
-                    <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador Argentino
-                </h1>
-                <p class="text-xs md:text-sm text-slate-400 light:text-slate-600 mt-1 font-medium">
-                    Información oficial resumida y detallada de la Superintendencia de Seguros de la Nación (SSN) &bull; Datos al <span class="font-bold text-white light:text-slate-900">31-03-2026</span>
-                </p>
-            </div>
-            <div class="flex items-center gap-2 bg-brandBlue/10 text-brandBlue px-4 py-2 rounded-xl border border-brandBlue/20 text-xs font-bold">
-                <i class="fas fa-database"></i> SSN Datos Oficiales
-            </div>
-        </div>
-
-        <!-- 1. TARJETAS KPI DE MERCADO EMITIDO -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Card 1: Mercado Total -->
-            <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-brandBlue/40 transition-all">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Mercado Total Primas</span>
-                    <span class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue"><i class="fas fa-vault"></i></span>
-                </div>
-                <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="aseg-kpi-total-premiums">ARS 19.940.000,00 M</div>
-                <div class="flex items-center gap-3 text-xs font-bold">
-                    <span class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i>+43,8% i.a. (Real)</span>
-                    <span class="text-slate-400 light:text-slate-600">(+167,6% Nom)</span>
-                </div>
-            </div>
-
-            <!-- Card 2: Patrimoniales -->
-            <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-cyan-500/40 transition-all">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros Patrimoniales</span>
-                    <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400"><i class="fas fa-car-shield"></i></span>
-                </div>
-                <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="aseg-kpi-patrimoniales-premiums">ARS 11.286.040,00 M</div>
-                <div class="flex items-center gap-3 text-xs font-bold">
-                    <span class="text-cyan-400"><i class="fas fa-chart-pie mr-1"></i>56,6% Participación</span>
-                    <span class="text-brandGreen">+42,1% i.a.</span>
-                </div>
-            </div>
-
-            <!-- Card 3: Personas y ART -->
-            <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-emerald-500/40 transition-all">
-                <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Personas, ART y Retiro</span>
-                    <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i class="fas fa-user-shield"></i></span>
-                </div>
-                <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="aseg-kpi-personas-premiums">ARS 8.653.960,00 M</div>
-                <div class="flex items-center gap-3 text-xs font-bold">
-                    <span class="text-emerald-400"><i class="fas fa-chart-pie mr-1"></i>43,4% Participación</span>
-                    <span class="text-brandGreen">+46,0% i.a.</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. PARTICIPACIÓN Y RANKING POR RAMOS -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-            <!-- Pie 1: Mercado Total -->
-            <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col items-center">
-                <h3 class="text-base font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
-                    <i class="fas fa-chart-pie text-brandBlue"></i> Mercado Total - Top Aseguradoras
-                </h3>
-                <div class="relative w-full h-[280px]">
-                    <canvas id="chart-pie-mercado-total"></canvas>
-                </div>
-            </div>
-
-            <!-- Pie 2: Patrimoniales -->
-            <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col items-center">
-                <h3 class="text-base font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
-                    <i class="fas fa-car text-cyan-400"></i> Patrimoniales y Automotores
-                </h3>
-                <div class="relative w-full h-[280px]">
-                    <canvas id="chart-pie-seguros-patrimoniales"></canvas>
-                </div>
-            </div>
-
-            <!-- Pie 3: Personas y ART -->
-            <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col items-center">
-                <h3 class="text-base font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
-                    <i class="fas fa-users text-emerald-400"></i> Personas y Riesgos del Trabajo
-                </h3>
-                <div class="relative w-full h-[280px]">
-                    <canvas id="chart-pie-seguros-personas"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- 3. RANKING GENERAL DE GRUPOS ASEGURADORES -->
-        <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl mb-8">
-            <div class="flex items-center justify-between mb-6">
-                <div>
-                    <h3 class="text-lg font-bold text-white light:text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-trophy text-amber-400"></i> Ranking de Grupos Aseguradores (Producción Acumulada)
-                    </h3>
-                    <p class="text-xs text-slate-400 light:text-slate-600 mt-1 font-medium">Consolidado por grupo económico y cuota de mercado relativa</p>
-                </div>
-                <span class="text-xs font-bold text-brandBlue bg-brandBlue/10 px-3 py-1 rounded-lg border border-brandBlue/20">Top Grupos SSN</span>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-300 light:text-slate-700">
-                    <thead class="bg-darkBg/60 text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-darkBorder">
-                        <tr>
-                            <th class="py-3 px-4 text-center">Puesto</th>
-                            <th class="py-3 px-4">Grupo Asegurador</th>
-                            <th class="py-3 px-4 text-right">Primas Acumuladas</th>
-                            <th class="py-3 px-4 text-right">Cuota de Mercado (%)</th>
-                            <th class="py-3 px-4">Compañías Principales del Grupo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="aseg-table-groups-body" class="divide-y divide-darkBorder/20">
-                        <!-- Populated by JS -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- 4. FICHA GRUPO LA SEGUNDA Y DETALLE COMPAÑÍAS -->
-        <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl mb-8">
-            <div class="flex items-center justify-between mb-6">
-                <div>
-                    <h3 class="text-lg font-bold text-white light:text-slate-900 flex items-center gap-2">
-                        <i class="fas fa-building-flag text-brandBlue"></i> Ficha de Desglose: Grupo La Segunda
-                    </h3>
-                    <p class="text-xs text-slate-400 light:text-slate-600 mt-1 font-medium">Desglose por entidad operativa y posición competitiva por ramo</p>
-                </div>
-                <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">Grupo La Segunda</span>
-            </div>
-
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-300 light:text-slate-700">
-                    <thead class="bg-darkBg/60 text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-darkBorder">
-                        <tr>
-                            <th class="py-3 px-4">Entidad Operativa</th>
-                            <th class="py-3 px-4">Ramo / Segmento</th>
-                            <th class="py-3 px-4 text-right">Primas Acumuladas</th>
-                            <th class="py-3 px-4 text-right">Participación (%)</th>
-                            <th class="py-3 px-4">Posición / Líder del Ramo</th>
-                        </tr>
-                    </thead>
-                    <tbody id="aseg-table-lasegunda-body" class="divide-y divide-darkBorder/20">
-                        <!-- Populated by JS -->
-                    </tbody>
-                </table>
-            </div>
+        <div class="glass-card bg-darkCard/90 p-8 rounded-2xl border border-darkBorder shadow-2xl text-center">
+            <h1 class="text-2xl font-extrabold text-white light:text-slate-900 tracking-tight flex items-center justify-center gap-3 mb-2">
+                <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador Argentino
+            </h1>
+            <p class="text-sm text-slate-400 light:text-slate-600 font-medium">
+                Sección lista para reconstrucción 100% desde cero.
+            </p>
         </div>
     </div>
+
+
 
 
     
@@ -43951,7 +43813,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             
 
-            if (datasets.length > 0 && datasets[0].data && datasets[0].data.length >= 3 && !isPovertyGroup) {
+            if (datasets.length > 0 && datasets[0].data && datasets[0].data.length >= 3 && !isPovertyGroup && modalState.showRegression) {
 
                 const pts = datasets[0].data
 
@@ -46527,151 +46389,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
 
 function renderAseguradorData() {
-    console.log("Rendering Mercado Asegurador Data...");
-    var dataObj = window.appData ? (window.appData.ssn_data || window.appData.insurance_data || {}) : {};
-    
-    if (dataObj.summary && dataObj.summary.total_mercado) {
-        var tm = dataObj.summary.total_mercado;
-        var kpiTot = document.getElementById('aseg-kpi-total-premiums');
-        if (kpiTot) kpiTot.textContent = 'ARS ' + Number(tm.premiums || 19940000000000).toLocaleString('es-AR') + ' M';
-    }
-    
-    if (dataObj.summary && dataObj.summary.seguros_patrimoniales) {
-        var sp = dataObj.summary.seguros_patrimoniales;
-        var kpiPat = document.getElementById('aseg-kpi-patrimoniales-premiums');
-        if (kpiPat) kpiPat.textContent = 'ARS ' + Number(sp.premiums || 11286040000000).toLocaleString('es-AR') + ' M';
-    }
-    
-    if (dataObj.summary && dataObj.summary.seguros_personas) {
-        var per = dataObj.summary.seguros_personas;
-        var kpiPer = document.getElementById('aseg-kpi-personas-premiums');
-        if (kpiPer) kpiPer.textContent = 'ARS ' + Number(per.premiums || 8653960000000).toLocaleString('es-AR') + ' M';
-    }
-
-    var defaultTop20 = [
-        { name: 'Federación Patronal', share: 14.2 },
-        { name: 'Sancor Seguros', share: 10.3 },
-        { name: 'La Segunda Cooperativa', share: 5.8 },
-        { name: 'San Cristóbal', share: 5.1 },
-        { name: 'Prevención ART', share: 4.5 },
-        { name: 'La Caja', share: 4.2 },
-        { name: 'Mercantil Andina', share: 3.9 },
-        { name: 'Allianz', share: 3.5 },
-        { name: 'Zurich', share: 3.2 },
-        { name: 'Galeno Seguros', share: 2.8 }
-    ];
-
-    var subsections = dataObj.subsections || {
-        mercado_total: { mensual: { top20: defaultTop20 } },
-        seguros_patrimoniales: { mensual: { top20: defaultTop20 } },
-        seguros_personas: { mensual: { top20: defaultTop20 } }
-    };
-
-    var pieKeys = ['mercado_total', 'seguros_patrimoniales', 'seguros_personas'];
-    var colors = ['#3b82f6', '#06b6d4', '#10b981', '#f59e0b', '#8b5cf6', '#ec4899', '#f97316', '#14b8a6', '#6366f1', '#a855f7', '#64748b'];
-
-    window.aseguradorPieCharts = window.aseguradorPieCharts || {};
-
-    pieKeys.forEach(function(k) {
-        var canvasId = 'chart-pie-' + k.replace('_', '-');
-        var canvas = document.getElementById(canvasId);
-        if (!canvas) return;
-
-        var subItem = subsections[k];
-        var topList = defaultTop20;
-
-        if (subItem) {
-            if (subItem.mensual && subItem.mensual.top20) topList = subItem.mensual.top20;
-            else if (subItem.acumulado && subItem.acumulado.top20) topList = subItem.acumulado.top20;
-            else if (subItem.top20) topList = subItem.top20;
-        }
-
-        var top10 = topList.slice(0, 10);
-        var labels = top10.map(function(x) { return x.name || x.company || 'Aseguradora'; });
-        var dataVals = top10.map(function(x) { return typeof x.share === 'number' ? x.share : parseFloat(x.share) || 5.0; });
-
-        var sumShares = dataVals.reduce(function(a, b) { return a + b; }, 0);
-        labels.push('Resto del Mercado');
-        dataVals.push(Math.max(0, Math.round((100.0 - sumShares) * 100) / 100));
-
-        if (window.aseguradorPieCharts[k]) {
-            window.aseguradorPieCharts[k].destroy();
-        }
-
-        var ctx = canvas.getContext('2d');
-        var isDark = document.body.classList.contains('dark');
-
-        window.aseguradorPieCharts[k] = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: dataVals,
-                    backgroundColor: colors,
-                    borderWidth: 2,
-                    borderColor: isDark ? '#0f172a' : '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                cutout: '62%',
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            boxWidth: 8,
-                            padding: 6,
-                            font: { size: 9, weight: '600' },
-                            color: isDark ? '#94a3b8' : '#334155'
-                        }
-                    }
-                }
-            }
-        });
-    });
-
-    var groupsList = dataObj.insurance_groups_comparison || [
-        { rank: "1", group: "Grupo Sancor Seguros", premiums: "ARS 3.320,00 mil M", share: "16,65%", companies: "Sancor Seguros, Prevención ART, Prevención Retiro" },
-        { rank: "2", group: "Grupo Federación Patronal", premiums: "ARS 2.050,00 mil M", share: "10,28%", companies: "Fed. Patronal Seguros, Fed. Patronal Retiro, Fed. Patronal Vida" },
-        { rank: "3", group: "Grupo San Cristóbal", premiums: "ARS 1.580,00 mil M", share: "7,92%", companies: "San Cristóbal Seguros, San Cristóbal Retiro, Asociart ART" },
-        { rank: "4", group: "Grupo La Segunda", premiums: "ARS 1.163,55 mil M", share: "5,83%", companies: "La Segunda Coop., La Segunda ART, La Segunda Personas, La Segunda Retiro" },
-        { rank: "5", group: "Grupo Galeno", premiums: "ARS 880,00 mil M", share: "4,41%", companies: "Galeno Seguros, Galeno ART, Galeno Retiro" },
-        { rank: "6", group: "Grupo Provincia", premiums: "ARS 830,00 mil M", share: "4,16%", companies: "Provincia Seguros, Provincia ART, Provincia Vida" }
-    ];
-
-    var tbodyGroups = document.getElementById('aseg-table-groups-body');
-    if (tbodyGroups) {
-        tbodyGroups.innerHTML = groupsList.map(function(g, idx) {
-            return '<tr class="hover:bg-brandBlue/5 transition-colors">' +
-                '<td class="py-3 px-4 text-center font-bold text-brandBlue font-mono">' + (g.rank || (idx + 1)) + '</td>' +
-                '<td class="py-3 px-4 font-bold text-white light:text-slate-900">' + g.group + '</td>' +
-                '<td class="py-3 px-4 text-right font-mono font-bold text-emerald-400">' + g.premiums + '</td>' +
-                '<td class="py-3 px-4 text-right font-mono font-bold text-cyan-400">' + g.share + '</td>' +
-                '<td class="py-3 px-4 text-xs text-slate-400 light:text-slate-600">' + g.companies + '</td>' +
-                '</tr>';
-        }).join('');
-    }
-
-    var lasegundaList = dataObj.la_segunda_group || [
-        { entity: "La Segunda Cooperativa", segment: "Patrimoniales (Autos / Agro)", premiums: "ARS 709,48 mil M (Acum. 9m)", share: "5,8%", leader: "Federación Patronal (14,2%)" },
-        { entity: "La Segunda ART", segment: "Riesgos del Trabajo (ART)", premiums: "ARS 393,96 mil M (Acum. 9m)", share: "8,4%", leader: "Prevención ART (21,5%)" },
-        { entity: "La Segunda Personas", segment: "Vida, AP y Salud", premiums: "ARS 45,69 mil M (Acum. 9m)", share: "2,29% (AP: 8,11%)", leader: "Federación Patronal / Sancor" },
-        { entity: "La Segunda Retiro", segment: "Seguros de Retiro (Ahorro)", premiums: "ARS 14,22 mil M (Acum. 9m)", share: "6,23% Indiv. / 5,12% Col.", leader: "San Cristóbal Retiro / Estrella" }
-    ];
-
-    var tbodyLaSeg = document.getElementById('aseg-table-lasegunda-body');
-    if (tbodyLaSeg) {
-        tbodyLaSeg.innerHTML = lasegundaList.map(function(item) {
-            return '<tr class="hover:bg-brandBlue/5 transition-colors">' +
-                '<td class="py-3 px-4 font-bold text-white light:text-slate-900">' + item.entity + '</td>' +
-                '<td class="py-3 px-4 text-xs font-semibold text-brandBlue">' + item.segment + '</td>' +
-                '<td class="py-3 px-4 text-right font-mono font-bold text-emerald-400">' + item.premiums + '</td>' +
-                '<td class="py-3 px-4 text-right font-mono font-bold text-cyan-400">' + item.share + '</td>' +
-                '<td class="py-3 px-4 text-xs text-slate-400 light:text-slate-600">' + item.leader + '</td>' +
-                '</tr>';
-        }).join('');
-    }
+    console.log("Mercado Asegurador - Listo para reconstrucción.");
 }
 
 </script>
@@ -46731,4 +46449,4 @@ function renderAseguradorData() {
 
 </body>
 </html>
-<!-- Deploy timestamp: 1786832453.7258017 -->
+<!-- Deploy timestamp: 1786835347.4492245 -->
