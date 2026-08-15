@@ -80,8 +80,8 @@ window.activeTab = 'exchange';
             } else if (tabId === 'mercado-asegurador') {
                 if (cAsegurador) cAsegurador.classList.remove('hidden');
                 if (bAsegurador) bAsegurador.className = activeClass;
-                if (typeof renderAsegPieCharts === 'function') {
-                    setTimeout(renderAsegPieCharts, 100);
+                if (typeof renderAseguradorData === 'function') {
+                    setTimeout(renderAseguradorData, 100);
                 }
             }
         }
@@ -165,10 +165,10 @@ window.activeTab = 'exchange';
                 activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
                 activeBtn.classList.remove('text-slate-400');
             }
-            if (typeof renderAsegPieCharts === 'function') renderAsegPieCharts();
+            if (typeof renderAseguradorData === 'function') renderAseguradorData();
         }
 
-        window.renderAsegPieCharts = function renderAsegPieCharts() {
+        window.renderAseguradorData = function renderAseguradorData() {
             const dataObj = window.appData || window.finalData || (typeof appData !== 'undefined' ? appData : null);
             if (!dataObj || !dataObj.ssn_data || !dataObj.ssn_data.subsections) return;
 
@@ -35945,7 +35945,7 @@ window.activeTab = 'exchange';
         window.appData = appData;
 
         window.finalData = appData;
-        if (typeof renderAsegPieCharts === 'function') setTimeout(renderAsegPieCharts, 50);
+        if (typeof renderAseguradorData === 'function') setTimeout(renderAseguradorData, 50);
 
 
 
@@ -45863,11 +45863,11 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
                 activeBtn.classList.add('bg-brandBlue', 'text-white', 'shadow-md');
                 activeBtn.classList.remove('text-slate-400');
             }
-            if (typeof renderAsegPieCharts === 'function') renderAsegPieCharts();
+            if (typeof renderAseguradorData === 'function') renderAseguradorData();
         }
 
         window.aseguradorPieCharts = window.aseguradorPieCharts || {};
-        window.renderAsegPieCharts = function renderAsegPieCharts() {
+        window.renderAseguradorData = function renderAseguradorData() {
             const dataObj = window.appData || window.finalData || (typeof appData !== 'undefined' ? appData : null);
             if (!dataObj || !dataObj.ssn_data || !dataObj.ssn_data.subsections) return;
 
@@ -45964,7 +45964,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
                 if (bPrimasAcum) bPrimasAcum.className = activeClass;
                 if (bEvolucion) bEvolucion.className = inactiveClass;
                 if (bBalances) bBalances.className = inactiveClass;
-                if (typeof window.renderAsegPieCharts === 'function') setTimeout(window.renderAsegPieCharts, 50);
+                if (typeof window.renderAseguradorData === 'function') setTimeout(window.renderAseguradorData, 50);
             } else if (secId === 'evolucion-primas') {
                 if (cPrimasAcum) cPrimasAcum.classList.add('hidden');
                 if (cEvolucion) cEvolucion.classList.remove('hidden');
@@ -46776,6 +46776,19 @@ function renderAseguradorData() {
     }
 }
 
+window.renderAseguradorData = renderAseguradorData;
+window.renderAsegPieCharts = renderAseguradorData;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        if (typeof renderAseguradorData === 'function') renderAseguradorData();
+    });
+} else {
+    if (typeof renderAseguradorData === 'function') setTimeout(renderAseguradorData, 50);
+}
+
+
+
 
 </script>
 
@@ -46834,4 +46847,4 @@ function renderAseguradorData() {
 
 </body>
 </html>
-<!-- Deploy timestamp: 1786836486.8076377 -->
+<!-- Deploy timestamp: 1786836881.9769804 -->
