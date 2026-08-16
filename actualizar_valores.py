@@ -494,11 +494,18 @@ var srChartAsegurados = null;
 function switchSegRetiroView(viewName) {
     var vComp = document.getElementById('sr-view-compromisos');
     var vAseg = document.getElementById('sr-view-asegurados');
+    var vPrimas = document.getElementById('sr-view-primas');
+
+    if (vComp) vComp.classList.add('hidden');
+    if (vAseg) vAseg.classList.add('hidden');
+    if (vPrimas) vPrimas.classList.add('hidden');
+
     if (viewName === 'asegurados') {
-        if (vComp) vComp.classList.add('hidden');
         if (vAseg) vAseg.classList.remove('hidden');
+    } else if (viewName === 'primas') {
+        if (vPrimas) vPrimas.classList.remove('hidden');
+        renderPrimasEmitidasRetiroTable();
     } else {
-        if (vAseg) vAseg.classList.add('hidden');
         if (vComp) vComp.classList.remove('hidden');
     }
 }
@@ -699,6 +706,220 @@ function renderSegRetiroSubtabData(srData) {
     }
 }
 window.renderSegRetiroSubtabData = renderSegRetiroSubtabData;
+
+var srChartPrimas = null;
+
+function renderPrimasEmitidasRetiroTable() {
+    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                  (window.appData ? window.appData : 
+                  (window.finalData ? window.finalData : {}));
+    var srData = rootObj.ssn_seg_retiro || (rootObj.final_data ? rootObj.final_data.ssn_seg_retiro : undefined);
+    
+    if (!srData || !srData.primas_emitidas) return;
+
+    var tbody = document.getElementById('tbl-sr-primas-body');
+    if (!tbody) return;
+
+    var fmtNum = function(n) {
+        if (typeof n !== 'number') return n;
+        return n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    };
+
+    var rows = [];
+
+    // Summary Total Row
+    var trT = srData.primas_emitidas_total_row || {};
+    rows.push('<tr id="row-sr-primas-total" class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+        '<td class="py-3 px-3 text-center"><i class="fas fa-calculator"></i></td>' +
+        '<td class="py-3 px-3 uppercase tracking-wider font-bold">TOTAL SELECCIONADO</td>' +
+        '<td id="cell-sr-primas-tot-val" class="py-3 px-3 text-right font-mono text-white text-base font-extrabold">' + fmtNum(trT.primas_total || 0) + '</td>' +
+        '<td id="cell-sr-primas-tot-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
+        '<td id="cell-sr-primas-col-val" class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(trT.primas_colectivo || 0) + '</td>' +
+        '<td id="cell-sr-primas-col-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
+        '<td id="cell-sr-primas-ind-val" class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(trT.primas_individual || 0) + '</td>' +
+        '<td id="cell-sr-primas-ind-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
+    '</tr>');
+
+    srData.primas_emitidas.forEach(function(row, idx) {
+        var isL2 = row.entidad.indexOf('SEGUNDA') !== -1;
+        var rowClass = isL2 ? 'bg-amber-500/10 font-bold border-l-4 border-amber-400' : 'hover:bg-darkBg/50 transition';
+        var nameClass = isL2 ? 'text-amber-300 font-bold' : 'text-slate-200 font-semibold';
+
+        rows.push('<tr id="tr-sr-primas-' + idx + '" class="' + rowClass + '" data-entidad="' + row.entidad + '">' +
+            '<td class="py-3 px-3 text-center">' +
+                '<input type="checkbox" class="chk-sr-primas accent-emerald-500 cursor-pointer rounded" data-index="' + idx + '" checked onchange="updatePrimasRetiroCalculations()">' +
+            '</td>' +
+            '<td class="py-3 px-3 ' + nameClass + '">' + row.entidad + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-white font-bold cell-tot-val">' + fmtNum(row.primas_total) + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold cell-tot-pct">' + row.total_pct.toFixed(2) + '%</td>' +
+            '<td class="py-3 px-3 text-center cell-tot-rank"><span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + row.rank_total + '</span></td>' +
+            '<td class="py-3 px-3 text-right font-mono text-slate-200 cell-col-val">' + fmtNum(row.primas_colectivo) + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-emerald-400/90 cell-col-pct">' + row.colectivo_pct.toFixed(2) + '%</td>' +
+            '<td class="py-3 px-3 text-center cell-col-rank">' + (row.rank_colectivo !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">#' + row.rank_colectivo + '</span>' : '-') + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-slate-200 cell-ind-val">' + fmtNum(row.primas_individual) + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-emerald-400/90 cell-ind-pct">' + row.individual_pct.toFixed(2) + '%</td>' +
+            '<td class="py-3 px-3 text-center cell-ind-rank">' + (row.rank_individual !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">#' + row.rank_individual + '</span>' : '-') + '</td>' +
+        '</tr>');
+    });
+
+    tbody.innerHTML = rows.join('');
+    updatePrimasRetiroCalculations();
+}
+window.renderPrimasEmitidasRetiroTable = renderPrimasEmitidasRetiroTable;
+
+function toggleAllPrimasRetiroCheckboxes(forceState) {
+    var checkboxes = document.querySelectorAll('.chk-sr-primas');
+    var master = document.getElementById('chk-sr-primas-master');
+    var newState = (typeof forceState === 'boolean') ? forceState : (!master || !master.checked);
+
+    if (master) master.checked = newState;
+    checkboxes.forEach(function(cb) {
+        cb.checked = newState;
+    });
+    updatePrimasRetiroCalculations();
+}
+window.toggleAllPrimasRetiroCheckboxes = toggleAllPrimasRetiroCheckboxes;
+
+function updatePrimasRetiroCalculations() {
+    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                  (window.appData ? window.appData : 
+                  (window.finalData ? window.finalData : {}));
+    var srData = rootObj.ssn_seg_retiro || (rootObj.final_data ? rootObj.final_data.ssn_seg_retiro : undefined);
+    if (!srData || !srData.primas_emitidas) return;
+
+    var fmtNum = function(n) {
+        if (typeof n !== 'number') return n;
+        return n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    };
+
+    var checkboxes = document.querySelectorAll('.chk-sr-primas');
+    var activeIndices = [];
+    checkboxes.forEach(function(cb) {
+        if (cb.checked) {
+            activeIndices.push(parseInt(cb.getAttribute('data-index')));
+        }
+    });
+
+    var sumTot = 0, sumCol = 0, sumInd = 0;
+    activeIndices.forEach(function(idx) {
+        var item = srData.primas_emitidas[idx];
+        sumTot += item.primas_total;
+        sumCol += item.primas_colectivo;
+        sumInd += item.primas_individual;
+    });
+
+    var activeList = activeIndices.map(function(idx) {
+        return { idx: idx, data: srData.primas_emitidas[idx] };
+    });
+
+    activeList.sort(function(a, b) { return b.data.primas_total - a.data.primas_total; });
+    var rankTotalMap = {};
+    activeList.forEach(function(item, r) { rankTotalMap[item.idx] = r + 1; });
+
+    var activeCol = activeList.slice().sort(function(a, b) { return b.data.primas_colectivo - a.data.primas_colectivo; });
+    var rankColMap = {};
+    var rColCount = 1;
+    activeCol.forEach(function(item) {
+        if (item.data.primas_colectivo > 0) {
+            rankColMap[item.idx] = rColCount++;
+        } else {
+            rankColMap[item.idx] = '-';
+        }
+    });
+
+    var activeInd = activeList.slice().sort(function(a, b) { return b.data.primas_individual - a.data.primas_individual; });
+    var rankIndMap = {};
+    var rIndCount = 1;
+    activeInd.forEach(function(item) {
+        if (item.data.primas_individual > 0) {
+            rankIndMap[item.idx] = rIndCount++;
+        } else {
+            rankIndMap[item.idx] = '-';
+        }
+    });
+
+    var cTotVal = document.getElementById('cell-sr-primas-tot-val');
+    var cColVal = document.getElementById('cell-sr-primas-col-val');
+    var cIndVal = document.getElementById('cell-sr-primas-ind-val');
+    if (cTotVal) cTotVal.textContent = fmtNum(sumTot);
+    if (cColVal) cColVal.textContent = fmtNum(sumCol);
+    if (cIndVal) cIndVal.textContent = fmtNum(sumInd);
+
+    srData.primas_emitidas.forEach(function(row, idx) {
+        var tr = document.getElementById('tr-sr-primas-' + idx);
+        if (!tr) return;
+
+        var isActive = activeIndices.indexOf(idx) !== -1;
+        if (!isActive) {
+            tr.classList.add('opacity-40');
+            tr.querySelector('.cell-tot-pct').textContent = '-';
+            tr.querySelector('.cell-tot-rank').innerHTML = '-';
+            tr.querySelector('.cell-col-pct').textContent = '-';
+            tr.querySelector('.cell-col-rank').innerHTML = '-';
+            tr.querySelector('.cell-ind-pct').textContent = '-';
+            tr.querySelector('.cell-ind-rank').innerHTML = '-';
+        } else {
+            tr.classList.remove('opacity-40');
+            var pctTot = sumTot ? (row.primas_total / sumTot * 100).toFixed(2) + '%' : '0.00%';
+            var pctCol = sumCol ? (row.primas_colectivo / sumCol * 100).toFixed(2) + '%' : '0.00%';
+            var pctInd = sumInd ? (row.primas_individual / sumInd * 100).toFixed(2) + '%' : '0.00%';
+
+            var rTot = rankTotalMap[idx] || '-';
+            var rCol = rankColMap[idx] || '-';
+            var rInd = rankIndMap[idx] || '-';
+
+            tr.querySelector('.cell-tot-pct').textContent = pctTot;
+            tr.querySelector('.cell-tot-rank').innerHTML = '<span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + rTot + '</span>';
+            tr.querySelector('.cell-col-pct').textContent = pctCol;
+            tr.querySelector('.cell-col-rank').innerHTML = (rCol !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">#' + rCol + '</span>' : '-');
+            tr.querySelector('.cell-ind-pct').textContent = pctInd;
+            tr.querySelector('.cell-ind-rank').innerHTML = (rInd !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">#' + rInd + '</span>' : '-');
+        }
+    });
+
+    var chartCanvas = document.getElementById('chart-sr-primas');
+    if (chartCanvas && window.Chart) {
+        if (srChartPrimas) srChartPrimas.destroy();
+
+        var chartDataItems = activeList.slice(0, 10).map(function(item) { return item.data; });
+        srChartPrimas = new Chart(chartCanvas, {
+            type: 'bar',
+            data: {
+                labels: chartDataItems.map(function(r) { return r.entidad.replace(' SEGUROS DE RETIRO', '').replace(' RETIRO', ''); }),
+                datasets: [
+                    { label: 'Retiro Colectivo', data: chartDataItems.map(function(r) { return r.primas_colectivo; }), backgroundColor: '#3b82f6' },
+                    { label: 'Retiro Individual', data: chartDataItems.map(function(r) { return r.primas_individual; }), backgroundColor: '#10b981' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { color: '#94a3b8', font: { weight: 'bold' } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                return ctx.dataset.label + ': $ ' + fmtNum(ctx.raw);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }, grid: { display: false } },
+                    y: {
+                        ticks: { color: '#94a3b8', callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                    }
+                }
+            }
+        });
+    }
+}
+window.updatePrimasRetiroCalculations = updatePrimasRetiroCalculations;
+
 
 
 
@@ -36889,6 +37110,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                 <select id="select-seg-retiro-view" onchange="switchSegRetiroView(this.value)" class="bg-darkBg text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-emerald-500/30 focus:border-emerald-400 focus:outline-none cursor-pointer shadow-lg">
                                     <option value="compromisos" selected>Compromisos Técnicos (Reservas Matemáticas)</option>
                                     <option value="asegurados">Cantidad de Asegurados y Rentistas</option>
+                                    <option value="primas">Primas Emitidas (Ranking y Producción)</option>
                                 </select>
                                 <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2">
                                     <i class="fas fa-database"></i> Fuente: SSN
@@ -36945,6 +37167,116 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                 <h3 class="text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider">Top 10 Aseguradoras por Compromisos Técnicos (Reservas Matemáticas)</h3>
                                 <div class="relative w-full h-[360px]">
                                     <canvas id="chart-sr-compromisos"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VISTA 3: PRIMAS EMITIDAS (RANKING Y PRODUCCIÓN) -->
+                        <div id="sr-view-primas" class="hidden mb-10">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                        <i class="fas fa-file-invoice-dollar text-emerald-400"></i> Primas Emitidas - Ranking de Producción (Acumulado Trimestral SSN)
+                                    </h2>
+                                    <p class="text-xs text-slate-400 mt-1">Lógica de ejercicios de Balances (01-07 al 30-06). Datos acumulados a Marzo 2026.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleAllPrimasRetiroCheckboxes()" class="px-3.5 py-2 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/20 transition flex items-center gap-2 shadow-md">
+                                        <i class="fas fa-check-double"></i> <span>Seleccionar / Deseleccionar Todas</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                                <div class="lg:col-span-12 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left border-collapse" id="tbl-sr-primas">
+                                            <thead>
+                                                <tr class="bg-darkBg/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-darkBorder">
+                                                    <th class="py-3 px-3 w-10 text-center">
+                                                        <input type="checkbox" id="chk-sr-primas-master" checked onchange="toggleAllPrimasRetiroCheckboxes(this.checked)" class="accent-emerald-500 cursor-pointer rounded">
+                                                    </th>
+                                                    <th class="py-3 px-3">Aseguradora (Entidad)</th>
+                                                    <th class="py-3 px-3 text-right">Total Primas ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Rank Total</th>
+                                                    <th class="py-3 px-3 text-right">Retiro Colectivo ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Rank Col.</th>
+                                                    <th class="py-3 px-3 text-right">Retiro Individual ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Rank Ind.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl-sr-primas-body" class="divide-y divide-darkBorder/40 text-xs md:text-sm font-medium text-slate-200">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gráfico Primas Emitidas -->
+                            <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                <h3 class="text-sm font-bold text-slate-300 mb-4 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fas fa-chart-bar text-emerald-400"></i> Producción por Primas Emitidas (Retiro Colectivo vs. Individual)
+                                </h3>
+                                <div class="relative w-full h-[380px]">
+                                    <canvas id="chart-sr-primas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VISTA 3: PRIMAS EMITIDAS (RANKING Y PRODUCCIÓN) -->
+                        <div id="sr-view-primas" class="hidden mb-10">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                                <div>
+                                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                        <i class="fas fa-file-invoice-dollar text-emerald-400"></i> Primas Emitidas - Ranking de Producción (Acumulado Trimestral SSN)
+                                    </h2>
+                                    <p class="text-xs text-slate-400 mt-1">Lógica de ejercicios de Balances (01-07 al 30-06). Datos acumulados a Marzo 2026.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleAllPrimasRetiroCheckboxes()" class="px-3.5 py-2 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/20 transition flex items-center gap-2 shadow-md">
+                                        <i class="fas fa-check-double"></i> <span>Seleccionar / Deseleccionar Todas</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                                <div class="lg:col-span-12 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left border-collapse" id="tbl-sr-primas">
+                                            <thead>
+                                                <tr class="bg-darkBg/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-darkBorder">
+                                                    <th class="py-3 px-3 w-10 text-center">
+                                                        <input type="checkbox" id="chk-sr-primas-master" checked onchange="toggleAllPrimasRetiroCheckboxes(this.checked)" class="accent-emerald-500 cursor-pointer rounded">
+                                                    </th>
+                                                    <th class="py-3 px-3">Aseguradora (Entidad)</th>
+                                                    <th class="py-3 px-3 text-right">Total Primas ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Rank Total</th>
+                                                    <th class="py-3 px-3 text-right">Retiro Colectivo ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Rank Col.</th>
+                                                    <th class="py-3 px-3 text-right">Retiro Individual ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Rank Ind.</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl-sr-primas-body" class="divide-y divide-darkBorder/40 text-xs md:text-sm font-medium text-slate-200">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gráfico Primas Emitidas -->
+                            <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                <h3 class="text-sm font-bold text-slate-300 mb-4 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fas fa-chart-bar text-emerald-400"></i> Producción por Primas Emitidas (Retiro Colectivo vs. Individual)
+                                </h3>
+                                <div class="relative w-full h-[380px]">
+                                    <canvas id="chart-sr-primas"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -49340,12 +49672,113 @@ def load_ssn_seg_retiro_data():
             'art_base': int(sum(x['art_base'] for x in asegurados))
         }
 
+        # --- 3. PRIMAS EMITIDAS (Hoja '3- Seg. de Personas' de ssn_202603_prod_trimestral_boletin.xlsx) ---
+        file_prod = os.path.join("data", "ssn", "ssn_202603_prod_trimestral_boletin.xlsx")
+        if not os.path.exists(file_prod) and os.path.exists("ssn_202603_prod_trimestral_boletin.xlsx"):
+            file_prod = "ssn_202603_prod_trimestral_boletin.xlsx"
+
+        if not os.path.exists(file_prod):
+            os.makedirs(os.path.join("data", "ssn"), exist_ok=True)
+            import urllib.request
+            try:
+                url_prod = "https://www.argentina.gob.ar/sites/default/files/ssn_202603_prod_trimestral_boletin.xlsx"
+                req = urllib.request.Request(url_prod, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req) as resp, open(file_prod, 'wb') as f_out:
+                    f_out.write(resp.read())
+            except Exception as e:
+                print(f"Error downloading {file_prod}: {e}")
+
+        primas_emitidas_list = []
+        tot_primas_row = {}
+
+        if os.path.exists(file_prod):
+            try:
+                fixed_prod = fix_strict_ooxml(file_prod)
+                wb_prod = openpyxl.load_workbook(fixed_prod, data_only=True)
+                sheet_p = [s for s in wb_prod.sheetnames if '3' in s and 'Personas' in s][0]
+                ws_prod = wb_prod[sheet_p]
+
+                raw_col = {}
+                raw_ind = {}
+                ent_set = set()
+
+                for r in range(4, ws_prod.max_row + 1):
+                    ramo = str(ws_prod.cell(row=r, column=6).value or '').strip()
+                    entidad = str(ws_prod.cell(row=r, column=3).value or '').strip()
+                    primas = ws_prod.cell(row=r, column=4).value
+                    if not entidad or primas is None:
+                        continue
+                    try:
+                        p_val = float(primas)
+                    except (ValueError, TypeError):
+                        continue
+
+                    if 'Retiro - Colectivo' in ramo:
+                        raw_col[entidad] = p_val
+                        ent_set.add(entidad)
+                    elif 'Retiro - Individual' in ramo:
+                        raw_ind[entidad] = p_val
+                        ent_set.add(entidad)
+
+                sum_col = sum(raw_col.values())
+                sum_ind = sum(raw_ind.values())
+                sum_tot = sum_col + sum_ind
+
+                for ent in ent_set:
+                    p_colectivo = raw_col.get(ent, 0.0)
+                    p_individual = raw_ind.get(ent, 0.0)
+                    p_total = p_colectivo + p_individual
+
+                    pct_total = (p_total / sum_tot * 100.0) if sum_tot else 0.0
+                    pct_colectivo = (p_colectivo / sum_col * 100.0) if sum_col else 0.0
+                    pct_individual = (p_individual / sum_ind * 100.0) if sum_ind else 0.0
+
+                    primas_emitidas_list.append({
+                        'entidad': ent,
+                        'primas_total': round(p_total, 2),
+                        'total_pct': round(pct_total, 2),
+                        'primas_colectivo': round(p_colectivo, 2),
+                        'colectivo_pct': round(pct_colectivo, 2),
+                        'primas_individual': round(p_individual, 2),
+                        'individual_pct': round(pct_individual, 2)
+                    })
+
+                primas_emitidas_list.sort(key=lambda x: x['primas_total'], reverse=True)
+
+                for rank, item in enumerate(primas_emitidas_list, start=1):
+                    item['rank_total'] = rank
+
+                sorted_col_list = sorted(primas_emitidas_list, key=lambda x: x['primas_colectivo'], reverse=True)
+                for rank, item in enumerate(sorted_col_list, start=1):
+                    item['rank_colectivo'] = rank if item['primas_colectivo'] > 0 else '-'
+
+                sorted_ind_list = sorted(primas_emitidas_list, key=lambda x: x['primas_individual'], reverse=True)
+                for rank, item in enumerate(sorted_ind_list, start=1):
+                    item['rank_individual'] = rank if item['primas_individual'] > 0 else '-'
+
+                tot_primas_row = {
+                    'entidad': 'TOTAL MERCADO',
+                    'primas_total': round(sum_tot, 2),
+                    'total_pct': 100.0,
+                    'rank_total': '-',
+                    'primas_colectivo': round(sum_col, 2),
+                    'colectivo_pct': 100.0,
+                    'rank_colectivo': '-',
+                    'primas_individual': round(sum_ind, 2),
+                    'individual_pct': 100.0,
+                    'rank_individual': '-'
+                }
+            except Exception as e_p:
+                print(f"Error parsing ssn_prod_trimestral for Primas Emitidas: {e_p}")
+
         return {
             "periodo": "Marzo 2026",
             "compromisos_total_row": tot_compromisos_row,
             "compromisos_tecnicos": compromisos_tecnicos,
             "asegurados_total_row": tot_asegurados_row,
-            "asegurados": asegurados
+            "asegurados": asegurados,
+            "primas_emitidas_total_row": tot_primas_row,
+            "primas_emitidas": primas_emitidas_list
         }
     except Exception as e:
         print(f"Error parsing ssn_seg_retiro_data: {e}")
