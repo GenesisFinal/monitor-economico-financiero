@@ -24,12 +24,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
 function renderAseguradorData() {
-    console.log("Rendering Mercado Asegurador...");
-    var viewMensual = document.getElementById('subtab-view-mensual');
-    if (viewMensual && !viewMensual.classList.contains('hidden')) {
-        renderMensualSubtabData();
-    } else {
-        renderPrimasSubtabData();
+    var cur = window.activeAsegSubtab || 'primas';
+    if (typeof switchAsegSubtab === 'function') {
+        switchAsegSubtab(cur);
     }
 }
 window.renderAseguradorData = renderAseguradorData;
