@@ -44,6 +44,8 @@ function renderPrimasSubtabData() {
     var branches = ssnObj.branches || [];
     var seriesObj = ssnObj.quarterly_series || {};
 
+    var IPC_FACTOR = 1.32607212;
+
     var fmtM = function(val) {
         if (!val || isNaN(val)) return '0,00';
         return (val / 1000000.0).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -82,6 +84,9 @@ function renderPrimasSubtabData() {
             var rowClass = isTotal ? 'font-bold bg-slate-800/40 text-white' : 'hover:bg-slate-800/20 text-slate-300';
             var nameCol = isTotal ? '<span class="font-bold text-white">' + item.name + '</span>' : item.name;
             
+            var calcNom = (item.primas_prev > 0) ? (((item.primas_actual - item.primas_prev) / item.primas_prev) * 100.0) : item.var_nominal;
+            var calcReal = (((1.0 + (calcNom / 100.0)) / IPC_FACTOR) - 1.0) * 100.0;
+
             var calculatedShare = (totalMercadoPrimas > 0) ? ((item.primas_actual / totalMercadoPrimas) * 100.0) : (item.share || 0);
             var shareVal = calculatedShare.toFixed(2).replace('.', ',') + '%';
 
@@ -89,8 +94,8 @@ function renderPrimasSubtabData() {
             html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_actual) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_prev) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (item.var_nominal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_nominal) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (item.var_real >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_real) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (calcNom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(calcNom) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (calcReal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(calcReal) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono text-cyan-400 font-bold">' + shareVal + '</td>';
             html += '</tr>';
         });
