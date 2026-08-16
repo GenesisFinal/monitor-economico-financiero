@@ -501,9 +501,9 @@ function switchAsegSubtab(subtabId) {
         if (viewMensual) viewMensual.classList.add('hidden');
         if (viewRankings) viewRankings.classList.remove('hidden');
 
-        if (btnPrimas) btnPrimas.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
-        if (btnMensual) btnMensual.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
-        if (btnRankings) btnRankings.className = "px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 shadow-md transition-all";
+        if (btnPrimas) btnPrimas.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
+        if (btnMensual) btnMensual.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
+        if (btnRankings) btnRankings.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20 flex items-center gap-2";
 
         renderRankingsSubtabData();
     } else if (subtabId === 'evolucion-mensual') {
@@ -511,9 +511,9 @@ function switchAsegSubtab(subtabId) {
         if (viewRankings) viewRankings.classList.add('hidden');
         if (viewMensual) viewMensual.classList.remove('hidden');
 
-        if (btnPrimas) btnPrimas.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
-        if (btnRankings) btnRankings.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
-        if (btnMensual) btnMensual.className = "px-4 py-2 rounded-xl text-xs font-bold bg-brandBlue text-white shadow-md transition-all";
+        if (btnPrimas) btnPrimas.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
+        if (btnRankings) btnRankings.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
+        if (btnMensual) btnMensual.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all bg-brandBlue text-white shadow-lg shadow-brandBlue/20 flex items-center gap-2";
 
         renderMensualSubtabData();
     } else {
@@ -521,9 +521,9 @@ function switchAsegSubtab(subtabId) {
         if (viewRankings) viewRankings.classList.add('hidden');
         if (viewPrimas) viewPrimas.classList.remove('hidden');
 
-        if (btnMensual) btnMensual.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
-        if (btnRankings) btnRankings.className = "px-4 py-2 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-all";
-        if (btnPrimas) btnPrimas.className = "px-4 py-2 rounded-xl text-xs font-bold bg-brandBlue text-white shadow-md transition-all";
+        if (btnMensual) btnMensual.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
+        if (btnRankings) btnRankings.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
+        if (btnPrimas) btnPrimas.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all bg-brandBlue text-white shadow-lg shadow-brandBlue/20 flex items-center gap-2";
 
         renderPrimasSubtabData();
     }
@@ -35033,6 +35033,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 </button>
                 <button id="btn-aseg-subtab-mensual" onclick="switchAsegSubtab('evolucion-mensual')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
                     <i class="fas fa-calendar-days"></i> Evolución Mensual
+                </button>
+                <button id="btn-aseg-subtab-rankings" onclick="switchAsegSubtab('rankings-produccion')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
+                    <i class="fas fa-trophy text-amber-400"></i> Rankings de Producción
                 </button>
             </div>
 
