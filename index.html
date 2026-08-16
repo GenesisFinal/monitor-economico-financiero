@@ -42,6 +42,9 @@ window.renderAsegPieCharts = renderAsegPieCharts;
 function renderPrimasSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_primas_mercado || {}) : {};
     var branches = ssnObj.branches || [];
+    var seriesObj = ssnObj.quarterly_series || {};
+
+    var IPC_FACTOR = 1.32607212;
 
     var fmtM = function(val) {
         if (!val || isNaN(val)) return '0,00';
@@ -58,41 +61,144 @@ function renderPrimasSubtabData() {
     var patItem = branches.find(function(x) { return x.key === 'total_patrimoniales'; });
     var perItem = branches.find(function(x) { return x.key === 'total_personas'; });
 
-    if (totItem && document.getElementById('kpi-primas-total-val')) document.getElementById('kpi-primas-total-val').textContent = '$' + fmtM(totItem.primas_actual);
-    if (totItem && document.getElementById('kpi-primas-total-var-nom')) document.getElementById('kpi-primas-total-var-nom').textContent = fmtPct(totItem.var_nominal);
-    if (totItem && document.getElementById('kpi-primas-total-var-real')) document.getElementById('kpi-primas-total-var-real').textContent = fmtPct(totItem.var_real);
+    var totalMercadoPrimas = totItem ? totItem.primas_actual : 0;
 
-    if (patItem && document.getElementById('kpi-primas-patrim-val')) document.getElementById('kpi-primas-patrim-val').textContent = '$' + fmtM(patItem.primas_actual);
-    if (patItem && document.getElementById('kpi-primas-patrim-var-nom')) document.getElementById('kpi-primas-patrim-var-nom').textContent = fmtPct(patItem.var_nominal);
-    if (patItem && document.getElementById('kpi-primas-patrim-var-real')) document.getElementById('kpi-primas-patrim-var-real').textContent = fmtPct(patItem.var_real);
+    var totNom = totItem ? ((totItem.primas_prev > 0) ? (((totItem.primas_actual - totItem.primas_prev) / totItem.primas_prev) * 100.0) : totItem.var_nominal) : 0;
+    var totReal = (((1.0 + (totNom / 100.0)) / IPC_FACTOR) - 1.0) * 100.0;
 
-    if (perItem && document.getElementById('kpi-primas-personas-val')) document.getElementById('kpi-primas-personas-val').textContent = '$' + fmtM(perItem.primas_actual);
-    if (perItem && document.getElementById('kpi-primas-personas-var-nom')) document.getElementById('kpi-primas-personas-var-nom').textContent = fmtPct(perItem.var_nominal);
-    if (perItem && document.getElementById('kpi-primas-personas-var-real')) document.getElementById('kpi-primas-personas-var-real').textContent = fmtPct(perItem.var_real);
+    var patNom = patItem ? ((patItem.primas_prev > 0) ? (((patItem.primas_actual - patItem.primas_prev) / patItem.primas_prev) * 100.0) : patItem.var_nominal) : 0;
+    var patReal = (((1.0 + (patNom / 100.0)) / IPC_FACTOR) - 1.0) * 100.0;
 
-    var renderTable = function(tbodyId, groupName) {
-        var tbody = document.getElementById(tbodyId);
+    var perNom = perItem ? ((perItem.primas_prev > 0) ? (((perItem.primas_actual - perItem.primas_prev) / perItem.primas_prev) * 100.0) : perItem.var_nominal) : 0;
+    var perReal = (((1.0 + (perNom / 100.0)) / IPC_FACTOR) - 1.0) * 100.0;
+
+    if (totItem && document.getElementById('kpi-primas-total-val')) document.getElementById('kpi-primas-total-val').textContent = 'ARS ' + fmtM(totItem.primas_actual) + ' M';
+    if (totItem && document.getElementById('kpi-primas-total-var-nom')) document.getElementById('kpi-primas-total-var-nom').textContent = fmtPct(totNom);
+    if (totItem && document.getElementById('kpi-primas-total-var-real')) document.getElementById('kpi-primas-total-var-real').textContent = '(' + fmtPct(totReal) + ' Real Neta Inflación)';
+
+    if (patItem && document.getElementById('kpi-primas-patrimoniales-val')) document.getElementById('kpi-primas-patrimoniales-val').textContent = 'ARS ' + fmtM(patItem.primas_actual) + ' M';
+    if (patItem && document.getElementById('kpi-primas-patrim-var-nom')) document.getElementById('kpi-primas-patrim-var-nom').textContent = fmtPct(patNom);
+    if (patItem && document.getElementById('kpi-primas-patrim-var-real')) document.getElementById('kpi-primas-patrim-var-real').textContent = '(' + fmtPct(patReal) + ' Real Neta Inflación)';
+
+    if (perItem && document.getElementById('kpi-primas-personas-val')) document.getElementById('kpi-primas-personas-val').textContent = 'ARS ' + fmtM(perItem.primas_actual) + ' M';
+    if (perItem && document.getElementById('kpi-primas-personas-var-nom')) document.getElementById('kpi-primas-personas-var-nom').textContent = fmtPct(perNom);
+    if (perItem && document.getElementById('kpi-primas-personas-var-real')) document.getElementById('kpi-primas-personas-var-real').textContent = '(' + fmtPct(perReal) + ' Real Neta Inflación)';
+
+    var populateTable = function(tableId, items) {
+        var tbody = document.getElementById(tableId);
         if (!tbody) return;
-        var groupItems = branches.filter(function(x) { return x.group === groupName; });
         var html = '';
-        groupItems.forEach(function(item) {
-            var isHeader = item.is_total || item.key === 'total_mercado';
-            var bgClass = isHeader ? 'bg-darkBg/60 font-bold text-white' : 'hover:bg-darkCard/40 text-slate-300';
-            html += '<tr class="' + bgClass + '">';
-            html += '<td class="py-2.5 px-4 font-semibold">' + item.name + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono font-medium">$' + fmtM(item.primas_actual) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono text-slate-400">$' + fmtM(item.primas_prev) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono ' + (item.var_nominal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_nominal) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono ' + (item.var_real >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_real) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono text-slate-400">' + (item.share ? item.share.toFixed(2) + '%' : '-') + '</td>';
+        items.forEach(function(item) {
+            var isTotal = item.is_total || item.key.indexOf('total') !== -1;
+            var rowClass = isTotal ? 'font-bold bg-slate-800/40 text-white' : 'hover:bg-slate-800/20 text-slate-300';
+            var nameCol = isTotal ? '<span class="font-bold text-white">' + item.name + '</span>' : item.name;
+            
+            var calcNom = (item.primas_prev > 0) ? (((item.primas_actual - item.primas_prev) / item.primas_prev) * 100.0) : item.var_nominal;
+            var calcReal = (((1.0 + (calcNom / 100.0)) / IPC_FACTOR) - 1.0) * 100.0;
+
+            var calculatedShare = (totalMercadoPrimas > 0) ? ((item.primas_actual / totalMercadoPrimas) * 100.0) : (item.share || 0);
+            var shareVal = calculatedShare.toFixed(2).replace('.', ',') + '%';
+
+            html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
+            html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_actual) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_prev) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (calcNom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(calcNom) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (calcReal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(calcReal) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono text-cyan-400 font-bold">' + shareVal + '</td>';
             html += '</tr>';
         });
         tbody.innerHTML = html;
     };
 
-    renderTable('tbl-body-personas', 'Personas');
-    renderTable('tbl-body-patrimoniales', 'Patrimoniales');
-    renderTable('tbl-body-total-mercado', 'Total Mercado');
+    var personasItems = branches.filter(function(x) { return x.group === 'Personas' || x.type === 'personas' || x.type === 'personas_total'; });
+    var patrimonialesItems = branches.filter(function(x) { return x.group === 'Patrimoniales' || x.type === 'patrimoniales' || x.type === 'patrimoniales_total'; });
+    
+    // For Consolidado Total Mercado (Table 3): include Seguros Patrimoniales, Seguros de Personas, and Total Mercado
+    var totalItems = [];
+    if (patItem) totalItems.push(patItem);
+    if (perItem) totalItems.push(perItem);
+    if (totItem) totalItems.push(totItem);
+
+    populateTable('tbl-body-personas', personasItems);
+    populateTable('tbl-body-patrimoniales', patrimonialesItems);
+    populateTable('tbl-body-total-mercado', totalItems);
+
+    // Initialize Donut Chart 1: Personas
+    if (typeof Chart !== 'undefined' && document.getElementById('chart-pie-personas-primas')) {
+        var canvasPer = document.getElementById('chart-pie-personas-primas');
+        if (window.personasPieChart) window.personasPieChart.destroy();
+
+        var subPer = personasItems.filter(function(x) { return !x.is_total; });
+        window.personasPieChart = new Chart(canvasPer.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: subPer.map(function(x) { return x.name; }),
+                datasets: [{
+                    data: subPer.map(function(x) { return x.primas_actual / 1000000.0; }),
+                    backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+            }
+        });
+    }
+
+    // Initialize Donut Chart 2: Patrimoniales
+    if (typeof Chart !== 'undefined' && document.getElementById('chart-pie-patrimoniales-primas')) {
+        var canvasPat = document.getElementById('chart-pie-patrimoniales-primas');
+        if (window.patrimonialesPieChart) window.patrimonialesPieChart.destroy();
+
+        var subPat = patrimonialesItems.filter(function(x) { return !x.is_total; });
+        window.patrimonialesPieChart = new Chart(canvasPat.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: subPat.map(function(x) { return x.name; }),
+                datasets: [{
+                    data: subPat.map(function(x) { return x.primas_actual / 1000000.0; }),
+                    backgroundColor: ['#f59e0b', '#06b6d4', '#10b981', '#6366f1']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+            }
+        });
+    }
+
+    // Initialize Bar Chart 3: 5-Quarter Evolution
+    if (typeof Chart !== 'undefined' && document.getElementById('chart-bar-5q-evolution')) {
+        var canvasBar = document.getElementById('chart-bar-5q-evolution');
+        if (window.evolution5QBarChart) window.evolution5QBarChart.destroy();
+
+        var qDates = seriesObj.total_mercado ? seriesObj.total_mercado.dates : ['Mar 25', 'Jun 25', 'Sep 25', 'Dic 25', 'Mar 26'];
+        var patVals = seriesObj.total_patrimoniales ? seriesObj.total_patrimoniales.values.map(function(v) { return v / 1000000.0; }) : [];
+        var perVals = seriesObj.total_personas ? seriesObj.total_personas.values.map(function(v) { return v / 1000000.0; }) : [];
+
+        window.evolution5QBarChart = new Chart(canvasBar.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: qDates,
+                datasets: [
+                    { label: 'Seguros Patrimoniales ($M)', data: patVals, backgroundColor: '#f59e0b' },
+                    { label: 'Seguros de Personas ($M)', data: perVals, backgroundColor: '#10b981' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                scales: {
+                    x: { stacked: true, ticks: { color: '#94a3b8' }, grid: { display: false } },
+                    y: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                }
+            }
+        });
+    }
 }
 window.renderPrimasSubtabData = renderPrimasSubtabData;
 
