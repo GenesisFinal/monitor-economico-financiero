@@ -488,6 +488,219 @@ function renderSegPersonasSubtabData(spData) {
 window.renderSegPersonasSubtabData = renderSegPersonasSubtabData;
 
 
+var srChartCompromisos = null;
+var srChartAsegurados = null;
+
+function switchSegRetiroView(viewName) {
+    var vComp = document.getElementById('sr-view-compromisos');
+    var vAseg = document.getElementById('sr-view-asegurados');
+    if (viewName === 'asegurados') {
+        if (vComp) vComp.classList.add('hidden');
+        if (vAseg) vAseg.classList.remove('hidden');
+    } else {
+        if (vAseg) vAseg.classList.add('hidden');
+        if (vComp) vComp.classList.remove('hidden');
+    }
+}
+window.switchSegRetiroView = switchSegRetiroView;
+
+function toggleSrCol(colType) {
+    var cols = document.querySelectorAll('.col-sr-' + colType);
+    var txtEl = document.getElementById('btn-toggle-' + colType + '-txt');
+    cols.forEach(function(el) {
+        el.classList.toggle('hidden');
+    });
+    if (txtEl) {
+        var isHidden = cols.length > 0 && cols[0].classList.contains('hidden');
+        txtEl.textContent = isHidden ? ('Desglosar ' + (colType === 'ahorro' ? 'Ahorro' : 'Rentas')) : ('Ocultar ' + (colType === 'ahorro' ? 'Ahorro' : 'Rentas'));
+    }
+}
+window.toggleSrCol = toggleSrCol;
+
+function toggleSrAsegCol(colType) {
+    var cols = document.querySelectorAll('.col-sr-aseg-' + colType);
+    var txtEl = document.getElementById('btn-toggle-aseg-' + colType + '-txt');
+    cols.forEach(function(el) {
+        el.classList.toggle('hidden');
+    });
+    if (txtEl) {
+        var isHidden = cols.length > 0 && cols[0].classList.contains('hidden');
+        txtEl.textContent = isHidden ? ('Desglosar ' + (colType === 'ahorro' ? 'Ahorro' : 'Renta')) : ('Ocultar ' + (colType === 'ahorro' ? 'Ahorro' : 'Renta'));
+    }
+}
+window.toggleSrAsegCol = toggleSrAsegCol;
+
+function renderSegRetiroSubtabData(srData) {
+    if (!srData) {
+        var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                      (window.appData ? window.appData : 
+                      (window.finalData ? window.finalData : {}));
+        srData = rootObj.ssn_seg_retiro || (rootObj.final_data ? rootObj.final_data.ssn_seg_retiro : undefined) || (window.masterDataset && window.masterDataset.final_data ? window.masterDataset.final_data.ssn_seg_retiro : undefined);
+    }
+
+    if (!srData || (!srData.compromisos_tecnicos && !srData.asegurados)) {
+        console.warn("[SEG RETIRO] Data not found in appData or finalData");
+        return;
+    }
+
+    var fmtNum = function(n) {
+        if (typeof n !== 'number') return n;
+        return n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    };
+
+    // 1. Compromisos Técnicos Table
+    var compBody = document.getElementById('tbl-sr-compromisos-body');
+    if (compBody && srData.compromisos_tecnicos) {
+        var rows = [];
+        if (srData.compromisos_total_row) {
+            var tr = srData.compromisos_total_row;
+            rows.push('<tr class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+                '<td class="py-3 px-3 uppercase tracking-wider"><i class="fas fa-calculator mr-1.5"></i>' + tr.entidad + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(tr.total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(tr.ahorro_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-300">' + fmtNum(tr.ahorro_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-300">' + fmtNum(tr.ahorro_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(tr.rentas_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-300">' + fmtNum(tr.rentas_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-300">' + fmtNum(tr.rentas_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-amber-300">' + fmtNum(tr.rvp_art) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtNum(tr.otros) + '</td>' +
+            '</tr>');
+        }
+
+        srData.compromisos_tecnicos.forEach(function(row) {
+            var isL2 = row.entidad.indexOf('SEGUNDA') !== -1;
+            var rowClass = isL2 ? 'bg-amber-500/10 font-bold border-l-4 border-amber-400' : 'hover:bg-darkBg/50 transition';
+            var nameClass = isL2 ? 'text-amber-300 font-bold' : 'text-slate-200 font-semibold';
+
+            rows.push('<tr class="' + rowClass + '">' +
+                '<td class="py-3 px-3 ' + nameClass + '">' + row.entidad + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(row.total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold">' + row.total_pct.toFixed(2) + '%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-slate-200">' + fmtNum(row.ahorro_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-400">' + fmtNum(row.ahorro_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-400">' + fmtNum(row.ahorro_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-emerald-400/90">' + row.ahorro_pct.toFixed(2) + '%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-slate-200">' + fmtNum(row.rentas_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-400">' + fmtNum(row.rentas_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-400">' + fmtNum(row.rentas_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-emerald-400/90">' + row.rentas_pct.toFixed(2) + '%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-amber-400/90">' + fmtNum(row.rvp_art) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-slate-400">' + fmtNum(row.otros) + '</td>' +
+            '</tr>');
+        });
+
+        compBody.innerHTML = rows.join('');
+    }
+
+    // 2. Asegurados Table
+    var asegBody = document.getElementById('tbl-sr-asegurados-body');
+    if (asegBody && srData.asegurados) {
+        var rowsA = [];
+        if (srData.asegurados_total_row) {
+            var trA = srData.asegurados_total_row;
+            rowsA.push('<tr class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+                '<td class="py-3 px-3 uppercase tracking-wider"><i class="fas fa-users mr-1.5"></i>' + trA.entidad + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white text-base font-extrabold">' + fmtNum(trA.total_asegurados) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(trA.ahorro_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-ahorro hidden text-slate-300">' + fmtNum(trA.ahorro_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-ahorro hidden text-slate-300">' + fmtNum(trA.ahorro_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(trA.renta_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-renta hidden text-slate-300">' + fmtNum(trA.renta_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-renta hidden text-slate-300">' + fmtNum(trA.renta_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-amber-300">' + fmtNum(trA.rvp_art) + '</td>' +
+            '</tr>');
+        }
+
+        srData.asegurados.forEach(function(row) {
+            var isL2 = row.entidad.indexOf('SEGUNDA') !== -1;
+            var rowClass = isL2 ? 'bg-amber-500/10 font-bold border-l-4 border-amber-400' : 'hover:bg-darkBg/50 transition';
+            var nameClass = isL2 ? 'text-amber-300 font-bold' : 'text-slate-200 font-semibold';
+
+            rowsA.push('<tr class="' + rowClass + '">' +
+                '<td class="py-3 px-3 ' + nameClass + '">' + row.entidad + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(row.total_asegurados) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-slate-200">' + fmtNum(row.ahorro_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-ahorro hidden text-slate-400">' + fmtNum(row.ahorro_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-ahorro hidden text-slate-400">' + fmtNum(row.ahorro_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-slate-200">' + fmtNum(row.renta_total) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-renta hidden text-slate-400">' + fmtNum(row.renta_indiv) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono col-sr-aseg-renta hidden text-slate-400">' + fmtNum(row.renta_colec) + '</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-amber-400/90">' + fmtNum(row.rvp_art) + '</td>' +
+            '</tr>');
+        });
+
+        asegBody.innerHTML = rowsA.join('');
+    }
+
+    // 3. Charts rendering
+    try {
+        if (window.Chart) {
+            // Compromisos Chart
+            var ctxC = document.getElementById('chart-sr-compromisos');
+            if (ctxC && srData.compromisos_tecnicos) {
+                if (srChartCompromisos) srChartCompromisos.destroy();
+                var top10C = srData.compromisos_tecnicos.slice(0, 10);
+                srChartCompromisos = new Chart(ctxC, {
+                    type: 'bar',
+                    data: {
+                        labels: top10C.map(function(r) { return r.entidad.replace(' SEGUROS DE RETIRO', '').replace(' RETIRO', ''); }),
+                        datasets: [
+                            { label: 'P. Ahorro', data: top10C.map(function(r) { return r.ahorro_total; }), backgroundColor: '#10b981' },
+                            { label: 'P. Renta', data: top10C.map(function(r) { return r.rentas_total; }), backgroundColor: '#3b82f6' },
+                            { label: 'RVP + ART', data: top10C.map(function(r) { return r.rvp_art; }), backgroundColor: '#f59e0b' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        scales: {
+                            x: { stacked: true, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { stacked: true, ticks: { color: '#94a3b8', callback: function(v) { return '$' + (v/1000000).toFixed(0) + 'M'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        }
+                    }
+                });
+            }
+
+            // Asegurados Chart
+            var ctxA = document.getElementById('chart-sr-asegurados');
+            if (ctxA && srData.asegurados) {
+                if (srChartAsegurados) srChartAsegurados.destroy();
+                var top10A = srData.asegurados.slice(0, 10);
+                srChartAsegurados = new Chart(ctxA, {
+                    type: 'bar',
+                    data: {
+                        labels: top10A.map(function(r) { return r.entidad.replace(' SEGUROS DE RETIRO', '').replace(' RETIRO', ''); }),
+                        datasets: [
+                            { label: 'P. Ahorro', data: top10A.map(function(r) { return r.ahorro_total; }), backgroundColor: '#10b981' },
+                            { label: 'P. Renta', data: top10A.map(function(r) { return r.renta_total; }), backgroundColor: '#3b82f6' },
+                            { label: 'RVP + ART', data: top10A.map(function(r) { return r.rvp_art; }), backgroundColor: '#f59e0b' }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        scales: {
+                            x: { stacked: true, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { stacked: true, ticks: { color: '#94a3b8', callback: function(v) { return v.toLocaleString('es-AR'); } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        }
+                    }
+                });
+            }
+        }
+    } catch(e) {
+        console.error('Error rendering SegRetiro charts:', e);
+    }
+}
+window.renderSegRetiroSubtabData = renderSegRetiroSubtabData;
+
+
+
 function renderPrimasSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_primas_mercado || {}) : {};
     var branches = ssnObj.branches || [];
@@ -977,7 +1190,7 @@ function switchAsegSubtab(subtabId) {
 
     window.activeAsegSubtab = key;
 
-    var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda', 'seg-personas'];
+    var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda', 'seg-personas', 'seg-retiro'];
 
     subtabs.forEach(function(s) {
         var btn = document.getElementById('btn-aseg-subtab-' + s);
@@ -997,7 +1210,7 @@ function switchAsegSubtab(subtabId) {
                 btn.classList.add('text-slate-400', 'border-darkBorder');
                 if (icon) {
                     icon.classList.remove('text-white');
-                    if (s === 'seg-personas' || s === 'balances') icon.classList.add('text-emerald-400');
+                    if (s === 'seg-personas' || s === 'seg-retiro' || s === 'balances') icon.classList.add('text-emerald-400');
                     else if (s === 'lasegunda' || s === 'rankings') icon.classList.add('text-amber-400');
                 }
             }
@@ -1024,6 +1237,9 @@ function switchAsegSubtab(subtabId) {
         if (typeof renderLaSegundaSubtabData === 'function') renderLaSegundaSubtabData();
     } else if (key === 'seg-personas') {
         if (typeof renderSegPersonasSubtabData === 'function') renderSegPersonasSubtabData();
+    }
+    else if (key === 'seg-retiro') {
+        if (typeof renderSegRetiroSubtabData === 'function') renderSegRetiroSubtabData();
     }
 }
 window.switchAsegSubtab = switchAsegSubtab;
@@ -35909,6 +36125,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <button id="btn-aseg-subtab-seg-personas" onclick="switchAsegSubtab('seg-personas')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
                     <i class="fas fa-user-shield text-emerald-400"></i> Seg. de Personas
                 </button>
+                <button id="btn-aseg-subtab-seg-retiro" onclick="switchAsegSubtab('seg-retiro')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
+                    <i class="fas fa-piggy-bank text-emerald-400"></i> Seg. de Retiro
+                </button>
             </div>
 
             <!-- Mode Switcher (Visible in Subtab 2) -->
@@ -36644,6 +36863,133 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                     <div class="relative w-full h-[320px]">
                                         <canvas id="sp-chart-retiro"></canvas>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBTAB VIEW: SEG. DE RETIRO -->
+                    <div id="subtab-view-seg-retiro" class="hidden">
+                        <!-- Header Banner con Selector de Vista -->
+                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                            <div>
+                                <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+                                    <i class="fas fa-piggy-bank text-emerald-400"></i> Seguros de Retiro (Reservas Matemáticas & Asegurados)
+                                </h1>
+                                <p class="text-xs md:text-sm text-slate-400 mt-1 font-medium">
+                                    Publicación Oficial SSN &bull; Informes Estadísticos Trimestrales (Marzo 2026)
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <label for="select-seg-retiro-view" class="text-xs font-bold text-slate-300">Seleccionar Informe:</label>
+                                <select id="select-seg-retiro-view" onchange="switchSegRetiroView(this.value)" class="bg-darkBg text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-emerald-500/30 focus:border-emerald-400 focus:outline-none cursor-pointer shadow-lg">
+                                    <option value="compromisos" selected>Compromisos Técnicos (Reservas Matemáticas)</option>
+                                    <option value="asegurados">Cantidad de Asegurados y Rentistas</option>
+                                </select>
+                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2">
+                                    <i class="fas fa-database"></i> Fuente: SSN
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- VISTA 1: COMPROMISOS TÉCNICOS -->
+                        <div id="sr-view-compromisos" class="mb-10">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fas fa-vault text-emerald-400"></i> Compromisos Técnicos / Reservas Matemáticas (en miles de $)
+                                </h2>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleSrCol('ahorro')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                        <i class="fas fa-layer-group"></i> <span id="btn-toggle-ahorro-txt">Desglosar Ahorro</span>
+                                    </button>
+                                    <button onclick="toggleSrCol('rentas')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                        <i class="fas fa-layer-group"></i> <span id="btn-toggle-rentas-txt">Desglosar Rentas</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                                <div class="lg:col-span-12 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr class="border-b border-darkBorder text-slate-400 text-xs font-semibold uppercase">
+                                                    <th class="py-3 px-3">Entidad</th>
+                                                    <th class="py-3 px-3 text-right">Total ($)</th>
+                                                    <th class="py-3 px-3 text-right">% Total</th>
+                                                    <th class="py-3 px-3 text-right">P. Ahorro ($)</th>
+                                                    <th class="py-3 px-3 text-right col-sr-ahorro hidden text-slate-300">Ahorro Indiv.</th>
+                                                    <th class="py-3 px-3 text-right col-sr-ahorro hidden text-slate-300">Ahorro Colec.</th>
+                                                    <th class="py-3 px-3 text-right">% Ahorro</th>
+                                                    <th class="py-3 px-3 text-right">P. Renta ($)</th>
+                                                    <th class="py-3 px-3 text-right col-sr-rentas hidden text-slate-300">Renta Indiv.</th>
+                                                    <th class="py-3 px-3 text-right col-sr-rentas hidden text-slate-300">Renta Colec.</th>
+                                                    <th class="py-3 px-3 text-right">% Renta</th>
+                                                    <th class="py-3 px-3 text-right">RVP + ART ($)</th>
+                                                    <th class="py-3 px-3 text-right">Otros ($)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl-sr-compromisos-body" class="divide-y divide-darkBorder/40 text-xs md:text-sm font-medium text-slate-200">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gráfico Compromisos Técnicos -->
+                            <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                <h3 class="text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider">Top 10 Aseguradoras por Compromisos Técnicos (Reservas Matemáticas)</h3>
+                                <div class="relative w-full h-[360px]">
+                                    <canvas id="chart-sr-compromisos"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- VISTA 2: ASEGURADOS Y RENTISTAS -->
+                        <div id="sr-view-asegurados" class="mb-10 hidden">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
+                                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                    <i class="fas fa-users text-emerald-400"></i> Cantidad de Asegurados y Rentistas
+                                </h2>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="toggleSrAsegCol('ahorro')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                        <i class="fas fa-layer-group"></i> <span id="btn-toggle-aseg-ahorro-txt">Desglosar Ahorro</span>
+                                    </button>
+                                    <button onclick="toggleSrAsegCol('renta')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                        <i class="fas fa-layer-group"></i> <span id="btn-toggle-aseg-renta-txt">Desglosar Renta</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                                <div class="lg:col-span-12 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left border-collapse">
+                                            <thead>
+                                                <tr class="border-b border-darkBorder text-slate-400 text-xs font-semibold uppercase">
+                                                    <th class="py-3 px-3">Entidad</th>
+                                                    <th class="py-3 px-3 text-right">Total Asegurados</th>
+                                                    <th class="py-3 px-3 text-right">P. Ahorro Total</th>
+                                                    <th class="py-3 px-3 text-right col-sr-aseg-ahorro hidden text-slate-300">Ahorro Indiv.</th>
+                                                    <th class="py-3 px-3 text-right col-sr-aseg-ahorro hidden text-slate-300">Ahorro Colec.</th>
+                                                    <th class="py-3 px-3 text-right">P. Renta Total</th>
+                                                    <th class="py-3 px-3 text-right col-sr-aseg-renta hidden text-slate-300">Renta Indiv.</th>
+                                                    <th class="py-3 px-3 text-right col-sr-aseg-renta hidden text-slate-300">Renta Colec.</th>
+                                                    <th class="py-3 px-3 text-right">RVP + ART</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl-sr-asegurados-body" class="divide-y divide-darkBorder/40 text-xs md:text-sm font-medium text-slate-200">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gráfico Asegurados -->
+                            <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                <h3 class="text-sm font-bold text-slate-300 mb-3 uppercase tracking-wider">Top 10 Aseguradoras por Cantidad Total de Asegurados</h3>
+                                <div class="relative w-full h-[360px]">
+                                    <canvas id="chart-sr-asegurados"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -48436,6 +48782,219 @@ def load_ssn_balances_data():
 
 
 
+
+def fix_strict_ooxml(file_path):
+    import io, zipfile
+    in_mem = io.BytesIO()
+    with zipfile.ZipFile(file_path, 'r') as z_in, zipfile.ZipFile(in_mem, 'w', zipfile.ZIP_DEFLATED) as z_out:
+        for item in z_in.infolist():
+            content = z_in.read(item.filename)
+            if item.filename.endswith('.xml') or item.filename.endswith('.rels'):
+                content = content.replace(b'http://purl.oclc.org/ooxml/spreadsheetml/main', b'http://schemas.openxmlformats.org/spreadsheetml/2006/main')
+                content = content.replace(b'http://purl.oclc.org/ooxml/officeDocument/relationships', b'http://schemas.openxmlformats.org/officeDocument/2006/relationships')
+            z_out.writestr(item, content)
+    in_mem.seek(0)
+    return in_mem
+
+def load_ssn_seg_retiro_data():
+    import re, openpyxl, os
+
+    file_res = os.path.join("data", "ssn", "ssn_202603_reserva_matematica.xlsx")
+    if not os.path.exists(file_res) and os.path.exists("ssn_202603_reserva_matematica.xlsx"):
+        file_res = "ssn_202603_reserva_matematica.xlsx"
+
+    if not os.path.exists(file_res):
+        os.makedirs(os.path.join("data", "ssn"), exist_ok=True)
+        import urllib.request
+        try:
+            url_res = "https://www.argentina.gob.ar/sites/default/files/ssn_202603_reserva_matematica.xlsx"
+            req = urllib.request.Request(url_res, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req) as resp, open(file_res, 'wb') as f_out:
+                f_out.write(resp.read())
+        except Exception as e:
+            print(f"Error downloading {file_res}: {e}")
+
+    if not os.path.exists(file_res):
+        return {}
+
+    try:
+        fixed_file = fix_strict_ooxml(file_res)
+        wb = openpyxl.load_workbook(fixed_file, data_only=True)
+
+        # --- 1. COMPROMISOS TÉCNICOS (Hoja '1 Res. Mat.') ---
+        ws1 = wb['1 Res. Mat.']
+        compromisos_tecnicos = []
+
+        tot_b = float(ws1.cell(row=8, column=2).value or 0)
+        tot_c = float(ws1.cell(row=8, column=3).value or 0)
+        tot_f = float(ws1.cell(row=8, column=6).value or 0)
+
+        tot_compromisos_row = {
+            'entidad': 'TOTAL MERCADO',
+            'total': round(tot_b, 2),
+            'total_pct': 100.0,
+            'ahorro_total': round(tot_c, 2),
+            'ahorro_pct': 100.0,
+            'ahorro_indiv': round(float(ws1.cell(row=8, column=4).value or 0), 2),
+            'ahorro_colec': round(float(ws1.cell(row=8, column=5).value or 0), 2),
+            'rentas_total': round(tot_f, 2),
+            'rentas_pct': 100.0,
+            'rentas_indiv': round(float(ws1.cell(row=8, column=7).value or 0), 2),
+            'rentas_colec': round(float(ws1.cell(row=8, column=8).value or 0), 2),
+            'rvp_art': round(float(ws1.cell(row=8, column=9).value or 0) + float(ws1.cell(row=8, column=10).value or 0), 2),
+            'otros': round(float(ws1.cell(row=8, column=13).value or 0), 2)
+        }
+
+        for r in range(9, 25):
+            entidad = str(ws1.cell(row=r, column=1).value or '').strip()
+            if not entidad or any(kw in entidad.upper() for kw in ['REVOCACION', 'CAMBIO', 'CORRESPONDE', 'NOTA']):
+                continue
+
+            col_b = float(ws1.cell(row=r, column=2).value or 0)
+            col_c = float(ws1.cell(row=r, column=3).value or 0)
+            col_d = float(ws1.cell(row=r, column=4).value or 0)
+            col_e = float(ws1.cell(row=r, column=5).value or 0)
+            col_f = float(ws1.cell(row=r, column=6).value or 0)
+            col_g = float(ws1.cell(row=r, column=7).value or 0)
+            col_h = float(ws1.cell(row=r, column=8).value or 0)
+            col_i = float(ws1.cell(row=r, column=9).value or 0)
+            col_j = float(ws1.cell(row=r, column=10).value or 0)
+            col_m = float(ws1.cell(row=r, column=13).value or 0)
+
+            rvp_art = col_i + col_j
+            pct_b = (col_b / tot_b * 100.0) if tot_b else 0.0
+            pct_c = (col_c / tot_c * 100.0) if tot_c else 0.0
+            pct_f = (col_f / tot_f * 100.0) if tot_f else 0.0
+
+            compromisos_tecnicos.append({
+                'entidad': entidad,
+                'total': round(col_b, 2),
+                'total_pct': round(pct_b, 2),
+                'ahorro_total': round(col_c, 2),
+                'ahorro_pct': round(pct_c, 2),
+                'ahorro_indiv': round(col_d, 2),
+                'ahorro_colec': round(col_e, 2),
+                'rentas_total': round(col_f, 2),
+                'rentas_pct': round(pct_f, 2),
+                'rentas_indiv': round(col_g, 2),
+                'rentas_colec': round(col_h, 2),
+                'rvp_art': round(rvp_art, 2),
+                'otros': round(col_m, 2)
+            })
+
+        compromisos_tecnicos.sort(key=lambda x: x['total'], reverse=True)
+
+        # --- 2. ASEGURADOS Y RENTISTAS ---
+        def norm_name(n):
+            if not n: return ''
+            n = str(n).strip().upper()
+            n = re.sub(r'\(\d+\)', '', n).strip()
+            return n
+
+        ws3 = wb['3 Aseg.  Indiv y  Colec']
+        ahorro_ind = {}
+        ahorro_col = {}
+        for r in range(10, 24):
+            comp = norm_name(ws3.cell(row=r, column=1).value)
+            if comp: ahorro_ind[comp] = float(ws3.cell(row=r, column=2).value or 0)
+        for r in range(28, 42):
+            comp = norm_name(ws3.cell(row=r, column=1).value)
+            if comp: ahorro_col[comp] = float(ws3.cell(row=r, column=2).value or 0)
+
+        ws4 = wb['4 Rentistas Indiv y Colec']
+        renta_ind = {}
+        renta_col = {}
+        for r in range(10, 23):
+            comp = norm_name(ws4.cell(row=r, column=1).value)
+            if comp: renta_ind[comp] = float(ws4.cell(row=r, column=2).value or 0)
+        for r in range(28, 41):
+            comp = norm_name(ws4.cell(row=r, column=1).value)
+            if comp: renta_col[comp] = float(ws4.cell(row=r, column=2).value or 0)
+
+        ws5 = wb['5 Rentistas Previsional']
+        previsional_vals = {}
+        for r in range(8, 24):
+            comp = norm_name(ws5.cell(row=r, column=1).value)
+            if comp: previsional_vals[comp] = float(ws5.cell(row=r, column=2).value or 0)
+
+        ws6 = wb['6 Rentistas ART ']
+        art_vals = {}
+        for r in range(8, 24):
+            comp = norm_name(ws6.cell(row=r, column=1).value)
+            if comp: art_vals[comp] = float(ws6.cell(row=r, column=2).value or 0)
+
+        all_comps = sorted(list(set(list(ahorro_ind.keys()) + list(ahorro_col.keys()) + list(renta_ind.keys()) + list(renta_col.keys()) + list(previsional_vals.keys()) + list(art_vals.keys()))))
+
+        asegurados = []
+        tot_aseg_sum = 0
+        tot_ahorro_sum = 0
+        tot_renta_sum = 0
+        tot_rvpart_sum = 0
+
+        for comp in all_comps:
+            if not comp or any(kw in comp for kw in ['SUBTOTAL', 'TOTAL', 'CORRESPONDE']):
+                continue
+            a_ind = ahorro_ind.get(comp, 0)
+            a_col = ahorro_col.get(comp, 0)
+            ahorro_tot = a_ind + a_col
+
+            r_ind = renta_ind.get(comp, 0)
+            r_col = renta_col.get(comp, 0)
+            renta_tot = r_ind + r_col
+
+            p_val = previsional_vals.get(comp, 0)
+            art_v = art_vals.get(comp, 0)
+            rvp_art_tot = p_val + art_v
+
+            total_aseg = ahorro_tot + renta_tot + rvp_art_tot
+
+            tot_aseg_sum += total_aseg
+            tot_ahorro_sum += ahorro_tot
+            tot_renta_sum += renta_tot
+            tot_rvpart_sum += rvp_art_tot
+
+            asegurados.append({
+                'entidad': comp,
+                'total_asegurados': int(total_aseg),
+                'ahorro_total': int(ahorro_tot),
+                'ahorro_indiv': int(a_ind),
+                'ahorro_colec': int(a_col),
+                'renta_total': int(renta_tot),
+                'renta_indiv': int(r_ind),
+                'renta_colec': int(r_col),
+                'rvp_art': int(rvp_art_tot),
+                'previsional_base': int(p_val),
+                'art_base': int(art_v)
+            })
+
+        asegurados.sort(key=lambda x: x['total_asegurados'], reverse=True)
+
+        tot_asegurados_row = {
+            'entidad': 'TOTAL MERCADO',
+            'total_asegurados': int(tot_aseg_sum),
+            'ahorro_total': int(tot_ahorro_sum),
+            'ahorro_indiv': int(sum(x['ahorro_indiv'] for x in asegurados)),
+            'ahorro_colec': int(sum(x['ahorro_colec'] for x in asegurados)),
+            'renta_total': int(tot_renta_sum),
+            'renta_indiv': int(sum(x['renta_indiv'] for x in asegurados)),
+            'renta_colec': int(sum(x['renta_colec'] for x in asegurados)),
+            'rvp_art': int(tot_rvpart_sum),
+            'previsional_base': int(sum(x['previsional_base'] for x in asegurados)),
+            'art_base': int(sum(x['art_base'] for x in asegurados))
+        }
+
+        return {
+            "periodo": "Marzo 2026",
+            "compromisos_total_row": tot_compromisos_row,
+            "compromisos_tecnicos": compromisos_tecnicos,
+            "asegurados_total_row": tot_asegurados_row,
+            "asegurados": asegurados
+        }
+    except Exception as e:
+        print(f"Error parsing ssn_seg_retiro_data: {e}")
+        return {}
+
+
 def load_ssn_seg_personas_data():
     file_sit = os.path.join("data", "ssn", "ssn_202603_sit_mercado_asegurador.xlsx")
     file_ind = os.path.join("data", "ssn", "ssn_202603_indicadores_mercado.xlsx")
@@ -48731,6 +49290,8 @@ def build_dashboard():
     master_store_data["final_data"]["ssn_lasegunda"] = ssn_lasegunda
     ssn_seg_personas = load_ssn_seg_personas_data()
     master_store_data["final_data"]["ssn_seg_personas"] = ssn_seg_personas
+    ssn_seg_retiro = load_ssn_seg_retiro_data()
+    master_store_data["final_data"]["ssn_seg_retiro"] = ssn_seg_retiro
 
 
 
