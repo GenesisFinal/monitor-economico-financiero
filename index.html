@@ -724,8 +724,9 @@ function renderPrimasEmitidasRetiroTable() {
 }
 window.renderPrimasEmitidasRetiroTable = renderPrimasEmitidasRetiroTable;
 
+
 var spChartPrimasRamos = null;
-var spSelectedRamos = [];
+var spSelectedRamos = null; // null means uninitialized, [] means zero ramos selected
 
 function initSpPrimasRamosView() {
     var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
@@ -739,15 +740,15 @@ function initSpPrimasRamosView() {
     var container = document.getElementById('sp-ramos-selector-container');
     if (!container) return;
 
-    if (spSelectedRamos.length === 0 && boletin.target_ramos) {
+    if (spSelectedRamos === null && boletin.target_ramos) {
         spSelectedRamos = boletin.target_ramos.slice();
     }
 
     var htmlPills = [];
     boletin.target_ramos.forEach(function(ramo) {
         var isChecked = spSelectedRamos.indexOf(ramo) !== -1;
-        var pillClass = isChecked ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-darkBg text-slate-400 border-darkBorder';
-        htmlPills.push('<label class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold cursor-pointer transition shadow-sm ' + pillClass + '">' +
+        var pillClass = isChecked ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-sm' : 'bg-darkBg/60 text-slate-400 border-darkBorder hover:text-slate-200';
+        htmlPills.push('<label class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold cursor-pointer transition ' + pillClass + '">' +
             '<input type="checkbox" class="chk-sp-ramo accent-emerald-500 cursor-pointer" value="' + ramo + '" ' + (isChecked ? 'checked' : '') + ' onchange="onSpRamoCheckboxChange(this)">' +
             '<span>' + ramo + '</span>' +
         '</label>');
@@ -759,6 +760,7 @@ function initSpPrimasRamosView() {
 window.initSpPrimasRamosView = initSpPrimasRamosView;
 
 function onSpRamoCheckboxChange(cb) {
+    if (spSelectedRamos === null) spSelectedRamos = [];
     var val = cb.value;
     if (cb.checked) {
         if (spSelectedRamos.indexOf(val) === -1) spSelectedRamos.push(val);
@@ -804,7 +806,20 @@ function renderSpPrimasTable() {
     var boletin = spData.boletin_personas;
     var companies = boletin.companies || [];
 
-    // Calculate total per company for selected ramos
+    if (!spSelectedRamos || spSelectedRamos.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="py-12 text-center text-slate-400 font-medium text-sm">' +
+            '<i class="fas fa-exclamation-circle text-amber-400 text-lg mr-2"></i>' +
+            'No hay ramos seleccionados. Seleccione al menos un ramo arriba para visualizar el ranking.</td></tr>';
+        
+        var cTotVal = document.getElementById('cell-sp-primas-tot-val');
+        var cTotPct = document.getElementById('cell-sp-primas-tot-pct');
+        if (cTotVal) cTotVal.textContent = '$ 0';
+        if (cTotPct) cTotPct.textContent = '0,00%';
+        if (spChartPrimasRamos) { spChartPrimasRamos.destroy(); spChartPrimasRamos = null; }
+        return;
+    }
+
+    // 1. Calculate total per company for selected ramos
     var list = companies.map(function(c, idx) {
         var tot = 0;
         spSelectedRamos.forEach(function(r) {
@@ -813,9 +828,23 @@ function renderSpPrimasTable() {
         return { origIndex: idx, entidad: c.entidad, total: tot, orig: c };
     });
 
-    // Sort descending by calculated total
+    // 2. Filter out companies with zero production in selected ramos & sort descending
+    list = list.filter(function(item) { return item.total > 0; });
     list.sort(function(a, b) { return b.total - a.total; });
 
+    // 3. Extract Top 15
+    var displayList = list.slice(0, 15);
+
+    // 4. Check if La Segunda is in displayList. If not, append La Segunda if present in list
+    var hasLaSegunda = displayList.some(function(item) { return item.entidad.indexOf('SEGUNDA') !== -1; });
+    if (!hasLaSegunda) {
+        var laSegundaItem = list.find(function(item) { return item.entidad.indexOf('SEGUNDA') !== -1; });
+        if (laSegundaItem) {
+            displayList.push(laSegundaItem);
+        }
+    }
+
+    // 5. Total market production for the full active selection
     var sumGrand = 0;
     list.forEach(function(item) { sumGrand += item.total; });
 
@@ -830,13 +859,13 @@ function renderSpPrimasTable() {
         '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
     '</tr>');
 
-    list.forEach(function(item, i) {
-        if (item.total <= 0) return; // Skip zero production companies for selected ramos
-
+    displayList.forEach(function(item) {
         var isL2 = item.entidad.indexOf('SEGUNDA') !== -1;
         var rowClass = isL2 ? 'bg-amber-500/10 font-bold border-l-4 border-amber-400' : 'hover:bg-darkBg/50 transition';
         var nameClass = isL2 ? 'text-amber-300 font-bold' : 'text-slate-200 font-semibold';
         var pct = sumGrand ? (item.total / sumGrand * 100).toFixed(2) + '%' : '0.00%';
+
+        var actualRank = list.findIndex(function(it) { return it.origIndex === item.origIndex; }) + 1;
 
         rows.push('<tr id="tr-sp-primas-' + item.origIndex + '" class="' + rowClass + '" data-index="' + item.origIndex + '" data-total="' + item.total + '">' +
             '<td class="py-3 px-3 text-center">' +
@@ -845,7 +874,7 @@ function renderSpPrimasTable() {
             '<td class="py-3 px-3 ' + nameClass + '">' + item.entidad + '</td>' +
             '<td class="py-3 px-3 text-right font-mono text-white font-bold cell-sp-val">' + fmtNum(item.total) + '</td>' +
             '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold cell-sp-pct">' + pct + '</td>' +
-            '<td class="py-3 px-3 text-center cell-sp-rank"><span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + (i + 1) + '</span></td>' +
+            '<td class="py-3 px-3 text-center cell-sp-rank"><span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + actualRank + '</span></td>' +
         '</tr>');
     });
 
@@ -898,7 +927,6 @@ function updateSpPrimasCalculations() {
         return isNaN(n) ? 0 : n;
     }
 
-    // Sort active rows descending to compute dynamic ranks
     activeRows.sort(function(a, b) { return b.total - a.total; });
 
     activeRows.forEach(function(item, rank) {
@@ -915,7 +943,6 @@ function updateSpPrimasCalculations() {
     var cTotVal = document.getElementById('cell-sp-primas-tot-val');
     if (cTotVal) cTotVal.textContent = fmtNum(sumActive);
 
-    // Update Chart
     var chartCanvas = document.getElementById('chart-sp-primas-ramos');
     if (chartCanvas && window.Chart) {
         if (spChartPrimasRamos) spChartPrimasRamos.destroy();
@@ -956,6 +983,7 @@ function updateSpPrimasCalculations() {
     }
 }
 window.updateSpPrimasCalculations = updateSpPrimasCalculations;
+
 
 
 function toggleAllPrimasRetiroCheckboxes(forceState) {
