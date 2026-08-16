@@ -221,13 +221,18 @@ function renderLaSegundaSubtabData() {
         return val.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
     };
 
-    // KPIs
+    // KPIs (4 Cards)
     var kpiTotG = document.getElementById('ls-kpi-tot-grupo');
-    var kpiTotP = document.getElementById('ls-kpi-tot-patrimoniales');
+    var kpiTotGen = document.getElementById('ls-kpi-tot-generales');
+    var kpiTotArt = document.getElementById('ls-kpi-tot-art');
     var kpiTotPers = document.getElementById('ls-kpi-tot-personas');
 
+    var cGen = (lsData.companies || []).find(function(c) { return (c.name || '').indexOf('Cooperativa') !== -1; }) || { prima: 709475.28 };
+    var cArt = (lsData.companies || []).find(function(c) { return (c.name || '').indexOf('ART') !== -1; }) || { prima: 402547.83 };
+
     if (kpiTotG) kpiTotG.innerText = fmtMoney(lsData.tot_grupo);
-    if (kpiTotP) kpiTotP.innerText = fmtMoney(lsData.tot_patrimoniales);
+    if (kpiTotGen) kpiTotGen.innerText = fmtMoney(cGen.prima);
+    if (kpiTotArt) kpiTotArt.innerText = fmtMoney(cArt.prima);
     if (kpiTotPers) kpiTotPers.innerText = fmtMoney(lsData.tot_personas);
 
     // 1. Tabla de Empresas
@@ -890,7 +895,7 @@ window.onBalancesRubroChange = onBalancesRubroChange;
 
 
 function togglePersonasSubRow(groupId) {
-    var subRows = document.querySelectorAll('.ls-sub-row-' + groupId);
+    var subRows = document.querySelectorAll('.ls-subrow-' + groupId + ', .ls-sub-row-' + groupId);
     var btnIcon = document.getElementById('ls-toggle-icon-' + groupId);
 
     subRows.forEach(function(row) {
@@ -36235,17 +36240,21 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             </p>
                         </div>
                         <div class="flex flex-wrap gap-3">
-                            <div class="bg-darkBg/80 border border-amber-500/30 px-4 py-2 rounded-xl text-center">
-                                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Prima Total Grupo</div>
-                                <div id="ls-kpi-tot-grupo" class="text-base font-extrabold text-amber-400 font-mono">-</div>
+                            <div class="bg-darkBg/80 border border-emerald-500/30 px-3.5 py-2 rounded-xl text-center min-w-[130px]">
+                                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Generales</div>
+                                <div id="ls-kpi-tot-generales" class="text-base font-extrabold text-emerald-400 font-mono">-</div>
                             </div>
-                            <div class="bg-darkBg/80 border border-emerald-500/30 px-4 py-2 rounded-xl text-center">
-                                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Patrimoniales</div>
-                                <div id="ls-kpi-tot-patrimoniales" class="text-base font-extrabold text-emerald-400 font-mono">-</div>
+                            <div class="bg-darkBg/80 border border-cyan-500/30 px-3.5 py-2 rounded-xl text-center min-w-[130px]">
+                                <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">La Segunda ART</div>
+                                <div id="ls-kpi-tot-art" class="text-base font-extrabold text-cyan-400 font-mono">-</div>
                             </div>
-                            <div class="bg-darkBg/80 border border-indigo-500/30 px-4 py-2 rounded-xl text-center">
+                            <div class="bg-darkBg/80 border border-indigo-500/30 px-3.5 py-2 rounded-xl text-center min-w-[130px]">
                                 <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Personas y Retiro</div>
                                 <div id="ls-kpi-tot-personas" class="text-base font-extrabold text-indigo-400 font-mono">-</div>
+                            </div>
+                            <div class="bg-darkBg/80 border border-amber-500/30 px-3.5 py-2 rounded-xl text-center min-w-[140px]">
+                                <div class="text-[10px] text-amber-400/90 font-bold uppercase tracking-wider">Total Grupo</div>
+                                <div id="ls-kpi-tot-grupo" class="text-base font-extrabold text-amber-400 font-mono">-</div>
                             </div>
                         </div>
                     </div>
