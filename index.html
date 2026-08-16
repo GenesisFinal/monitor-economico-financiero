@@ -2347,9 +2347,92 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         }
 
-    </style>
+    
+        /* --- DYNAMIC ACCENT COLOR SYSTEM --- */
+        :root {
+            --accent-color: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.20);
+            --accent-border: rgba(16, 185, 129, 0.35);
+        }
 
-</head>
+        body.theme-emerald-green {
+            --accent-color: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.20);
+            --accent-border: rgba(16, 185, 129, 0.35);
+            --highlight-color: #10b981;
+            --brand-blue: #10b981;
+        }
+
+        body.theme-carbon-electric {
+            --accent-color: #3b82f6;
+            --accent-glow: rgba(59, 130, 246, 0.20);
+            --accent-border: rgba(59, 130, 246, 0.35);
+            --highlight-color: #3b82f6;
+            --brand-blue: #3b82f6;
+        }
+
+        body.theme-amber-terminal {
+            --accent-color: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.20);
+            --accent-border: rgba(245, 158, 11, 0.35);
+            --highlight-color: #f59e0b;
+            --brand-blue: #f59e0b;
+        }
+
+        body.theme-ocean-navy {
+            --accent-color: #06b6d4;
+            --accent-glow: rgba(6, 182, 212, 0.20);
+            --accent-border: rgba(6, 182, 212, 0.35);
+            --highlight-color: #06b6d4;
+            --brand-blue: #06b6d4;
+        }
+
+        body.theme-golden-yellow {
+            --accent-color: #eab308;
+            --accent-glow: rgba(234, 179, 8, 0.20);
+            --accent-border: rgba(234, 179, 8, 0.35);
+            --highlight-color: #eab308;
+            --brand-blue: #eab308;
+        }
+
+        body.theme-pink-neon {
+            --accent-color: #ec4899;
+            --accent-glow: rgba(236, 72, 153, 0.20);
+            --accent-border: rgba(236, 72, 153, 0.35);
+            --highlight-color: #ec4899;
+            --brand-blue: #ec4899;
+        }
+
+        /* --- GLOBAL ACCENT COLOR RESPONSIVENESS (TITLES, ICONS, MENUS, TABS, BUTTONS) --- */
+        h1 i, h2 i, h3 i, h4 i,
+        .card-header i, .modal-title i,
+        .fa-shield-halved, .fa-chart-line, .fa-calendar-days, .fa-trophy, .fa-chart-bar, .fa-scale-balanced, .fa-building-columns, .fa-receipt {
+            color: var(--accent-color) !important;
+        }
+
+        .bg-brandBlue, .bg-amber-500, button.bg-brandBlue, button.bg-amber-500 {
+            background-color: var(--accent-color) !important;
+            color: #040906 !important;
+            font-weight: 700 !important;
+        }
+
+        .text-brandBlue, .text-amber-400, .text-cyan-400, .text-emerald-400 {
+            color: var(--accent-color) !important;
+        }
+
+        .border-brandBlue, .border-amber-500\/30, .border-amber-500\/40, .border-cyan-500\/30 {
+            border-color: var(--accent-border) !important;
+        }
+
+        .bg-brandBlue\/10, .bg-amber-500\/10, .bg-amber-500\/20, .bg-cyan-500\/10 {
+            background-color: var(--accent-glow) !important;
+        }
+
+        body.layout-agmd-style {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+    </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
 
@@ -42784,7 +42867,7 @@ function switchGlobalTab(tabId) {
 
             const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon'];
 
-            if (!allowed.includes(themeName)) themeName = 'carbon-electric';
+            if (!allowed.includes(themeName)) themeName = 'emerald-green';
 
             
 
@@ -42816,7 +42899,7 @@ function switchGlobalTab(tabId) {
 
             const allowed = ['bento', 'executive', 'flat-saas', 'agmd-style'];
 
-            if (!allowed.includes(layoutName)) layoutName = 'bento';
+            if (!allowed.includes(layoutName)) layoutName = 'agmd-style';
 
             
 
