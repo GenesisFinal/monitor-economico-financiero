@@ -761,13 +761,14 @@ function renderBalancesSubtabData() {
         var edrRows = [
             { label: 'Resultado Técnico Seg. Directo (1)', i26: 0, i25: 0 },
             { label: 'Resultado Técnico Reaseg. Activo (2)', i26: 1, i25: 1 },
-            { label: 'Otros Ingresos / Egresos (3)', i26: 2, i25: 2 },
-            { label: 'Resultado Técnico Total (4)', i26: 3, i25: 3, isHighlight: true, isYoy: true },
-            { label: 'Resultado Financiero Total (5)', i26: 4, i25: 4, isHighlight: true, isYoy: true },
-            { label: 'Rdo. Estructura Fin. / Cap. Sob. (6)', i26: 5, i25: 5 },
-            { label: 'Resultados Extraordinarios (7)', i26: 6, i25: 6 },
-            { label: 'Impuesto a las Ganancias (8)', i26: 7, i25: 7 },
-            { label: 'RESULTADO DEL EJERCICIO (9)', i26: 8, i25: 8, isHighlight: true, isYoy: true }
+            { label: 'Otros Ingresos (3)', i26: 2, i25: 2 },
+            { label: 'Otros Egresos (4)', i26: 3, i25: 3 },
+            { label: 'Resultado Técnico (5 = 1 + 2 + 3 + 4)', i26: 4, i25: 4, isHighlight: true, isYoy: true },
+            { label: 'Resultado Financiero (6)', i26: 5, i25: 5, isHighlight: true, isYoy: true },
+            { label: 'Rdo. Operaciones Ordinarias (7 = 5 + 6)', i26: 6, i25: 6 },
+            { label: 'Rdo. Operaciones Extraordinarias (8)', i26: 7, i25: 7 },
+            { label: 'Impuesto a las Ganancias (9)', i26: 8, i25: 8 },
+            { label: 'RESULTADO DEL EJERCICIO (10 = 7 + 8 + 9)', i26: 9, i25: 9, isHighlight: true, isYoy: true }
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
@@ -818,12 +819,13 @@ function renderBalancesSubtabData() {
     } else if (vKey === 'financiero') {
         var finRows = [
             { label: 'Rentas', i: 0 },
-            { label: 'Realización de Inversiones', i: 1 },
-            { label: 'Resultados de Tenencia', i: 2 },
-            { label: 'Otros Ingresos y Egresos Financieros', i: 3 },
-            { label: 'Gastos de Explotación Financieros', i: 4 },
-            { label: 'RECPAM Financiero', i: 5 },
-            { label: 'RESULTADO FINANCIERO TOTAL', i: 6, isHighlight: true, isYoy: true }
+            { label: 'Resultados por Realización', i: 1 },
+            { label: 'Resultados por Tenencia', i: 2 },
+            { label: 'Otros Ingresos Financieros', i: 3 },
+            { label: 'Otros Egresos Financieros', i: 4 },
+            { label: 'Gastos de Explotación y Otros Cargos', i: 5 },
+            { label: 'RECPAM Financiero', i: 6 },
+            { label: 'RESULTADO FINANCIERO TOTAL', i: 7, isHighlight: true, isYoy: true }
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
