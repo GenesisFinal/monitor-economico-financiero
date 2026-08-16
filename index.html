@@ -725,8 +725,10 @@ function renderPrimasEmitidasRetiroTable() {
 window.renderPrimasEmitidasRetiroTable = renderPrimasEmitidasRetiroTable;
 
 
+
 var spChartPrimasRamos = null;
 var spSelectedRamos = null; // null means uninitialized, [] means zero ramos selected
+var spFullActiveList = [];  # Store full sorted active market list for exact rank lookups
 
 function initSpPrimasRamosView() {
     var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
@@ -816,6 +818,7 @@ function renderSpPrimasTable() {
         if (cTotVal) cTotVal.textContent = '$ 0';
         if (cTotPct) cTotPct.textContent = '0,00%';
         if (spChartPrimasRamos) { spChartPrimasRamos.destroy(); spChartPrimasRamos = null; }
+        spFullActiveList = [];
         return;
     }
 
@@ -831,6 +834,8 @@ function renderSpPrimasTable() {
     // 2. Filter out companies with zero production in selected ramos & sort descending
     list = list.filter(function(item) { return item.total > 0; });
     list.sort(function(a, b) { return b.total - a.total; });
+
+    spFullActiveList = list; // Save full market list for exact rank lookups
 
     // 3. Extract Top 15
     var displayList = list.slice(0, 15);
@@ -903,17 +908,21 @@ function updateSpPrimasCalculations() {
     };
 
     var checkboxes = document.querySelectorAll('.chk-sp-primas');
+    var disabledOrigIndices = [];
     var activeRows = [];
     var sumActive = 0;
 
     checkboxes.forEach(function(cb) {
         var tr = cb.closest('tr');
         if (!tr) return;
+        var origIdx = parseInt(cb.getAttribute('data-index'));
         var totalVal = floatVal(tr.getAttribute('data-total') || '0');
+
         if (cb.checked) {
-            activeRows.push({ tr: tr, total: totalVal, entidad: tr.querySelector('td:nth-child(2)').innerText.trim() });
+            activeRows.push({ tr: tr, origIndex: origIdx, total: totalVal, entidad: tr.querySelector('td:nth-child(2)').innerText.trim() });
             sumActive += totalVal;
         } else {
+            disabledOrigIndices.push(origIdx);
             tr.classList.add('opacity-40');
             var pctEl = tr.querySelector('.cell-sp-pct');
             var rankEl = tr.querySelector('.cell-sp-rank');
@@ -927,17 +936,23 @@ function updateSpPrimasCalculations() {
         return isNaN(n) ? 0 : n;
     }
 
-    activeRows.sort(function(a, b) { return b.total - a.total; });
+    // Filter full market list removing unchecked companies
+    var activeFullMarketList = spFullActiveList.filter(function(item) {
+        return disabledOrigIndices.indexOf(item.origIndex) === -1;
+    });
 
-    activeRows.forEach(function(item, rank) {
+    activeRows.forEach(function(item) {
         var tr = item.tr;
         tr.classList.remove('opacity-40');
         var pctStr = sumActive ? (item.total / sumActive * 100).toFixed(2) + '%' : '0.00%';
         var pctEl = tr.querySelector('.cell-sp-pct');
         var rankEl = tr.querySelector('.cell-sp-rank');
 
+        // Find exact rank position in the active full market list
+        var exactRank = activeFullMarketList.findIndex(function(it) { return it.origIndex === item.origIndex; }) + 1;
+
         if (pctEl) pctEl.textContent = pctStr;
-        if (rankEl) rankEl.innerHTML = '<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + (rank + 1) + '</span>';
+        if (rankEl) rankEl.innerHTML = '<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + exactRank + '</span>';
     });
 
     var cTotVal = document.getElementById('cell-sp-primas-tot-val');
@@ -947,7 +962,7 @@ function updateSpPrimasCalculations() {
     if (chartCanvas && window.Chart) {
         if (spChartPrimasRamos) spChartPrimasRamos.destroy();
 
-        var topActive = activeRows.slice(0, 10);
+        var topActive = activeRows.slice().sort(function(a, b) { return b.total - a.total; }).slice(0, 10);
         spChartPrimasRamos = new Chart(chartCanvas, {
             type: 'bar',
             data: {
@@ -983,6 +998,7 @@ function updateSpPrimasCalculations() {
     }
 }
 window.updateSpPrimasCalculations = updateSpPrimasCalculations;
+
 
 
 
