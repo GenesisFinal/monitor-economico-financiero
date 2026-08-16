@@ -36,6 +36,132 @@ function renderAsegPieCharts() {
 }
 window.renderAsegPieCharts = renderAsegPieCharts;
 
+function renderLaSegundaSubtabData() {
+    var rootObj = (typeof appData !== 'undefined' && appData && appData.ssn_lasegunda) ? appData : 
+                  (window.appData && window.appData.ssn_lasegunda ? window.appData : 
+                  (window.masterStoreData && window.masterStoreData.ssn_lasegunda ? window.masterStoreData : 
+                  (typeof masterStoreData !== 'undefined' && masterStoreData && masterStoreData.ssn_lasegunda ? masterStoreData : {})));
+    
+    var lsData = rootObj.ssn_lasegunda || (rootObj.final_data ? rootObj.final_data.ssn_lasegunda : {}) || {};
+
+    if (!lsData || !lsData.companies || lsData.companies.length === 0) {
+        console.warn("[LA SEGUNDA] Data not ready yet, scheduling retry...");
+        if (!window._lsRetryCount) window._lsRetryCount = 0;
+        if (window._lsRetryCount < 10) {
+            window._lsRetryCount++;
+            setTimeout(renderLaSegundaSubtabData, 200);
+        }
+        return;
+    }
+
+    var fmtMoney = function(val) {
+        if (val === null || val === undefined || isNaN(val)) return '-';
+        var absVal = Math.abs(val);
+        var formatted = absVal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        return (val < 0 ? '-$' : '$') + formatted;
+    };
+
+    var fmtPct = function(val) {
+        if (val === null || val === undefined || isNaN(val)) return '-';
+        return val.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+    };
+
+    // KPIs
+    var kpiTotG = document.getElementById('ls-kpi-tot-grupo');
+    var kpiTotP = document.getElementById('ls-kpi-tot-patrimoniales');
+    var kpiTotPers = document.getElementById('ls-kpi-tot-personas');
+
+    if (kpiTotG) kpiTotG.innerText = fmtMoney(lsData.tot_grupo);
+    if (kpiTotP) kpiTotP.innerText = fmtMoney(lsData.tot_patrimoniales);
+    if (kpiTotPers) kpiTotPers.innerText = fmtMoney(lsData.tot_personas);
+
+    // 1. Tabla de Empresas
+    var tbodyEmpresas = document.getElementById('ls-table-empresas-body');
+    if (tbodyEmpresas) {
+        var empRowsHTML = '';
+        (lsData.companies || []).forEach(function(c) {
+            empRowsHTML += '<tr class="hover:bg-amber-500/5 transition">';
+            empRowsHTML += '<td class="py-2.5 px-3 font-semibold text-white flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i>' + c.name + '</td>';
+            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-white font-bold">' + fmtMoney(c.prima) + '</td>';
+            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-amber-400 font-bold">' + fmtPct(c.pct_grupo) + '</td>';
+            empRowsHTML += '</tr>';
+        });
+        empRowsHTML += '<tr class="bg-amber-500/10 border-t border-amber-500/30 font-bold">';
+        empRowsHTML += '<td class="py-3 px-3 text-white uppercase tracking-wider">TOTAL GRUPO LA SEGUNDA</td>';
+        empRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtMoney(lsData.tot_grupo) + '</td>';
+        empRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">100,00%</td>';
+        empRowsHTML += '</tr>';
+        tbodyEmpresas.innerHTML = empRowsHTML;
+    }
+
+    // Render Donut Chart de Empresas
+    renderLaSegundaEmpresasChart(lsData);
+
+    // 2. Tabla de Patrimoniales
+    var tbodyPatrimoniales = document.getElementById('ls-table-patrimoniales-body');
+    if (tbodyPatrimoniales) {
+        var patRowsHTML = '';
+        (lsData.patrimoniales_ramos || []).forEach(function(r, idx) {
+            patRowsHTML += '<tr class="hover:bg-emerald-500/5 transition border-b border-darkBorder/30">';
+            patRowsHTML += '<td class="py-2 px-3 text-slate-400 font-mono text-xs text-center">' + (idx + 1) + '</td>';
+            patRowsHTML += '<td class="py-2 px-3 font-medium text-white text-xs">' + r.ramo + '</td>';
+            patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-white text-xs font-semibold">' + fmtMoney(r.prima) + '</td>';
+            patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-emerald-400 text-xs font-bold">' + fmtPct(r.pct_patrimoniales) + '</td>';
+            patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-amber-400 text-xs font-bold">' + fmtPct(r.pct_grupo) + '</td>';
+            patRowsHTML += '</tr>';
+        });
+        patRowsHTML += '<tr class="bg-emerald-500/10 border-t border-emerald-500/30 font-bold">';
+        patRowsHTML += '<td colspan="2" class="py-3 px-3 text-white uppercase tracking-wider text-xs">TOTAL SEGUROS PATRIMONIALES</td>';
+        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(lsData.tot_patrimoniales) + '</td>';
+        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">100,00%</td>';
+        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtPct((lsData.tot_patrimoniales / lsData.tot_grupo) * 100) + '</td>';
+        patRowsHTML += '</tr>';
+        tbodyPatrimoniales.innerHTML = patRowsHTML;
+    }
+
+    // 3. Tabla de Personas
+    var tbodyPersonas = document.getElementById('ls-table-personas-body');
+    if (tbodyPersonas) {
+        var persRowsHTML = '';
+        (lsData.personas_groups || []).forEach(function(g) {
+            var toggleBtn = g.has_sub ? '<button onclick="togglePersonasSubRow(&quot;' + g.id + '&quot;)" class="px-2 py-1 rounded bg-darkBg border border-indigo-500/30 text-indigo-300 hover:text-white text-[10px] font-bold flex items-center gap-1 cursor-pointer mx-auto"><span>Desglose</span><i id="ls-toggle-icon-' + g.id + '" class="fas fa-chevron-down text-[9px]"></i></button>' : '-';
+
+            persRowsHTML += '<tr class="hover:bg-indigo-500/5 transition font-semibold border-b border-darkBorder/40 bg-darkBg/40">';
+            persRowsHTML += '<td class="py-2.5 px-3 font-bold text-white text-xs">' + g.name + '</td>';
+            persRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-white text-xs font-bold">' + fmtMoney(g.prima) + '</td>';
+            persRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-indigo-400 text-xs font-bold">' + fmtPct(g.pct_personas) + '</td>';
+            persRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-amber-400 text-xs font-bold">' + fmtPct(g.pct_grupo) + '</td>';
+            persRowsHTML += '<td class="py-2.5 px-3 text-center">' + toggleBtn + '</td>';
+            persRowsHTML += '</tr>';
+
+            if (g.has_sub && g.sub_items) {
+                g.sub_items.forEach(function(sub) {
+                    persRowsHTML += '<tr class="ls-subrow-' + g.id + ' hidden bg-indigo-950/20 text-slate-300 text-xs border-b border-indigo-500/10">';
+                    persRowsHTML += '<td class="py-2 pl-8 pr-3 italic font-normal text-slate-300 flex items-center gap-2"><i class="fas fa-level-up-alt rotate-90 text-indigo-400 text-[10px]"></i>' + sub.name + '</td>';
+                    persRowsHTML += '<td class="py-2 px-3 text-right font-mono text-slate-200">' + fmtMoney(sub.prima) + '</td>';
+                    persRowsHTML += '<td class="py-2 px-3 text-right font-mono text-indigo-300 text-[11px]">' + fmtPct((sub.prima / g.prima) * 100) + ' <span class="text-[9px] text-slate-400">s/cat</span></td>';
+                    persRowsHTML += '<td class="py-2 px-3 text-right font-mono text-amber-300 text-[11px]">' + fmtPct((sub.prima / lsData.tot_grupo) * 100) + '</td>';
+                    persRowsHTML += '<td class="py-2 px-3 text-center text-slate-500">-</td>';
+                    persRowsHTML += '</tr>';
+                });
+            }
+        });
+
+        persRowsHTML += '<tr class="bg-indigo-500/10 border-t border-indigo-500/30 font-bold">';
+        persRowsHTML += '<td class="py-3 px-3 text-white uppercase tracking-wider text-xs">TOTAL SEGUROS DE PERSONAS Y RETIRO</td>';
+        persRowsHTML += '<td class="py-3 px-3 text-right font-mono text-indigo-400 text-sm">' + fmtMoney(lsData.tot_personas) + '</td>';
+        persRowsHTML += '<td class="py-3 px-3 text-right font-mono text-indigo-400 text-sm">100,00%</td>';
+        persRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtPct((lsData.tot_personas / lsData.tot_grupo) * 100) + '</td>';
+        persRowsHTML += '<td class="py-3 px-3 text-center">-</td>';
+        persRowsHTML += '</tr>';
+        tbodyPersonas.innerHTML = persRowsHTML;
+    }
+
+    // Render Charts
+    renderLaSegundaRamosCharts(lsData);
+}
+window.renderLaSegundaSubtabData = renderLaSegundaSubtabData;
+
 function renderPrimasSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_primas_mercado || {}) : {};
     var branches = ssnObj.branches || [];
@@ -627,196 +753,8 @@ var lsChartEmpresas = null;
 var lsChartPatrimoniales = null;
 var lsChartPersonas = null;
 
-function renderLaSegundaSubtabData() {
-    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : (window.appData || window.masterStoreData || window.finalData || (typeof masterStoreData !== 'undefined' ? masterStoreData : {}));
-    var lsData = rootObj.ssn_lasegunda || (rootObj.final_data ? rootObj.final_data.ssn_lasegunda : {}) || (window.appData ? window.appData.ssn_lasegunda : {}) || {};
-    
-    console.log("[LA SEGUNDA DEBUG] rootObj keys:", Object.keys(rootObj), "lsData keys:", Object.keys(lsData));
-
-    if (!lsData || !lsData.companies) {
-        console.warn("[LA SEGUNDA] Data not ready or empty. rootObj keys:", Object.keys(rootObj));
-        return;
-    }
-
-    var fmtMoney = function(val) {
-        if (val === null || val === undefined || isNaN(val)) return '-';
-        var absVal = Math.abs(val);
-        var formatted = absVal.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        return (val < 0 ? '-$' : '$') + formatted;
-    };
-
-    var fmtPct = function(val) {
-        if (val === null || val === undefined || isNaN(val)) return '-';
-        return val.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
-    };
-
-    // KPIs
-    var kpiTotG = document.getElementById('ls-kpi-tot-grupo');
-    var kpiTotP = document.getElementById('ls-kpi-tot-patrimoniales');
-    var kpiTotPers = document.getElementById('ls-kpi-tot-personas');
-
-    if (kpiTotG) kpiTotG.innerText = fmtMoney(lsData.tot_grupo);
-    if (kpiTotP) kpiTotP.innerText = fmtMoney(lsData.tot_patrimoniales);
-    if (kpiTotPers) kpiTotPers.innerText = fmtMoney(lsData.tot_personas);
-
-    var subPat = document.getElementById('ls-subtitle-patrimoniales');
-    var subPers = document.getElementById('ls-subtitle-personas');
-    if (subPat) subPat.innerText = fmtMoney(lsData.tot_patrimoniales) + ' ARS M (' + fmtPct((lsData.tot_patrimoniales/lsData.tot_grupo)*100) + ' del Grupo)';
-    if (subPers) subPers.innerText = fmtMoney(lsData.tot_personas) + ' ARS M (' + fmtPct((lsData.tot_personas/lsData.tot_grupo)*100) + ' del Grupo)';
-
-    // 1. Tabla Empresas
-    var tbodyEmp = document.getElementById('ls-table-empresas-body');
-    if (tbodyEmp) {
-        var htmlEmp = '';
-        lsData.companies.forEach(function(c) {
-            htmlEmp += '<tr class="hover:bg-amber-500/5 transition"><td class="py-2.5 px-3 font-semibold text-white flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i> ' + c.name + '</td><td class="py-2.5 px-3 text-right font-mono text-amber-300 font-bold">' + fmtMoney(c.prima) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-300 font-semibold">' + fmtPct(c.pct_grupo) + '</td></tr>';
-        });
-        htmlEmp += '<tr class="bg-amber-500/10 font-bold border-t-2 border-amber-500/30"><td class="py-3 px-3 text-white flex items-center gap-2"><i class="fas fa-star text-amber-400"></i> TOTAL GRUPO LA SEGUNDA</td><td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtMoney(lsData.tot_grupo) + '</td><td class="py-3 px-3 text-right font-mono text-amber-400">100,00%</td></tr>';
-        tbodyEmp.innerHTML = htmlEmp;
-    }
-
-    // Chart Empresas (Donut Chart)
-    var ctxEmp = document.getElementById('ls-chart-empresas');
-    if (ctxEmp && typeof Chart !== 'undefined') {
-        if (lsChartEmpresas) lsChartEmpresas.destroy();
-        lsChartEmpresas = new Chart(ctxEmp, {
-            type: 'doughnut',
-            data: {
-                labels: lsData.companies.map(function(c) { return c.name; }),
-                datasets: [{
-                    data: lsData.companies.map(function(c) { return c.prima; }),
-                    backgroundColor: ['#f59e0b', '#10b981', '#6366f1', '#ec4899'],
-                    borderWidth: 2,
-                    borderColor: '#1e293b'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10, weight: 'bold' } } },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                var val = ctx.raw || 0;
-                                var pct = (val / lsData.tot_grupo * 100).toFixed(2);
-                                return ctx.label + ': $' + val.toLocaleString('es-AR', {minimumFractionDigits:2}) + ' M (' + pct + '%)';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    }
-
-    // 2. Tabla Patrimoniales
-    var tbodyPat = document.getElementById('ls-table-patrimoniales-body');
-    if (tbodyPat) {
-        var htmlPat = '';
-        lsData.patrimoniales_ramos.forEach(function(r, idx) {
-            htmlPat += '<tr class="hover:bg-emerald-500/5 transition"><td class="py-2 px-3 font-mono text-slate-500 text-[11px]">' + (idx + 1) + '</td><td class="py-2 px-3 font-medium text-slate-200">' + r.ramo + '</td><td class="py-2 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(r.prima) + '</td><td class="py-2 px-3 text-right font-mono text-slate-300">' + fmtPct(r.pct_patrimoniales) + '</td><td class="py-2 px-3 text-right font-mono text-slate-400">' + fmtPct(r.pct_grupo) + '</td></tr>';
-        });
-        htmlPat += '<tr class="bg-emerald-500/10 font-bold border-t-2 border-emerald-500/30"><td class="py-3 px-3 text-white" colspan="2">TOTAL SEGUROS PATRIMONIALES</td><td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(lsData.tot_patrimoniales) + '</td><td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtPct((lsData.tot_patrimoniales/lsData.tot_grupo)*100) + '</td></tr>';
-        tbodyPat.innerHTML = htmlPat;
-    }
-
-    // 3. Tabla Personas
-    var tbodyPers = document.getElementById('ls-table-personas-body');
-    if (tbodyPers) {
-        var htmlPers = '';
-        lsData.personas_groups.forEach(function(g) {
-            var toggleBtn = g.has_sub ? '<button onclick="togglePersonasSubRow(&quot;' + g.id + '&quot;)" class="px-2 py-1 rounded bg-darkBg border border-indigo-500/30 text-indigo-300 hover:text-white text-[10px] font-bold flex items-center gap-1 cursor-pointer mx-auto"><span>Desglose</span><i id="ls-toggle-icon-' + g.id + '" class="fas fa-chevron-down text-[9px]"></i></button>' : '-';
-
-            htmlPers += '<tr class="bg-indigo-500/10 font-bold border-t border-darkBorder/40"><td class="py-2.5 px-3 text-indigo-200 flex items-center gap-2"><i class="fas fa-folder text-indigo-400"></i> ' + g.name + '</td><td class="py-2.5 px-3 text-right font-mono text-indigo-300 font-bold">' + fmtMoney(g.prima) + '</td><td class="py-2.5 px-3 text-right font-mono text-indigo-300">' + fmtPct(g.pct_personas) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-300">' + fmtPct(g.pct_grupo) + '</td><td class="py-2.5 px-3 text-center">' + toggleBtn + '</td></tr>';
-
-            if (g.has_sub && g.sub_items) {
-                g.sub_items.forEach(function(sub) {
-                    htmlPers += '<tr class="ls-sub-row-' + g.id + ' hidden bg-darkBg/50 text-slate-300 hover:bg-indigo-500/5 transition"><td class="py-2 px-3 pl-8 font-medium text-slate-300 flex items-center gap-2"><span class="text-indigo-400 font-bold">&bull;</span> ' + sub.name + '</td><td class="py-2 px-3 text-right font-mono text-slate-300 font-semibold">' + fmtMoney(sub.prima) + '</td><td class="py-2 px-3 text-right font-mono text-slate-400">' + fmtPct(sub.pct_personas) + '</td><td class="py-2 px-3 text-right font-mono text-slate-500">' + fmtPct(sub.pct_grupo) + '</td><td class="py-2 px-3 text-center text-slate-600">-</td></tr>';
-                });
-            }
-        });
-        htmlPers += '<tr class="bg-indigo-500/20 font-bold border-t-2 border-indigo-500/40"><td class="py-3 px-3 text-white" colspan="1">TOTAL SEGUROS DE PERSONAS Y RETIRO</td><td class="py-3 px-3 text-right font-mono text-indigo-400 text-sm">' + fmtMoney(lsData.tot_personas) + '</td><td class="py-3 px-3 text-right font-mono text-indigo-400">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtPct((lsData.tot_personas/lsData.tot_grupo)*100) + '</td><td class="py-3 px-3 text-center">-</td></tr>';
-        tbodyPers.innerHTML = htmlPers;
-    }
-
-    // Chart Patrimoniales (Bar/Treemap)
-    var ctxPat = document.getElementById('ls-chart-patrimoniales');
-    if (ctxPat && typeof Chart !== 'undefined') {
-        if (lsChartPatrimoniales) lsChartPatrimoniales.destroy();
-        var topPat = lsData.patrimoniales_ramos.slice(0, 10);
-        lsChartPatrimoniales = new Chart(ctxPat, {
-            type: 'bar',
-            data: {
-                labels: topPat.map(function(r) { return r.ramo; }),
-                datasets: [{
-                    label: 'Prima (ARS M)',
-                    data: topPat.map(function(r) { return r.prima; }),
-                    backgroundColor: '#10b981',
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return 'Prima: $' + ctx.raw.toLocaleString('es-AR', {minimumFractionDigits:2}) + ' M';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                    y: { ticks: { color: '#e2e8f0', font: { size: 10, weight: 'bold' } }, grid: { display: false } }
-                }
-            }
-        });
-    }
-
-    // Chart Personas (Bar/Treemap)
-    var ctxPers = document.getElementById('ls-chart-personas');
-    if (ctxPers && typeof Chart !== 'undefined') {
-        if (lsChartPersonas) lsChartPersonas.destroy();
-        lsChartPersonas = new Chart(ctxPers, {
-            type: 'bar',
-            data: {
-                labels: lsData.personas_groups.map(function(g) { return g.name; }),
-                datasets: [{
-                    label: 'Prima (ARS M)',
-                    data: lsData.personas_groups.map(function(g) { return g.prima; }),
-                    backgroundColor: '#6366f1',
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                indexAxis: 'y',
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: function(ctx) {
-                                return 'Prima: $' + ctx.raw.toLocaleString('es-AR', {minimumFractionDigits:2}) + ' M';
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: { ticks: { color: '#94a3b8', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                    y: { ticks: { color: '#e2e8f0', font: { size: 10, weight: 'bold' } }, grid: { display: false } }
-                }
-            }
-        });
-    }
-}
-window.renderLaSegundaSubtabData = renderLaSegundaSubtabData;
 function renderBalancesSubtabData() {
-    var rootObj = window.masterStoreData || window.finalData || window.appData || ((typeof appData !== 'undefined' && appData) ? appData : {});
+    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : (window.appData || window.masterStoreData || window.finalData || (typeof masterStoreData !== 'undefined' ? masterStoreData : {}));
     var balancesObj = rootObj.ssn_balances || {};
 
     var period26 = balancesObj.period_2026 || 'Marzo 2026';
