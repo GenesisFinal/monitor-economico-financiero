@@ -770,6 +770,240 @@ function renderPrimasEmitidasRetiroTable() {
 }
 window.renderPrimasEmitidasRetiroTable = renderPrimasEmitidasRetiroTable;
 
+var spChartPrimasRamos = null;
+var spSelectedRamos = [];
+
+function initSpPrimasRamosView() {
+    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                  (window.appData ? window.appData : 
+                  (window.finalData ? window.finalData : {}));
+    var spData = rootObj.ssn_seg_personas || (rootObj.final_data ? rootObj.final_data.ssn_seg_personas : undefined);
+    
+    if (!spData || !spData.boletin_personas) return;
+    var boletin = spData.boletin_personas;
+
+    var container = document.getElementById('sp-ramos-selector-container');
+    if (!container) return;
+
+    if (spSelectedRamos.length === 0 && boletin.target_ramos) {
+        spSelectedRamos = boletin.target_ramos.slice();
+    }
+
+    var htmlPills = [];
+    boletin.target_ramos.forEach(function(ramo) {
+        var isChecked = spSelectedRamos.indexOf(ramo) !== -1;
+        var pillClass = isChecked ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' : 'bg-darkBg text-slate-400 border-darkBorder';
+        htmlPills.push('<label class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold cursor-pointer transition shadow-sm ' + pillClass + '">' +
+            '<input type="checkbox" class="chk-sp-ramo accent-emerald-500 cursor-pointer" value="' + ramo + '" ' + (isChecked ? 'checked' : '') + ' onchange="onSpRamoCheckboxChange(this)">' +
+            '<span>' + ramo + '</span>' +
+        '</label>');
+    });
+
+    container.innerHTML = htmlPills.join('');
+    renderSpPrimasTable();
+}
+window.initSpPrimasRamosView = initSpPrimasRamosView;
+
+function onSpRamoCheckboxChange(cb) {
+    var val = cb.value;
+    if (cb.checked) {
+        if (spSelectedRamos.indexOf(val) === -1) spSelectedRamos.push(val);
+    } else {
+        var idx = spSelectedRamos.indexOf(val);
+        if (idx !== -1) spSelectedRamos.splice(idx, 1);
+    }
+    initSpPrimasRamosView();
+}
+window.onSpRamoCheckboxChange = onSpRamoCheckboxChange;
+
+function selectAllSpRamos(forceState) {
+    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                  (window.appData ? window.appData : 
+                  (window.finalData ? window.finalData : {}));
+    var spData = rootObj.ssn_seg_personas || (rootObj.final_data ? rootObj.final_data.ssn_seg_personas : undefined);
+    if (!spData || !spData.boletin_personas) return;
+
+    if (forceState) {
+        spSelectedRamos = spData.boletin_personas.target_ramos.slice();
+    } else {
+        spSelectedRamos = [];
+    }
+    initSpPrimasRamosView();
+}
+window.selectAllSpRamos = selectAllSpRamos;
+
+function renderSpPrimasTable() {
+    var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                  (window.appData ? window.appData : 
+                  (window.finalData ? window.finalData : {}));
+    var spData = rootObj.ssn_seg_personas || (rootObj.final_data ? rootObj.final_data.ssn_seg_personas : undefined);
+    if (!spData || !spData.boletin_personas) return;
+
+    var tbody = document.getElementById('tbl-sp-primas-body');
+    if (!tbody) return;
+
+    var fmtNum = function(n) {
+        if (typeof n !== 'number') return n;
+        return n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    };
+
+    var boletin = spData.boletin_personas;
+    var companies = boletin.companies || [];
+
+    // Calculate total per company for selected ramos
+    var list = companies.map(function(c, idx) {
+        var tot = 0;
+        spSelectedRamos.forEach(function(r) {
+            tot += (c.ramos_values ? (c.ramos_values[r] || 0) : 0);
+        });
+        return { origIndex: idx, entidad: c.entidad, total: tot, orig: c };
+    });
+
+    // Sort descending by calculated total
+    list.sort(function(a, b) { return b.total - a.total; });
+
+    var sumGrand = 0;
+    list.forEach(function(item) { sumGrand += item.total; });
+
+    var rows = [];
+
+    // Summary Header Row
+    rows.push('<tr id="row-sp-primas-total" class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+        '<td class="py-3 px-3 text-center"><i class="fas fa-calculator"></i></td>' +
+        '<td class="py-3 px-3 uppercase tracking-wider font-bold">TOTAL SELECCIONADO (' + spSelectedRamos.length + ' RAMOS)</td>' +
+        '<td id="cell-sp-primas-tot-val" class="py-3 px-3 text-right font-mono text-white text-base font-extrabold">' + fmtNum(sumGrand) + '</td>' +
+        '<td id="cell-sp-primas-tot-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
+    '</tr>');
+
+    list.forEach(function(item, i) {
+        if (item.total <= 0) return; // Skip zero production companies for selected ramos
+
+        var isL2 = item.entidad.indexOf('SEGUNDA') !== -1;
+        var rowClass = isL2 ? 'bg-amber-500/10 font-bold border-l-4 border-amber-400' : 'hover:bg-darkBg/50 transition';
+        var nameClass = isL2 ? 'text-amber-300 font-bold' : 'text-slate-200 font-semibold';
+        var pct = sumGrand ? (item.total / sumGrand * 100).toFixed(2) + '%' : '0.00%';
+
+        rows.push('<tr id="tr-sp-primas-' + item.origIndex + '" class="' + rowClass + '" data-index="' + item.origIndex + '" data-total="' + item.total + '">' +
+            '<td class="py-3 px-3 text-center">' +
+                '<input type="checkbox" class="chk-sp-primas accent-emerald-500 cursor-pointer rounded" data-index="' + item.origIndex + '" checked onchange="updateSpPrimasCalculations()">' +
+            '</td>' +
+            '<td class="py-3 px-3 ' + nameClass + '">' + item.entidad + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-white font-bold cell-sp-val">' + fmtNum(item.total) + '</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold cell-sp-pct">' + pct + '</td>' +
+            '<td class="py-3 px-3 text-center cell-sp-rank"><span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + (i + 1) + '</span></td>' +
+        '</tr>');
+    });
+
+    tbody.innerHTML = rows.join('');
+    updateSpPrimasCalculations();
+}
+window.renderSpPrimasTable = renderSpPrimasTable;
+
+function toggleAllSpPrimasCheckboxes(forceState) {
+    var checkboxes = document.querySelectorAll('.chk-sp-primas');
+    var master = document.getElementById('chk-sp-primas-master');
+    var newState = (typeof forceState === 'boolean') ? forceState : (!master || !master.checked);
+
+    if (master) master.checked = newState;
+    checkboxes.forEach(function(cb) {
+        cb.checked = newState;
+    });
+    updateSpPrimasCalculations();
+}
+window.toggleAllSpPrimasCheckboxes = toggleAllSpPrimasCheckboxes;
+
+function updateSpPrimasCalculations() {
+    var fmtNum = function(n) {
+        if (typeof n !== 'number') return n;
+        return n.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    };
+
+    var checkboxes = document.querySelectorAll('.chk-sp-primas');
+    var activeRows = [];
+    var sumActive = 0;
+
+    checkboxes.forEach(function(cb) {
+        var tr = cb.closest('tr');
+        if (!tr) return;
+        var totalVal = floatVal(tr.getAttribute('data-total') || '0');
+        if (cb.checked) {
+            activeRows.push({ tr: tr, total: totalVal, entidad: tr.querySelector('td:nth-child(2)').innerText.trim() });
+            sumActive += totalVal;
+        } else {
+            tr.classList.add('opacity-40');
+            var pctEl = tr.querySelector('.cell-sp-pct');
+            var rankEl = tr.querySelector('.cell-sp-rank');
+            if (pctEl) pctEl.textContent = '-';
+            if (rankEl) rankEl.innerHTML = '-';
+        }
+    });
+
+    function floatVal(v) {
+        var n = parseFloat(v);
+        return isNaN(n) ? 0 : n;
+    }
+
+    // Sort active rows descending to compute dynamic ranks
+    activeRows.sort(function(a, b) { return b.total - a.total; });
+
+    activeRows.forEach(function(item, rank) {
+        var tr = item.tr;
+        tr.classList.remove('opacity-40');
+        var pctStr = sumActive ? (item.total / sumActive * 100).toFixed(2) + '%' : '0.00%';
+        var pctEl = tr.querySelector('.cell-sp-pct');
+        var rankEl = tr.querySelector('.cell-sp-rank');
+
+        if (pctEl) pctEl.textContent = pctStr;
+        if (rankEl) rankEl.innerHTML = '<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + (rank + 1) + '</span>';
+    });
+
+    var cTotVal = document.getElementById('cell-sp-primas-tot-val');
+    if (cTotVal) cTotVal.textContent = fmtNum(sumActive);
+
+    // Update Chart
+    var chartCanvas = document.getElementById('chart-sp-primas-ramos');
+    if (chartCanvas && window.Chart) {
+        if (spChartPrimasRamos) spChartPrimasRamos.destroy();
+
+        var topActive = activeRows.slice(0, 10);
+        spChartPrimasRamos = new Chart(chartCanvas, {
+            type: 'bar',
+            data: {
+                labels: topActive.map(function(r) { return r.entidad.replace(' SEGUROS DE PERSONAS', '').replace(' SEGUROS', '').replace(' PERSONAS', ''); }),
+                datasets: [{
+                    label: 'Primas Emitidas ($)',
+                    data: topActive.map(function(r) { return r.total; }),
+                    backgroundColor: '#10b981'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                return 'Primas: $ ' + fmtNum(ctx.raw);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }, grid: { display: false } },
+                    y: {
+                        ticks: { color: '#94a3b8', callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                    }
+                }
+            }
+        });
+    }
+}
+window.updateSpPrimasCalculations = updateSpPrimasCalculations;
+
+
 function toggleAllPrimasRetiroCheckboxes(forceState) {
     var checkboxes = document.querySelectorAll('.chk-sr-primas');
     var master = document.getElementById('chk-sr-primas-master');
@@ -37093,6 +37327,67 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         </div>
                     </div>
 
+                    <!-- SECCIÓN PRIMAS EMITIDAS POR RAMOS (BOLETÍN SSN) -->
+                        <div class="mt-12 pt-8 border-t border-darkBorder/60">
+                            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+                                <div>
+                                    <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
+                                        <i class="fas fa-layer-group text-emerald-400"></i> Primas Emitidas por Ramos en Seg. de Personas
+                                    </h2>
+                                    <p class="text-xs text-slate-400 mt-1">Boletín Trimestral SSN &bull; Acumulado a Marzo 2026. Seleccione los ramos a incluir para recalcular el mercado dinámicamente.</p>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="selectAllSpRamos(true)" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1">
+                                        <i class="fas fa-check-square"></i> Seleccionar Todos
+                                    </button>
+                                    <button onclick="selectAllSpRamos(false)" class="px-3 py-1.5 text-xs font-bold bg-slate-700/50 text-slate-300 border border-slate-600/30 rounded-lg hover:bg-slate-700 transition flex items-center gap-1">
+                                        <i class="fas fa-square"></i> Deseleccionar Todos
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Selector de Ramos con Casillas de Verificación -->
+                            <div class="glass-card bg-darkCard/80 p-5 rounded-2xl border border-darkBorder mb-8 shadow-xl">
+                                <label class="text-xs font-bold text-slate-300 uppercase tracking-wider block mb-3">Filtrar Ramos de Personas:</label>
+                                <div id="sp-ramos-selector-container" class="flex flex-wrap gap-2.5">
+                                </div>
+                            </div>
+
+                            <!-- Tabla Comparativa de Primas por Ramos -->
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+                                <div class="lg:col-span-12 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                    <div class="overflow-x-auto">
+                                        <table class="w-full text-left border-collapse" id="tbl-sp-primas">
+                                            <thead>
+                                                <tr class="bg-darkBg/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-darkBorder">
+                                                    <th class="py-3 px-3 w-10 text-center">
+                                                        <input type="checkbox" id="chk-sp-primas-master" checked onchange="toggleAllSpPrimasCheckboxes(this.checked)" class="accent-emerald-500 cursor-pointer rounded">
+                                                    </th>
+                                                    <th class="py-3 px-3">Aseguradora (Entidad)</th>
+                                                    <th class="py-3 px-3 text-right">Primas Emitidas ($)</th>
+                                                    <th class="py-3 px-3 text-right">Part. %</th>
+                                                    <th class="py-3 px-3 text-center">Ranking</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl-sp-primas-body" class="divide-y divide-darkBorder/40 text-xs md:text-sm font-medium text-slate-200">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gráfico Primas Emitidas por Ramos -->
+                            <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
+                                <h3 class="text-sm font-bold text-slate-300 mb-4 uppercase tracking-wider flex items-center gap-2">
+                                    <i class="fas fa-chart-bar text-emerald-400"></i> Top 10 Aseguradoras en Ramos Seleccionados
+                                </h3>
+                                <div class="relative w-full h-[380px]">
+                                    <canvas id="chart-sp-primas-ramos"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- SUBTAB VIEW: SEG. DE RETIRO -->
                     <div id="subtab-view-seg-retiro" class="hidden">
                         <!-- Header Banner con Selector de Vista -->
@@ -49871,10 +50166,93 @@ def load_ssn_seg_personas_data():
                 "l2": clean_val(retiro_l2.get(ind_name))
             })
 
+                # --- 3. PRIMAS EMITIDAS POR RAMOS (Hoja '3- Seg. de Personas' de ssn_202603_prod_trimestral_boletin.xlsx) ---
+        file_prod = os.path.join("data", "ssn", "ssn_202603_prod_trimestral_boletin.xlsx")
+        if not os.path.exists(file_prod) and os.path.exists("ssn_202603_prod_trimestral_boletin.xlsx"):
+            file_prod = "ssn_202603_prod_trimestral_boletin.xlsx"
+
+        if not os.path.exists(file_prod):
+            os.makedirs(os.path.join("data", "ssn"), exist_ok=True)
+            import urllib.request
+            try:
+                url_prod = "https://www.argentina.gob.ar/sites/default/files/ssn_202603_prod_trimestral_boletin.xlsx"
+                req = urllib.request.Request(url_prod, headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req) as resp, open(file_prod, 'wb') as f_out:
+                    f_out.write(resp.read())
+            except Exception as e:
+                print(f"Error downloading {file_prod}: {e}")
+
+        target_ramos = [
+            'Acc. Personales- Colectivo',
+            'Acc. Personales- Individual',
+            'Salud',
+            'Sepelio - Colectivo',
+            'Sepelio - Individual',
+            'Vida - Colectivo',
+            'Vida - Individual',
+            'Vida - Obligatorios',
+            'Vida - Saldo Deudor'
+        ]
+
+        branch_data = {r: {} for r in target_ramos}
+        all_companies_set = set()
+
+        if os.path.exists(file_prod):
+            try:
+                fixed_prod = fix_strict_ooxml(file_prod)
+                wb_prod = openpyxl.load_workbook(fixed_prod, data_only=True)
+                sheet_p = [s for s in wb_prod.sheetnames if '3' in s and 'Personas' in s][0]
+                ws_prod = wb_prod[sheet_p]
+
+                for r in range(4, ws_prod.max_row + 1):
+                    ramo = str(ws_prod.cell(row=r, column=6).value or '').strip()
+                    entidad = str(ws_prod.cell(row=r, column=3).value or '').strip()
+                    primas = ws_prod.cell(row=r, column=4).value
+                    if not entidad or primas is None or not ramo:
+                        continue
+                    try:
+                        p_val = float(primas)
+                    except (ValueError, TypeError):
+                        continue
+
+                    for tr in target_ramos:
+                        if tr == ramo:
+                            branch_data[tr][entidad] = p_val
+                            all_companies_set.add(entidad)
+                            break
+            except Exception as e_p:
+                print(f"Error parsing ssn_prod_trimestral for Seg. de Personas Ramos: {e_p}")
+
+        comp_totals = []
+        grand_total_9_ramos = sum(sum(branch_data[r].values()) for r in target_ramos)
+
+        for ent in all_companies_set:
+            tot_ent = sum(branch_data[tr].get(ent, 0.0) for tr in target_ramos)
+            pct_ent = (tot_ent / grand_total_9_ramos * 100.0) if grand_total_9_ramos else 0.0
+            comp_totals.append({
+                'entidad': ent,
+                'total_primas': round(tot_ent, 2),
+                'total_pct': round(pct_ent, 2),
+                'ramos_values': {tr: round(branch_data[tr].get(ent, 0.0), 2) for tr in target_ramos}
+            })
+
+        comp_totals.sort(key=lambda x: x['total_primas'], reverse=True)
+
+        for rank, item in enumerate(comp_totals, start=1):
+            item['rank_initial'] = rank
+
+        boletin_personas_obj = {
+            "target_ramos": target_ramos,
+            "grand_total": round(grand_total_9_ramos, 2),
+            "branch_data": branch_data,
+            "companies": comp_totals
+        }
+
         return {
             "periodo": "Marzo 2026",
             "personas": personas_rows,
-            "retiro": retiro_rows
+            "retiro": retiro_rows,
+            "boletin_personas": boletin_personas_obj
         }
     except Exception as e:
         print(f"Error parsing ssn_seg_personas_data: {e}")
