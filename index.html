@@ -666,7 +666,6 @@ function renderBalancesSubtabData() {
         if (cName !== 'ALL') {
             var targetName = (cName || '').trim().toUpperCase();
             
-            // 1. Try exact rubro match
             if (catObj.companies) {
                 var found = catObj.companies.find(function(x) { 
                     return (x.name || '').trim().toUpperCase() === targetName; 
@@ -674,7 +673,6 @@ function renderBalancesSubtabData() {
                 if (found) return found.vals || [];
             }
 
-            // 2. Fallback: Search all other rubro categories in this view
             for (var altK in vObj) {
                 var altCat = vObj[altK];
                 if (altCat && altCat.companies) {
@@ -763,12 +761,12 @@ function renderBalancesSubtabData() {
             { label: 'Resultado Técnico Reaseg. Activo (2)', i26: 1, i25: 1 },
             { label: 'Otros Ingresos (3)', i26: 2, i25: 2 },
             { label: 'Otros Egresos (4)', i26: 3, i25: 3 },
-            { label: 'Resultado Técnico (5 = 1 + 2 + 3 + 4)', i26: 4, i25: 4, isHighlight: true, isYoy: true },
-            { label: 'Resultado Financiero (6)', i26: 5, i25: 5, isHighlight: true, isYoy: true },
+            { label: 'Resultado Técnico (5 = 1 + 2 + 3 + 4)', i26: 4, i25: 4, isHighlight: true },
+            { label: 'Resultado Financiero (6)', i26: 5, i25: 5, isHighlight: true },
             { label: 'Rdo. Operaciones Ordinarias (7 = 5 + 6)', i26: 6, i25: 6 },
             { label: 'Rdo. Operaciones Extraordinarias (8)', i26: 7, i25: 7 },
             { label: 'Impuesto a las Ganancias (9)', i26: 8, i25: 8 },
-            { label: 'RESULTADO DEL EJERCICIO (10 = 7 + 8 + 9)', i26: 9, i25: 9, isHighlight: true, isYoy: true }
+            { label: 'RESULTADO DEL EJERCICIO (10 = 7 + 8 + 9)', i26: 9, i25: 9, isHighlight: true }
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
@@ -780,7 +778,7 @@ function renderBalancesSubtabData() {
             var yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
             var rowClass = row.isHighlight ? 'bg-emerald-500/10 font-bold text-white' : 'hover:bg-emerald-500/5';
             
-            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : '-') + '</td></tr>';
+            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
         html += '</tbody></table></div></div>';
@@ -791,16 +789,16 @@ function renderBalancesSubtabData() {
             { label: 'Rescates', i: 2 },
             { label: 'Rentas Vitalicias y Periódicas', i: 3 },
             { label: 'Gastos Totales', i: 4 },
-            { label: 'Total Seguros Directos', i: 5, isHighlight: true, isYoy: true },
+            { label: 'Total Seguros Directos', i: 5, isHighlight: true },
             { label: 'Primas Netas (Reaseguros Activos)', i: 6 },
             { label: 'Siniestros Netos (Reaseguros Activos)', i: 7 },
             { label: 'Gastos de Producción (Reaseguros Activos)', i: 8 },
-            { label: 'Total Reaseguros Activos', i: 9, isHighlight: true, isYoy: true },
+            { label: 'Total Reaseguros Activos', i: 9, isHighlight: true },
             { label: 'Gastos de Prevención', i: 10 },
             { label: 'Otros Ingresos', i: 11 },
             { label: 'Otros Egresos', i: 12 },
             { label: 'Otras Indemnizaciones y Beneficios', i: 13 },
-            { label: 'RESULTADO TÉCNICO TOTAL', i: 14, isHighlight: true, isYoy: true }
+            { label: 'RESULTADO TÉCNICO TOTAL', i: 14, isHighlight: true }
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
@@ -812,7 +810,7 @@ function renderBalancesSubtabData() {
             var yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
             var rowClass = row.isHighlight ? 'bg-emerald-500/10 font-bold text-white' : 'hover:bg-emerald-500/5';
             
-            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (row.isYoy && yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : '-') + '</td></tr>';
+            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
         html += '</tbody></table></div></div>';
@@ -825,7 +823,7 @@ function renderBalancesSubtabData() {
             { label: 'Otros Egresos Financieros', i: 4 },
             { label: 'Gastos de Explotación y Otros Cargos', i: 5 },
             { label: 'RECPAM Financiero', i: 6 },
-            { label: 'RESULTADO FINANCIERO TOTAL', i: 7, isHighlight: true, isYoy: true }
+            { label: 'RESULTADO FINANCIERO TOTAL', i: 7, isHighlight: true }
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
@@ -837,7 +835,7 @@ function renderBalancesSubtabData() {
             var yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
             var rowClass = row.isHighlight ? 'bg-emerald-500/10 font-bold text-white' : 'hover:bg-emerald-500/5';
             
-            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (row.isYoy && yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : '-') + '</td></tr>';
+            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
         html += '</tbody></table></div></div>';
