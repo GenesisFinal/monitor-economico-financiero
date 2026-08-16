@@ -42,6 +42,7 @@ window.renderAsegPieCharts = renderAsegPieCharts;
 function renderPrimasSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_primas_mercado || {}) : {};
     var branches = ssnObj.branches || [];
+    var seriesObj = ssnObj.quarterly_series || {};
 
     var fmtM = function(val) {
         if (!val || isNaN(val)) return '0,00';
@@ -58,6 +59,8 @@ function renderPrimasSubtabData() {
     var patItem = branches.find(function(x) { return x.key === 'total_patrimoniales'; });
     var perItem = branches.find(function(x) { return x.key === 'total_personas'; });
 
+    var totalMercadoPrimas = totItem ? totItem.primas_actual : 0;
+
     if (totItem && document.getElementById('kpi-primas-total-val')) document.getElementById('kpi-primas-total-val').textContent = '$' + fmtM(totItem.primas_actual);
     if (totItem && document.getElementById('kpi-primas-total-var-nom')) document.getElementById('kpi-primas-total-var-nom').textContent = fmtPct(totItem.var_nominal);
     if (totItem && document.getElementById('kpi-primas-total-var-real')) document.getElementById('kpi-primas-total-var-real').textContent = fmtPct(totItem.var_real);
@@ -70,29 +73,110 @@ function renderPrimasSubtabData() {
     if (perItem && document.getElementById('kpi-primas-personas-var-nom')) document.getElementById('kpi-primas-personas-var-nom').textContent = fmtPct(perItem.var_nominal);
     if (perItem && document.getElementById('kpi-primas-personas-var-real')) document.getElementById('kpi-primas-personas-var-real').textContent = fmtPct(perItem.var_real);
 
-    var renderTable = function(tbodyId, groupName) {
-        var tbody = document.getElementById(tbodyId);
+    var populateTable = function(tableId, items) {
+        var tbody = document.getElementById(tableId);
         if (!tbody) return;
-        var groupItems = branches.filter(function(x) { return x.group === groupName; });
         var html = '';
-        groupItems.forEach(function(item) {
-            var isHeader = item.is_total || item.key === 'total_mercado';
-            var bgClass = isHeader ? 'bg-darkBg/60 font-bold text-white' : 'hover:bg-darkCard/40 text-slate-300';
-            html += '<tr class="' + bgClass + '">';
-            html += '<td class="py-2.5 px-4 font-semibold">' + item.name + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono font-medium">$' + fmtM(item.primas_actual) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono text-slate-400">$' + fmtM(item.primas_prev) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono ' + (item.var_nominal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_nominal) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono ' + (item.var_real >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_real) + '</td>';
-            html += '<td class="py-2.5 px-4 text-right font-mono text-slate-400">' + (item.share ? item.share.toFixed(2) + '%' : '-') + '</td>';
+        items.forEach(function(item) {
+            var isTotal = item.is_total || item.key.indexOf('total') !== -1;
+            var rowClass = isTotal ? 'font-bold bg-slate-800/40 text-white' : 'hover:bg-slate-800/20 text-slate-300';
+            var nameCol = isTotal ? '<span class="font-bold text-white">' + item.name + '</span>' : item.name;
+            
+            var calculatedShare = (totalMercadoPrimas > 0) ? ((item.primas_actual / totalMercadoPrimas) * 100.0) : (item.share || 0);
+            var shareVal = calculatedShare.toFixed(2).replace('.', ',') + '%';
+
+            html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
+            html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_actual) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_prev) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (item.var_nominal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_nominal) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (item.var_real >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(item.var_real) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono text-cyan-400 font-bold">' + shareVal + '</td>';
             html += '</tr>';
         });
         tbody.innerHTML = html;
     };
 
-    renderTable('tbl-body-personas', 'Personas');
-    renderTable('tbl-body-patrimoniales', 'Patrimoniales');
-    renderTable('tbl-body-total-mercado', 'Total Mercado');
+    var personasItems = branches.filter(function(x) { return x.group === 'Personas' || x.type === 'personas' || x.type === 'personas_total'; });
+    var patrimonialesItems = branches.filter(function(x) { return x.group === 'Patrimoniales' || x.type === 'patrimoniales' || x.type === 'patrimoniales_total'; });
+    var totalItems = branches.filter(function(x) { return x.group === 'Total Mercado' || x.type === 'mercado_total'; });
+
+    populateTable('tbl-body-personas', personasItems);
+    populateTable('tbl-body-patrimoniales', patrimonialesItems);
+    populateTable('tbl-body-total-mercado', totalItems);
+
+    if (typeof Chart !== 'undefined' && document.getElementById('chart-pie-personas-primas')) {
+        var canvasPer = document.getElementById('chart-pie-personas-primas');
+        if (window.personasPieChart) window.personasPieChart.destroy();
+
+        var subPer = personasItems.filter(function(x) { return !x.is_total; });
+        window.personasPieChart = new Chart(canvasPer.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: subPer.map(function(x) { return x.name; }),
+                datasets: [{
+                    data: subPer.map(function(x) { return x.primas_actual / 1000000.0; }),
+                    backgroundColor: ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#ec4899']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+            }
+        });
+    }
+
+    if (typeof Chart !== 'undefined' && document.getElementById('chart-pie-patrimoniales-primas')) {
+        var canvasPat = document.getElementById('chart-pie-patrimoniales-primas');
+        if (window.patrimonialesPieChart) window.patrimonialesPieChart.destroy();
+
+        var subPat = patrimonialesItems.filter(function(x) { return !x.is_total; });
+        window.patrimonialesPieChart = new Chart(canvasPat.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: subPat.map(function(x) { return x.name; }),
+                datasets: [{
+                    data: subPat.map(function(x) { return x.primas_actual / 1000000.0; }),
+                    backgroundColor: ['#f59e0b', '#06b6d4', '#10b981', '#6366f1']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+            }
+        });
+    }
+
+    if (typeof Chart !== 'undefined' && document.getElementById('chart-bar-5q-evolution')) {
+        var canvasBar = document.getElementById('chart-bar-5q-evolution');
+        if (window.evolution5QBarChart) window.evolution5QBarChart.destroy();
+
+        var qDates = seriesObj.total_mercado ? seriesObj.total_mercado.dates : ['Mar 25', 'Jun 25', 'Sep 25', 'Dic 25', 'Mar 26'];
+        var patVals = seriesObj.total_patrimoniales ? seriesObj.total_patrimoniales.values.map(function(v) { return v / 1000000.0; }) : [];
+        var perVals = seriesObj.total_personas ? seriesObj.total_personas.values.map(function(v) { return v / 1000000.0; }) : [];
+
+        window.evolution5QBarChart = new Chart(canvasBar.getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: qDates,
+                datasets: [
+                    { label: 'Seguros Patrimoniales ($M)', data: patVals, backgroundColor: '#f59e0b' },
+                    { label: 'Seguros de Personas ($M)', data: perVals, backgroundColor: '#10b981' }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                scales: {
+                    x: { stacked: true, ticks: { color: '#94a3b8' }, grid: { display: false } },
+                    y: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                }
+            }
+        });
+    }
 }
 window.renderPrimasSubtabData = renderPrimasSubtabData;
 
@@ -1908,7 +1992,25 @@ window.switchAsegSubtab = switchAsegSubtab;
 
         }
 
-    </style>
+    
+        /* Global Theme Variable Enforcement */
+        body {
+            background-color: var(--bg-color) !important;
+            color: var(--text-color) !important;
+        }
+        h1, h2, h3, h4, .section-title {
+            color: var(--title-color) !important;
+        }
+        header, nav {
+            border-color: var(--border-color) !important;
+        }
+        .bg-brandBlue, .btn-primary-theme {
+            background-color: var(--highlight-color) !important;
+        }
+        .text-brandBlue, .text-theme-highlight {
+            color: var(--highlight-color) !important;
+        }
+</style>
 
 </head>
 
@@ -34629,42 +34731,42 @@ window.switchAsegSubtab = switchAsegSubtab;
 
             <!-- 1. TARJETAS KPI RESUMEN DE PRIMAS ACUMULADAS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- Card 1: Total Mercado -->
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-brandBlue/40 transition-all">
+                <!-- Card 1: Total del Mercado -->
+                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-brandBlue/30 shadow-xl hover:border-brandBlue/50 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Total del Mercado (9 Meses)</span>
-                        <span class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue"><i class="fas fa-vault"></i></span>
+                        <span class="p-3 rounded-2xl bg-brandBlue/10 text-brandBlue border border-brandBlue/20"><i class="fas fa-building-columns text-xl"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-total-val">ARS 19.409.600,79 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
-                        <span class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i>+43,76% Nom i.a.</span>
-                        <span class="text-emerald-400">(+8,41% Real Neta Inflación)</span>
+                        <span class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i><span id="kpi-primas-total-var-nom">+43,76%</span> Nom i.a.</span>
+                        <span class="text-emerald-400" id="kpi-primas-total-var-real">(+8,41% Real Neta Inflación)</span>
                     </div>
                 </div>
 
                 <!-- Card 2: Seguros Patrimoniales -->
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-cyan-500/40 transition-all">
+                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-amber-400/30 shadow-xl hover:border-amber-400/50 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros Patrimoniales & ART</span>
-                        <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400"><i class="fas fa-car-shield"></i></span>
+                        <span class="p-3 rounded-2xl bg-amber-400/10 text-amber-400 border border-amber-400/20"><i class="fas fa-shield-alt text-xl"></i></span>
                     </div>
-                    <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-patrimoniales-val">ARS 16.815.480,34 M</div>
+                    <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-patrim-val">ARS 16.815.480,34 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
-                        <span class="text-cyan-400"><i class="fas fa-chart-pie mr-1"></i>86,63% Participación</span>
-                        <span class="text-brandGreen">+42,86% Nom (+7,73% Real)</span>
+                        <span class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i><span id="kpi-primas-patrim-var-nom">+42,86%</span> Nom i.a.</span>
+                        <span class="text-emerald-400" id="kpi-primas-patrim-var-real">(+7,73% Real Neta Inflación)</span>
                     </div>
                 </div>
 
                 <!-- Card 3: Seguros de Personas -->
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-emerald-500/40 transition-all">
+                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-emerald-400/30 shadow-xl hover:border-emerald-400/50 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros de Personas</span>
-                        <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i class="fas fa-user-shield"></i></span>
+                        <span class="p-3 rounded-2xl bg-emerald-400/10 text-emerald-400 border border-emerald-400/20"><i class="fas fa-user-shield text-xl"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-personas-val">ARS 2.594.120,45 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
-                        <span class="text-emerald-400"><i class="fas fa-chart-pie mr-1"></i>13,37% Participación</span>
-                        <span class="text-brandGreen">+49,87% Nom (+13,02% Real)</span>
+                        <span class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i><span id="kpi-primas-personas-var-nom">+49,87%</span> Nom i.a.</span>
+                        <span class="text-emerald-400" id="kpi-primas-personas-var-real">(+13,02% Real Neta Inflación)</span>
                     </div>
                 </div>
             </div>
@@ -34986,6 +35088,10 @@ window.switchAsegSubtab = switchAsegSubtab;
             
             <!-- Chart Container -->
             <div class="flex-grow min-h-[300px] h-[350px] relative w-full mb-2">
+                <div id="econ-modal-regression-info" class="hidden mb-3 px-4 py-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-mono font-bold flex items-center justify-between shadow-sm">
+                    <span id="econ-modal-regression-text"></span>
+                    <span class="text-[10px] uppercase tracking-wider text-amber-500/80">Tendencia Ajustada</span>
+                </div>
                 <canvas id="modal-chart-canvas"></canvas>
             </div>
         </div>
@@ -39251,12 +39357,10 @@ function switchGlobalTab(tabId) {
 
                 btnIndicadores.className = activeClass;
 
-            } else if (tabId === 'mercado-asegurador') {
-
+            } else if (tabId === 'mercado-asegurador' || tabId === 'asegurador') {
                 if (containerAsegurador) containerAsegurador.classList.remove('hidden');
-
                 if (btnAsegurador) btnAsegurador.className = activeClass;
-
+                if (typeof renderAseguradorData === 'function') renderAseguradorData();
             } else if (tabId === 'fuentes') {
 
                 if (containerFuentes) containerFuentes.classList.remove('hidden');
@@ -46083,4 +46187,3 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
 </body>
 </html>
-<!-- Deploy timestamp: 1786844688.1804235 -->
