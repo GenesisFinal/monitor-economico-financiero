@@ -770,11 +770,9 @@ function renderPrimasEmitidasRetiroTable() {
 }
 window.renderPrimasEmitidasRetiroTable = renderPrimasEmitidasRetiroTable;
 
-
-
 var spChartPrimasRamos = null;
-var spSelectedRamos = null; // null means uninitialized, [] means zero ramos selected
-var spFullActiveList = [];  # Store full sorted active market list for exact rank lookups
+var spSelectedRamos = null;
+var spFullActiveList = [];
 
 function initSpPrimasRamosView() {
     var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
@@ -881,7 +879,7 @@ function renderSpPrimasTable() {
     list = list.filter(function(item) { return item.total > 0; });
     list.sort(function(a, b) { return b.total - a.total; });
 
-    spFullActiveList = list; // Save full market list for exact rank lookups
+    spFullActiveList = list;
 
     // 3. Extract Top 15
     var displayList = list.slice(0, 15);
@@ -982,7 +980,6 @@ function updateSpPrimasCalculations() {
         return isNaN(n) ? 0 : n;
     }
 
-    // Filter full market list removing unchecked companies
     var activeFullMarketList = spFullActiveList.filter(function(item) {
         return disabledOrigIndices.indexOf(item.origIndex) === -1;
     });
@@ -994,7 +991,6 @@ function updateSpPrimasCalculations() {
         var pctEl = tr.querySelector('.cell-sp-pct');
         var rankEl = tr.querySelector('.cell-sp-rank');
 
-        // Find exact rank position in the active full market list
         var exactRank = activeFullMarketList.findIndex(function(it) { return it.origIndex === item.origIndex; }) + 1;
 
         if (pctEl) pctEl.textContent = pctStr;
@@ -1044,8 +1040,6 @@ function updateSpPrimasCalculations() {
     }
 }
 window.updateSpPrimasCalculations = updateSpPrimasCalculations;
-
-
 
 
 function toggleAllPrimasRetiroCheckboxes(forceState) {
@@ -37368,10 +37362,8 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <!-- SECCIÓN PRIMAS EMITIDAS POR RAMOS (BOLETÍN SSN) -->
+                        <!-- SECCIÓN PRIMAS EMITIDAS POR RAMOS (BOLETÍN SSN) -->
                         <div class="mt-12 pt-8 border-t border-darkBorder/60">
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
                                 <div>
@@ -37429,6 +37421,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                     <canvas id="chart-sp-primas-ramos"></canvas>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
 
