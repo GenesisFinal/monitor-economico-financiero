@@ -207,6 +207,54 @@ var currentMensualTimeframe = 'all';
 window.currentMensualCurrency = currentMensualCurrency;
 window.currentMensualTimeframe = currentMensualTimeframe;
 
+window.currentMensualTimeframe = 'all';
+window.mensualSeriesState = { total: true, patrimoniales: true, personas: true };
+
+function setMensualTimeframe(tfKey) {
+    window.currentMensualTimeframe = tfKey;
+    var tfs = ['12m', '24m', '36m', '5y', 'all'];
+    tfs.forEach(function(k) {
+        var btn = document.getElementById('btn-tf-' + k);
+        if (btn) {
+            if (k === tfKey) {
+                btn.className = "px-2.5 py-1 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
+            } else {
+                btn.className = "px-2.5 py-1 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
+            }
+        }
+    });
+    renderMensualSubtabData();
+}
+window.setMensualTimeframe = setMensualTimeframe;
+
+function toggleMensualSeries(sKey) {
+    if (!window.mensualSeriesState) window.mensualSeriesState = { total: true, patrimoniales: true, personas: true };
+    window.mensualSeriesState[sKey] = !window.mensualSeriesState[sKey];
+
+    if (!window.mensualSeriesState.total && !window.mensualSeriesState.patrimoniales && !window.mensualSeriesState.personas) {
+        window.mensualSeriesState[sKey] = true;
+    }
+
+    var btnMap = {
+        'total': { id: 'btn-toggle-series-total', active: 'bg-brandBlue/20 text-brandBlue border border-brandBlue/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' },
+        'patrimoniales': { id: 'btn-toggle-series-patrimoniales', active: 'bg-amber-500/20 text-amber-400 border border-amber-500/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' },
+        'personas': { id: 'btn-toggle-series-personas', active: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' }
+    };
+
+    Object.keys(btnMap).forEach(function(k) {
+        var btn = document.getElementById(btnMap[k].id);
+        var isAct = window.mensualSeriesState[k];
+        if (btn) {
+            btn.className = "px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 " + (isAct ? btnMap[k].active : btnMap[k].inactive);
+            var icon = btn.querySelector('i');
+            if (icon) icon.className = isAct ? "fas fa-check-square" : "far fa-square";
+        }
+    });
+
+    renderMensualSubtabData();
+}
+window.toggleMensualSeries = toggleMensualSeries;
+
 function renderMensualSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_produccion_mensual || {}) : {};
     var currKey = (typeof currentMensualCurrency !== 'undefined') ? currentMensualCurrency : (window.currentMensualCurrency || 'corriente');
@@ -329,9 +377,9 @@ function renderMensualSubtabData() {
     populateMensualTable('tbl-body-mensual-patrimoniales', patCards);
     populateMensualTable('tbl-body-mensual-personas', perCards);
 
-    // 4. Render Monthly Historical Line Chart
+    // 4. Render Monthly Historical Line Chart (Total, Patrimoniales, Personas)
     if (typeof Chart !== 'undefined' && document.getElementById('chart-line-mensual-history')) {
-        var canvas = document.getElementById('chart-line-mensual-history');
+        var canvasLine = document.getElementById('chart-line-mensual-history');
         if (window.mensualLineChart) window.mensualLineChart.destroy();
 
         var tfKey = (typeof currentMensualTimeframe !== 'undefined') ? currentMensualTimeframe : (window.currentMensualTimeframe || 'all');
@@ -342,25 +390,96 @@ function renderMensualSubtabData() {
         else if (tfKey === '5y') slicedHistory = history.slice(-60);
 
         var labels = slicedHistory.map(function(x) { return x.date || x.period || (x.month + '/' + x.year); });
-        var dataTot = slicedHistory.map(function(x) { return x.total_mercado; });
-        var dataAuto = slicedHistory.map(function(x) { return x.automotores; });
 
-        window.mensualLineChart = new Chart(canvas.getContext('2d'), {
+        var sState = window.mensualSeriesState || { total: true, patrimoniales: true, personas: true };
+        var datasets = [];
+
+        if (sState.total) {
+            datasets.push({
+                label: 'Total Mercado ($M)',
+                data: slicedHistory.map(function(x) { return x.total_mercado; }),
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                fill: true,
+                tension: 0.3
+            });
+        }
+
+        if (sState.patrimoniales) {
+            datasets.push({
+                label: 'Seguros Patrimoniales & ART ($M)',
+                data: slicedHistory.map(function(x) { return x.total_patrimoniales; }),
+                borderColor: '#f59e0b',
+                backgroundColor: 'rgba(245, 158, 11, 0.05)',
+                fill: false,
+                tension: 0.3
+            });
+        }
+
+        if (sState.personas) {
+            datasets.push({
+                label: 'Seguros de Personas ($M)',
+                data: slicedHistory.map(function(x) { return x.total_personas; }),
+                borderColor: '#10b981',
+                backgroundColor: 'rgba(16, 185, 129, 0.05)',
+                fill: false,
+                tension: 0.3
+            });
+        }
+
+        window.mensualLineChart = new Chart(canvasLine.getContext('2d'), {
             type: 'line',
             data: {
                 labels: labels,
-                datasets: [
-                    { label: 'Total Mercado ($M)', data: dataTot, borderColor: '#3b82f6', backgroundColor: 'rgba(59, 130, 246, 0.1)', fill: true, tension: 0.3 },
-                    { label: 'Automotores ($M)', data: dataAuto, borderColor: '#10b981', borderDash: [4, 4], fill: false, tension: 0.3 }
-                ]
+                datasets: datasets
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } },
                 scales: {
                     x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
                     y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                }
+            }
+        });
+    }
+
+    // 5. Render Monthly Distribution Donut Chart
+    var canvasDist = document.getElementById('chart-pie-mensual-dist') || document.getElementById('chart-pie-mensual-distribution');
+    if (typeof Chart !== 'undefined' && canvasDist) {
+        if (window.mensualDistPieChart) window.mensualDistPieChart.destroy();
+
+        var subCards = cards.filter(function(x) { 
+            return !x.is_total && x.key !== 'total_mercado' && x.key !== 'total_patrimoniales' && x.key !== 'total_personas'; 
+        });
+
+        var distLabels = subCards.map(function(x) { return x.label || x.name || x.key; });
+        var distData = subCards.map(function(x) { return (x.latest_val !== undefined) ? x.latest_val : (x.actual_val || 0); });
+        var distColors = ['#f59e0b', '#06b6d4', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899', '#6366f1'];
+
+        window.mensualDistPieChart = new Chart(canvasDist.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: distLabels,
+                datasets: [{
+                    data: distData,
+                    backgroundColor: distColors
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                var val = ctx.raw || 0;
+                                return ctx.label + ': $' + val.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' M';
+                            }
+                        }
+                    }
                 }
             }
         });
@@ -35111,13 +35230,14 @@ window.switchAsegSubtab = switchAsegSubtab;
 
             <!-- Gráficos Históricos Mensuales -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+                <!-- Gráfico de Evolución Mensual Histórica (Líneas) -->
                 <div class="lg:col-span-2 glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
                         <div>
                             <h3 class="text-base font-bold text-white light:text-slate-900 flex items-center gap-2">
                                 <i class="fas fa-chart-line text-brandBlue"></i> Evolución Mensual Histórica Completa
                             </h3>
-                            <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Producción mensual total del mercado en millones de pesos</p>
+                            <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Producción mensual del mercado en millones de pesos</p>
                         </div>
                         <!-- Timeframe Selection Bar -->
                         <div class="flex items-center gap-1 bg-darkBg/80 p-1 rounded-xl border border-darkBorder/80 self-start sm:self-auto">
@@ -35129,30 +35249,40 @@ window.switchAsegSubtab = switchAsegSubtab;
                         </div>
                     </div>
 
+                    <!-- Series Toggle Selector Bar -->
+                    <div class="flex flex-wrap items-center gap-2 mb-4 pt-2 border-t border-darkBorder/40 text-xs">
+                        <span class="text-slate-400 font-medium mr-1"><i class="fas fa-layer-group text-slate-500"></i> Series:</span>
+                        <button id="btn-toggle-series-total" onclick="toggleMensualSeries('total')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-brandBlue/20 text-brandBlue border border-brandBlue/40 flex items-center gap-1.5">
+                            <i class="fas fa-check-square"></i> Total Mercado
+                        </button>
+                        <button id="btn-toggle-series-patrimoniales" onclick="toggleMensualSeries('patrimoniales')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center gap-1.5">
+                            <i class="fas fa-check-square"></i> Seguros Patrimoniales & ART
+                        </button>
+                        <button id="btn-toggle-series-personas" onclick="toggleMensualSeries('personas')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center gap-1.5">
+                            <i class="fas fa-check-square"></i> Seguros de Personas
+                        </button>
+                    </div>
+
                     <div class="relative w-full h-[320px]">
                         <canvas id="chart-line-mensual-history"></canvas>
                     </div>
                 </div>
 
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col items-center">
-                    <h3 class="text-base font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fas fa-chart-pie text-cyan-400"></i> Distribución del Mes
-                    </h3>
-                    <div class="relative w-full h-[320px]">
+                <!-- Gráfico de Distribución del Mes (Donut) -->
+                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-base font-bold text-white light:text-slate-900 mb-1 flex items-center gap-2">
+                            <i class="fas fa-chart-pie text-cyan-400"></i> Distribución del Mes
+                        </h3>
+                        <p class="text-xs text-slate-400 light:text-slate-600 mb-4">Participación por ramo en el último mes</p>
+                    </div>
+                    <div class="relative w-full h-[280px]">
                         <canvas id="chart-pie-mensual-dist"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-    
-
 
     <div id="indicator-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 999999; display: none; align-items: center; justify-content: center; transition: opacity 0.3s ease-in-out; opacity: 0; pointer-events: none;" onclick="const card = this.querySelector('.glass-card'); if (card && !card.contains(event.target)) closeIndicatorModal()">
         <div class="glass-card bg-darkCard/95 light:bg-white max-w-3xl w-full mx-4 p-6 rounded-3xl border border-darkBorder/40 light:border-gray-200 shadow-2xl relative flex flex-col max-h-[90vh]">
