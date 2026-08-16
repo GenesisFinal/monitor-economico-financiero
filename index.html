@@ -642,11 +642,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
         /* Dynamic Font Theme Classes */
-        body.font-outfit-fit, body {
-            font-family: 'Outfit', sans-serif;
+        body.font-jetbrains-fira, body {
+            font-family: 'JetBrains Mono', monospace !important;
         }
-        body.font-outfit-fit .font-mono, body .font-mono {
+        body.font-jetbrains-fira .font-mono, body .font-mono {
             font-family: 'JetBrains Mono', monospace;
         }
 
@@ -664,9 +665,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             font-family: 'Roboto Mono', monospace !important;
         }
 
-        body.font-jetbrains-fira {
-            font-family: 'Fira Code', monospace !important;
-        }
+        body.font-jetbrains-fira { font-family: 'JetBrains Mono', monospace !important; }
         body.font-jetbrains-fira .font-mono, body.font-jetbrains-fira table th, body.font-jetbrains-fira table td, body.font-jetbrains-fira .live-price-cell {
             font-family: 'JetBrains Mono', monospace !important;
         }
@@ -2434,7 +2433,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
     </style></head>
 
-<body class="dark theme-emerald-green layout-agmd-style bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
+<body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
 
     <!-- Header Global -->
 
@@ -2509,10 +2508,10 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <div class="flex items-center gap-1.5 bg-darkCard/80 light:bg-slate-100 border border-darkBorder/60 light:border-slate-300 rounded-xl px-2.5 py-1.5 shadow-sm">
                         <i class="fas fa-font text-xs text-slate-400 light:text-slate-600"></i>
                         <select id="select-visual-font" onchange="switchVisualFont(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
-                            <option value="outfit-fit" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
+                            <option value="outfit-fit" class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
                             <option value="ibm-plex" class="bg-darkCard text-white light:bg-white light:text-slate-800">IBM Plex</option>
                             <option value="roboto-inter" class="bg-darkCard text-white light:bg-white light:text-slate-800">Roboto</option>
-                            <option value="jetbrains-fira" class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
+                            <option value="jetbrains-fira" selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
                         </select>
                     </div>
 
@@ -42843,11 +42842,11 @@ function switchGlobalTab(tabId) {
 
             const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
 
-            if (!allowed.includes(fontName)) fontName = 'outfit-fit';
+            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
 
             
 
-            document.body.classList.remove('font-outfit-fit', 'font-ibm-plex', 'font-roboto-inter', 'font-jetbrains-fira');
+            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-jetbrains-fira');
 
             document.body.classList.add('font-' + fontName);
 
@@ -45629,7 +45628,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             let savedVisualFont = localStorage.getItem('visualFont');
 
-            if (!allowedFonts.includes(savedVisualFont)) savedVisualFont = 'outfit-fit';
+            if (!allowedFonts.includes(savedVisualFont)) savedVisualFont = 'jetbrains-fira';
 
             switchVisualFont(savedVisualFont);
 
