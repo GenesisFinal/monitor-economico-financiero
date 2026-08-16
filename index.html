@@ -390,7 +390,7 @@ function renderSegPersonasSubtabData(spData) {
                     data: {
                         labels: labelsP,
                         datasets: [
-                            { label: 'Total Mercado', data: spData.personas.map(function(r) { return r.mercado; }), backgroundColor: '#6366f1' },
+                            { label: 'Total Mercado', data: spData.personas.map(function(r) { return r.mercado; }), backgroundColor: '#10b981' },
                             { label: 'L2 Personas', data: spData.personas.map(function(r) { return r.l2; }), backgroundColor: '#f59e0b' }
                         ]
                     },
@@ -419,7 +419,7 @@ function renderSegPersonasSubtabData(spData) {
                     data: {
                         labels: labelsR,
                         datasets: [
-                            { label: 'Exclusivas Retiro', data: spData.retiro.map(function(r) { return r.mercado; }), backgroundColor: '#6366f1' },
+                            { label: 'Exclusivas Retiro', data: spData.retiro.map(function(r) { return r.mercado; }), backgroundColor: '#10b981' },
                             { label: 'L2 Retiro', data: spData.retiro.map(function(r) { return r.l2; }), backgroundColor: '#a855f7' }
                         ]
                     },
@@ -951,9 +951,8 @@ function switchAsegSubtab(subtabId) {
                 btn.classList.add('text-slate-400', 'border-darkBorder');
                 if (icon) {
                     icon.classList.remove('text-white');
-                    if (s === 'seg-personas') icon.classList.add('text-indigo-400');
+                    if (s === 'seg-personas' || s === 'balances') icon.classList.add('text-emerald-400');
                     else if (s === 'lasegunda' || s === 'rankings') icon.classList.add('text-amber-400');
-                    else if (s === 'balances') icon.classList.add('text-emerald-400');
                 }
             }
         }
@@ -35862,7 +35861,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <i class="fas fa-building text-amber-400"></i> La Segunda
                         </button>
                 <button id="btn-aseg-subtab-seg-personas" onclick="switchAsegSubtab('seg-personas')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
-                    <i class="fas fa-user-shield text-indigo-400"></i> Seg. de Personas
+                    <i class="fas fa-user-shield text-emerald-400"></i> Seg. de Personas
                 </button>
             </div>
 
@@ -36521,17 +36520,17 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <!-- SUBTAB VIEW: SEG. DE PERSONAS -->
                     <div id="subtab-view-seg-personas" class="hidden">
                         <!-- Header Banner -->
-                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-indigo-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div>
                                 <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                                    <i class="fas fa-user-shield text-indigo-400"></i> Seguros de Personas y Retiro
+                                    <i class="fas fa-user-shield text-emerald-400"></i> Seguros de Personas y Retiro
                                 </h1>
-                                <p class="text-xs md:text-sm text-slate-400 mt-1">
+                                <p class="text-xs md:text-sm text-slate-400 mt-1 font-medium">
                                     Indicadores de Gestión y Rentabilidad Comparativos (Marzo 2026) &bull; Total Mercado vs. Grupo La Segunda
                                 </p>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center gap-2">
+                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2">
                                     <i class="fas fa-database"></i> Fuente: SSN Anexo I
                                 </span>
                             </div>
@@ -36540,7 +36539,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- SECCIÓN 1: SEGUROS DE PERSONAS -->
                         <div class="mb-10">
                             <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <i class="fas fa-users text-indigo-400"></i> 1. Seguros de Personas (Total Mercado vs. L2 Personas)
+                                <i class="fas fa-users text-emerald-400"></i> 1. Seguros de Personas (Total Mercado vs. L2 Personas)
                             </h2>
                             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div class="lg:col-span-7 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">
@@ -36573,7 +36572,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- SECCIÓN 2: SEGUROS DE RETIRO -->
                         <div class="mb-10">
                             <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <i class="fas fa-piggy-bank text-purple-400"></i> 2. Seguros de Retiro (Exclusivas Retiro Mercado vs. L2 Retiro)
+                                <i class="fas fa-piggy-bank text-emerald-400"></i> 2. Seguros de Retiro (Exclusivas Retiro Mercado vs. L2 Retiro)
                             </h2>
                             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div class="lg:col-span-7 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">
