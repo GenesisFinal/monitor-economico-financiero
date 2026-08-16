@@ -651,7 +651,8 @@ function renderSegRetiroSubtabData(srData) {
                         datasets: [
                             { label: 'P. Ahorro', data: top10C.map(function(r) { return r.ahorro_total; }), backgroundColor: '#10b981' },
                             { label: 'P. Renta', data: top10C.map(function(r) { return r.rentas_total; }), backgroundColor: '#3b82f6' },
-                            { label: 'RVP + ART', data: top10C.map(function(r) { return r.rvp_art; }), backgroundColor: '#f59e0b' }
+                            { label: 'RVP + ART', data: top10C.map(function(r) { return r.rvp_art; }), backgroundColor: '#f59e0b' },
+                            { label: 'Otros', data: top10C.map(function(r) { return r.otros; }), backgroundColor: '#8b5cf6' }
                         ]
                     },
                     options: {
@@ -49176,13 +49177,17 @@ def load_ssn_seg_retiro_data():
         ws1 = wb['1 Res. Mat.']
         compromisos_tecnicos = []
 
-        tot_b = float(ws1.cell(row=8, column=2).value or 0)
         tot_c = float(ws1.cell(row=8, column=3).value or 0)
         tot_f = float(ws1.cell(row=8, column=6).value or 0)
+        tot_rvp_art = float(ws1.cell(row=8, column=9).value or 0) + float(ws1.cell(row=8, column=10).value or 0)
+        tot_otros = float(ws1.cell(row=8, column=13).value or 0)
+
+        # Total Compromisos Técnicos includes Ahorro + Rentas + RVP/ART + Otros
+        tot_b_calc = tot_c + tot_f + tot_rvp_art + tot_otros
 
         tot_compromisos_row = {
             'entidad': 'TOTAL MERCADO',
-            'total': round(tot_b, 2),
+            'total': round(tot_b_calc, 2),
             'total_pct': 100.0,
             'ahorro_total': round(tot_c, 2),
             'ahorro_pct': 100.0,
@@ -49192,8 +49197,8 @@ def load_ssn_seg_retiro_data():
             'rentas_pct': 100.0,
             'rentas_indiv': round(float(ws1.cell(row=8, column=7).value or 0), 2),
             'rentas_colec': round(float(ws1.cell(row=8, column=8).value or 0), 2),
-            'rvp_art': round(float(ws1.cell(row=8, column=9).value or 0) + float(ws1.cell(row=8, column=10).value or 0), 2),
-            'otros': round(float(ws1.cell(row=8, column=13).value or 0), 2)
+            'rvp_art': round(tot_rvp_art, 2),
+            'otros': round(tot_otros, 2)
         }
 
         for r in range(9, 25):
@@ -49201,7 +49206,6 @@ def load_ssn_seg_retiro_data():
             if not entidad or any(kw in entidad.upper() for kw in ['REVOCACION', 'CAMBIO', 'CORRESPONDE', 'NOTA']):
                 continue
 
-            col_b = float(ws1.cell(row=r, column=2).value or 0)
             col_c = float(ws1.cell(row=r, column=3).value or 0)
             col_d = float(ws1.cell(row=r, column=4).value or 0)
             col_e = float(ws1.cell(row=r, column=5).value or 0)
@@ -49213,13 +49217,15 @@ def load_ssn_seg_retiro_data():
             col_m = float(ws1.cell(row=r, column=13).value or 0)
 
             rvp_art = col_i + col_j
-            pct_b = (col_b / tot_b * 100.0) if tot_b else 0.0
+            col_b_calc = col_c + col_f + rvp_art + col_m
+
+            pct_b = (col_b_calc / tot_b_calc * 100.0) if tot_b_calc else 0.0
             pct_c = (col_c / tot_c * 100.0) if tot_c else 0.0
             pct_f = (col_f / tot_f * 100.0) if tot_f else 0.0
 
             compromisos_tecnicos.append({
                 'entidad': entidad,
-                'total': round(col_b, 2),
+                'total': round(col_b_calc, 2),
                 'total_pct': round(pct_b, 2),
                 'ahorro_total': round(col_c, 2),
                 'ahorro_pct': round(pct_c, 2),
