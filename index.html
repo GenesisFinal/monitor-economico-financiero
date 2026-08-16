@@ -517,24 +517,34 @@ function renderMensualSubtabData() {
 }
 window.renderMensualSubtabData = renderMensualSubtabData;
 
+window.activeAsegSubtab = 'primas';
+
 function switchAsegSubtab(subtabId) {
+    var key = subtabId || 'primas';
+    if (key === 'primas-mercado') key = 'primas';
+    if (key === 'evolucion-mensual') key = 'mensual';
+    if (key === 'rankings-produccion') key = 'rankings';
+
+    window.activeAsegSubtab = key;
+
     var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda'];
+
     subtabs.forEach(function(s) {
         var btn = document.getElementById('btn-aseg-subtab-' + s);
         var view = document.getElementById('subtab-view-' + s);
 
         if (btn) {
-            if (s === subtabId) {
-                btn.classList.remove('text-slate-400', 'border-transparent');
-                btn.classList.add('text-white', 'bg-darkBg', 'border-emerald-500/30', 'shadow-lg');
+            if (s === key) {
+                btn.classList.remove('text-slate-400', 'border-transparent', 'border-darkBorder');
+                btn.classList.add('text-white', 'bg-brandBlue', 'border-emerald-500/30', 'shadow-lg');
             } else {
-                btn.classList.remove('text-white', 'bg-darkBg', 'border-emerald-500/30', 'shadow-lg');
-                btn.classList.add('text-slate-400', 'border-transparent');
+                btn.classList.remove('text-white', 'bg-brandBlue', 'border-emerald-500/30', 'shadow-lg');
+                btn.classList.add('text-slate-400', 'border-darkBorder');
             }
         }
 
         if (view) {
-            if (s === subtabId) {
+            if (s === key) {
                 view.classList.remove('hidden');
             } else {
                 view.classList.add('hidden');
@@ -542,9 +552,15 @@ function switchAsegSubtab(subtabId) {
         }
     });
 
-    if (subtabId === 'balances') {
+    if (key === 'primas') {
+        if (typeof renderPrimasSubtabData === 'function') renderPrimasSubtabData();
+    } else if (key === 'mensual') {
+        if (typeof renderMensualSubtabData === 'function') renderMensualSubtabData();
+    } else if (key === 'rankings') {
+        if (typeof renderRankingsSubtabData === 'function') renderRankingsSubtabData();
+    } else if (key === 'balances') {
         if (typeof renderBalancesSubtabData === 'function') renderBalancesSubtabData();
-    } else if (subtabId === 'lasegunda') {
+    } else if (key === 'lasegunda') {
         if (typeof renderLaSegundaSubtabData === 'function') renderLaSegundaSubtabData();
     }
 }
@@ -35601,13 +35617,13 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         <!-- Subtab Navigation Bar -->
         <div class="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-darkBorder/60 pb-3">
             <div class="flex items-center gap-2">
-                <button id="btn-aseg-subtab-primas" onclick="switchAsegSubtab('primas-mercado')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all bg-brandBlue text-white shadow-lg shadow-brandBlue/20 flex items-center gap-2">
+                <button id="btn-aseg-subtab-primas" onclick="switchAsegSubtab('primas')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all bg-brandBlue text-white shadow-lg shadow-brandBlue/20 flex items-center gap-2">
                     <i class="fas fa-chart-line"></i> Primas Acumuladas - Mercado
                 </button>
-                <button id="btn-aseg-subtab-mensual" onclick="switchAsegSubtab('evolucion-mensual')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
+                <button id="btn-aseg-subtab-mensual" onclick="switchAsegSubtab('mensual')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
                     <i class="fas fa-calendar-days"></i> Evolución Mensual
                 </button>
-                <button id="btn-aseg-subtab-rankings" onclick="switchAsegSubtab('rankings-produccion')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
+                <button id="btn-aseg-subtab-rankings" onclick="switchAsegSubtab('rankings')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
                     <i class="fas fa-trophy text-amber-400"></i> Rankings de Producción
                 </button>
                 <button id="btn-aseg-subtab-balances" onclick="switchAsegSubtab('balances')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
@@ -40568,6 +40584,10 @@ function switchGlobalTab(tabId) {
                 if (containerAsegurador) containerAsegurador.classList.remove('hidden');
 
                 if (btnAsegurador) btnAsegurador.className = activeClass;
+
+                var curSub = window.activeAsegSubtab || 'primas';
+
+                if (typeof switchAsegSubtab === 'function') switchAsegSubtab(curSub);
 
             } else if (tabId === 'fuentes') {
 
