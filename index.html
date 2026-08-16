@@ -565,15 +565,17 @@ function renderRankingsSubtabData() {
             var rShare = (r.share !== undefined) ? r.share : 0;
             var rRank = r.rank || 0;
 
-            var isLaSegundaExtra = r.is_la_segunda_extra;
+            var upperName = (rName || '').toUpperCase();
+            var isLaSegunda = (upperName.indexOf('SEGUNDA') !== -1);
 
-            var rowClass = isLaSegundaExtra ? 'bg-amber-500/10 border-amber-500/30 font-semibold text-amber-200' : (rRank <= 3 ? 'font-bold bg-slate-800/50 text-white' : 'hover:bg-slate-800/20 text-slate-300');
+            var rowClass = isLaSegunda ? 'bg-amber-500/20 border-l-4 border-l-amber-400 border-b border-amber-500/30 font-bold text-amber-200' :
+                           (rRank <= 3 ? 'font-bold bg-slate-800/50 text-white' : 'hover:bg-slate-800/20 text-slate-300');
             
             var rankBadge = (rRank === 1) ? '<span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 font-bold">1º</span>' :
                             (rRank === 2) ? '<span class="px-2 py-0.5 rounded-full bg-slate-400/20 text-slate-300 font-bold">2º</span>' :
                             (rRank === 3) ? '<span class="px-2 py-0.5 rounded-full bg-amber-700/20 text-amber-500 font-bold">3º</span>' : rRank + 'º';
 
-            var extraTag = isLaSegundaExtra ? ' <span class="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30">Grupo La Segunda</span>' : '';
+            var extraTag = isLaSegunda ? ' <span class="ml-2 text-[10px] px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold shadow-sm"><i class="fas fa-star text-amber-400 mr-1"></i>Grupo La Segunda</span>' : '';
 
             html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
             html += '<td class="py-3 px-4 text-center font-mono">' + rankBadge + '</td>';
