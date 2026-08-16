@@ -973,22 +973,34 @@ function switchAsegSubtab(subtabId) {
     if (key === 'primas-mercado') key = 'primas';
     if (key === 'evolucion-mensual') key = 'mensual';
     if (key === 'rankings-produccion') key = 'rankings';
+    if (key === 'seg-personas' || key === 'personas') key = 'seg-personas';
 
     window.activeAsegSubtab = key;
 
-    var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda'];
+    var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda', 'seg-personas'];
 
     subtabs.forEach(function(s) {
         var btn = document.getElementById('btn-aseg-subtab-' + s);
         var view = document.getElementById('subtab-view-' + s);
 
         if (btn) {
+            var icon = btn.querySelector('i');
             if (s === key) {
                 btn.classList.remove('text-slate-400', 'border-transparent', 'border-darkBorder');
                 btn.classList.add('text-white', 'bg-brandBlue', 'border-emerald-500/30', 'shadow-lg');
+                if (icon) {
+                    icon.classList.remove('text-indigo-400', 'text-amber-400', 'text-emerald-400');
+                    icon.classList.add('text-white');
+                }
             } else {
                 btn.classList.remove('text-white', 'bg-brandBlue', 'border-emerald-500/30', 'shadow-lg');
                 btn.classList.add('text-slate-400', 'border-darkBorder');
+                if (icon) {
+                    icon.classList.remove('text-white');
+                    if (s === 'seg-personas') icon.classList.add('text-indigo-400');
+                    else if (s === 'lasegunda' || s === 'rankings') icon.classList.add('text-amber-400');
+                    else if (s === 'balances') icon.classList.add('text-emerald-400');
+                }
             }
         }
 
@@ -1011,6 +1023,8 @@ function switchAsegSubtab(subtabId) {
         if (typeof renderBalancesSubtabData === 'function') renderBalancesSubtabData();
     } else if (key === 'lasegunda') {
         if (typeof renderLaSegundaSubtabData === 'function') renderLaSegundaSubtabData();
+    } else if (key === 'seg-personas') {
+        if (typeof renderSegPersonasSubtabData === 'function') renderSegPersonasSubtabData();
     }
 }
 window.switchAsegSubtab = switchAsegSubtab;
