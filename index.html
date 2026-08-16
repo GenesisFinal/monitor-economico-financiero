@@ -34752,7 +34752,7 @@ window.switchAsegSubtab = switchAsegSubtab;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-cyan-500/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros Patrimoniales & ART</span>
-                        <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400"><i class="fas fa-car-shield"></i></span>
+                        <span class="p-2.5 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20"><i class="fas fa-building-shield text-lg"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-patrimoniales-val">ARS 16.815.480,34 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
@@ -34821,7 +34821,7 @@ window.switchAsegSubtab = switchAsegSubtab;
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="text-lg font-bold text-white light:text-slate-900 flex items-center gap-2">
-                                <i class="fas fa-car-shield text-cyan-400"></i> Seguros Patrimoniales & ART &bull; Primas Acumuladas
+                                <i class="fas fa-building-shield text-cyan-400"></i> Seguros Patrimoniales & ART &bull; Primas Acumuladas
                             </h3>
                             <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Comparación acumulada 9 meses: Mar 2026 vs Mar 2025</p>
                         </div>
@@ -34857,24 +34857,28 @@ window.switchAsegSubtab = switchAsegSubtab;
 
             <!-- 4. TABLA TOTAL MERCADO Y GRÁFICO EVOLUCIÓN TRIMESTRAL (5 TRIMESTRES) -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl">
+                <!-- Tabla Consolidado Total Mercado (Ancha: lg:col-span-2) -->
+                <div class="lg:col-span-2 glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl">
                     <div class="flex items-center justify-between mb-4">
                         <div>
-                            <h3 class="text-base font-bold text-white light:text-slate-900 flex items-center gap-2">
-                                <i class="fas fa-vault text-brandBlue"></i> Consolidado Total Mercado
+                            <h3 class="text-lg font-bold text-white light:text-slate-900 flex items-center gap-2">
+                                <i class="fas fa-building-columns text-brandBlue"></i> Consolidado Total Mercado &bull; Primas Acumuladas
                             </h3>
-                            <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Resumen por grandes agrupamientos</p>
+                            <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Resumen comparativo por grandes agrupamientos del mercado</p>
                         </div>
+                        <span class="text-xs font-bold text-brandBlue bg-brandBlue/10 px-3 py-1 rounded-lg border border-brandBlue/20">Consolidado</span>
                     </div>
 
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs text-slate-300 light:text-slate-700">
+                        <table class="w-full text-left text-sm text-slate-300 light:text-slate-700">
                             <thead class="bg-darkBg/60 text-xs font-bold uppercase tracking-wider text-slate-400 border-b border-darkBorder">
                                 <tr>
-                                    <th class="py-2.5 px-3">Categoría</th>
-                                    <th class="py-2.5 px-3 text-right">Mar 2026 (M)</th>
-                                    <th class="py-2.5 px-3 text-right">Var. Nom</th>
-                                    <th class="py-2.5 px-3 text-right">Var. Real</th>
+                                    <th class="py-3 px-4">Categoría / Agrupamiento</th>
+                                    <th class="py-3 px-4 text-right">Marzo 2026 (ARS M)</th>
+                                    <th class="py-3 px-4 text-right">Marzo 2025 (ARS M)</th>
+                                    <th class="py-3 px-4 text-right">Var. Nominal (%)</th>
+                                    <th class="py-3 px-4 text-right">Var. Real (%)</th>
+                                    <th class="py-3 px-4 text-right">Cuota (%)</th>
                                 </tr>
                             </thead>
                             <tbody id="tbl-body-total-mercado" class="divide-y divide-darkBorder/20"></tbody>
@@ -34882,15 +34886,15 @@ window.switchAsegSubtab = switchAsegSubtab;
                     </div>
                 </div>
 
-                <div class="lg:col-span-2 glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl">
+                <!-- Gráfico Evolución Trimestral (Achicado: lg:col-span-1) -->
+                <div class="lg:col-span-1 glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl flex flex-col justify-between">
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="text-base font-bold text-white light:text-slate-900 flex items-center gap-2">
-                                <i class="fas fa-chart-area text-brandBlue"></i> Evolución Trimestral Acumulada (Últimos 5 Trimestres)
+                                <i class="fas fa-chart-area text-brandBlue"></i> Evolución Trimestral (5 Trimestres)
                             </h3>
-                            <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Primas emitidas netas en pesos corrientes (Marzo 2025 a Marzo 2026)</p>
+                            <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Primas netas en pesos corrientes</p>
                         </div>
-                        <span class="text-xs font-bold text-brandBlue bg-brandBlue/10 px-3 py-1 rounded-lg border border-brandBlue/20">5 Trimestres</span>
                     </div>
 
                     <div class="relative w-full h-[280px]">
