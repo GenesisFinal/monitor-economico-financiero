@@ -328,11 +328,15 @@ var spChartRetiro = null;
 
 function renderSegPersonasSubtabData(spData) {
     if (!spData) {
-        if (window.masterDataset && window.masterDataset.ssn_seg_personas) {
-            spData = window.masterDataset.ssn_seg_personas;
-        } else {
-            return;
-        }
+        var rootObj = (typeof appData !== 'undefined' && appData) ? appData : 
+                      (window.appData ? window.appData : 
+                      (window.finalData ? window.finalData : {}));
+        spData = rootObj.ssn_seg_personas || (rootObj.final_data ? rootObj.final_data.ssn_seg_personas : undefined) || (window.masterDataset && window.masterDataset.final_data ? window.masterDataset.final_data.ssn_seg_personas : undefined);
+    }
+
+    if (!spData || (!spData.personas && !spData.retiro)) {
+        console.warn("[SEG PERSONAS] Data not found in appData or finalData");
+        return;
     }
 
     var personasBody = document.getElementById('tbl-sp-personas-body');
@@ -923,11 +927,10 @@ function switchAsegSubtab(subtabId) {
     if (key === 'primas-mercado') key = 'primas';
     if (key === 'evolucion-mensual') key = 'mensual';
     if (key === 'rankings-produccion') key = 'rankings';
-    if (key === 'seg-personas' || key === 'personas') key = 'seg-personas';
 
     window.activeAsegSubtab = key;
 
-    var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda', 'seg-personas'];
+    var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda'];
 
     subtabs.forEach(function(s) {
         var btn = document.getElementById('btn-aseg-subtab-' + s);
