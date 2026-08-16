@@ -211,7 +211,7 @@ function renderMensualSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_produccion_mensual || {}) : {};
     var currKey = (typeof currentMensualCurrency !== 'undefined') ? currentMensualCurrency : (window.currentMensualCurrency || 'corriente');
     var currObj = ssnObj[currKey] || {};
-    var cards = currObj.summary_cards || [];
+    var cards = currObj.metrics || currObj.summary_cards || [];
     var history = currObj.history || [];
 
     var fmtM = function(val) {
@@ -225,23 +225,111 @@ function renderMensualSubtabData() {
         return prefix + val.toFixed(2).replace('.', ',') + '%';
     };
 
+    var totCard = cards.find(function(x) { return x.key === 'total_mercado'; });
+    var patCard = cards.find(function(x) { return x.key === 'total_patrimoniales'; });
+    var perCard = cards.find(function(x) { return x.key === 'total_personas'; });
+
+    // 1. Top 3 KPI Cards for Subtab 2
+    if (totCard) {
+        var vAct = (totCard.latest_val !== undefined) ? totCard.latest_val : (totCard.actual_val || 0);
+        var vMom = (totCard.mom_pct !== undefined) ? totCard.mom_pct : (totCard.var_mom || 0);
+        var vIa = (totCard.yoy_pct !== undefined) ? totCard.yoy_pct : (totCard.var_ia || 0);
+        var vAcumPct = (totCard.accum_pct !== undefined) ? totCard.accum_pct : (totCard.var_acum_ejercicio || 0);
+
+        if (document.getElementById('kpi-mensual-total-val')) document.getElementById('kpi-mensual-total-val').textContent = 'ARS ' + fmtM(vAct) + ' M';
+        if (document.getElementById('kpi-mensual-total-mom')) document.getElementById('kpi-mensual-total-mom').innerHTML = '<i class="fas fa-arrow-trend-up mr-1"></i>' + fmtPct(vMom) + ' m/m';
+        if (document.getElementById('kpi-mensual-total-yoy')) document.getElementById('kpi-mensual-total-yoy').textContent = fmtPct(vIa) + ' i.a.';
+        if (document.getElementById('kpi-mensual-total-accum')) document.getElementById('kpi-mensual-total-accum').textContent = fmtPct(vAcumPct) + ' Acum. Ejercicio';
+    }
+
+    if (patCard) {
+        var vAct = (patCard.latest_val !== undefined) ? patCard.latest_val : (patCard.actual_val || 0);
+        var vMom = (patCard.mom_pct !== undefined) ? patCard.mom_pct : (patCard.var_mom || 0);
+        var vIa = (patCard.yoy_pct !== undefined) ? patCard.yoy_pct : (patCard.var_ia || 0);
+        var vAcumPct = (patCard.accum_pct !== undefined) ? patCard.accum_pct : (patCard.var_acum_ejercicio || 0);
+
+        if (document.getElementById('kpi-mensual-patrimoniales-val')) document.getElementById('kpi-mensual-patrimoniales-val').textContent = 'ARS ' + fmtM(vAct) + ' M';
+        if (document.getElementById('kpi-mensual-patrim-mom')) document.getElementById('kpi-mensual-patrim-mom').textContent = fmtPct(vMom) + ' m/m';
+        if (document.getElementById('kpi-mensual-patrim-yoy')) document.getElementById('kpi-mensual-patrim-yoy').textContent = fmtPct(vIa) + ' i.a.';
+        if (document.getElementById('kpi-mensual-patrim-accum')) document.getElementById('kpi-mensual-patrim-accum').textContent = fmtPct(vAcumPct) + ' Acum. Ejercicio';
+    }
+
+    if (perCard) {
+        var vAct = (perCard.latest_val !== undefined) ? perCard.latest_val : (perCard.actual_val || 0);
+        var vMom = (perCard.mom_pct !== undefined) ? perCard.mom_pct : (perCard.var_mom || 0);
+        var vIa = (perCard.yoy_pct !== undefined) ? perCard.yoy_pct : (perCard.var_ia || 0);
+        var vAcumPct = (perCard.accum_pct !== undefined) ? perCard.accum_pct : (perCard.var_acum_ejercicio || 0);
+
+        if (document.getElementById('kpi-mensual-personas-val')) document.getElementById('kpi-mensual-personas-val').textContent = 'ARS ' + fmtM(vAct) + ' M';
+        if (document.getElementById('kpi-mensual-personas-mom')) document.getElementById('kpi-mensual-personas-mom').textContent = fmtPct(vMom) + ' m/m';
+        if (document.getElementById('kpi-mensual-personas-yoy')) document.getElementById('kpi-mensual-personas-yoy').textContent = fmtPct(vIa) + ' i.a.';
+        if (document.getElementById('kpi-mensual-personas-accum')) document.getElementById('kpi-mensual-personas-accum').textContent = fmtPct(vAcumPct) + ' Acum. Ejercicio';
+    }
+
+    // 2. Populate Grid 10 Cards
     var grid = document.getElementById('grid-mensual-cards');
     if (grid) {
         var gridHtml = '';
         cards.forEach(function(c) {
+            var cName = c.label || c.name || c.key;
+            var vAct = (c.latest_val !== undefined) ? c.latest_val : (c.actual_val || 0);
+            var vMom = (c.mom_pct !== undefined) ? c.mom_pct : (c.var_mom || 0);
+            var vIa = (c.yoy_pct !== undefined) ? c.yoy_pct : (c.var_ia || 0);
+            var vAcumPct = (c.accum_pct !== undefined) ? c.accum_pct : (c.var_acum_ejercicio || 0);
+
             gridHtml += '<div class="glass-card bg-darkCard/60 border border-darkBorder p-4 rounded-2xl space-y-2 hover:border-brandBlue/30 transition-all">';
-            gridHtml += '<div class="flex justify-between items-center text-xs text-slate-400 font-medium"><span>' + c.name + '</span>';
+            gridHtml += '<div class="flex justify-between items-center text-xs text-slate-400 font-medium"><span>' + cName + '</span>';
             gridHtml += '<span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">Últ. Mes</span></div>';
-            gridHtml += '<div class="text-xl font-bold text-white font-mono">$' + fmtM(c.actual_val) + ' M</div>';
+            gridHtml += '<div class="text-xl font-bold text-white font-mono">$' + fmtM(vAct) + ' M</div>';
             gridHtml += '<div class="grid grid-cols-3 gap-1 pt-2 border-t border-darkBorder/40 text-[11px] font-mono">';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">MoM</span><span class="' + (c.var_mom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(c.var_mom) + '</span></div>';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">i.a.</span><span class="' + (c.var_ia >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(c.var_ia) + '</span></div>';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">Ej. Acum</span><span class="' + (c.var_acum_ejercicio >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(c.var_acum_ejercicio) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">MoM</span><span class="' + (vMom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vMom) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">i.a.</span><span class="' + (vIa >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vIa) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">Ej. Acum</span><span class="' + (vAcumPct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</span></div>';
             gridHtml += '</div></div>';
         });
         grid.innerHTML = gridHtml;
     }
 
+    // 3. Populate Tables for Subtab 2
+    var populateMensualTable = function(tableId, items) {
+        var tbody = document.getElementById(tableId);
+        if (!tbody) return;
+        var html = '';
+        items.forEach(function(c) {
+            var isTotal = c.is_total || c.key.indexOf('total') !== -1;
+            var rowClass = isTotal ? 'font-bold bg-slate-800/40 text-white' : 'hover:bg-slate-800/20 text-slate-300';
+            var cName = c.label || c.name || c.key;
+            var nameCol = isTotal ? '<span class="font-bold text-white">' + cName + '</span>' : cName;
+            
+            var vAct = (c.latest_val !== undefined) ? c.latest_val : (c.actual_val || 0);
+            var vMom = (c.mom_pct !== undefined) ? c.mom_pct : (c.var_mom || 0);
+            var vIa = (c.yoy_pct !== undefined) ? c.yoy_pct : (c.var_ia || 0);
+            var vAcumVal = c.accum_val || 0;
+            var vAcumPct = (c.accum_pct !== undefined) ? c.accum_pct : (c.var_acum_ejercicio || 0);
+
+            html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
+            html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAct) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vMom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vMom) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vIa >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vIa) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAcumVal) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vAcumPct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
+            html += '</tr>';
+        });
+        tbody.innerHTML = html;
+    };
+
+    var patCards = cards.filter(function(x) { 
+        return x.type === 'patrimoniales' || x.type === 'patrimoniales_total' || x.key.indexOf('patrim') !== -1 || x.key === 'automotores' || x.key === 'riesgos_trabajo' || x.key === 'resto_patrimoniales';
+    });
+    var perCards = cards.filter(function(x) { 
+        return x.type === 'personas' || x.type === 'personas_total' || x.key.indexOf('personas') !== -1 || x.key === 'vida_individual' || x.key === 'vida_colectivo' || x.key === 'retiro' || x.key === 'otros_personas';
+    });
+
+    populateMensualTable('tbl-body-mensual-patrimoniales', patCards);
+    populateMensualTable('tbl-body-mensual-personas', perCards);
+
+    // 4. Render Monthly Historical Line Chart
     if (typeof Chart !== 'undefined' && document.getElementById('chart-line-mensual-history')) {
         var canvas = document.getElementById('chart-line-mensual-history');
         if (window.mensualLineChart) window.mensualLineChart.destroy();
