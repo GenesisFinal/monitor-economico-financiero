@@ -43840,38 +43840,38 @@ function switchGlobalTab(tabId) {
                             
 
                             const getMAVal = (val, idx) => {
-                                const yVal = (val === null || val === undefined) ? null : ((isBase100 && baseVal) ? roundToDecimals((val / baseVal) * 100, 2) : val);
-                                return { x: commonLabels[idx], y: yVal };
+                                if (val === null || val === undefined) return null;
+                                return (isBase100 && baseVal) ? roundToDecimals((val / baseVal) * 100, 2) : roundToDecimals(val, 2);
                             };
 
-                            
+                            const findRawIndex = (d) => {
+                                let idx = rawDates.indexOf(d);
+                                if (idx !== -1) return idx;
+                                for (let k = rawDates.length - 1; k >= 0; k--) {
+                                    if (rawDates[k] <= d) return k;
+                                }
+                                return -1;
+                            };
 
                             let lastValid20 = null;
-
                             const alignedMA20 = mas.ma20 ? commonLabels.map((d, idx) => {
-                                const i = rawDates.indexOf(d);
+                                const i = findRawIndex(d);
                                 let rawMAVal = (i !== -1 && fullMA20[i] !== null && fullMA20[i] !== undefined) ? fullMA20[i] : lastValid20;
                                 if (i !== -1 && fullMA20[i] !== null && fullMA20[i] !== undefined) { lastValid20 = fullMA20[i]; }
                                 return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal, idx) : null;
                             }) : null;
 
-                            
-
                             let lastValid50 = null;
-
                             const alignedMA50 = mas.ma50 ? commonLabels.map((d, idx) => {
-                                const i = rawDates.indexOf(d);
+                                const i = findRawIndex(d);
                                 let rawMAVal = (i !== -1 && fullMA50[i] !== null && fullMA50[i] !== undefined) ? fullMA50[i] : lastValid50;
                                 if (i !== -1 && fullMA50[i] !== null && fullMA50[i] !== undefined) { lastValid50 = fullMA50[i]; }
                                 return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal, idx) : null;
                             }) : null;
 
-                            
-
                             let lastValid200 = null;
-
                             const alignedMA200 = mas.ma200 ? commonLabels.map((d, idx) => {
-                                const i = rawDates.indexOf(d);
+                                const i = findRawIndex(d);
                                 let rawMAVal = (i !== -1 && fullMA200[i] !== null && fullMA200[i] !== undefined) ? fullMA200[i] : lastValid200;
                                 if (i !== -1 && fullMA200[i] !== null && fullMA200[i] !== undefined) { lastValid200 = fullMA200[i]; }
                                 return (rawMAVal !== null && rawMAVal !== undefined) ? getMAVal(rawMAVal, idx) : null;
