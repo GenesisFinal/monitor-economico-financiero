@@ -255,6 +255,36 @@ function toggleMensualSeries(sKey) {
 }
 window.toggleMensualSeries = toggleMensualSeries;
 
+
+window.currentMensualCurrency = 'corriente';
+
+function toggleMensualCurrency(mode) {
+    if (mode !== 'corriente' && mode !== 'constante') mode = 'corriente';
+    window.currentMensualCurrency = mode;
+
+    var btnCorr = document.getElementById('btn-mensual-corriente');
+    var btnConst = document.getElementById('btn-mensual-constante');
+
+    if (mode === 'constante') {
+        if (btnCorr) btnCorr.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
+        if (btnConst) btnConst.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
+    } else {
+        if (btnCorr) btnCorr.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
+        if (btnConst) btnConst.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
+    }
+
+    var badgeSubtitle = document.getElementById('badge-mensual-subtitle-mode');
+    if (badgeSubtitle) {
+        badgeSubtitle.textContent = (mode === 'constante') ? 'Valores Constantes (Ajustados por IPC)' : 'Valores Corrientes (Nominales)';
+    }
+
+    if (typeof renderMensualSubtabData === 'function') {
+        renderMensualSubtabData();
+    }
+}
+window.toggleMensualCurrency = toggleMensualCurrency;
+
+
 function renderMensualSubtabData() {
     var ssnObj = window.appData ? (window.appData.ssn_produccion_mensual || {}) : {};
     var currKey = (typeof currentMensualCurrency !== 'undefined') ? currentMensualCurrency : (window.currentMensualCurrency || 'corriente');
@@ -496,10 +526,17 @@ function switchAsegSubtab(subtabId) {
     var btnMensual = document.getElementById('btn-aseg-subtab-mensual');
     var btnRankings = document.getElementById('btn-aseg-subtab-rankings');
 
+    var ctrlMensual = document.getElementById('subtab-mensual-controls');
+
     if (subtabId === 'rankings-produccion') {
         if (viewPrimas) viewPrimas.classList.add('hidden');
         if (viewMensual) viewMensual.classList.add('hidden');
         if (viewRankings) viewRankings.classList.remove('hidden');
+
+        if (ctrlMensual) {
+            ctrlMensual.classList.add('hidden');
+            ctrlMensual.classList.remove('flex');
+        }
 
         if (btnPrimas) btnPrimas.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
         if (btnMensual) btnMensual.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
@@ -511,6 +548,11 @@ function switchAsegSubtab(subtabId) {
         if (viewRankings) viewRankings.classList.add('hidden');
         if (viewMensual) viewMensual.classList.remove('hidden');
 
+        if (ctrlMensual) {
+            ctrlMensual.classList.remove('hidden');
+            ctrlMensual.classList.add('flex');
+        }
+
         if (btnPrimas) btnPrimas.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
         if (btnRankings) btnRankings.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
         if (btnMensual) btnMensual.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all bg-brandBlue text-white shadow-lg shadow-brandBlue/20 flex items-center gap-2";
@@ -520,6 +562,11 @@ function switchAsegSubtab(subtabId) {
         if (viewMensual) viewMensual.classList.add('hidden');
         if (viewRankings) viewRankings.classList.add('hidden');
         if (viewPrimas) viewPrimas.classList.remove('hidden');
+
+        if (ctrlMensual) {
+            ctrlMensual.classList.add('hidden');
+            ctrlMensual.classList.remove('flex');
+        }
 
         if (btnMensual) btnMensual.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
         if (btnRankings) btnRankings.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
