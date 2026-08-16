@@ -3417,6 +3417,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
                     </button>
+                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                        <i class="fas fa-database text-brandBlue"></i> Fuentes
+                    </button>
 
                     
 
@@ -36949,6 +36952,354 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         </div>
                     </div>
             </div>
+
+        <!-- SECCIÓN GLOBAL: FUENTES DE INFORMACIÓN Y DATOS -->
+        <div id="container-fuentes" class="hidden font-sans p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+            <!-- Header Banner -->
+            <div class="glass-card bg-darkCard/90 p-6 md:p-8 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
+                        <i class="fas fa-database text-emerald-400"></i> Fuentes de Información y Datos
+                    </h1>
+                    <p class="text-xs md:text-sm text-slate-400 mt-2 font-medium max-w-3xl leading-relaxed">
+                        Catálogo oficial de organismos públicos, entidades reguladoras, mercados bursátiles y proveedores de información estadística que alimentan el Monitor Económico Financiero.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2 shadow-sm">
+                        <i class="fas fa-shield-check"></i> 8 Fuentes Oficiales
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center gap-2 shadow-sm">
+                        <i class="fas fa-sync-alt"></i> Datos Sincronizados
+                    </span>
+                </div>
+            </div>
+
+            <!-- Grid de Tarjetas de Fuentes -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Card 1: SSN -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-emerald-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-shield-halved"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                Mercado Asegurador
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                            Superintendencia de Seguros de la Nación (SSN)
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Organismo público de control de la actividad aseguradora y reaseguradora en la República Argentina.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Primas Emitidas y Balances
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Seguros de Personas y Retiro
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Reservas Matemáticas e Indicadores
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Trimestral / Mensual</span>
+                        </div>
+                        <a href="https://www.argentina.gob.ar/superintendencia-de-seguros" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: BCRA -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-blue-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-building-columns"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                Política Monetaria
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-blue-400 transition-colors mb-2">
+                            Banco Central de la República Argentina (BCRA)
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Autoridad monetaria responsable del sistema financiero, política cambiaria y regulación bancaria.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-blue-400 text-xs"></i> Base Monetaria y Reservas
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-blue-400 text-xs"></i> Tasas Leliq, BOPREAL y BADLAR
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-blue-400 text-xs"></i> REM y Tipo de Cambio Oficial
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Diaria / Mensual</span>
+                        </div>
+                        <a href="https://www.bcra.gob.ar/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-blue-400 hover:bg-blue-500/20 border border-blue-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: INDEC -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-amber-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                Estadística Nacional
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors mb-2">
+                            Instituto Nacional de Estadística y Censos (INDEC)
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Organismo público que coordina las estadísticas sociales, económicas y demográficas oficiales de la Nación.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-amber-400 text-xs"></i> Índice de Precios al Consumidor (IPC)
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-amber-400 text-xs"></i> EMAE y Producto Interno Bruto
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-amber-400 text-xs"></i> Índice de Salarios e Interanuales
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Mensual / Trimestral</span>
+                        </div>
+                        <a href="https://www.indec.gob.ar/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-amber-400 hover:bg-amber-500/20 border border-amber-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 4: BYMA -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-purple-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-arrow-trend-up"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-purple-500/10 text-purple-400 border border-purple-500/20">
+                                Mercado Bursátil
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-purple-400 transition-colors mb-2">
+                            Bolsas y Mercados Argentinos (BYMA)
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Entidad bursátil integrada que combina negociación, liquidación y custodia del mercado de capitales argentino.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-purple-400 text-xs"></i> Bonos Soberanos (AL30, GD30)
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-purple-400 text-xs"></i> Acciones del Índice S&P Merval
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-purple-400 text-xs"></i> Obligaciones Negociables y Cedears
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Tiempo Real / Diaria</span>
+                        </div>
+                        <a href="https://www.byma.com.ar/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-purple-400 hover:bg-purple-500/20 border border-purple-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 5: Yahoo Finance API -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-cyan-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                                Global Markets
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">
+                            Yahoo Finance API
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Proveedor internacional de datos bursátiles en vivo para activos financieros e índices globales.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-cyan-400 text-xs"></i> Índices (S&P 500, Nasdaq, Dow)
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-cyan-400 text-xs"></i> ADRs Argentinos (NYSE/NASDAQ)
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-cyan-400 text-xs"></i> Commodities y Divisas Forex
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Tiempo Real / Intradía</span>
+                        </div>
+                        <a href="https://finance.yahoo.com/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-cyan-400 hover:bg-cyan-500/20 border border-cyan-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 6: MAE -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-emerald-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-money-bill-transfer"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                                Mercado Interbancario
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                            Mercado Abierto Electrónico (MAE)
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Mercado electrónico de títulos públicos, instrumentos de tasa fija y pases en la República Argentina.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Precios de Referencia Bonos
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Operaciones Cambiarias Mayoristas
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Pases Pasivos y Activos
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Diaria</span>
+                        </div>
+                        <a href="https://www.mae.com.ar/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 7: Ministerio de Economía -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-amber-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-landmark text-xl"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">
+                                Finanzas Públicas
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-amber-400 transition-colors mb-2">
+                            Ministerio de Economía de la Nación
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Órgano ejecutor de la política fiscal y de la Secretaría de Finanzas de la República Argentina.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-amber-400 text-xs"></i> Licitaciones Lecaps y Boncer
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-amber-400 text-xs"></i> Perfil de Deuda Pública Soberana
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-amber-400 text-xs"></i> Resultados del Cierre Fiscal
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Periódica / Licitaciones</span>
+                        </div>
+                        <a href="https://www.argentina.gob.ar/economia" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-amber-400 hover:bg-amber-500/20 border border-amber-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 8: Ámbito / Rava -->
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-blue-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                    <div>
+                        <div class="flex items-center justify-between gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                                <i class="fas fa-coins text-xl"></i>
+                            </div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                                Dólar Financiero
+                            </span>
+                        </div>
+                        <h3 class="text-base font-bold text-white group-hover:text-blue-400 transition-colors mb-2">
+                            Ámbito Financiero / Rava Bursátil
+                        </h3>
+                        <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                            Portales financieros de seguimiento continuo de cotizaciones cambiarias e indicadores implícitos del mercado.
+                        </p>
+                        <div class="space-y-2 mb-6">
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-blue-400 text-xs"></i> Dólar MEP (Bolsa)
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-blue-400 text-xs"></i> Dólar Contado con Liqui (CCL)
+                            </div>
+                            <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+                                <i class="fas fa-check-circle text-blue-400 text-xs"></i> Dólar Blue e Implícitos
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-darkBorder/50 flex items-center justify-between text-[11px] text-slate-400 mb-4 font-medium">
+                            <span>Frecuencia:</span>
+                            <span class="text-slate-200 font-bold">Tiempo Real / Diaria</span>
+                        </div>
+                        <a href="https://www.ambito.com/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-blue-400 hover:bg-blue-500/20 border border-blue-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                            <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 </div>
 
     <div id="indicator-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 999999; display: none; align-items: center; justify-content: center; transition: opacity 0.3s ease-in-out; opacity: 0; pointer-events: none;" onclick="const card = this.querySelector('.glass-card'); if (card && !card.contains(event.target)) closeIndicatorModal()">
