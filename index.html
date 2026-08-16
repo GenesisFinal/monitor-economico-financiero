@@ -15434,113 +15434,67 @@ window.renderAsegPieCharts = renderAsegPieCharts;
 
 
 function switchGlobalTab(tabId) {
-
-            localStorage.setItem('activeGlobalTab', tabId);
+            try {
+                localStorage.setItem('activeGlobalTab', tabId);
+            } catch(e) {}
 
             const btnValores = document.getElementById('btn-global-valores');
-
             const btnIndicadores = document.getElementById('btn-global-indicadores');
-
             const btnAsegurador = document.getElementById('btn-global-asegurador');
-
             const btnFuentes = document.getElementById('btn-global-fuentes');
 
             const containerValores = document.getElementById('container-valores-financieros');
-
             const containerIndicadores = document.getElementById('container-indicadores-economicos');
-
             const containerAsegurador = document.getElementById('container-mercado-asegurador');
-
             const containerFuentes = document.getElementById('container-fuentes');
 
             const body = document.body;
+            const isDark = body ? body.classList.contains('dark') : true;
 
-            const isDark = body.classList.contains('dark');
-
-            
-
-            // Hide all global containers
-
-            containerValores.classList.add('hidden');
-
-            containerIndicadores.classList.add('hidden');
-
+            if (containerValores) containerValores.classList.add('hidden');
+            if (containerIndicadores) containerIndicadores.classList.add('hidden');
             if (containerAsegurador) containerAsegurador.classList.add('hidden');
-
             if (containerFuentes) containerFuentes.classList.add('hidden');
 
-            
-
-            // Reset button classes to inactive
-
             const inactiveClass = isDark 
-
                 ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white" 
-
                 : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900";
 
-            
-
-            btnValores.className = inactiveClass;
-
-            btnIndicadores.className = inactiveClass;
-
+            if (btnValores) btnValores.className = inactiveClass;
+            if (btnIndicadores) btnIndicadores.className = inactiveClass;
             if (btnAsegurador) btnAsegurador.className = inactiveClass;
-
             if (btnFuentes) btnFuentes.className = inactiveClass;
 
-            
-
-            const activeClass = isDark ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20" : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
-
-            
+            const activeClass = isDark 
+                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20" 
+                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
 
             if (tabId === 'valores-financieros') {
-
-                containerValores.classList.remove('hidden');
-
-                btnValores.className = activeClass;
-
-                renderChart(activeTab);
-
+                if (containerValores) containerValores.classList.remove('hidden');
+                if (btnValores) btnValores.className = activeClass;
+                if (typeof renderChart === 'function' && typeof activeTab !== 'undefined') renderChart(activeTab);
             } else if (tabId === 'indicadores-economicos') {
-
-                containerIndicadores.classList.remove('hidden');
-
-                btnIndicadores.className = activeClass;
-
+                if (containerIndicadores) containerIndicadores.classList.remove('hidden');
+                if (btnIndicadores) btnIndicadores.className = activeClass;
             } else if (tabId === 'mercado-asegurador' || tabId === 'asegurador') {
                 if (containerAsegurador) containerAsegurador.classList.remove('hidden');
                 if (btnAsegurador) btnAsegurador.className = activeClass;
                 if (typeof renderAseguradorData === 'function') renderAseguradorData();
             } else if (tabId === 'fuentes') {
-
                 if (containerFuentes) containerFuentes.classList.remove('hidden');
-
                 if (btnFuentes) btnFuentes.className = activeClass;
-
             }
-
-            
 
             if (tabId === 'valores-financieros' && !document.querySelector('.tab-btn.active:not(.econ-tab-btn):not(.aseg-tab-btn)')) {
-
-                switchTab('exchange');
-
+                if (typeof switchTab === 'function') switchTab('exchange');
             } else if (tabId === 'indicadores-economicos' && !document.querySelector('.econ-tab-btn.active')) {
-
-                switchEconTab('econ-tab-precios-y-costo-de-vida');
-
+                if (typeof switchEconTab === 'function') switchEconTab('econ-tab-precios-y-costo-de-vida');
             } else if (tabId === 'mercado-asegurador') {
-
-                switchAsegTab('aseg-tab-primas');
-
+                if (typeof switchAsegTab === 'function') switchAsegTab('aseg-tab-primas');
             }
-
-
-
         }
 
+        window.switchGlobalTab = switchGlobalTab;
 
 
         function toggleBandsVisibility() {
