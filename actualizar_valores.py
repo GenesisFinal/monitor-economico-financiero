@@ -61,6 +61,11 @@ html_template = """<!DOCTYPE html>
     <meta http-equiv="Expires" content="0">
 
     <title>Monitor Económico Financiero</title>
+    <!-- Favicon / Ícono para Marcadores y Favoritos -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
 
     
 
