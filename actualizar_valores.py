@@ -1423,16 +1423,22 @@ function toggleMensualCurrency(mode) {
     var btnBanCorr = document.getElementById('btn-banner-mensual-corriente');
     var btnBanConst = document.getElementById('btn-banner-mensual-constante');
 
+    var activeTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm";
+    var inactiveTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent";
+
+    var activeBannerClass = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5";
+    var inactiveBannerClass = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5";
+
     if (mode === 'constante') {
-        if (btnCorr) btnCorr.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
-        if (btnConst) btnConst.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
-        if (btnBanCorr) btnBanCorr.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-1.5";
-        if (btnBanConst) btnBanConst.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm flex items-center gap-1.5";
+        if (btnCorr) btnCorr.className = inactiveTopClass;
+        if (btnConst) btnConst.className = activeTopClass;
+        if (btnBanCorr) btnBanCorr.className = inactiveBannerClass;
+        if (btnBanConst) btnBanConst.className = activeBannerClass;
     } else {
-        if (btnCorr) btnCorr.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
-        if (btnConst) btnConst.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
-        if (btnBanCorr) btnBanCorr.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm flex items-center gap-1.5";
-        if (btnBanConst) btnBanConst.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-1.5";
+        if (btnCorr) btnCorr.className = activeTopClass;
+        if (btnConst) btnConst.className = inactiveTopClass;
+        if (btnBanCorr) btnBanCorr.className = activeBannerClass;
+        if (btnBanConst) btnBanConst.className = inactiveBannerClass;
     }
 
     var badgeSubtitle = document.getElementById('badge-mensual-subtitle-mode');
@@ -1708,22 +1714,10 @@ function switchAsegSubtab(subtabId) {
         var view = document.getElementById('subtab-view-' + s);
 
         if (btn) {
-            var icon = btn.querySelector('i');
             if (s === key) {
-                btn.classList.remove('text-slate-400', 'border-transparent', 'border-darkBorder');
-                btn.classList.add('text-white', 'bg-brandBlue', 'border-emerald-500/30', 'shadow-lg');
-                if (icon) {
-                    icon.classList.remove('text-indigo-400', 'text-amber-400', 'text-emerald-400');
-                    icon.classList.add('text-white');
-                }
+                btn.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-lg backdrop-blur-sm flex items-center gap-2";
             } else {
-                btn.classList.remove('text-white', 'bg-brandBlue', 'border-emerald-500/30', 'shadow-lg');
-                btn.classList.add('text-slate-400', 'border-darkBorder');
-                if (icon) {
-                    icon.classList.remove('text-white');
-                    if (s === 'seg-personas' || s === 'seg-retiro' || s === 'balances') icon.classList.add('text-emerald-400');
-                    else if (s === 'lasegunda' || s === 'rankings') icon.classList.add('text-amber-400');
-                }
+                btn.className = "px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2";
             }
         }
 
