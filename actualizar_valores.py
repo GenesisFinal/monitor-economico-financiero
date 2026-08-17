@@ -1420,25 +1420,16 @@ function toggleMensualCurrency(mode) {
 
     var btnCorr = document.getElementById('btn-mensual-corriente');
     var btnConst = document.getElementById('btn-mensual-constante');
-    var btnBanCorr = document.getElementById('btn-banner-mensual-corriente');
-    var btnBanConst = document.getElementById('btn-banner-mensual-constante');
 
-    var activeTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm";
-    var inactiveTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent";
-
-    var activeBannerClass = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5";
-    var inactiveBannerClass = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5";
+    var activeTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5";
+    var inactiveTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5";
 
     if (mode === 'constante') {
         if (btnCorr) btnCorr.className = inactiveTopClass;
         if (btnConst) btnConst.className = activeTopClass;
-        if (btnBanCorr) btnBanCorr.className = inactiveBannerClass;
-        if (btnBanConst) btnBanConst.className = activeBannerClass;
     } else {
         if (btnCorr) btnCorr.className = activeTopClass;
         if (btnConst) btnConst.className = inactiveTopClass;
-        if (btnBanCorr) btnBanCorr.className = activeBannerClass;
-        if (btnBanConst) btnBanConst.className = inactiveBannerClass;
     }
 
     var badgeSubtitle = document.getElementById('badge-mensual-subtitle-mode');
@@ -36639,12 +36630,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             </div>
 
             <!-- Mode Switcher (Visible in Subtab 2) -->
-            <div id="subtab-mensual-controls" class="hidden items-center gap-2 bg-darkCard p-1 rounded-xl border border-darkBorder">
-                <button id="btn-mensual-corriente" onclick="toggleMensualCurrency('corriente')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm">
-                    Valores Corrientes
+            <div id="subtab-mensual-controls" class="hidden items-center gap-2 bg-darkCard/90 p-1 rounded-xl border border-darkBorder shadow-md">
+                <button id="btn-mensual-corriente" onclick="toggleMensualCurrency('corriente')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5">
+                    <i class="fas fa-coins text-amber-300"></i> <span>Valores Corrientes</span>
                 </button>
-                <button id="btn-mensual-constante" onclick="toggleMensualCurrency('constante')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white">
-                    Valores Constantes (Ajustado IPC)
+                <button id="btn-mensual-constante" onclick="toggleMensualCurrency('constante')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5">
+                    <i class="fas fa-chart-line text-emerald-400"></i> <span>Valores Constantes (Ajustado IPC)</span>
                 </button>
             </div>
         </div>
@@ -36848,17 +36839,6 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <p class="text-xs md:text-sm text-slate-400 light:text-slate-600 mt-1 font-medium">
                         Evolución histórica mensual estimada por la SSN &bull; Serie desde 2017 hasta <span class="font-bold text-white light:text-slate-900" id="badge-mensual-date">Junio 2026</span> &bull; <span id="badge-mensual-subtitle-mode" class="text-emerald-400 font-bold">Valores Corrientes (Nominales)</span>
                     </p>
-                </div>
-                
-                <!-- Selector de Moneda (Corriente vs Constante IPC) -->
-                <div class="flex items-center gap-2 bg-darkBg/90 p-1.5 rounded-xl border border-emerald-500/30 shadow-lg">
-                    <span class="text-xs font-bold text-slate-300 px-2 uppercase tracking-wider hidden sm:inline">Ver Cifras:</span>
-                    <button id="btn-banner-mensual-corriente" onclick="toggleMensualCurrency('corriente')" class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm flex items-center gap-1.5">
-                        <i class="fas fa-coins text-amber-300"></i> <span>Valores Corrientes</span>
-                    </button>
-                    <button id="btn-banner-mensual-constante" onclick="toggleMensualCurrency('constante')" class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-1.5">
-                        <i class="fas fa-chart-line text-emerald-400"></i> <span>Valores Constantes (IPC)</span>
-                    </button>
                 </div>
             </div>
 
