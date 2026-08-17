@@ -37431,8 +37431,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div>
                                 <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                                    <i class="fas fa-piggy-bank text-emerald-400"></i> Seguros de Retiro (Reservas Matemáticas & Asegurados)
-                                </h1>
+                                    <i class="fas fa-piggy-bank text-emerald-400"></i> Seguros de Retiro</h1>
                                 <p class="text-xs md:text-sm text-slate-400 mt-1 font-medium">
                                     Publicación Oficial SSN &bull; Informes Estadísticos Trimestrales (Marzo 2026)
                                 </p>
