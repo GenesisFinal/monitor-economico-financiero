@@ -1421,15 +1421,22 @@ function toggleMensualCurrency(mode) {
     var btnCorr = document.getElementById('btn-mensual-corriente');
     var btnConst = document.getElementById('btn-mensual-constante');
 
+    var iconCorr = btnCorr ? btnCorr.querySelector('i') : null;
+    var iconConst = btnConst ? btnConst.querySelector('i') : null;
+
     var activeTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5";
     var inactiveTopClass = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5";
 
     if (mode === 'constante') {
         if (btnCorr) btnCorr.className = inactiveTopClass;
         if (btnConst) btnConst.className = activeTopClass;
+        if (iconCorr) iconCorr.className = "fas fa-coins text-slate-500";
+        if (iconConst) iconConst.className = "fas fa-chart-line text-emerald-400";
     } else {
         if (btnCorr) btnCorr.className = activeTopClass;
         if (btnConst) btnConst.className = inactiveTopClass;
+        if (iconCorr) iconCorr.className = "fas fa-coins text-amber-400";
+        if (iconConst) iconConst.className = "fas fa-chart-line text-slate-500";
     }
 
     var badgeSubtitle = document.getElementById('badge-mensual-subtitle-mode');
