@@ -1389,7 +1389,7 @@ function toggleMensualCurrency(mode) {
     } else {
         if (btnCorr) btnCorr.className = activeTopClass;
         if (btnConst) btnConst.className = inactiveTopClass;
-        if (iconCorr) iconCorr.className = "fas fa-coins text-amber-400";
+        if (iconCorr) iconCorr.className = "fas fa-coins text-emerald-400";
         if (iconConst) iconConst.className = "fas fa-chart-line text-slate-500";
     }
 
@@ -36593,7 +36593,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             <!-- Mode Switcher (Visible in Subtab 2) -->
             <div id="subtab-mensual-controls" class="hidden items-center gap-2 bg-darkCard/90 p-1 rounded-xl border border-darkBorder shadow-md">
                 <button id="btn-mensual-corriente" onclick="toggleMensualCurrency('corriente')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5">
-                    <i class="fas fa-coins text-amber-300"></i> <span>Valores Corrientes</span>
+                    <i class="fas fa-coins text-emerald-400"></i> <span>Valores Corrientes</span>
                 </button>
                 <button id="btn-mensual-constante" onclick="toggleMensualCurrency('constante')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5">
                     <i class="fas fa-chart-line text-emerald-400"></i> <span>Valores Constantes (Ajustado IPC)</span>
