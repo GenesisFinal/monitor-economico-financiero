@@ -1899,8 +1899,8 @@ function renderBalancesSubtabData() {
         
         // Tabla Activo
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">';
-        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-wallet text-emerald-400"></i> Estructura del Activo &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
-        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RUBRO DEL ACTIVO</th><th class="py-2.5 px-3 text-right">2026 (ARS M)</th><th class="py-2.5 px-3 text-right">% S/ACTIVO</th><th class="py-2.5 px-3 text-right">2025 (ARS M)</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
+        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-wallet text-emerald-400"></i> Estructura del Activo ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RUBRO DEL ACTIVO</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">% S/ACTIVO</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
         
         actRows.forEach(function(row) {
             var pct = totAct26 !== 0 ? ((row.val26 || 0) / totAct26) * 100 : 0;
@@ -1908,14 +1908,14 @@ function renderBalancesSubtabData() {
         });
 
         html += '<tr class="bg-emerald-500/10 font-bold border-t-2 border-emerald-500/30"><td class="py-3 px-3 text-white">TOTAL ACTIVO</td><td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(totAct26) + '</td><td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(totAct25) + '</td></tr>';
-        html += '</tbody></table></div></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
         html += '<div class="mt-4 pt-3 border-t border-darkBorder/40 flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Total Activo:</span><span class="font-mono text-sm ' + (yoyAct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoyAct !== null ? (yoyAct >= 0 ? '+' : '') + fmtPct(yoyAct) : 'N/A') + '</span></div>';
         html += '</div>';
 
         // Tabla Pasivo y PN
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">';
-        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-file-invoice-dollar text-emerald-400"></i> Estructura del Pasivo y PN &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
-        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RUBRO PASIVO / PN</th><th class="py-2.5 px-3 text-right">2026 (ARS M)</th><th class="py-2.5 px-3 text-right">% S/PASIVO</th><th class="py-2.5 px-3 text-right">2025 (ARS M)</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
+        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-file-invoice-dollar text-emerald-400"></i> Estructura del Pasivo y PN ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RUBRO PASIVO / PN</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">% S/PASIVO</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
         
         pasRows.forEach(function(row) {
             var pct = totPas26 !== 0 ? ((row.val26 || 0) / totPas26) * 100 : 0;
@@ -1924,7 +1924,7 @@ function renderBalancesSubtabData() {
 
         html += '<tr class="bg-emerald-500/10 font-bold border-t-2 border-emerald-500/30"><td class="py-3 px-3 text-white">TOTAL PASIVO</td><td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(totPas26) + '</td><td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(totPas25) + '</td></tr>';
         html += '<tr class="bg-darkBg/40 font-bold"><td class="py-3 px-3 text-emerald-300">PATRIMONIO NETO</td><td class="py-3 px-3 text-right font-mono text-emerald-300 font-bold text-sm">' + fmtMoney(pn26) + '</td><td class="py-3 px-3 text-right font-mono text-slate-500">-</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(pn25) + '</td></tr>';
-        html += '</tbody></table></div></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
         html += '<div class="mt-4 pt-3 border-t border-darkBorder/40 space-y-1.5"><div class="flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Total Pasivo:</span><span class="font-mono ' + (yoyPas >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoyPas !== null ? (yoyPas >= 0 ? '+' : '') + fmtPct(yoyPas) : 'N/A') + '</span></div><div class="flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Patrimonio Neto:</span><span class="font-mono ' + (yoyPn >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoyPn !== null ? (yoyPn >= 0 ? '+' : '') + fmtPct(yoyPn) : 'N/A') + '</span></div></div>';
         html += '</div>';
 
@@ -1944,8 +1944,8 @@ function renderBalancesSubtabData() {
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
-        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-chart-line text-emerald-400"></i> Estado de Resultados &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
-        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN DEL ESTADO DE RESULTADOS</th><th class="py-2.5 px-3 text-right">2026 (ARS M)</th><th class="py-2.5 px-3 text-right">2025 (ARS M)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
+        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-chart-line text-emerald-400"></i> Estado de Resultados ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN DEL ESTADO DE RESULTADOS</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
 
         edrRows.forEach(function(row) {
             var v26 = r26[row.i26], v25 = r25[row.i25];
@@ -1955,7 +1955,7 @@ function renderBalancesSubtabData() {
             html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
-        html += '</tbody></table></div></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
     } else if (vKey === 'tecnico') {
         var tecRows = [
             { label: 'Primas Netas Devengadas', i: 0 },
@@ -1976,8 +1976,8 @@ function renderBalancesSubtabData() {
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
-        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-calculator text-emerald-400"></i> Estado de Resultado Técnico &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
-        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN RESULTADO TÉCNICO</th><th class="py-2.5 px-3 text-right">2026 (ARS M)</th><th class="py-2.5 px-3 text-right">2025 (ARS M)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
+        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-calculator text-emerald-400"></i> Estado de Resultado Técnico ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN RESULTADO TÉCNICO</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
 
         tecRows.forEach(function(row) {
             var v26 = r26[row.i], v25 = r25[row.i];
@@ -1987,7 +1987,7 @@ function renderBalancesSubtabData() {
             html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
-        html += '</tbody></table></div></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
     } else if (vKey === 'financiero') {
         var finRows = [
             { label: 'Rentas', i: 0 },
@@ -2001,8 +2001,8 @@ function renderBalancesSubtabData() {
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
-        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-coins text-emerald-400"></i> Estado de Resultado Financiero &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
-        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN RESULTADO FINANCIERO</th><th class="py-2.5 px-3 text-right">2026 (ARS M)</th><th class="py-2.5 px-3 text-right">2025 (ARS M)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
+        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-coins text-emerald-400"></i> Estado de Resultado Financiero ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN RESULTADO FINANCIERO</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
 
         finRows.forEach(function(row) {
             var v26 = r26[row.i], v25 = r25[row.i];
@@ -2012,7 +2012,7 @@ function renderBalancesSubtabData() {
             html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
-        html += '</tbody></table></div></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
     }
 
     container.innerHTML = html;
@@ -37080,8 +37080,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <i class="fas fa-scale-balanced text-emerald-400"></i> Balances y Estados Contables
                         </h1>
                         <p class="text-xs md:text-sm text-slate-400 light:text-slate-600 mt-1 font-medium">
-                            Publicación Oficial SSN &bull; Comparativo <span class="font-bold text-white light:text-slate-900">Marzo 2026 vs Marzo 2025</span>
+                            Publicación Oficial SSN &bull; Comparativo <span class="font-bold text-white light:text-slate-900">Marzo 2026 vs Marzo 2025</span> &bull; <span class="text-emerald-400 font-bold">Cifras Unificadas en Millones de Pesos ($ en Millones)</span>
                         </p>
+                        <div class="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-bold shadow-md">
+                            <i class="fas fa-info-circle text-emerald-400"></i>
+                            <span>Unificación de Cifras: Todos los Balances y Estados Contables se presentan unificados en <strong>Millones de Pesos ($ en Millones)</strong>.</span>
+                        </div>
                     </div>
 
                     <!-- 3 Selectores Alineados en Grid 3 Columnas -->
