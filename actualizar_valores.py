@@ -61,11 +61,15 @@ html_template = """<!DOCTYPE html>
     <meta http-equiv="Expires" content="0">
 
     <title>Monitor Económico Financiero</title>
-    <!-- Favicon / Ícono para Marcadores y Favoritos -->
+    <!-- Favicon & Bookmarks Icons (Compatibilidad Total Navegadores) -->
+    <!-- Favicon & Bookmarks Icons (Compatibilidad Total Navegadores) -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="alternate icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="shortcut icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="apple-touch-icon" href="favicon.svg">
 
     
 
