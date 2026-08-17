@@ -1420,13 +1420,19 @@ function toggleMensualCurrency(mode) {
 
     var btnCorr = document.getElementById('btn-mensual-corriente');
     var btnConst = document.getElementById('btn-mensual-constante');
+    var btnBanCorr = document.getElementById('btn-banner-mensual-corriente');
+    var btnBanConst = document.getElementById('btn-banner-mensual-constante');
 
     if (mode === 'constante') {
         if (btnCorr) btnCorr.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
         if (btnConst) btnConst.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
+        if (btnBanCorr) btnBanCorr.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-1.5";
+        if (btnBanConst) btnBanConst.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm flex items-center gap-1.5";
     } else {
         if (btnCorr) btnCorr.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm";
         if (btnConst) btnConst.className = "px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white";
+        if (btnBanCorr) btnBanCorr.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm flex items-center gap-1.5";
+        if (btnBanConst) btnBanConst.className = "px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-1.5";
     }
 
     var badgeSubtitle = document.getElementById('badge-mensual-subtitle-mode');
@@ -1685,6 +1691,17 @@ function switchAsegSubtab(subtabId) {
     window.activeAsegSubtab = key;
 
     var subtabs = ['primas', 'mensual', 'rankings', 'balances', 'lasegunda', 'seg-personas', 'seg-retiro'];
+
+    var mControls = document.getElementById('subtab-mensual-controls');
+    if (mControls) {
+        if (key === 'mensual') {
+            mControls.classList.remove('hidden');
+            mControls.classList.add('flex');
+        } else {
+            mControls.classList.add('hidden');
+            mControls.classList.remove('flex');
+        }
+    }
 
     subtabs.forEach(function(s) {
         var btn = document.getElementById('btn-aseg-subtab-' + s);
@@ -36835,10 +36852,20 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-calendar-days text-brandBlue"></i> Producción Mensual del Mercado Asegurador
                     </h1>
                     <p class="text-xs md:text-sm text-slate-400 light:text-slate-600 mt-1 font-medium">
-                        Evolución histórica mensual estimada por la SSN &bull; Serie desde 2017 hasta <span class="font-bold text-white light:text-slate-900" id="badge-mensual-date">Junio 2026</span>
+                        Evolución histórica mensual estimada por la SSN &bull; Serie desde 2017 hasta <span class="font-bold text-white light:text-slate-900" id="badge-mensual-date">Junio 2026</span> &bull; <span id="badge-mensual-subtitle-mode" class="text-emerald-400 font-bold">Valores Corrientes (Nominales)</span>
                     </p>
                 </div>
                 
+                <!-- Selector de Moneda (Corriente vs Constante IPC) -->
+                <div class="flex items-center gap-2 bg-darkBg/90 p-1.5 rounded-xl border border-emerald-500/30 shadow-lg">
+                    <span class="text-xs font-bold text-slate-300 px-2 uppercase tracking-wider hidden sm:inline">Ver Cifras:</span>
+                    <button id="btn-banner-mensual-corriente" onclick="toggleMensualCurrency('corriente')" class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all bg-brandBlue text-white shadow-sm flex items-center gap-1.5">
+                        <i class="fas fa-coins text-amber-300"></i> <span>Valores Corrientes</span>
+                    </button>
+                    <button id="btn-banner-mensual-constante" onclick="toggleMensualCurrency('constante')" class="px-3.5 py-2 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white flex items-center gap-1.5">
+                        <i class="fas fa-chart-line text-emerald-400"></i> <span>Valores Constantes (IPC)</span>
+                    </button>
+                </div>
             </div>
 
             <!-- KPI Cards Mensual -->
