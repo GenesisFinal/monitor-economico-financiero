@@ -253,13 +253,13 @@ function renderLaSegundaSubtabData() {
         var empRowsHTML = '';
         (lsData.companies || []).forEach(function(c) {
             empRowsHTML += '<tr class="hover:bg-amber-500/5 transition">';
-            empRowsHTML += '<td class="py-2.5 px-3 font-semibold text-white flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i>' + c.name + '</td>';
-            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-white font-bold">' + fmtMoney(c.prima) + '</td>';
+            empRowsHTML += '<td class="py-2.5 px-3 font-semibold text-slate-900 dark:text-white flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i>' + c.name + '</td>';
+            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-slate-900 dark:text-white font-bold">' + fmtMoney(c.prima) + '</td>';
             empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-amber-400 font-bold">' + fmtPct(c.pct_grupo) + '</td>';
             empRowsHTML += '</tr>';
         });
         empRowsHTML += '<tr class="bg-amber-500/10 border-t border-amber-500/30 font-bold">';
-        empRowsHTML += '<td class="py-3 px-3 text-white uppercase tracking-wider">TOTAL GRUPO LA SEGUNDA</td>';
+        empRowsHTML += '<td class="py-3 px-3 text-slate-900 dark:text-white uppercase tracking-wider font-extrabold">TOTAL GRUPO LA SEGUNDA</td>';
         empRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtMoney(lsData.tot_grupo) + '</td>';
         empRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">100,00%</td>';
         empRowsHTML += '</tr>';
@@ -409,9 +409,9 @@ function renderSegPersonasSubtabData(spData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') } } },
                         scales: {
-                            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
                             y: { ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                         }
                     }
@@ -438,9 +438,9 @@ function renderSegPersonasSubtabData(spData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') } } },
                         scales: {
-                            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
                             y: { ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                         }
                     }
@@ -4668,6 +4668,67 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         body.light #container-mercado-asegurador .text-slate-200,
         body.light #container-mercado-asegurador .text-slate-100 {
             color: #0f172a !important;
+        }
+
+        /* ==========================================================================
+           CORRECCIONES DE ALTO CONTRASTE Y LEGIBILIDAD EN MERCADO ASEGURADOR
+           ========================================================================== */
+
+        /* 1. BALANCES: Datos comparativos 2025 y totales */
+        body.light #subtab-view-balances td,
+        body.light #subtab-view-balances .text-slate-400,
+        body.light #subtab-view-balances .text-slate-300,
+        body.light #subtab-view-balances .text-slate-500 {
+            color: #1e293b !important;
+        }
+
+        /* 2. LA SEGUNDA: Íconos y datos legibles */
+        body.light #subtab-view-lasegunda td,
+        body.light #subtab-view-lasegunda th,
+        body.light #subtab-view-lasegunda .text-white,
+        body.light #subtab-view-lasegunda .text-slate-300,
+        body.light #subtab-view-lasegunda .text-slate-400 {
+            color: #0f172a !important;
+        }
+
+        body.theme-lasegunda #subtab-view-lasegunda .fa-star,
+        body.theme-lasegunda #subtab-view-lasegunda .fa-sitemap {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 3. SEGUROS DE PERSONAS: Tabla y gráfico */
+        body.light #subtab-view-seg-personas td,
+        body.light #subtab-view-seg-personas th,
+        body.light #subtab-view-seg-personas .text-slate-400,
+        body.light #subtab-view-seg-personas .text-slate-300,
+        body.light #subtab-view-seg-personas .text-slate-200 {
+            color: #1e293b !important;
+        }
+
+        /* 4. SEGUROS DE RETIRO: Compromisos Técnicos, Asegurados y Primas */
+        body.light #subtab-view-seg-retiro td,
+        body.light #subtab-view-seg-retiro th,
+        body.light #subtab-view-seg-retiro .text-slate-400,
+        body.light #subtab-view-seg-retiro .text-slate-300,
+        body.light #subtab-view-seg-retiro .text-slate-200,
+        body.light #subtab-view-seg-retiro .text-white {
+            color: #1e293b !important;
+        }
+
+        /* Ajuste de amarillo claro en Modo Claro para columna RVP + ART en Retiro */
+        body.light #subtab-view-seg-retiro .text-yellow-400,
+        body.light #subtab-view-seg-retiro .text-amber-400 {
+            color: #b45309 !important;
+            font-weight: 700 !important;
+        }
+
+        /* Resaltado en negrita de la fila TOTAL MERCADO en Retiro */
+        #subtab-view-seg-retiro tr:has(td:contains("TOTAL MERCADO")),
+        #subtab-view-seg-retiro tbody tr:first-child {
+            font-weight: 800 !important;
+        }
+        #subtab-view-seg-retiro tbody tr:first-child td {
+            font-weight: 800 !important;
         }
 </style></head>
 
@@ -37984,7 +38045,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
                                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                                    <i class="fas fa-users text-indigo-400"></i> Total de Seguros de Personas y Retiro &bull; <span id="ls-subtitle-personas" class="text-indigo-400">-</span>
+                                    <i class="fas fa-users text-indigo-400"></i> Total de Seguros de Personas &bull; <span id="ls-subtitle-personas" class="text-indigo-400">-</span>
                                 </h3>
                                 <span class="text-xs text-slate-400 font-medium">Con desplegables para desglose Colectivo / Individual</span>
                             </div>
@@ -38021,7 +38082,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <!-- Treemap Personas -->
                             <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                                 <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
-                                    <i class="fas fa-chart-pie text-indigo-400"></i> Distribución Seguros de Personas y Retiro por Ramo
+                                    <i class="fas fa-chart-pie text-indigo-400"></i> Distribución Seguros de Personas por Ramo
                                 </h3>
                                 <div class="relative w-full h-[320px]">
                                     <canvas id="ls-chart-personas"></canvas>
@@ -38037,7 +38098,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div>
                                 <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                                    <i class="fas fa-user-shield text-emerald-400"></i> Seguros de Personas y Retiro
+                                    <i class="fas fa-user-shield text-emerald-400"></i> Seguros de Personas
                                 </h1>
                                 <p class="text-xs md:text-sm text-slate-400 mt-1 font-medium">
                                     Indicadores de Gestión y Rentabilidad Comparativos (Marzo 2026) &bull; Total Mercado vs. Grupo La Segunda
@@ -38462,7 +38523,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                 <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Primas Emitidas y Balances
                             </div>
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Seguros de Personas y Retiro
+                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Seguros de Personas
                             </div>
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
                                 <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Reservas Matemáticas e Indicadores
