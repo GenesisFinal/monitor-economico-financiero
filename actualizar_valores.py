@@ -129,7 +129,7 @@ function renderLaSegundaEmpresasChart(lsData) {
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { color: '#94a3b8', font: { size: 11 } }
+                        labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 11 } }
                     },
                     tooltip: {
                         callbacks: {
@@ -190,7 +190,7 @@ function renderLaSegundaRamosCharts(lsData) {
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                        x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
                         y: { ticks: { color: '#e2e8f0', font: { size: 11 } }, grid: { display: false } }
                     }
                 }
@@ -237,7 +237,7 @@ function renderLaSegundaRamosCharts(lsData) {
                     },
                     scales: {
                         x: { ticks: { color: '#e2e8f0', font: { size: 11 } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        y: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                     }
                 }
             });
@@ -458,7 +458,7 @@ function renderSegPersonasSubtabData(spData) {
                         plugins: { legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') } } },
                         scales: {
                             x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            y: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                         }
                     }
                 });
@@ -487,7 +487,7 @@ function renderSegPersonasSubtabData(spData) {
                         plugins: { legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') } } },
                         scales: {
                             x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            y: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                         }
                     }
                 });
@@ -677,10 +677,10 @@ function renderSegRetiroSubtabData(srData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') } } },
                         scales: {
-                            x: { stacked: true, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { stacked: true, ticks: { color: '#94a3b8', callback: function(v) { return '$' + (v/1000000).toFixed(0) + 'M'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            x: { stacked: true, ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { stacked: true, ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), callback: function(v) { return '$' + (v/1000000).toFixed(0) + 'M'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                         }
                     }
                 });
@@ -704,10 +704,10 @@ function renderSegRetiroSubtabData(srData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') } } },
                         scales: {
-                            x: { stacked: true, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { stacked: true, ticks: { color: '#94a3b8', callback: function(v) { return v.toLocaleString('es-AR'); } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            x: { stacked: true, ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                            y: { stacked: true, ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), callback: function(v) { return v.toLocaleString('es-AR'); } }, grid: { color: 'rgba(255,255,255,0.05)' } }
                         }
                     }
                 });
@@ -798,9 +798,11 @@ function initSpPrimasRamosView() {
     var container = document.getElementById('sp-ramos-selector-container');
     if (!container) return;
 
-    if (spSelectedRamos === null && boletin.target_ramos) {
+    if ((spSelectedRamos === null || spSelectedRamos === undefined || spSelectedRamos.length === 0) && boletin.target_ramos) {
         spSelectedRamos = boletin.target_ramos.slice();
     }
+    var chkMaster = document.getElementById('chk-sp-primas-master');
+    if (chkMaster) chkMaster.checked = (spSelectedRamos.length === boletin.target_ramos.length);
 
     var htmlPills = [];
     boletin.target_ramos.forEach(function(ramo) {
@@ -1041,9 +1043,9 @@ function updateSpPrimasCalculations() {
                     }
                 },
                 scales: {
-                    x: { ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }, grid: { display: false } },
+                    x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 11, weight: 'bold' } }, grid: { display: false } },
                     y: {
-                        ticks: { color: '#94a3b8', callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
+                        ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
                         grid: { color: 'rgba(255, 255, 255, 0.05)' }
                     }
                 }
@@ -1182,7 +1184,7 @@ function updatePrimasRetiroCalculations() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { labels: { color: '#94a3b8', font: { weight: 'bold' } } },
+                    legend: { labels: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { weight: 'bold' } } },
                     tooltip: {
                         callbacks: {
                             label: function(ctx) {
@@ -1192,9 +1194,9 @@ function updatePrimasRetiroCalculations() {
                     }
                 },
                 scales: {
-                    x: { ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }, grid: { display: false } },
+                    x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), font: { size: 11, weight: 'bold' } }, grid: { display: false } },
                     y: {
-                        ticks: { color: '#94a3b8', callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
+                        ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b'), callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
                         grid: { color: 'rgba(255, 255, 255, 0.05)' }
                     }
                 }
@@ -1361,8 +1363,8 @@ function renderPrimasSubtabData() {
                 maintainAspectRatio: false,
                 plugins: { legend: { labels: { color: '#cbd5e1' } } },
                 scales: {
-                    x: { stacked: true, ticks: { color: '#94a3b8' }, grid: { display: false } },
-                    y: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                    x: { stacked: true, ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') }, grid: { display: false } },
+                    y: { stacked: true, ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
                 }
             }
         });
@@ -1652,8 +1654,8 @@ function renderMensualSubtabData() {
                 maintainAspectRatio: false,
                 plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } },
                 scales: {
-                    x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-                    y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                    x: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') }, grid: { display: false } },
+                    y: { ticks: { color: (document.body.classList.contains('dark') ? '#cbd5e1' : '#1e293b') }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
                 }
             }
         });
@@ -4775,6 +4777,37 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         }
         #subtab-view-seg-retiro tbody tr:first-child td {
             font-weight: 800 !important;
+        }
+
+        /* ==========================================================================
+           ALTO CONTRASTE PARA TEXTOS DE GRÁFICOS Y SELECTORES EN SEG. DE PERSONAS
+           ========================================================================== */
+
+        /* 1. Textos y etiquetas de gráficos en Modo Claro */
+        body.light canvas {
+            filter: none !important;
+        }
+
+        body.light .chartjs-legend,
+        body.light [id*="-chart"] label,
+        body.light [id*="chart-"] label {
+            color: #1e293b !important;
+        }
+
+        /* 2. Selector de Ramos de Personas en Modo Claro */
+        body.light #sp-ramos-selector-container label {
+            color: #1e293b !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        body.light #sp-ramos-selector-container label:has(input:checked) {
+            background-color: rgba(226, 0, 57, 0.12) !important;
+            color: #e20039 !important;
+            border-color: #e20039 !important;
+        }
+
+        body.light #chk-sp-primas-master {
+            accent-color: #e20039 !important;
         }
 </style></head>
 
@@ -46115,7 +46148,26 @@ function toggleBandsVisibility() {
         window.switchVisualFont = switchVisualFont;
 
         
-        function switchVisualTheme(themeName) {
+        
+        // ChartJS Universal Dark / Light Theme Text & Grid Helper
+        function getChartThemeColors() {
+            var isDark = document.body.classList.contains('dark');
+            var textColor = isDark ? '#cbd5e1' : '#1e293b';
+            var gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
+            if (window.Chart && window.Chart.defaults) {
+                window.Chart.defaults.color = textColor;
+            }
+            return {
+                isDark: isDark,
+                text: textColor,
+                title: isDark ? '#f8fafc' : '#0f172a',
+                grid: gridColor,
+                border: isDark ? '#334155' : '#cbd5e1'
+            };
+        }
+
+
+function switchVisualTheme(themeName) {
             const allowed = ['emerald-green', 'lasegunda', 'carbon-electric', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon'];
             if (!allowed.includes(themeName)) themeName = 'emerald-green';
 
