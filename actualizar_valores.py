@@ -1759,6 +1759,7 @@ function switchAsegSubtab(subtabId) {
     } else if (key === 'lasegunda') {
         if (typeof renderLaSegundaSubtabData === 'function') renderLaSegundaSubtabData();
     } else if (key === 'seg-personas') {
+        if (typeof initSpPrimasRamosView === 'function') initSpPrimasRamosView();
         if (typeof renderSegPersonasSubtabData === 'function') renderSegPersonasSubtabData();
     }
     else if (key === 'seg-retiro') {
@@ -4808,6 +4809,48 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.light #chk-sp-primas-master {
             accent-color: #e20039 !important;
+        }
+
+        /* ==========================================================================
+           CORRECCIONES DE LEGIBILIDAD TOTAL EN GRÁFICOS Y TABLAS (MODO CLARO)
+           ========================================================================== */
+
+        /* 1. Primas Acumuladas: 1ra columna en gris oscuro casi negro #0f172a */
+        body.light #subtab-view-primas table tr td:first-child,
+        body.light #subtab-view-primas table tr th:first-child,
+        body.light #subtab-view-primas table tbody tr td:first-child {
+            color: #0f172a !important;
+            font-weight: 700 !important;
+        }
+
+        body.light #subtab-view-primas .text-slate-400,
+        body.light #subtab-view-primas .text-slate-500,
+        body.light #subtab-view-primas .text-slate-300,
+        body.light #subtab-view-primas label,
+        body.light #subtab-view-primas span {
+            color: #1e293b !important;
+        }
+
+        /* 2. Ranking de Producción: Gráfico Cuota de Participación y textos */
+        body.light #subtab-view-rankings .text-slate-400,
+        body.light #subtab-view-rankings .text-slate-500,
+        body.light #subtab-view-rankings .text-slate-300,
+        body.light #subtab-view-rankings label,
+        body.light #subtab-view-rankings span,
+        body.light #subtab-view-rankings td,
+        body.light #subtab-view-rankings th {
+            color: #1e293b !important;
+        }
+
+        /* 3. La Segunda: Gráficos de Distribución Patrimoniales y Personas */
+        body.light #subtab-view-lasegunda .text-slate-400,
+        body.light #subtab-view-lasegunda .text-slate-500,
+        body.light #subtab-view-lasegunda .text-slate-300,
+        body.light #subtab-view-lasegunda label,
+        body.light #subtab-view-lasegunda span,
+        body.light #subtab-view-lasegunda td,
+        body.light #subtab-view-lasegunda th {
+            color: #1e293b !important;
         }
 </style></head>
 
