@@ -1553,9 +1553,13 @@ function renderMensualSubtabData() {
         var html = '';
         items.forEach(function(c) {
             var isTotal = c.is_total || c.key.indexOf('total') !== -1;
-            var rowClass = isTotal ? 'font-bold bg-slate-800/40 text-white' : 'hover:bg-slate-800/20 text-slate-300';
+            var rowClass = isTotal 
+                ? 'font-bold bg-slate-100 dark:bg-slate-800/60 text-slate-900 dark:text-white border-y-2 border-slate-300 dark:border-slate-700' 
+                : 'hover:bg-slate-50 dark:hover:bg-slate-800/30 text-slate-800 dark:text-slate-200';
             var cName = c.label || c.name || c.key;
-            var nameCol = isTotal ? '<span class="font-bold text-white">' + cName + '</span>' : cName;
+            var nameCol = isTotal 
+                ? '<span class="font-bold text-slate-900 dark:text-white">' + cName + '</span>' 
+                : '<span class="font-medium text-slate-800 dark:text-slate-300">' + cName + '</span>';
             
             var vAct = (c.latest_val !== undefined) ? c.latest_val : (c.actual_val || 0);
             var vMom = (c.mom_pct !== undefined) ? c.mom_pct : (c.var_mom || 0);
@@ -1563,13 +1567,13 @@ function renderMensualSubtabData() {
             var vAcumVal = c.accum_val || 0;
             var vAcumPct = (c.accum_pct !== undefined) ? c.accum_pct : (c.var_acum_ejercicio || 0);
 
-            html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
-            html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAct) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vMom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vMom) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vIa >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vIa) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAcumVal) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vAcumPct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
+            html += '<tr class="' + rowClass + ' border-b border-slate-200 dark:border-darkBorder/40 transition-colors">';
+            html += '<td class="py-3 px-4 text-left">' + nameCol + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">$' + fmtM(vAct) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono font-bold ' + (vMom >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400') + '">' + fmtPct(vMom) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono font-bold ' + (vIa >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400') + '">' + fmtPct(vIa) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">$' + fmtM(vAcumVal) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono font-bold ' + (vAcumPct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
             html += '</tr>';
         });
         tbody.innerHTML = html;
@@ -4409,6 +4413,102 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             color: #0f172a !important;
             background-color: #ffffff !important;
         }
+
+        /* ==========================================================================
+           BRANDBOOK LA SEGUNDA - FIX SELECTORES, ICONOS Y TABLAS (AGMD)
+           ========================================================================== */
+
+        /* 1. Botones Principales Superiores (Top Nav Tabs) Activos en Rojo Seguro */
+        body.theme-lasegunda button[id^="btn-global-"].active,
+        body.theme-lasegunda button[id^="btn-global-"][class*="bg-brandBlue"],
+        body.layout-lasegunda button[id^="btn-global-"].active,
+        body.layout-lasegunda button[id^="btn-global-"][class*="bg-brandBlue"],
+        body.theme-lasegunda #btn-global-asegurador.active,
+        body.theme-lasegunda #btn-global-valores.active,
+        body.theme-lasegunda #btn-global-indicadores.active,
+        body.theme-lasegunda #btn-global-fuentes.active {
+            background-color: #e20039 !important;
+            color: #ffffff !important;
+            border-color: #e20039 !important;
+            box-shadow: 0 4px 12px rgba(226, 0, 57, 0.35) !important;
+        }
+
+        body.theme-lasegunda button[id^="btn-global-"].active i,
+        body.theme-lasegunda button[id^="btn-global-"][class*="bg-brandBlue"] i,
+        body.layout-lasegunda button[id^="btn-global-"].active i,
+        body.layout-lasegunda button[id^="btn-global-"][class*="bg-brandBlue"] i,
+        body.theme-lasegunda #btn-global-asegurador.active i,
+        body.theme-lasegunda #btn-global-valores.active i,
+        body.theme-lasegunda #btn-global-indicadores.active i,
+        body.theme-lasegunda #btn-global-fuentes.active i {
+            color: #ffffff !important;
+        }
+
+        /* 2. Selectores de Moneda / Modalidad (Valores Corrientes / Valores Constantes) */
+        body.theme-lasegunda #subtab-mensual-controls button.active,
+        body.theme-lasegunda #subtab-mensual-controls button[class*="bg-brandBlue"],
+        body.theme-lasegunda #btn-aseg-mensual-corrientes.active,
+        body.theme-lasegunda #btn-aseg-mensual-constantes.active,
+        body.layout-lasegunda #subtab-mensual-controls button.active,
+        body.layout-lasegunda #btn-aseg-mensual-corrientes.active,
+        body.layout-lasegunda #btn-aseg-mensual-constantes.active {
+            background-color: #e20039 !important;
+            color: #ffffff !important;
+            border-color: #e20039 !important;
+            box-shadow: 0 4px 12px rgba(226, 0, 57, 0.35) !important;
+        }
+
+        body.theme-lasegunda #subtab-mensual-controls button.active i,
+        body.theme-lasegunda #subtab-mensual-controls button[class*="bg-brandBlue"] i,
+        body.theme-lasegunda #btn-aseg-mensual-corrientes.active i,
+        body.theme-lasegunda #btn-aseg-mensual-constantes.active i {
+            color: #ffffff !important;
+        }
+
+        body.theme-lasegunda.light #subtab-mensual-controls button:not(.active):not([class*="bg-brandBlue"]),
+        body.theme-lasegunda:not(.dark) #subtab-mensual-controls button:not(.active):not([class*="bg-brandBlue"]) {
+            background-color: #ffffff !important;
+            color: #1e293b !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        body.theme-lasegunda.light #subtab-mensual-controls button:not(.active):not([class*="bg-brandBlue"]) i,
+        body.theme-lasegunda:not(.dark) #subtab-mensual-controls button:not(.active):not([class*="bg-brandBlue"]) i {
+            color: #e20039 !important;
+        }
+
+        /* 3. Alto Contraste en Tablas para Modo Claro (Eliminar Grises Lavados) */
+        body.theme-lasegunda.light thead,
+        body.theme-lasegunda:not(.dark) thead,
+        body.light thead {
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
+            border-bottom: 2px solid #cbd5e1 !important;
+        }
+
+        body.theme-lasegunda.light thead th,
+        body.theme-lasegunda:not(.dark) thead th,
+        body.light thead th {
+            color: #0f172a !important;
+            font-weight: 800 !important;
+        }
+
+        body.theme-lasegunda.light tbody tr,
+        body.theme-lasegunda:not(.dark) tbody tr {
+            color: #1e293b !important;
+        }
+
+        body.theme-lasegunda.light tbody td,
+        body.theme-lasegunda:not(.dark) tbody td {
+            color: #1e293b !important;
+        }
+
+        body.theme-lasegunda.light .bg-slate-800\/40,
+        body.theme-lasegunda:not(.dark) .bg-slate-800\/40 {
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
+        }
+
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
@@ -37150,7 +37250,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-brandBlue/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Total del Mercado (9 Meses)</span>
-                        <span class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue"><i class="fas fa-vault"></i></span>
+                        <span class="p-2.5 rounded-xl bg-red-500/10 dark:bg-red-950/40 text-[#e20039] border border-red-500/20"><i class="fas fa-building-columns text-base"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-total-val">ARS 19.409.600,79 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
@@ -37176,7 +37276,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-emerald-500/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros de Personas</span>
-                        <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i class="fas fa-user-shield"></i></span>
+                        <span class="p-2.5 rounded-xl bg-red-500/10 dark:bg-red-950/40 text-[#e20039] border border-red-500/20"><i class="fas fa-user-shield text-base"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-personas-val">ARS 2.594.120,45 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
@@ -37335,7 +37435,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-brandBlue/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Total Mercado (Mes)</span>
-                        <span class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue"><i class="fas fa-vault"></i></span>
+                        <span class="p-2.5 rounded-xl bg-red-500/10 dark:bg-red-950/40 text-[#e20039] border border-red-500/20"><i class="fas fa-building-columns text-base"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-mensual-total-val">ARS 0,00 M</div>
                     <div class="flex flex-wrap items-center gap-3 text-xs font-bold mt-2">
@@ -37349,7 +37449,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-cyan-500/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros Patrimoniales & ART</span>
-                        <span class="p-2 rounded-xl bg-cyan-500/10 text-cyan-400"><i class="fas fa-car-shield"></i></span>
+                        <span class="p-2.5 rounded-xl bg-red-500/10 dark:bg-red-950/40 text-[#e20039] border border-red-500/20"><i class="fas fa-shield-halved text-base"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-mensual-patrimoniales-val">ARS 0,00 M</div>
                     <div class="flex flex-wrap items-center gap-3 text-xs font-bold mt-2">
@@ -37363,7 +37463,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-emerald-500/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros de Personas</span>
-                        <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i class="fas fa-user-shield"></i></span>
+                        <span class="p-2.5 rounded-xl bg-red-500/10 dark:bg-red-950/40 text-[#e20039] border border-red-500/20"><i class="fas fa-user-shield text-base"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-mensual-personas-val">ARS 0,00 M</div>
                     <div class="flex flex-wrap items-center gap-3 text-xs font-bold mt-2">
@@ -42782,7 +42882,7 @@ function switchGlobalTab(tabId) {
 
             
 
-            const activeClass = isDark ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20" : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-brandBlue bg-brandBlue/10 border border-brandBlue/20";
+            const activeClass = "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-[#e20039] border border-[#e20039] shadow-md";
 
             
 
