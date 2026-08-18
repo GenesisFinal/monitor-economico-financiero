@@ -45318,261 +45318,59 @@ function switchGlobalTab(tabId) {
 
 
 
-        function switchVisualFont(fontName) {
-
-            const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira', 'sora'];
-
-            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
-
-            
-
-            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-outfit-fit', 'font-sora');
-
-            document.body.classList.add('font-' + fontName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-font');
-
-            if (selectEl) selectEl.value = fontName;
-
-            localStorage.setItem('visualFont', fontName);
-
-        }
-
-
-
-        function switchVisualTheme(themeName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(themeName)) themeName = 'emerald-green';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('theme-' + themeName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-theme');
-
-            if (selectEl) selectEl.value = themeName;
-
-            localStorage.setItem('visualTheme', themeName);
-
-            
-
-            if (typeof renderSparklines === 'function') renderSparklines();
-
-            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
-
-            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
-
-        }
-
-
-
-        function switchVisualFont(fontName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('font-' + fontName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-font');
-
-            if (selectEl) selectEl.value = fontName;
-
-            localStorage.setItem('visualFont', fontName);
-
-        }
-
-
-
-        function switchVisualTheme(themeName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(themeName)) themeName = 'emerald-green';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('theme-' + themeName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-theme');
-
-            if (selectEl) selectEl.value = themeName;
-
-            localStorage.setItem('visualTheme', themeName);
-
-            
-
-            if (typeof renderSparklines === 'function') renderSparklines();
-
-            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
-
-            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
-
-        }
-
-
-
-        function switchVisualFont(fontName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('font-' + fontName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-font');
-
-            if (selectEl) selectEl.value = fontName;
-
-            localStorage.setItem('visualFont', fontName);
-
-        }
-
-
-
-        function switchVisualTheme(themeName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(themeName)) themeName = 'emerald-green';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('theme-' + themeName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-theme');
-
-            if (selectEl) selectEl.value = themeName;
-
-            localStorage.setItem('visualTheme', themeName);
-
-            
-
-            if (typeof renderSparklines === 'function') renderSparklines();
-
-            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
-
-            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
-
-        }
-
-
-
-        function switchVisualFont(fontName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('font-' + fontName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-font');
-
-            if (selectEl) selectEl.value = fontName;
-
-            localStorage.setItem('visualFont', fontName);
-
-        }
-
-
-
-        function switchVisualTheme(themeName) {
-
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
-
-            if (!allowed.includes(themeName)) themeName = 'emerald-green';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
-
-            document.body.classList.add('theme-' + themeName);
-
-            
-
-            const selectEl = document.getElementById('select-visual-theme');
-
-            if (selectEl) selectEl.value = themeName;
-
-            localStorage.setItem('visualTheme', themeName);
-
-            
-
-            if (typeof renderSparklines === 'function') renderSparklines();
-
-            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
-
-            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
-
-        }
-
-
-
+        
         function switchVisualLayout(layoutName) {
-
-            const allowed = ['bento', 'executive', 'flat-saas', 'agmd-style'];
-
+            const allowed = ['agmd-style', 'lasegunda', 'bento', 'executive', 'flat-saas'];
             if (!allowed.includes(layoutName)) layoutName = 'agmd-style';
 
-            
-
-            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style', 'layout-hft-terminal', 'layout-swiss-luxe', 'layout-tokyo-neoglass', 'layout-agmd-style');
-
+            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style', 'layout-hft-terminal', 'layout-swiss-luxe', 'layout-tokyo-neoglass', 'layout-agmd-style', 'layout-lasegunda');
             document.body.classList.add('layout-' + layoutName);
 
-            
-
             const selectEl = document.getElementById('select-visual-layout');
-
             if (selectEl) selectEl.value = layoutName;
-
             localStorage.setItem('visualLayout', layoutName);
 
-            
-
+            if (layoutName === 'lasegunda') {
+                if (typeof switchVisualTheme === 'function') switchVisualTheme('lasegunda');
+                if (typeof switchVisualFont === 'function') switchVisualFont('sora');
+            }
             if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
-
             if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
-
         }
+        window.switchVisualLayout = switchVisualLayout;
+
+        function switchVisualFont(fontName) {
+            const allowed = ['sora', 'outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
+            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
+
+            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-outfit-fit', 'font-sora');
+            document.body.classList.add('font-' + fontName);
+
+            const selectEl = document.getElementById('select-visual-font');
+            if (selectEl) selectEl.value = fontName;
+            localStorage.setItem('visualFont', fontName);
+        }
+        window.switchVisualFont = switchVisualFont;
+
+        function switchVisualTheme(themeName) {
+            const allowed = ['emerald-green', 'lasegunda', 'carbon-electric', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon'];
+            if (!allowed.includes(themeName)) themeName = 'emerald-green';
+
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+            document.body.classList.add('theme-' + themeName);
+
+            const selectEl = document.getElementById('select-visual-theme');
+            if (selectEl) selectEl.value = themeName;
+            localStorage.setItem('visualTheme', themeName);
+
+            if (typeof renderSparklines === 'function') renderSparklines();
+            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
+            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
+        }
+        window.switchVisualTheme = switchVisualTheme;
 
 
-
-        function renderSparklines() {
+function renderSparklines() {
 
             const sparklineElements = document.querySelectorAll('.sparkline-canvas');
 
