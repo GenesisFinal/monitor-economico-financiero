@@ -4178,6 +4178,76 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         body[class*="theme-"]:not(.theme-emerald-green) .border-brandBlue {
             border-color: var(--highlight-color) !important;
         }
+
+        /* ==========================================================================
+           DINAMISMO TOTAL DE ÍCONOS, SUBPESTAÑAS Y BADGES PARA TEMAS DE COLOR (L2 #e20039)
+           ========================================================================== */
+
+        /* 1. Sobreescritura estricta para íconos de subpestañas de Mercado Asegurador en L2 */
+        body.theme-lasegunda button[id*="btn-aseg-subtab"] i,
+        body.theme-lasegunda button[id*="btn-aseg-subtab"] svg,
+        body.theme-lasegunda .subtab-btn i,
+        body.theme-lasegunda #subtab-mensual-controls i,
+        body.theme-lasegunda #subtab-mensual-controls button i {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 2. Sobreescritura estricta para contenedores e íconos de Badges de Tarjetas en L2 */
+        body.theme-lasegunda .bg-emerald-100,
+        body.theme-lasegunda .bg-emerald-50,
+        body.theme-lasegunda .bg-emerald-500\/10,
+        body.theme-lasegunda .bg-emerald-500\/20,
+        body.theme-lasegunda .bg-emerald-500\/30,
+        body.theme-lasegunda .bg-teal-100,
+        body.theme-lasegunda .bg-green-100 {
+            background-color: rgba(226, 0, 57, 0.12) !important;
+            color: var(--highlight-color) !important;
+        }
+
+        body.theme-lasegunda .bg-emerald-100 i,
+        body.theme-lasegunda .bg-emerald-50 i,
+        body.theme-lasegunda .bg-emerald-500\/10 i,
+        body.theme-lasegunda .bg-emerald-500\/20 i,
+        body.theme-lasegunda .bg-emerald-500\/30 i {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 3. Sobreescritura estricta para textos, porcentajes y valores de tablas en L2 */
+        body.theme-lasegunda .text-emerald-400,
+        body.theme-lasegunda .text-emerald-500,
+        body.theme-lasegunda .text-emerald-600,
+        body.theme-lasegunda .text-emerald-700,
+        body.theme-lasegunda .text-emerald-300,
+        body.theme-lasegunda .text-green-400,
+        body.theme-lasegunda .text-green-500,
+        body.theme-lasegunda .text-green-600,
+        body.theme-lasegunda .text-teal-400,
+        body.theme-lasegunda .text-teal-500,
+        body.theme-lasegunda span.text-emerald-400,
+        body.theme-lasegunda span.text-emerald-500,
+        body.theme-lasegunda span.text-emerald-600,
+        body.theme-lasegunda p.text-emerald-400,
+        body.theme-lasegunda p.text-emerald-500,
+        body.theme-lasegunda td.text-emerald-400,
+        body.theme-lasegunda td.text-emerald-500,
+        body.theme-lasegunda td.text-emerald-600 {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 4. Sobreescritura universal para TODOS los demás temas no-verdes */
+        body[class*="theme-"]:not(.theme-emerald-green) button[id*="btn-aseg-subtab"] i,
+        body[class*="theme-"]:not(.theme-emerald-green) .subtab-btn i,
+        body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-100,
+        body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-500\/20,
+        body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-500\/10 {
+            color: var(--highlight-color) !important;
+        }
+
+        body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-100,
+        body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-500\/20,
+        body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-500\/10 {
+            background-color: var(--highlight-glow) !important;
+        }
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
