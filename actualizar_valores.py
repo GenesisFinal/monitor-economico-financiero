@@ -1552,14 +1552,12 @@ function renderMensualSubtabData() {
         if (!tbody) return;
         var html = '';
         items.forEach(function(c) {
-            var isTotal = c.is_total || c.key.indexOf('total') !== -1;
-            var rowClass = isTotal 
-                ? 'font-bold bg-slate-100 dark:bg-slate-800/60 text-slate-900 dark:text-white border-y-2 border-slate-300 dark:border-slate-700' 
-                : 'hover:bg-slate-50 dark:hover:bg-slate-800/30 text-slate-800 dark:text-slate-200';
+            var isTotal = (c.is_total === true) || (c.key === 'total_patrimoniales') || (c.key === 'total_personas') || (c.key === 'total_mercado');
+            var rowClass = isTotal ? 'is-total-row' : 'is-item-row';
             var cName = c.label || c.name || c.key;
             var nameCol = isTotal 
-                ? '<span class="font-bold text-slate-900 dark:text-white">' + cName + '</span>' 
-                : '<span class="font-medium text-slate-800 dark:text-slate-300">' + cName + '</span>';
+                ? '<span class="font-bold">' + cName + '</span>' 
+                : '<span class="font-medium">' + cName + '</span>';
             
             var vAct = (c.latest_val !== undefined) ? c.latest_val : (c.actual_val || 0);
             var vMom = (c.mom_pct !== undefined) ? c.mom_pct : (c.var_mom || 0);
@@ -1567,13 +1565,17 @@ function renderMensualSubtabData() {
             var vAcumVal = c.accum_val || 0;
             var vAcumPct = (c.accum_pct !== undefined) ? c.accum_pct : (c.var_acum_ejercicio || 0);
 
-            html += '<tr class="' + rowClass + ' border-b border-slate-200 dark:border-darkBorder/40 transition-colors">';
+            var momClass = vMom >= 0 ? 'cell-positive' : 'cell-negative';
+            var iaClass = vIa >= 0 ? 'cell-positive' : 'cell-negative';
+            var acumPctClass = vAcumPct >= 0 ? 'cell-positive' : 'cell-negative';
+
+            html += '<tr class="' + rowClass + ' transition-colors">';
             html += '<td class="py-3 px-4 text-left">' + nameCol + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">$' + fmtM(vAct) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono font-bold ' + (vMom >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400') + '">' + fmtPct(vMom) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono font-bold ' + (vIa >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400') + '">' + fmtPct(vIa) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono font-bold text-slate-900 dark:text-white">$' + fmtM(vAcumVal) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono font-bold ' + (vAcumPct >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
+            html += '<td class="py-3 px-4 text-right cell-money">$' + fmtM(vAct) + '</td>';
+            html += '<td class="py-3 px-4 text-right ' + momClass + '">' + fmtPct(vMom) + '</td>';
+            html += '<td class="py-3 px-4 text-right ' + iaClass + '">' + fmtPct(vIa) + '</td>';
+            html += '<td class="py-3 px-4 text-right cell-money">$' + fmtM(vAcumVal) + '</td>';
+            html += '<td class="py-3 px-4 text-right ' + acumPctClass + '">' + fmtPct(vAcumPct) + '</td>';
             html += '</tr>';
         });
         tbody.innerHTML = html;
@@ -4477,38 +4479,142 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             color: #e20039 !important;
         }
 
-        /* 3. Alto Contraste en Tablas para Modo Claro (Eliminar Grises Lavados) */
-        body.theme-lasegunda.light thead,
-        body.theme-lasegunda:not(.dark) thead,
-        body.light thead {
+        
+
+
+        /* ==========================================================================
+           TABLAS DE EVOLUCION MENSUAL - ESTILOS PRECISOS PARA MODO OSCURO Y CLARO
+           ========================================================================== */
+
+        /* --- MODO OSCURO (Dark Theme) --- */
+        body.dark #subtab-view-mensual table,
+        body.theme-lasegunda.dark #subtab-mensual table,
+        body.dark [id^="subtab-view-"] table {
+            background-color: transparent !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark #subtab-view-mensual thead th,
+        body.theme-lasegunda.dark [id^="subtab-view-"] thead th {
+            background-color: rgba(255, 255, 255, 0.05) !important;
+            color: #94a3b8 !important;
+            font-weight: 700 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        }
+
+        body.dark #subtab-view-mensual tbody tr,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody tr {
+            background-color: transparent !important;
+            color: #f1f5f9 !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+        }
+
+        body.dark #subtab-view-mensual tbody tr.is-total-row,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody tr.is-total-row {
+            background-color: rgba(255, 255, 255, 0.04) !important;
+            color: #ffffff !important;
+            font-weight: 800 !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+        }
+
+        body.dark #subtab-view-mensual tbody tr.is-total-row td,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody tr.is-total-row td {
+            color: #ffffff !important;
+            font-weight: 800 !important;
+        }
+
+        body.dark #subtab-view-mensual tbody tr.is-item-row td,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody tr.is-item-row td {
+            color: #cbd5e1 !important;
+        }
+
+        body.dark #subtab-view-mensual tbody td.cell-money,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody td.cell-money {
+            color: #ffffff !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-weight: 700 !important;
+        }
+
+        body.dark #subtab-view-mensual tbody td.cell-positive,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody td.cell-positive {
+            color: #3ac792 !important; /* Verde Institucional Brandbook */
+            font-family: 'JetBrains Mono', monospace !important;
+            font-weight: 700 !important;
+        }
+
+        body.dark #subtab-view-mensual tbody td.cell-negative,
+        body.theme-lasegunda.dark [id^="subtab-view-"] tbody td.cell-negative {
+            color: #ff4c60 !important; /* Rojo Alerta */
+            font-family: 'JetBrains Mono', monospace !important;
+            font-weight: 700 !important;
+        }
+
+        /* --- MODO CLARO (Light Theme) --- */
+        body.light #subtab-view-mensual table,
+        body.theme-lasegunda.light [id^="subtab-view-"] table,
+        body.light [id^="subtab-view-"] table {
+            background-color: transparent !important;
+            color: #0f172a !important;
+        }
+
+        body.light #subtab-view-mensual thead th,
+        body.theme-lasegunda.light [id^="subtab-view-"] thead th {
             background-color: #f1f5f9 !important;
             color: #0f172a !important;
+            font-weight: 800 !important;
             border-bottom: 2px solid #cbd5e1 !important;
         }
 
-        body.theme-lasegunda.light thead th,
-        body.theme-lasegunda:not(.dark) thead th,
-        body.light thead th {
+        body.light #subtab-view-mensual tbody tr,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody tr {
+            background-color: transparent !important;
+            color: #0f172a !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        body.light #subtab-view-mensual tbody tr.is-total-row,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody tr.is-total-row {
+            background-color: #f8fafc !important;
+            color: #0f172a !important;
+            font-weight: 800 !important;
+            border-top: 2px solid #cbd5e1 !important;
+            border-bottom: 2px solid #cbd5e1 !important;
+        }
+
+        body.light #subtab-view-mensual tbody tr.is-total-row td,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody tr.is-total-row td {
             color: #0f172a !important;
             font-weight: 800 !important;
         }
 
-        body.theme-lasegunda.light tbody tr,
-        body.theme-lasegunda:not(.dark) tbody tr {
+        body.light #subtab-view-mensual tbody tr.is-item-row td,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody tr.is-item-row td {
             color: #1e293b !important;
+            font-weight: 600 !important;
         }
 
-        body.theme-lasegunda.light tbody td,
-        body.theme-lasegunda:not(.dark) tbody td {
-            color: #1e293b !important;
-        }
-
-        body.theme-lasegunda.light .bg-slate-800\/40,
-        body.theme-lasegunda:not(.dark) .bg-slate-800\/40 {
-            background-color: #f1f5f9 !important;
+        body.light #subtab-view-mensual tbody td.cell-money,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody td.cell-money {
             color: #0f172a !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-weight: 700 !important;
         }
 
+        body.light #subtab-view-mensual tbody td.cell-positive,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody td.cell-positive {
+            color: #047857 !important; /* Verde Bosque Alto Contraste */
+            font-family: 'JetBrains Mono', monospace !important;
+            font-weight: 800 !important;
+        }
+
+        body.light #subtab-view-mensual tbody td.cell-negative,
+        body.theme-lasegunda.light [id^="subtab-view-"] tbody td.cell-negative {
+            color: #dc2626 !important; /* Rojo Carmesí Alto Contraste */
+            font-family: 'JetBrains Mono', monospace !important;
+            font-weight: 800 !important;
+        }
+    
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
