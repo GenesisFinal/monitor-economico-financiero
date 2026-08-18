@@ -3268,43 +3268,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
 
 
-        /* Premium global header tab buttons dynamic styling */
-
-        #btn-global-valores, #btn-global-indicadores, #btn-global-asegurador {
-
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-        }
-
-        .dark #btn-global-valores:not(.text-slate-400), 
-
-        .dark #btn-global-indicadores:not(.text-slate-400),
-
-        .dark #btn-global-asegurador:not(.text-slate-400) {
-
-            background-color: var(--highlight-glow) !important;
-
-            border-color: var(--highlight-color) !important;
-
-            box-shadow: 0 0 14px 2px var(--highlight-glow) !important;
-
-            text-shadow: 0 0 8px var(--highlight-color);
-
-        }
-
-        .light #btn-global-valores:not(.text-slate-600), 
-
-        .light #btn-global-indicadores:not(.text-slate-600),
-
-        .light #btn-global-asegurador:not(.text-slate-600) {
-
-            background-color: var(--highlight-glow) !important;
-
-            border-color: var(--highlight-color) !important;
-
-            box-shadow: 0 0 10px 0 var(--highlight-glow);
-
-        }
+        
 
 
 
@@ -4569,6 +4533,100 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             font-weight: 800 !important;
         }
     
+
+        /* ==========================================================================
+           UNIFICACIÓN TOTAL DE BOTONES PRINCIPALES DE CABECERA (Valores, Indicadores, Asegurador, Fuentes)
+           ========================================================================== */
+
+        #btn-global-valores, #btn-global-indicadores, #btn-global-asegurador, #btn-global-fuentes {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* 1. MODO OSCURO - Botón Activo (Fondo destacado del tema, texto e ícono en blanco) */
+        .dark #btn-global-valores.active,
+        .dark #btn-global-indicadores.active,
+        .dark #btn-global-asegurador.active,
+        .dark #btn-global-fuentes.active {
+            background-color: var(--highlight-color) !important;
+            border-color: var(--highlight-color) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .dark #btn-global-valores.active i,
+        .dark #btn-global-indicadores.active i,
+        .dark #btn-global-asegurador.active i,
+        .dark #btn-global-fuentes.active i {
+            color: #ffffff !important;
+        }
+
+        /* 2. MODO CLARO - Botón Activo (Fondo destacado del tema, texto e ícono en blanco) */
+        .light #btn-global-valores.active,
+        .light #btn-global-indicadores.active,
+        .light #btn-global-asegurador.active,
+        .light #btn-global-fuentes.active,
+        body:not(.dark) #btn-global-valores.active,
+        body:not(.dark) #btn-global-indicadores.active,
+        body:not(.dark) #btn-global-asegurador.active,
+        body:not(.dark) #btn-global-fuentes.active {
+            background-color: var(--highlight-color) !important;
+            border-color: var(--highlight-color) !important;
+            color: #ffffff !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .light #btn-global-valores.active i,
+        .light #btn-global-indicadores.active i,
+        .light #btn-global-asegurador.active i,
+        .light #btn-global-fuentes.active i,
+        body:not(.dark) #btn-global-valores.active i,
+        body:not(.dark) #btn-global-indicadores.active i,
+        body:not(.dark) #btn-global-asegurador.active i,
+        body:not(.dark) #btn-global-fuentes.active i {
+            color: #ffffff !important;
+        }
+
+        /* 3. MODO CLARO - Botón Inactivo */
+        .light #btn-global-valores:not(.active),
+        .light #btn-global-indicadores:not(.active),
+        .light #btn-global-asegurador:not(.active),
+        .light #btn-global-fuentes:not(.active),
+        body:not(.dark) #btn-global-valores:not(.active),
+        body:not(.dark) #btn-global-indicadores:not(.active),
+        body:not(.dark) #btn-global-asegurador:not(.active),
+        body:not(.dark) #btn-global-fuentes:not(.active) {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: #334155 !important;
+        }
+
+        .light #btn-global-valores:not(.active) i,
+        .light #btn-global-indicadores:not(.active) i,
+        .light #btn-global-asegurador:not(.active) i,
+        .light #btn-global-fuentes:not(.active) i,
+        body:not(.dark) #btn-global-valores:not(.active) i,
+        body:not(.dark) #btn-global-indicadores:not(.active) i,
+        body:not(.dark) #btn-global-asegurador:not(.active) i,
+        body:not(.dark) #btn-global-fuentes:not(.active) i {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 4. MODO OSCURO - Botón Inactivo */
+        .dark #btn-global-valores:not(.active),
+        .dark #btn-global-indicadores:not(.active),
+        .dark #btn-global-asegurador:not(.active),
+        .dark #btn-global-fuentes:not(.active) {
+            background-color: transparent !important;
+            border-color: transparent !important;
+            color: #94a3b8 !important;
+        }
+
+        .dark #btn-global-valores:not(.active) i,
+        .dark #btn-global-indicadores:not(.active) i,
+        .dark #btn-global-asegurador:not(.active) i,
+        .dark #btn-global-fuentes:not(.active) i {
+            color: var(--highlight-color) !important;
+        }
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
@@ -42884,123 +42942,60 @@ window.renderAsegPieCharts = renderAsegPieCharts;
 
 
 
-function switchGlobalTab(tabId) {
 
+        function switchGlobalTab(tabId) {
             localStorage.setItem('activeGlobalTab', tabId);
 
             const btnValores = document.getElementById('btn-global-valores');
-
             const btnIndicadores = document.getElementById('btn-global-indicadores');
-
             const btnAsegurador = document.getElementById('btn-global-asegurador');
-
             const btnFuentes = document.getElementById('btn-global-fuentes');
 
             const containerValores = document.getElementById('container-valores-financieros');
-
             const containerIndicadores = document.getElementById('container-indicadores-economicos');
-
             const containerAsegurador = document.getElementById('container-mercado-asegurador');
-
             const containerFuentes = document.getElementById('container-fuentes');
 
             const body = document.body;
-
             const isDark = body.classList.contains('dark');
 
-            
-
-            // Hide all global containers
-
-            containerValores.classList.add('hidden');
-
-            containerIndicadores.classList.add('hidden');
-
+            // Hide all containers
+            if (containerValores) containerValores.classList.add('hidden');
+            if (containerIndicadores) containerIndicadores.classList.add('hidden');
             if (containerAsegurador) containerAsegurador.classList.add('hidden');
-
             if (containerFuentes) containerFuentes.classList.add('hidden');
 
-            
+            const mainButtons = [
+                { id: 'valores-financieros', btn: btnValores, container: containerValores },
+                { id: 'indicadores-economicos', btn: btnIndicadores, container: containerIndicadores },
+                { id: 'mercado-asegurador', btn: btnAsegurador, container: containerAsegurador },
+                { id: 'fuentes', btn: btnFuentes, container: containerFuentes }
+            ];
 
-            // Reset button classes to inactive
-
-            const inactiveClass = isDark 
-
-                ? "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white" 
-
-                : "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-600 hover:text-slate-900";
-
-            
-
-            btnValores.className = inactiveClass;
-
-            btnIndicadores.className = inactiveClass;
-
-            if (btnAsegurador) btnAsegurador.className = inactiveClass;
-
-            if (btnFuentes) btnFuentes.className = inactiveClass;
-
-            
-
-            const activeClass = "px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-[#e20039] border border-[#e20039] shadow-md";
-
-            
+            mainButtons.forEach(item => {
+                if (item.btn) {
+                    if (item.id === tabId) {
+                        item.btn.classList.add('active');
+                        item.btn.classList.remove('text-slate-400', 'text-slate-600');
+                        if (item.container) item.container.classList.remove('hidden');
+                    } else {
+                        item.btn.classList.remove('active');
+                        item.btn.classList.add(isDark ? 'text-slate-400' : 'text-slate-600');
+                    }
+                }
+            });
 
             if (tabId === 'valores-financieros') {
-
-                containerValores.classList.remove('hidden');
-
-                btnValores.className = activeClass;
-
-                renderChart(activeTab);
-
-            } else if (tabId === 'indicadores-economicos') {
-
-                containerIndicadores.classList.remove('hidden');
-
-                btnIndicadores.className = activeClass;
-
+                if (typeof renderChart === 'function') renderChart(activeTab);
             } else if (tabId === 'mercado-asegurador') {
-
-                if (containerAsegurador) containerAsegurador.classList.remove('hidden');
-
-                if (btnAsegurador) btnAsegurador.className = activeClass;
-
                 var curSub = window.activeAsegSubtab || 'primas';
-
                 if (typeof switchAsegSubtab === 'function') switchAsegSubtab(curSub);
-
-            } else if (tabId === 'fuentes') {
-
-                if (containerFuentes) containerFuentes.classList.remove('hidden');
-
-                if (btnFuentes) btnFuentes.className = activeClass;
-
             }
-
-            
-
-            if (tabId === 'valores-financieros' && !document.querySelector('.tab-btn.active:not(.econ-tab-btn):not(.aseg-tab-btn)')) {
-
-                switchTab('exchange');
-
-            } else if (tabId === 'indicadores-economicos' && !document.querySelector('.econ-tab-btn.active')) {
-
-                switchEconTab('econ-tab-precios-y-costo-de-vida');
-
-            } else if (tabId === 'mercado-asegurador') {
-
-                switchAsegTab('aseg-tab-primas');
-
-            }
-
-
-
         }
+        window.switchGlobalTab = switchGlobalTab;
 
 
-
-        function toggleBandsVisibility() {
+function toggleBandsVisibility() {
 
             const chk = document.getElementById('chk-show-bands');
 
