@@ -3896,38 +3896,60 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         }
 
     
-        /* 9. Theme La Segunda (Oscuro) - Basado en Brandbook Oficial */
-        body.theme-lasegunda-dark {
+        
+
+        body.font-sora-brand {
             font-family: 'Sora', sans-serif !important;
+        }
+
+        /* Color Theme: L2 (La Segunda) - Adaptable a Dark Mode y Light Mode */
+        body.theme-lasegunda.dark {
             --bg-color: #141416;
             --card-bg: #1c1c20;
             --border-color: rgba(226, 0, 57, 0.28);
-            --highlight-color: #e20039; /* Rojo Seguro Institucional */
+            --highlight-color: #e20039; /* Rojo Seguro Institucional (#e20039) */
             --highlight-glow: rgba(226, 0, 57, 0.25);
-            --success-color: #3ac792; /* Verde Menta Complementario */
-            --error-color: #ff4c60; /* Rojo Vibrante Complementario */
+            --success-color: #3ac792; /* Verde Menta Complementario (#3ac792) */
+            --error-color: #ff4c60; /* Rojo Vibrante (#ff4c60) */
             --shadow-color: rgba(0, 0, 0, 0.6);
             --text-color: #e4e4e7;
             --title-color: #ffffff;
         }
 
-        /* 10. Theme La Segunda (Claro) - Basado en Brandbook Oficial */
-        body.theme-lasegunda-light {
-            font-family: 'Sora', sans-serif !important;
+        body.theme-lasegunda.light {
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --border-color: #e2e8f0;
-            --highlight-color: #e20039; /* Rojo Seguro Institucional */
+            --highlight-color: #e20039; /* Rojo Seguro Institucional (#e20039) */
             --highlight-glow: rgba(226, 0, 57, 0.08);
             --success-color: #059669;
-            --error-color: #b91f38;
+            --error-color: #b91f38; /* Rojo Oscuro (#b91f38) */
             --shadow-color: rgba(15, 23, 42, 0.05);
-            --text-color: #30302d; /* Process Black 90% Institucional */
-            --title-color: #111827;
+            --text-color: #30302d; /* Process Black 90% (#30302d) */
+            --title-color: #0f172a;
         }
 
-        body.font-sora-brand {
+        body.theme-lasegunda:not(.light) {
+            --bg-color: #141416;
+            --card-bg: #1c1c20;
+            --border-color: rgba(226, 0, 57, 0.28);
+            --highlight-color: #e20039;
+            --highlight-glow: rgba(226, 0, 57, 0.25);
+            --success-color: #3ac792;
+            --error-color: #ff4c60;
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            --text-color: #e4e4e7;
+            --title-color: #ffffff;
+        }
+
+        /* Font: Sora (Brandbook Oficial) */
+        body.font-sora {
             font-family: 'Sora', sans-serif !important;
+        }
+
+        /* Layout: La Segunda */
+        body.layout-lasegunda {
+            letter-spacing: -0.01em;
         }
 </style></head>
 
@@ -3982,12 +4004,10 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                     <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
                         <option value="agmd-style" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
-                        <option value="lasegunda-dark" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda (Oscuro)</option>
-                        <option value="lasegunda-light" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda (Claro)</option>
+                        <option value="lasegunda" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda</option>
                         <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid</option>
                         <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report</option>
-                        <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">FlatSaas</option>
-                    </select>
+                        <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">FlatSaas</option></select>
 
                 </div>
 
@@ -3999,26 +4019,23 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                     <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
                         <option value="emerald-green" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Green</option>
-                        <option value="lasegunda-dark" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda (Oscuro)</option>
-                        <option value="lasegunda-light" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda (Claro)</option>
+                        <option value="lasegunda" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
                         <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon</option>
                         <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber</option>
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean</option>
-                        <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo</option>
-                        <option value="pink-neon" class="bg-darkCard text-white light:bg-white light:text-slate-800">Pink</option>
-                    </select>
+                        <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Gold</option>
+                        <option value="pink-neon" class="bg-darkCard text-white light:bg-white light:text-slate-800">Neon</option></select>
 
                 </div>
                     <!-- Selector Tipografía -->
                     <div class="flex items-center gap-1.5 bg-darkCard/80 light:bg-slate-100 border border-darkBorder/60 light:border-slate-300 rounded-xl px-2.5 py-1.5 shadow-sm">
                         <i class="fas fa-font text-xs text-slate-400 light:text-slate-600"></i>
                         <select id="select-visual-font" onchange="switchVisualFont(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
-                            <option value="sora-brand" class="bg-darkCard text-white light:bg-white light:text-slate-800">Sora (Brandbook)</option>
+                            <option value="sora" class="bg-darkCard text-white light:bg-white light:text-slate-800">Sora</option>
                             <option value="outfit-fit" class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
                             <option value="ibm-plex" class="bg-darkCard text-white light:bg-white light:text-slate-800">IBM Plex</option>
                             <option value="roboto-inter" class="bg-darkCard text-white light:bg-white light:text-slate-800">Roboto</option>
-                            <option value="jetbrains-fira" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
-                        </select>
+                            <option value="jetbrains-fira" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option></select>
                     </div>
 
                 <button onclick="toggleTheme()" class="p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors">
@@ -45303,13 +45320,13 @@ function switchGlobalTab(tabId) {
 
         function switchVisualFont(fontName) {
 
-            const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira', 'sora-brand'];
+            const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira', 'sora'];
 
             if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
 
             
 
-            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-outfit-fit', 'font-sora-brand');
+            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-outfit-fit', 'font-sora');
 
             document.body.classList.add('font-' + fontName);
 
@@ -45327,13 +45344,13 @@ function switchGlobalTab(tabId) {
 
         function switchVisualTheme(themeName) {
 
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda-dark', 'lasegunda-light'];
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
 
             if (!allowed.includes(themeName)) themeName = 'emerald-green';
 
             
 
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
 
             document.body.classList.add('theme-' + themeName);
 
@@ -45359,13 +45376,13 @@ function switchGlobalTab(tabId) {
 
         function switchVisualFont(fontName) {
 
-            const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira', 'sora-brand'];
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
 
             if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
 
             
 
-            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-outfit-fit', 'font-sora-brand');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
 
             document.body.classList.add('font-' + fontName);
 
@@ -45383,13 +45400,125 @@ function switchGlobalTab(tabId) {
 
         function switchVisualTheme(themeName) {
 
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda-dark', 'lasegunda-light'];
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
 
             if (!allowed.includes(themeName)) themeName = 'emerald-green';
 
             
 
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+
+            document.body.classList.add('theme-' + themeName);
+
+            
+
+            const selectEl = document.getElementById('select-visual-theme');
+
+            if (selectEl) selectEl.value = themeName;
+
+            localStorage.setItem('visualTheme', themeName);
+
+            
+
+            if (typeof renderSparklines === 'function') renderSparklines();
+
+            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
+
+            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
+
+        }
+
+
+
+        function switchVisualFont(fontName) {
+
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
+
+            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
+
+            
+
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+
+            document.body.classList.add('font-' + fontName);
+
+            
+
+            const selectEl = document.getElementById('select-visual-font');
+
+            if (selectEl) selectEl.value = fontName;
+
+            localStorage.setItem('visualFont', fontName);
+
+        }
+
+
+
+        function switchVisualTheme(themeName) {
+
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
+
+            if (!allowed.includes(themeName)) themeName = 'emerald-green';
+
+            
+
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+
+            document.body.classList.add('theme-' + themeName);
+
+            
+
+            const selectEl = document.getElementById('select-visual-theme');
+
+            if (selectEl) selectEl.value = themeName;
+
+            localStorage.setItem('visualTheme', themeName);
+
+            
+
+            if (typeof renderSparklines === 'function') renderSparklines();
+
+            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
+
+            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
+
+        }
+
+
+
+        function switchVisualFont(fontName) {
+
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
+
+            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
+
+            
+
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+
+            document.body.classList.add('font-' + fontName);
+
+            
+
+            const selectEl = document.getElementById('select-visual-font');
+
+            if (selectEl) selectEl.value = fontName;
+
+            localStorage.setItem('visualFont', fontName);
+
+        }
+
+
+
+        function switchVisualTheme(themeName) {
+
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda'];
+
+            if (!allowed.includes(themeName)) themeName = 'emerald-green';
+
+            
+
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda', 'theme-lasegunda-dark', 'theme-lasegunda-light');
 
             document.body.classList.add('theme-' + themeName);
 
