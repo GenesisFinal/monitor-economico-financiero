@@ -3948,54 +3948,81 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             font-family: 'Sora', sans-serif !important;
         }
 
-        /* Color Theme: L2 (La Segunda) - Adaptable a Dark Mode y Light Mode */
-        body.theme-lasegunda.dark {
-            --bg-color: #141416;
-            --card-bg: #1c1c20;
-            --border-color: rgba(226, 0, 57, 0.28);
-            --highlight-color: #e20039; /* Rojo Seguro Institucional (#e20039) */
-            --highlight-glow: rgba(226, 0, 57, 0.25);
-            --success-color: #3ac792; /* Verde Menta Complementario (#3ac792) */
-            --error-color: #ff4c60; /* Rojo Vibrante (#ff4c60) */
-            --shadow-color: rgba(0, 0, 0, 0.6);
-            --text-color: #e4e4e7;
-            --title-color: #ffffff;
-        }
+        
 
-        body.theme-lasegunda.light {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
-            --highlight-color: #e20039; /* Rojo Seguro Institucional (#e20039) */
-            --highlight-glow: rgba(226, 0, 57, 0.08);
-            --success-color: #059669;
-            --error-color: #b91f38; /* Rojo Oscuro (#b91f38) */
-            --shadow-color: rgba(15, 23, 42, 0.05);
-            --text-color: #30302d; /* Process Black 90% (#30302d) */
-            --title-color: #0f172a;
-        }
-
-        body.theme-lasegunda:not(.light) {
-            --bg-color: #141416;
-            --card-bg: #1c1c20;
-            --border-color: rgba(226, 0, 57, 0.28);
-            --highlight-color: #e20039;
+        /* ==========================================================================
+           ESTILO L2 (LA SEGUNDA) - EXACT BRANDBOOK CALCULADORA ACTUARIAL
+           ========================================================================== */
+        
+        /* 1. MODO OSCURO (Dark Theme L2) */
+        body.theme-lasegunda.dark, body.dark.theme-lasegunda, body.dark.layout-lasegunda {
+            font-family: 'Sora', sans-serif !important;
+            --gris-fondo: #242322;
+            --gris-texto: #a8a5a1;
+            --gris-borde: #3c3a38;
+            --text-primary: #f0eeec;
+            --dark-accent: #151413;
+            --surface: #1c1b1a;
+            --surface-2: #242322;
+            --surface-3: #292826;
+            --bg-color: #242322;
+            --card-bg: #1c1b1a;
+            --border-color: #3c3a38;
+            --highlight-color: #e20039; /* Rojo Seguro */
             --highlight-glow: rgba(226, 0, 57, 0.25);
             --success-color: #3ac792;
             --error-color: #ff4c60;
-            --shadow-color: rgba(0, 0, 0, 0.6);
-            --text-color: #e4e4e7;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --text-color: #f0eeec;
             --title-color: #ffffff;
+            background-color: #242322 !important;
+            color: #f0eeec !important;
         }
 
-        /* Font: Sora (Brandbook Oficial) */
-        body.font-sora {
+        /* 2. MODO CLARO (Light Theme L2) */
+        body.theme-lasegunda.light, body.light.theme-lasegunda, body.light.layout-lasegunda, body.theme-lasegunda:not(.dark) {
             font-family: 'Sora', sans-serif !important;
+            --gris-fondo: #f2f0ef;
+            --gris-texto: #6a6866;
+            --gris-borde: #e2dfdd;
+            --text-primary: #30302d;
+            --dark-accent: #30302d;
+            --surface: #ffffff;
+            --surface-2: #fafafa;
+            --surface-3: #f7f6f5;
+            --bg-color: #f2f0ef;
+            --card-bg: #ffffff;
+            --border-color: #e2dfdd;
+            --highlight-color: #e20039; /* Rojo Seguro */
+            --highlight-glow: rgba(226, 0, 57, 0.08);
+            --success-color: #3ac792;
+            --error-color: #b91f38;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --text-color: #30302d;
+            --title-color: #30302d;
+            background-color: #f2f0ef !important;
+            color: #30302d !important;
         }
 
-        /* Layout: La Segunda */
-        body.layout-lasegunda {
-            letter-spacing: -0.01em;
+        /* Re-override background in dark mode when theme-lasegunda or layout-lasegunda is active */
+        body.dark.theme-lasegunda, body.dark.layout-lasegunda {
+            background-color: #242322 !important;
+            color: #f0eeec !important;
+        }
+
+        /* Specific card overrides for Layout La Segunda */
+        body.layout-lasegunda .bg-darkCard,
+        body.theme-lasegunda.dark .bg-darkCard {
+            background-color: #1c1b1a !important;
+            border-color: #3c3a38 !important;
+        }
+
+        body.layout-lasegunda.light .bg-darkCard,
+        body.layout-lasegunda:not(.dark) .bg-darkCard,
+        body.theme-lasegunda.light .bg-darkCard {
+            background-color: #ffffff !important;
+            border-color: #e2dfdd !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
         }
 </style></head>
 
