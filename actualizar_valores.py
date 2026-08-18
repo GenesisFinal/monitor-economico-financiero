@@ -4066,6 +4066,164 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             background-color: #f2f0ef !important;
             color: #30302d !important;
         }
+
+        /* ==========================================================================
+           DINAMISMO TOTAL DE TEMAS DE COLOR EN TODO EL SITIO (#e20039 para L2)
+           ========================================================================== */
+
+        /* 1. Definición estricta de variables para Theme L2 */
+        body.theme-lasegunda.dark, body.dark.theme-lasegunda {
+            --highlight-color: #e20039 !important;
+            --highlight-glow: rgba(226, 0, 57, 0.22) !important;
+            --border-color: rgba(226, 0, 57, 0.3) !important;
+            --success-color: #3ac792 !important;
+            --error-color: #ff4c60 !important;
+        }
+
+        body.theme-lasegunda.light, body.light.theme-lasegunda, body.theme-lasegunda:not(.dark) {
+            --highlight-color: #e20039 !important;
+            --highlight-glow: rgba(226, 0, 57, 0.1) !important;
+            --border-color: rgba(226, 0, 57, 0.25) !important;
+            --success-color: #059669 !important;
+            --error-color: #b91f38 !important;
+        }
+
+        /* 2. Sobreescritura de colores de texto e íconos en todo el sitio para L2 */
+        body.theme-lasegunda .text-emerald-400,
+        body.theme-lasegunda .text-emerald-500,
+        body.theme-lasegunda .text-emerald-600,
+        body.theme-lasegunda .text-emerald-300,
+        body.theme-lasegunda .text-brandBlue,
+        body.theme-lasegunda .text-green-400,
+        body.theme-lasegunda .text-green-500,
+        body.theme-lasegunda i.text-emerald-400,
+        body.theme-lasegunda i.text-emerald-500,
+        body.theme-lasegunda i.text-brandBlue,
+        body.theme-lasegunda i.text-green-400,
+        body.theme-lasegunda i.text-emerald-300,
+        body.theme-lasegunda span.text-emerald-400,
+        body.theme-lasegunda span.text-emerald-500,
+        body.theme-lasegunda p.text-emerald-400,
+        body.theme-lasegunda div.text-emerald-400,
+        body.theme-lasegunda .text-emerald-400\/80,
+        body.theme-lasegunda .text-emerald-500\/80 {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 3. Sobreescritura de bordes y fondos de selección para L2 */
+        body.theme-lasegunda .border-emerald-500,
+        body.theme-lasegunda .border-emerald-400,
+        body.theme-lasegunda .border-brandBlue,
+        body.theme-lasegunda .border-brandBlue\/50 {
+            border-color: var(--highlight-color) !important;
+        }
+
+        body.theme-lasegunda .bg-emerald-500\/10,
+        body.theme-lasegunda .bg-emerald-500\/20,
+        body.theme-lasegunda .bg-brandBlue\/20 {
+            background-color: rgba(226, 0, 57, 0.15) !important;
+        }
+
+        /* 4. Sobreescritura universal para TODOS los demás temas de color (Carbon, Amber, Ocean, Gold, Neon) */
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-500,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-600,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-300,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-brandBlue,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-green-400,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-green-500,
+        body[class*="theme-"]:not(.theme-emerald-green) i.text-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) i.text-emerald-500,
+        body[class*="theme-"]:not(.theme-emerald-green) i.text-brandBlue,
+        body[class*="theme-"]:not(.theme-emerald-green) span.text-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) span.text-emerald-500 {
+            color: var(--highlight-color) !important;
+        }
+
+        body[class*="theme-"]:not(.theme-emerald-green) .border-emerald-500,
+        body[class*="theme-"]:not(.theme-emerald-green) .border-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) .border-brandBlue {
+            border-color: var(--highlight-color) !important;
+        }
+
+        /* ==========================================================================
+           DINAMISMO TOTAL DE TEMAS DE COLOR EN TODO EL SITIO (#e20039 para L2)
+           ========================================================================== */
+
+        /* 1. Definición estricta de variables para Theme L2 */
+        body.theme-lasegunda.dark, body.dark.theme-lasegunda {
+            --highlight-color: #e20039 !important;
+            --highlight-glow: rgba(226, 0, 57, 0.22) !important;
+            --border-color: rgba(226, 0, 57, 0.3) !important;
+            --success-color: #3ac792 !important;
+            --error-color: #ff4c60 !important;
+        }
+
+        body.theme-lasegunda.light, body.light.theme-lasegunda, body.theme-lasegunda:not(.dark) {
+            --highlight-color: #e20039 !important;
+            --highlight-glow: rgba(226, 0, 57, 0.1) !important;
+            --border-color: rgba(226, 0, 57, 0.25) !important;
+            --success-color: #059669 !important;
+            --error-color: #b91f38 !important;
+        }
+
+        /* 2. Sobreescritura de colores de texto e íconos en todo el sitio para L2 */
+        body.theme-lasegunda .text-emerald-400,
+        body.theme-lasegunda .text-emerald-500,
+        body.theme-lasegunda .text-emerald-600,
+        body.theme-lasegunda .text-emerald-300,
+        body.theme-lasegunda .text-brandBlue,
+        body.theme-lasegunda .text-green-400,
+        body.theme-lasegunda .text-green-500,
+        body.theme-lasegunda i.text-emerald-400,
+        body.theme-lasegunda i.text-emerald-500,
+        body.theme-lasegunda i.text-brandBlue,
+        body.theme-lasegunda i.text-green-400,
+        body.theme-lasegunda i.text-emerald-300,
+        body.theme-lasegunda span.text-emerald-400,
+        body.theme-lasegunda span.text-emerald-500,
+        body.theme-lasegunda p.text-emerald-400,
+        body.theme-lasegunda div.text-emerald-400,
+        body.theme-lasegunda .text-emerald-400\/80,
+        body.theme-lasegunda .text-emerald-500\/80 {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 3. Sobreescritura de bordes y fondos de selección para L2 */
+        body.theme-lasegunda .border-emerald-500,
+        body.theme-lasegunda .border-emerald-400,
+        body.theme-lasegunda .border-brandBlue,
+        body.theme-lasegunda .border-brandBlue\/50 {
+            border-color: var(--highlight-color) !important;
+        }
+
+        body.theme-lasegunda .bg-emerald-500\/10,
+        body.theme-lasegunda .bg-emerald-500\/20,
+        body.theme-lasegunda .bg-brandBlue\/20 {
+            background-color: rgba(226, 0, 57, 0.15) !important;
+        }
+
+        /* 4. Sobreescritura universal para TODOS los demás temas de color (Carbon, Amber, Ocean, Gold, Neon) */
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-500,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-600,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-emerald-300,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-brandBlue,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-green-400,
+        body[class*="theme-"]:not(.theme-emerald-green) .text-green-500,
+        body[class*="theme-"]:not(.theme-emerald-green) i.text-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) i.text-emerald-500,
+        body[class*="theme-"]:not(.theme-emerald-green) i.text-brandBlue,
+        body[class*="theme-"]:not(.theme-emerald-green) span.text-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) span.text-emerald-500 {
+            color: var(--highlight-color) !important;
+        }
+
+        body[class*="theme-"]:not(.theme-emerald-green) .border-emerald-500,
+        body[class*="theme-"]:not(.theme-emerald-green) .border-emerald-400,
+        body[class*="theme-"]:not(.theme-emerald-green) .border-brandBlue {
+            border-color: var(--highlight-color) !important;
+        }
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
@@ -45467,6 +45625,7 @@ function switchGlobalTab(tabId) {
         }
         window.switchVisualFont = switchVisualFont;
 
+        
         function switchVisualTheme(themeName) {
             const allowed = ['emerald-green', 'lasegunda', 'carbon-electric', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon'];
             if (!allowed.includes(themeName)) themeName = 'emerald-green';
@@ -45483,6 +45642,9 @@ function switchGlobalTab(tabId) {
             if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
         }
         window.switchVisualTheme = switchVisualTheme;
+
+
+
 
 
 function renderSparklines() {
