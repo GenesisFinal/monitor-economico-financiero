@@ -4028,6 +4028,8 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                     <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
                         <option value="agmd-style" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
+                        <option value="lasegunda-dark" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda (Oscuro)</option>
+                        <option value="lasegunda-light" class="bg-darkCard text-white light:bg-white light:text-slate-800">La Segunda (Claro)</option>
                         <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid</option>
                         <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report</option>
                         <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">FlatSaas</option>
@@ -4057,10 +4059,11 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <div class="flex items-center gap-1.5 bg-darkCard/80 light:bg-slate-100 border border-darkBorder/60 light:border-slate-300 rounded-xl px-2.5 py-1.5 shadow-sm">
                         <i class="fas fa-font text-xs text-slate-400 light:text-slate-600"></i>
                         <select id="select-visual-font" onchange="switchVisualFont(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
+                            <option value="sora-brand" class="bg-darkCard text-white light:bg-white light:text-slate-800">Sora (Brandbook)</option>
                             <option value="outfit-fit" class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
                             <option value="ibm-plex" class="bg-darkCard text-white light:bg-white light:text-slate-800">IBM Plex</option>
                             <option value="roboto-inter" class="bg-darkCard text-white light:bg-white light:text-slate-800">Roboto</option>
-                            <option value="jetbrains-fira" selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
+                            <option value="jetbrains-fira" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
                         </select>
                     </div>
 
@@ -45339,6 +45342,62 @@ function switchGlobalTab(tabId) {
                 }
 
             });
+
+        }
+
+
+
+        function switchVisualFont(fontName) {
+
+            const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira', 'sora-brand'];
+
+            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
+
+            
+
+            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-outfit-fit', 'font-sora-brand');
+
+            document.body.classList.add('font-' + fontName);
+
+            
+
+            const selectEl = document.getElementById('select-visual-font');
+
+            if (selectEl) selectEl.value = fontName;
+
+            localStorage.setItem('visualFont', fontName);
+
+        }
+
+
+
+        function switchVisualTheme(themeName) {
+
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'lasegunda-dark', 'lasegunda-light'];
+
+            if (!allowed.includes(themeName)) themeName = 'emerald-green';
+
+            
+
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color', 'theme-lasegunda-dark', 'theme-lasegunda-light');
+
+            document.body.classList.add('theme-' + themeName);
+
+            
+
+            const selectEl = document.getElementById('select-visual-theme');
+
+            if (selectEl) selectEl.value = themeName;
+
+            localStorage.setItem('visualTheme', themeName);
+
+            
+
+            if (typeof renderSparklines === 'function') renderSparklines();
+
+            if (typeof activeTab !== 'undefined' && activeTab && typeof renderChart === 'function') renderChart(activeTab);
+
+            if (typeof activeDebtCard !== 'undefined' && activeDebtCard && typeof renderDebtChart === 'function') renderDebtChart(activeDebtCard);
 
         }
 
