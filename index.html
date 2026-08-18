@@ -4248,6 +4248,121 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         body[class*="theme-"]:not(.theme-emerald-green) .bg-emerald-500\/10 {
             background-color: var(--highlight-glow) !important;
         }
+
+        /* ==========================================================================
+           AJUSTES FINALES ESTILO L2 & NAVEGACIÓN EN TODO EL SITIO
+           ========================================================================== */
+
+        /* 1. MODO OSCURO SIN DEGRADÉS (Negro simple plano) */
+        body.layout-lasegunda.dark, body.dark.theme-lasegunda, body.dark.layout-lasegunda {
+            background: #09090b !important;
+            background-image: none !important;
+            color: #f4f4f5 !important;
+            --bg-color: #09090b;
+            --card-bg: #121215;
+            --border-color: #27272a;
+            --text-color: #f4f4f5;
+            --title-color: #ffffff;
+        }
+
+        body.layout-lasegunda.dark .bg-gradient-to-b,
+        body.layout-lasegunda.dark .bg-gradient-to-r,
+        body.layout-lasegunda.dark .bg-gradient-to-br,
+        body.layout-lasegunda.dark [class*="bg-gradient"] {
+            background: #121215 !important;
+            background-image: none !important;
+        }
+
+        /* 2. SELECTOR SELECCIONADO EN ESTILO L2 (Fondo rojo #e20039 y letras blancas) */
+        body.theme-lasegunda button[id*="btn-aseg-subtab"].active,
+        body.theme-lasegunda button[id*="btn-aseg-subtab"][class*="bg-brandBlue"],
+        body.layout-lasegunda button[id*="btn-aseg-subtab"].active,
+        body.layout-lasegunda button[id*="btn-aseg-subtab"][class*="bg-brandBlue"] {
+            background-color: #e20039 !important;
+            color: #ffffff !important;
+            border-color: #e20039 !important;
+            box-shadow: 0 4px 12px rgba(226, 0, 57, 0.35) !important;
+        }
+
+        body.theme-lasegunda button[id*="btn-aseg-subtab"].active i,
+        body.theme-lasegunda button[id*="btn-aseg-subtab"][class*="bg-brandBlue"] i,
+        body.layout-lasegunda button[id*="btn-aseg-subtab"].active i,
+        body.layout-lasegunda button[id*="btn-aseg-subtab"][class*="bg-brandBlue"] i {
+            color: #ffffff !important;
+        }
+
+        /* 3. MODO CLARO DE ALTO CONTRASTE (Sin grises imperceptibles) */
+        body.layout-lasegunda.light, body.light.theme-lasegunda, body.light.layout-lasegunda, body.layout-lasegunda:not(.dark) {
+            background: #f8fafc !important;
+            color: #0f172a !important;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #cbd5e1;
+            --text-color: #1e293b;
+            --title-color: #0f172a;
+        }
+
+        body.layout-lasegunda.light .text-slate-400,
+        body.layout-lasegunda.light .text-slate-500,
+        body.layout-lasegunda.light .text-slate-600,
+        body.layout-lasegunda.light .text-gray-400,
+        body.layout-lasegunda.light .text-gray-500,
+        body.light.theme-lasegunda .text-slate-400,
+        body.light.theme-lasegunda .text-slate-500 {
+            color: #334155 !important;
+        }
+
+        /* 4. SOBREESCRITURA TOTAL DE ÍCONOS Y BADGES EN MERCADO ASEGURADOR PARA L2 */
+        body.theme-lasegunda [id^="subtab-view-"] i,
+        body.theme-lasegunda [id^="subtab-view-"] .text-emerald-400,
+        body.theme-lasegunda [id^="subtab-view-"] .text-emerald-500,
+        body.theme-lasegunda [id^="subtab-view-"] .text-emerald-600,
+        body.theme-lasegunda [id^="subtab-view-"] .text-green-500,
+        body.theme-lasegunda [id^="subtab-view-"] .text-teal-500,
+        body.theme-lasegunda [id^="subtab-view-"] .text-rose-500,
+        body.theme-lasegunda #subtab-mensual-controls i,
+        body.theme-lasegunda #subtab-balances-controls i {
+            color: var(--highlight-color) !important;
+        }
+
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-100,
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-500\/10,
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-500\/20,
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-500\/30,
+        body.theme-lasegunda [id^="subtab-view-"] [class*="bg-emerald"],
+        body.theme-lasegunda [id^="subtab-view-"] [class*="bg-teal"],
+        body.theme-lasegunda [id^="subtab-view-"] [class*="bg-green"] {
+            background-color: rgba(226, 0, 57, 0.15) !important;
+            color: var(--highlight-color) !important;
+        }
+
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-100 i,
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-500\/10 i,
+        body.theme-lasegunda [id^="subtab-view-"] .bg-emerald-500\/20 i {
+            color: var(--highlight-color) !important;
+        }
+
+        /* 5. CORRECCIÓN DE SELECTORES EN MODO CLARO (Legibilidad total: Letras oscuras en fondo blanco) */
+        body.light select,
+        body.light select option,
+        .light select,
+        .light select option,
+        body.light #select-visual-layout,
+        body.light #select-visual-theme,
+        body.light #select-visual-font,
+        body.light #subtab-mensual-controls select,
+        body.light #select-fuente-mensual,
+        body.light #subtab-balances-controls select,
+        body.light [id*="controls"] select {
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+        }
+
+        body.light select option,
+        .light select option {
+            color: #0f172a !important;
+            background-color: #ffffff !important;
+        }
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
