@@ -4024,6 +4024,48 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             border-color: #e2dfdd !important;
             box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
         }
+
+        /* ==========================================================================
+           TEMA DE COLOR L2 (#e20039 - Rojo Seguro Institucional)
+           Afecta a todo el sitio como cualquier otro color de la paleta
+           ========================================================================== */
+        
+        body.theme-lasegunda.dark {
+            --highlight-color: #e20039 !important;
+            --highlight-glow: rgba(226, 0, 57, 0.22) !important;
+            --border-color: rgba(226, 0, 57, 0.3) !important;
+            --success-color: #3ac792 !important;
+            --error-color: #ff4c60 !important;
+        }
+
+        body.theme-lasegunda.light, body.theme-lasegunda:not(.dark) {
+            --highlight-color: #e20039 !important;
+            --highlight-glow: rgba(226, 0, 57, 0.1) !important;
+            --border-color: rgba(226, 0, 57, 0.25) !important;
+            --success-color: #059669 !important;
+            --error-color: #b91f38 !important;
+        }
+
+        /* Layout La Segunda (Estilo visual de tarjetas de Calculadora Actuarial) */
+        body.layout-lasegunda.dark {
+            --bg-color: #242322;
+            --card-bg: #1c1b1a;
+            --border-color: #3c3a38;
+            --text-color: #f0eeec;
+            --title-color: #ffffff;
+            background-color: #242322 !important;
+            color: #f0eeec !important;
+        }
+
+        body.layout-lasegunda.light, body.layout-lasegunda:not(.dark) {
+            --bg-color: #f2f0ef;
+            --card-bg: #ffffff;
+            --border-color: #e2dfdd;
+            --text-color: #30302d;
+            --title-color: #30302d;
+            background-color: #f2f0ef !important;
+            color: #30302d !important;
+        }
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
