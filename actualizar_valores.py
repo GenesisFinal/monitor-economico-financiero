@@ -4673,6 +4673,48 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         .dark #btn-global-fuentes:not(.active) i {
             color: var(--highlight-color) !important;
         }
+
+        /* ==========================================================================
+           ALTO CONTRASTE EN MODO CLARO PARA MERCADO ASEGURADOR (Gris oscuro casi negro)
+           ========================================================================== */
+
+        body.light #container-mercado-asegurador .text-slate-400,
+        body.light #container-mercado-asegurador .text-slate-500,
+        body.light #container-mercado-asegurador .text-slate-600,
+        body.light #container-mercado-asegurador .text-gray-400,
+        body.light #container-mercado-asegurador .text-gray-500,
+        body.light #container-mercado-asegurador .text-gray-600,
+        body.light #container-mercado-asegurador p.text-xs,
+        body.light #container-mercado-asegurador p.text-sm,
+        body.light #container-mercado-asegurador span.text-xs,
+        body.light #container-mercado-asegurador span.text-sm,
+        body.light #container-mercado-asegurador th,
+        body.light #container-mercado-asegurador label,
+        body.light #container-mercado-asegurador [id^="subtab-view-"] .text-slate-400,
+        body.light #container-mercado-asegurador [id^="subtab-view-"] .text-slate-500,
+        body.light #container-mercado-asegurador [id^="subtab-view-"] .text-gray-400,
+        body.light #container-mercado-asegurador [id^="subtab-view-"] .text-gray-500,
+        body:not(.dark) #container-mercado-asegurador .text-slate-400,
+        body:not(.dark) #container-mercado-asegurador .text-slate-500,
+        body:not(.dark) #container-mercado-asegurador .text-gray-400,
+        body:not(.dark) #container-mercado-asegurador .text-gray-500 {
+            color: #1e293b !important;
+        }
+
+        body.light #container-mercado-asegurador p,
+        body.light #container-mercado-asegurador span.text-slate-400,
+        body.light #container-mercado-asegurador div.text-slate-400 {
+            color: #334155 !important;
+        }
+
+        body.light #container-mercado-asegurador h1,
+        body.light #container-mercado-asegurador h2,
+        body.light #container-mercado-asegurador h3,
+        body.light #container-mercado-asegurador h4,
+        body.light #container-mercado-asegurador .text-slate-200,
+        body.light #container-mercado-asegurador .text-slate-100 {
+            color: #0f172a !important;
+        }
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
