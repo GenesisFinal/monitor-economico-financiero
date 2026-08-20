@@ -4969,7 +4969,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                 </h1>
 
-                <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-1">Actualizado: 15/08/2026 18:56:25 hs</span>
+                <span class="text-[10px] text-slate-500 light:text-slate-400 block mt-1">Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}</span>
 
                 <span class="text-[9px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización lunes a viernes, 21:00 hs)</span>
 
@@ -9771,7 +9771,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-globe text-brandBlue"></i> Índices Globales
                     </h2>
                     <span id="last-updated-indices" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -10787,7 +10787,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-coins text-brandBlue"></i> Divisas
                     </h2>
                     <span id="last-updated-forex" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -11308,7 +11308,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-wheat-awn text-brandBlue"></i> Commodities
                     </h2>
                     <span id="last-updated-commodities" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -13759,7 +13759,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                 <h3 class="text-sm font-bold text-white light:text-slate-900">Riesgo País (EMBI+ JP Morgan)</h3>
 
-                                <p class="text-xs text-slate-400 light:text-slate-500">Última actualización: 2026-08-13</p>
+                                <p class="text-xs text-slate-400 light:text-slate-500">Última actualización: {{ final_data.country_risk_date if final_data and final_data.country_risk_date else "19/08/2026" }}</p>
 
                             </div>
 
@@ -13767,7 +13767,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                         <div class="text-right">
 
-                            <span class="text-xl font-black text-brandRed font-mono">472 pb</span>
+                            <span id="country-risk-value" class="text-xl font-black text-brandRed font-mono">{{ final_data.country_risk_latest if final_data and final_data.country_risk_latest else "511" }} pb</span>
 
                         </div>
 
@@ -13832,8 +13832,8 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                                 </td>
 
-                                                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL30D" data-close-price="56.51">-.-</td>
-                                                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$56.51</td>
+                                                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL30D" data-close-price="55.41">-.-</td>
+                                                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$55.41</td>
 
                                                 <td class="py-2.5 px-3 text-right font-bold text-brandRed">
 
@@ -18199,7 +18199,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-certificate text-amber-400"></i> CEDEARs (Certificados de Depósito Argentinos)
                     </h2>
                     <span id="last-updated-cedears" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -25291,7 +25291,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-chart-pie text-brandBlue"></i> ETFs (CEDEARs)
                     </h2>
                     <span id="last-updated-etfs" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -26657,7 +26657,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-flag text-brandBlue"></i> Acciones Argentinas
                     </h2>
                     <span id="last-updated-acciones_arg" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -28023,7 +28023,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-bitcoin text-brandBlue"></i> Criptomonedas
                     </h2>
                     <span id="last-updated-cryptos" class="text-xs text-slate-400 light:text-slate-500 font-mono">
-                        Actualizado: 15/08/2026 18:56:25 hs
+                        Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}
                     </span>
                 </div>
 
@@ -28493,7 +28493,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                     <span class="text-[10px] uppercase font-bold text-slate-500 light:text-slate-400 tracking-wider block">Categorías Económicas</span>
 
-                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: 15/08/2026 18:56:25 hs</span>
+                    <span class="text-[9px] text-slate-500 light:text-slate-400 block mt-0.5">Actualizado: {{ last_updated if last_updated else "19/08/2026 21:00:00 hs" }}</span>
 
                     <span class="text-[8px] text-slate-500/70 light:text-slate-400/80 block mt-0.5 italic">(Actualización semanal los viernes, 21:00 hs)</span>
 
@@ -51297,12 +51297,14 @@ def load_ssn_lasegunda_data():
 def build_dashboard():
     import json
     import jinja2
+    print("Executing live market updater FIRST...")
     try:
         import live_market_updater
         live_market_updater.update_master_dataset_live()
     except Exception as e:
         print("Live market updater warning:", e)
-    print("Loading master_dataset.json...")
+
+    print("Loading freshly updated master_dataset.json into memory...")
     with open("master_dataset.json", "r", encoding="utf-8", errors="ignore") as f:
         master_store_data = json.load(f)
 
