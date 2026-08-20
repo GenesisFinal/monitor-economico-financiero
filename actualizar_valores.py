@@ -51297,6 +51297,11 @@ def load_ssn_lasegunda_data():
 def build_dashboard():
     import json
     import jinja2
+    try:
+        import live_market_updater
+        live_market_updater.update_master_dataset_live()
+    except Exception as e:
+        print("Live market updater warning:", e)
     print("Loading master_dataset.json...")
     with open("master_dataset.json", "r", encoding="utf-8", errors="ignore") as f:
         master_store_data = json.load(f)
