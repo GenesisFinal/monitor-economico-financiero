@@ -9878,9 +9878,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'indices', '^N225')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">^N225</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Nikkei 225</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^N225" data-close-price="65708.36">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$65.708,36</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.58%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^N225" data-close-price="66010.83">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$66.010,83</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+36.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+61.11%</td>
@@ -9946,9 +9946,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'indices', '^AXJO')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">^AXJO</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">ASX 200</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^AXJO" data-close-price="9097.3">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$9.097,30</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.48%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^AXJO" data-close-price="9098.3">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$9.098,30</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.49%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.10%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.44%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.72%</td>
@@ -10033,9 +10033,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'forex', 'GBPUSD=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">GBPUSD=X</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">GBP/USD</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GBPUSD=X" data-close-price="1.3601">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GBPUSD=X" data-close-price="1.3602">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,36</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.04%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.03%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.46%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.36%</td>
@@ -10044,9 +10044,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'forex', 'JPY=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">JPY=X</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">USD/JPY (Yen)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPY=X" data-close-price="158.33">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$158,33</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.15%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPY=X" data-close-price="158.346">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$158,35</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.16%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.71%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.86%</td>
@@ -10055,9 +10055,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'forex', 'AUDUSD=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">AUDUSD=X</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">AUD/USD</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AUDUSD=X" data-close-price="0.7126">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AUDUSD=X" data-close-price="0.7125">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$0,71</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.03%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.12%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+6.11%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+9.07%</td>
@@ -10077,9 +10077,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'forex', 'MXN=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">MXN=X</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">USD/MEX (Peso)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MXN=X" data-close-price="16.9495">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MXN=X" data-close-price="16.9478">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$16,95</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.09%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.08%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.39%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-9.50%</td>
@@ -10165,9 +10165,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'GC=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">GC=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Oro (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GC=F" data-close-price="4571.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$4.571,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.57%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GC=F" data-close-price="4568.5">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$4.568,50</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.51%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+8.32%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.53%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+31.34%</td>
@@ -10176,9 +10176,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'SI=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">SI=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Plata (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SI=F" data-close-price="67.205">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$67,20</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.10%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SI=F" data-close-price="67.17">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$67,17</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+13.79%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-7.89%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+71.10%</td>
@@ -10187,9 +10187,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'PL=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">PL=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Platino (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PL=F" data-close-price="1828.6">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.828,60</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.00%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PL=F" data-close-price="1827.3">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.827,30</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.93%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.26%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-17.67%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+29.60%</td>
@@ -10198,9 +10198,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'HG=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">HG=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Cobre (USD/Lb)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HG=F" data-close-price="6.496">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HG=F" data-close-price="6.501">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$6,50</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.08%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.86%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+17.01%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+47.82%</td>
@@ -10221,9 +10221,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'CL=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">CL=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Petróleo WTI (USD/Bbl)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CL=F" data-close-price="84.55">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$84,55</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.19%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CL=F" data-close-price="84.56">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$84,56</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.20%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.52%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+43.75%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+28.83%</td>
@@ -10232,9 +10232,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'BZ=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">BZ=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Petróleo Brent (USD/Bbl)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BZ=F" data-close-price="91.85">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$91,85</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.25%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BZ=F" data-close-price="91.81">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$91,81</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.21%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.20%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+45.71%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+32.44%</td>
@@ -10243,9 +10243,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'NG=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">NG=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Gas Natural (USD/MMBtu)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NG=F" data-close-price="2.78">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2,78</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.21%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NG=F" data-close-price="2.786">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2,79</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.00%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-6.53%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-24.46%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.80%</td>
@@ -10254,9 +10254,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'RB=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">RB=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Gasolina (USD/Gal)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RB=F" data-close-price="2.9507">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RB=F" data-close-price="2.953">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2,95</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.90%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.82%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.54%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+87.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+50.96%</td>
@@ -10266,9 +10266,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'ZS=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">ZS=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Soja Chicago (USD/Ton)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZS=F" data-close-price="1239.75">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.239,75</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.20%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZS=F" data-close-price="1238.75">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.238,75</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.12%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.37%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+14.01%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+16.39%</td>
@@ -10277,9 +10277,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'ZC=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">ZC=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Maíz Chicago (USD/Ton)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZC=F" data-close-price="499.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$499,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.20%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZC=F" data-close-price="498.25">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$498,25</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.57%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.91%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+22.40%</td>
@@ -10288,9 +10288,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'ZW=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">ZW=F</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Trigo Chicago (USD/Ton)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZW=F" data-close-price="697.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$697,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.07%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZW=F" data-close-price="694.25">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$694,25</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.47%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.41%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+33.22%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+34.01%</td>
@@ -23770,9 +23770,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'BTC-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">BTC-USD</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Bitcoin</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTC-USD" data-close-price="69663.7">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$69.663,70</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.54%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTC-USD" data-close-price="69508.75">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$69.508,75</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.32%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.11%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-28.91%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-46.27%</td>
@@ -23781,9 +23781,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'ETH-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">ETH-USD</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Ethereum</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ETH-USD" data-close-price="2261.6">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.261,60</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.43%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ETH-USD" data-close-price="2267.56">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.267,56</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.69%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.07%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-37.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-57.59%</td>
@@ -23792,9 +23792,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'USDT-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">USDT-USD</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Tether USDt</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USDT-USD" data-close-price="0.99938">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USDT-USD" data-close-price="0.99932">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-0.00%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.17%</td>
@@ -23803,9 +23803,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'BNB-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">BNB-USD</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">BNB</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BNB-USD" data-close-price="627.6">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$627,60</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.17%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BNB-USD" data-close-price="628.7">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$628,70</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.35%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+6.59%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-29.33%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-26.28%</td>
@@ -23814,9 +23814,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'XRP-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">XRP-USD</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">XRP</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XRP-USD" data-close-price="1.1064">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XRP-USD" data-close-price="1.1077">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,11</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.18%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.29%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-7.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-46.57%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-67.41%</td>
@@ -23825,9 +23825,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'SOL-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="font-bold">SOL-USD</span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Solana</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SOL-USD" data-close-price="85.53">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$85,53</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.20%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SOL-USD" data-close-price="85.49">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$85,49</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.15%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.44%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-40.36%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-59.30%</td>
