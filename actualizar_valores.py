@@ -40363,8 +40363,24 @@ def build_dashboard():
 
 
 
-    with open("master_dataset.json", "w", encoding="utf-8") as f:
+            with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     print("Rendering template to index.html...")
     env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
