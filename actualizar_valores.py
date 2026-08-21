@@ -40488,10 +40488,44 @@ def build_dashboard():
     if "final_data" in master_store_data_light and "historical_db" in master_store_data_light["final_data"]:
         master_store_data_light["final_data"]["historical_db"] = {}
 
+        # Split dataset: master_dataset.json (light metadata, 5MB) + historical_series.json (2 years daily history, 15MB)
+    full_h_db = master_store_data.get("final_data", {}).get("historical_db", {})
+
+    # Trim historical_db series to last 500 trading days (2 full years) to keep file under GitHub API 25MB limit
+        # Compact floats and dates to shrink historical_series.json below 18MB
+    compact_h_db = {}
+    for ticker, series in full_h_db.items():
+        if isinstance(series, list):
+            clean_list = []
+            for item in (series[-400:] if len(series) > 400 else series):
+                if isinstance(item, dict):
+                    clean_item = {}
+                    if "d" in item or "fecha" in item or "date" in item:
+                        clean_item["d"] = item.get("d") or item.get("fecha") or item.get("date")
+                    if "v" in item or "c" in item or "precio" in item or "val" in item:
+                        v = item.get("v") or item.get("c") or item.get("precio") or item.get("val") or 0
+                        clean_item["v"] = round(float(v), 2) if isinstance(v, (int, float)) else v
+                    clean_list.append(clean_item)
+                else:
+                    clean_list.append(item)
+            compact_h_db[ticker] = clean_list
+        elif isinstance(series, dict) and "dates" in series and "prices" in series:
+            dates = series.get("dates", [])[-400:]
+            prices = series.get("prices", [])[-400:]
+            clean_prices = [round(float(p), 2) if isinstance(p, (int, float)) else p for p in prices]
+            compact_h_db[ticker] = {"dates": dates, "prices": clean_prices}
+        else:
+            compact_h_db[ticker] = series
+
+    master_store_light = json.loads(json.dumps(master_store_data))
+    if "final_data" in master_store_light and "historical_db" in master_store_light["final_data"]:
+        master_store_light["final_data"]["historical_db"] = {}
+
     with open("master_dataset.json", "w", encoding="utf-8") as f:
-        json.dump(master_store_data_light, f, ensure_ascii=False, indent=2)
+        json.dump(master_store_light, f, ensure_ascii=False, indent=2)
 
     with open("historical_series.json", "w", encoding="utf-8") as f:
+        json.dump({"historical_db": compact_h_db}, f, ensure_ascii=False, indent=2)
         json.dump({"historical_db": full_historical_db}, f, ensure_ascii=False, indent=2)
 
     print("Rendering template to index.html...")
