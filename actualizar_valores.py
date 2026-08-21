@@ -78,7 +78,51 @@ html_template = """<!DOCTYPE html>
 
     <!-- Tailwind CSS CDN -->
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+        // renderAllSparklines Function for Minicharts
+        window.renderAllSparklines = function() {
+            console.log("[SPARK LINES] Rendering sparklines for cards...");
+            const db = (window.appData && window.appData.sparklines_db) || (window.appData && window.appData.historical_db) || {};
+            
+            document.querySelectorAll('.sparkline-container, [id^="sparkline-"]').forEach(container => {
+                const id = container.id || '';
+                const ticker = container.dataset.ticker || id.replace('sparkline-', '');
+                if (!ticker) return;
+                
+                let series = db[ticker];
+                let prices = [];
+                if (Array.isArray(series)) {
+                    prices = series.map(p => typeof p === 'number' ? p : (p && p.price ? p.price : 0)).filter(p => p > 0);
+                } else if (series && Array.isArray(series.prices)) {
+                    prices = series.prices.filter(p => typeof p === 'number' && p > 0);
+                }
+                
+                if (prices.length < 2) return;
+                
+                const min = Math.min(...prices);
+                const max = Math.max(...prices);
+                const range = (max - min) || 1;
+                const width = 120;
+                const height = 30;
+                
+                const points = prices.map((p, idx) => {
+                    const x = (idx / (prices.length - 1)) * width;
+                    const y = height - ((p - min) / range) * (height - 4) - 2;
+                    return `${x.toFixed(1)},${y.toFixed(1)}`;
+                }).join(' ');
+                
+                const isUp = prices[prices.length - 1] >= prices[0];
+                const strokeColor = isUp ? '#10b981' : '#ef4444';
+                
+                container.innerHTML = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" class="overflow-visible"><polyline fill="none" stroke="${strokeColor}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${points}" /></svg>`;
+            });
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(window.renderAllSparklines, 500);
+        });
+    
+</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
 function renderAseguradorData() {
@@ -299,8 +343,8 @@ function renderLaSegundaSubtabData() {
         var empRowsHTML = '';
         (lsData.companies || []).forEach(function(c) {
             empRowsHTML += '<tr class="hover:bg-amber-500/5 transition">';
-            empRowsHTML += '<td class="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-100 font-semibold flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i>' + c.name + '</td>';
-            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-slate-800 dark:text-slate-100 font-semibold font-bold">' + fmtMoney(c.prima) + '</td>';
+            empRowsHTML += '<td style="color: #ffffff !important; font-weight: 600;" class="py-2.5 px-3 flex items-center gap-2"><i class="fas fa-building text-amber-400"></i>' + c.name + '</td>';
+            empRowsHTML += '<td style="color: #ffffff !important; font-weight: 700;" class="py-2.5 px-3 text-right font-mono">' + fmtMoney(c.prima) + '</td>';
             empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-amber-400 font-bold">' + fmtPct(c.pct_grupo) + '</td>';
             empRowsHTML += '</tr>';
         });
@@ -7424,12 +7468,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
             </tr>
 <tr data-ticker="^DJI" onclick="rowClick(event, 'indices', '^DJI')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^DJI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
+                <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'indices', '^DJI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^DJI</span><a href="https://finance.yahoo.com/quote/%5EDJI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Dow Jones Industrial</td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="^DJI">$52.759,21</td>
+                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="^DJI">$53.318,90</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">$52.759,21</td>
-                <td class="py-2.5 px-4 text-right font-bold text-rose-500 font-bold">-1,32%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1,06%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+2,04%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+11,06%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+19,64%</td>
@@ -7840,15 +7884,15 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
             </tr>
 <tr data-ticker="GC=F" onclick="rowClick(event, 'commodities', 'GC=F')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'GC=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
+                <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'GC=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GC=F</span><a href="https://finance.yahoo.com/quote/GC%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Oro (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="GC=F">$4.641,20</td>
+                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Oro USD/Oz</td>
+                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="GC=F">$4.679,20</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">$4.571,40</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500 font-bold">+1,53%</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+8,32%</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+1,53%</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+31,34%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2,36%</td>
+                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+4,12%</td>
+                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+15,80%</td>
+                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+32,10%</td>
             </tr>
 <tr data-ticker="SI=F" onclick="rowClick(event, 'commodities', 'SI=F')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'SI=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
