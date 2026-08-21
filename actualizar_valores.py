@@ -31086,7 +31086,8 @@ canvas.sparkline-canvas {
 
             }
 
-            const history = historyObj.daily;
+            const history = (historyObj.daily && historyObj.daily.dates) ? historyObj.daily : (historyObj.dates ? historyObj : null);
+            if (!history || !history.dates) return;
 
             
 
@@ -35178,15 +35179,17 @@ function renderSparklines() {
 
                     const mepHist = appData.historical_db['mep'] || appData.historical_db['MEP'] || appData.historical_db['bolsa'];
 
-                    if (baseHist && baseHist.daily && mepHist && mepHist.daily) {
+                    const bObj = (baseHist && baseHist.daily && baseHist.daily.dates) ? baseHist.daily : (baseHist && baseHist.dates ? baseHist : null);
+                    const mObj = (mepHist && mepHist.daily && mepHist.daily.dates) ? mepHist.daily : (mepHist && mepHist.dates ? mepHist : null);
+                    if (bObj && mObj) {
 
-                        const bDates = baseHist.daily.dates || [];
+                        const bDates = bObj.dates || [];
 
-                        const bPrices = baseHist.daily.prices || [];
+                        const bPrices = bObj.prices || [];
 
-                        const mDates = mepHist.daily.dates || [];
+                        const mDates = mObj.dates || [];
 
-                        const mPrices = mepHist.daily.prices || [];
+                        const mPrices = mObj.prices || [];
 
                         const mepMap = {};
 
@@ -35280,11 +35283,12 @@ function renderSparklines() {
 
                 const annualObj = appData.historical_db[key + "_annual"];
 
-                if (annualObj && annualObj.daily && annualObj.daily.prices && annualObj.daily.prices.length > 0) {
+                const annDataObj = (annualObj && annualObj.daily && annualObj.daily.prices) ? annualObj.daily : (annualObj && annualObj.prices ? annualObj : null);
+                if (annDataObj && annDataObj.prices && annDataObj.prices.length > 0) {
 
-                    prices = annualObj.daily.prices;
+                    prices = annDataObj.prices;
 
-                    dates = annualObj.daily.dates;
+                    dates = annDataObj.dates;
 
                 }
 
@@ -36174,15 +36178,17 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                     const mepHist = appData.historical_db['mep'] || appData.historical_db['MEP'] || appData.historical_db['bolsa'];
 
-                    if (baseHist && baseHist.daily && mepHist && mepHist.daily) {
+                    const bObj = (baseHist && baseHist.daily && baseHist.daily.dates) ? baseHist.daily : (baseHist && baseHist.dates ? baseHist : null);
+                    const mObj = (mepHist && mepHist.daily && mepHist.daily.dates) ? mepHist.daily : (mepHist && mepHist.dates ? mepHist : null);
+                    if (bObj && mObj) {
 
-                        const bDates = baseHist.daily.dates || [];
+                        const bDates = bObj.dates || [];
 
-                        const bPrices = baseHist.daily.prices || [];
+                        const bPrices = bObj.prices || [];
 
-                        const mDates = mepHist.daily.dates || [];
+                        const mDates = mObj.dates || [];
 
-                        const mPrices = mepHist.daily.prices || [];
+                        const mPrices = mObj.prices || [];
 
                         const mepMap = {};
 
@@ -40187,8 +40193,16 @@ def build_dashboard():
 
 
 
-                                with open("master_dataset.json", "w", encoding="utf-8") as f:
+                                    with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
