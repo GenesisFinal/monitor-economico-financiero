@@ -40545,8 +40545,8 @@ def build_dashboard():
             prices = series.get("prices", [])[-30:]
             sparklines_db[ticker] = {"dates": dates, "prices": prices}
 
-    master_store_light["final_data"]["sparklines_db"] = sparklines_db
-    master_store_light["final_data"]["historical_db"] = sparklines_db
+    master_store_data["final_data"]["sparklines_db"] = sparklines_db
+    master_store_data["final_data"]["historical_db"] = sparklines_db
 
     with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(sanitize_json_nan(master_store_light), f, ensure_ascii=False, indent=2)
@@ -40559,7 +40559,10 @@ def build_dashboard():
     env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
     template = env.from_string(html_template)
     full_final_data = master_store_data.get("final_data", {})
-    light_final_data = {k: v for k, v in full_final_data.items() if k != "historical_db"}
+    sanitized_full_data = sanitize_json_nan(full_final_data)
+    master_store_data["final_data"] = sanitized_full_data
+
+    light_final_data = {k: v for k, v in sanitized_full_data.items() if k != "historical_db"}
     light_final_data["historical_db"] = {}
 
     rendered_html = template.render(
@@ -40568,7 +40571,9 @@ def build_dashboard():
     )
 
     with open("index.html", "w", encoding="utf-8") as f:
-        f.write(rendered_html)
+        # Guarantee zero NaN occurrences in raw HTML output
+        clean_html = re.sub(r':\s*NaN\b', ': null', rendered_html)
+        f.write(clean_html)
 
     print(f"SUCCESS! Rendered updated index.html ({len(rendered_html):,} bytes) cleanly!")
 
