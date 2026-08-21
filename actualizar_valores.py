@@ -7474,17 +7474,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                     </tr>
                                 </thead>
                                 <tbody id="tbl-indices" class="divide-y divide-darkBorder/40 light:divide-gray-200">
-<tr data-ticker="" onclick="rowClick(event, 'indices', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'indices', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="^DJI" onclick="rowClick(event, 'indices', '^DJI')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^DJI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^DJI</span><a href="https://finance.yahoo.com/quote/%5EDJI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -7518,17 +7508,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+15,04%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+23,12%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'indices', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="^FTSE" onclick="rowClick(event, 'indices', '^FTSE')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^FTSE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^FTSE</span><a href="https://finance.yahoo.com/quote/%5EFTSE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -7573,17 +7553,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+15,23%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+32,55%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'indices', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="^N225" onclick="rowClick(event, 'indices', '^N225')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^N225')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^N225</span><a href="https://finance.yahoo.com/quote/%5EN225" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -7617,17 +7587,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-1,05%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+7,11%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'indices', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="^BVSP" onclick="rowClick(event, 'indices', '^BVSP')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^BVSP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^BVSP</span><a href="https://finance.yahoo.com/quote/%5EBVSP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -7650,17 +7610,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-5,72%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+34,67%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'indices', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="^GSPTSE" onclick="rowClick(event, 'indices', '^GSPTSE')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^GSPTSE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^GSPTSE</span><a href="https://finance.yahoo.com/quote/%5EGSPTSE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -7890,17 +7840,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                     </tr>
                                 </thead>
                                 <tbody id="tbl-commodities" class="divide-y divide-darkBorder/40 light:divide-gray-200">
-<tr data-ticker="" onclick="rowClick(event, 'commodities', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="GC=F" onclick="rowClick(event, 'commodities', 'GC=F')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'GC=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GC=F</span><a href="https://finance.yahoo.com/quote/GC%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -7956,17 +7896,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+14,21%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+34,14%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'commodities', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="CL=F" onclick="rowClick(event, 'commodities', 'CL=F')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'CL=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CL=F</span><a href="https://finance.yahoo.com/quote/CL%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -8011,17 +7941,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+87,50%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+50,96%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'commodities', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="ZS=F" onclick="rowClick(event, 'commodities', 'ZS=F')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'ZS=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ZS=F</span><a href="https://finance.yahoo.com/quote/ZS%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -8055,17 +7975,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+33,22%</td>
                 <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">+34,01%</td>
             </tr>
-<tr data-ticker="" onclick="rowClick(event, 'commodities', '')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
-                <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', '')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-                <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold"></span><a href="https://finance.yahoo.com/quote/" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-                <td class="py-2.5 px-4 text-slate-300 light:text-slate-700"></td>
-                <td class="py-2.5 px-4 text-right font-mono font-bold text-white light:text-slate-900 live-price-cell" data-ticker="">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 light:text-slate-500 font-semibold">-.-</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono text-slate-400 hidden md:table-cell">-.-</td>
-            </tr>
+
 <tr data-ticker="CT=F" onclick="rowClick(event, 'commodities', 'CT=F')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'CT=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CT=F</span><a href="https://finance.yahoo.com/quote/CT%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
@@ -17759,7 +17669,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_alimentaria_val', 'Canasta Básica Alimentaria - Valor', 'Mide el costo mensual de alimentos mínimos para la subsistencia de un adulto equivalente (línea de indigencia).', 'Mensual', '$0', '$251,893')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_alimentaria_val" data-type="line" data-min="0.0" data-max="251893.164"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_alimentaria_val" data-type="line" data-min="0.0" data-max="251893.164"></canvas>
 
                                     </div>
 
@@ -17857,7 +17767,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_alimentaria_usd', 'Canasta Básica Alimentaria en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_alimentaria_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_alimentaria_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -17955,7 +17865,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_alimentaria_hogar2', 'Canasta Básica Alimentaria Familiar (Hogar 2)', 'Costo mensual de la Canasta Básica Alimentaria para una familia tipo integrada por cuatro miembros. Establece la línea de indigencia para el hogar.', 'Mensual', '$0', '$778,350')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_alimentaria_hogar2" data-type="line" data-min="0.0" data-max="778349.874"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_alimentaria_hogar2" data-type="line" data-min="0.0" data-max="778349.874"></canvas>
 
                                     </div>
 
@@ -18049,7 +17959,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_alimentaria_hogar2_usd', 'Canasta Alimentaria Familiar (Hogar 2) en USD', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_alimentaria_hogar2_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_alimentaria_hogar2_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -18147,7 +18057,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_total_val', 'Canasta Básica Total - Valor', 'Mide el costo mensual de la canasta alimentaria más servicios básicos, vestimenta y transporte para un adulto equivalente (línea de pobreza).', 'Mensual', '$0', '$556,652')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_total_val" data-type="line" data-min="0.0" data-max="556652.239"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_total_val" data-type="line" data-min="0.0" data-max="556652.239"></canvas>
 
                                     </div>
 
@@ -18245,7 +18155,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_total_usd', 'Canasta Básica Total en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_total_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_total_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -18343,7 +18253,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_total_hogar2', 'Canasta Básica Total Familiar (Hogar 2)', 'Costo mensual estimado de la Canasta Básica Total para una familia tipo integrada por cuatro miembros (dos adultos y dos menores). Establece la línea de pobreza para el hogar.', 'Mensual', '$0', '$1,720,055')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_total_hogar2" data-type="line" data-min="0.0" data-max="1720055.419"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_total_hogar2" data-type="line" data-min="0.0" data-max="1720055.419"></canvas>
 
                                     </div>
 
@@ -18437,7 +18347,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('canasta_total_hogar2_usd', 'Canasta Total Familiar (Hogar 2) en USD', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="canasta_total_hogar2_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="canasta_total_hogar2_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -18535,7 +18445,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipc_interanual', 'Inflación IPC - Interanual', 'Mide la variación interanual (últimos 12 meses) de los precios al consumidor a nivel nacional.', 'Mensual', '0.0%', '315.9%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipc_interanual" data-type="bar" data-min="0.0" data-max="315.86580756819177"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipc_interanual" data-type="bar" data-min="0.0" data-max="315.86580756819177"></canvas>
 
                                     </div>
 
@@ -18619,7 +18529,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipc_mayorista_interanual', 'Inflación Mayorista - Interanual', 'Mide la variación interanual de los precios mayoristas domésticos.', 'Mensual', '0.0%', '362.2%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipc_mayorista_interanual" data-type="line" data-min="0.0" data-max="362.22147591291"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipc_mayorista_interanual" data-type="line" data-min="0.0" data-max="362.22147591291"></canvas>
 
                                     </div>
 
@@ -18703,7 +18613,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipc_mayorista_mensual', 'Inflación Mayorista - Tasa Mensual', 'Mide la evolución de los precios de los productos destinados al mercado interno (IPIM), de origen nacional o importado.', 'Mensual', '-6.8%', '59.6%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipc_mayorista_mensual" data-type="line" data-min="-6.828045844442003" data-max="59.56437862246044"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipc_mayorista_mensual" data-type="line" data-min="-6.828045844442003" data-max="59.56437862246044"></canvas>
 
                                     </div>
 
@@ -18787,7 +18697,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipc_mensual', 'Inflación IPC - Tasa Mensual', 'Mide la variación mensual promedio de los precios de una canasta de bienes y servicios representativa del consumo de los hogares.', 'Mensual', '0.0%', '27.9%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipc_mensual" data-type="bar" data-min="0.0" data-max="27.8930351355216"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipc_mensual" data-type="bar" data-min="0.0" data-max="27.8930351355216"></canvas>
 
                                     </div>
 
@@ -18871,7 +18781,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipc_nucleo_interanual', 'Inflación Núcleo - Interanual', 'Mide la variación interanual de precios excluyendo precios regulados y estacionales.', 'Mensual', '0.0%', '327.9%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipc_nucleo_interanual" data-type="line" data-min="0.0" data-max="327.87429277862077"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipc_nucleo_interanual" data-type="line" data-min="0.0" data-max="327.87429277862077"></canvas>
 
                                     </div>
 
@@ -18955,7 +18865,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipc_nucleo_mensual', 'Inflación Núcleo - Tasa Mensual', 'Mide la variación de precios excluyendo componentes estacionales y regulados (como tarifas y combustibles).', 'Mensual', '0.0%', '31.0%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipc_nucleo_mensual" data-type="line" data-min="0.0" data-max="30.95615072097656"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipc_nucleo_mensual" data-type="line" data-min="0.0" data-max="30.95615072097656"></canvas>
 
                                     </div>
 
@@ -19039,7 +18949,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('uva_val', 'Valor UVA - Valor', 'Unidad de Valor Adquisitivo diaria ajustable por CER.', 'Diario', '0.0', '2,283.1')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="uva_val" data-type="line" data-min="0.0" data-max="2283.097"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="uva_val" data-type="line" data-min="0.0" data-max="2283.097"></canvas>
 
                                     </div>
 
@@ -19165,7 +19075,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('agregado_b1', 'Agregado Monetario B1 (M1 Bimonetario)', 'Circulación monetaria en poder del público más depósitos a la vista (cuentas corrientes) en pesos y dólares del sector público y privado, medido en billones de pesos.', 'Mensual', '$0.0 B', '$68.1 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="agregado_b1" data-type="bar" data-min="0.0" data-max="68.0987925952"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="agregado_b1" data-type="bar" data-min="0.0" data-max="68.0987925952"></canvas>
 
                                     </div>
 
@@ -19263,7 +19173,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('agregado_b1_usd', 'Agregado Monetario B1 (M1) en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="agregado_b1_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="agregado_b1_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -19361,7 +19271,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('agregado_b2', 'Agregado Monetario B2 (M2 Bimonetario)', 'Comprende el agregado B1 más los depósitos en cajas de ahorro en pesos y dólares del sector público y privado, medido en billones de pesos.', 'Mensual', '$0.0 B', '$72.7 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="agregado_b2" data-type="bar" data-min="0.0" data-max="72.6539963062301"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="agregado_b2" data-type="bar" data-min="0.0" data-max="72.6539963062301"></canvas>
 
                                     </div>
 
@@ -19459,7 +19369,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('agregado_b2_usd', 'Agregado Monetario B2 (M2) en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="agregado_b2_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="agregado_b2_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -19557,7 +19467,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('agregado_b3', 'Agregado Monetario B3 (M3 Bimonetario)', 'El agregado más amplio. Comprende el agregado B2 más los depósitos a plazo fijo (plazos fijos y otras inversiones a plazo) en pesos y dólares, medido en billones de pesos.', 'Mensual', '$0.0 B', '$73.1 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="agregado_b3" data-type="bar" data-min="0.0" data-max="73.09027129771076"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="agregado_b3" data-type="bar" data-min="0.0" data-max="73.09027129771076"></canvas>
 
                                     </div>
 
@@ -19655,7 +19565,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('agregado_b3_usd', 'Agregado Monetario B3 (M3) en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="agregado_b3_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="agregado_b3_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -19753,7 +19663,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('base_monetaria', 'Base Monetaria', 'Total de dinero físico en circulación (billetes y monedas en poder del público y bancos) más los depósitos de los bancos en el Banco Central, medido en billones de pesos.', 'Mensual', '$0.0 B', '$48.7 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="base_monetaria" data-type="bar" data-min="0.0" data-max="48.65216471310001"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="base_monetaria" data-type="bar" data-min="0.0" data-max="48.65216471310001"></canvas>
 
                                     </div>
 
@@ -19851,7 +19761,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('base_monetaria_usd', 'Base Monetaria en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="base_monetaria_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="base_monetaria_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -19949,7 +19859,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('billetes_circulacion', 'Billetes y monedas en poder del público - Valor', 'Monto total de dinero físico emitido por el BCRA fuera del sistema financiero.', 'Mensual', '0.0', '26,157,232,713.6')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="billetes_circulacion" data-type="line" data-min="0.0" data-max="26157232713.6"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="billetes_circulacion" data-type="line" data-min="0.0" data-max="26157232713.6"></canvas>
 
                                     </div>
 
@@ -20047,7 +19957,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('billetes_circulacion_usd', 'Billetes en Circulación en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="billetes_circulacion_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="billetes_circulacion_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -20173,7 +20083,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('recaudacion_iva', 'Recaudación IVA - Valor', 'Monto de recaudación del Impuesto al Valor Agregado neto de devoluciones y reintegros.', 'Mensual', '$0.0 B', '$3,299,995.9 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="recaudacion_iva" data-type="line" data-min="0.0" data-max="3299995.8749999995"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="recaudacion_iva" data-type="line" data-min="0.0" data-max="3299995.8749999995"></canvas>
 
                                     </div>
 
@@ -20271,7 +20181,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('recaudacion_iva_usd', 'Recaudación IVA en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="recaudacion_iva_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="recaudacion_iva_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -20369,7 +20279,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('recaudacion_seg_social', 'Recaudación de la Seguridad Social', 'Monto total ingresado en concepto de aportes y contribuciones patronales al sistema previsional.', 'Mensual', '$0.0 B', '$6,928,704.2 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="recaudacion_seg_social" data-type="line" data-min="0.0" data-max="6928704.245409829"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="recaudacion_seg_social" data-type="line" data-min="0.0" data-max="6928704.245409829"></canvas>
 
                                     </div>
 
@@ -20467,7 +20377,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('recaudacion_seg_social_usd', 'Recaudación Seguridad Social en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="recaudacion_seg_social_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="recaudacion_seg_social_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -20565,7 +20475,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('recaudacion_total', 'Recaudación Tributaria - Variación Interanual', 'Variación interanual de los ingresos fiscales tributarios totales recaudados por el Estado.', 'Mensual', '$-48.2 B', '$354.5 B')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="recaudacion_total" data-type="line" data-min="-48.18396376580788" data-max="354.49891197763816"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="recaudacion_total" data-type="line" data-min="-48.18396376580788" data-max="354.49891197763816"></canvas>
 
                                     </div>
 
@@ -20649,7 +20559,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('resultado_financiero', 'Resultado Financiero', 'Resultado final de la ejecución presupuestaria del Sector Público Nacional contemplando los pagos netos por intereses de la deuda pública. Un valor positivo representa superávit financiero.', 'Mensual', '-3,737,689.2%', '1,630,958.3%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="resultado_financiero" data-type="bar" data-min="-3737689.190000006" data-max="1630958.290000003"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="resultado_financiero" data-type="bar" data-min="-3737689.190000006" data-max="1630958.290000003"></canvas>
 
                                     </div>
 
@@ -20747,7 +20657,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('resultado_financiero_mep', 'Resultado Financiero (USD MEP)', 'Resultado financiero convertido a USD MEP.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="resultado_financiero_mep" data-type="bar" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="resultado_financiero_mep" data-type="bar" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -20841,7 +20751,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('resultado_financiero_usd', 'Resultado Financiero en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="resultado_financiero_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="resultado_financiero_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -20939,7 +20849,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('resultado_fiscal_primario', 'Resultado Fiscal Primario', 'Resultado de la ejecución presupuestaria del Sector Público Nacional (ingresos menos gastos corrientes y de capital) sin computar los pagos de intereses de deuda. Un valor positivo indica superávit.', 'Mensual', '-3,476,668.3%', '3,725,956.0%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="resultado_fiscal_primario" data-type="line" data-min="-3476668.2900000056" data-max="3725955.9899999993"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="resultado_fiscal_primario" data-type="line" data-min="-3476668.2900000056" data-max="3725955.9899999993"></canvas>
 
                                     </div>
 
@@ -21037,7 +20947,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('resultado_fiscal_primario_usd', 'Resultado Fiscal Primario en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="resultado_fiscal_primario_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="resultado_fiscal_primario_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -21135,7 +21045,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('resultado_primario_mep', 'Resultado Fiscal Primario (USD MEP)', 'Resultado primario convertido a USD MEP.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="resultado_primario_mep" data-type="bar" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="resultado_primario_mep" data-type="bar" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -21257,7 +21167,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('exportaciones_val', 'Exportaciones - Valor', 'Monto total despachado desde el país en concepto de exportaciones de bienes durante el mes indicado (millones de USD FOB).', 'Mensual', '2,814.1', '10,192.7')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="exportaciones_val" data-type="line" data-min="2814.117961846" data-max="10192.702419694"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="exportaciones_val" data-type="line" data-min="2814.117961846" data-max="10192.702419694"></canvas>
 
                                     </div>
 
@@ -21355,7 +21265,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('exportaciones_moi', 'Exportaciones Industriales (MOI)', 'Exportaciones de manufacturas de origen industrial en millones de USD.', 'Mensual', '523.0', '2,695.4')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="exportaciones_moi" data-type="line" data-min="522.961643864" data-max="2695.421917496"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="exportaciones_moi" data-type="line" data-min="522.961643864" data-max="2695.421917496"></canvas>
 
                                     </div>
 
@@ -21453,7 +21363,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('importaciones_total', 'Importaciones - Valor', 'Monto total ingresado al país en concepto de importaciones de bienes durante el mes indicado (millones de USD CIF).', 'Mensual', '2,317.0', '9,241.0')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="importaciones_total" data-type="line" data-min="2317.0" data-max="9241.0"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="importaciones_total" data-type="line" data-min="2317.0" data-max="9241.0"></canvas>
 
                                     </div>
 
@@ -21551,7 +21461,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('saldo_comercial', 'Saldo Comercial (Balanza Comercial)', 'Resultado mensual del Intercambio Comercial Argentino (FOB - CIF en millones de USD). Equivale a la resta de Exportaciones menos Importaciones.', 'Mensual', '-2,361 M USD', '3,978 M USD')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="saldo_comercial" data-type="bar" data-min="-2360.989972814" data-max="3978.047003073999"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="saldo_comercial" data-type="bar" data-min="-2360.989972814" data-max="3978.047003073999"></canvas>
 
                                     </div>
 
@@ -21789,7 +21699,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('deuda_externa', 'Deuda Externa Total', 'Monto total de las obligaciones financieras brutas de Argentina (públicas y privadas) con no residentes, expresado en millones de dólares a valor nominal bruto residual.', 'Mensual', '122,833 M USD', '339,869 M USD')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="deuda_externa" data-type="line" data-min="122832.88208577383" data-max="339869.37435583875"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="deuda_externa" data-type="line" data-min="122832.88208577383" data-max="339869.37435583875"></canvas>
 
                                     </div>
 
@@ -21891,7 +21801,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('deuda_publica_externa', 'Deuda Pública Externa', 'Obligaciones financieras brutas de la Administración Central bajo legislación extranjera o en manos de acreedores externos, en millones de dólares.', 'Mensual', '52,611 M USD', '324,672 M USD')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="deuda_publica_externa" data-type="bar" data-min="52611.3" data-max="324671.7"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="deuda_publica_externa" data-type="bar" data-min="52611.3" data-max="324671.7"></canvas>
 
                                     </div>
 
@@ -21993,7 +21903,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('deuda_publica_fmi', 'Deuda Pública con el FMI', 'Obligaciones financieras de la Administración Central con el Fondo Monetario Internacional (FMI), en millones de dólares.', 'Mensual', '0 M USD', '49,102 M USD')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="deuda_publica_fmi" data-type="bar" data-min="0.0" data-max="49101.844"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="deuda_publica_fmi" data-type="bar" data-min="0.0" data-max="49101.844"></canvas>
 
                                     </div>
 
@@ -22095,7 +22005,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('deuda_publica_pesos', 'Deuda Pública en Pesos', 'Monto de las obligaciones nominadas en moneda nacional (pesos), presentadas en pesos (ARS B) y valorizadas en su equivalente de millones de dólares (USD M).', 'Mensual', '35,429 B ARS', '210,276 B ARS')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="deuda_publica_pesos" data-type="bar" data-min="35429.494" data-max="210275.566"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="deuda_publica_pesos" data-type="bar" data-min="35429.494" data-max="210275.566"></canvas>
 
                                     </div>
 
@@ -22197,7 +22107,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('deuda_publica_total', 'Deuda Pública Total', 'Monto total de los compromisos financieros brutos de la Administración Central, abarcando moneda nacional/extranjera y legislación local/externa.', 'Mensual', '87,897 M USD', '536,532 M USD')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="deuda_publica_total" data-type="bar" data-min="87896.746" data-max="536531.794"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="deuda_publica_total" data-type="bar" data-min="87896.746" data-max="536531.794"></canvas>
 
                                     </div>
 
@@ -22295,7 +22205,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('reservas_brutas', 'Reservas Internacionales Brutas', 'Activos externos líquidos totales controlados por el BCRA (oro, divisas, swap de China, depósitos), medido en millones de dólares.', 'Diario', '17,990 M USD', '52,973 M USD')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="reservas_brutas" data-type="line" data-min="17989.7" data-max="52973.3"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="reservas_brutas" data-type="line" data-min="17989.7" data-max="52973.3"></canvas>
 
                                     </div>
 
@@ -22421,7 +22331,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('empleo_privado', 'Trabajadores Registrados Privados', 'Cantidad de asalariados registrados en el sector privado nacional (sin estacionalidad).', 'Mensual', '5,732.6', '6,469.6')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="empleo_privado" data-type="line" data-min="5732.5721" data-max="6469.5509"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="empleo_privado" data-type="line" data-min="5732.5721" data-max="6469.5509"></canvas>
 
                                     </div>
 
@@ -22519,7 +22429,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('empleo_total', 'Total de Trabajadores Registrados', 'Cantidad total de trabajadores con aportes al SIPA.', 'Mensual', '11,363.6', '13,557.0')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="empleo_total" data-type="line" data-min="11363.612399999998" data-max="13556.9796"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="empleo_total" data-type="line" data-min="11363.612399999998" data-max="13556.9796"></canvas>
 
                                     </div>
 
@@ -22617,7 +22527,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('indice_salarios_ipc', 'Poder Adquisitivo Salarial', 'ndice de Salarios deflactado por IPC, ajustado para que el ltimo dato sea = 100. Permite visualizar rpidamente la ganancia/prdida respecto al mes actual.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="indice_salarios_ipc" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="indice_salarios_ipc" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -22715,7 +22625,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ripte_val', 'RIPTE - Salario Promedio', 'Remuneración Imponible Promedio de los Trabajadores Estables.', 'Mensual', '0.0', '2,106,588.1')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ripte_val" data-type="bar" data-min="0.0" data-max="2106588.133"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ripte_val" data-type="bar" data-min="0.0" data-max="2106588.133"></canvas>
 
                                     </div>
 
@@ -22813,7 +22723,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ripte_usd', 'RIPTE - Salario Promedio en USD (MEP)', 'Remuneración Imponible Promedio de los Trabajadores Estables expresada en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '356.9', '1,567.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ripte_usd" data-type="line" data-min="356.904" data-max="1567.7759999999998"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ripte_usd" data-type="line" data-min="356.904" data-max="1567.7759999999998"></canvas>
 
                                     </div>
 
@@ -22907,7 +22817,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('salarios_indice', 'Índice de Salarios - Variación', 'Mide la evolución de los salarios estimados de los sectores público, privado registrado y privado no registrado.', 'Mensual', '0.0', '9,865.9')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="salarios_indice" data-type="line" data-min="0.0" data-max="9865.91"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="salarios_indice" data-type="line" data-min="0.0" data-max="9865.91"></canvas>
 
                                     </div>
 
@@ -23005,7 +22915,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('smvm_val', 'Salario Mínimo Vital y Móvil', 'Monto mensual mínimo legal que debe percibir un trabajador por su jornada laboral.', 'Mensual', '0.0', '413,900.0')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="smvm_val" data-type="line" data-min="0.0" data-max="413900.0"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="smvm_val" data-type="line" data-min="0.0" data-max="413900.0"></canvas>
 
                                     </div>
 
@@ -23103,7 +23013,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('smvm_usd', 'Salario Mínimo en USD (MEP)', 'Monto del Salario Mínimo Vital y Móvil expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '93.0', '560.1')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="smvm_usd" data-type="line" data-min="93.03800000000001" data-max="560.102"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="smvm_usd" data-type="line" data-min="93.03800000000001" data-max="560.102"></canvas>
 
                                     </div>
 
@@ -23225,7 +23135,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('actividad_val', 'Tasa de Actividad Laboral', 'Porcentaje de la población total que constituye la fuerza laboral activa (ocupados + desocupados).', 'Mensual', '37.4', '49.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="actividad_val" data-type="line" data-min="37.36" data-max="49.839999999999996"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="actividad_val" data-type="line" data-min="37.36" data-max="49.839999999999996"></canvas>
 
                                     </div>
 
@@ -23323,7 +23233,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('desocupacion_val', 'Tasa de Desocupación', 'Porcentaje de la población activa que no tiene trabajo pero lo busca activamente.', 'Mensual', '5.0', '13.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="desocupacion_val" data-type="line" data-min="4.96" data-max="13.840000000000002"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="desocupacion_val" data-type="line" data-min="4.96" data-max="13.840000000000002"></canvas>
 
                                     </div>
 
@@ -23421,7 +23331,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('empleo_val', 'Tasa de Empleo', 'Porcentaje de la población total que se encuentra actualmente trabajando.', 'Mensual', '32.2', '47.0')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="empleo_val" data-type="line" data-min="32.16" data-max="47.03999999999999"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="empleo_val" data-type="line" data-min="32.16" data-max="47.03999999999999"></canvas>
 
                                     </div>
 
@@ -23519,7 +23429,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('indigencia_val', 'Indigencia - Porcentaje', 'Porcentaje de personas cuyos ingresos no alcanzan a cubrir la Canasta Básica Alimentaria (CBA), es decir, que no cubren sus necesidades alimentarias básicas.', 'Semestral', '0%', '100%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="indigencia_val" data-type="line" data-min="0.0" data-max="100.0"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="indigencia_val" data-type="line" data-min="0.0" data-max="100.0"></canvas>
 
                                     </div>
 
@@ -23617,7 +23527,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('poblacion', 'Población Nacional Estimada', 'Evolución de la población total de Argentina.', 'Mensual', '40,614,303.2', '46,955,291.6')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="poblacion" data-type="line" data-min="40614303.20651779" data-max="46955291.64825168"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="poblacion" data-type="line" data-min="40614303.20651779" data-max="46955291.64825168"></canvas>
 
                                     </div>
 
@@ -23715,7 +23625,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('pobreza_val', 'Pobreza - Porcentaje', 'Porcentaje de personas cuyos ingresos no alcanzan a cubrir la Canasta Básica Total (CBT) en aglomerados urbanos.', 'Semestral', '0%', '100%')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="pobreza_val" data-type="line" data-min="0.0" data-max="100.0"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="pobreza_val" data-type="line" data-min="0.0" data-max="100.0"></canvas>
 
                                     </div>
 
@@ -23841,7 +23751,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima', 'Jubilación Máxima', 'Monto límite superior establecido por ley para las prestaciones del régimen previsional general de reparto de la seguridad social.', 'Mensual', '0.0', '2,983,011.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="jubilacion_maxima" data-type="line" data-min="0.0" data-max="2983011.7739999997"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="jubilacion_maxima" data-type="line" data-min="0.0" data-max="2983011.7739999997"></canvas>
 
                                     </div>
 
@@ -23939,7 +23849,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_usd', 'Jubilación Máxima en USD (MEP)', 'Haber máximo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '464.9', '2,009.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="jubilacion_maxima_usd" data-type="line" data-min="464.896" data-max="2009.344"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="jubilacion_maxima_usd" data-type="line" data-min="464.896" data-max="2009.344"></canvas>
 
                                     </div>
 
@@ -24033,7 +23943,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_minima', 'Jubilación Mínima', 'Monto del haber mensual básico legal establecido para los beneficiarios del régimen general previsional nacional sin incluir suplementos o bonos.', 'Mensual', '0.0', '443,303.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="jubilacion_minima" data-type="line" data-min="0.0" data-max="443303.349"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="jubilacion_minima" data-type="line" data-min="0.0" data-max="443303.349"></canvas>
 
                                     </div>
 
@@ -24131,7 +24041,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_usd', 'Jubilación Mínima en USD (MEP)', 'Haber mínimo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '69.1', '298.6')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="jubilacion_minima_usd" data-type="line" data-min="69.094" data-max="298.606"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="jubilacion_minima_usd" data-type="line" data-min="69.094" data-max="298.606"></canvas>
 
                                     </div>
 
@@ -24225,7 +24135,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio', 'Jubilación Promedio (SIPA)', 'Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).', 'Mensual', '0.0', '511,344.6')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="jubilacion_promedio" data-type="line" data-min="0.0" data-max="511344.586"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="jubilacion_promedio" data-type="line" data-min="0.0" data-max="511344.586"></canvas>
 
                                     </div>
 
@@ -24319,7 +24229,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_usd', 'Jubilación Promedio en USD (MEP)', 'Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '79.7', '344.4')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="jubilacion_promedio_usd" data-type="line" data-min="79.69800000000001" data-max="344.442"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="jubilacion_promedio_usd" data-type="line" data-min="79.69800000000001" data-max="344.442"></canvas>
 
                                     </div>
 
@@ -24441,7 +24351,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('emae_interanual', 'Estimador Mensual de Actividad Económica (EMAE) - Variación Interanual', 'Anticipa la evolución provisional del Producto Bruto Interno (PBI) con frecuencia mensual.', 'Mensual', '-29.9', '35.4')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="emae_interanual" data-type="line" data-min="-29.87030656296413" data-max="35.44015460049788"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="emae_interanual" data-type="line" data-min="-29.87030656296413" data-max="35.44015460049788"></canvas>
 
                                     </div>
 
@@ -24525,7 +24435,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('pbi_usd_mep', 'PBI en Dólares (MEP)', 'Producto Bruto Interno expresado en millones de dólares al tipo de cambio MEP de cada trimestre histórico.', 'Mensual', '183,352.3', '768,871.9')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="pbi_usd_mep" data-type="line" data-min="183352.323" data-max="768871.887"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="pbi_usd_mep" data-type="line" data-min="183352.323" data-max="768871.887"></canvas>
 
                                     </div>
 
@@ -24619,7 +24529,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('pbi_constante_hoy', 'PBI a Pesos de Hoy', 'Mide el Producto Bruto Interno ajustado por inflación, actualizado nominalmente al valor del último trimestre.', 'Mensual', '793,480,852.3', '1,086,377,882.9')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="pbi_constante_hoy" data-type="line" data-min="793480852.3243655" data-max="1086377882.9158783"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="pbi_constante_hoy" data-type="line" data-min="793480852.3243655" data-max="1086377882.9158783"></canvas>
 
                                     </div>
 
@@ -24717,7 +24627,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('pbi_corriente', 'PBI en Pesos Históricos', 'Mide el Producto Bruto Interno en millones de pesos a precios corrientes históricos de cada época.', 'Mensual', '0.0', '1,071,039,647.5')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="pbi_corriente" data-type="line" data-min="0.0" data-max="1071039647.4869839"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="pbi_corriente" data-type="line" data-min="0.0" data-max="1071039647.4869839"></canvas>
 
                                     </div>
 
@@ -24815,7 +24725,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('pbi_interanual', 'Producto Bruto Interno (PBI) - Variación Interanual', 'Mide el valor total de los bienes y servicios producidos en el país en un trimestre comparado con igual trimestre del año anterior.', 'Mensual', '-22.7', '22.5')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="pbi_interanual" data-type="line" data-min="-22.70940952040937" data-max="22.49717626148808"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="pbi_interanual" data-type="line" data-min="-22.70940952040937" data-max="22.49717626148808"></canvas>
 
                                     </div>
 
@@ -24899,7 +24809,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('pbi_per_capita_usd_mep', 'PBI per Cápita en USD', 'Producto Bruto Interno per cápita medido en dólares MEP.', 'Mensual', '4,061.9', '16,565.2')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="pbi_per_capita_usd_mep" data-type="line" data-min="4061.9100000000003" data-max="16565.19"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="pbi_per_capita_usd_mep" data-type="line" data-min="4061.9100000000003" data-max="16565.19"></canvas>
 
                                     </div>
 
@@ -24993,7 +24903,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('supermercados_ventas', 'Venta en Supermercados a Precios Constantes - Variación Interanual', 'Mide la evolución del consumo en supermercados deflactando la inflación.', 'Mensual', '-20.5', '12.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="supermercados_ventas" data-type="line" data-min="-20.544030819382133" data-max="12.275636461804297"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="supermercados_ventas" data-type="line" data-min="-20.544030819382133" data-max="12.275636461804297"></canvas>
 
                                     </div>
 
@@ -25077,7 +24987,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('supermercados_ventas_usd', 'Ventas en Supermercados en USD (MEP)', 'Valor dolarizado por el Dólar MEP implícito de la fecha para aislar el efecto inflacionario.', 'Mensual', '', '')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="supermercados_ventas_usd" data-type="line" data-min="" data-max=""></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="supermercados_ventas_usd" data-type="line" data-min="" data-max=""></canvas>
 
                                     </div>
 
@@ -25175,7 +25085,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('supermercados_ventas_valor', 'Venta en Supermercados a Precios Constantes - Valor', 'Monto total facturado en supermercados a nivel nacional deflactado a precios constantes de base 2017.', 'Mensual', '19,238.9', '35,434.1')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="supermercados_ventas_valor" data-type="line" data-min="19238.862170605964" data-max="35434.12463944111"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="supermercados_ventas_valor" data-type="line" data-min="19238.862170605964" data-max="35434.12463944111"></canvas>
 
                                     </div>
 
@@ -25301,7 +25211,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('gas_produccion', 'Producción de Gas - Cantidad', 'Producción mensual nacional de gas natural.', 'Mensual', '3,012.5', '5,162.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="gas_produccion" data-type="line" data-min="3012.4644645000003" data-max="5162.804463299997"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="gas_produccion" data-type="line" data-min="3012.4644645000003" data-max="5162.804463299997"></canvas>
 
                                     </div>
 
@@ -25399,7 +25309,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('ipi_interanual', 'Índice de Producción Industrial (IPI) - Variación Interanual', 'Índice de Producción Industrial Manufacturero. Mide la evolución del sector mercantil o manufacturero argentino.', 'Mensual', '-42.2', '65.1')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="ipi_interanual" data-type="line" data-min="-42.173865240941566" data-max="65.1207781243505"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="ipi_interanual" data-type="line" data-min="-42.173865240941566" data-max="65.1207781243505"></canvas>
 
                                     </div>
 
@@ -25483,7 +25393,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('petroleo_produccion', 'Producción de Petróleo - Cantidad', 'Producción mensual nacional de petróleo crudo.', 'Mensual', '1,945.5', '4,391.4')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="petroleo_produccion" data-type="line" data-min="1945.46540374" data-max="4391.39941606"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="petroleo_produccion" data-type="line" data-min="1945.46540374" data-max="4391.39941606"></canvas>
 
                                     </div>
 
@@ -25609,7 +25519,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('emae_agro', 'EMAE Agricultura', 'Nivel de actividad económica para el sector agrícola y ganadería.', 'Mensual', '-63.6', '110.4')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="emae_agro" data-type="line" data-min="-63.557977917781024" data-max="110.39136772034138"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="emae_agro" data-type="line" data-min="-63.557977917781024" data-max="110.39136772034138"></canvas>
 
                                     </div>
 
@@ -25693,7 +25603,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('exportaciones_moa', 'Exportaciones MOA', 'Exportaciones de manufacturas de origen agropecuario en millones de USD.', 'Mensual', '843.2', '3,900.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="exportaciones_moa" data-type="line" data-min="843.2" data-max="3900.8"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="exportaciones_moa" data-type="line" data-min="843.2" data-max="3900.8"></canvas>
 
                                     </div>
 
@@ -25791,7 +25701,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('exportaciones_pp', 'Exportaciones Primarios (PP)', 'Exportaciones de productos primarios en millones de USD FOB.', 'Mensual', '221.1', '2,997.4')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="exportaciones_pp" data-type="line" data-min="221.12341174155205" data-max="2997.3524171144045"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="exportaciones_pp" data-type="line" data-min="221.12341174155205" data-max="2997.3524171144045"></canvas>
 
                                     </div>
 
@@ -25889,7 +25799,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('moa_exportaciones', 'Exportaciones Agro (MOA)', 'Montos en millones de USD de Manufacturas de Origen Agro.', 'Mensual', '843.2', '3,900.8')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="moa_exportaciones" data-type="line" data-min="843.2" data-max="3900.8"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="moa_exportaciones" data-type="line" data-min="843.2" data-max="3900.8"></canvas>
 
                                     </div>
 
@@ -26015,7 +25925,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('cemento_total', 'Despachos de Cemento (Total)', 'Despachos de Cemento Portland al Mercado Interno (Miles de Toneladas).', 'Mensual', '927.3', '25,811.7')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="cemento_total" data-type="line" data-min="927.2999999999997" data-max="25811.7"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="cemento_total" data-type="line" data-min="927.2999999999997" data-max="25811.7"></canvas>
 
                                     </div>
 
@@ -26113,7 +26023,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('emae_construccion', 'EMAE Construcción', 'Nivel de actividad económica para el sector construcción.', 'Mensual', '31.8', '177.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="emae_construccion" data-type="line" data-min="31.75498110038822" data-max="177.32796240253134"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="emae_construccion" data-type="line" data-min="31.75498110038822" data-max="177.32796240253134"></canvas>
 
                                     </div>
 
@@ -26211,7 +26121,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('icc_general', 'Costo Construcción (ICC)', 'Variación mensual del nivel general del Índice del Costo de la Construcción.', 'Mensual', '22.1', '1,407.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="icc_general" data-type="line" data-min="22.059999999999988" data-max="1407.3400000000001"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="icc_general" data-type="line" data-min="22.059999999999988" data-max="1407.3400000000001"></canvas>
 
                                     </div>
 
@@ -26309,7 +26219,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('isac_asfalto', 'Consumo de Asfalto', 'Índice de consumo de asfalto para obras públicas.', 'Mensual', '24.1', '264.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="isac_asfalto" data-type="line" data-min="24.08839895366332" data-max="264.28061366204184"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="isac_asfalto" data-type="line" data-min="24.08839895366332" data-max="264.28061366204184"></canvas>
 
                                     </div>
 
@@ -26407,7 +26317,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('isac_cemento', 'Consumo de Cemento', 'Índice de consumo de Cemento Portland para construcción.', 'Mensual', '68.1', '245.5')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="isac_cemento" data-type="line" data-min="68.1474350593471" data-max="245.49362540457898"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="isac_cemento" data-type="line" data-min="68.1474350593471" data-max="245.49362540457898"></canvas>
 
                                     </div>
 
@@ -26505,7 +26415,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                     <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('isac_general', 'ISAC Construcción', 'Indicador Sintético de la Actividad de la Construcción.', 'Mensual', '-74.9', '149.3')">
 
-                                        <canvas class="sparkline-canvas" width="120" height="30" data-key="isac_general" data-type="line" data-min="-74.9332183638185" data-max="149.25518859712093"></canvas>
+                                        <canvas class="sparkline-canvas" width="120" height="30" width="120" height="30" data-key="isac_general" data-type="line" data-min="-74.9332183638185" data-max="149.25518859712093"></canvas>
 
                                     </div>
 
@@ -34014,7 +33924,7 @@ function toggleBandsVisibility() {
 
                 
 
-                let histData = appData.historical_db[dbKey] || appData.historical_db[ticker + '.BA'] || appData.historical_db[ticker.replace('.BA', '')];
+                let histData = (appData.sparklines_db && appData.sparklines_db[dbKey]) || (appData.sparklines_db && appData.sparklines_db[ticker]) || appData.historical_db[dbKey] || appData.historical_db[ticker + '.BA'] || appData.historical_db[ticker.replace('.BA', '')];
 
                 const filtered = filterHistory(histData, period);
 
@@ -36374,7 +36284,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             } else {
 
-                let historyObj = appData.historical_db[modalState.key];
+                let historyObj = (appData.sparklines_db && appData.sparklines_db[modalState.key]) || (appData.historical_db && appData.historical_db[modalState.key]);
 
                 if (!historyObj && (modalState.key.endsWith('_usd') || modalState.key.includes('_usd_mep') || modalState.key.includes('_mep'))) {
 
@@ -37996,6 +37906,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
                         const ticker = firstRow.dataset.ticker;
 
                         if (!state[sec]) state[sec] = { tickers: [] };
+                        if (!state[sec]) state[sec] = { tickers: [] };
                         state[sec].tickers = [ticker];
 
                     }
@@ -38028,6 +37939,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                         const ticker = firstRow.dataset.ticker;
 
+                        if (!state[sec]) state[sec] = { tickers: [] };
                         if (!state[sec]) state[sec] = { tickers: [] };
                         state[sec].tickers = [ticker];
 
@@ -40398,7 +40310,7 @@ def build_dashboard():
 
 
 
-            with open("master_dataset.json", "w", encoding="utf-8") as f:
+        with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
 
     # Permanent NaN Post-Pass Filter
