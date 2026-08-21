@@ -4866,7 +4866,7 @@ canvas.sparkline-canvas {
 <script>
         // Asynchronously fetch full multi-year historical dataset (1255-1500 points per asset)
         (function loadFullHistoricalSeries() {
-            fetch('historical_series.json?v=' + Date.now())
+            fetch('historical_series_v2.json?v=' + Date.now())
                 .then(r => r.json())
                 .then(data => {
                     if (data && data.historical_db) {
@@ -40179,8 +40179,16 @@ def build_dashboard():
 
 
 
-                                            with open("master_dataset.json", "w", encoding="utf-8") as f:
+                                                with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
