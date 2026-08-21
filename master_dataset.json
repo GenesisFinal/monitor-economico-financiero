@@ -1,11 +1,11 @@
 {
-  "last_updated": "21/08/2026 16:27:31 hs",
+  "last_updated": "21/08/2026 16:32:02 hs",
   "final_data": {
     "bond_details": {
       "AE38D": {
         "ticker": "AE38D",
         "name": "Bono USD Ley Arg. - vto. 01/2038",
-        "price": 78.25,
+        "price": 78.15,
         "tir": 0.10178125171583977,
         "fair_value": 100.54166666666669,
         "modified_duration": 4.470283456793326,
@@ -14,7 +14,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 78.25,
+        "close": 78.15,
         "start_date": "2020-09-04",
         "end_date": "2038-01-09",
         "coupon": 0.0,
@@ -1815,7 +1815,7 @@
       "AL29D": {
         "ticker": "AL29D",
         "name": "Bono USD Ley Arg. - 1.00% - vto. 07/2029",
-        "price": 53.32,
+        "price": 53.63,
         "tir": 0.0738557740094427,
         "fair_value": 60.065,
         "modified_duration": 1.5310387269550232,
@@ -1824,7 +1824,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 53.32,
+        "close": 53.63,
         "start_date": "2020-09-04",
         "end_date": "2029-07-09",
         "coupon": 0.0,
@@ -3625,7 +3625,7 @@
       "AL30D": {
         "ticker": "AL30D",
         "name": "Bono USD Ley Arg. - vto. 07/2030",
-        "price": 55.11,
+        "price": 55.15,
         "tir": 0.07650087709957956,
         "fair_value": 64.052,
         "modified_duration": 1.9665123387625232,
@@ -3634,7 +3634,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 55.11,
+        "close": 55.15,
         "start_date": "2020-09-04",
         "end_date": "2030-07-09",
         "coupon": 0.0,
@@ -5435,7 +5435,7 @@
       "AL35D": {
         "ticker": "AL35D",
         "name": "Bono USD Ley Arg. - vto. 07/2035",
-        "price": 74.9,
+        "price": 74.97,
         "tir": 0.09982618819105515,
         "fair_value": 100.446875,
         "modified_duration": 5.247594054534522,
@@ -5444,7 +5444,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 74.9,
+        "close": 74.97,
         "start_date": "2020-09-04",
         "end_date": "2035-07-09",
         "coupon": 0.0,
@@ -7245,7 +7245,7 @@
       "AL41D": {
         "ticker": "AL41D",
         "name": "Bono USD Ley Arg. - vto. 07/2041",
-        "price": 69.71,
+        "price": 69.62,
         "tir": 0.100913297419973,
         "fair_value": 100.37916666666662,
         "modified_duration": 5.6928012822027245,
@@ -7254,7 +7254,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 69.71,
+        "close": 69.62,
         "start_date": "2020-09-04",
         "end_date": "2041-07-09",
         "coupon": 0.0,
@@ -9055,7 +9055,7 @@
       "AN29D": {
         "ticker": "AN29D",
         "name": "Bono USD Ley Arg. - 6.50% - vto. 11/2029",
-        "price": 92.6,
+        "price": 92.4,
         "tir": 0.09389617341991875,
         "fair_value": 101.40833333333333,
         "modified_duration": 2.822821766119891,
@@ -9064,7 +9064,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 92.6,
+        "close": 92.4,
         "start_date": "2025-12-12",
         "end_date": "2029-11-30",
         "coupon": 0.0,
@@ -10081,7 +10081,7 @@
       "AO27D": {
         "ticker": "AO27D",
         "name": "Bono USD Ley Arg. - 6.00% - vto. 10/2027",
-        "price": 101.8,
+        "price": 101.85,
         "tir": 0.04382369200313505,
         "fair_value": 100.3,
         "modified_duration": 1.151108533146949,
@@ -10090,7 +10090,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 101.8,
+        "close": 101.85,
         "start_date": "2026-02-27",
         "end_date": "2027-10-29",
         "coupon": 0.0,
@@ -10813,7 +10813,7 @@
       "AO28D": {
         "ticker": "AO28D",
         "name": "Bono USD Ley Arg. - 6.00% - vto. 10/2028",
-        "price": 94.42,
+        "price": 94.49,
         "tir": 0.08582874211004334,
         "fair_value": 100.3,
         "modified_duration": 2.0439424663865835,
@@ -10822,7 +10822,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 94.42,
+        "close": 94.49,
         "start_date": "2026-03-31",
         "end_date": "2028-10-31",
         "coupon": 0.0,
@@ -11405,7 +11405,7 @@
       "AO29D": {
         "ticker": "AO29D",
         "name": "Bono USD Ley Arg. - 6.00% - vto. 10/2029",
-        "price": 91.05,
+        "price": 90.88,
         "tir": 0.08873291614284402,
         "fair_value": 100.51666666666667,
         "modified_duration": 2.870060750419619,
@@ -11414,7 +11414,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 91.05,
+        "close": 90.88,
         "start_date": "2026-07-17",
         "end_date": "2029-10-31",
         "coupon": 0.0,
@@ -13331,7 +13331,7 @@
       "BPOA7": {
         "ticker": "BPOA7",
         "name": "BOPREAL USD - vto. 10/2027",
-        "price": 157600.0,
+        "price": 157000.0,
         "tir": 0.03913224378579163,
         "fair_value": 101.5,
         "modified_duration": 0.910854696878969,
@@ -13340,7 +13340,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 157600.0,
+        "close": 157000.0,
         "start_date": "2024-01-05",
         "end_date": "2027-10-31",
         "coupon": 0.0,
@@ -16503,7 +16503,7 @@
       "BPOB7": {
         "ticker": "BPOB7",
         "name": "BOPREAL USD - vto. 10/2027",
-        "price": 157800.0,
+        "price": 157620.0,
         "tir": 0.04361873530023817,
         "fair_value": 101.5,
         "modified_duration": 0.9085366271189403,
@@ -16512,7 +16512,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 157800.0,
+        "close": 157620.0,
         "start_date": "2024-01-05",
         "end_date": "2027-10-31",
         "coupon": 0.0,
@@ -19696,7 +19696,7 @@
       "BPOC7": {
         "ticker": "BPOC7",
         "name": "BOPREAL USD - vto. 10/2027",
-        "price": 157130.0,
+        "price": 157670.0,
         "tir": 0.03261699693529674,
         "fair_value": 101.5,
         "modified_duration": 0.9142415051514178,
@@ -19705,7 +19705,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 157130.0,
+        "close": 157670.0,
         "start_date": "2024-01-05",
         "end_date": "2027-10-31",
         "coupon": 0.0,
@@ -21506,7 +21506,7 @@
       "BPOD7": {
         "ticker": "BPOD7",
         "name": "BOPREAL USD - vto. 10/2027",
-        "price": 157300.0,
+        "price": 157450.0,
         "tir": 0.02843652845231772,
         "fair_value": 101.5,
         "modified_duration": 0.9164275429558305,
@@ -21515,7 +21515,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 157300.0,
+        "close": 157450.0,
         "start_date": "2024-01-05",
         "end_date": "2027-10-31",
         "coupon": 0.0,
@@ -25438,7 +25438,7 @@
       "DICP": {
         "ticker": "DICP",
         "name": "Bono CER - vto. 12/2033",
-        "price": 47355.0,
+        "price": 47370.0,
         "tir": 0.09268378398311941,
         "fair_value": 53888.13514287793,
         "modified_duration": 3.1064958847480346,
@@ -25447,7 +25447,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 47355.0,
+        "close": 47370.0,
         "start_date": "2003-12-31",
         "end_date": "2033-12-31",
         "coupon": 0.0,
@@ -29058,7 +29058,7 @@
       "GD29D": {
         "ticker": "GD29D",
         "name": "Bono USD Ley NY - 1.00% - vto. 07/2029",
-        "price": 55.7,
+        "price": 55.67,
         "tir": 0.05310422934210354,
         "fair_value": 60.065,
         "modified_duration": 1.5602627191101865,
@@ -29067,7 +29067,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 55.7,
+        "close": 55.67,
         "start_date": "2020-09-04",
         "end_date": "2029-07-09",
         "coupon": 0.0,
@@ -30868,7 +30868,7 @@
       "GD30D": {
         "ticker": "GD30D",
         "name": "Bono USD Ley NY - vto. 07/2030",
-        "price": 57.39,
+        "price": 57.36,
         "tir": 0.06283126088634107,
         "fair_value": 64.052,
         "modified_duration": 1.9955510824717007,
@@ -30877,7 +30877,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 57.39,
+        "close": 57.36,
         "start_date": "2020-09-04",
         "end_date": "2030-07-09",
         "coupon": 0.0,
@@ -32678,7 +32678,7 @@
       "GD35D": {
         "ticker": "GD35D",
         "name": "Bono USD Ley NY - vto. 07/2035",
-        "price": 79.45,
+        "price": 79.49,
         "tir": 0.08981387731884152,
         "fair_value": 100.446875,
         "modified_duration": 5.314213809825582,
@@ -32687,7 +32687,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 79.45,
+        "close": 79.49,
         "start_date": "2020-09-04",
         "end_date": "2035-07-09",
         "coupon": 0.0,
@@ -34488,7 +34488,7 @@
       "GD38D": {
         "ticker": "GD38D",
         "name": "Bono USD Ley NY - vto. 01/2038",
-        "price": 83.38,
+        "price": 83.34,
         "tir": 0.0883954663135198,
         "fair_value": 100.54166666666669,
         "modified_duration": 4.608629276604714,
@@ -34497,7 +34497,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 83.38,
+        "close": 83.34,
         "start_date": "2020-09-04",
         "end_date": "2038-01-09",
         "coupon": 0.0,
@@ -36298,7 +36298,7 @@
       "GD41D": {
         "ticker": "GD41D",
         "name": "Bono USD Ley NY - vto. 07/2041",
-        "price": 74.27,
+        "price": 74.14,
         "tir": 0.09132102042143615,
         "fair_value": 100.37916666666662,
         "modified_duration": 5.840645173461521,
@@ -36307,7 +36307,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 74.27,
+        "close": 74.14,
         "start_date": "2020-09-04",
         "end_date": "2041-07-09",
         "coupon": 0.0,
@@ -41728,7 +41728,7 @@
       "MCC3D": {
         "ticker": "MCC3D",
         "name": "Bono USD Ley Arg. - 7.50% - vto. 05/2030",
-        "price": 102.7,
+        "price": 102.5,
         "tir": 0.07367510101353295,
         "fair_value": 102.03424657534246,
         "modified_duration": 3.1484137931098775,
@@ -41737,7 +41737,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 102.7,
+        "close": 102.5,
         "start_date": "2026-05-11",
         "end_date": "2030-05-11",
         "coupon": 0.0,
@@ -42131,7 +42131,7 @@
       "MGCRD": {
         "ticker": "MGCRD",
         "name": "Bono USD Ley NY - 7.75% - vto. 11/2037",
-        "price": 107.25,
+        "price": 107.15,
         "tir": 0.07115340016834075,
         "fair_value": 101.9375,
         "modified_duration": 7.406951726500409,
@@ -42140,7 +42140,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 107.25,
+        "close": 107.15,
         "start_date": "2025-11-14",
         "end_date": "2037-11-14",
         "coupon": 0.0,
@@ -43276,7 +43276,7 @@
       "NPCDD": {
         "ticker": "NPCDD",
         "name": "Bono USD Ley Arg. - 6.00% - vto. 04/2030",
-        "price": 101.15,
+        "price": 101.2,
         "tir": 0.059990810703926645,
         "fair_value": 101.8082191780822,
         "modified_duration": 3.2181190016661363,
@@ -43285,7 +43285,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 101.15,
+        "close": 101.2,
         "start_date": "2026-04-30",
         "end_date": "2030-04-30",
         "coupon": 0.0,
@@ -47334,7 +47334,7 @@
       "PLC7D": {
         "ticker": "PLC7D",
         "name": "Bono USD Ley NY - 7.55% - vto. 09/2037",
-        "price": 104.55,
+        "price": 104.4,
         "tir": 0.07146623490781583,
         "fair_value": 101.00666666666666,
         "modified_duration": 6.9978385474620115,
@@ -47343,7 +47343,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 104.55,
+        "close": 104.4,
         "start_date": "2026-06-30",
         "end_date": "2037-09-30",
         "coupon": 0.0,
@@ -47520,7 +47520,7 @@
       "TMF27": {
         "ticker": "TMF27",
         "name": "Bono TAMAR - vto. 02/2027",
-        "price": 120.05,
+        "price": 120.1,
         "tir": 0.30329144806526637,
         "fair_value": 118.39077461988586,
         "modified_duration": 0.4036145545499489,
@@ -47529,7 +47529,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 120.05,
+        "close": 120.1,
         "start_date": "2026-02-13",
         "end_date": "2027-02-26",
         "coupon": 0.0,
@@ -49629,7 +49629,7 @@
       "TML27": {
         "ticker": "TML27",
         "name": "Bono TAMAR - vto. 07/2027",
-        "price": 105.5,
+        "price": 105.35,
         "tir": 0.3099807409937888,
         "fair_value": 104.41680527742308,
         "modified_duration": 0.7236329327711478,
@@ -49638,7 +49638,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 105.5,
+        "close": 105.35,
         "start_date": "2026-06-30",
         "end_date": "2027-07-30",
         "coupon": 0.0,
@@ -57055,7 +57055,7 @@
       "TX28": {
         "ticker": "TX28",
         "name": "Bono CER - vto. 11/2028",
-        "price": 1706.0,
+        "price": 1705.0,
         "tir": 0.07825409520998959,
         "fair_value": 1823.0479048010334,
         "modified_duration": 1.1338737096766283,
@@ -57064,7 +57064,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 1706.0,
+        "close": 1705.0,
         "start_date": "2020-09-04",
         "end_date": "2028-11-09",
         "coupon": 0.0,
@@ -60675,7 +60675,7 @@
       "TXMD8": {
         "ticker": "TXMD8",
         "name": "Bono ARS - vto. 12/2028",
-        "price": 91.06,
+        "price": 91.24,
         "tir": 0.37509105320375546,
         "fair_value": 106.71949557121133,
         "modified_duration": 1.6916368169876217,
@@ -60684,7 +60684,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 91.06,
+        "close": 91.24,
         "start_date": "2026-06-12",
         "end_date": "2028-12-15",
         "coupon": 0.0,
@@ -60931,7 +60931,7 @@
       "TXMD9": {
         "ticker": "TXMD9",
         "name": "Bono ARS - vto. 12/2029",
-        "price": 84.0,
+        "price": 83.85,
         "tir": 0.38609323954839603,
         "fair_value": 107.7868090993593,
         "modified_duration": 2.3975931607006733,
@@ -60940,7 +60940,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 84.0,
+        "close": 83.85,
         "start_date": "2026-06-12",
         "end_date": "2029-12-14",
         "coupon": 0.0,
@@ -61075,7 +61075,7 @@
       "TXMJ0": {
         "ticker": "TXMJ0",
         "name": "Bono ARS - vto. 06/2030",
-        "price": 81.05,
+        "price": 81.09,
         "tir": 0.3872712687805489,
         "fair_value": 108.45022058936412,
         "modified_duration": 2.7826381523850374,
@@ -61084,7 +61084,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 81.05,
+        "close": 81.09,
         "start_date": "2026-06-12",
         "end_date": "2030-06-28",
         "coupon": 0.0,
@@ -61706,7 +61706,7 @@
       "TXMJ9": {
         "ticker": "TXMJ9",
         "name": "Bono Dual - vto. 06/2029",
-        "price": 90.09,
+        "price": 89.9,
         "tir": 0.3380956776014439,
         "fair_value": 110.17722665002232,
         "modified_duration": 2.1396180768000788,
@@ -61715,7 +61715,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 90.09,
+        "close": 89.9,
         "start_date": "2026-04-30",
         "end_date": "2029-06-29",
         "coupon": 0.0,
@@ -64686,7 +64686,7 @@
       "TZV28": {
         "ticker": "TZV28",
         "name": "Bono DL (sin cupón) - vto. 06/2028",
-        "price": 124090.0,
+        "price": 123900.0,
         "tir": 0.09588615979506787,
         "fair_value": 100,
         "modified_duration": 1.703770270445758,
@@ -64695,7 +64695,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 124090.0,
+        "close": 123900.0,
         "start_date": "2026-02-27",
         "end_date": "2028-06-30",
         "coupon": 0.0,
@@ -65408,7 +65408,7 @@
       "TZX27": {
         "ticker": "TZX27",
         "name": "Bono CER - vto. 06/2027",
-        "price": 387.1,
+        "price": 387.45,
         "tir": 0.056702200806445315,
         "fair_value": 407.6696936927311,
         "modified_duration": 0.8192974557986328,
@@ -65417,7 +65417,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 387.1,
+        "close": 387.45,
         "start_date": "2024-02-01",
         "end_date": "2027-06-30",
         "coupon": 0.0,
@@ -67218,7 +67218,7 @@
       "TZX28": {
         "ticker": "TZX28",
         "name": "Bono CER - vto. 06/2028",
-        "price": 345.85,
+        "price": 345.7,
         "tir": 0.09032257519425194,
         "fair_value": 407.6696936927311,
         "modified_duration": 1.7124640921236716,
@@ -67227,7 +67227,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 345.85,
+        "close": 345.7,
         "start_date": "2024-02-01",
         "end_date": "2028-06-30",
         "coupon": 0.0,
@@ -70075,7 +70075,7 @@
       "TZXD6": {
         "ticker": "TZXD6",
         "name": "Bono CER - vto. 12/2026",
-        "price": 297.75,
+        "price": 297.5,
         "tir": 0.0378414155921169,
         "fair_value": 301.3939786948824,
         "modified_duration": 0.3141398987958737,
@@ -70084,7 +70084,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 297.75,
+        "close": 297.5,
         "start_date": "2024-03-15",
         "end_date": "2026-12-15",
         "coupon": 0.0,
@@ -73881,7 +73881,7 @@
       "TZXM7": {
         "ticker": "TZXM7",
         "name": "Bono CER - vto. 03/2027",
-        "price": 219.05,
+        "price": 219.1,
         "tir": 0.05021092752437874,
         "fair_value": 226.09503267955668,
         "modified_duration": 0.5869662369801177,
@@ -73890,7 +73890,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 219.05,
+        "close": 219.1,
         "start_date": "2024-05-20",
         "end_date": "2027-03-31",
         "coupon": 0.0,
@@ -75691,7 +75691,7 @@
       "TZXM8": {
         "ticker": "TZXM8",
         "name": "Bono CER - vto. 03/2028",
-        "price": 98.0,
+        "price": 98.25,
         "tir": 0.08619694609248625,
         "fair_value": 112.98110360005514,
         "modified_duration": 1.4900653006738995,
@@ -75700,7 +75700,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 98.0,
+        "close": 98.25,
         "start_date": "2026-03-31",
         "end_date": "2028-03-31",
         "coupon": 0.0,
@@ -75989,7 +75989,7 @@
       "TZXM9": {
         "ticker": "TZXM9",
         "name": "Bono CER - vto. 03/2029",
-        "price": 89.33,
+        "price": 89.15,
         "tir": 0.09135914013414072,
         "fair_value": 112.98110360005514,
         "modified_duration": 2.3898816459065264,
@@ -75998,7 +75998,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 89.33,
+        "close": 89.15,
         "start_date": "2026-03-31",
         "end_date": "2029-03-28",
         "coupon": 0.0,
@@ -81729,7 +81729,7 @@
       "VSCXD": {
         "ticker": "VSCXD",
         "name": "Bono USD Ley NY - 7.88% - vto. 04/2038",
-        "price": 110.05,
+        "price": 110.85,
         "tir": 0.06987092089323585,
         "fair_value": 102.821875,
         "modified_duration": 7.084736440612377,
@@ -81738,7 +81738,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 110.05,
+        "close": 110.85,
         "start_date": "2026-04-09",
         "end_date": "2038-04-09",
         "coupon": 0.0,
@@ -82265,7 +82265,7 @@
       "X30N6": {
         "ticker": "X30N6",
         "name": "Bono CER - vto. 11/2026",
-        "price": 122.6,
+        "price": 122.55,
         "tir": 0.03504029760492093,
         "fair_value": 123.83617935892599,
         "modified_duration": 0.2752854236773636,
@@ -82274,7 +82274,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 122.6,
+        "close": 122.55,
         "start_date": "2025-12-15",
         "end_date": "2026-11-30",
         "coupon": 0.0,
@@ -85101,7 +85101,7 @@
       "YMCXD": {
         "ticker": "YMCXD",
         "name": "Bono USD Ley NY - 8.75% - vto. 09/2031",
-        "price": 113.3,
+        "price": 113.25,
         "tir": 0.06137024598888663,
         "fair_value": 103.81597222222223,
         "modified_duration": 3.585370663504837,
@@ -85110,7 +85110,7 @@
         "open": 0.0,
         "min": 0.0,
         "max": 0.0,
-        "close": 113.3,
+        "close": 113.25,
         "start_date": "2024-09-11",
         "end_date": "2031-09-11",
         "coupon": 0.0,
@@ -87981,7 +87981,7 @@
       }
     },
     "update_time": "15/08/2026 18:56:25",
-    "update_time_financial": "21/08/2026 16:27:31 hs",
+    "update_time_financial": "21/08/2026 16:32:02 hs",
     "update_time_economic": "15/08/2026 18:56:25",
     "update_time_insurance": "15/08/2026 18:56:25",
     "names": {
@@ -88679,8 +88679,8 @@
               "share": 1.64
             }
           ],
-          "otros_premiums": NaN,
-          "otros_share": NaN
+          "otros_premiums": null,
+          "otros_share": null
         },
         "seguros_patrimoniales": {
           "key": "seguros_patrimoniales",
@@ -115627,7 +115627,7 @@
         "name": "LECAP Oct 30",
         "pago_final": 135.278,
         "fecha_vencimiento": "2026-10-30",
-        "price": 129.44,
+        "price": 129.45,
         "type": "LECAP",
         "dtm": 73,
         "tem": 1.92,
@@ -115635,8 +115635,8 @@
         "tea": 26.09,
         "change": 0.49,
         "change_val": -0.01,
-        "prev_close": 128.81,
-        "cierre_anterior": 128.81
+        "prev_close": 128.82,
+        "cierre_anterior": 128.82
       },
       {
         "ticker": "S13N6",
@@ -115659,29 +115659,29 @@
         "name": "LECAP Nov 30",
         "pago_final": 129.888,
         "fecha_vencimiento": "2026-11-30",
-        "price": 121.48,
+        "price": 121.5,
         "type": "LECAP",
         "dtm": 104,
         "tem": 2.05,
         "tna": 25.64,
         "tea": 28.08,
-        "change": 0.42,
+        "change": 0.43,
         "change_val": -0.09,
-        "prev_close": 120.97,
-        "cierre_anterior": 120.97
+        "prev_close": 120.98,
+        "cierre_anterior": 120.98
       },
       {
         "ticker": "T15E7",
         "name": "BONCAP Ene 15/27",
         "pago_final": 161.104,
         "fecha_vencimiento": "2027-01-15",
-        "price": 145.4,
+        "price": 145.45,
         "type": "BONCAP",
         "dtm": 150,
         "tem": 2.09,
         "tna": 26.47,
         "tea": 28.56,
-        "change": 0.21,
+        "change": 0.24,
         "prev_close": 145.1,
         "cierre_anterior": 145.1
       },
@@ -115690,16 +115690,16 @@
         "name": "BONCAP Abr 30/27",
         "pago_final": 157.341,
         "fecha_vencimiento": "2027-04-30",
-        "price": 131.85,
+        "price": 131.9,
         "type": "BONCAP",
         "dtm": 255,
         "tem": 2.13,
         "tna": 28.13,
         "tea": 29.29,
-        "change": 0.24,
+        "change": 0.27,
         "change_val": -0.45,
-        "prev_close": 131.53,
-        "cierre_anterior": 131.53
+        "prev_close": 131.54,
+        "cierre_anterior": 131.54
       },
       {
         "ticker": "T31Y7",
@@ -115722,16 +115722,16 @@
         "name": "BONCAP Jun 30/27",
         "pago_final": 156.037,
         "fecha_vencimiento": "2027-06-30",
-        "price": 126.21,
+        "price": 125.5,
         "type": "BONCAP",
         "dtm": 316,
         "tem": 2.06,
         "tna": 27.71,
         "tea": 28.19,
-        "change": 0.33,
+        "change": -0.24,
         "change_val": -0.2,
-        "prev_close": 125.79,
-        "cierre_anterior": 125.79
+        "prev_close": 125.8,
+        "cierre_anterior": 125.8
       }
     ],
     "indices": [
@@ -115742,8 +115742,8 @@
       {
         "ticker": "^DJI",
         "name": "Dow Jones Industrial",
-        "price": 53289.36,
-        "change": 1.0,
+        "price": 53315.85,
+        "change": 1.06,
         "change_val": 0.22,
         "change_7d": -0.56,
         "change_1m": 2.04,
@@ -115756,8 +115756,8 @@
       {
         "ticker": "^GSPC",
         "name": "S&P 500",
-        "price": 7678.39,
-        "change": 0.49,
+        "price": 7680.0,
+        "change": 0.51,
         "change_val": 0.21,
         "change_7d": 0.36,
         "change_1m": 2.82,
@@ -115770,8 +115770,8 @@
       {
         "ticker": "^IXIC",
         "name": "Nasdaq Composite",
-        "price": 26193.16,
-        "change": 0.48,
+        "price": 26196.33,
+        "change": 0.5,
         "change_val": 0.16,
         "change_7d": 0.14,
         "change_1m": 1.75,
@@ -115894,8 +115894,8 @@
       {
         "ticker": "^BVSP",
         "name": "IBovespa",
-        "price": 171195.7,
-        "change": 1.95,
+        "price": 171178.05,
+        "change": 1.94,
         "change_val": 0.9,
         "change_7d": -3.23,
         "change_1m": -5.16,
@@ -115908,8 +115908,8 @@
       {
         "ticker": "^MERV",
         "name": "S&P Merval",
-        "price": 2918862.25,
-        "change": 1.49,
+        "price": 2914173.75,
+        "change": 1.33,
         "change_val": -0.59,
         "change_7d": -4.52,
         "change_1m": -10.45,
@@ -115926,8 +115926,8 @@
       {
         "ticker": "^GSPTSE",
         "name": "S&P/TSX",
-        "price": 36632.7,
-        "change": 0.74,
+        "price": 36630.82,
+        "change": 0.73,
         "change_val": 0.09,
         "change_7d": 0.96,
         "change_1m": 3.71,
@@ -115971,7 +115971,7 @@
         "ticker": "GBPUSD=X",
         "name": "GBP/USD",
         "price": 1.36,
-        "change": 0.35,
+        "change": 0.36,
         "change_val": -0.01,
         "change_7d": 0.6,
         "change_1m": 1.04,
@@ -116013,7 +116013,7 @@
         "ticker": "BRL=X",
         "name": "USD/BRL (Real)",
         "price": 5.14,
-        "change": -0.69,
+        "change": -0.7,
         "change_val": 0.21,
         "change_7d": 1.78,
         "change_1m": 2.4,
@@ -116026,8 +116026,8 @@
       {
         "ticker": "MXN=X",
         "name": "USD/MEX (Peso)",
-        "price": 16.91,
-        "change": -0.22,
+        "price": 16.92,
+        "change": -0.21,
         "change_val": 0.06,
         "change_7d": -1.1,
         "change_1m": -2.04,
@@ -116060,22 +116060,22 @@
       {
         "ticker": "GC=F",
         "name": "Oro (USD/Oz)",
-        "price": 4677.5,
-        "change": 2.32,
+        "price": 4680.1,
+        "change": 3.63,
         "change_val": 0.25,
         "change_7d": 0.91,
         "change_1m": 8.32,
         "change_ytd": 1.53,
         "change_12m": 31.34,
         "volume": 1491,
-        "prev_close": 4571.4,
-        "cierre_anterior": 4571.4
+        "prev_close": 4516.3,
+        "cierre_anterior": 4516.3
       },
       {
         "ticker": "SI=F",
         "name": "Plata (USD/Oz)",
-        "price": 69.54,
-        "change": 2.22,
+        "price": 69.6,
+        "change": 2.31,
         "change_val": 1.74,
         "change_7d": 2.61,
         "change_1m": 13.79,
@@ -116088,8 +116088,8 @@
       {
         "ticker": "PL=F",
         "name": "Platino (USD/Oz)",
-        "price": 1885.3,
-        "change": 2.97,
+        "price": 1887.0,
+        "change": 3.06,
         "change_val": 0.06,
         "change_7d": -0.01,
         "change_1m": 7.26,
@@ -116102,8 +116102,8 @@
       {
         "ticker": "HG=F",
         "name": "Cobre (USD/Lb)",
-        "price": 6.58,
-        "change": 1.92,
+        "price": 6.59,
+        "change": 1.93,
         "change_val": -0.18,
         "change_7d": 0.44,
         "change_1m": 4.86,
@@ -116134,8 +116134,8 @@
       {
         "ticker": "CL=F",
         "name": "Petróleo WTI (USD/Bbl)",
-        "price": 86.91,
-        "change": -1.05,
+        "price": 86.84,
+        "change": -1.13,
         "change_val": 0.57,
         "change_7d": 5.4,
         "change_1m": 3.52,
@@ -116177,7 +116177,7 @@
         "ticker": "RB=F",
         "name": "Gasolina (USD/Gal)",
         "price": 3.03,
-        "change": -7.06,
+        "change": -7.12,
         "change_val": -0.64,
         "change_7d": 6.66,
         "change_1m": -3.54,
@@ -116313,8 +116313,8 @@
         {
           "ticker": "NVDA",
           "name": "NVIDIA Corporation",
-          "price": 215.09,
-          "change": -0.81,
+          "price": 215.01,
+          "change": -0.85,
           "change_7d": 0,
           "change_1m": 2.26,
           "change_ytd": 14.24,
@@ -116327,8 +116327,8 @@
         {
           "ticker": "AAPL",
           "name": "Apple Inc.",
-          "price": 309.53,
-          "change": -0.57,
+          "price": 309.82,
+          "change": -0.48,
           "change_7d": 0,
           "change_1m": -4.48,
           "change_ytd": 17.66,
@@ -116341,8 +116341,8 @@
         {
           "ticker": "GOOGL",
           "name": "Alphabet Inc.",
-          "price": 345.42,
-          "change": 1.39,
+          "price": 345.52,
+          "change": 1.42,
           "change_7d": 0,
           "change_1m": -0.42,
           "change_ytd": 8.16,
@@ -116355,8 +116355,8 @@
         {
           "ticker": "GOOG",
           "name": "Alphabet Inc.",
-          "price": 342.45,
-          "change": 1.26,
+          "price": 342.61,
+          "change": 1.3,
           "change_7d": 0,
           "change_1m": -1.09,
           "change_ytd": 7.4,
@@ -116369,8 +116369,8 @@
         {
           "ticker": "MSFT",
           "name": "Microsoft Corporation",
-          "price": 483.26,
-          "change": 0.44,
+          "price": 483.03,
+          "change": 0.39,
           "change_7d": 0,
           "change_1m": 23.26,
           "change_ytd": 21.13,
@@ -116383,8 +116383,8 @@
         {
           "ticker": "AMZN",
           "name": "Amazon.com, Inc.",
-          "price": 259.48,
-          "change": -0.24,
+          "price": 259.7,
+          "change": -0.16,
           "change_7d": 0,
           "change_1m": 6.23,
           "change_ytd": 23.8,
@@ -116397,7 +116397,7 @@
         {
           "ticker": "TSM",
           "name": "Taiwan Semiconductor Manufactur",
-          "price": 419.2,
+          "price": 419.22,
           "change": 0.77,
           "change_7d": 0,
           "change_1m": -1.24,
@@ -116411,8 +116411,8 @@
         {
           "ticker": "SPCX",
           "name": "Space Exploration Technologies ",
-          "price": 136.29,
-          "change": 1.71,
+          "price": 136.0,
+          "change": 1.5,
           "change_7d": 0,
           "change_1m": 16.26,
           "change_ytd": 11.81,
@@ -116425,8 +116425,8 @@
         {
           "ticker": "AVGO",
           "name": "Broadcom Inc.",
-          "price": 367.83,
-          "change": 1.04,
+          "price": 368.15,
+          "change": 1.13,
           "change_7d": 0,
           "change_1m": -8.26,
           "change_ytd": 9.43,
@@ -116439,8 +116439,8 @@
         {
           "ticker": "META",
           "name": "Meta Platforms, Inc.",
-          "price": 550.8,
-          "change": 0.91,
+          "price": 550.58,
+          "change": 0.87,
           "change_7d": 0,
           "change_1m": -12.97,
           "change_ytd": -16.75,
@@ -116453,8 +116453,8 @@
         {
           "ticker": "TSLA",
           "name": "Tesla, Inc.",
-          "price": 364.97,
-          "change": 5.75,
+          "price": 365.0,
+          "change": 5.76,
           "change_7d": 0,
           "change_1m": -7.72,
           "change_ytd": -16.19,
@@ -116467,8 +116467,8 @@
         {
           "ticker": "SKHY",
           "name": "SK hynix Inc.",
-          "price": 163.68,
-          "change": 0.37,
+          "price": 163.2,
+          "change": 0.07,
           "change_7d": 0,
           "change_1m": -1.33,
           "change_ytd": 13.46,
@@ -116481,8 +116481,8 @@
         {
           "ticker": "LLY",
           "name": "Eli Lilly and Company",
-          "price": 1257.86,
-          "change": 1.08,
+          "price": 1258.0,
+          "change": 1.09,
           "change_7d": 0,
           "change_1m": 7.0,
           "change_ytd": 23.27,
@@ -116495,8 +116495,8 @@
         {
           "ticker": "BRK-B",
           "name": "Berkshire Hathaway Inc. New",
-          "price": 497.31,
-          "change": 0.09,
+          "price": 496.84,
+          "change": -0.0,
           "change_7d": 0,
           "change_1m": 1.53,
           "change_ytd": -0.27,
@@ -116509,8 +116509,8 @@
         {
           "ticker": "BRK-A",
           "name": "Berkshire Hathaway Inc.",
-          "price": 746439.81,
-          "change": 0.25,
+          "price": 745311.62,
+          "change": 0.1,
           "change_7d": 0,
           "change_1m": 1.62,
           "change_ytd": -0.25,
@@ -116523,8 +116523,8 @@
         {
           "ticker": "JPM",
           "name": "JP Morgan Chase & Co.",
-          "price": 352.06,
-          "change": 0.15,
+          "price": 352.11,
+          "change": 0.16,
           "change_7d": 0,
           "change_1m": 0.96,
           "change_ytd": 13.11,
@@ -116537,8 +116537,8 @@
         {
           "ticker": "WMT",
           "name": "Walmart Inc.",
-          "price": 103.0,
-          "change": -0.8,
+          "price": 103.22,
+          "change": -0.59,
           "change_7d": 0,
           "change_1m": -5.02,
           "change_ytd": -15.57,
@@ -116551,8 +116551,8 @@
         {
           "ticker": "AMD",
           "name": "Advanced Micro Devices, Inc.",
-          "price": 471.37,
-          "change": 0.41,
+          "price": 471.79,
+          "change": 0.5,
           "change_7d": 0,
           "change_1m": -15.0,
           "change_ytd": 134.55,
@@ -116565,8 +116565,8 @@
         {
           "ticker": "XOM",
           "name": "ExxonMobil Holdings Corporation",
-          "price": 164.77,
-          "change": -0.83,
+          "price": 164.96,
+          "change": -0.72,
           "change_7d": 0,
           "change_1m": 7.58,
           "change_ytd": 12.81,
@@ -116579,7 +116579,7 @@
         {
           "ticker": "V",
           "name": "Visa Inc.",
-          "price": 370.71,
+          "price": 370.7,
           "change": 1.36,
           "change_7d": 0,
           "change_1m": 3.48,
@@ -116593,8 +116593,8 @@
         {
           "ticker": "ASML",
           "name": "ASML Holding N.V. - New York Re",
-          "price": 1768.35,
-          "change": 1.03,
+          "price": 1769.59,
+          "change": 1.1,
           "change_7d": 0,
           "change_1m": -2.86,
           "change_ytd": 19.1,
@@ -116607,8 +116607,8 @@
         {
           "ticker": "JNJ",
           "name": "Johnson & Johnson",
-          "price": 271.17,
-          "change": 1.42,
+          "price": 271.42,
+          "change": 1.51,
           "change_7d": 0,
           "change_1m": 4.59,
           "change_ytd": 10.26,
@@ -116621,8 +116621,8 @@
         {
           "ticker": "MA",
           "name": "Mastercard Incorporated",
-          "price": 580.0,
-          "change": 1.07,
+          "price": 579.48,
+          "change": 0.98,
           "change_7d": 0,
           "change_1m": 7.87,
           "change_ytd": 9.01,
@@ -116635,8 +116635,8 @@
         {
           "ticker": "INTC",
           "name": "Intel Corporation",
-          "price": 90.19,
-          "change": -2.11,
+          "price": 90.22,
+          "change": -2.07,
           "change_7d": 0,
           "change_1m": -10.22,
           "change_ytd": 108.86,
@@ -116649,8 +116649,8 @@
         {
           "ticker": "ABBV",
           "name": "AbbVie Inc.",
-          "price": 265.7,
-          "change": 1.48,
+          "price": 265.81,
+          "change": 1.52,
           "change_7d": 0,
           "change_1m": 3.37,
           "change_ytd": 16.47,
@@ -116664,7 +116664,7 @@
           "ticker": "HOWL",
           "name": "Werewolf Therapeutics, Inc.",
           "price": 0.9,
-          "change": 108.58,
+          "change": 109.42,
           "change_7d": 0,
           "change_1m": 18.08,
           "change_ytd": -35.67,
@@ -116677,8 +116677,8 @@
         {
           "ticker": "SUGP",
           "name": "SU Group Holdings Limited",
-          "price": 1.6,
-          "change": -42.4,
+          "price": 1.57,
+          "change": -43.42,
           "change_7d": 0,
           "change_1m": 5.51,
           "change_ytd": -90.24,
@@ -116693,8 +116693,8 @@
         {
           "ticker": "MARA",
           "name": "MARA Holdings, Inc.",
-          "price": 11.15,
-          "change": 0.04,
+          "price": 11.11,
+          "change": -0.31,
           "change_7d": 0,
           "change_1m": -10.15,
           "change_ytd": 39.9,
@@ -116707,8 +116707,8 @@
         {
           "ticker": "IOVA",
           "name": "Iovance Biotherapeutics, Inc.",
-          "price": 8.28,
-          "change": -7.9,
+          "price": 8.32,
+          "change": -7.4,
           "change_7d": 0,
           "change_1m": 73.89,
           "change_ytd": 213.24,
@@ -116721,8 +116721,8 @@
         {
           "ticker": "ANDG",
           "name": "Andersen Group Inc.",
-          "price": 49.89,
-          "change": -0.85,
+          "price": 50.04,
+          "change": -0.55,
           "change_7d": 0,
           "change_1m": 21.49,
           "change_ytd": 44.39,
@@ -116735,8 +116735,8 @@
         {
           "ticker": "XXI",
           "name": "Twenty One Capital, Inc.",
-          "price": 6.43,
-          "change": 3.96,
+          "price": 6.39,
+          "change": 3.31,
           "change_7d": 0,
           "change_1m": 23.31,
           "change_ytd": 0.65,
@@ -116749,8 +116749,8 @@
         {
           "ticker": "LIME",
           "name": "Neutron Holdings, Inc.",
-          "price": 41.24,
-          "change": -1.89,
+          "price": 41.07,
+          "change": -2.28,
           "change_7d": 0,
           "change_1m": 59.93,
           "change_ytd": 56.3,
@@ -116763,8 +116763,8 @@
         {
           "ticker": "ALM",
           "name": "Almonty Industries Inc.",
-          "price": 18.65,
-          "change": 5.43,
+          "price": 18.59,
+          "change": 5.09,
           "change_7d": 0,
           "change_1m": 23.79,
           "change_ytd": 20.01,
@@ -116777,8 +116777,8 @@
         {
           "ticker": "TEM",
           "name": "Tempus AI, Inc.",
-          "price": 72.34,
-          "change": 8.54,
+          "price": 72.3,
+          "change": 8.48,
           "change_7d": 0,
           "change_1m": 41.93,
           "change_ytd": 14.19,
@@ -116791,8 +116791,8 @@
         {
           "ticker": "STDN",
           "name": "Standard Nuclear, Inc.",
-          "price": 13.07,
-          "change": 0.77,
+          "price": 13.08,
+          "change": 0.88,
           "change_7d": 0,
           "change_1m": 34.4,
           "change_ytd": 54.22,
@@ -116805,8 +116805,8 @@
         {
           "ticker": "BTDR",
           "name": "Bitdeer Technologies Group",
-          "price": 11.4,
-          "change": 9.35,
+          "price": 11.42,
+          "change": 9.49,
           "change_7d": 0,
           "change_1m": -14.93,
           "change_ytd": 34.06,
@@ -116819,8 +116819,8 @@
         {
           "ticker": "CIFR",
           "name": "Cipher Digital Inc.",
-          "price": 15.79,
-          "change": -8.23,
+          "price": 15.7,
+          "change": -8.74,
           "change_7d": 0,
           "change_1m": -29.64,
           "change_ytd": 17.47,
@@ -116835,8 +116835,8 @@
         {
           "ticker": "MRNA",
           "name": "Moderna, Inc.",
-          "price": 148.92,
-          "change": 11.7,
+          "price": 146.02,
+          "change": 9.52,
           "change_7d": 0,
           "change_1m": 129.58,
           "change_ytd": 167.34,
@@ -116849,8 +116849,8 @@
         {
           "ticker": "AADX",
           "name": "Applied Aerospace & Defense, In",
-          "price": 15.03,
-          "change": -3.03,
+          "price": 15.02,
+          "change": -3.13,
           "change_7d": 0,
           "change_1m": -10.35,
           "change_ytd": -19.4,
@@ -116863,8 +116863,8 @@
         {
           "ticker": "EROC",
           "name": "ERock, Inc.",
-          "price": 14.32,
-          "change": 10.11,
+          "price": 14.35,
+          "change": 10.3,
           "change_7d": 0,
           "change_1m": 5.6,
           "change_ytd": 20.35,
@@ -116877,8 +116877,8 @@
         {
           "ticker": "WMT",
           "name": "Walmart Inc.",
-          "price": 103.0,
-          "change": -0.8,
+          "price": 103.22,
+          "change": -0.59,
           "change_7d": 0,
           "change_1m": -5.02,
           "change_ytd": -15.57,
@@ -116891,8 +116891,8 @@
         {
           "ticker": "INIO",
           "name": "INNIO N.V.",
-          "price": 23.21,
-          "change": 0.91,
+          "price": 23.2,
+          "change": 0.87,
           "change_7d": 0,
           "change_1m": -16.18,
           "change_ytd": -17.92,
@@ -116905,8 +116905,8 @@
         {
           "ticker": "RH",
           "name": "RH",
-          "price": 154.41,
-          "change": -1.28,
+          "price": 154.47,
+          "change": -1.24,
           "change_7d": 0,
           "change_1m": -10.67,
           "change_ytd": -24.71,
@@ -116919,8 +116919,8 @@
         {
           "ticker": "XE",
           "name": "X-Energy, Inc.",
-          "price": 18.97,
-          "change": 3.72,
+          "price": 18.98,
+          "change": 3.77,
           "change_7d": 0,
           "change_1m": 11.19,
           "change_ytd": -4.24,
@@ -116933,8 +116933,8 @@
         {
           "ticker": "SEI",
           "name": "Solaris Energy Infrastructure, ",
-          "price": 53.3,
-          "change": -1.73,
+          "price": 53.68,
+          "change": -1.03,
           "change_7d": 0,
           "change_1m": -13.96,
           "change_ytd": 10.15,
@@ -116961,8 +116961,8 @@
         {
           "ticker": "AVAV",
           "name": "AeroVironment, Inc.",
-          "price": 161.36,
-          "change": 0.98,
+          "price": 161.24,
+          "change": 0.91,
           "change_7d": 0,
           "change_1m": 6.28,
           "change_ytd": -39.62,
@@ -116977,8 +116977,8 @@
         {
           "ticker": "SPCX",
           "name": "Space Exploration Technologies ",
-          "price": 136.28,
-          "change": 1.7,
+          "price": 136.01,
+          "change": 1.5,
           "change_7d": 0,
           "change_1m": 16.26,
           "change_ytd": 11.81,
@@ -117005,8 +117005,8 @@
         {
           "ticker": "MRNA",
           "name": "Moderna, Inc.",
-          "price": 148.92,
-          "change": 11.7,
+          "price": 146.02,
+          "change": 9.52,
           "change_7d": 0,
           "change_1m": 129.58,
           "change_ytd": 167.34,
@@ -117033,8 +117033,8 @@
         {
           "ticker": "NU",
           "name": "Nu Holdings Ltd.",
-          "price": 14.61,
-          "change": 2.82,
+          "price": 14.59,
+          "change": 2.67,
           "change_7d": 0,
           "change_1m": -2.07,
           "change_ytd": -18.94,
@@ -117047,8 +117047,8 @@
         {
           "ticker": "MARA",
           "name": "MARA Holdings, Inc.",
-          "price": 11.15,
-          "change": 0.04,
+          "price": 11.11,
+          "change": -0.31,
           "change_7d": 0,
           "change_1m": -10.15,
           "change_ytd": 39.9,
@@ -117061,8 +117061,8 @@
         {
           "ticker": "WMT",
           "name": "Walmart Inc.",
-          "price": 103.0,
-          "change": -0.8,
+          "price": 103.22,
+          "change": -0.59,
           "change_7d": 0,
           "change_1m": -5.02,
           "change_ytd": -15.57,
@@ -117075,8 +117075,8 @@
         {
           "ticker": "INTC",
           "name": "Intel Corporation",
-          "price": 90.19,
-          "change": -2.11,
+          "price": 90.22,
+          "change": -2.07,
           "change_7d": 0,
           "change_1m": -10.22,
           "change_ytd": 108.86,
@@ -117089,8 +117089,8 @@
         {
           "ticker": "NVDA",
           "name": "NVIDIA Corporation",
-          "price": 215.08,
-          "change": -0.82,
+          "price": 215.01,
+          "change": -0.85,
           "change_7d": 0,
           "change_1m": 2.26,
           "change_ytd": 14.24,
@@ -117103,8 +117103,8 @@
         {
           "ticker": "PATH",
           "name": "UiPath, Inc.",
-          "price": 16.23,
-          "change": 1.95,
+          "price": 16.19,
+          "change": 1.72,
           "change_7d": 0,
           "change_1m": 48.79,
           "change_ytd": 47.41,
@@ -117119,7 +117119,7 @@
         {
           "ticker": "SNDK",
           "name": "Sandisk Corporation",
-          "price": 1601.24,
+          "price": 1601.22,
           "change": 0.04,
           "change_7d": 0,
           "change_1m": 0.08,
@@ -117133,8 +117133,8 @@
         {
           "ticker": "AXTI",
           "name": "AXT Inc",
-          "price": 69.94,
-          "change": -4.35,
+          "price": 70.07,
+          "change": -4.17,
           "change_7d": 0,
           "change_1m": 38.01,
           "change_ytd": 146.36,
@@ -117161,8 +117161,8 @@
         {
           "ticker": "ERAS",
           "name": "Erasca, Inc.",
-          "price": 17.6,
-          "change": 3.04,
+          "price": 17.69,
+          "change": 3.57,
           "change_7d": 0,
           "change_1m": -12.46,
           "change_ytd": 36.2,
@@ -117175,8 +117175,8 @@
         {
           "ticker": "PRAX",
           "name": "Praxis Precision Medicines, Inc",
-          "price": 378.27,
-          "change": 3.76,
+          "price": 375.62,
+          "change": 3.03,
           "change_7d": 0,
           "change_1m": 16.82,
           "change_ytd": 8.74,
@@ -117189,8 +117189,8 @@
         {
           "ticker": "LITE",
           "name": "Lumentum Holdings Inc.",
-          "price": 868.64,
-          "change": -1.21,
+          "price": 869.58,
+          "change": -1.1,
           "change_7d": 0,
           "change_1m": 5.98,
           "change_ytd": 31.67,
@@ -117203,8 +117203,8 @@
         {
           "ticker": "SLS",
           "name": "SELLAS Life Sciences Group, Inc",
-          "price": 15.4,
-          "change": 14.93,
+          "price": 15.31,
+          "change": 14.25,
           "change_7d": 0,
           "change_1m": 10.93,
           "change_ytd": 222.89,
@@ -117217,8 +117217,8 @@
         {
           "ticker": "ORKA",
           "name": "Oruka Therapeutics, Inc.",
-          "price": 108.19,
-          "change": 3.18,
+          "price": 108.22,
+          "change": 3.2,
           "change_7d": 0,
           "change_1m": 13.33,
           "change_ytd": 224.24,
@@ -117231,8 +117231,8 @@
         {
           "ticker": "CHRN",
           "name": "ChronoScale Holdings Corporatio",
-          "price": 24.05,
-          "change": -0.21,
+          "price": 24.18,
+          "change": 0.35,
           "change_7d": 0,
           "change_1m": -5.64,
           "change_ytd": 115.56,
@@ -117245,8 +117245,8 @@
         {
           "ticker": "SYRE",
           "name": "Spyre Therapeutics, Inc.",
-          "price": 106.53,
-          "change": -1.17,
+          "price": 106.52,
+          "change": -1.18,
           "change_7d": 0,
           "change_1m": 8.69,
           "change_ytd": 149.46,
@@ -117275,8 +117275,8 @@
         {
           "ticker": "EMAT",
           "name": "Evolution Metals & Technologies",
-          "price": 4.05,
-          "change": 21.62,
+          "price": 4.0,
+          "change": 20.12,
           "change_7d": 0,
           "change_1m": -39.45,
           "change_ytd": -65.2,
@@ -117289,8 +117289,8 @@
         {
           "ticker": "FRMI",
           "name": "Fermi Inc.",
-          "price": 5.95,
-          "change": -0.42,
+          "price": 5.93,
+          "change": -0.67,
           "change_7d": 0,
           "change_1m": -9.27,
           "change_ytd": -26.3,
@@ -117303,8 +117303,8 @@
         {
           "ticker": "XXI",
           "name": "Twenty One Capital, Inc.",
-          "price": 6.43,
-          "change": 3.96,
+          "price": 6.39,
+          "change": 3.31,
           "change_7d": 0,
           "change_1m": 23.31,
           "change_ytd": 0.65,
@@ -117318,7 +117318,7 @@
           "ticker": "UWMC",
           "name": "UWM Holdings Corporation",
           "price": 1.4,
-          "change": -1.41,
+          "change": -1.06,
           "change_7d": 0,
           "change_1m": -22.83,
           "change_ytd": -69.26,
@@ -117331,8 +117331,8 @@
         {
           "ticker": "TTD",
           "name": "The Trade Desk, Inc.",
-          "price": 13.2,
-          "change": -0.9,
+          "price": 13.16,
+          "change": -1.16,
           "change_7d": 0,
           "change_1m": -24.23,
           "change_ytd": -46.93,
@@ -117345,8 +117345,8 @@
         {
           "ticker": "SMR",
           "name": "NuScale Power Corporation",
-          "price": 9.53,
-          "change": 5.13,
+          "price": 9.47,
+          "change": 4.39,
           "change_7d": 0,
           "change_1m": 4.49,
           "change_ytd": -32.51,
@@ -117360,7 +117360,7 @@
           "ticker": "LCID",
           "name": "Lucid Group, Inc.",
           "price": 5.55,
-          "change": -1.24,
+          "change": -1.42,
           "change_7d": 0,
           "change_1m": -17.04,
           "change_ytd": -41.1,
@@ -117374,7 +117374,7 @@
           "ticker": "STUB",
           "name": "StubHub Holdings, Inc.",
           "price": 6.74,
-          "change": -1.24,
+          "change": -1.39,
           "change_7d": 0,
           "change_1m": -21.31,
           "change_ytd": -23.34,
@@ -117387,8 +117387,8 @@
         {
           "ticker": "MSTR",
           "name": "Strategy Inc",
-          "price": 119.07,
-          "change": 5.95,
+          "price": 118.83,
+          "change": 5.73,
           "change_7d": 0,
           "change_1m": 12.38,
           "change_ytd": -14.24,
@@ -117405,16 +117405,16 @@
         {
           "ticker": "AAPL.BA",
           "name": "APPLE INC CEDEAR(REPR 1/20 SHR)",
-          "price": 24600.0,
-          "change": -0.32,
+          "price": 24610.0,
+          "change": -0.28,
           "change_7d": 0,
           "change_1m": -3.74,
           "change_ytd": 28.61,
           "change_12m": 66.48,
           "market_cap": 100000000000.0,
           "volume": 76461.0,
-          "prev_close": 24678.97,
-          "cierre_anterior": 24678.97
+          "prev_close": 24679.1,
+          "cierre_anterior": 24679.1
         },
         {
           "ticker": "NVDA.BA",
@@ -117433,72 +117433,72 @@
         {
           "ticker": "MELI.BA",
           "name": "MERCADOLIBRE INC CEDEAR EACH 12",
-          "price": 25420.0,
-          "change": 0.08,
+          "price": 25460.0,
+          "change": 0.24,
           "change_7d": 0,
           "change_1m": 7.58,
           "change_ytd": 12.99,
           "change_12m": -0.59,
           "market_cap": 100000000000.0,
           "volume": 274625.0,
-          "prev_close": 25399.68,
-          "cierre_anterior": 25399.68
+          "prev_close": 25399.04,
+          "cierre_anterior": 25399.04
         },
         {
           "ticker": "MSFT.BA",
           "name": "MICROSOFT CORP CEDEAR EACH 30 R",
-          "price": 25560.0,
-          "change": 0.63,
+          "price": 25580.0,
+          "change": 0.71,
           "change_7d": 0,
           "change_1m": 24.33,
           "change_ytd": 37.74,
           "change_12m": 14.93,
           "market_cap": 100000000000.0,
           "volume": 135237.0,
-          "prev_close": 25399.98,
-          "cierre_anterior": 25399.98
+          "prev_close": 25399.66,
+          "cierre_anterior": 25399.66
         },
         {
           "ticker": "AMZN.BA",
           "name": "AMAZON COM INC CEDEAR EACH 144 ",
-          "price": 2868.0,
-          "change": 0.0,
+          "price": 2875.0,
+          "change": 0.26,
           "change_7d": 0,
           "change_1m": 7.0,
           "change_ytd": 39.88,
           "change_12m": 40.56,
           "market_cap": 100000000000.0,
           "volume": 370042.0,
-          "prev_close": 2868.0,
-          "cierre_anterior": 2868.0
+          "prev_close": 2867.54,
+          "cierre_anterior": 2867.54
         },
         {
           "ticker": "GOOGL.BA",
           "name": "ALPHABET INC CEDEAR EACH 58 REP",
-          "price": 9475.0,
-          "change": 1.61,
+          "price": 9495.0,
+          "change": 1.82,
           "change_7d": 0,
           "change_1m": -0.11,
           "change_ytd": 20.48,
           "change_12m": 107.45,
           "market_cap": 100000000000.0,
           "volume": 560376.0,
-          "prev_close": 9324.87,
-          "cierre_anterior": 9324.87
+          "prev_close": 9325.28,
+          "cierre_anterior": 9325.28
         },
         {
           "ticker": "META.BA",
           "name": "META PLATFORMS INC CEDEAR EA 24",
-          "price": 36460.0,
-          "change": 1.0,
+          "price": 36520.0,
+          "change": 1.16,
           "change_7d": 0,
           "change_1m": 0.0,
           "change_ytd": 0.0,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 134025.0,
-          "prev_close": 36099.01,
-          "cierre_anterior": 36099.01
+          "prev_close": 36101.23,
+          "cierre_anterior": 36101.23
         },
         {
           "ticker": "TSLA.BA",
@@ -117517,86 +117517,86 @@
         {
           "ticker": "LLY.BA",
           "name": "ELI LILLY AND COMPANY CEDEAR EA",
-          "price": 35840.0,
-          "change": 1.64,
+          "price": 35760.0,
+          "change": 1.42,
           "change_7d": 0,
           "change_1m": 8.16,
           "change_ytd": 30.88,
           "change_12m": 114.02,
           "market_cap": 100000000000.0,
           "volume": 11138.0,
-          "prev_close": 35261.71,
-          "cierre_anterior": 35261.71
+          "prev_close": 35259.32,
+          "cierre_anterior": 35259.32
         },
         {
           "ticker": "WMT.BA",
           "name": "WALMART INC CEDEAR EACH 18 REP ",
-          "price": 9105.0,
-          "change": -0.25,
+          "price": 9135.0,
+          "change": 0.07,
           "change_7d": 0,
           "change_1m": -4.29,
           "change_ytd": -9.5,
           "change_12m": 22.82,
           "market_cap": 100000000000.0,
           "volume": 432459.0,
-          "prev_close": 9127.82,
-          "cierre_anterior": 9127.82
+          "prev_close": 9128.61,
+          "cierre_anterior": 9128.61
         },
         {
           "ticker": "JPM.BA",
           "name": "JPMORGAN CHASE & CO. CEDEAR EAC",
-          "price": 37320.0,
-          "change": 0.16,
+          "price": 37300.0,
+          "change": 0.11,
           "change_7d": 0,
           "change_1m": 1.86,
           "change_ytd": 30.28,
           "change_12m": 45.97,
           "market_cap": 100000000000.0,
           "volume": 16380.0,
-          "prev_close": 37260.38,
-          "cierre_anterior": 37260.38
+          "prev_close": 37259.02,
+          "cierre_anterior": 37259.02
         },
         {
           "ticker": "V.BA",
           "name": "VISA INC CEDEARS (EACH 18 REP 1",
-          "price": 32700.0,
-          "change": 1.3,
+          "price": 32760.0,
+          "change": 1.49,
           "change_7d": 0,
           "change_1m": 4.81,
           "change_ytd": 31.54,
           "change_12m": 28.99,
           "market_cap": 100000000000.0,
           "volume": 14098.0,
-          "prev_close": 32280.36,
-          "cierre_anterior": 32280.36
+          "prev_close": 32279.04,
+          "cierre_anterior": 32279.04
         },
         {
           "ticker": "PFE.BA",
           "name": "PFIZER INC CEDEAR EACH 4 REP 1 ",
-          "price": 11110.0,
-          "change": 0.82,
+          "price": 11080.0,
+          "change": 0.54,
           "change_7d": 0,
           "change_1m": 12.79,
           "change_ytd": 13.26,
           "change_12m": 32.93,
           "market_cap": 100000000000.0,
           "volume": 27189.0,
-          "prev_close": 11019.64,
-          "cierre_anterior": 11019.64
+          "prev_close": 11020.49,
+          "cierre_anterior": 11020.49
         },
         {
           "ticker": "BABA.BA",
           "name": "ALIBABA GROUP HOLDING LTD CEDEA",
-          "price": 21140.0,
-          "change": -7.69,
+          "price": 21080.0,
+          "change": -7.95,
           "change_7d": 0,
           "change_1m": 12.7,
           "change_ytd": -6.42,
           "change_12m": 31.61,
           "market_cap": 100000000000.0,
           "volume": 219861.0,
-          "prev_close": 22901.09,
-          "cierre_anterior": 22901.09
+          "prev_close": 22900.6,
+          "cierre_anterior": 22900.6
         },
         {
           "ticker": "KO.BA",
@@ -117615,30 +117615,30 @@
         {
           "ticker": "PEP.BA",
           "name": "PEPSICO INC CEDEAR EACH 18 REP ",
-          "price": 12620.0,
-          "change": 0.64,
+          "price": 12640.0,
+          "change": 0.8,
           "change_7d": 0,
           "change_1m": 5.56,
           "change_ytd": -6.56,
           "change_12m": 14.52,
           "market_cap": 100000000000.0,
           "volume": 103080.0,
-          "prev_close": 12539.75,
-          "cierre_anterior": 12539.75
+          "prev_close": 12539.68,
+          "cierre_anterior": 12539.68
         },
         {
           "ticker": "XOM.BA",
           "name": "EXXONMOBIL HOLDINGS CORPORATION",
-          "price": 26200.0,
-          "change": -0.61,
+          "price": 26220.0,
+          "change": -0.53,
           "change_7d": 0,
           "change_1m": 8.7,
           "change_ytd": 21.36,
           "change_12m": 84.66,
           "market_cap": 100000000000.0,
           "volume": 17081.0,
-          "prev_close": 26360.8,
-          "cierre_anterior": 26360.8
+          "prev_close": 26359.71,
+          "cierre_anterior": 26359.71
         },
         {
           "ticker": "NFLX.BA",
@@ -117657,30 +117657,30 @@
         {
           "ticker": "AMD.BA",
           "name": "ADVANCED MICRO DEVICES INC CEDE",
-          "price": 74850.0,
-          "change": 0.88,
+          "price": 74925.0,
+          "change": 0.98,
           "change_7d": 0,
           "change_1m": -14.61,
           "change_ytd": 163.87,
           "change_12m": 242.73,
           "market_cap": 100000000000.0,
           "volume": 10769.0,
-          "prev_close": 74197.07,
-          "cierre_anterior": 74197.07
+          "prev_close": 74197.86,
+          "cierre_anterior": 74197.86
         },
         {
           "ticker": "VALE.BA",
           "name": "VALE S.A. CEDEAR (EACH REP 0.5 ",
-          "price": 11570.0,
-          "change": 2.75,
+          "price": 11550.0,
+          "change": 2.58,
           "change_7d": 0,
           "change_1m": -3.76,
           "change_ytd": -7.78,
           "change_12m": 77.04,
           "market_cap": 100000000000.0,
           "volume": 65641.0,
-          "prev_close": 11260.34,
-          "cierre_anterior": 11260.34
+          "prev_close": 11259.5,
+          "cierre_anterior": 11259.5
         },
         {
           "ticker": "GLOB.BA",
@@ -117699,86 +117699,86 @@
         {
           "ticker": "CEPU.BA",
           "name": "CENTRAL PUERTO SA",
-          "price": 2077.0,
-          "change": 2.26,
+          "price": 2068.0,
+          "change": 1.82,
           "change_7d": 0,
           "change_1m": -15.76,
           "change_ytd": -11.39,
           "change_12m": 41.53,
           "market_cap": 100000000000.0,
           "volume": 828488.0,
-          "prev_close": 2031.1,
-          "cierre_anterior": 2031.1
+          "prev_close": 2031.04,
+          "cierre_anterior": 2031.04
         },
         {
           "ticker": "TEN.BA",
           "name": "TENARIS S.A. CEDEAR EACH REPR 1",
-          "price": 83500.0,
-          "change": 0.15,
+          "price": 83275.0,
+          "change": -0.12,
           "change_7d": 0,
           "change_1m": 0.0,
           "change_ytd": 0.0,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 994.0,
-          "prev_close": 83374.94,
-          "cierre_anterior": 83374.94
+          "prev_close": 83375.05,
+          "cierre_anterior": 83375.05
         },
         {
           "ticker": "TXR.BA",
           "name": "TERNIUM SA CEDEAR EACH 4  REP 1",
-          "price": 21980.0,
-          "change": 2.71,
+          "price": 22030.0,
+          "change": 2.94,
           "change_7d": 0,
           "change_1m": 17.39,
           "change_ytd": 37.53,
           "change_12m": 105.77,
           "market_cap": 100000000000.0,
           "volume": 2819.0,
-          "prev_close": 21400.06,
-          "cierre_anterior": 21400.06
+          "prev_close": 21400.82,
+          "cierre_anterior": 21400.82
         },
         {
           "ticker": "SPY.BA",
           "name": "STATE ST SPDR S&P 500 ETF TR CE",
-          "price": 20310.0,
-          "change": 0.59,
+          "price": 20330.0,
+          "change": 0.69,
           "change_7d": 0,
           "change_1m": 2.96,
           "change_ytd": -0.64,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 484095.0,
-          "prev_close": 20190.87,
-          "cierre_anterior": 20190.87
+          "prev_close": 20190.68,
+          "cierre_anterior": 20190.68
         },
         {
           "ticker": "QQQ.BA",
           "name": "INVESCO QQQ TRUST CEDEAR EACH 2",
-          "price": 56725.0,
-          "change": 0.58,
+          "price": 56700.0,
+          "change": 0.53,
           "change_7d": 0,
           "change_1m": 1.26,
           "change_ytd": -1.31,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 33117.0,
-          "prev_close": 56397.89,
-          "cierre_anterior": 56397.89
+          "prev_close": 56401.07,
+          "cierre_anterior": 56401.07
         },
         {
           "ticker": "IWM.BA",
           "name": "ISHARES TRUST CEDEAR EACH 10 RE",
-          "price": 47600.0,
-          "change": 0.89,
+          "price": 47720.0,
+          "change": 1.14,
           "change_7d": 0,
           "change_1m": 1.42,
           "change_ytd": -0.92,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 5093.0,
-          "prev_close": 47180.1,
-          "cierre_anterior": 47180.1
+          "prev_close": 47182.12,
+          "cierre_anterior": 47182.12
         },
         {
           "ticker": "DIA.BA",
@@ -117799,30 +117799,30 @@
         {
           "ticker": "AMD.BA",
           "name": "ADVANCED MICRO DEVICES INC CEDE",
-          "price": 74850.0,
-          "change": 0.88,
+          "price": 74925.0,
+          "change": 0.98,
           "change_7d": 0,
           "change_1m": -14.61,
           "change_ytd": 163.87,
           "change_12m": 242.73,
           "market_cap": 100000000000.0,
           "volume": 10769.0,
-          "prev_close": 74197.07,
-          "cierre_anterior": 74197.07
+          "prev_close": 74197.86,
+          "cierre_anterior": 74197.86
         },
         {
           "ticker": "MELI.BA",
           "name": "MERCADOLIBRE INC CEDEAR EACH 12",
-          "price": 25420.0,
-          "change": 0.08,
+          "price": 25460.0,
+          "change": 0.24,
           "change_7d": 0,
           "change_1m": 7.58,
           "change_ytd": 12.99,
           "change_12m": -0.59,
           "market_cap": 100000000000.0,
           "volume": 274625.0,
-          "prev_close": 25399.68,
-          "cierre_anterior": 25399.68
+          "prev_close": 25399.04,
+          "cierre_anterior": 25399.04
         },
         {
           "ticker": "NVDA.BA",
@@ -117841,44 +117841,44 @@
         {
           "ticker": "AMZN.BA",
           "name": "AMAZON COM INC CEDEAR EACH 144 ",
-          "price": 2868.0,
-          "change": 0.0,
+          "price": 2875.0,
+          "change": 0.26,
           "change_7d": 0,
           "change_1m": 7.0,
           "change_ytd": 39.88,
           "change_12m": 40.56,
           "market_cap": 100000000000.0,
           "volume": 370042.0,
-          "prev_close": 2868.0,
-          "cierre_anterior": 2868.0
+          "prev_close": 2867.54,
+          "cierre_anterior": 2867.54
         },
         {
           "ticker": "GOOGL.BA",
           "name": "ALPHABET INC CEDEAR EACH 58 REP",
-          "price": 9475.0,
-          "change": 1.61,
+          "price": 9495.0,
+          "change": 1.82,
           "change_7d": 0,
           "change_1m": -0.11,
           "change_ytd": 20.48,
           "change_12m": 107.45,
           "market_cap": 100000000000.0,
           "volume": 560376.0,
-          "prev_close": 9324.87,
-          "cierre_anterior": 9324.87
+          "prev_close": 9325.28,
+          "cierre_anterior": 9325.28
         },
         {
           "ticker": "META.BA",
           "name": "META PLATFORMS INC CEDEAR EA 24",
-          "price": 36460.0,
-          "change": 1.0,
+          "price": 36520.0,
+          "change": 1.16,
           "change_7d": 0,
           "change_1m": 0.0,
           "change_ytd": 0.0,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 134025.0,
-          "prev_close": 36099.01,
-          "cierre_anterior": 36099.01
+          "prev_close": 36101.23,
+          "cierre_anterior": 36101.23
         },
         {
           "ticker": "TSLA.BA",
@@ -117897,60 +117897,60 @@
         {
           "ticker": "AAPL.BA",
           "name": "APPLE INC CEDEAR(REPR 1/20 SHR)",
-          "price": 24600.0,
-          "change": -0.32,
+          "price": 24610.0,
+          "change": -0.28,
           "change_7d": 0,
           "change_1m": -3.74,
           "change_ytd": 28.61,
           "change_12m": 66.48,
           "market_cap": 100000000000.0,
           "volume": 76461.0,
-          "prev_close": 24678.97,
-          "cierre_anterior": 24678.97
+          "prev_close": 24679.1,
+          "cierre_anterior": 24679.1
         },
         {
           "ticker": "MSFT.BA",
           "name": "MICROSOFT CORP CEDEAR EACH 30 R",
-          "price": 25560.0,
-          "change": 0.63,
+          "price": 25580.0,
+          "change": 0.71,
           "change_7d": 0,
           "change_1m": 24.33,
           "change_ytd": 37.74,
           "change_12m": 14.93,
           "market_cap": 100000000000.0,
           "volume": 135237.0,
-          "prev_close": 25399.98,
-          "cierre_anterior": 25399.98
+          "prev_close": 25399.66,
+          "cierre_anterior": 25399.66
         },
         {
           "ticker": "LLY.BA",
           "name": "ELI LILLY AND COMPANY CEDEAR EA",
-          "price": 35840.0,
-          "change": 1.64,
+          "price": 35760.0,
+          "change": 1.42,
           "change_7d": 0,
           "change_1m": 8.16,
           "change_ytd": 30.88,
           "change_12m": 114.02,
           "market_cap": 100000000000.0,
           "volume": 11138.0,
-          "prev_close": 35261.71,
-          "cierre_anterior": 35261.71
+          "prev_close": 35259.32,
+          "cierre_anterior": 35259.32
         }
       ],
       "top_losers": [
         {
           "ticker": "CRWD.BA",
           "name": "CROWDSTRIKE HOLDINGS INC CEDEAR",
-          "price": 3840.0,
-          "change": 0.66,
+          "price": 3868.0,
+          "change": 1.38,
           "change_7d": 0,
           "change_1m": 0.59,
           "change_ytd": -9.76,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 21285.0,
-          "prev_close": 3814.82,
-          "cierre_anterior": 3814.82
+          "prev_close": 3815.35,
+          "cierre_anterior": 3815.35
         },
         {
           "ticker": "GLOB.BA",
@@ -117969,44 +117969,44 @@
         {
           "ticker": "VALE.BA",
           "name": "VALE S.A. CEDEAR (EACH REP 0.5 ",
-          "price": 11570.0,
-          "change": 2.75,
+          "price": 11550.0,
+          "change": 2.58,
           "change_7d": 0,
           "change_1m": -3.76,
           "change_ytd": -7.78,
           "change_12m": 77.04,
           "market_cap": 100000000000.0,
           "volume": 65641.0,
-          "prev_close": 11260.34,
-          "cierre_anterior": 11260.34
+          "prev_close": 11259.5,
+          "cierre_anterior": 11259.5
         },
         {
           "ticker": "BABA.BA",
           "name": "ALIBABA GROUP HOLDING LTD CEDEA",
-          "price": 21140.0,
-          "change": -7.69,
+          "price": 21080.0,
+          "change": -7.95,
           "change_7d": 0,
           "change_1m": 12.7,
           "change_ytd": -6.42,
           "change_12m": 31.61,
           "market_cap": 100000000000.0,
           "volume": 219861.0,
-          "prev_close": 22901.09,
-          "cierre_anterior": 22901.09
+          "prev_close": 22900.6,
+          "cierre_anterior": 22900.6
         },
         {
           "ticker": "PFE.BA",
           "name": "PFIZER INC CEDEAR EACH 4 REP 1 ",
-          "price": 11110.0,
-          "change": 0.82,
+          "price": 11080.0,
+          "change": 0.54,
           "change_7d": 0,
           "change_1m": 12.79,
           "change_ytd": 13.26,
           "change_12m": 32.93,
           "market_cap": 100000000000.0,
           "volume": 27189.0,
-          "prev_close": 11019.64,
-          "cierre_anterior": 11019.64
+          "prev_close": 11020.49,
+          "cierre_anterior": 11020.49
         },
         {
           "ticker": "KO.BA",
@@ -118025,44 +118025,44 @@
         {
           "ticker": "PEP.BA",
           "name": "PEPSICO INC CEDEAR EACH 18 REP ",
-          "price": 12620.0,
-          "change": 0.64,
+          "price": 12640.0,
+          "change": 0.8,
           "change_7d": 0,
           "change_1m": 5.56,
           "change_ytd": -6.56,
           "change_12m": 14.52,
           "market_cap": 100000000000.0,
           "volume": 103080.0,
-          "prev_close": 12539.75,
-          "cierre_anterior": 12539.75
+          "prev_close": 12539.68,
+          "cierre_anterior": 12539.68
         },
         {
           "ticker": "XOM.BA",
           "name": "EXXONMOBIL HOLDINGS CORPORATION",
-          "price": 26200.0,
-          "change": -0.61,
+          "price": 26220.0,
+          "change": -0.53,
           "change_7d": 0,
           "change_1m": 8.7,
           "change_ytd": 21.36,
           "change_12m": 84.66,
           "market_cap": 100000000000.0,
           "volume": 17081.0,
-          "prev_close": 26360.8,
-          "cierre_anterior": 26360.8
+          "prev_close": 26359.71,
+          "cierre_anterior": 26359.71
         },
         {
           "ticker": "CVX.BA",
           "name": "CHEVRON CORPORATION CEDEAR EACH",
-          "price": 20400.0,
-          "change": -0.2,
+          "price": 20380.0,
+          "change": -0.29,
           "change_7d": 0,
           "change_1m": 7.98,
           "change_ytd": 22.76,
           "change_12m": 62.87,
           "market_cap": 100000000000.0,
           "volume": 22730.0,
-          "prev_close": 20440.88,
-          "cierre_anterior": 20440.88
+          "prev_close": 20439.27,
+          "cierre_anterior": 20439.27
         }
       ],
       "high_volume": [
@@ -118083,44 +118083,44 @@
         {
           "ticker": "VALE.BA",
           "name": "VALE S.A. CEDEAR (EACH REP 0.5 ",
-          "price": 11570.0,
-          "change": 2.75,
+          "price": 11550.0,
+          "change": 2.58,
           "change_7d": 0,
           "change_1m": -3.76,
           "change_ytd": -7.78,
           "change_12m": 77.04,
           "market_cap": 100000000000.0,
           "volume": 65641.0,
-          "prev_close": 11260.34,
-          "cierre_anterior": 11260.34
+          "prev_close": 11259.5,
+          "cierre_anterior": 11259.5
         },
         {
           "ticker": "AMD.BA",
           "name": "ADVANCED MICRO DEVICES INC CEDE",
-          "price": 74850.0,
-          "change": 0.88,
+          "price": 74925.0,
+          "change": 0.98,
           "change_7d": 0,
           "change_1m": -14.61,
           "change_ytd": 163.87,
           "change_12m": 242.73,
           "market_cap": 100000000000.0,
           "volume": 10769.0,
-          "prev_close": 74197.07,
-          "cierre_anterior": 74197.07
+          "prev_close": 74197.86,
+          "cierre_anterior": 74197.86
         },
         {
           "ticker": "AAPL.BA",
           "name": "APPLE INC CEDEAR(REPR 1/20 SHR)",
-          "price": 24600.0,
-          "change": -0.32,
+          "price": 24610.0,
+          "change": -0.28,
           "change_7d": 0,
           "change_1m": -3.74,
           "change_ytd": 28.61,
           "change_12m": 66.48,
           "market_cap": 100000000000.0,
           "volume": 76461.0,
-          "prev_close": 24678.97,
-          "cierre_anterior": 24678.97
+          "prev_close": 24679.1,
+          "cierre_anterior": 24679.1
         },
         {
           "ticker": "NVDA.BA",
@@ -118139,72 +118139,72 @@
         {
           "ticker": "MELI.BA",
           "name": "MERCADOLIBRE INC CEDEAR EACH 12",
-          "price": 25420.0,
-          "change": 0.08,
+          "price": 25460.0,
+          "change": 0.24,
           "change_7d": 0,
           "change_1m": 7.58,
           "change_ytd": 12.99,
           "change_12m": -0.59,
           "market_cap": 100000000000.0,
           "volume": 274625.0,
-          "prev_close": 25399.68,
-          "cierre_anterior": 25399.68
+          "prev_close": 25399.04,
+          "cierre_anterior": 25399.04
         },
         {
           "ticker": "MSFT.BA",
           "name": "MICROSOFT CORP CEDEAR EACH 30 R",
-          "price": 25560.0,
-          "change": 0.63,
+          "price": 25580.0,
+          "change": 0.71,
           "change_7d": 0,
           "change_1m": 24.33,
           "change_ytd": 37.74,
           "change_12m": 14.93,
           "market_cap": 100000000000.0,
           "volume": 135237.0,
-          "prev_close": 25399.98,
-          "cierre_anterior": 25399.98
+          "prev_close": 25399.66,
+          "cierre_anterior": 25399.66
         },
         {
           "ticker": "AMZN.BA",
           "name": "AMAZON COM INC CEDEAR EACH 144 ",
-          "price": 2868.0,
-          "change": 0.0,
+          "price": 2875.0,
+          "change": 0.26,
           "change_7d": 0,
           "change_1m": 7.0,
           "change_ytd": 39.88,
           "change_12m": 40.56,
           "market_cap": 100000000000.0,
           "volume": 370042.0,
-          "prev_close": 2868.0,
-          "cierre_anterior": 2868.0
+          "prev_close": 2867.54,
+          "cierre_anterior": 2867.54
         },
         {
           "ticker": "GOOGL.BA",
           "name": "ALPHABET INC CEDEAR EACH 58 REP",
-          "price": 9475.0,
-          "change": 1.61,
+          "price": 9495.0,
+          "change": 1.82,
           "change_7d": 0,
           "change_1m": -0.11,
           "change_ytd": 20.48,
           "change_12m": 107.45,
           "market_cap": 100000000000.0,
           "volume": 560376.0,
-          "prev_close": 9324.87,
-          "cierre_anterior": 9324.87
+          "prev_close": 9325.28,
+          "cierre_anterior": 9325.28
         },
         {
           "ticker": "SPY.BA",
           "name": "STATE ST SPDR S&P 500 ETF TR CE",
-          "price": 20310.0,
-          "change": 0.59,
+          "price": 20330.0,
+          "change": 0.69,
           "change_7d": 0,
           "change_1m": 2.96,
           "change_ytd": -0.64,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 484095.0,
-          "prev_close": 20190.87,
-          "cierre_anterior": 20190.87
+          "prev_close": 20190.68,
+          "cierre_anterior": 20190.68
         }
       ],
       "highs_52w": [
@@ -118225,58 +118225,58 @@
         {
           "ticker": "LLY.BA",
           "name": "ELI LILLY AND COMPANY CEDEAR EA",
-          "price": 35840.0,
-          "change": 1.64,
+          "price": 35760.0,
+          "change": 1.42,
           "change_7d": 0,
           "change_1m": 8.16,
           "change_ytd": 30.88,
           "change_12m": 114.02,
           "market_cap": 100000000000.0,
           "volume": 11138.0,
-          "prev_close": 35261.71,
-          "cierre_anterior": 35261.71
+          "prev_close": 35259.32,
+          "cierre_anterior": 35259.32
         },
         {
           "ticker": "WMT.BA",
           "name": "WALMART INC CEDEAR EACH 18 REP ",
-          "price": 9105.0,
-          "change": -0.25,
+          "price": 9135.0,
+          "change": 0.07,
           "change_7d": 0,
           "change_1m": -4.29,
           "change_ytd": -9.5,
           "change_12m": 22.82,
           "market_cap": 100000000000.0,
           "volume": 432459.0,
-          "prev_close": 9127.82,
-          "cierre_anterior": 9127.82
+          "prev_close": 9128.61,
+          "cierre_anterior": 9128.61
         },
         {
           "ticker": "JPM.BA",
           "name": "JPMORGAN CHASE & CO. CEDEAR EAC",
-          "price": 37320.0,
-          "change": 0.16,
+          "price": 37300.0,
+          "change": 0.11,
           "change_7d": 0,
           "change_1m": 1.86,
           "change_ytd": 30.28,
           "change_12m": 45.97,
           "market_cap": 100000000000.0,
           "volume": 16380.0,
-          "prev_close": 37260.38,
-          "cierre_anterior": 37260.38
+          "prev_close": 37259.02,
+          "cierre_anterior": 37259.02
         },
         {
           "ticker": "COST.BA",
           "name": "COSTCO WHOLESALE CORP CEDEAR EA",
-          "price": 31260.0,
-          "change": 1.1,
+          "price": 31380.0,
+          "change": 1.49,
           "change_7d": 0,
           "change_1m": 1.91,
           "change_ytd": 4.46,
           "change_12m": 13.89,
           "market_cap": 100000000000.0,
           "volume": 1695.0,
-          "prev_close": 30919.88,
-          "cierre_anterior": 30919.88
+          "prev_close": 30919.3,
+          "cierre_anterior": 30919.3
         },
         {
           "ticker": "MA.BA",
@@ -118295,30 +118295,30 @@
         {
           "ticker": "V.BA",
           "name": "VISA INC CEDEARS (EACH 18 REP 1",
-          "price": 32700.0,
-          "change": 1.3,
+          "price": 32760.0,
+          "change": 1.49,
           "change_7d": 0,
           "change_1m": 4.81,
           "change_ytd": 31.54,
           "change_12m": 28.99,
           "market_cap": 100000000000.0,
           "volume": 14098.0,
-          "prev_close": 32280.36,
-          "cierre_anterior": 32280.36
+          "prev_close": 32279.04,
+          "cierre_anterior": 32279.04
         },
         {
           "ticker": "HD.BA",
           "name": "HOME DEPOT INC CEDEAR EACH 32 R",
-          "price": 16700.0,
-          "change": 0.97,
+          "price": 16720.0,
+          "change": 1.09,
           "change_7d": 0,
           "change_1m": 1.6,
           "change_ytd": -2.99,
           "change_12m": 0.24,
           "market_cap": 100000000000.0,
           "volume": 626.0,
-          "prev_close": 16539.57,
-          "cierre_anterior": 16539.57
+          "prev_close": 16539.72,
+          "cierre_anterior": 16539.72
         },
         {
           "ticker": "BAC.BA",
@@ -118337,102 +118337,102 @@
         {
           "ticker": "PG.BA",
           "name": "PROCTER & GAMBLE CO CEDEAR EACH",
-          "price": 15370.0,
-          "change": 1.39,
+          "price": 15380.0,
+          "change": 1.45,
           "change_7d": 0,
           "change_1m": -3.01,
           "change_ytd": -4.29,
           "change_12m": 8.87,
           "market_cap": 100000000000.0,
           "volume": 20829.0,
-          "prev_close": 15159.29,
-          "cierre_anterior": 15159.29
+          "prev_close": 15160.18,
+          "cierre_anterior": 15160.18
         }
       ],
       "lows_52w": [
         {
           "ticker": "PFE.BA",
           "name": "PFIZER INC CEDEAR EACH 4 REP 1 ",
-          "price": 11110.0,
-          "change": 0.82,
+          "price": 11080.0,
+          "change": 0.54,
           "change_7d": 0,
           "change_1m": 12.79,
           "change_ytd": 13.26,
           "change_12m": 32.93,
           "market_cap": 100000000000.0,
           "volume": 27189.0,
-          "prev_close": 11019.64,
-          "cierre_anterior": 11019.64
+          "prev_close": 11020.49,
+          "cierre_anterior": 11020.49
         },
         {
           "ticker": "BABA.BA",
           "name": "ALIBABA GROUP HOLDING LTD CEDEA",
-          "price": 21140.0,
-          "change": -7.69,
+          "price": 21080.0,
+          "change": -7.95,
           "change_7d": 0,
           "change_1m": 12.7,
           "change_ytd": -6.42,
           "change_12m": 31.61,
           "market_cap": 100000000000.0,
           "volume": 219861.0,
-          "prev_close": 22901.09,
-          "cierre_anterior": 22901.09
+          "prev_close": 22900.6,
+          "cierre_anterior": 22900.6
         },
         {
           "ticker": "VALE.BA",
           "name": "VALE S.A. CEDEAR (EACH REP 0.5 ",
-          "price": 11570.0,
-          "change": 2.75,
+          "price": 11550.0,
+          "change": 2.58,
           "change_7d": 0,
           "change_1m": -3.76,
           "change_ytd": -7.78,
           "change_12m": 77.04,
           "market_cap": 100000000000.0,
           "volume": 65641.0,
-          "prev_close": 11260.34,
-          "cierre_anterior": 11260.34
+          "prev_close": 11259.5,
+          "cierre_anterior": 11259.5
         },
         {
           "ticker": "INTC.BA",
           "name": "INTEL CORP CEDEARS (EACH 5 REP ",
-          "price": 28720.0,
-          "change": -1.98,
+          "price": 28660.0,
+          "change": -2.18,
           "change_7d": 0,
           "change_1m": -9.62,
           "change_ytd": 134.96,
           "change_12m": 374.11,
           "market_cap": 100000000000.0,
           "volume": 32563.0,
-          "prev_close": 29300.14,
-          "cierre_anterior": 29300.14
+          "prev_close": 29298.71,
+          "cierre_anterior": 29298.71
         },
         {
           "ticker": "BA.BA",
           "name": "BOEING CO CEDEAR EACH 24 REP 1",
-          "price": 14160.0,
-          "change": 0.0,
+          "price": 14130.0,
+          "change": -0.21,
           "change_7d": 0,
           "change_1m": 3.89,
           "change_ytd": 2.39,
           "change_12m": 15.36,
           "market_cap": 100000000000.0,
           "volume": 5080.0,
-          "prev_close": 14160.0,
-          "cierre_anterior": 14160.0
+          "prev_close": 14159.74,
+          "cierre_anterior": 14159.74
         },
         {
           "ticker": "PYPL.BA",
           "name": "PAYPAL HOLDINGS INC CEDEAR EACH",
-          "price": 12240.0,
-          "change": -1.13,
+          "price": 12230.0,
+          "change": -1.21,
           "change_7d": 0,
           "change_1m": 13.58,
           "change_ytd": 56.12,
           "change_12m": 11.28,
           "market_cap": 100000000000.0,
           "volume": 60626.0,
-          "prev_close": 12379.89,
-          "cierre_anterior": 12379.89
+          "prev_close": 12379.8,
+          "cierre_anterior": 12379.8
         },
         {
           "ticker": "NKE.BA",
@@ -118482,8 +118482,8 @@
       {
         "ticker": "SPY",
         "name": "SPDR S&P 500 ETF",
-        "price": 765.96,
-        "change": 0.44,
+        "price": 766.11,
+        "change": 0.46,
         "change_val": 0.21,
         "change_7d": 0.4,
         "change_1m": 2.85,
@@ -118496,8 +118496,8 @@
       {
         "ticker": "QQQ",
         "name": "Invesco QQQ Trust (Nasdaq 100)",
-        "price": 713.5,
-        "change": 0.36,
+        "price": 713.67,
+        "change": 0.39,
         "change_val": -0.2,
         "change_7d": 1.11,
         "change_1m": 1.86,
@@ -118510,8 +118510,8 @@
       {
         "ticker": "DIA",
         "name": "SPDR Dow Jones Industrial",
-        "price": 532.33,
-        "change": 0.91,
+        "price": 532.53,
+        "change": 0.95,
         "change_val": 0.26,
         "change_7d": -0.52,
         "change_1m": 2.06,
@@ -118524,8 +118524,8 @@
       {
         "ticker": "EEM",
         "name": "iShares MSCI Emerging Markets",
-        "price": 67.14,
-        "change": 0.77,
+        "price": 67.12,
+        "change": 0.76,
         "change_val": 1.18,
         "change_7d": 1.48,
         "change_1m": 1.59,
@@ -118552,8 +118552,8 @@
       {
         "ticker": "IWM",
         "name": "iShares Russell 2000 ETF",
-        "price": 300.14,
-        "change": 0.83,
+        "price": 300.11,
+        "change": 0.82,
         "change_val": 0.5,
         "change_7d": 1.17,
         "change_1m": 3.15,
@@ -118566,8 +118566,8 @@
       {
         "ticker": "ARKK",
         "name": "ARK Innovation ETF",
-        "price": 86.21,
-        "change": 3.53,
+        "price": 86.13,
+        "change": 3.43,
         "change_val": 5.26,
         "change_7d": 2.1,
         "change_1m": 1.88,
@@ -118580,8 +118580,8 @@
       {
         "ticker": "XLE",
         "name": "Energy Select Sector SPDR",
-        "price": 63.62,
-        "change": -0.2,
+        "price": 63.73,
+        "change": -0.03,
         "change_val": -0.16,
         "change_7d": 7.67,
         "change_1m": 9.58,
@@ -118594,8 +118594,8 @@
       {
         "ticker": "XLF",
         "name": "Financial Select Sector SPDR",
-        "price": 57.49,
-        "change": 0.94,
+        "price": 57.47,
+        "change": 0.91,
         "change_val": -0.62,
         "change_7d": 0.97,
         "change_1m": 2.83,
@@ -118608,8 +118608,8 @@
       {
         "ticker": "XLV",
         "name": "Health Care Select Sector SPDR",
-        "price": 174.75,
-        "change": 1.37,
+        "price": 174.66,
+        "change": 1.32,
         "change_val": 3.51,
         "change_7d": 1.02,
         "change_1m": 5.74,
@@ -118622,8 +118622,8 @@
       {
         "ticker": "SMH",
         "name": "VanEck Semiconductor ETF",
-        "price": 561.01,
-        "change": -0.29,
+        "price": 561.07,
+        "change": -0.28,
         "change_val": -1.55,
         "change_7d": 0.88,
         "change_1m": -0.5,
@@ -118636,8 +118636,8 @@
       {
         "ticker": "IBIT",
         "name": "iShares Bitcoin Trust",
-        "price": 43.78,
-        "change": 6.25,
+        "price": 43.79,
+        "change": 6.28,
         "change_val": 5.96,
         "change_7d": -3.18,
         "change_1m": -3.21,
@@ -118650,8 +118650,8 @@
       {
         "ticker": "GLD",
         "name": "SPDR Gold Shares",
-        "price": 423.88,
-        "change": 2.08,
+        "price": 423.66,
+        "change": 2.02,
         "change_val": 3.84,
         "change_7d": 0.76,
         "change_1m": 7.82,
@@ -118664,8 +118664,8 @@
       {
         "ticker": "XLK",
         "name": "Technology Select Sector SPDR",
-        "price": 183.4,
-        "change": 0.17,
+        "price": 183.45,
+        "change": 0.19,
         "change_val": -1.07,
         "change_7d": 1.09,
         "change_1m": 4.64,
@@ -118678,8 +118678,8 @@
       {
         "ticker": "TLT",
         "name": "iShares 20+ Year Treasury Bond",
-        "price": 82.0,
-        "change": -0.42,
+        "price": 81.97,
+        "change": -0.45,
         "change_val": 1.67,
         "change_7d": -0.87,
         "change_1m": -2.61,
@@ -118692,8 +118692,8 @@
       {
         "ticker": "FXI",
         "name": "iShares China Large-Cap ETF",
-        "price": 35.89,
-        "change": 0.62,
+        "price": 35.88,
+        "change": 0.6,
         "change_val": 1.77,
         "change_7d": -3.54,
         "change_1m": 1.78,
@@ -118706,8 +118706,8 @@
       {
         "ticker": "SLV",
         "name": "iShares Silver Trust",
-        "price": 62.83,
-        "change": 1.91,
+        "price": 62.71,
+        "change": 1.69,
         "change_val": 4.47,
         "change_7d": 1.7,
         "change_1m": 12.01,
@@ -118720,8 +118720,8 @@
       {
         "ticker": "USO",
         "name": "United States Oil Fund",
-        "price": 134.93,
-        "change": 0.29,
+        "price": 134.95,
+        "change": 0.3,
         "change_val": 0.19,
         "change_7d": 7.31,
         "change_1m": 4.3,
@@ -118734,8 +118734,8 @@
       {
         "ticker": "XLP",
         "name": "Consumer Staples Select Sector",
-        "price": 85.74,
-        "change": 0.49,
+        "price": 85.77,
+        "change": 0.53,
         "change_val": 1.12,
         "change_7d": 1.14,
         "change_1m": 3.14,
@@ -118748,8 +118748,8 @@
       {
         "ticker": "XLY",
         "name": "Consumer Discretionary Select Sector",
-        "price": 118.17,
-        "change": 1.28,
+        "price": 118.19,
+        "change": 1.3,
         "change_val": 1.92,
         "change_7d": -1.38,
         "change_1m": 1.03,
@@ -118764,44 +118764,44 @@
       {
         "ticker": "ALUA.BA",
         "name": "Aluar",
-        "price": 875.0,
-        "change": 2.1,
+        "price": 870.0,
+        "change": 1.52,
         "change_val": -0.58,
         "change_7d": -3.91,
         "change_1m": -6.41,
         "change_ytd": -10.56,
         "change_12m": 26.84,
         "volume": 226233,
-        "prev_close": 857.0,
-        "cierre_anterior": 857.0
+        "prev_close": 856.97,
+        "cierre_anterior": 856.97
       },
       {
         "ticker": "BBAR.BA",
         "name": "Banco BBVA",
-        "price": 7510.0,
-        "change": 0.94,
+        "price": 7500.0,
+        "change": 0.81,
         "change_val": -2.62,
         "change_7d": -9.5,
         "change_1m": -24.16,
         "change_ytd": -14.01,
         "change_12m": 18.08,
         "volume": 136214,
-        "prev_close": 7440.06,
-        "cierre_anterior": 7440.06
+        "prev_close": 7439.74,
+        "cierre_anterior": 7439.74
       },
       {
         "ticker": "BMA.BA",
         "name": "Banco Macro",
-        "price": 11630.0,
-        "change": 0.87,
+        "price": 11660.0,
+        "change": 1.13,
         "change_val": -1.26,
         "change_7d": -7.76,
         "change_1m": -18.02,
         "change_ytd": -11.82,
         "change_12m": 35.4,
         "volume": 280605,
-        "prev_close": 11529.69,
-        "cierre_anterior": 11529.69
+        "prev_close": 11529.71,
+        "cierre_anterior": 11529.71
       },
       {
         "ticker": "BYMA.BA",
@@ -118820,22 +118820,22 @@
       {
         "ticker": "CEPU.BA",
         "name": "Central Puerto",
-        "price": 2077.0,
-        "change": 2.26,
+        "price": 2068.0,
+        "change": 1.82,
         "change_val": -0.44,
         "change_7d": -6.16,
         "change_1m": -11.6,
         "change_ytd": -23.19,
         "change_12m": 33.25,
         "volume": 1032491,
-        "prev_close": 2031.1,
-        "cierre_anterior": 2031.1
+        "prev_close": 2031.04,
+        "cierre_anterior": 2031.04
       },
       {
         "ticker": "COME.BA",
         "name": "Sociedad Comercial del Plata",
-        "price": 40.8,
-        "change": 2.41,
+        "price": 40.83,
+        "change": 2.48,
         "change_val": 3.82,
         "change_7d": -3.05,
         "change_1m": -12.23,
@@ -118876,100 +118876,100 @@
       {
         "ticker": "EDN.BA",
         "name": "Edenor",
-        "price": 1772.0,
-        "change": 0.85,
+        "price": 1770.0,
+        "change": 0.74,
         "change_val": -0.85,
         "change_7d": -4.89,
         "change_1m": -8.87,
         "change_ytd": -21.16,
         "change_12m": 1.33,
         "volume": 855965,
-        "prev_close": 1757.06,
-        "cierre_anterior": 1757.06
+        "prev_close": 1757.0,
+        "cierre_anterior": 1757.0
       },
       {
         "ticker": "GGAL.BA",
         "name": "Grupo Financiero Galicia",
-        "price": 6615.0,
-        "change": 1.53,
+        "price": 6620.0,
+        "change": 1.61,
         "change_val": -1.5,
         "change_7d": -6.36,
         "change_1m": -16.51,
         "change_ytd": -17.96,
         "change_12m": 6.2,
         "volume": 1746579,
-        "prev_close": 6515.32,
-        "cierre_anterior": 6515.32
+        "prev_close": 6515.11,
+        "cierre_anterior": 6515.11
       },
       {
         "ticker": "LOMA.BA",
         "name": "Loma Negra",
-        "price": 2970.0,
-        "change": 0.76,
+        "price": 2960.0,
+        "change": 0.42,
         "change_val": 1.81,
         "change_7d": -9.42,
         "change_1m": -18.13,
         "change_ytd": -26.02,
         "change_12m": 5.06,
         "volume": 736425,
-        "prev_close": 2947.6,
-        "cierre_anterior": 2947.6
+        "prev_close": 2947.62,
+        "cierre_anterior": 2947.62
       },
       {
         "ticker": "METR.BA",
         "name": "Metrogas",
-        "price": 2274.0,
-        "change": 0.49,
+        "price": 2276.0,
+        "change": 0.57,
         "change_val": 0.4,
         "change_7d": 17.5,
         "change_1m": 8.79,
         "change_ytd": -9.24,
         "change_12m": 17.5,
         "volume": 940948,
-        "prev_close": 2262.91,
-        "cierre_anterior": 2262.91
+        "prev_close": 2263.1,
+        "cierre_anterior": 2263.1
       },
       {
         "ticker": "PAMP.BA",
         "name": "Pampa Energía",
-        "price": 5060.0,
-        "change": 0.6,
+        "price": 5070.0,
+        "change": 0.8,
         "change_val": 1.01,
         "change_7d": -4.13,
         "change_1m": -4.77,
         "change_ytd": -8.27,
         "change_12m": 27.62,
         "volume": 1057097,
-        "prev_close": 5029.82,
-        "cierre_anterior": 5029.82
+        "prev_close": 5029.76,
+        "cierre_anterior": 5029.76
       },
       {
         "ticker": "SUPV.BA",
         "name": "Grupo Supervielle",
-        "price": 2499.0,
-        "change": 2.88,
+        "price": 2494.0,
+        "change": 2.68,
         "change_val": -1.71,
         "change_7d": -4.83,
         "change_1m": -19.98,
         "change_ytd": -28.72,
         "change_12m": -1.44,
         "volume": 486089,
-        "prev_close": 2429.04,
-        "cierre_anterior": 2429.04
+        "prev_close": 2428.91,
+        "cierre_anterior": 2428.91
       },
       {
         "ticker": "TGNO4.BA",
         "name": "Transportadora de Gas del Norte",
-        "price": 3310.0,
-        "change": 1.3,
+        "price": 3333.0,
+        "change": 1.99,
         "change_val": -1.25,
         "change_7d": -12.55,
         "change_1m": -16.43,
         "change_ytd": -29.5,
         "change_12m": -4.15,
         "volume": 343473,
-        "prev_close": 3267.52,
-        "cierre_anterior": 3267.52
+        "prev_close": 3267.97,
+        "cierre_anterior": 3267.97
       },
       {
         "ticker": "TGSU2.BA",
@@ -118988,44 +118988,44 @@
       {
         "ticker": "TRAN.BA",
         "name": "Transener",
-        "price": 3243.0,
-        "change": -1.74,
+        "price": 3245.0,
+        "change": -1.67,
         "change_val": 0.93,
         "change_7d": -6.57,
         "change_1m": -6.82,
         "change_ytd": -1.59,
         "change_12m": 36.06,
         "volume": 382984,
-        "prev_close": 3300.43,
-        "cierre_anterior": 3300.43
+        "prev_close": 3300.11,
+        "cierre_anterior": 3300.11
       },
       {
         "ticker": "TXAR.BA",
         "name": "Ternium Argentina",
-        "price": 686.0,
-        "change": 2.01,
+        "price": 684.0,
+        "change": 1.71,
         "change_val": -2.01,
         "change_7d": 1.75,
         "change_1m": 8.49,
         "change_ytd": 4.0,
         "change_12m": 19.54,
         "volume": 426318,
-        "prev_close": 672.48,
-        "cierre_anterior": 672.48
+        "prev_close": 672.5,
+        "cierre_anterior": 672.5
       },
       {
         "ticker": "VALO.BA",
         "name": "Grupo Financiero Valores",
-        "price": 568.5,
-        "change": 0.71,
+        "price": 569.0,
+        "change": 0.8,
         "change_val": -0.36,
         "change_7d": -3.33,
         "change_1m": -11.03,
         "change_ytd": 5.35,
         "change_12m": 68.02,
         "volume": 1414370,
-        "prev_close": 564.49,
-        "cierre_anterior": 564.49
+        "prev_close": 564.48,
+        "cierre_anterior": 564.48
       },
       {
         "ticker": "YPFD.BA",
@@ -119046,8 +119046,8 @@
       {
         "ticker": "BTC-USD",
         "name": "Bitcoin",
-        "price": 77258.0,
-        "change": 5.79,
+        "price": 77276.41,
+        "change": 5.81,
         "change_val": 0.03,
         "change_7d": -2.81,
         "change_1m": -1.11,
@@ -119060,8 +119060,8 @@
       {
         "ticker": "ETH-USD",
         "name": "Ethereum",
-        "price": 2417.53,
-        "change": 3.92,
+        "price": 2418.35,
+        "change": 3.95,
         "change_val": 0.17,
         "change_7d": -1.7,
         "change_1m": 1.07,
@@ -119075,7 +119075,7 @@
         "ticker": "USDT-USD",
         "name": "Tether USDt",
         "price": 1.0,
-        "change": -0.02,
+        "change": -0.04,
         "change_val": 0.01,
         "change_7d": -0.03,
         "change_1m": -0.02,
@@ -119088,8 +119088,8 @@
       {
         "ticker": "BNB-USD",
         "name": "BNB",
-        "price": 676.49,
-        "change": 3.3,
+        "price": 676.0,
+        "change": 3.22,
         "change_val": -0.29,
         "change_7d": 1.58,
         "change_1m": 6.59,
@@ -119103,7 +119103,7 @@
         "ticker": "XRP-USD",
         "name": "XRP",
         "price": 1.39,
-        "change": 9.29,
+        "change": 9.21,
         "change_val": 0.65,
         "change_7d": -3.4,
         "change_1m": -7.64,
@@ -119116,8 +119116,8 @@
       {
         "ticker": "SOL-USD",
         "name": "Solana",
-        "price": 91.29,
-        "change": 4.17,
+        "price": 91.2,
+        "change": 4.07,
         "change_val": -0.64,
         "change_7d": -0.49,
         "change_1m": 0.44,
@@ -123663,30 +123663,30 @@
         {
           "ticker": "TZXM7",
           "name": "Bono CER - vto. 03/2027",
-          "price": 219.05,
+          "price": 219.1,
           "tir": "5.02%",
           "duration": "0.59",
-          "change": 0.32,
+          "change": 0.34,
           "change_1m": 1.81,
           "change_12m": 68.85,
           "change_ytd": 30.07,
           "type": "CER",
-          "prev_close": 218.35,
-          "cierre_anterior": 218.35
+          "prev_close": 218.36,
+          "cierre_anterior": 218.36
         },
         {
           "ticker": "TZXD6",
           "name": "Bono CER - vto. 12/2026",
-          "price": 297.75,
+          "price": 297.5,
           "tir": "3.78%",
           "duration": "0.31",
-          "change": 0.29,
+          "change": 0.2,
           "change_1m": 2.04,
           "change_12m": 65.71,
           "change_ytd": 29.54,
           "type": "CER",
-          "prev_close": 296.89,
-          "cierre_anterior": 296.89
+          "prev_close": 296.91,
+          "cierre_anterior": 296.91
         },
         {
           "ticker": "TZXD7",
@@ -123705,10 +123705,10 @@
         {
           "ticker": "TZXM8",
           "name": "Bono CER - vto. 03/2028",
-          "price": 98.0,
+          "price": 98.25,
           "tir": "8.62%",
           "duration": "1.49",
-          "change": -0.41,
+          "change": -0.15,
           "change_1m": 2.25,
           "change_12m": 8.67,
           "change_ytd": 8.67,
@@ -123719,16 +123719,16 @@
         {
           "ticker": "X30N6",
           "name": "Bono CER - vto. 11/2026",
-          "price": 122.6,
+          "price": 122.55,
           "tir": "3.50%",
           "duration": "0.28",
-          "change": 0.2,
+          "change": 0.16,
           "change_1m": 2.36,
           "change_12m": 27.15,
           "change_ytd": 30.53,
           "type": "CER",
-          "prev_close": 122.36,
-          "cierre_anterior": 122.36
+          "prev_close": 122.35,
+          "cierre_anterior": 122.35
         },
         {
           "ticker": "TX26",
@@ -123747,16 +123747,16 @@
         {
           "ticker": "TZX28",
           "name": "Bono CER - vto. 06/2028",
-          "price": 345.85,
+          "price": 345.7,
           "tir": "9.03%",
           "duration": "1.71",
-          "change": 0.48,
+          "change": 0.44,
           "change_1m": 0.83,
           "change_12m": 68.91,
           "change_ytd": 26.31,
           "type": "CER",
-          "prev_close": 344.2,
-          "cierre_anterior": 344.2
+          "prev_close": 344.19,
+          "cierre_anterior": 344.19
         },
         {
           "ticker": "TZXO7",
@@ -123775,10 +123775,10 @@
         {
           "ticker": "TZX27",
           "name": "Bono CER - vto. 06/2027",
-          "price": 387.1,
+          "price": 387.45,
           "tir": "5.67%",
           "duration": "0.82",
-          "change": 0.52,
+          "change": 0.61,
           "change_1m": 1.08,
           "change_12m": 70.53,
           "change_ytd": 28.65,
@@ -123831,24 +123831,24 @@
         {
           "ticker": "TX28",
           "name": "Bono CER - vto. 11/2028",
-          "price": 1706.0,
+          "price": 1705.0,
           "tir": "7.83%",
           "duration": "1.13",
-          "change": 0.21,
+          "change": 0.18,
           "change_1m": 1.9,
           "change_12m": 54.48,
           "change_ytd": 25.0,
           "type": "CER",
-          "prev_close": 1702.42,
-          "cierre_anterior": 1702.42
+          "prev_close": 1701.94,
+          "cierre_anterior": 1701.94
         },
         {
           "ticker": "TZXM9",
           "name": "Bono CER - vto. 03/2029",
-          "price": 89.33,
+          "price": 89.15,
           "tir": "9.14%",
           "duration": "2.39",
-          "change": 0.38,
+          "change": 0.18,
           "change_1m": 0.17,
           "change_12m": 8.43,
           "change_ytd": 8.43,
@@ -123873,16 +123873,16 @@
         {
           "ticker": "DICP",
           "name": "Bono CER - vto. 12/2033",
-          "price": 47355.0,
+          "price": 47370.0,
           "tir": "9.27%",
           "duration": "3.11",
-          "change": 0.26,
+          "change": 0.3,
           "change_1m": -0.22,
           "change_12m": 54.83,
           "change_ytd": 20.32,
           "type": "CER",
-          "prev_close": 47232.2,
-          "cierre_anterior": 47232.2
+          "prev_close": 47228.32,
+          "cierre_anterior": 47228.32
         },
         {
           "ticker": "PAP0",
@@ -123945,10 +123945,10 @@
         {
           "ticker": "AL30D",
           "name": "Bono USD Ley Arg. - vto. 07/2030",
-          "price": 55.11,
+          "price": 55.15,
           "tir": "7.65%",
           "duration": "1.97",
-          "change": -0.07,
+          "change": 0.0,
           "change_1m": 0.28,
           "change_12m": 16.08,
           "change_ytd": 4.65,
@@ -123959,10 +123959,10 @@
         {
           "ticker": "AO27D",
           "name": "Bono USD Ley Arg. - 6.00% - vto. 10/2027",
-          "price": 101.8,
+          "price": 101.85,
           "tir": "4.38%",
           "duration": "1.15",
-          "change": 0.1,
+          "change": 0.15,
           "change_1m": -0.68,
           "change_12m": 1.04,
           "change_ytd": 1.04,
@@ -123973,10 +123973,10 @@
         {
           "ticker": "AO28D",
           "name": "Bono USD Ley Arg. - 6.00% - vto. 10/2028",
-          "price": 94.42,
+          "price": 94.49,
           "tir": "8.58%",
           "duration": "2.04",
-          "change": 0.56,
+          "change": 0.64,
           "change_1m": -1.89,
           "change_12m": 1.56,
           "change_ytd": 1.56,
@@ -123987,10 +123987,10 @@
         {
           "ticker": "AO29D",
           "name": "Bono USD Ley Arg. - 6.00% - vto. 10/2029",
-          "price": 91.05,
+          "price": 90.88,
           "tir": "8.87%",
           "duration": "2.87",
-          "change": 0.33,
+          "change": 0.14,
           "change_1m": -1.22,
           "change_12m": -1.22,
           "change_ytd": -1.22,
@@ -124001,10 +124001,10 @@
         {
           "ticker": "GD35D",
           "name": "Bono USD Ley NY - vto. 07/2035",
-          "price": 79.45,
+          "price": 79.49,
           "tir": "8.98%",
           "duration": "5.31",
-          "change": 1.78,
+          "change": 1.83,
           "change_1m": -3.45,
           "change_12m": 20.03,
           "change_ytd": 2.94,
@@ -124015,10 +124015,10 @@
         {
           "ticker": "AE38D",
           "name": "Bono USD Ley Arg. - vto. 01/2038",
-          "price": 78.25,
+          "price": 78.15,
           "tir": "10.18%",
           "duration": "4.47",
-          "change": 1.2,
+          "change": 1.07,
           "change_1m": -4.79,
           "change_12m": 15.78,
           "change_ytd": 0.09,
@@ -124029,10 +124029,10 @@
         {
           "ticker": "GD41D",
           "name": "Bono USD Ley NY - vto. 07/2041",
-          "price": 74.27,
+          "price": 74.14,
           "tir": "9.13%",
           "duration": "5.84",
-          "change": 1.85,
+          "change": 1.67,
           "change_1m": -3.72,
           "change_12m": 20.49,
           "change_ytd": 3.53,
@@ -124043,10 +124043,10 @@
         {
           "ticker": "AL35D",
           "name": "Bono USD Ley Arg. - vto. 07/2035",
-          "price": 74.9,
+          "price": 74.97,
           "tir": "9.98%",
           "duration": "5.25",
-          "change": 1.79,
+          "change": 1.89,
           "change_1m": -4.8,
           "change_12m": 16.69,
           "change_ytd": -0.29,
@@ -124057,10 +124057,10 @@
         {
           "ticker": "AL41D",
           "name": "Bono USD Ley Arg. - vto. 07/2041",
-          "price": 69.71,
+          "price": 69.62,
           "tir": "10.09%",
           "duration": "5.69",
-          "change": 1.22,
+          "change": 1.09,
           "change_1m": -7.1,
           "change_12m": 17.33,
           "change_ytd": -2.43,
@@ -124071,10 +124071,10 @@
         {
           "ticker": "GD30D",
           "name": "Bono USD Ley NY - vto. 07/2030",
-          "price": 57.39,
+          "price": 57.36,
           "tir": "6.28%",
           "duration": "2.00",
-          "change": 0.63,
+          "change": 0.58,
           "change_1m": -0.1,
           "change_12m": 15.61,
           "change_ytd": 3.0,
@@ -124085,10 +124085,10 @@
         {
           "ticker": "AN29D",
           "name": "Bono USD Ley Arg. - 6.50% - vto. 11/2029",
-          "price": 92.6,
+          "price": 92.4,
           "tir": "9.39%",
           "duration": "2.82",
-          "change": 0.65,
+          "change": 0.43,
           "change_1m": -3.07,
           "change_12m": 3.79,
           "change_ytd": 3.78,
@@ -124099,10 +124099,10 @@
         {
           "ticker": "GD38D",
           "name": "Bono USD Ley NY - vto. 01/2038",
-          "price": 83.38,
+          "price": 83.34,
           "tir": "8.84%",
           "duration": "4.61",
-          "change": 1.13,
+          "change": 1.08,
           "change_1m": -3.9,
           "change_12m": 17.1,
           "change_ytd": 1.68,
@@ -124113,10 +124113,10 @@
         {
           "ticker": "AL29D",
           "name": "Bono USD Ley Arg. - 1.00% - vto. 07/2029",
-          "price": 53.32,
+          "price": 53.63,
           "tir": "7.39%",
           "duration": "1.53",
-          "change": 0.23,
+          "change": 0.81,
           "change_1m": -1.77,
           "change_12m": 14.3,
           "change_ytd": 2.92,
@@ -124141,10 +124141,10 @@
         {
           "ticker": "GD29D",
           "name": "Bono USD Ley NY - 1.00% - vto. 07/2029",
-          "price": 55.7,
+          "price": 55.67,
           "tir": "5.31%",
           "duration": "1.56",
-          "change": 0.04,
+          "change": -0.02,
           "change_1m": 1.35,
           "change_12m": 14.45,
           "change_ytd": 2.54,
@@ -124157,10 +124157,10 @@
         {
           "ticker": "TXMJ0",
           "name": "Bono ARS - vto. 06/2030",
-          "price": 81.05,
+          "price": 81.09,
           "tir": "38.73%",
           "duration": "2.78",
-          "change": 0.58,
+          "change": 0.63,
           "change_1m": -1.4,
           "change_12m": 1.7,
           "change_ytd": 1.7,
@@ -124199,10 +124199,10 @@
         {
           "ticker": "TXMD8",
           "name": "Bono ARS - vto. 12/2028",
-          "price": 91.06,
+          "price": 91.24,
           "tir": "37.51%",
           "duration": "1.69",
-          "change": 0.34,
+          "change": 0.54,
           "change_1m": -0.55,
           "change_12m": 2.0,
           "change_ytd": 2.0,
@@ -124213,10 +124213,10 @@
         {
           "ticker": "TXMD9",
           "name": "Bono ARS - vto. 12/2029",
-          "price": 84.0,
+          "price": 83.85,
           "tir": "38.61%",
           "duration": "2.40",
-          "change": 0.6,
+          "change": 0.42,
           "change_1m": -0.93,
           "change_12m": 1.02,
           "change_ytd": 1.02,
@@ -124227,10 +124227,10 @@
         {
           "ticker": "TXMJ9",
           "name": "Bono Dual - vto. 06/2029",
-          "price": 90.09,
+          "price": 89.9,
           "tir": "33.81%",
           "duration": "2.14",
-          "change": 0.94,
+          "change": 0.73,
           "change_1m": -0.77,
           "change_12m": 7.73,
           "change_ytd": 7.73,
@@ -124279,10 +124279,10 @@
         {
           "ticker": "TMF27",
           "name": "Bono TAMAR - vto. 02/2027",
-          "price": 120.05,
+          "price": 120.1,
           "tir": "30.33%",
           "duration": "0.40",
-          "change": 0.5,
+          "change": 0.54,
           "change_1m": 1.84,
           "change_12m": 15.78,
           "change_ytd": 15.78,
@@ -124293,16 +124293,16 @@
         {
           "ticker": "TML27",
           "name": "Bono TAMAR - vto. 07/2027",
-          "price": 105.5,
+          "price": 105.35,
           "tir": "31.00%",
           "duration": "0.72",
-          "change": 0.29,
+          "change": 0.14,
           "change_1m": 1.4,
           "change_12m": 3.44,
           "change_ytd": 3.44,
           "type": "Pesos",
-          "prev_close": 105.19,
-          "cierre_anterior": 105.19
+          "prev_close": 105.2,
+          "cierre_anterior": 105.2
         },
         {
           "ticker": "TY30P",
@@ -124363,16 +124363,16 @@
         {
           "ticker": "TZV28",
           "name": "Bono DL (sin cupón) - vto. 06/2028",
-          "price": 124090.0,
+          "price": 123900.0,
           "tir": "9.59%",
           "duration": "1.70",
-          "change": 0.07,
+          "change": -0.08,
           "change_1m": 0.0,
           "change_12m": 0.0,
           "change_ytd": 0.0,
           "type": "Pesos",
-          "prev_close": 124003.2,
-          "cierre_anterior": 124003.2
+          "prev_close": 123999.2,
+          "cierre_anterior": 123999.2
         },
         {
           "ticker": "TZV27",
@@ -124391,16 +124391,16 @@
         {
           "ticker": "BPOD7",
           "name": "BOPREAL USD - vto. 10/2027",
-          "price": 157300.0,
+          "price": 157450.0,
           "tir": "2.84%",
           "duration": "0.92",
-          "change": 0.32,
+          "change": 0.41,
           "change_1m": 0.0,
           "change_12m": 0.0,
           "change_ytd": 0.0,
           "type": "Pesos",
-          "prev_close": 156798.25,
-          "cierre_anterior": 156798.25
+          "prev_close": 156807.09,
+          "cierre_anterior": 156807.09
         },
         {
           "ticker": "BPOB8",
@@ -124433,16 +124433,16 @@
         {
           "ticker": "BPOC7",
           "name": "BOPREAL USD - vto. 10/2027",
-          "price": 157130.0,
+          "price": 157670.0,
           "tir": "3.26%",
           "duration": "0.91",
-          "change": 0.43,
+          "change": 0.77,
           "change_1m": 0.0,
           "change_12m": 0.0,
           "change_ytd": 0.0,
           "type": "Pesos",
-          "prev_close": 156457.23,
-          "cierre_anterior": 156457.23
+          "prev_close": 156465.22,
+          "cierre_anterior": 156465.22
         },
         {
           "ticker": "D31M7",
@@ -124461,16 +124461,16 @@
         {
           "ticker": "BPOB7",
           "name": "BOPREAL USD - vto. 10/2027",
-          "price": 157800.0,
+          "price": 157620.0,
           "tir": "6.35%",
           "duration": "0.90",
-          "change": 0.57,
+          "change": 0.46,
           "change_1m": 0.0,
           "change_12m": 0.0,
           "change_ytd": 0.0,
           "type": "Pesos",
-          "prev_close": 156905.64,
-          "cierre_anterior": 156905.64
+          "prev_close": 156898.27,
+          "cierre_anterior": 156898.27
         },
         {
           "ticker": "BPOA8",
@@ -124489,16 +124489,16 @@
         {
           "ticker": "BPOA7",
           "name": "BOPREAL USD - vto. 10/2027",
-          "price": 157600.0,
+          "price": 157000.0,
           "tir": "3.91%",
           "duration": "0.91",
-          "change": 0.77,
+          "change": 0.38,
           "change_1m": 0.0,
           "change_12m": 0.0,
           "change_ytd": 0.0,
           "type": "Pesos",
-          "prev_close": 156395.75,
-          "cierre_anterior": 156395.75
+          "prev_close": 156405.66,
+          "cierre_anterior": 156405.66
         }
       ],
       "ons_hard": [
@@ -124519,10 +124519,10 @@
           "ticker": "MGCRD",
           "name": "Bono USD Ley NY - 7.75% - vto. 11/2037",
           "company": "Mastellone",
-          "price": 107.25,
+          "price": 107.15,
           "tir": "7.12%",
           "duration": "7.41",
-          "change": 0.05,
+          "change": -0.05,
           "change_1m": 0.89,
           "change_12m": 8.23,
           "change_ytd": 4.86,
@@ -124534,10 +124534,10 @@
           "ticker": "PLC7D",
           "name": "Bono USD Ley NY - 7.55% - vto. 09/2037",
           "company": "-",
-          "price": 104.55,
+          "price": 104.4,
           "tir": "7.15%",
           "duration": "7.00",
-          "change": 0.05,
+          "change": -0.1,
           "change_1m": 2.65,
           "change_12m": 3.56,
           "change_ytd": 3.56,
@@ -124549,10 +124549,10 @@
           "ticker": "YMCXD",
           "name": "Bono USD Ley NY - 8.75% - vto. 09/2031",
           "company": "YPF",
-          "price": 113.3,
+          "price": 113.25,
           "tir": "6.14%",
           "duration": "3.59",
-          "change": -0.09,
+          "change": -0.13,
           "change_1m": 0.75,
           "change_12m": 4.92,
           "change_ytd": 4.58,
@@ -124579,10 +124579,10 @@
           "ticker": "VSCXD",
           "name": "Bono USD Ley NY - 7.88% - vto. 04/2038",
           "company": "-",
-          "price": 110.05,
+          "price": 110.85,
           "tir": "6.99%",
           "duration": "7.08",
-          "change": 0.05,
+          "change": 0.77,
           "change_1m": 1.57,
           "change_12m": 4.95,
           "change_ytd": 4.95,
@@ -124594,10 +124594,10 @@
           "ticker": "NPCDD",
           "name": "Bono USD Ley Arg. - 6.00% - vto. 04/2030",
           "company": "-",
-          "price": 101.15,
+          "price": 101.2,
           "tir": "6.09%",
           "duration": "3.22",
-          "change": -0.39,
+          "change": -0.34,
           "change_1m": 0.49,
           "change_12m": 2.0,
           "change_ytd": 2.0,
@@ -124639,10 +124639,10 @@
           "ticker": "MCC3D",
           "name": "Bono USD Ley Arg. - 7.50% - vto. 05/2030",
           "company": "-",
-          "price": 102.7,
+          "price": 102.5,
           "tir": "7.37%",
           "duration": "3.15",
-          "change": -0.15,
+          "change": -0.34,
           "change_1m": 0.1,
           "change_12m": 2.9,
           "change_ytd": 2.9,
@@ -124776,7 +124776,7 @@
           215.26,
           215.21,
           215.15,
-          215.09
+          215.01
         ]
       },
       "AAPL": {
@@ -124842,7 +124842,7 @@
           309.71,
           309.65,
           309.59,
-          309.53
+          309.82
         ]
       },
       "GOOGL": {
@@ -124908,7 +124908,7 @@
           344.94,
           345.1,
           345.26,
-          345.42
+          345.52
         ]
       },
       "GOOG": {
@@ -124974,7 +124974,7 @@
           342.02,
           342.16,
           342.31,
-          342.45
+          342.61
         ]
       },
       "MSFT": {
@@ -125040,7 +125040,7 @@
           483.05,
           483.12,
           483.19,
-          483.26
+          483.03
         ]
       },
       "AMZN": {
@@ -125106,7 +125106,7 @@
           259.54,
           259.52,
           259.5,
-          259.48
+          259.7
         ]
       },
       "TSM": {
@@ -125172,7 +125172,7 @@
           418.88,
           418.98,
           419.09,
-          419.2
+          419.22
         ]
       },
       "SPCX": {
@@ -125238,7 +125238,7 @@
           136.06,
           136.13,
           136.21,
-          136.29
+          136.01
         ]
       },
       "AVGO": {
@@ -125304,7 +125304,7 @@
           367.45,
           367.57,
           367.7,
-          367.83
+          368.15
         ]
       },
       "META": {
@@ -125370,7 +125370,7 @@
           550.3,
           550.47,
           550.63,
-          550.8
+          550.58
         ]
       },
       "TSLA": {
@@ -125436,7 +125436,7 @@
           362.87,
           363.57,
           364.27,
-          364.97
+          365.0
         ]
       },
       "SKHY": {
@@ -125502,7 +125502,7 @@
           163.62,
           163.64,
           163.66,
-          163.68
+          163.2
         ]
       },
       "LLY": {
@@ -125568,7 +125568,7 @@
           1256.5,
           1256.95,
           1257.41,
-          1257.86
+          1258.0
         ]
       },
       "BRK-B": {
@@ -125634,7 +125634,7 @@
           497.27,
           497.28,
           497.3,
-          497.31
+          496.84
         ]
       },
       "BRK-A": {
@@ -125700,7 +125700,7 @@
           746253.2,
           746315.4,
           746377.61,
-          746439.81
+          745311.62
         ]
       },
       "JPM": {
@@ -125766,7 +125766,7 @@
           352.01,
           352.02,
           352.04,
-          352.06
+          352.11
         ]
       },
       "WMT": {
@@ -125832,7 +125832,7 @@
           103.08,
           103.05,
           103.03,
-          103.0
+          103.22
         ]
       },
       "AMD": {
@@ -125898,7 +125898,7 @@
           471.18,
           471.24,
           471.31,
-          471.37
+          471.79
         ]
       },
       "XOM": {
@@ -125964,7 +125964,7 @@
           164.91,
           164.86,
           164.82,
-          164.77
+          164.96
         ]
       },
       "V": {
@@ -126030,7 +126030,7 @@
           370.21,
           370.37,
           370.54,
-          370.71
+          370.7
         ]
       },
       "ASML": {
@@ -126096,7 +126096,7 @@
           1766.53,
           1767.14,
           1767.74,
-          1768.35
+          1769.59
         ]
       },
       "JNJ": {
@@ -126162,7 +126162,7 @@
           270.78,
           270.91,
           271.04,
-          271.17
+          271.42
         ]
       },
       "MA": {
@@ -126228,7 +126228,7 @@
           579.38,
           579.59,
           579.79,
-          580.0
+          579.48
         ]
       },
       "INTC": {
@@ -126294,7 +126294,7 @@
           90.38,
           90.32,
           90.25,
-          90.19
+          90.22
         ]
       },
       "ABBV": {
@@ -126360,7 +126360,7 @@
           265.31,
           265.44,
           265.57,
-          265.7
+          265.81
         ]
       },
       "HOWL": {
@@ -126492,7 +126492,7 @@
           1.67,
           1.65,
           1.62,
-          1.6
+          1.57
         ]
       },
       "MARA": {
@@ -126558,7 +126558,7 @@
           11.15,
           11.15,
           11.15,
-          11.15
+          11.11
         ]
       },
       "IOVA": {
@@ -126624,7 +126624,7 @@
           8.35,
           8.32,
           8.3,
-          8.28
+          8.32
         ]
       },
       "ANDG": {
@@ -126690,7 +126690,7 @@
           49.93,
           49.92,
           49.9,
-          49.89
+          50.04
         ]
       },
       "XXI": {
@@ -126756,7 +126756,7 @@
           6.4,
           6.41,
           6.42,
-          6.43
+          6.39
         ]
       },
       "LIME": {
@@ -126822,7 +126822,7 @@
           41.32,
           41.29,
           41.27,
-          41.24
+          41.07
         ]
       },
       "ALM": {
@@ -126888,7 +126888,7 @@
           18.55,
           18.58,
           18.62,
-          18.65
+          18.59
         ]
       },
       "TEM": {
@@ -126954,7 +126954,7 @@
           71.72,
           71.93,
           72.13,
-          72.34
+          72.3
         ]
       },
       "STDN": {
@@ -127020,7 +127020,7 @@
           13.06,
           13.06,
           13.07,
-          13.07
+          13.08
         ]
       },
       "BTDR": {
@@ -127086,7 +127086,7 @@
           11.29,
           11.33,
           11.36,
-          11.4
+          11.42
         ]
       },
       "CIFR": {
@@ -127152,7 +127152,7 @@
           15.92,
           15.88,
           15.83,
-          15.79
+          15.7
         ]
       },
       "MRNA": {
@@ -127218,7 +127218,7 @@
           147.18,
           147.76,
           148.34,
-          148.92
+          146.02
         ]
       },
       "AADX": {
@@ -127284,7 +127284,7 @@
           15.08,
           15.06,
           15.05,
-          15.03
+          15.02
         ]
       },
       "EROC": {
@@ -127350,7 +127350,7 @@
           14.18,
           14.22,
           14.27,
-          14.32
+          14.35
         ]
       },
       "INIO": {
@@ -127416,7 +127416,7 @@
           23.19,
           23.2,
           23.2,
-          23.21
+          23.2
         ]
       },
       "RH": {
@@ -127482,7 +127482,7 @@
           154.61,
           154.54,
           154.48,
-          154.41
+          154.47
         ]
       },
       "XE": {
@@ -127548,7 +127548,7 @@
           18.9,
           18.92,
           18.95,
-          18.97
+          18.98
         ]
       },
       "SEI": {
@@ -127614,7 +127614,7 @@
           53.39,
           53.36,
           53.33,
-          53.3
+          53.68
         ]
       },
       "KC": {
@@ -127746,7 +127746,7 @@
           161.2,
           161.25,
           161.31,
-          161.36
+          161.24
         ]
       },
       "ABEV": {
@@ -127944,7 +127944,7 @@
           14.57,
           14.58,
           14.6,
-          14.61
+          14.59
         ]
       },
       "PATH": {
@@ -128010,7 +128010,7 @@
           16.2,
           16.21,
           16.22,
-          16.23
+          16.19
         ]
       },
       "SNDK": {
@@ -128076,7 +128076,7 @@
           1601.18,
           1601.2,
           1601.22,
-          1601.24
+          1601.22
         ]
       },
       "AXTI": {
@@ -128142,7 +128142,7 @@
           70.24,
           70.14,
           70.04,
-          69.94
+          70.07
         ]
       },
       "BVC": {
@@ -128274,7 +128274,7 @@
           17.55,
           17.56,
           17.58,
-          17.6
+          17.69
         ]
       },
       "PRAX": {
@@ -128340,7 +128340,7 @@
           376.85,
           377.32,
           377.8,
-          378.27
+          375.62
         ]
       },
       "LITE": {
@@ -128406,7 +128406,7 @@
           869.69,
           869.34,
           868.99,
-          868.64
+          869.58
         ]
       },
       "SLS": {
@@ -128472,7 +128472,7 @@
           15.17,
           15.25,
           15.32,
-          15.4
+          15.31
         ]
       },
       "ORKA": {
@@ -128538,7 +128538,7 @@
           107.85,
           107.96,
           108.08,
-          108.19
+          108.22
         ]
       },
       "CHRN": {
@@ -128604,7 +128604,7 @@
           24.06,
           24.05,
           24.05,
-          24.05
+          24.18
         ]
       },
       "SYRE": {
@@ -128670,7 +128670,7 @@
           106.65,
           106.61,
           106.57,
-          106.53
+          106.52
         ]
       },
       "TDTH": {
@@ -128802,7 +128802,7 @@
           3.96,
           3.99,
           4.02,
-          4.05
+          4.0
         ]
       },
       "FRMI": {
@@ -128868,7 +128868,7 @@
           5.95,
           5.95,
           5.95,
-          5.95
+          5.93
         ]
       },
       "UWMC": {
@@ -129000,7 +129000,7 @@
           13.21,
           13.21,
           13.2,
-          13.2
+          13.16
         ]
       },
       "SMR": {
@@ -129066,7 +129066,7 @@
           9.48,
           9.5,
           9.51,
-          9.53
+          9.47
         ]
       },
       "LCID": {
@@ -129264,7 +129264,7 @@
           118.36,
           118.6,
           118.83,
-          119.07
+          118.83
         ]
       },
       "AAPL.BA": {
@@ -129330,7 +129330,7 @@
           24607.87,
           24605.25,
           24602.62,
-          24600.0
+          24610.0
         ]
       },
       "NVDA.BA": {
@@ -129462,7 +129462,7 @@
           25417.97,
           25418.64,
           25419.32,
-          25420.0
+          25460.0
         ]
       },
       "MSFT.BA": {
@@ -129528,7 +129528,7 @@
           25543.9,
           25549.26,
           25554.63,
-          25560.0
+          25580.0
         ]
       },
       "AMZN.BA": {
@@ -129594,7 +129594,7 @@
           2868.0,
           2868.0,
           2868.0,
-          2868.0
+          2875.0
         ]
       },
       "GOOGL.BA": {
@@ -129660,7 +129660,7 @@
           9459.75,
           9464.83,
           9469.92,
-          9475.0
+          9495.0
         ]
       },
       "META.BA": {
@@ -129726,7 +129726,7 @@
           36423.54,
           36435.69,
           36447.85,
-          36460.0
+          36520.0
         ]
       },
       "TSLA.BA": {
@@ -129858,7 +129858,7 @@
           35781.22,
           35800.81,
           35820.41,
-          35840.0
+          35760.0
         ]
       },
       "WMT.BA": {
@@ -129924,7 +129924,7 @@
           9107.28,
           9106.52,
           9105.76,
-          9105.0
+          9135.0
         ]
       },
       "JPM.BA": {
@@ -129990,7 +129990,7 @@
           37314.03,
           37316.02,
           37318.01,
-          37320.0
+          37300.0
         ]
       },
       "V.BA": {
@@ -130056,7 +130056,7 @@
           32657.49,
           32671.66,
           32685.83,
-          32700.0
+          32760.0
         ]
       },
       "PFE.BA": {
@@ -130122,7 +130122,7 @@
           11100.89,
           11103.93,
           11106.96,
-          11110.0
+          11080.0
         ]
       },
       "BABA.BA": {
@@ -130188,7 +130188,7 @@
           21302.57,
           21248.38,
           21194.19,
-          21140.0
+          21080.0
         ]
       },
       "KO.BA": {
@@ -130320,7 +130320,7 @@
           12611.92,
           12614.62,
           12617.31,
-          12620.0
+          12640.0
         ]
       },
       "XOM.BA": {
@@ -130386,7 +130386,7 @@
           26215.98,
           26210.65,
           26205.33,
-          26200.0
+          26220.0
         ]
       },
       "NFLX.BA": {
@@ -130518,7 +130518,7 @@
           74784.13,
           74806.09,
           74828.04,
-          74850.0
+          74925.0
         ]
       },
       "VALE.BA": {
@@ -130584,7 +130584,7 @@
           11538.18,
           11548.79,
           11559.39,
-          11570.0
+          11550.0
         ]
       },
       "GLOB.BA": {
@@ -130716,7 +130716,7 @@
           2072.31,
           2073.87,
           2075.44,
-          2077.0
+          2068.0
         ]
       },
       "TEN.BA": {
@@ -130782,7 +130782,7 @@
           83487.48,
           83491.65,
           83495.82,
-          83500.0
+          83275.0
         ]
       },
       "TXR.BA": {
@@ -130848,7 +130848,7 @@
           21920.43,
           21940.29,
           21960.14,
-          21980.0
+          22030.0
         ]
       },
       "SPY.BA": {
@@ -130914,7 +130914,7 @@
           20298.02,
           20302.01,
           20306.01,
-          20310.0
+          20330.0
         ]
       },
       "QQQ.BA": {
@@ -130980,7 +130980,7 @@
           56692.1,
           56703.07,
           56714.03,
-          56725.0
+          56700.0
         ]
       },
       "IWM.BA": {
@@ -131046,7 +131046,7 @@
           47557.64,
           47571.76,
           47585.88,
-          47600.0
+          47720.0
         ]
       },
       "DIA.BA": {
@@ -131178,7 +131178,7 @@
           3837.47,
           3838.31,
           3839.16,
-          3840.0
+          3868.0
         ]
       },
       "CVX.BA": {
@@ -131244,7 +131244,7 @@
           20404.08,
           20402.72,
           20401.36,
-          20400.0
+          20380.0
         ]
       },
       "COST.BA": {
@@ -131310,7 +131310,7 @@
           31225.61,
           31237.08,
           31248.54,
-          31260.0
+          31380.0
         ]
       },
       "MA.BA": {
@@ -131442,7 +131442,7 @@
           16683.8,
           16689.2,
           16694.6,
-          16700.0
+          16720.0
         ]
       },
       "BAC.BA": {
@@ -131574,7 +131574,7 @@
           15348.64,
           15355.76,
           15362.88,
-          15370.0
+          15380.0
         ]
       },
       "INTC.BA": {
@@ -131640,7 +131640,7 @@
           28776.87,
           28757.91,
           28738.96,
-          28720.0
+          28660.0
         ]
       },
       "BA.BA": {
@@ -131706,7 +131706,7 @@
           14160.0,
           14160.0,
           14160.0,
-          14160.0
+          14130.0
         ]
       },
       "PYPL.BA": {
@@ -131772,7 +131772,7 @@
           12253.83,
           12249.22,
           12244.61,
-          12240.0
+          12230.0
         ]
       },
       "NKE.BA": {
@@ -131970,7 +131970,7 @@
           53236.07,
           53253.83,
           53271.6,
-          53289.36
+          53315.85
         ]
       },
       "^GSPC": {
@@ -132036,7 +132036,7 @@
           7674.63,
           7675.88,
           7677.14,
-          7678.39
+          7680.0
         ]
       },
       "^IXIC": {
@@ -132102,7 +132102,7 @@
           26180.59,
           26184.78,
           26188.97,
-          26193.16
+          26196.33
         ]
       },
       "^FTSE": {
@@ -132630,7 +132630,7 @@
           170861.87,
           170973.15,
           171084.42,
-          171195.7
+          171178.05
         ]
       },
       "^MERV": {
@@ -132696,7 +132696,7 @@
           2914513.15,
           2915962.85,
           2917412.55,
-          2918862.25
+          2914173.75
         ]
       },
       "^GSPTSE": {
@@ -132762,7 +132762,7 @@
           36605.59,
           36614.63,
           36623.66,
-          36632.7
+          36630.82
         ]
       },
       "^AXJO": {
@@ -132894,7 +132894,7 @@
           765.62,
           765.74,
           765.85,
-          765.96
+          766.11
         ]
       },
       "QQQ": {
@@ -132960,7 +132960,7 @@
           713.24,
           713.33,
           713.41,
-          713.5
+          713.67
         ]
       },
       "DIA": {
@@ -133026,7 +133026,7 @@
           531.85,
           532.01,
           532.17,
-          532.33
+          532.53
         ]
       },
       "EEM": {
@@ -133092,7 +133092,7 @@
           67.09,
           67.11,
           67.12,
-          67.14
+          67.12
         ]
       },
       "EWZ": {
@@ -133224,7 +133224,7 @@
           299.89,
           299.97,
           300.06,
-          300.14
+          300.11
         ]
       },
       "ARKK": {
@@ -133290,7 +133290,7 @@
           85.91,
           86.01,
           86.11,
-          86.21
+          86.13
         ]
       },
       "XLE": {
@@ -133356,7 +133356,7 @@
           63.63,
           63.63,
           63.62,
-          63.62
+          63.73
         ]
       },
       "XLF": {
@@ -133422,7 +133422,7 @@
           57.44,
           57.45,
           57.47,
-          57.49
+          57.47
         ]
       },
       "XLV": {
@@ -133488,7 +133488,7 @@
           174.51,
           174.59,
           174.67,
-          174.75
+          174.66
         ]
       },
       "SMH": {
@@ -133554,7 +133554,7 @@
           561.17,
           561.12,
           561.06,
-          561.01
+          561.07
         ]
       },
       "IBIT": {
@@ -133620,7 +133620,7 @@
           43.51,
           43.6,
           43.69,
-          43.78
+          43.79
         ]
       },
       "GLD": {
@@ -133686,7 +133686,7 @@
           423.0,
           423.29,
           423.59,
-          423.88
+          423.66
         ]
       },
       "XLK": {
@@ -133752,7 +133752,7 @@
           183.37,
           183.38,
           183.39,
-          183.4
+          183.45
         ]
       },
       "TLT": {
@@ -133818,7 +133818,7 @@
           82.03,
           82.02,
           82.01,
-          82.0
+          81.97
         ]
       },
       "FXI": {
@@ -133884,7 +133884,7 @@
           35.87,
           35.88,
           35.88,
-          35.89
+          35.88
         ]
       },
       "SLV": {
@@ -133950,7 +133950,7 @@
           62.71,
           62.75,
           62.79,
-          62.83
+          62.71
         ]
       },
       "USO": {
@@ -134016,7 +134016,7 @@
           134.89,
           134.9,
           134.92,
-          134.93
+          134.95
         ]
       },
       "XLP": {
@@ -134082,7 +134082,7 @@
           85.7,
           85.71,
           85.73,
-          85.74
+          85.77
         ]
       },
       "XLY": {
@@ -134148,7 +134148,7 @@
           118.02,
           118.07,
           118.12,
-          118.17
+          118.19
         ]
       },
       "GC=F": {
@@ -134214,7 +134214,7 @@
           4666.65,
           4670.27,
           4673.88,
-          4677.5
+          4680.1
         ]
       },
       "SI=F": {
@@ -134280,7 +134280,7 @@
           69.39,
           69.44,
           69.49,
-          69.54
+          69.6
         ]
       },
       "PL=F": {
@@ -134346,7 +134346,7 @@
           1879.7,
           1881.57,
           1883.43,
-          1885.3
+          1887.0
         ]
       },
       "HG=F": {
@@ -134412,7 +134412,7 @@
           6.57,
           6.57,
           6.58,
-          6.58
+          6.59
         ]
       },
       "ALI=F": {
@@ -134544,7 +134544,7 @@
           87.0,
           86.97,
           86.94,
-          86.91
+          86.84
         ]
       },
       "BZ=F": {
@@ -135336,7 +135336,7 @@
           873.16,
           873.78,
           874.39,
-          875.0
+          870.0
         ]
       },
       "BBAR.BA": {
@@ -135402,7 +135402,7 @@
           7502.94,
           7505.29,
           7507.65,
-          7510.0
+          7500.0
         ]
       },
       "BMA.BA": {
@@ -135468,7 +135468,7 @@
           11619.88,
           11623.25,
           11626.63,
-          11630.0
+          11660.0
         ]
       },
       "BYMA.BA": {
@@ -135600,7 +135600,7 @@
           40.7,
           40.73,
           40.77,
-          40.8
+          40.83
         ]
       },
       "CRES.BA": {
@@ -135798,7 +135798,7 @@
           1770.49,
           1771.0,
           1771.5,
-          1772.0
+          1770.0
         ]
       },
       "GGAL.BA": {
@@ -135864,7 +135864,7 @@
           6604.88,
           6608.25,
           6611.63,
-          6615.0
+          6620.0
         ]
       },
       "LOMA.BA": {
@@ -135930,7 +135930,7 @@
           2967.74,
           2968.5,
           2969.25,
-          2970.0
+          2960.0
         ]
       },
       "METR.BA": {
@@ -135996,7 +135996,7 @@
           2272.89,
           2273.26,
           2273.63,
-          2274.0
+          2276.0
         ]
       },
       "PAMP.BA": {
@@ -136062,7 +136062,7 @@
           5056.96,
           5057.98,
           5058.99,
-          5060.0
+          5070.0
         ]
       },
       "SUPV.BA": {
@@ -136128,7 +136128,7 @@
           2491.8,
           2494.2,
           2496.6,
-          2499.0
+          2494.0
         ]
       },
       "TGNO4.BA": {
@@ -136194,7 +136194,7 @@
           3305.7,
           3307.13,
           3308.57,
-          3310.0
+          3333.0
         ]
       },
       "TGSU2.BA": {
@@ -136326,7 +136326,7 @@
           3248.64,
           3246.76,
           3244.88,
-          3243.0
+          3245.0
         ]
       },
       "TXAR.BA": {
@@ -136392,7 +136392,7 @@
           684.62,
           685.08,
           685.54,
-          686.0
+          684.0
         ]
       },
       "VALO.BA": {
@@ -136458,7 +136458,7 @@
           568.1,
           568.23,
           568.37,
-          568.5
+          569.0
         ]
       },
       "YPFD.BA": {
@@ -136590,7 +136590,7 @@
           76810.68,
           76959.78,
           77108.89,
-          77258.0
+          77276.41
         ]
       },
       "ETH-USD": {
@@ -136656,7 +136656,7 @@
           2408.05,
           2411.21,
           2414.37,
-          2417.53
+          2418.35
         ]
       },
       "USDT-USD": {
@@ -136788,7 +136788,7 @@
           674.26,
           675.0,
           675.75,
-          676.49
+          676.0
         ]
       },
       "XRP-USD": {
@@ -136920,7 +136920,7 @@
           90.91,
           91.04,
           91.16,
-          91.29
+          91.2
         ]
       },
       "FEDFUNDS-TARGET": {
@@ -211498,7 +211498,7 @@
           215.26,
           215.21,
           215.15,
-          215.09
+          215.01
         ]
       },
       "AAPL": {
@@ -211564,7 +211564,7 @@
           309.71,
           309.65,
           309.59,
-          309.53
+          309.82
         ]
       },
       "GOOGL": {
@@ -211630,7 +211630,7 @@
           344.94,
           345.1,
           345.26,
-          345.42
+          345.52
         ]
       },
       "GOOG": {
@@ -211696,7 +211696,7 @@
           342.02,
           342.16,
           342.31,
-          342.45
+          342.61
         ]
       },
       "MSFT": {
@@ -211762,7 +211762,7 @@
           483.05,
           483.12,
           483.19,
-          483.26
+          483.03
         ]
       },
       "AMZN": {
@@ -211828,7 +211828,7 @@
           259.54,
           259.52,
           259.5,
-          259.48
+          259.7
         ]
       },
       "TSM": {
@@ -211894,7 +211894,7 @@
           418.88,
           418.98,
           419.09,
-          419.2
+          419.22
         ]
       },
       "SPCX": {
@@ -211960,7 +211960,7 @@
           136.06,
           136.13,
           136.21,
-          136.29
+          136.01
         ]
       },
       "AVGO": {
@@ -212026,7 +212026,7 @@
           367.45,
           367.57,
           367.7,
-          367.83
+          368.15
         ]
       },
       "META": {
@@ -212092,7 +212092,7 @@
           550.3,
           550.47,
           550.63,
-          550.8
+          550.58
         ]
       },
       "TSLA": {
@@ -212158,7 +212158,7 @@
           362.87,
           363.57,
           364.27,
-          364.97
+          365.0
         ]
       },
       "SKHY": {
@@ -212224,7 +212224,7 @@
           163.62,
           163.64,
           163.66,
-          163.68
+          163.2
         ]
       },
       "LLY": {
@@ -212290,7 +212290,7 @@
           1256.5,
           1256.95,
           1257.41,
-          1257.86
+          1258.0
         ]
       },
       "BRK-B": {
@@ -212356,7 +212356,7 @@
           497.27,
           497.28,
           497.3,
-          497.31
+          496.84
         ]
       },
       "BRK-A": {
@@ -212422,7 +212422,7 @@
           746253.2,
           746315.4,
           746377.61,
-          746439.81
+          745311.62
         ]
       },
       "JPM": {
@@ -212488,7 +212488,7 @@
           352.01,
           352.02,
           352.04,
-          352.06
+          352.11
         ]
       },
       "WMT": {
@@ -212554,7 +212554,7 @@
           103.08,
           103.05,
           103.03,
-          103.0
+          103.22
         ]
       },
       "AMD": {
@@ -212620,7 +212620,7 @@
           471.18,
           471.24,
           471.31,
-          471.37
+          471.79
         ]
       },
       "XOM": {
@@ -212686,7 +212686,7 @@
           164.91,
           164.86,
           164.82,
-          164.77
+          164.96
         ]
       },
       "V": {
@@ -212752,7 +212752,7 @@
           370.21,
           370.37,
           370.54,
-          370.71
+          370.7
         ]
       },
       "ASML": {
@@ -212818,7 +212818,7 @@
           1766.53,
           1767.14,
           1767.74,
-          1768.35
+          1769.59
         ]
       },
       "JNJ": {
@@ -212884,7 +212884,7 @@
           270.78,
           270.91,
           271.04,
-          271.17
+          271.42
         ]
       },
       "MA": {
@@ -212950,7 +212950,7 @@
           579.38,
           579.59,
           579.79,
-          580.0
+          579.48
         ]
       },
       "INTC": {
@@ -213016,7 +213016,7 @@
           90.38,
           90.32,
           90.25,
-          90.19
+          90.22
         ]
       },
       "ABBV": {
@@ -213082,7 +213082,7 @@
           265.31,
           265.44,
           265.57,
-          265.7
+          265.81
         ]
       },
       "HOWL": {
@@ -213214,7 +213214,7 @@
           1.67,
           1.65,
           1.62,
-          1.6
+          1.57
         ]
       },
       "MARA": {
@@ -213280,7 +213280,7 @@
           11.15,
           11.15,
           11.15,
-          11.15
+          11.11
         ]
       },
       "IOVA": {
@@ -213346,7 +213346,7 @@
           8.35,
           8.32,
           8.3,
-          8.28
+          8.32
         ]
       },
       "ANDG": {
@@ -213412,7 +213412,7 @@
           49.93,
           49.92,
           49.9,
-          49.89
+          50.04
         ]
       },
       "XXI": {
@@ -213478,7 +213478,7 @@
           6.4,
           6.41,
           6.42,
-          6.43
+          6.39
         ]
       },
       "LIME": {
@@ -213544,7 +213544,7 @@
           41.32,
           41.29,
           41.27,
-          41.24
+          41.07
         ]
       },
       "ALM": {
@@ -213610,7 +213610,7 @@
           18.55,
           18.58,
           18.62,
-          18.65
+          18.59
         ]
       },
       "TEM": {
@@ -213676,7 +213676,7 @@
           71.72,
           71.93,
           72.13,
-          72.34
+          72.3
         ]
       },
       "STDN": {
@@ -213742,7 +213742,7 @@
           13.06,
           13.06,
           13.07,
-          13.07
+          13.08
         ]
       },
       "BTDR": {
@@ -213808,7 +213808,7 @@
           11.29,
           11.33,
           11.36,
-          11.4
+          11.42
         ]
       },
       "CIFR": {
@@ -213874,7 +213874,7 @@
           15.92,
           15.88,
           15.83,
-          15.79
+          15.7
         ]
       },
       "MRNA": {
@@ -213940,7 +213940,7 @@
           147.18,
           147.76,
           148.34,
-          148.92
+          146.02
         ]
       },
       "AADX": {
@@ -214006,7 +214006,7 @@
           15.08,
           15.06,
           15.05,
-          15.03
+          15.02
         ]
       },
       "EROC": {
@@ -214072,7 +214072,7 @@
           14.18,
           14.22,
           14.27,
-          14.32
+          14.35
         ]
       },
       "INIO": {
@@ -214138,7 +214138,7 @@
           23.19,
           23.2,
           23.2,
-          23.21
+          23.2
         ]
       },
       "RH": {
@@ -214204,7 +214204,7 @@
           154.61,
           154.54,
           154.48,
-          154.41
+          154.47
         ]
       },
       "XE": {
@@ -214270,7 +214270,7 @@
           18.9,
           18.92,
           18.95,
-          18.97
+          18.98
         ]
       },
       "SEI": {
@@ -214336,7 +214336,7 @@
           53.39,
           53.36,
           53.33,
-          53.3
+          53.68
         ]
       },
       "KC": {
@@ -214468,7 +214468,7 @@
           161.2,
           161.25,
           161.31,
-          161.36
+          161.24
         ]
       },
       "ABEV": {
@@ -214666,7 +214666,7 @@
           14.57,
           14.58,
           14.6,
-          14.61
+          14.59
         ]
       },
       "PATH": {
@@ -214732,7 +214732,7 @@
           16.2,
           16.21,
           16.22,
-          16.23
+          16.19
         ]
       },
       "SNDK": {
@@ -214798,7 +214798,7 @@
           1601.18,
           1601.2,
           1601.22,
-          1601.24
+          1601.22
         ]
       },
       "AXTI": {
@@ -214864,7 +214864,7 @@
           70.24,
           70.14,
           70.04,
-          69.94
+          70.07
         ]
       },
       "BVC": {
@@ -214996,7 +214996,7 @@
           17.55,
           17.56,
           17.58,
-          17.6
+          17.69
         ]
       },
       "PRAX": {
@@ -215062,7 +215062,7 @@
           376.85,
           377.32,
           377.8,
-          378.27
+          375.62
         ]
       },
       "LITE": {
@@ -215128,7 +215128,7 @@
           869.69,
           869.34,
           868.99,
-          868.64
+          869.58
         ]
       },
       "SLS": {
@@ -215194,7 +215194,7 @@
           15.17,
           15.25,
           15.32,
-          15.4
+          15.31
         ]
       },
       "ORKA": {
@@ -215260,7 +215260,7 @@
           107.85,
           107.96,
           108.08,
-          108.19
+          108.22
         ]
       },
       "CHRN": {
@@ -215326,7 +215326,7 @@
           24.06,
           24.05,
           24.05,
-          24.05
+          24.18
         ]
       },
       "SYRE": {
@@ -215392,7 +215392,7 @@
           106.65,
           106.61,
           106.57,
-          106.53
+          106.52
         ]
       },
       "TDTH": {
@@ -215524,7 +215524,7 @@
           3.96,
           3.99,
           4.02,
-          4.05
+          4.0
         ]
       },
       "FRMI": {
@@ -215590,7 +215590,7 @@
           5.95,
           5.95,
           5.95,
-          5.95
+          5.93
         ]
       },
       "UWMC": {
@@ -215722,7 +215722,7 @@
           13.21,
           13.21,
           13.2,
-          13.2
+          13.16
         ]
       },
       "SMR": {
@@ -215788,7 +215788,7 @@
           9.48,
           9.5,
           9.51,
-          9.53
+          9.47
         ]
       },
       "LCID": {
@@ -215986,7 +215986,7 @@
           118.36,
           118.6,
           118.83,
-          119.07
+          118.83
         ]
       },
       "AAPL.BA": {
@@ -216052,7 +216052,7 @@
           24607.87,
           24605.25,
           24602.62,
-          24600.0
+          24610.0
         ]
       },
       "NVDA.BA": {
@@ -216184,7 +216184,7 @@
           25417.97,
           25418.64,
           25419.32,
-          25420.0
+          25460.0
         ]
       },
       "MSFT.BA": {
@@ -216250,7 +216250,7 @@
           25543.9,
           25549.26,
           25554.63,
-          25560.0
+          25580.0
         ]
       },
       "AMZN.BA": {
@@ -216316,7 +216316,7 @@
           2868.0,
           2868.0,
           2868.0,
-          2868.0
+          2875.0
         ]
       },
       "GOOGL.BA": {
@@ -216382,7 +216382,7 @@
           9459.75,
           9464.83,
           9469.92,
-          9475.0
+          9495.0
         ]
       },
       "META.BA": {
@@ -216448,7 +216448,7 @@
           36423.54,
           36435.69,
           36447.85,
-          36460.0
+          36520.0
         ]
       },
       "TSLA.BA": {
@@ -216580,7 +216580,7 @@
           35781.22,
           35800.81,
           35820.41,
-          35840.0
+          35760.0
         ]
       },
       "WMT.BA": {
@@ -216646,7 +216646,7 @@
           9107.28,
           9106.52,
           9105.76,
-          9105.0
+          9135.0
         ]
       },
       "JPM.BA": {
@@ -216712,7 +216712,7 @@
           37314.03,
           37316.02,
           37318.01,
-          37320.0
+          37300.0
         ]
       },
       "V.BA": {
@@ -216778,7 +216778,7 @@
           32657.49,
           32671.66,
           32685.83,
-          32700.0
+          32760.0
         ]
       },
       "PFE.BA": {
@@ -216844,7 +216844,7 @@
           11100.89,
           11103.93,
           11106.96,
-          11110.0
+          11080.0
         ]
       },
       "BABA.BA": {
@@ -216910,7 +216910,7 @@
           21302.57,
           21248.38,
           21194.19,
-          21140.0
+          21080.0
         ]
       },
       "KO.BA": {
@@ -217042,7 +217042,7 @@
           12611.92,
           12614.62,
           12617.31,
-          12620.0
+          12640.0
         ]
       },
       "XOM.BA": {
@@ -217108,7 +217108,7 @@
           26215.98,
           26210.65,
           26205.33,
-          26200.0
+          26220.0
         ]
       },
       "NFLX.BA": {
@@ -217240,7 +217240,7 @@
           74784.13,
           74806.09,
           74828.04,
-          74850.0
+          74925.0
         ]
       },
       "VALE.BA": {
@@ -217306,7 +217306,7 @@
           11538.18,
           11548.79,
           11559.39,
-          11570.0
+          11550.0
         ]
       },
       "GLOB.BA": {
@@ -217438,7 +217438,7 @@
           2072.31,
           2073.87,
           2075.44,
-          2077.0
+          2068.0
         ]
       },
       "TEN.BA": {
@@ -217504,7 +217504,7 @@
           83487.48,
           83491.65,
           83495.82,
-          83500.0
+          83275.0
         ]
       },
       "TXR.BA": {
@@ -217570,7 +217570,7 @@
           21920.43,
           21940.29,
           21960.14,
-          21980.0
+          22030.0
         ]
       },
       "SPY.BA": {
@@ -217636,7 +217636,7 @@
           20298.02,
           20302.01,
           20306.01,
-          20310.0
+          20330.0
         ]
       },
       "QQQ.BA": {
@@ -217702,7 +217702,7 @@
           56692.1,
           56703.07,
           56714.03,
-          56725.0
+          56700.0
         ]
       },
       "IWM.BA": {
@@ -217768,7 +217768,7 @@
           47557.64,
           47571.76,
           47585.88,
-          47600.0
+          47720.0
         ]
       },
       "DIA.BA": {
@@ -217900,7 +217900,7 @@
           3837.47,
           3838.31,
           3839.16,
-          3840.0
+          3868.0
         ]
       },
       "CVX.BA": {
@@ -217966,7 +217966,7 @@
           20404.08,
           20402.72,
           20401.36,
-          20400.0
+          20380.0
         ]
       },
       "COST.BA": {
@@ -218032,7 +218032,7 @@
           31225.61,
           31237.08,
           31248.54,
-          31260.0
+          31380.0
         ]
       },
       "MA.BA": {
@@ -218164,7 +218164,7 @@
           16683.8,
           16689.2,
           16694.6,
-          16700.0
+          16720.0
         ]
       },
       "BAC.BA": {
@@ -218296,7 +218296,7 @@
           15348.64,
           15355.76,
           15362.88,
-          15370.0
+          15380.0
         ]
       },
       "INTC.BA": {
@@ -218362,7 +218362,7 @@
           28776.87,
           28757.91,
           28738.96,
-          28720.0
+          28660.0
         ]
       },
       "BA.BA": {
@@ -218428,7 +218428,7 @@
           14160.0,
           14160.0,
           14160.0,
-          14160.0
+          14130.0
         ]
       },
       "PYPL.BA": {
@@ -218494,7 +218494,7 @@
           12253.83,
           12249.22,
           12244.61,
-          12240.0
+          12230.0
         ]
       },
       "NKE.BA": {
@@ -218692,7 +218692,7 @@
           53236.07,
           53253.83,
           53271.6,
-          53289.36
+          53315.85
         ]
       },
       "^GSPC": {
@@ -218758,7 +218758,7 @@
           7674.63,
           7675.88,
           7677.14,
-          7678.39
+          7680.0
         ]
       },
       "^IXIC": {
@@ -218824,7 +218824,7 @@
           26180.59,
           26184.78,
           26188.97,
-          26193.16
+          26196.33
         ]
       },
       "^FTSE": {
@@ -219352,7 +219352,7 @@
           170861.87,
           170973.15,
           171084.42,
-          171195.7
+          171178.05
         ]
       },
       "^MERV": {
@@ -219418,7 +219418,7 @@
           2914513.15,
           2915962.85,
           2917412.55,
-          2918862.25
+          2914173.75
         ]
       },
       "^GSPTSE": {
@@ -219484,7 +219484,7 @@
           36605.59,
           36614.63,
           36623.66,
-          36632.7
+          36630.82
         ]
       },
       "^AXJO": {
@@ -219616,7 +219616,7 @@
           765.62,
           765.74,
           765.85,
-          765.96
+          766.11
         ]
       },
       "QQQ": {
@@ -219682,7 +219682,7 @@
           713.24,
           713.33,
           713.41,
-          713.5
+          713.67
         ]
       },
       "DIA": {
@@ -219748,7 +219748,7 @@
           531.85,
           532.01,
           532.17,
-          532.33
+          532.53
         ]
       },
       "EEM": {
@@ -219814,7 +219814,7 @@
           67.09,
           67.11,
           67.12,
-          67.14
+          67.12
         ]
       },
       "EWZ": {
@@ -219946,7 +219946,7 @@
           299.89,
           299.97,
           300.06,
-          300.14
+          300.11
         ]
       },
       "ARKK": {
@@ -220012,7 +220012,7 @@
           85.91,
           86.01,
           86.11,
-          86.21
+          86.13
         ]
       },
       "XLE": {
@@ -220078,7 +220078,7 @@
           63.63,
           63.63,
           63.62,
-          63.62
+          63.73
         ]
       },
       "XLF": {
@@ -220144,7 +220144,7 @@
           57.44,
           57.45,
           57.47,
-          57.49
+          57.47
         ]
       },
       "XLV": {
@@ -220210,7 +220210,7 @@
           174.51,
           174.59,
           174.67,
-          174.75
+          174.66
         ]
       },
       "SMH": {
@@ -220276,7 +220276,7 @@
           561.17,
           561.12,
           561.06,
-          561.01
+          561.07
         ]
       },
       "IBIT": {
@@ -220342,7 +220342,7 @@
           43.51,
           43.6,
           43.69,
-          43.78
+          43.79
         ]
       },
       "GLD": {
@@ -220408,7 +220408,7 @@
           423.0,
           423.29,
           423.59,
-          423.88
+          423.66
         ]
       },
       "XLK": {
@@ -220474,7 +220474,7 @@
           183.37,
           183.38,
           183.39,
-          183.4
+          183.45
         ]
       },
       "TLT": {
@@ -220540,7 +220540,7 @@
           82.03,
           82.02,
           82.01,
-          82.0
+          81.97
         ]
       },
       "FXI": {
@@ -220606,7 +220606,7 @@
           35.87,
           35.88,
           35.88,
-          35.89
+          35.88
         ]
       },
       "SLV": {
@@ -220672,7 +220672,7 @@
           62.71,
           62.75,
           62.79,
-          62.83
+          62.71
         ]
       },
       "USO": {
@@ -220738,7 +220738,7 @@
           134.89,
           134.9,
           134.92,
-          134.93
+          134.95
         ]
       },
       "XLP": {
@@ -220804,7 +220804,7 @@
           85.7,
           85.71,
           85.73,
-          85.74
+          85.77
         ]
       },
       "XLY": {
@@ -220870,7 +220870,7 @@
           118.02,
           118.07,
           118.12,
-          118.17
+          118.19
         ]
       },
       "GC=F": {
@@ -220936,7 +220936,7 @@
           4666.65,
           4670.27,
           4673.88,
-          4677.5
+          4680.1
         ]
       },
       "SI=F": {
@@ -221002,7 +221002,7 @@
           69.39,
           69.44,
           69.49,
-          69.54
+          69.6
         ]
       },
       "PL=F": {
@@ -221068,7 +221068,7 @@
           1879.7,
           1881.57,
           1883.43,
-          1885.3
+          1887.0
         ]
       },
       "HG=F": {
@@ -221134,7 +221134,7 @@
           6.57,
           6.57,
           6.58,
-          6.58
+          6.59
         ]
       },
       "ALI=F": {
@@ -221266,7 +221266,7 @@
           87.0,
           86.97,
           86.94,
-          86.91
+          86.84
         ]
       },
       "BZ=F": {
@@ -222058,7 +222058,7 @@
           873.16,
           873.78,
           874.39,
-          875.0
+          870.0
         ]
       },
       "BBAR.BA": {
@@ -222124,7 +222124,7 @@
           7502.94,
           7505.29,
           7507.65,
-          7510.0
+          7500.0
         ]
       },
       "BMA.BA": {
@@ -222190,7 +222190,7 @@
           11619.88,
           11623.25,
           11626.63,
-          11630.0
+          11660.0
         ]
       },
       "BYMA.BA": {
@@ -222322,7 +222322,7 @@
           40.7,
           40.73,
           40.77,
-          40.8
+          40.83
         ]
       },
       "CRES.BA": {
@@ -222520,7 +222520,7 @@
           1770.49,
           1771.0,
           1771.5,
-          1772.0
+          1770.0
         ]
       },
       "GGAL.BA": {
@@ -222586,7 +222586,7 @@
           6604.88,
           6608.25,
           6611.63,
-          6615.0
+          6620.0
         ]
       },
       "LOMA.BA": {
@@ -222652,7 +222652,7 @@
           2967.74,
           2968.5,
           2969.25,
-          2970.0
+          2960.0
         ]
       },
       "METR.BA": {
@@ -222718,7 +222718,7 @@
           2272.89,
           2273.26,
           2273.63,
-          2274.0
+          2276.0
         ]
       },
       "PAMP.BA": {
@@ -222784,7 +222784,7 @@
           5056.96,
           5057.98,
           5058.99,
-          5060.0
+          5070.0
         ]
       },
       "SUPV.BA": {
@@ -222850,7 +222850,7 @@
           2491.8,
           2494.2,
           2496.6,
-          2499.0
+          2494.0
         ]
       },
       "TGNO4.BA": {
@@ -222916,7 +222916,7 @@
           3305.7,
           3307.13,
           3308.57,
-          3310.0
+          3333.0
         ]
       },
       "TGSU2.BA": {
@@ -223048,7 +223048,7 @@
           3248.64,
           3246.76,
           3244.88,
-          3243.0
+          3245.0
         ]
       },
       "TXAR.BA": {
@@ -223114,7 +223114,7 @@
           684.62,
           685.08,
           685.54,
-          686.0
+          684.0
         ]
       },
       "VALO.BA": {
@@ -223180,7 +223180,7 @@
           568.1,
           568.23,
           568.37,
-          568.5
+          569.0
         ]
       },
       "YPFD.BA": {
@@ -223312,7 +223312,7 @@
           76810.68,
           76959.78,
           77108.89,
-          77258.0
+          77276.41
         ]
       },
       "ETH-USD": {
@@ -223378,7 +223378,7 @@
           2408.05,
           2411.21,
           2414.37,
-          2417.53
+          2418.35
         ]
       },
       "USDT-USD": {
@@ -223510,7 +223510,7 @@
           674.26,
           675.0,
           675.75,
-          676.49
+          676.0
         ]
       },
       "XRP-USD": {
@@ -223642,7 +223642,7 @@
           90.91,
           91.04,
           91.16,
-          91.29
+          91.2
         ]
       },
       "FEDFUNDS-TARGET": {
