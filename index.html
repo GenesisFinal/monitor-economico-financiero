@@ -4820,7 +4820,7 @@ canvas.sparkline-canvas {
 <script>
         // Asynchronously fetch full multi-year historical dataset (1255-1500 points per asset)
         (function loadFullHistoricalSeries() {
-            fetch('historical_series.json?v=' + Date.now())
+            fetch('historical_series_v2.json?v=' + Date.now())
                 .then(r => r.json())
                 .then(data => {
                     if (data && data.historical_db) {
