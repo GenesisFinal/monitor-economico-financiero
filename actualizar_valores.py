@@ -40179,7 +40179,7 @@ def build_dashboard():
 
 
 
-                                                with open("master_dataset.json", "w", encoding="utf-8") as f:
+            with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
 
     # Permanent NaN Post-Pass Filter
@@ -40310,7 +40310,37 @@ def build_dashboard():
     with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
+
     print("Rendering template to index.html...")
+    
+    # Merge 100% full 5-year historical dataset (1255-1500 points) before rendering HTML
+    try:
+        with open('historical_series.json', 'r', encoding='utf-8') as hf:
+            h_full_data = json.load(hf).get('historical_db', {})
+            if h_full_data:
+                if 'historical_db' not in master_store_data['final_data']:
+                    master_store_data['final_data']['historical_db'] = {}
+                for hk, hv in h_full_data.items():
+                    master_store_data['final_data']['historical_db'][hk] = hv
+                print(f"[BUILDER SUCCESS] Embedded {len(h_full_data)} full 5-year historical tickers into master_store_data!")
+    except Exception as e:
+        print("[BUILDER WARN] Could not merge historical_series.json into master_store_data:", e)
+
     env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
     template = env.from_string(html_template)
     rendered_html = template.render(
