@@ -542,13 +542,13 @@ function renderLaSegundaSubtabData() {
         var empRowsHTML = '';
         (lsData.companies || []).forEach(function(c) {
             empRowsHTML += '<tr class="hover:bg-amber-500/5 transition">';
-            empRowsHTML += '<td class="py-2.5 px-3 font-semibold text-slate-900 dark:text-white flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i>' + c.name + '</td>';
-            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-slate-900 dark:text-white font-bold">' + fmtMoney(c.prima) + '</td>';
+            empRowsHTML += '<td class="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-100 font-semibold flex items-center gap-2"><i class="fas fa-building text-amber-400/80"></i>' + c.name + '</td>';
+            empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-slate-800 dark:text-slate-100 font-semibold font-bold">' + fmtMoney(c.prima) + '</td>';
             empRowsHTML += '<td class="py-2.5 px-3 text-right font-mono text-amber-400 font-bold">' + fmtPct(c.pct_grupo) + '</td>';
             empRowsHTML += '</tr>';
         });
         empRowsHTML += '<tr class="bg-amber-500/10 border-t border-amber-500/30 font-bold">';
-        empRowsHTML += '<td class="py-3 px-3 text-slate-900 dark:text-white uppercase tracking-wider font-extrabold">TOTAL GRUPO LA SEGUNDA</td>';
+        empRowsHTML += '<td class="py-3 px-3 text-slate-800 dark:text-slate-100 font-semibold uppercase tracking-wider font-extrabold">TOTAL GRUPO LA SEGUNDA</td>';
         empRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtMoney(lsData.tot_grupo) + '</td>';
         empRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">100,00%</td>';
         empRowsHTML += '</tr>';
@@ -7660,9 +7660,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'indices', '^DJI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^DJI</span><a href="https://finance.yahoo.com/quote/%5EDJI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Dow Jones Industrial</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^DJI" data-close-price="53253.29">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$53.253,29</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.94%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^DJI" data-close-price="53314.57">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$53.314,57</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+11.06%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+19.64%</td>
@@ -7671,9 +7671,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^GSPC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^GSPC</span><a href="https://finance.yahoo.com/quote/%5EGSPC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">S&P 500</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^GSPC" data-close-price="7673.18">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$7.673,18</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.42%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^GSPC" data-close-price="7679.51">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$7.679,51</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.82%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+13.52%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+20.36%</td>
@@ -7682,9 +7682,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^IXIC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^IXIC</span><a href="https://finance.yahoo.com/quote/%5EIXIC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Nasdaq Composite</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^IXIC" data-close-price="26160.756">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$26.160,76</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.36%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^IXIC" data-close-price="26191.39">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$26.191,39</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.48%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.75%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+15.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+23.12%</td>
@@ -7739,9 +7739,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^N225')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^N225</span><a href="https://finance.yahoo.com/quote/%5EN225" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Nikkei 225</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^N225" data-close-price="66016.36">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$66.016,36</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.30%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^N225" data-close-price="66216.79">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$66.216,79</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.36%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+36.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+61.11%</td>
@@ -7750,9 +7750,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^HSI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^HSI</span><a href="https://finance.yahoo.com/quote/%5EHSI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Hang Seng</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^HSI" data-close-price="26009.46">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$26.009,46</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.02%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^HSI" data-close-price="25698.49">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$25.698,49</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.80%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.77%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-4.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.58%</td>
@@ -7761,9 +7761,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '000001.SS')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">000001.SS</span><a href="https://finance.yahoo.com/quote/000001.SS" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">SSE Composite</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="000001.SS" data-close-price="3905.203">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.905,20</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.28%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="000001.SS" data-close-price="3903.72">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.903,72</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.72%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.11%</td>
@@ -7773,9 +7773,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^BVSP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^BVSP</span><a href="https://finance.yahoo.com/quote/%5EBVSP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">IBovespa</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^BVSP" data-close-price="171427.36">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$171.427,36</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.08%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^BVSP" data-close-price="171188.12">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$171.188,12</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.94%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.16%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.98%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+22.43%</td>
@@ -7784,9 +7784,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^MERV')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^MERV</span><a href="https://finance.yahoo.com/quote/%5EMERV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">S&P Merval</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^MERV" data-close-price="2916736.5">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.916.736,50</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.42%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^MERV" data-close-price="2917936.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.917.936,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.46%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-10.45%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.72%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+34.67%</td>
@@ -7796,9 +7796,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^GSPTSE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^GSPTSE</span><a href="https://finance.yahoo.com/quote/%5EGSPTSE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">S&P/TSX</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^GSPTSE" data-close-price="36605.88">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$36.605,88</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.66%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^GSPTSE" data-close-price="36638.1">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$36.638,10</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.75%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.71%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+15.20%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+31.57%</td>
@@ -7807,9 +7807,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'indices', '^AXJO')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">^AXJO</span><a href="https://finance.yahoo.com/quote/%5EAXJO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">ASX 200</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^AXJO" data-close-price="9058.9">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$9.058,90</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.06%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="^AXJO" data-close-price="9083.8">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$9.083,80</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.33%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.10%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.44%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.72%</td>
@@ -7883,9 +7883,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'forex', 'EURUSD=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">EURUSD=X</span><a href="https://finance.yahoo.com/quote/EURUSD%3DX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">EUR/USD</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EURUSD=X" data-close-price="1.1686">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EURUSD=X" data-close-price="1.17">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,17</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.04%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.07%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.30%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.51%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.20%</td>
@@ -7894,9 +7894,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'forex', 'GBPUSD=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GBPUSD=X</span><a href="https://finance.yahoo.com/quote/GBPUSD%3DX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">GBP/USD</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GBPUSD=X" data-close-price="1.3651">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,37</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.15%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GBPUSD=X" data-close-price="1.36">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,36</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.35%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.46%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.36%</td>
@@ -7905,9 +7905,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'forex', 'JPY=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">JPY=X</span><a href="https://finance.yahoo.com/quote/JPY%3DX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">USD/JPY (Yen)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPY=X" data-close-price="159.029">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPY=X" data-close-price="159.03">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$159,03</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.48%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.71%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.86%</td>
@@ -7916,9 +7916,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'forex', 'AUDUSD=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AUDUSD=X</span><a href="https://finance.yahoo.com/quote/AUDUSD%3DX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">AUD/USD</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AUDUSD=X" data-close-price="0.718">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AUDUSD=X" data-close-price="0.72">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$0,72</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.94%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.72%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.12%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+6.11%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+9.07%</td>
@@ -7927,9 +7927,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'forex', 'BRL=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BRL=X</span><a href="https://finance.yahoo.com/quote/BRL%3DX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">USD/BRL (Real)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BRL=X" data-close-price="5.1359">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BRL=X" data-close-price="5.14">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$5,14</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.10%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.71%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.40%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.51%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.62%</td>
@@ -7938,9 +7938,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'forex', 'MXN=X')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MXN=X</span><a href="https://finance.yahoo.com/quote/MXN%3DX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">USD/MEX (Peso)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MXN=X" data-close-price="16.897">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$16,90</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.25%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MXN=X" data-close-price="16.91">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$16,91</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.22%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.39%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-9.50%</td>
@@ -7951,7 +7951,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">USD/ARS (Peso)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ARS=X" data-close-price="1499.0">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.499,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.13%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.12%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.78%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+14.56%</td>
@@ -8026,9 +8026,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'commodities', 'GC=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GC=F</span><a href="https://finance.yahoo.com/quote/GC%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Oro (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GC=F" data-close-price="4678.1">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$4.678,10</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.33%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GC=F" data-close-price="4678.9">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$4.678,90</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+8.32%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.53%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+31.34%</td>
@@ -8037,9 +8037,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'SI=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SI=F</span><a href="https://finance.yahoo.com/quote/SI%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Plata (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SI=F" data-close-price="69.615">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$69,61</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.22%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SI=F" data-close-price="69.57">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$69,57</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.26%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+13.79%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-7.89%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+71.10%</td>
@@ -8048,9 +8048,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'PL=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PL=F</span><a href="https://finance.yahoo.com/quote/PL%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Platino (USD/Oz)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PL=F" data-close-price="1885.4">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.885,40</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.52%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PL=F" data-close-price="1886.6">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.886,60</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.04%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.26%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-17.67%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+29.60%</td>
@@ -8059,9 +8059,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'HG=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">HG=F</span><a href="https://finance.yahoo.com/quote/HG%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Cobre (USD/Lb)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HG=F" data-close-price="6.584">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HG=F" data-close-price="6.58">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$6,58</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.78%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.92%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.86%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+17.01%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+47.82%</td>
@@ -8072,7 +8072,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Aluminio (USD/Ton)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ALI=F" data-close-price="3413.0">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.413,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.53%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.67%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.89%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+14.21%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+34.14%</td>
@@ -8082,9 +8082,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'CL=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CL=F</span><a href="https://finance.yahoo.com/quote/CL%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Petróleo WTI (USD/Bbl)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CL=F" data-close-price="87.06">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$87,06</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.26%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CL=F" data-close-price="86.91">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$86,91</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.52%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+43.75%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+28.83%</td>
@@ -8093,9 +8093,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'BZ=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BZ=F</span><a href="https://finance.yahoo.com/quote/BZ%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Petróleo Brent (USD/Bbl)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BZ=F" data-close-price="94.3">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$94,30</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.55%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BZ=F" data-close-price="94.08">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$94,08</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.32%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.20%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+45.71%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+32.44%</td>
@@ -8106,7 +8106,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Gas Natural (USD/MMBtu)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NG=F" data-close-price="2.8">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2,80</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.45%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.27%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-6.53%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-24.46%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.80%</td>
@@ -8115,9 +8115,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'commodities', 'RB=F')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">RB=F</span><a href="https://finance.yahoo.com/quote/RB%3DF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Gasolina (USD/Gal)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RB=F" data-close-price="3.0449">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3,04</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.19%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RB=F" data-close-price="3.03">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3,03</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-7.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.54%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+87.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+50.96%</td>
@@ -8129,7 +8129,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Soja Chicago (USD/Ton)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZS=F" data-close-price="1240.25">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.240,25</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.30%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.37%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+14.01%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+16.39%</td>
@@ -8140,7 +8140,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Maíz Chicago (USD/Ton)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZC=F" data-close-price="508.25">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$508,25</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.94%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+6.16%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.57%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.91%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+22.40%</td>
@@ -8151,7 +8151,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Trigo Chicago (USD/Ton)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ZW=F" data-close-price="700.0">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$700,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-slate-400">0.00%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.53%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.41%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+33.22%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+34.01%</td>
@@ -8163,7 +8163,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Algodón (USD/Lb)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CT=F" data-close-price="88.6">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$88,60</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.29%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.82%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.77%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+30.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+26.34%</td>
@@ -8174,7 +8174,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Café (USD/Lb)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KC=F" data-close-price="324.9">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$324,90</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.34%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-10.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.09%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.37%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.55%</td>
@@ -8185,7 +8185,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Cacao (USD/Ton)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CC=F" data-close-price="5981.0">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$5.981,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.37%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.76%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.33%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-30.29%</td>
@@ -8207,7 +8207,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Jugo de Naranja (USD/Lb)</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="OJ=F" data-close-price="152.75">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$152,75</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.45%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.63%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.47%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-28.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-41.76%</td>
@@ -9540,8 +9540,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                             <tr class="border-b border-darkBorder/30 text-brandBlue font-semibold">
                                                 <th class="w-10 py-2.5 px-3 text-center">Comparar</th>
                                                 <th class="py-2.5 px-3">Ticker</th>
-                                                <th class="py-2.5 px-3 text-right">Precio Actual</th>
-                                                <th class="py-2.5 px-3 text-right">Precio Cierre</th>
+                                                <th class="py-2.5 px-3">Instrumento / Nombre</th>
+                                                <th class="py-2.5 px-3 text-right">Cotización ARS</th>
+                                                <th class="py-2.5 px-3 text-right">Cotización USD</th>
                                                 <th class="py-2.5 px-3 text-right">Var %</th>
                                                 <th class="py-2.5 px-3 text-right">YTD</th>
                                                 <th class="py-2.5 px-3 text-right">TIR</th>
@@ -9554,9 +9555,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'bonds', 'AL30D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AL30D</span><a href="https://www.rava.com/perfil/AL30D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - vto. 07/2030</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL30D" data-close-price="55.14">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$55,14</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.02%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL30D" data-close-price="55.13">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$55,13</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.04%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+4.65%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.65%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.97</td>
@@ -9565,9 +9566,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AO27D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AO27D</span><a href="https://www.rava.com/perfil/AO27D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 6.00% - vto. 10/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AO27D" data-close-price="101.95">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$101,95</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.25%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AO27D" data-close-price="101.8">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$101,80</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.10%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.04%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">4.38%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.15</td>
@@ -9576,9 +9577,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AO28D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AO28D</span><a href="https://www.rava.com/perfil/AO28D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 6.00% - vto. 10/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AO28D" data-close-price="94.59">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$94,59</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.75%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AO28D" data-close-price="94.42">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$94,42</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.56%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.56%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.58%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.04</td>
@@ -9587,9 +9588,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AO29D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AO29D</span><a href="https://www.rava.com/perfil/AO29D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 6.00% - vto. 10/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AO29D" data-close-price="91.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$91,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.28%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AO29D" data-close-price="91.05">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$91,05</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.33%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">-1.22%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.87%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.87</td>
@@ -9600,7 +9601,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - vto. 07/2035</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD35D" data-close-price="79.45">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$79,45</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.78%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.78%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+2.94%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.98%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.31</td>
@@ -9609,9 +9610,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AE38D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AE38D</span><a href="https://www.rava.com/perfil/AE38D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - vto. 01/2038</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AE38D" data-close-price="78.18">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$78,18</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AE38D" data-close-price="78.25">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$78,25</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.20%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+0.09%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">10.18%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">4.47</td>
@@ -9622,7 +9623,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - vto. 07/2041</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD41D" data-close-price="74.27">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$74,27</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.85%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.85%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.53%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.13%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.84</td>
@@ -9631,9 +9632,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AL35D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AL35D</span><a href="https://www.rava.com/perfil/AL35D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - vto. 07/2035</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL35D" data-close-price="74.94">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$74,94</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.85%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL35D" data-close-price="74.9">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$74,90</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.79%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">-0.29%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.98%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.25</td>
@@ -9642,9 +9643,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AL41D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AL41D</span><a href="https://www.rava.com/perfil/AL41D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - vto. 07/2041</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL41D" data-close-price="69.54">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$69,54</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.97%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL41D" data-close-price="69.71">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$69,71</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.22%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">-2.43%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">10.09%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.69</td>
@@ -9653,9 +9654,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'GD30D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GD30D</span><a href="https://www.rava.com/perfil/GD30D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - vto. 07/2030</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD30D" data-close-price="57.36">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$57,36</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.58%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD30D" data-close-price="57.39">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$57,39</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.63%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.28%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.00</td>
@@ -9664,9 +9665,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AN29D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AN29D</span><a href="https://www.rava.com/perfil/AN29D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 6.50% - vto. 11/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AN29D" data-close-price="92.66">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$92,66</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.72%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AN29D" data-close-price="92.6">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$92,60</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.65%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.78%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.39%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.82</td>
@@ -9675,9 +9676,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'GD38D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GD38D</span><a href="https://www.rava.com/perfil/GD38D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - vto. 01/2038</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD38D" data-close-price="83.56">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$83,56</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.35%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD38D" data-close-price="83.38">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$83,38</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.13%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.68%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.84%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">4.61</td>
@@ -9686,9 +9687,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'AL29D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AL29D</span><a href="https://www.rava.com/perfil/AL29D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 1.00% - vto. 07/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL29D" data-close-price="53.68">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$53,68</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.90%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AL29D" data-close-price="53.32">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$53,32</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.23%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+2.92%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.39%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.53</td>
@@ -9699,7 +9700,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - vto. 07/2046</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD46D" data-close-price="67.6">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$67,60</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.90%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.90%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">-3.63%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.09%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.32</td>
@@ -9708,9 +9709,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'GD29D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GD29D</span><a href="https://www.rava.com/perfil/GD29D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 1.00% - vto. 07/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD29D" data-close-price="55.67">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$55,67</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.02%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GD29D" data-close-price="55.7">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$55,70</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.04%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+2.54%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.31%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.56</td>
@@ -9821,8 +9822,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                             <tr class="border-b border-darkBorder/30 text-brandBlue font-semibold">
                                                 <th class="w-10 py-2.5 px-3 text-center">Comparar</th>
                                                 <th class="py-2.5 px-3">Ticker</th>
-                                                <th class="py-2.5 px-3 text-right">Precio Actual</th>
-                                                <th class="py-2.5 px-3 text-right">Precio Cierre</th>
+                                                <th class="py-2.5 px-3">Instrumento / Nombre</th>
+                                                <th class="py-2.5 px-3 text-right">Cotización ARS</th>
+                                                <th class="py-2.5 px-3 text-right">Cotización USD</th>
                                                 <th class="py-2.5 px-3 text-right">Var %</th>
                                                 <th class="py-2.5 px-3 text-right">YTD</th>
                                                 <th class="py-2.5 px-3 text-right">TIR</th>
@@ -9835,9 +9837,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'bonds', 'TZXS8')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXS8</span><a href="https://www.rava.com/perfil/TZXS8" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 09/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXS8" data-close-price="93.55">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$93,55</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.05%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXS8" data-close-price="93.5">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$93,50</td>
+                <td class="py-2.5 px-3 text-right font-bold text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+12.48%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.94</td>
@@ -9848,7 +9850,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 09/2027</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXS7" data-close-price="104.85">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$104,85</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.48%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.48%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+11.91%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.65%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.05</td>
@@ -9857,9 +9859,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXM7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXM7</span><a href="https://www.rava.com/perfil/TZXM7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 03/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXM7" data-close-price="219.2">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$219,20</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.39%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXM7" data-close-price="219.05">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$219,05</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.32%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+30.07%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.02%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.59</td>
@@ -9868,9 +9870,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXD6')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXD6</span><a href="https://www.rava.com/perfil/TZXD6" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2026</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXD6" data-close-price="297.55">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$297,55</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.22%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXD6" data-close-price="297.75">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$297,75</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.29%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+29.54%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.78%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.31</td>
@@ -9879,9 +9881,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXD7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXD7</span><a href="https://www.rava.com/perfil/TZXD7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXD7" data-close-price="272.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$272,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.37%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXD7" data-close-price="271.75">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$271,75</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.28%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+27.52%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.75%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.23</td>
@@ -9890,9 +9892,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXM8')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXM8</span><a href="https://www.rava.com/perfil/TZXM8" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 03/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXM8" data-close-price="98.55">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$98,55</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.15%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXM8" data-close-price="98.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$98,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.41%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+8.67%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.62%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.49</td>
@@ -9901,9 +9903,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'X30N6')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">X30N6</span><a href="https://www.rava.com/perfil/X30N6" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 11/2026</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="X30N6" data-close-price="122.65">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$122,65</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.25%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="X30N6" data-close-price="122.6">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$122,60</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.20%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+30.53%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.50%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.28</td>
@@ -9912,9 +9914,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TX26')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TX26</span><a href="https://www.rava.com/perfil/TX26" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 11/2026</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TX26" data-close-price="728.1">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$728,10</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.32%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TX26" data-close-price="727.5">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$727,50</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.23%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+26.10%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.14%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.22</td>
@@ -9923,9 +9925,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZX28')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZX28</span><a href="https://www.rava.com/perfil/TZX28" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 06/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZX28" data-close-price="346.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$346,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.52%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZX28" data-close-price="345.85">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$345,85</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.48%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+26.31%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.03%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.71</td>
@@ -9934,9 +9936,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXO7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXO7</span><a href="https://www.rava.com/perfil/TZXO7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 10/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXO7" data-close-price="95.05">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$95,05</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.16%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXO7" data-close-price="95.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$95,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.21%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.04%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.23%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.12</td>
@@ -9945,9 +9947,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZX27')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZX27</span><a href="https://www.rava.com/perfil/TZX27" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 06/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZX27" data-close-price="389.2">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$389,20</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.06%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZX27" data-close-price="387.1">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$387,10</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.52%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+28.65%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.67%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.82</td>
@@ -9956,9 +9958,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXA7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXA7</span><a href="https://www.rava.com/perfil/TZXA7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 04/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXA7" data-close-price="120.5">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$120,50</td>
-                <td class="py-2.5 px-3 text-right font-bold text-slate-400">0.00%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXA7" data-close-price="120.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$120,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.41%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+23.97%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.55%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.66</td>
@@ -9967,9 +9969,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXY7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXY7</span><a href="https://www.rava.com/perfil/TZXY7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 05/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXY7" data-close-price="119.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$119,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.51%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXY7" data-close-price="117.8">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$117,80</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.51%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+28.57%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">5.52%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.74</td>
@@ -9980,7 +9982,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2028</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXD8" data-close-price="84.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$84,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.30%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.30%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.75%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.73%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.14</td>
@@ -9989,9 +9991,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TX28')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TX28</span><a href="https://www.rava.com/perfil/TX28" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 11/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TX28" data-close-price="1708.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$1.708,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.35%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TX28" data-close-price="1706.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$1.706,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.21%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+25.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.83%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.13</td>
@@ -10000,9 +10002,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZXM9')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZXM9</span><a href="https://www.rava.com/perfil/TZXM9" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 03/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXM9" data-close-price="89.15">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$89,15</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.18%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZXM9" data-close-price="89.33">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$89,33</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.38%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+8.43%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.14%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.39</td>
@@ -10013,7 +10015,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 11/2031</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TX31" data-close-price="1421.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$1.421,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.11%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.11%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+7.37%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.32%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.64</td>
@@ -10022,9 +10024,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'DICP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">DICP</span><a href="https://www.rava.com/perfil/DICP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2033</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DICP" data-close-price="47360.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$47.360,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.28%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DICP" data-close-price="47355.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$47.355,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.26%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+20.32%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.27%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.11</td>
@@ -10035,7 +10037,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2038</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PAP0" data-close-price="36500.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$36.500,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+2.82%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+2.82%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+20.26%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">8.96%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.29</td>
@@ -10044,9 +10046,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'CUAP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CUAP</span><a href="https://www.rava.com/perfil/CUAP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2045</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CUAP" data-close-price="42470.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$42.470,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.06%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CUAP" data-close-price="42410.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$42.410,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.20%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+16.95%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.07%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.66</td>
@@ -10055,9 +10057,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'PARP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PARP</span><a href="https://www.rava.com/perfil/PARP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2038</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PARP" data-close-price="34670.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$34.670,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.23%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PARP" data-close-price="34550.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$34.550,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.88%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+20.54%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.29%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.25</td>
@@ -10066,9 +10068,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'DIP0')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">DIP0</span><a href="https://www.rava.com/perfil/DIP0" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono CER - vto. 12/2033</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DIP0" data-close-price="46935.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$46.935,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DIP0" data-close-price="47300.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$47.300,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.64%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+12.11%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.13%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.11</td>
@@ -10179,8 +10181,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                             <tr class="border-b border-darkBorder/30 text-brandBlue font-semibold">
                                                 <th class="w-10 py-2.5 px-3 text-center">Comparar</th>
                                                 <th class="py-2.5 px-3">Ticker</th>
-                                                <th class="py-2.5 px-3 text-right">Precio Actual</th>
-                                                <th class="py-2.5 px-3 text-right">Precio Cierre</th>
+                                                <th class="py-2.5 px-3">Instrumento / Nombre</th>
+                                                <th class="py-2.5 px-3 text-right">Cotización ARS</th>
+                                                <th class="py-2.5 px-3 text-right">Cotización USD</th>
                                                 <th class="py-2.5 px-3 text-right">Var %</th>
                                                 <th class="py-2.5 px-3 text-right">YTD</th>
                                                 <th class="py-2.5 px-3 text-right">TIR</th>
@@ -10193,9 +10196,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'bonds', 'TXMJ0')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TXMJ0</span><a href="https://www.rava.com/perfil/TXMJ0" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono ARS - vto. 06/2030</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMJ0" data-close-price="80.94">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$80,94</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.45%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMJ0" data-close-price="81.05">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$81,05</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.58%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.70%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">38.73%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.78</td>
@@ -10204,9 +10207,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TMG28')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TMG28</span><a href="https://www.rava.com/perfil/TMG28" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono TAMAR - vto. 08/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TMG28" data-close-price="103.45">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$103,45</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.29%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TMG28" data-close-price="103.75">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$103,75</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.58%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.13%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">38.13%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.47</td>
@@ -10215,9 +10218,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TXMJ8')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TXMJ8</span><a href="https://www.rava.com/perfil/TXMJ8" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono ARS - vto. 06/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMJ8" data-close-price="96.94">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$96,94</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.51%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMJ8" data-close-price="96.6">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$96,60</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.16%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+5.04%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">36.59%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.37</td>
@@ -10228,7 +10231,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono ARS - vto. 12/2028</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMD8" data-close-price="91.06">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$91,06</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.34%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.34%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+2.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">37.51%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.69</td>
@@ -10237,9 +10240,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TXMD9')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TXMD9</span><a href="https://www.rava.com/perfil/TXMD9" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono ARS - vto. 12/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMD9" data-close-price="83.99">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$83,99</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.59%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMD9" data-close-price="84.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$84,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.60%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.02%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">38.61%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.40</td>
@@ -10248,9 +10251,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TXMJ9')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TXMJ9</span><a href="https://www.rava.com/perfil/TXMJ9" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono Dual - vto. 06/2029</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMJ9" data-close-price="89.99">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$89,99</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.83%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXMJ9" data-close-price="90.09">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$90,09</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.94%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+7.73%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">33.81%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.14</td>
@@ -10259,9 +10262,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TTD26')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TTD26</span><a href="https://www.rava.com/perfil/TTD26" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono Dual - 28.93% - vto. 12/2026</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TTD26" data-close-price="166.45">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$166,45</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.21%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TTD26" data-close-price="166.5">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$166,50</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.24%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+23.49%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">28.53%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.25</td>
@@ -10292,9 +10295,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TMF27')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TMF27</span><a href="https://www.rava.com/perfil/TMF27" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono TAMAR - vto. 02/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TMF27" data-close-price="120.2">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$120,20</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.63%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TMF27" data-close-price="120.05">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$120,05</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.50%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+15.78%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">30.33%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.40</td>
@@ -10305,7 +10308,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono TAMAR - vto. 07/2027</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TML27" data-close-price="105.5">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$105,50</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.29%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.29%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.44%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">31.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.72</td>
@@ -10314,9 +10317,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TY30P')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TY30P</span><a href="https://www.rava.com/perfil/TY30P" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono Tasa Fija ARS - 29.50% - vto. 05/2030</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TY30P" data-close-price="109.75">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$109,75</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.37%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TY30P" data-close-price="110.1">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$110,10</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.69%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.64%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">28.98%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.11</td>
@@ -10325,9 +10328,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TMG27')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TMG27</span><a href="https://www.rava.com/perfil/TMG27" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono TAMAR - vto. 08/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TMG27" data-close-price="113.5">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$113,50</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.71%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TMG27" data-close-price="114.25">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$114,25</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.38%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+14.23%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">29.66%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.80</td>
@@ -10336,9 +10339,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BDC28')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BDC28</span><a href="https://www.rava.com/perfil/BDC28" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono BADLAR - vto. 02/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BDC28" data-close-price="100.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$100,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.78%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BDC28" data-close-price="101.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$101,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.79%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">-8.27%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">30.55%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.14</td>
@@ -10358,9 +10361,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZV28')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZV28</span><a href="https://www.rava.com/perfil/TZV28" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono DL (sin cupón) - vto. 06/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZV28" data-close-price="124280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$124.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.23%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZV28" data-close-price="124090.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$124.090,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.07%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.59%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.70</td>
@@ -10371,7 +10374,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono DL (sin cupón) - vto. 06/2027</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZV27" data-close-price="147100.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$147.100,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.03%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.03%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.38%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.85</td>
@@ -10380,9 +10383,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BPOD7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BPOD7</span><a href="https://www.rava.com/perfil/BPOD7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BOPREAL USD - vto. 10/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOD7" data-close-price="157660.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.660,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.55%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOD7" data-close-price="157300.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.300,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.32%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.84%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.92</td>
@@ -10391,9 +10394,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BPOB8')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BPOB8</span><a href="https://www.rava.com/perfil/BPOB8" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BOPREAL USD - vto. 10/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOB8" data-close-price="140050.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$140.050,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.41%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOB8" data-close-price="140440.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$140.440,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.69%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.21%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.05</td>
@@ -10402,9 +10405,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'TZVD8')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TZVD8</span><a href="https://www.rava.com/perfil/TZVD8" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono DL (sin cupón) - vto. 12/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZVD8" data-close-price="118100.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$118.100,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.76%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TZVD8" data-close-price="118000.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$118.000,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.84%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">9.83%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.12</td>
@@ -10413,9 +10416,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BPOC7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BPOC7</span><a href="https://www.rava.com/perfil/BPOC7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BOPREAL USD - vto. 10/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOC7" data-close-price="157660.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.660,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.77%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOC7" data-close-price="157130.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.130,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.43%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.26%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.91</td>
@@ -10426,7 +10429,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono DL (sin cupón) - vto. 03/2027</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="D31M7" data-close-price="145990.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$145.990,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.01%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.01%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">4.10%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.59</td>
@@ -10435,9 +10438,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BPOB7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BPOB7</span><a href="https://www.rava.com/perfil/BPOB7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BOPREAL USD - vto. 10/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOB7" data-close-price="157500.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.500,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.38%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOB7" data-close-price="157800.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.800,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.57%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.35%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.90</td>
@@ -10446,9 +10449,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BPOA8')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BPOA8</span><a href="https://www.rava.com/perfil/BPOA8" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BOPREAL USD - vto. 10/2028</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOA8" data-close-price="139900.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$139.900,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+1.44%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOA8" data-close-price="140000.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$140.000,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+1.52%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.99%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.05</td>
@@ -10457,9 +10460,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'BPOA7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BPOA7</span><a href="https://www.rava.com/perfil/BPOA7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BOPREAL USD - vto. 10/2027</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOA7" data-close-price="157010.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.010,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.39%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BPOA7" data-close-price="157600.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$157.600,00</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.77%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.91%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.91</td>
@@ -10598,9 +10601,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'lecaps', 'S30O6')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">S30O6</span><a href="https://www.rava.com/perfil/S30O6" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">LECAP Oct 30</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="S30O6" data-close-price="129.4">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$129,40</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.45%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="S30O6" data-close-price="129.44">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$129,44</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.49%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">73</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">1.92%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">23.72%</td>
@@ -10610,9 +10613,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'lecaps', 'S13N6')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">S13N6</span><a href="https://www.rava.com/perfil/S13N6" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">LECAP Nov 13</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="S13N6" data-close-price="103.53">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$103,53</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.18%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="S13N6" data-close-price="103.57">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$103,57</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.22%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">87</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.11%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">26.13%</td>
@@ -10622,9 +10625,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'lecaps', 'S30N6')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">S30N6</span><a href="https://www.rava.com/perfil/S30N6" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">LECAP Nov 30</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="S30N6" data-close-price="121.43">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$121,43</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.37%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="S30N6" data-close-price="121.48">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$121,48</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.42%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">104</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.05%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">25.64%</td>
@@ -10634,9 +10637,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'lecaps', 'T15E7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">T15E7</span><a href="https://www.rava.com/perfil/T15E7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BONCAP Ene 15/27</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T15E7" data-close-price="145.7">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$145,70</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.41%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T15E7" data-close-price="145.4">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$145,40</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.21%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">150</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.09%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">26.47%</td>
@@ -10646,9 +10649,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'lecaps', 'T30A7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">T30A7</span><a href="https://www.rava.com/perfil/T30A7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BONCAP Abr 30/27</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T30A7" data-close-price="131.71">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$131,71</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.13%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T30A7" data-close-price="131.85">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$131,85</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.24%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">255</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.13%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">28.13%</td>
@@ -10660,7 +10663,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BONCAP May 31/27</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T31Y7" data-close-price="124.3">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$124,30</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.16%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.16%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">286</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.14%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">28.49%</td>
@@ -10670,9 +10673,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'lecaps', 'T30J7')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">T30J7</span><a href="https://www.rava.com/perfil/T30J7" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">BONCAP Jun 30/27</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T30J7" data-close-price="125.9">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$125,90</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.08%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="T30J7" data-close-price="126.21">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$126,21</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.33%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">316</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">2.06%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">27.71%</td>
@@ -10763,9 +10766,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'MGCRD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MGCRD</span><a href="https://www.rava.com/perfil/MGCRD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 7.75% - vto. 11/2037</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MGCRD" data-close-price="107.2">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$107,20</td>
-                <td class="py-2.5 px-3 text-right font-bold text-slate-400">0.00%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MGCRD" data-close-price="107.25">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$107,25</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.05%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+4.86%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.12%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.41</td>
@@ -10774,9 +10777,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'PLC7D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PLC7D</span><a href="https://www.rava.com/perfil/PLC7D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 7.55% - vto. 09/2037</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PLC7D" data-close-price="104.65">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$104,65</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PLC7D" data-close-price="104.55">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$104,55</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.05%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+3.56%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.15%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.00</td>
@@ -10787,7 +10790,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 8.75% - vto. 09/2031</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="YMCXD" data-close-price="113.3">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$113,30</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.09%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.09%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+4.58%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.14%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.59</td>
@@ -10796,9 +10799,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'IRCPD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">IRCPD</span><a href="https://www.rava.com/perfil/IRCPD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 8.00% - vto. 03/2035</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IRCPD" data-close-price="110.15">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$110,15</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.45%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IRCPD" data-close-price="110.1">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$110,10</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.50%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+4.98%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.93%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.09</td>
@@ -10807,9 +10810,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'VSCXD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">VSCXD</span><a href="https://www.rava.com/perfil/VSCXD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 7.88% - vto. 04/2038</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VSCXD" data-close-price="110.15">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$110,15</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VSCXD" data-close-price="110.05">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$110,05</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.05%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+4.95%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.99%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.08</td>
@@ -10818,9 +10821,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'NPCDD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NPCDD</span><a href="https://www.rava.com/perfil/NPCDD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 6.00% - vto. 04/2030</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NPCDD" data-close-price="101.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$101,00</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.54%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NPCDD" data-close-price="101.15">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$101,15</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.39%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+2.00%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.09%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.22</td>
@@ -10831,7 +10834,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley NY - 8.50% - vto. 06/2033</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VSCVD" data-close-price="112.6">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$112,60</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.53%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.53%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+6.23%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">6.31%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">4.56</td>
@@ -10842,7 +10845,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 6.25% - vto. 02/2027</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="YM35D" data-close-price="101.8">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$101,80</td>
-                <td class="py-2.5 px-3 text-right font-bold text-emerald-500">+0.15%</td>
+                <td class="py-2.5 px-3 text-right font-bold text-emerald-500 font-bold">+0.15%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+1.59%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">4.68%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">0.52</td>
@@ -10851,9 +10854,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'bonds', 'MCC3D')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MCC3D</span><a href="https://www.rava.com/perfil/MCC3D" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700">Bono USD Ley Arg. - 7.50% - vto. 05/2030</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MCC3D" data-close-price="102.4">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$102,40</td>
-                <td class="py-2.5 px-3 text-right font-bold text-brandRed">-0.44%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MCC3D" data-close-price="102.7">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900">$102,70</td>
+                <td class="py-2.5 px-3 text-right font-bold text-rose-500 font-bold">-0.15%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">+2.90%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">7.37%</td>
                 <td class="py-2.5 px-3 text-right text-slate-400">3.15</td>
@@ -10990,9 +10993,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cedears', 'AAPL.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AAPL.BA</span><a href="https://www.rava.com/perfil/AAPL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="APPLE INC CEDEAR(REPR 1/20 SHR)">APPLE INC CEDEAR(REPR 1/20 SHR)</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL.BA" data-close-price="24520.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24.520,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.65%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL.BA" data-close-price="24600.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24.600,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.32%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.74%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+28.61%</td>
@@ -11004,9 +11007,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'NVDA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NVDA.BA</span><a href="https://www.rava.com/perfil/NVDA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NVIDIA CORP CEDEAR EACH 24 REP ">NVIDIA CORP CEDEAR EACH 24 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.35%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14260.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.260,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.49%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+25.37%</td>
@@ -11020,7 +11023,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MERCADOLIBRE INC CEDEAR EACH 12">MERCADOLIBRE INC CEDEAR EACH 12</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MELI.BA" data-close-price="25600.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.600,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.79%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.99%</td>
@@ -11032,9 +11035,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'MSFT.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MSFT.BA</span><a href="https://www.rava.com/perfil/MSFT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MICROSOFT CORP CEDEAR EACH 30 R">MICROSOFT CORP CEDEAR EACH 30 R</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT.BA" data-close-price="25520.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.520,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.47%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT.BA" data-close-price="25560.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.560,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.63%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+24.33%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+37.74%</td>
@@ -11046,9 +11049,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AMZN.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMZN.BA</span><a href="https://www.rava.com/perfil/AMZN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="AMAZON COM INC CEDEAR EACH 144 ">AMAZON COM INC CEDEAR EACH 144 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN.BA" data-close-price="2863.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.863,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.17%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN.BA" data-close-price="2868.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.868,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+39.88%</td>
@@ -11062,7 +11065,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ALPHABET INC CEDEAR EACH 58 REP">ALPHABET INC CEDEAR EACH 58 REP</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOGL.BA" data-close-price="9475.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.475,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.61%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.11%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+20.48%</td>
@@ -11074,9 +11077,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'META.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">META.BA</span><a href="https://www.rava.com/perfil/META" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="META PLATFORMS INC CEDEAR EA 24">META PLATFORMS INC CEDEAR EA 24</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="META.BA" data-close-price="36500.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$36.500,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="META.BA" data-close-price="36460.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$36.460,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
@@ -11088,9 +11091,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'TSLA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TSLA.BA</span><a href="https://www.rava.com/perfil/TSLA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="TESLA INC CEDEAR EACH 15 REP 1 ">TESLA INC CEDEAR EACH 15 REP 1 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSLA.BA" data-close-price="38600.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$38.600,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+6.10%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSLA.BA" data-close-price="38580.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$38.580,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+6.05%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.19%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.21%</td>
@@ -11102,9 +11105,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'LLY.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LLY.BA</span><a href="https://www.rava.com/perfil/LLY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ELI LILLY AND COMPANY CEDEAR EA">ELI LILLY AND COMPANY CEDEAR EA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY.BA" data-close-price="35660.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$35.660,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.13%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY.BA" data-close-price="35840.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$35.840,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.16%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+30.88%</td>
@@ -11116,9 +11119,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'WMT.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">WMT.BA</span><a href="https://www.rava.com/perfil/WMT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="WALMART INC CEDEAR EACH 18 REP ">WALMART INC CEDEAR EACH 18 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT.BA" data-close-price="9100.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.100,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.31%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT.BA" data-close-price="9105.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.105,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.25%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.29%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-9.50%</td>
@@ -11130,9 +11133,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'JPM.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">JPM.BA</span><a href="https://www.rava.com/perfil/JPM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="JPMORGAN CHASE & CO. CEDEAR EAC">JPMORGAN CHASE & CO. CEDEAR EAC</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPM.BA" data-close-price="37400.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$37.400,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.38%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPM.BA" data-close-price="37320.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$37.320,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.16%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.86%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+30.28%</td>
@@ -11144,9 +11147,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'V.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">V.BA</span><a href="https://www.rava.com/perfil/V" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="VISA INC CEDEARS (EACH 18 REP 1">VISA INC CEDEARS (EACH 18 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="V.BA" data-close-price="32720.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$32.720,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.36%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="V.BA" data-close-price="32700.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$32.700,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.30%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+4.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+31.54%</td>
@@ -11160,7 +11163,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PFIZER INC CEDEAR EACH 4 REP 1 ">PFIZER INC CEDEAR EACH 4 REP 1 </td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PFE.BA" data-close-price="11110.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.110,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.82%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.82%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.26%</td>
@@ -11172,9 +11175,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'BABA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BABA.BA</span><a href="https://www.rava.com/perfil/BABA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ALIBABA GROUP HOLDING LTD CEDEA">ALIBABA GROUP HOLDING LTD CEDEA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BABA.BA" data-close-price="21150.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.150,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-7.64%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BABA.BA" data-close-price="21140.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.140,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-7.69%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-6.42%</td>
@@ -11186,9 +11189,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'KO.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">KO.BA</span><a href="https://www.rava.com/perfil/KO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="COCA-COLA CO CEDEARS EACH 5  RE">COCA-COLA CO CEDEARS EACH 5  RE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KO.BA" data-close-price="28860.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$28.860,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KO.BA" data-close-price="28840.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$28.840,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.07%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+11.02%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+24.12%</td>
@@ -11200,9 +11203,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'PEP.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PEP.BA</span><a href="https://www.rava.com/perfil/PEP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PEPSICO INC CEDEAR EACH 18 REP ">PEPSICO INC CEDEAR EACH 18 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PEP.BA" data-close-price="12670.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$12.670,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.04%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PEP.BA" data-close-price="12620.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$12.620,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+5.56%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-6.56%</td>
@@ -11214,9 +11217,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'XOM.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XOM.BA</span><a href="https://www.rava.com/perfil/XOM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="EXXONMOBIL HOLDINGS CORPORATION">EXXONMOBIL HOLDINGS CORPORATION</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XOM.BA" data-close-price="26280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$26.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.30%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XOM.BA" data-close-price="26200.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$26.200,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+21.36%</td>
@@ -11228,9 +11231,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'NFLX.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NFLX.BA</span><a href="https://www.rava.com/perfil/NFLX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NETFLIX INC CEDEAR EACH 48 REP ">NETFLIX INC CEDEAR EACH 48 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NFLX.BA" data-close-price="2623.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.623,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.47%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NFLX.BA" data-close-price="2620.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.620,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.57%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+17.01%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+14.71%</td>
@@ -11242,9 +11245,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AMD.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMD.BA</span><a href="https://www.rava.com/perfil/AMD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ADVANCED MICRO DEVICES INC CEDE">ADVANCED MICRO DEVICES INC CEDE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD.BA" data-close-price="75000.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$75.000,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.08%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD.BA" data-close-price="74850.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$74.850,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.88%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-14.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+163.87%</td>
@@ -11256,9 +11259,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'VALE.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">VALE.BA</span><a href="https://www.rava.com/perfil/VALE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="VALE S.A. CEDEAR (EACH REP 0.5 ">VALE S.A. CEDEAR (EACH REP 0.5 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11610.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.610,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11570.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.570,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.76%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.78%</td>
@@ -11270,9 +11273,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'GLOB.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GLOB.BA</span><a href="https://www.rava.com/perfil/GLOB" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="GLOBANT SA CEDEAR EACH 18 REP 1">GLOBANT SA CEDEAR EACH 18 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3465.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.465,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.29%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3458.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.458,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+29.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.27%</td>
@@ -11284,9 +11287,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'CEPU.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CEPU.BA</span><a href="https://www.rava.com/perfil/CEPU" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="CENTRAL PUERTO SA">CENTRAL PUERTO SA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CEPU.BA" data-close-price="2070.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.070,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.92%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CEPU.BA" data-close-price="2077.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.077,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-15.76%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-11.39%</td>
@@ -11300,7 +11303,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="TENARIS S.A. CEDEAR EACH REPR 1">TENARIS S.A. CEDEAR EACH REPR 1</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TEN.BA" data-close-price="83500.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$83.500,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.15%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.15%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
@@ -11312,9 +11315,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'TXR.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TXR.BA</span><a href="https://www.rava.com/perfil/TXR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="TERNIUM SA CEDEAR EACH 4  REP 1">TERNIUM SA CEDEAR EACH 4  REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXR.BA" data-close-price="22100.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$22.100,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.27%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXR.BA" data-close-price="21980.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.980,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.71%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+17.39%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+37.53%</td>
@@ -11326,9 +11329,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'SPY.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SPY.BA</span><a href="https://www.rava.com/perfil/SPY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="STATE ST SPDR S&P 500 ETF TR CE">STATE ST SPDR S&P 500 ETF TR CE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPY.BA" data-close-price="20300.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$20.300,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.54%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPY.BA" data-close-price="20310.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$20.310,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.59%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+2.96%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.64%</td>
@@ -11340,9 +11343,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'QQQ.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">QQQ.BA</span><a href="https://www.rava.com/perfil/QQQ" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="INVESCO QQQ TRUST CEDEAR EACH 2">INVESCO QQQ TRUST CEDEAR EACH 2</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="QQQ.BA" data-close-price="56750.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$56.750,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.62%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="QQQ.BA" data-close-price="56725.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$56.725,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-1.31%</td>
@@ -11354,9 +11357,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'IWM.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">IWM.BA</span><a href="https://www.rava.com/perfil/IWM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ISHARES TRUST CEDEAR EACH 10 RE">ISHARES TRUST CEDEAR EACH 10 RE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IWM.BA" data-close-price="47740.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$47.740,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.19%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IWM.BA" data-close-price="47600.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$47.600,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.89%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.92%</td>
@@ -11368,9 +11371,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'DIA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">DIA.BA</span><a href="https://www.rava.com/perfil/DIA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="STATE ST SPDR DOW JONES INDL CE">STATE ST SPDR DOW JONES INDL CE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DIA.BA" data-close-price="42260.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$42.260,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.96%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DIA.BA" data-close-price="42360.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$42.360,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.19%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+2.30%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-2.06%</td>
@@ -11408,9 +11411,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cedears', 'AMD.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMD.BA</span><a href="https://www.rava.com/perfil/AMD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ADVANCED MICRO DEVICES INC CEDE">ADVANCED MICRO DEVICES INC CEDE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD.BA" data-close-price="75000.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$75.000,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.08%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD.BA" data-close-price="74850.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$74.850,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.88%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-14.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+163.87%</td>
@@ -11424,7 +11427,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MERCADOLIBRE INC CEDEAR EACH 12">MERCADOLIBRE INC CEDEAR EACH 12</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MELI.BA" data-close-price="25600.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.600,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.79%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.99%</td>
@@ -11436,9 +11439,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'NVDA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NVDA.BA</span><a href="https://www.rava.com/perfil/NVDA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NVIDIA CORP CEDEAR EACH 24 REP ">NVIDIA CORP CEDEAR EACH 24 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.35%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14260.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.260,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.49%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+25.37%</td>
@@ -11450,9 +11453,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AMZN.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMZN.BA</span><a href="https://www.rava.com/perfil/AMZN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="AMAZON COM INC CEDEAR EACH 144 ">AMAZON COM INC CEDEAR EACH 144 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN.BA" data-close-price="2863.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.863,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.17%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN.BA" data-close-price="2868.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.868,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+39.88%</td>
@@ -11466,7 +11469,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ALPHABET INC CEDEAR EACH 58 REP">ALPHABET INC CEDEAR EACH 58 REP</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOGL.BA" data-close-price="9475.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.475,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.61%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.11%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+20.48%</td>
@@ -11478,9 +11481,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'META.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">META.BA</span><a href="https://www.rava.com/perfil/META" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="META PLATFORMS INC CEDEAR EA 24">META PLATFORMS INC CEDEAR EA 24</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="META.BA" data-close-price="36500.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$36.500,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="META.BA" data-close-price="36460.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$36.460,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
@@ -11492,9 +11495,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'TSLA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TSLA.BA</span><a href="https://www.rava.com/perfil/TSLA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="TESLA INC CEDEAR EACH 15 REP 1 ">TESLA INC CEDEAR EACH 15 REP 1 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSLA.BA" data-close-price="38600.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$38.600,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+6.10%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSLA.BA" data-close-price="38580.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$38.580,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+6.05%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.19%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.21%</td>
@@ -11506,9 +11509,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AAPL.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AAPL.BA</span><a href="https://www.rava.com/perfil/AAPL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="APPLE INC CEDEAR(REPR 1/20 SHR)">APPLE INC CEDEAR(REPR 1/20 SHR)</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL.BA" data-close-price="24520.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24.520,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.65%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL.BA" data-close-price="24600.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24.600,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.32%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.74%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+28.61%</td>
@@ -11520,9 +11523,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'MSFT.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MSFT.BA</span><a href="https://www.rava.com/perfil/MSFT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MICROSOFT CORP CEDEAR EACH 30 R">MICROSOFT CORP CEDEAR EACH 30 R</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT.BA" data-close-price="25520.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.520,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.47%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT.BA" data-close-price="25560.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.560,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.63%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+24.33%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+37.74%</td>
@@ -11534,9 +11537,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'LLY.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LLY.BA</span><a href="https://www.rava.com/perfil/LLY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ELI LILLY AND COMPANY CEDEAR EA">ELI LILLY AND COMPANY CEDEAR EA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY.BA" data-close-price="35660.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$35.660,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.13%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY.BA" data-close-price="35840.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$35.840,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.16%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+30.88%</td>
@@ -11574,9 +11577,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cedears', 'CRWD.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CRWD.BA</span><a href="https://www.rava.com/perfil/CRWD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="CROWDSTRIKE HOLDINGS INC CEDEAR">CROWDSTRIKE HOLDINGS INC CEDEAR</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CRWD.BA" data-close-price="3835.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.835,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.52%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CRWD.BA" data-close-price="3840.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.840,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.66%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+0.59%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-9.76%</td>
@@ -11588,9 +11591,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'GLOB.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GLOB.BA</span><a href="https://www.rava.com/perfil/GLOB" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="GLOBANT SA CEDEAR EACH 18 REP 1">GLOBANT SA CEDEAR EACH 18 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3465.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.465,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.29%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3458.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.458,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+29.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.27%</td>
@@ -11602,9 +11605,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'VALE.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">VALE.BA</span><a href="https://www.rava.com/perfil/VALE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="VALE S.A. CEDEAR (EACH REP 0.5 ">VALE S.A. CEDEAR (EACH REP 0.5 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11610.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.610,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11570.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.570,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.76%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.78%</td>
@@ -11616,9 +11619,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'BABA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BABA.BA</span><a href="https://www.rava.com/perfil/BABA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ALIBABA GROUP HOLDING LTD CEDEA">ALIBABA GROUP HOLDING LTD CEDEA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BABA.BA" data-close-price="21150.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.150,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-7.64%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BABA.BA" data-close-price="21140.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.140,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-7.69%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-6.42%</td>
@@ -11632,7 +11635,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PFIZER INC CEDEAR EACH 4 REP 1 ">PFIZER INC CEDEAR EACH 4 REP 1 </td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PFE.BA" data-close-price="11110.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.110,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.82%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.82%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.26%</td>
@@ -11644,9 +11647,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'KO.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">KO.BA</span><a href="https://www.rava.com/perfil/KO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="COCA-COLA CO CEDEARS EACH 5  RE">COCA-COLA CO CEDEARS EACH 5  RE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KO.BA" data-close-price="28860.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$28.860,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KO.BA" data-close-price="28840.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$28.840,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.07%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+11.02%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+24.12%</td>
@@ -11658,9 +11661,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'PEP.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PEP.BA</span><a href="https://www.rava.com/perfil/PEP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PEPSICO INC CEDEAR EACH 18 REP ">PEPSICO INC CEDEAR EACH 18 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PEP.BA" data-close-price="12670.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$12.670,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.04%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PEP.BA" data-close-price="12620.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$12.620,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+5.56%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-6.56%</td>
@@ -11672,9 +11675,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'XOM.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XOM.BA</span><a href="https://www.rava.com/perfil/XOM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="EXXONMOBIL HOLDINGS CORPORATION">EXXONMOBIL HOLDINGS CORPORATION</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XOM.BA" data-close-price="26280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$26.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.30%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XOM.BA" data-close-price="26200.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$26.200,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+21.36%</td>
@@ -11688,7 +11691,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="CHEVRON CORPORATION CEDEAR EACH">CHEVRON CORPORATION CEDEAR EACH</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CVX.BA" data-close-price="20400.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$20.400,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.20%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.20%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.98%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+22.76%</td>
@@ -11726,9 +11729,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cedears', 'NVDA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NVDA.BA</span><a href="https://www.rava.com/perfil/NVDA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NVIDIA CORP CEDEAR EACH 24 REP ">NVIDIA CORP CEDEAR EACH 24 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.35%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14260.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.260,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.49%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+25.37%</td>
@@ -11740,9 +11743,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'LLY.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LLY.BA</span><a href="https://www.rava.com/perfil/LLY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ELI LILLY AND COMPANY CEDEAR EA">ELI LILLY AND COMPANY CEDEAR EA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY.BA" data-close-price="35660.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$35.660,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.13%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY.BA" data-close-price="35840.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$35.840,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.16%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+30.88%</td>
@@ -11754,9 +11757,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'WMT.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">WMT.BA</span><a href="https://www.rava.com/perfil/WMT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="WALMART INC CEDEAR EACH 18 REP ">WALMART INC CEDEAR EACH 18 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT.BA" data-close-price="9100.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.100,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.31%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT.BA" data-close-price="9105.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.105,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.25%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.29%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-9.50%</td>
@@ -11768,9 +11771,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'JPM.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">JPM.BA</span><a href="https://www.rava.com/perfil/JPM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="JPMORGAN CHASE & CO. CEDEAR EAC">JPMORGAN CHASE & CO. CEDEAR EAC</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPM.BA" data-close-price="37400.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$37.400,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.38%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPM.BA" data-close-price="37320.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$37.320,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.16%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.86%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+30.28%</td>
@@ -11782,9 +11785,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'COST.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">COST.BA</span><a href="https://www.rava.com/perfil/COST" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="COSTCO WHOLESALE CORP CEDEAR EA">COSTCO WHOLESALE CORP CEDEAR EA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="COST.BA" data-close-price="31340.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$31.340,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.36%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="COST.BA" data-close-price="31260.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$31.260,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.10%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.91%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+4.46%</td>
@@ -11798,7 +11801,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MASTERCARD INCORPORATED CEDEAR ">MASTERCARD INCORPORATED CEDEAR </td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MA.BA" data-close-price="27940.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$27.940,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.23%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.23%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
@@ -11810,9 +11813,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'V.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">V.BA</span><a href="https://www.rava.com/perfil/V" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="VISA INC CEDEARS (EACH 18 REP 1">VISA INC CEDEARS (EACH 18 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="V.BA" data-close-price="32720.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$32.720,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.36%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="V.BA" data-close-price="32700.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$32.700,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.30%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+4.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+31.54%</td>
@@ -11826,7 +11829,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="HOME DEPOT INC CEDEAR EACH 32 R">HOME DEPOT INC CEDEAR EACH 32 R</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HD.BA" data-close-price="16700.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$16.700,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.97%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.97%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.60%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-2.99%</td>
@@ -11852,9 +11855,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'PG.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PG.BA</span><a href="https://www.rava.com/perfil/PG" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PROCTER & GAMBLE CO CEDEAR EACH">PROCTER & GAMBLE CO CEDEAR EACH</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PG.BA" data-close-price="15390.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15.390,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.52%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PG.BA" data-close-price="15370.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15.370,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.39%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.01%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.29%</td>
@@ -11894,7 +11897,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PFIZER INC CEDEAR EACH 4 REP 1 ">PFIZER INC CEDEAR EACH 4 REP 1 </td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PFE.BA" data-close-price="11110.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.110,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.82%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.82%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.26%</td>
@@ -11906,9 +11909,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'BABA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BABA.BA</span><a href="https://www.rava.com/perfil/BABA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ALIBABA GROUP HOLDING LTD CEDEA">ALIBABA GROUP HOLDING LTD CEDEA</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BABA.BA" data-close-price="21150.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.150,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-7.64%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BABA.BA" data-close-price="21140.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$21.140,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-7.69%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-6.42%</td>
@@ -11920,9 +11923,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'VALE.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">VALE.BA</span><a href="https://www.rava.com/perfil/VALE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="VALE S.A. CEDEAR (EACH REP 0.5 ">VALE S.A. CEDEAR (EACH REP 0.5 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11610.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.610,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11570.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.570,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.76%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.78%</td>
@@ -11934,9 +11937,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'INTC.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">INTC.BA</span><a href="https://www.rava.com/perfil/INTC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="INTEL CORP CEDEARS (EACH 5 REP ">INTEL CORP CEDEARS (EACH 5 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INTC.BA" data-close-price="28780.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$28.780,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-1.77%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INTC.BA" data-close-price="28720.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$28.720,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.98%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-9.62%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+134.96%</td>
@@ -11948,9 +11951,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'BA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BA.BA</span><a href="https://www.rava.com/perfil/BA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="BOEING CO CEDEAR EACH 24 REP 1">BOEING CO CEDEAR EACH 24 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BA.BA" data-close-price="14180.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.180,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BA.BA" data-close-price="14160.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.160,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.89%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+2.39%</td>
@@ -11962,9 +11965,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'PYPL.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PYPL.BA</span><a href="https://www.rava.com/perfil/PYPL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="PAYPAL HOLDINGS INC CEDEAR EACH">PAYPAL HOLDINGS INC CEDEAR EACH</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PYPL.BA" data-close-price="12220.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$12.220,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-1.29%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PYPL.BA" data-close-price="12240.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$12.240,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.13%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+56.12%</td>
@@ -11976,9 +11979,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'NKE.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NKE.BA</span><a href="https://www.rava.com/perfil/NKE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NIKE INC CEDEAR EACH 12 REP 1 C">NIKE INC CEDEAR EACH 12 REP 1 C</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NKE.BA" data-close-price="5370.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$5.370,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.94%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NKE.BA" data-close-price="5360.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$5.360,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.45%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-29.72%</td>
@@ -11990,9 +11993,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'GLOB.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GLOB.BA</span><a href="https://www.rava.com/perfil/GLOB" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="GLOBANT SA CEDEAR EACH 18 REP 1">GLOBANT SA CEDEAR EACH 18 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3465.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.465,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.29%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3458.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.458,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+29.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.27%</td>
@@ -12004,9 +12007,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'NIO.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NIO.BA</span><a href="https://www.rava.com/perfil/NIO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NIO INC CEDEAR EACH 4 REP 1 ADR">NIO INC CEDEAR EACH 4 REP 1 ADR</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NIO.BA" data-close-price="1845.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.845,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+2.39%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NIO.BA" data-close-price="1843.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.843,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.28%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">0.00%</td>
@@ -12044,9 +12047,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cedears', 'GLOB.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GLOB.BA</span><a href="https://www.rava.com/perfil/GLOB" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="GLOBANT SA CEDEAR EACH 18 REP 1">GLOBANT SA CEDEAR EACH 18 REP 1</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3465.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.465,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.29%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLOB.BA" data-close-price="3458.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3.458,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+29.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.27%</td>
@@ -12058,9 +12061,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'VALE.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">VALE.BA</span><a href="https://www.rava.com/perfil/VALE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="VALE S.A. CEDEAR (EACH REP 0.5 ">VALE S.A. CEDEAR (EACH REP 0.5 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11610.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.610,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALE.BA" data-close-price="11570.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11.570,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.76%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.78%</td>
@@ -12072,9 +12075,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AMD.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMD.BA</span><a href="https://www.rava.com/perfil/AMD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ADVANCED MICRO DEVICES INC CEDE">ADVANCED MICRO DEVICES INC CEDE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD.BA" data-close-price="75000.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$75.000,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.08%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD.BA" data-close-price="74850.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$74.850,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.88%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-14.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+163.87%</td>
@@ -12086,9 +12089,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AAPL.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AAPL.BA</span><a href="https://www.rava.com/perfil/AAPL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="APPLE INC CEDEAR(REPR 1/20 SHR)">APPLE INC CEDEAR(REPR 1/20 SHR)</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL.BA" data-close-price="24520.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24.520,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.65%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL.BA" data-close-price="24600.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24.600,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.32%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-3.74%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+28.61%</td>
@@ -12100,9 +12103,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'NVDA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NVDA.BA</span><a href="https://www.rava.com/perfil/NVDA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NVIDIA CORP CEDEAR EACH 24 REP ">NVIDIA CORP CEDEAR EACH 24 REP </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14280.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.280,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.35%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA.BA" data-close-price="14260.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14.260,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.49%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+25.37%</td>
@@ -12116,7 +12119,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MERCADOLIBRE INC CEDEAR EACH 12">MERCADOLIBRE INC CEDEAR EACH 12</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MELI.BA" data-close-price="25600.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.600,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.79%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.99%</td>
@@ -12128,9 +12131,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'MSFT.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MSFT.BA</span><a href="https://www.rava.com/perfil/MSFT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MICROSOFT CORP CEDEAR EACH 30 R">MICROSOFT CORP CEDEAR EACH 30 R</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT.BA" data-close-price="25520.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.520,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.47%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT.BA" data-close-price="25560.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$25.560,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.63%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+24.33%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+37.74%</td>
@@ -12142,9 +12145,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'AMZN.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMZN.BA</span><a href="https://www.rava.com/perfil/AMZN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="AMAZON COM INC CEDEAR EACH 144 ">AMAZON COM INC CEDEAR EACH 144 </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN.BA" data-close-price="2863.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.863,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.17%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN.BA" data-close-price="2868.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2.868,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+39.88%</td>
@@ -12158,7 +12161,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ALPHABET INC CEDEAR EACH 58 REP">ALPHABET INC CEDEAR EACH 58 REP</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOGL.BA" data-close-price="9475.0">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9.475,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.61%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.11%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+20.48%</td>
@@ -12170,9 +12173,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cedears', 'SPY.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SPY.BA</span><a href="https://www.rava.com/perfil/SPY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="STATE ST SPDR S&P 500 ETF TR CE">STATE ST SPDR S&P 500 ETF TR CE</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPY.BA" data-close-price="20300.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$20.300,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.54%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPY.BA" data-close-price="20310.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$20.310,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.59%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+2.96%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.64%</td>
@@ -15562,9 +15565,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'stocks', 'NVDA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NVDA</span><a href="https://finance.yahoo.com/quote/NVDA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NVIDIA Corporation">NVIDIA Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA" data-close-price="215.19">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$215,19</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.77%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA" data-close-price="215.1">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$215,10</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+2.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+14.24%</td>
@@ -15576,9 +15579,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AAPL')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AAPL</span><a href="https://finance.yahoo.com/quote/AAPL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Apple Inc.">Apple Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL" data-close-price="308.565">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$308,56</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.88%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AAPL" data-close-price="309.55">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$309,55</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.56%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.48%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+17.66%</td>
@@ -15590,9 +15593,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'GOOGL')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GOOGL</span><a href="https://finance.yahoo.com/quote/GOOGL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Alphabet Inc.">Alphabet Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOGL" data-close-price="344.915">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$344,92</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.25%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOGL" data-close-price="345.44">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$345,44</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.40%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.16%</td>
@@ -15604,9 +15607,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'GOOG')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GOOG</span><a href="https://finance.yahoo.com/quote/GOOG" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Alphabet Inc.">Alphabet Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOG" data-close-price="341.94">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$341,94</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GOOG" data-close-price="342.49">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$342,49</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.27%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-1.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.40%</td>
@@ -15618,9 +15621,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'MSFT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MSFT</span><a href="https://finance.yahoo.com/quote/MSFT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Microsoft Corporation">Microsoft Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT" data-close-price="482.195">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$482,19</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.22%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSFT" data-close-price="483.23">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$483,23</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.43%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+21.13%</td>
@@ -15632,9 +15635,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AMZN')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMZN</span><a href="https://finance.yahoo.com/quote/AMZN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Amazon.com, Inc.">Amazon.com, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN" data-close-price="258.755">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$258,75</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.52%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMZN" data-close-price="259.45">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$259,45</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.25%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+6.23%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.80%</td>
@@ -15646,9 +15649,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'TSM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TSM</span><a href="https://finance.yahoo.com/quote/TSM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Taiwan Semiconductor Manufactur">Taiwan Semiconductor Manufactur</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSM" data-close-price="419.21">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$419,21</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.77%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSM" data-close-price="419.09">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$419,09</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.74%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-1.24%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.27%</td>
@@ -15660,9 +15663,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SPCX')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SPCX</span><a href="https://finance.yahoo.com/quote/SPCX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Space Exploration Technologies ">Space Exploration Technologies </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPCX" data-close-price="136.11">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$136,11</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.57%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPCX" data-close-price="136.21">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$136,21</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.65%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+16.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+11.81%</td>
@@ -15674,9 +15677,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AVGO')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AVGO</span><a href="https://finance.yahoo.com/quote/AVGO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Broadcom Inc.">Broadcom Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AVGO" data-close-price="366.375">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$366,38</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.64%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AVGO" data-close-price="367.65">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$367,65</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-8.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+9.43%</td>
@@ -15688,9 +15691,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'META')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">META</span><a href="https://finance.yahoo.com/quote/META" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Meta Platforms, Inc.">Meta Platforms, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="META" data-close-price="550.07">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$550,07</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.78%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="META" data-close-price="550.77">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$550,77</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.91%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-12.97%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-16.75%</td>
@@ -15702,9 +15705,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'TSLA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TSLA</span><a href="https://finance.yahoo.com/quote/TSLA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Tesla, Inc.">Tesla, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSLA" data-close-price="364.43">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$364,43</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+5.59%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TSLA" data-close-price="364.64">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$364,64</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+5.65%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.72%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-16.19%</td>
@@ -15716,9 +15719,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SKHY')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SKHY</span><a href="https://finance.yahoo.com/quote/SKHY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="SK hynix Inc.">SK hynix Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SKHY" data-close-price="163.64">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$163,64</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.34%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SKHY" data-close-price="163.66">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$163,66</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.36%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-1.33%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.46%</td>
@@ -15730,9 +15733,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'LLY')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LLY</span><a href="https://finance.yahoo.com/quote/LLY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Eli Lilly and Company">Eli Lilly and Company</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY" data-close-price="1256.953">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.256,95</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.01%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LLY" data-close-price="1259.51">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.259,51</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.21%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.27%</td>
@@ -15744,9 +15747,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'BRK-B')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BRK-B</span><a href="https://finance.yahoo.com/quote/BRK-B" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Berkshire Hathaway Inc. New">Berkshire Hathaway Inc. New</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BRK-B" data-close-price="497.595">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$497,60</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.15%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BRK-B" data-close-price="497.07">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$497,07</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.04%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.53%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.27%</td>
@@ -15758,9 +15761,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'BRK-A')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BRK-A</span><a href="https://finance.yahoo.com/quote/BRK-A" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Berkshire Hathaway Inc.">Berkshire Hathaway Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BRK-A" data-close-price="746630.8">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$746.630,80</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.27%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BRK-A" data-close-price="746439.81">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$746.439,81</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.25%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+1.62%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.25%</td>
@@ -15772,9 +15775,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'JPM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">JPM</span><a href="https://finance.yahoo.com/quote/JPM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="JP Morgan Chase & Co.">JP Morgan Chase & Co.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPM" data-close-price="351.94">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$351,94</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.11%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JPM" data-close-price="352.45">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$352,45</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+0.96%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.11%</td>
@@ -15786,9 +15789,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'WMT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">WMT</span><a href="https://finance.yahoo.com/quote/WMT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Walmart Inc.">Walmart Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT" data-close-price="102.97">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$102,97</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.60%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT" data-close-price="103.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$103,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-5.02%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-15.57%</td>
@@ -15800,9 +15803,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AMD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AMD</span><a href="https://finance.yahoo.com/quote/AMD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Advanced Micro Devices, Inc.">Advanced Micro Devices, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD" data-close-price="471.8">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$471,80</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.50%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AMD" data-close-price="471.29">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$471,29</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.39%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-15.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+134.55%</td>
@@ -15814,9 +15817,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'XOM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XOM</span><a href="https://finance.yahoo.com/quote/XOM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ExxonMobil Holdings Corporation">ExxonMobil Holdings Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XOM" data-close-price="165.375">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$165,38</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.47%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XOM" data-close-price="164.88">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$164,88</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.76%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.81%</td>
@@ -15828,9 +15831,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'V')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">V</span><a href="https://finance.yahoo.com/quote/V" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Visa Inc.">Visa Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="V" data-close-price="369.88">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$369,88</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.13%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="V" data-close-price="370.75">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$370,75</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.37%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.48%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.95%</td>
@@ -15842,9 +15845,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ASML')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ASML</span><a href="https://finance.yahoo.com/quote/ASML" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ASML Holding N.V. - New York Re">ASML Holding N.V. - New York Re</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ASML" data-close-price="1765.825">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.765,83</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.89%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ASML" data-close-price="1769.1">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.769,10</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.07%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-2.86%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+19.10%</td>
@@ -15856,9 +15859,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'JNJ')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">JNJ</span><a href="https://finance.yahoo.com/quote/JNJ" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Johnson & Johnson">Johnson & Johnson</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JNJ" data-close-price="271.11">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$271,11</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.40%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="JNJ" data-close-price="271.38">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$271,38</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+4.59%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+10.26%</td>
@@ -15870,9 +15873,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'MA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MA</span><a href="https://finance.yahoo.com/quote/MA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Mastercard Incorporated">Mastercard Incorporated</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MA" data-close-price="579.1">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$579,10</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.91%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MA" data-close-price="580.07">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$580,07</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.08%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.87%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+9.01%</td>
@@ -15884,9 +15887,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'INTC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">INTC</span><a href="https://finance.yahoo.com/quote/INTC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Intel Corporation">Intel Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INTC" data-close-price="90.405">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$90,41</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-1.87%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INTC" data-close-price="90.19">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$90,19</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-2.11%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-10.22%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+108.86%</td>
@@ -15898,9 +15901,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ABBV')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ABBV</span><a href="https://finance.yahoo.com/quote/ABBV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="AbbVie Inc.">AbbVie Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ABBV" data-close-price="265.875">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$265,88</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.54%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ABBV" data-close-price="265.77">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$265,77</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+3.37%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+16.47%</td>
@@ -15912,9 +15915,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'HOWL')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">HOWL</span><a href="https://finance.yahoo.com/quote/HOWL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Werewolf Therapeutics, Inc.">Werewolf Therapeutics, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HOWL" data-close-price="0.896">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="HOWL" data-close-price="0.9">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$0,90</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+107.79%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+109.37%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+18.08%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-35.67%</td>
@@ -15926,9 +15929,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SUGP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SUGP</span><a href="https://finance.yahoo.com/quote/SUGP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="SU Group Holdings Limited">SU Group Holdings Limited</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SUGP" data-close-price="1.795">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1,79</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-35.32%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SUGP" data-close-price="1.59">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1,59</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-42.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+5.51%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-90.24%</td>
@@ -15976,9 +15979,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'stocks', 'MARA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MARA</span><a href="https://finance.yahoo.com/quote/MARA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MARA Holdings, Inc.">MARA Holdings, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MARA" data-close-price="11.205">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,21</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.49%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MARA" data-close-price="11.14">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,14</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-10.15%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+39.90%</td>
@@ -15990,9 +15993,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'IOVA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">IOVA</span><a href="https://finance.yahoo.com/quote/IOVA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Iovance Biotherapeutics, Inc.">Iovance Biotherapeutics, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IOVA" data-close-price="8.185">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$8,19</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-8.95%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IOVA" data-close-price="8.27">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$8,27</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-7.95%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+73.89%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+213.24%</td>
@@ -16004,9 +16007,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ANDG')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ANDG</span><a href="https://finance.yahoo.com/quote/ANDG" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Andersen Group Inc.">Andersen Group Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ANDG" data-close-price="50.21">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$50,21</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.22%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ANDG" data-close-price="49.88">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$49,88</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.87%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+21.49%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+44.39%</td>
@@ -16018,9 +16021,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'XXI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XXI</span><a href="https://finance.yahoo.com/quote/XXI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Twenty One Capital, Inc.">Twenty One Capital, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XXI" data-close-price="6.47">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$6,47</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+4.52%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XXI" data-close-price="6.43">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$6,43</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+3.89%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.31%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+0.65%</td>
@@ -16032,9 +16035,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'LIME')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LIME</span><a href="https://finance.yahoo.com/quote/LIME" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Neutron Holdings, Inc.">Neutron Holdings, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LIME" data-close-price="41.65">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$41,65</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.90%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LIME" data-close-price="41.24">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$41,24</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.89%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+59.93%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+56.30%</td>
@@ -16046,9 +16049,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ALM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ALM</span><a href="https://finance.yahoo.com/quote/ALM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Almonty Industries Inc.">Almonty Industries Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ALM" data-close-price="18.83">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$18,83</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+6.44%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ALM" data-close-price="18.68">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$18,68</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+5.60%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+20.01%</td>
@@ -16060,9 +16063,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'TEM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TEM</span><a href="https://finance.yahoo.com/quote/TEM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Tempus AI, Inc.">Tempus AI, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TEM" data-close-price="71.2">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$71,20</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+6.83%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TEM" data-close-price="72.09">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$72,09</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+8.16%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+41.93%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+14.19%</td>
@@ -16074,9 +16077,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'STDN')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">STDN</span><a href="https://finance.yahoo.com/quote/STDN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Standard Nuclear, Inc.">Standard Nuclear, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="STDN" data-close-price="13.13">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$13,13</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.23%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="STDN" data-close-price="13.07">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$13,07</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+0.77%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+34.40%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+54.22%</td>
@@ -16088,9 +16091,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'BTDR')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BTDR</span><a href="https://finance.yahoo.com/quote/BTDR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Bitdeer Technologies Group">Bitdeer Technologies Group</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTDR" data-close-price="11.12">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,12</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+6.62%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTDR" data-close-price="11.37">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,37</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+9.01%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-14.93%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+34.06%</td>
@@ -16102,9 +16105,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'CIFR')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CIFR</span><a href="https://finance.yahoo.com/quote/CIFR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Cipher Digital Inc.">Cipher Digital Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CIFR" data-close-price="15.795">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,79</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-8.22%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CIFR" data-close-price="15.77">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,77</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-8.40%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-29.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+17.47%</td>
@@ -16152,9 +16155,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'stocks', 'MRNA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MRNA</span><a href="https://finance.yahoo.com/quote/MRNA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Moderna, Inc.">Moderna, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MRNA" data-close-price="140.32">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$140,32</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+5.25%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MRNA" data-close-price="148.88">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$148,88</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+11.67%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+129.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+167.34%</td>
@@ -16166,9 +16169,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AADX')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AADX</span><a href="https://finance.yahoo.com/quote/AADX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Applied Aerospace & Defense, In">Applied Aerospace & Defense, In</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AADX" data-close-price="15.43">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,43</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.45%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AADX" data-close-price="15.02">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,02</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-3.13%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-10.35%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-19.40%</td>
@@ -16180,9 +16183,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'EROC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">EROC</span><a href="https://finance.yahoo.com/quote/EROC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ERock, Inc.">ERock, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EROC" data-close-price="14.145">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14,14</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+8.72%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EROC" data-close-price="14.35">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14,35</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+10.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+5.60%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+20.35%</td>
@@ -16194,9 +16197,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'WMT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">WMT</span><a href="https://finance.yahoo.com/quote/WMT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Walmart Inc.">Walmart Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT" data-close-price="102.97">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$102,97</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.60%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT" data-close-price="103.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$103,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-5.02%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-15.57%</td>
@@ -16208,9 +16211,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'INIO')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">INIO</span><a href="https://finance.yahoo.com/quote/INIO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="INNIO N.V.">INNIO N.V.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INIO" data-close-price="23.21">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$23,21</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.91%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INIO" data-close-price="23.23">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$23,23</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-16.18%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-17.92%</td>
@@ -16222,9 +16225,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'RH')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">RH</span><a href="https://finance.yahoo.com/quote/RH" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="RH">RH</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RH" data-close-price="155.0">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$155,00</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.90%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="RH" data-close-price="154.49">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$154,49</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.23%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-10.67%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-24.71%</td>
@@ -16236,9 +16239,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'XE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XE</span><a href="https://finance.yahoo.com/quote/XE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="X-Energy, Inc.">X-Energy, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XE" data-close-price="18.93">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$18,93</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.50%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XE" data-close-price="18.95">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$18,95</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+3.61%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+11.19%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-4.24%</td>
@@ -16250,9 +16253,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SEI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SEI</span><a href="https://finance.yahoo.com/quote/SEI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Solaris Energy Infrastructure, ">Solaris Energy Infrastructure, </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SEI" data-close-price="53.735">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$53,73</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.93%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SEI" data-close-price="53.29">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$53,29</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-13.96%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+10.15%</td>
@@ -16264,9 +16267,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'KC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">KC</span><a href="https://finance.yahoo.com/quote/KC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Kingsoft Cloud Holdings Limited">Kingsoft Cloud Holdings Limited</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KC" data-close-price="11.185">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,19</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-2.06%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="KC" data-close-price="11.2">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,20</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.92%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+17.01%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-17.43%</td>
@@ -16278,9 +16281,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AVAV')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AVAV</span><a href="https://finance.yahoo.com/quote/AVAV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="AeroVironment, Inc.">AeroVironment, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AVAV" data-close-price="160.97">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$160,97</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.74%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AVAV" data-close-price="161.48">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$161,48</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.06%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+6.28%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-39.62%</td>
@@ -16328,9 +16331,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'stocks', 'SNDK')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SNDK</span><a href="https://finance.yahoo.com/quote/SNDK" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Sandisk Corporation">Sandisk Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SNDK" data-close-price="1602.85">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.602,85</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.14%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SNDK" data-close-price="1600.42">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1.600,42</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.01%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+0.08%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+146.26%</td>
@@ -16342,9 +16345,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'AXTI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">AXTI</span><a href="https://finance.yahoo.com/quote/AXTI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="AXT Inc">AXT Inc</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AXTI" data-close-price="69.42">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$69,42</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-5.06%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="AXTI" data-close-price="69.83">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$69,83</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-4.50%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+38.01%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+146.36%</td>
@@ -16356,9 +16359,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'BVC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BVC</span><a href="https://finance.yahoo.com/quote/BVC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="BitVentures Limited">BitVentures Limited</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BVC" data-close-price="15.536">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,54</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+15.77%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BVC" data-close-price="15.4">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,40</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+14.75%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.35%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+78.46%</td>
@@ -16370,9 +16373,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ERAS')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ERAS</span><a href="https://finance.yahoo.com/quote/ERAS" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Erasca, Inc.">Erasca, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ERAS" data-close-price="17.455">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$17,45</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+2.20%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ERAS" data-close-price="17.61">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$17,61</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+3.10%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-12.46%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+36.20%</td>
@@ -16384,9 +16387,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'PRAX')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PRAX</span><a href="https://finance.yahoo.com/quote/PRAX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Praxis Precision Medicines, Inc">Praxis Precision Medicines, Inc</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PRAX" data-close-price="377.64">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$377,64</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.58%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PRAX" data-close-price="378.7">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$378,70</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+3.87%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+16.82%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.74%</td>
@@ -16398,9 +16401,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'LITE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LITE</span><a href="https://finance.yahoo.com/quote/LITE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Lumentum Holdings Inc.">Lumentum Holdings Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LITE" data-close-price="870.915">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$870,91</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.95%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LITE" data-close-price="868.61">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$868,61</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.21%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+5.98%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+31.67%</td>
@@ -16412,9 +16415,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SLS')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SLS</span><a href="https://finance.yahoo.com/quote/SLS" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="SELLAS Life Sciences Group, Inc">SELLAS Life Sciences Group, Inc</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SLS" data-close-price="15.42">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,42</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+15.07%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SLS" data-close-price="15.45">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$15,45</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+15.28%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+10.93%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+222.89%</td>
@@ -16426,9 +16429,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ORKA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ORKA</span><a href="https://finance.yahoo.com/quote/ORKA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Oruka Therapeutics, Inc.">Oruka Therapeutics, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ORKA" data-close-price="108.78">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$108,78</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.74%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ORKA" data-close-price="107.94">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$107,94</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.94%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+13.33%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+224.24%</td>
@@ -16440,9 +16443,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'CHRN')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CHRN</span><a href="https://finance.yahoo.com/quote/CHRN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="ChronoScale Holdings Corporatio">ChronoScale Holdings Corporatio</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CHRN" data-close-price="24.02">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24,02</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.33%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CHRN" data-close-price="24.05">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$24,05</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.21%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-5.64%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+115.56%</td>
@@ -16454,9 +16457,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SYRE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SYRE</span><a href="https://finance.yahoo.com/quote/SYRE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Spyre Therapeutics, Inc.">Spyre Therapeutics, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SYRE" data-close-price="107.12">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$107,12</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.62%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SYRE" data-close-price="106.58">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$106,58</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.12%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+8.69%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+149.46%</td>
@@ -16504,9 +16507,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'stocks', 'TDTH')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TDTH</span><a href="https://finance.yahoo.com/quote/TDTH" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Trident Digital Tech Holdings L">Trident Digital Tech Holdings L</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TDTH" data-close-price="1.905">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1,91</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.53%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TDTH" data-close-price="1.92">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1,92</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+4.35%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-39.27%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-74.23%</td>
@@ -16518,9 +16521,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'EMAT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">EMAT</span><a href="https://finance.yahoo.com/quote/EMAT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Evolution Metals & Technologies">Evolution Metals & Technologies</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EMAT" data-close-price="3.99">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$3,99</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+19.82%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EMAT" data-close-price="4.07">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$4,07</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+22.22%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-39.45%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-65.20%</td>
@@ -16532,9 +16535,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'FRMI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">FRMI</span><a href="https://finance.yahoo.com/quote/FRMI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Fermi Inc.">Fermi Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="FRMI" data-close-price="5.945">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="FRMI" data-close-price="5.95">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$5,95</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.42%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-9.27%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-26.30%</td>
@@ -16546,9 +16549,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'XXI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XXI</span><a href="https://finance.yahoo.com/quote/XXI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Twenty One Capital, Inc.">Twenty One Capital, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XXI" data-close-price="6.47">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$6,47</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+4.52%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XXI" data-close-price="6.43">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$6,43</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+3.89%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+23.31%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+0.65%</td>
@@ -16560,9 +16563,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'UWMC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">UWMC</span><a href="https://finance.yahoo.com/quote/UWMC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="UWM Holdings Corporation">UWM Holdings Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="UWMC" data-close-price="1.4">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1,40</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-1.41%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="UWMC" data-close-price="1.41">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$1,41</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.70%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-22.83%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-69.26%</td>
@@ -16574,9 +16577,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'TTD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TTD</span><a href="https://finance.yahoo.com/quote/TTD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="The Trade Desk, Inc.">The Trade Desk, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TTD" data-close-price="13.225">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$13,22</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.71%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TTD" data-close-price="13.19">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$13,19</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.94%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-24.23%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-46.93%</td>
@@ -16588,9 +16591,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'SMR')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SMR</span><a href="https://finance.yahoo.com/quote/SMR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NuScale Power Corporation">NuScale Power Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SMR" data-close-price="9.44">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9,44</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+4.08%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SMR" data-close-price="9.52">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$9,52</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+5.02%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+4.49%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-32.51%</td>
@@ -16602,9 +16605,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'LCID')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LCID</span><a href="https://finance.yahoo.com/quote/LCID" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Lucid Group, Inc.">Lucid Group, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LCID" data-close-price="5.555">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LCID" data-close-price="5.55">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$5,55</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-1.24%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.42%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-17.04%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-41.10%</td>
@@ -16616,9 +16619,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'STUB')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">STUB</span><a href="https://finance.yahoo.com/quote/STUB" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="StubHub Holdings, Inc.">StubHub Holdings, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="STUB" data-close-price="6.785">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$6,79</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.66%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="STUB" data-close-price="6.74">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$6,74</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-1.24%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-21.31%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-23.34%</td>
@@ -16630,9 +16633,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'MSTR')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MSTR</span><a href="https://finance.yahoo.com/quote/MSTR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Strategy Inc">Strategy Inc</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSTR" data-close-price="118.41">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$118,41</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+5.36%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MSTR" data-close-price="119.39">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$119,39</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+6.23%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+12.38%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-14.24%</td>
@@ -16680,9 +16683,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'stocks', 'SPCX')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SPCX</span><a href="https://finance.yahoo.com/quote/SPCX" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Space Exploration Technologies ">Space Exploration Technologies </td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPCX" data-close-price="136.11">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$136,11</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.57%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPCX" data-close-price="136.21">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$136,21</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.65%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+16.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+11.81%</td>
@@ -16694,9 +16697,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'ABEV')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ABEV</span><a href="https://finance.yahoo.com/quote/ABEV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Ambev S.A.">Ambev S.A.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ABEV" data-close-price="2.875">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2,88</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.59%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ABEV" data-close-price="2.87">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$2,87</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.24%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-9.87%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-7.82%</td>
@@ -16708,9 +16711,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'MRNA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MRNA</span><a href="https://finance.yahoo.com/quote/MRNA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Moderna, Inc.">Moderna, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MRNA" data-close-price="140.32">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$140,32</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+5.25%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MRNA" data-close-price="148.86">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$148,86</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+11.66%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+129.58%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+167.34%</td>
@@ -16724,7 +16727,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Webster Financial Corporation">Webster Financial Corporation</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WBS" data-close-price="77.57">-.-</td>
                 <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$77,57</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.51%</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-slate-400">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-0.04%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+7.36%</td>
@@ -16736,9 +16739,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'NU')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NU</span><a href="https://finance.yahoo.com/quote/NU" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Nu Holdings Ltd.">Nu Holdings Ltd.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NU" data-close-price="14.655">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14,65</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+3.13%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NU" data-close-price="14.61">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$14,61</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+2.82%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-2.07%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-18.94%</td>
@@ -16750,9 +16753,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'MARA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">MARA</span><a href="https://finance.yahoo.com/quote/MARA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="MARA Holdings, Inc.">MARA Holdings, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MARA" data-close-price="11.205">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,21</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+0.49%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="MARA" data-close-price="11.14">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$11,14</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.09%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-10.15%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+39.90%</td>
@@ -16764,9 +16767,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'WMT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">WMT</span><a href="https://finance.yahoo.com/quote/WMT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Walmart Inc.">Walmart Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT" data-close-price="102.97">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$102,97</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.60%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="WMT" data-close-price="103.0">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$103,00</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-5.02%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-15.57%</td>
@@ -16778,9 +16781,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'INTC')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">INTC</span><a href="https://finance.yahoo.com/quote/INTC" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="Intel Corporation">Intel Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INTC" data-close-price="90.4">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$90,40</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-1.88%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="INTC" data-close-price="90.18">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$90,18</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-2.11%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">-10.22%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+108.86%</td>
@@ -16792,9 +16795,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'NVDA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">NVDA</span><a href="https://finance.yahoo.com/quote/NVDA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="NVIDIA Corporation">NVIDIA Corporation</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA" data-close-price="215.185">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$215,19</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-brandRed">-0.77%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="NVDA" data-close-price="215.09">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$215,09</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-rose-500 font-bold">-0.81%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+2.26%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+14.24%</td>
@@ -16806,9 +16809,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-2 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'stocks', 'PATH')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PATH</span><a href="https://finance.yahoo.com/quote/PATH" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="UiPath, Inc.">UiPath, Inc.</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PATH" data-close-price="16.14">-.-</td>
-                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$16,14</td>
-                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500">+1.38%</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PATH" data-close-price="16.23">-.-</td>
+                <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">$16,23</td>
+                <td class="py-2.5 px-3 text-right font-bold whitespace-nowrap text-emerald-500 font-bold">+1.92%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-300 hidden lg:table-cell whitespace-nowrap">0.00%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+48.79%</td>
                 <td class="py-2.5 px-3 text-right font-mono text-slate-400 hidden xl:table-cell whitespace-nowrap">+47.41%</td>
@@ -16931,9 +16934,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'etfs', 'SPY')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SPY</span><a href="https://finance.yahoo.com/quote/SPY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">SPDR S&P 500 ETF</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPY" data-close-price="765.46">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$765,46</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.38%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SPY" data-close-price="766.04">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$766,04</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.45%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.85%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+13.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+20.37%</td>
@@ -16942,9 +16945,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'QQQ')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">QQQ</span><a href="https://finance.yahoo.com/quote/QQQ" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Invesco QQQ Trust (Nasdaq 100)</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="QQQ" data-close-price="712.946">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$712,95</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.28%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="QQQ" data-close-price="713.48">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$713,48</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.36%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.86%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+19.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+26.07%</td>
@@ -16953,9 +16956,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'DIA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">DIA</span><a href="https://finance.yahoo.com/quote/DIA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">SPDR Dow Jones Industrial</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DIA" data-close-price="531.92">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$531,92</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.92%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="DIA" data-close-price="532.55">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$532,55</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.96%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.06%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+10.99%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+19.51%</td>
@@ -16964,7 +16967,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'EEM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">EEM</span><a href="https://finance.yahoo.com/quote/EEM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares MSCI Emerging Markets</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EEM" data-close-price="67.135">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EEM" data-close-price="67.14">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$67,14</td>
                 <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.77%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.59%</td>
@@ -16975,9 +16978,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'EWZ')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">EWZ</span><a href="https://finance.yahoo.com/quote/EWZ" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares MSCI Brazil ETF</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EWZ" data-close-price="35.175">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$35,17</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.03%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="EWZ" data-close-price="35.1">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$35,10</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.81%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-5.43%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.37%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+21.66%</td>
@@ -16986,9 +16989,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'IWM')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">IWM</span><a href="https://finance.yahoo.com/quote/IWM" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares Russell 2000 ETF</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IWM" data-close-price="299.9">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$299,90</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.75%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IWM" data-close-price="300.14">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$300,14</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.83%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.15%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+22.63%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+33.67%</td>
@@ -16997,9 +17000,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'ARKK')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ARKK</span><a href="https://finance.yahoo.com/quote/ARKK" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">ARK Innovation ETF</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ARKK" data-close-price="85.81">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$85,81</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.05%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ARKK" data-close-price="86.2">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$86,20</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.52%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.88%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.56%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.26%</td>
@@ -17008,9 +17011,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'XLE')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XLE</span><a href="https://finance.yahoo.com/quote/XLE" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Energy Select Sector SPDR</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLE" data-close-price="63.755">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$63,76</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.01%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLE" data-close-price="63.65">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$63,65</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.16%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+9.58%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+35.62%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+44.72%</td>
@@ -17019,9 +17022,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'XLF')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XLF</span><a href="https://finance.yahoo.com/quote/XLF" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Financial Select Sector SPDR</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLF" data-close-price="57.445">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$57,45</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.87%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLF" data-close-price="57.49">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$57,49</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.96%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.83%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.88%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+9.72%</td>
@@ -17030,9 +17033,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'XLV')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XLV</span><a href="https://finance.yahoo.com/quote/XLV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Health Care Select Sector SPDR</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLV" data-close-price="174.575">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$174,57</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.27%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLV" data-close-price="174.79">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$174,79</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.39%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.74%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.63%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+24.94%</td>
@@ -17041,9 +17044,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'SMH')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SMH</span><a href="https://finance.yahoo.com/quote/SMH" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">VanEck Semiconductor ETF</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SMH" data-close-price="560.41">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$560,41</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.40%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SMH" data-close-price="560.87">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$560,87</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.32%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+57.47%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+94.69%</td>
@@ -17052,9 +17055,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'IBIT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">IBIT</span><a href="https://finance.yahoo.com/quote/IBIT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares Bitcoin Trust</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IBIT" data-close-price="43.455">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$43,45</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+5.47%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="IBIT" data-close-price="43.76">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$43,76</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+6.23%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.21%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-30.05%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-46.84%</td>
@@ -17063,9 +17066,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'GLD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GLD</span><a href="https://finance.yahoo.com/quote/GLD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">SPDR Gold Shares</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLD" data-close-price="424.18">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$424,18</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.15%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GLD" data-close-price="423.97">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$423,97</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.10%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+7.82%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.80%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+30.67%</td>
@@ -17074,9 +17077,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'XLK')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XLK</span><a href="https://finance.yahoo.com/quote/XLK" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Technology Select Sector SPDR</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLK" data-close-price="183.16">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$183,16</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.03%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLK" data-close-price="183.4">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$183,40</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.17%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+31.68%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+41.94%</td>
@@ -17085,7 +17088,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'TLT')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TLT</span><a href="https://finance.yahoo.com/quote/TLT" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares 20+ Year Treasury Bond</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TLT" data-close-price="81.995">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TLT" data-close-price="82.0">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$82,00</td>
                 <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.42%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-2.61%</td>
@@ -17096,9 +17099,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'FXI')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">FXI</span><a href="https://finance.yahoo.com/quote/FXI" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares China Large-Cap ETF</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="FXI" data-close-price="35.87">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$35,87</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.56%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="FXI" data-close-price="35.88">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$35,88</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.78%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-12.38%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-9.00%</td>
@@ -17107,9 +17110,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'SLV')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SLV</span><a href="https://finance.yahoo.com/quote/SLV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">iShares Silver Trust</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SLV" data-close-price="62.88">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$62,88</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.98%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SLV" data-close-price="62.84">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$62,84</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.92%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+12.01%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-11.06%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+69.51%</td>
@@ -17118,9 +17121,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'USO')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">USO</span><a href="https://finance.yahoo.com/quote/USO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">United States Oil Fund</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USO" data-close-price="135.09">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$135,09</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.41%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USO" data-close-price="134.95">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$134,95</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.30%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.30%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+83.58%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+71.68%</td>
@@ -17129,9 +17132,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'XLP')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XLP</span><a href="https://finance.yahoo.com/quote/XLP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Consumer Staples Select Sector</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLP" data-close-price="85.815">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$85,81</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.58%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLP" data-close-price="85.75">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$85,75</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.51%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+3.14%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+10.81%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.13%</td>
@@ -17140,9 +17143,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'etfs', 'XLY')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XLY</span><a href="https://finance.yahoo.com/quote/XLY" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Consumer Discretionary Select Sector</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLY" data-close-price="118.07">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$118,07</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.19%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XLY" data-close-price="118.14">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$118,14</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.26%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.03%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.13%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+2.97%</td>
@@ -17216,9 +17219,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'acciones_arg', 'ALUA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ALUA.BA</span><a href="https://www.rava.com/perfil/ALUA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Aluar</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ALUA.BA" data-close-price="874.5">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$874,50</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.04%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ALUA.BA" data-close-price="875.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$875,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.10%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-6.41%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-10.56%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+26.84%</td>
@@ -17227,9 +17230,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'BBAR.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BBAR.BA</span><a href="https://www.rava.com/perfil/BBAR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Banco BBVA</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BBAR.BA" data-close-price="7530.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$7.530,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.21%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BBAR.BA" data-close-price="7510.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$7.510,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.94%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-24.16%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-14.01%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+18.08%</td>
@@ -17238,9 +17241,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'BMA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BMA.BA</span><a href="https://www.rava.com/perfil/BMA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Banco Macro</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BMA.BA" data-close-price="11710.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$11.710,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.56%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BMA.BA" data-close-price="11630.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$11.630,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.87%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-18.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-11.82%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+35.40%</td>
@@ -17249,9 +17252,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'BYMA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BYMA.BA</span><a href="https://www.rava.com/perfil/BYMA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Bolsas y Mercados Argentinos</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BYMA.BA" data-close-price="254.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$254,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.80%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BYMA.BA" data-close-price="255.25">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$255,25</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.30%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-12.58%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-11.78%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+35.93%</td>
@@ -17260,9 +17263,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'CEPU.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CEPU.BA</span><a href="https://www.rava.com/perfil/CEPU" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Central Puerto</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CEPU.BA" data-close-price="2070.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.070,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.92%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CEPU.BA" data-close-price="2077.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.077,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.26%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-11.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-23.19%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+33.25%</td>
@@ -17271,9 +17274,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'COME.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">COME.BA</span><a href="https://www.rava.com/perfil/COME" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Sociedad Comercial del Plata</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="COME.BA" data-close-price="40.83">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$40,83</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.48%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="COME.BA" data-close-price="40.8">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$40,80</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.41%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-12.23%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-34.45%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-31.89%</td>
@@ -17282,9 +17285,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'CRES.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">CRES.BA</span><a href="https://www.rava.com/perfil/CRES" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Cresud</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CRES.BA" data-close-price="1750.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.750,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.92%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="CRES.BA" data-close-price="1748.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1.748,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.81%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-3.31%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-13.95%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+18.16%</td>
@@ -17293,9 +17296,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'ECOG.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ECOG.BA</span><a href="https://www.rava.com/perfil/ECOG" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Distribuidora de Gas Cuyana</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ECOG.BA" data-close-price="2850.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.850,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.33%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ECOG.BA" data-close-price="2835.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.835,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.80%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-7.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-12.42%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-88.50%</td>
@@ -17315,9 +17318,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'GGAL.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">GGAL.BA</span><a href="https://www.rava.com/perfil/GGAL" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Grupo Financiero Galicia</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GGAL.BA" data-close-price="6585.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$6.585,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.07%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="GGAL.BA" data-close-price="6615.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$6.615,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.53%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-16.51%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-17.96%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+6.20%</td>
@@ -17326,9 +17329,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'LOMA.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">LOMA.BA</span><a href="https://www.rava.com/perfil/LOMA" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Loma Negra</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LOMA.BA" data-close-price="2953.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.953,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.17%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="LOMA.BA" data-close-price="2970.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.970,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.76%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-18.13%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-26.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.06%</td>
@@ -17337,9 +17340,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'METR.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">METR.BA</span><a href="https://www.rava.com/perfil/METR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Metrogas</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="METR.BA" data-close-price="2274.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.274,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.49%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="METR.BA" data-close-price="2273.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.273,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.44%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+8.79%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-9.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+17.50%</td>
@@ -17348,9 +17351,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'PAMP.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">PAMP.BA</span><a href="https://www.rava.com/perfil/PAMP" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Pampa Energía</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PAMP.BA" data-close-price="5070.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$5.070,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.80%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="PAMP.BA" data-close-price="5060.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$5.060,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.60%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-4.77%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-8.27%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+27.62%</td>
@@ -17359,9 +17362,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'SUPV.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SUPV.BA</span><a href="https://www.rava.com/perfil/SUPV" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Grupo Supervielle</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SUPV.BA" data-close-price="2543.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.543,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+4.67%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SUPV.BA" data-close-price="2499.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.499,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.88%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-19.98%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-28.72%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.44%</td>
@@ -17370,9 +17373,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'TGNO4.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TGNO4.BA</span><a href="https://www.rava.com/perfil/TGNO4" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Transportadora de Gas del Norte</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TGNO4.BA" data-close-price="3315.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.315,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.45%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TGNO4.BA" data-close-price="3310.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.310,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.30%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-16.43%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-29.50%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-4.15%</td>
@@ -17381,9 +17384,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'TGSU2.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TGSU2.BA</span><a href="https://www.rava.com/perfil/TGSU2" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Transportadora de Gas del Sur</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TGSU2.BA" data-close-price="8960.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$8.960,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.11%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TGSU2.BA" data-close-price="8985.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$8.985,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.17%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-9.03%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-6.78%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+20.68%</td>
@@ -17392,9 +17395,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'TRAN.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TRAN.BA</span><a href="https://www.rava.com/perfil/TRAN" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Transener</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TRAN.BA" data-close-price="3255.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.255,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.36%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TRAN.BA" data-close-price="3243.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$3.243,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-1.74%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-6.82%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.59%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+36.06%</td>
@@ -17403,9 +17406,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'TXAR.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">TXAR.BA</span><a href="https://www.rava.com/perfil/TXAR" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Ternium Argentina</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXAR.BA" data-close-price="688.5">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$688,50</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.38%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="TXAR.BA" data-close-price="686.5">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$686,50</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+2.08%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+8.49%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+4.00%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+19.54%</td>
@@ -17414,9 +17417,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'VALO.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">VALO.BA</span><a href="https://www.rava.com/perfil/VALO" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Grupo Financiero Valores</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALO.BA" data-close-price="568.5">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$568,50</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.71%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="VALO.BA" data-close-price="569.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$569,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+0.80%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-11.03%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+5.35%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+68.02%</td>
@@ -17425,9 +17428,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'acciones_arg', 'YPFD.BA')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">YPFD.BA</span><a href="https://www.rava.com/perfil/YPFD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">YPF S.A.</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="YPFD.BA" data-close-price="8150.0">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$8.150,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.31%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="YPFD.BA" data-close-price="8145.0">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$8.145,00</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+1.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.06%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+39.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+83.11%</td>
@@ -17501,9 +17504,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox" checked onchange="toggleSelect(event, 'cryptos', 'BTC-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BTC-USD</span><a href="https://finance.yahoo.com/quote/BTC-USD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Bitcoin</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTC-USD" data-close-price="76709.78">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$76.709,78</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+5.06%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BTC-USD" data-close-price="77232.76">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$77.232,76</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+5.75%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-1.11%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-28.91%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-46.27%</td>
@@ -17512,9 +17515,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cryptos', 'ETH-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">ETH-USD</span><a href="https://finance.yahoo.com/quote/ETH-USD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Ethereum</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ETH-USD" data-close-price="2400.49">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.400,49</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.18%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="ETH-USD" data-close-price="2416.63">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$2.416,63</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.88%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+1.07%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-37.24%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-57.59%</td>
@@ -17523,9 +17526,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cryptos', 'USDT-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">USDT-USD</span><a href="https://finance.yahoo.com/quote/USDT-USD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Tether USDt</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USDT-USD" data-close-price="0.99948">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="USDT-USD" data-close-price="1.0">-.-</td>
                 <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,00</td>
-                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.03%</td>
+                <td class="py-2.5 px-4 text-right font-bold text-brandRed">-0.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.02%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-0.17%</td>
@@ -17534,9 +17537,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cryptos', 'BNB-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">BNB-USD</span><a href="https://finance.yahoo.com/quote/BNB-USD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">BNB</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BNB-USD" data-close-price="674.65">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$674,65</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.02%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="BNB-USD" data-close-price="676.28">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$676,28</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+3.26%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+6.59%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-29.33%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-26.28%</td>
@@ -17545,9 +17548,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cryptos', 'XRP-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">XRP-USD</span><a href="https://finance.yahoo.com/quote/XRP-USD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">XRP</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XRP-USD" data-close-price="1.374">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,37</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+8.33%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="XRP-USD" data-close-price="1.38">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$1,38</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+9.19%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-7.64%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-46.57%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-67.41%</td>
@@ -17556,9 +17559,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <td class="py-2.5 px-4 text-center"><input type="checkbox"  onchange="toggleSelect(event, 'cryptos', 'SOL-USD')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
                 <td class="py-2.5 px-4 font-semibold text-white light:text-slate-900 font-mono"><span class="inline-flex items-center gap-1.5"><span class="font-bold">SOL-USD</span><a href="https://finance.yahoo.com/quote/SOL-USD" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Yahoo Finance" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
                 <td class="py-2.5 px-4 text-slate-300 light:text-slate-700">Solana</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SOL-USD" data-close-price="91.29">-.-</td>
-                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$91,29</td>
-                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+4.17%</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="SOL-USD" data-close-price="91.27">-.-</td>
+                <td class="py-2.5 px-4 text-right font-mono font-semibold text-white light:text-slate-900">$91,27</td>
+                <td class="py-2.5 px-4 text-right font-bold text-emerald-500">+4.15%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">+0.44%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-40.36%</td>
                 <td class="py-2.5 px-4 text-right text-slate-400 hidden md:table-cell">-59.30%</td>
@@ -40517,9 +40520,18 @@ def build_dashboard():
         else:
             compact_h_db[ticker] = series
 
-    master_store_light = json.loads(json.dumps(master_store_data))
-    if "final_data" in master_store_light and "historical_db" in master_store_light["final_data"]:
-        master_store_light["final_data"]["historical_db"] = {}
+        # Create sparklines_db (last 30 points) directly in master_store_light for instant minichart rendering
+    sparklines_db = {}
+    for ticker, series in full_h_db.items():
+        if isinstance(series, list):
+            sparklines_db[ticker] = series[-30:] if len(series) > 30 else series
+        elif isinstance(series, dict) and "dates" in series and "prices" in series:
+            dates = series.get("dates", [])[-30:]
+            prices = series.get("prices", [])[-30:]
+            sparklines_db[ticker] = {"dates": dates, "prices": prices}
+
+    master_store_light["final_data"]["sparklines_db"] = sparklines_db
+    master_store_light["final_data"]["historical_db"] = sparklines_db
 
     with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_light, f, ensure_ascii=False, indent=2)
