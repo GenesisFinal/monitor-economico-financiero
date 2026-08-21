@@ -38516,19 +38516,6 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
             const sign = isPos ? '+' : '';
             return `<span class="px-2 py-0.5 rounded text-[11px] ${colorClass}">${sign}${pct.toFixed(2)}%</span>`;
         }
-            if (pct === 0) {
-                return `<span class="px-2 py-0.5 rounded text-[11px] font-semibold !text-slate-100 light:!text-slate-900">0.00%</span>`;
-            }
-            const isPos = pct > 0;
-            const colorClass = isPos ? '!text-emerald-500 light:!text-emerald-600 font-bold' : '!text-rose-500 light:!text-rose-600 font-bold';
-            const sign = isPos ? '+' : '';
-            return `<span class="px-2 py-0.5 rounded text-[11px] ${colorClass}">${sign}${pct.toFixed(2)}%</span>`;
-        }
-            const isPos = pct > 0;
-            const bgClass = isPos ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20';
-            const sign = isPos ? '+' : '';
-            return `<span class="px-2 py-0.5 rounded text-[11px] font-bold ${bgClass}">${sign}${pct.toFixed(2)}%</span>`;
-        }
 
         window.switchAsegStatement = function(stmtKey) {
             window.activeAsegStatement = stmtKey;
@@ -40179,8 +40166,16 @@ def build_dashboard():
 
 
 
-        with open("master_dataset.json", "w", encoding="utf-8") as f:
+            with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
