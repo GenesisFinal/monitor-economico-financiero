@@ -4866,7 +4866,7 @@ canvas.sparkline-canvas {
 <script>
         // Asynchronously fetch full multi-year historical dataset (1255-1500 points per asset)
         (function loadFullHistoricalSeries() {
-            fetch('historical_series.json')
+            fetch('historical_series.json?v=' + Date.now())
                 .then(r => r.json())
                 .then(data => {
                     if (data && data.historical_db) {
@@ -33857,7 +33857,7 @@ function toggleBandsVisibility() {
 
                 
 
-                let histData = (appData.sparklines_db && appData.sparklines_db[dbKey]) || (appData.sparklines_db && appData.sparklines_db[ticker]) || appData.historical_db[dbKey] || appData.historical_db[ticker + '.BA'] || appData.historical_db[ticker.replace('.BA', '')];
+                let histData = (appData.historical_db && appData.historical_db[dbKey]) || (appData.historical_db && appData.historical_db[ticker]) || (appData.historical_db && appData.historical_db[ticker + '.BA']) || (appData.historical_db && appData.historical_db[ticker.replace('.BA', '')]) || (appData.sparklines_db && appData.sparklines_db[dbKey]) || (appData.sparklines_db && appData.sparklines_db[ticker]);
 
                 const filtered = filterHistory(histData, period);
 
@@ -35159,7 +35159,7 @@ function renderSparklines() {
 
                     }
 
-                let historyObj = (appData.sparklines_db && appData.sparklines_db[key]) || (appData.historical_db && appData.historical_db[key]);
+                let historyObj = (appData.historical_db && appData.historical_db[key]) || (appData.historical_db && appData.historical_db[key + '.BA']) || (appData.historical_db && appData.historical_db[key.replace('.BA', '')]) || (appData.sparklines_db && appData.sparklines_db[key]);
 
                 if (!historyObj && (key.endsWith('_usd') || key.includes('_usd_mep') || key.includes('_mep'))) {
 
@@ -35257,14 +35257,7 @@ function renderSparklines() {
 
                 }
 
-                if (canvas.chart) {
-                    canvas.style.setProperty('width', '120px', 'important');
-                    canvas.style.setProperty('height', '30px', 'important');
-                    canvas.width = 120;
-                    canvas.height = 30;
-                    canvas.chart.resize(120, 30);
-                    canvas.chart.update('none');
-                }
+                // Modal canvas size preserved dynamically
                 if (!historyObj) return;
 
                 
@@ -36156,7 +36149,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             } else {
 
-                let historyObj = (appData.sparklines_db && appData.sparklines_db[modalState.key]) || (appData.historical_db && appData.historical_db[modalState.key]);
+                let historyObj = (appData.historical_db && appData.historical_db[modalState.key]) || (appData.historical_db && appData.historical_db[modalState.key + '.BA']) || (appData.historical_db && appData.historical_db[modalState.key.replace('.BA', '')]) || (appData.sparklines_db && appData.sparklines_db[modalState.key]);
 
                 if (!historyObj && (modalState.key.endsWith('_usd') || modalState.key.includes('_usd_mep') || modalState.key.includes('_mep'))) {
 
@@ -36240,14 +36233,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
 
 
-                if (canvas.chart) {
-                    canvas.style.setProperty('width', '120px', 'important');
-                    canvas.style.setProperty('height', '30px', 'important');
-                    canvas.width = 120;
-                    canvas.height = 30;
-                    canvas.chart.resize(120, 30);
-                    canvas.chart.update('none');
-                }
+                // Modal canvas size preserved dynamically
                 if (!historyObj) return;
 
                 
@@ -40193,8 +40179,16 @@ def build_dashboard():
 
 
 
-                                    with open("master_dataset.json", "w", encoding="utf-8") as f:
+                                        with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
