@@ -1,5 +1,5 @@
 {
-  "last_updated": "21/08/2026 17:57:30 hs",
+  "last_updated": "21/08/2026 18:05:57 hs",
   "final_data": {
     "bond_details": {
       "AE38D": {
@@ -87981,7 +87981,7 @@
       }
     },
     "update_time": "15/08/2026 18:56:25",
-    "update_time_financial": "21/08/2026 17:57:30 hs",
+    "update_time_financial": "21/08/2026 18:05:57 hs",
     "update_time_economic": "15/08/2026 18:56:25",
     "update_time_insurance": "15/08/2026 18:56:25",
     "names": {
@@ -115889,7 +115889,7 @@
         "ticker": "EURUSD=X",
         "name": "EUR/USD",
         "price": 1.17,
-        "change": -0.07,
+        "change": -0.08,
         "change_val": 0.0,
         "change_7d": 0.42,
         "change_1m": 1.3,
@@ -115903,7 +115903,7 @@
         "ticker": "GBPUSD=X",
         "name": "GBP/USD",
         "price": 1.36,
-        "change": -0.0,
+        "change": 0.03,
         "change_val": -0.01,
         "change_7d": 0.6,
         "change_1m": 1.04,
@@ -115916,8 +115916,8 @@
       {
         "ticker": "JPY=X",
         "name": "USD/JPY (Yen)",
-        "price": 158.98,
-        "change": 0.06,
+        "price": 158.86,
+        "change": -0.01,
         "change_val": 0.19,
         "change_7d": 0.57,
         "change_1m": -1.71,
@@ -115931,7 +115931,7 @@
         "ticker": "AUDUSD=X",
         "name": "AUD/USD",
         "price": 0.72,
-        "change": 0.75,
+        "change": 0.78,
         "change_val": -0.07,
         "change_7d": 0.76,
         "change_1m": 1.12,
@@ -115945,7 +115945,7 @@
         "ticker": "BRL=X",
         "name": "USD/BRL (Real)",
         "price": 5.14,
-        "change": -1.04,
+        "change": -1.05,
         "change_val": 0.21,
         "change_7d": 1.78,
         "change_1m": 2.4,
@@ -115958,8 +115958,8 @@
       {
         "ticker": "MXN=X",
         "name": "USD/MEX (Peso)",
-        "price": 16.92,
-        "change": -0.16,
+        "price": 16.91,
+        "change": -0.21,
         "change_val": 0.06,
         "change_7d": -1.1,
         "change_1m": -2.04,
@@ -115992,8 +115992,8 @@
       {
         "ticker": "GC=F",
         "name": "Oro (USD/Oz)",
-        "price": 4665.6,
-        "change": 3.31,
+        "price": 4662.1,
+        "change": 3.23,
         "change_val": 0.25,
         "change_7d": 0.91,
         "change_1m": 8.32,
@@ -116006,8 +116006,8 @@
       {
         "ticker": "SI=F",
         "name": "Plata (USD/Oz)",
-        "price": 69.09,
-        "change": 1.56,
+        "price": 69.01,
+        "change": 1.45,
         "change_val": 1.74,
         "change_7d": 2.61,
         "change_1m": 13.79,
@@ -116020,8 +116020,8 @@
       {
         "ticker": "PL=F",
         "name": "Platino (USD/Oz)",
-        "price": 1887.5,
-        "change": 3.09,
+        "price": 1891.7,
+        "change": 3.32,
         "change_val": 0.06,
         "change_7d": -0.01,
         "change_1m": 7.26,
@@ -116035,7 +116035,7 @@
         "ticker": "HG=F",
         "name": "Cobre (USD/Lb)",
         "price": 6.58,
-        "change": 1.88,
+        "change": 1.83,
         "change_val": -0.18,
         "change_7d": 0.44,
         "change_1m": 4.86,
@@ -116066,8 +116066,8 @@
       {
         "ticker": "CL=F",
         "name": "Petróleo WTI (USD/Bbl)",
-        "price": 86.79,
-        "change": -1.18,
+        "price": 86.7,
+        "change": -1.29,
         "change_val": 0.57,
         "change_7d": 5.4,
         "change_1m": 3.52,
@@ -116080,8 +116080,8 @@
       {
         "ticker": "BZ=F",
         "name": "Petróleo Brent (USD/Bbl)",
-        "price": 94.04,
-        "change": 0.28,
+        "price": 93.94,
+        "change": 0.17,
         "change_val": 0.72,
         "change_7d": 5.95,
         "change_1m": 4.2,
@@ -116095,7 +116095,7 @@
         "ticker": "NG=F",
         "name": "Gas Natural (USD/MMBtu)",
         "price": 2.8,
-        "change": 2.38,
+        "change": 2.34,
         "change_val": -1.03,
         "change_7d": 2.67,
         "change_1m": -6.53,
@@ -116109,7 +116109,7 @@
         "ticker": "RB=F",
         "name": "Gasolina (USD/Gal)",
         "price": 3.02,
-        "change": -7.32,
+        "change": -7.35,
         "change_val": -0.64,
         "change_7d": 6.66,
         "change_1m": -3.54,
@@ -117337,7 +117337,7 @@
         {
           "ticker": "AAPL.BA",
           "name": "APPLE INC CEDEAR(REPR 1/20 SHR)",
-          "price": 24690.0,
+          "price": 24680.0,
           "change": 0.04,
           "change_7d": 0,
           "change_1m": -3.74,
@@ -117345,8 +117345,8 @@
           "change_12m": 66.48,
           "market_cap": 100000000000.0,
           "volume": 76461.0,
-          "prev_close": 24680.13,
-          "cierre_anterior": 24680.13
+          "prev_close": 24670.13,
+          "cierre_anterior": 24670.13
         },
         {
           "ticker": "NVDA.BA",
@@ -117379,16 +117379,16 @@
         {
           "ticker": "MSFT.BA",
           "name": "MICROSOFT CORP CEDEAR EACH 30 R",
-          "price": 25640.0,
-          "change": 0.94,
+          "price": 25680.0,
+          "change": 1.1,
           "change_7d": 0,
           "change_1m": 24.33,
           "change_ytd": 37.74,
           "change_12m": 14.93,
           "market_cap": 100000000000.0,
           "volume": 135237.0,
-          "prev_close": 25401.23,
-          "cierre_anterior": 25401.23
+          "prev_close": 25400.59,
+          "cierre_anterior": 25400.59
         },
         {
           "ticker": "AMZN.BA",
@@ -117435,16 +117435,16 @@
         {
           "ticker": "TSLA.BA",
           "name": "TESLA INC CEDEAR EACH 15 REP 1 ",
-          "price": 38580.0,
-          "change": 6.05,
+          "price": 38520.0,
+          "change": 5.88,
           "change_7d": 0,
           "change_1m": -7.19,
           "change_ytd": -4.21,
           "change_12m": 28.44,
           "market_cap": 100000000000.0,
           "volume": 58301.0,
-          "prev_close": 36379.07,
-          "cierre_anterior": 36379.07
+          "prev_close": 36380.81,
+          "cierre_anterior": 36380.81
         },
         {
           "ticker": "LLY.BA",
@@ -117491,7 +117491,7 @@
         {
           "ticker": "V.BA",
           "name": "VISA INC CEDEARS (EACH 18 REP 1",
-          "price": 32900.0,
+          "price": 32880.0,
           "change": 1.92,
           "change_7d": 0,
           "change_1m": 4.81,
@@ -117499,36 +117499,36 @@
           "change_12m": 28.99,
           "market_cap": 100000000000.0,
           "volume": 14098.0,
-          "prev_close": 32280.22,
-          "cierre_anterior": 32280.22
+          "prev_close": 32260.6,
+          "cierre_anterior": 32260.6
         },
         {
           "ticker": "PFE.BA",
           "name": "PFIZER INC CEDEAR EACH 4 REP 1 ",
           "price": 11130.0,
-          "change": 1.0,
+          "change": 1.27,
           "change_7d": 0,
           "change_1m": 12.79,
           "change_ytd": 13.26,
           "change_12m": 32.93,
           "market_cap": 100000000000.0,
           "volume": 27189.0,
-          "prev_close": 11019.8,
-          "cierre_anterior": 11019.8
+          "prev_close": 10990.42,
+          "cierre_anterior": 10990.42
         },
         {
           "ticker": "BABA.BA",
           "name": "ALIBABA GROUP HOLDING LTD CEDEA",
           "price": 21190.0,
-          "change": -7.47,
+          "change": -7.6,
           "change_7d": 0,
           "change_1m": 12.7,
           "change_ytd": -6.42,
           "change_12m": 31.61,
           "market_cap": 100000000000.0,
           "volume": 219861.0,
-          "prev_close": 22900.68,
-          "cierre_anterior": 22900.68
+          "prev_close": 22932.9,
+          "cierre_anterior": 22932.9
         },
         {
           "ticker": "KO.BA",
@@ -117547,16 +117547,16 @@
         {
           "ticker": "PEP.BA",
           "name": "PEPSICO INC CEDEAR EACH 18 REP ",
-          "price": 12730.0,
-          "change": 1.52,
+          "price": 12700.0,
+          "change": 1.28,
           "change_7d": 0,
           "change_1m": 5.56,
           "change_ytd": -6.56,
           "change_12m": 14.52,
           "market_cap": 100000000000.0,
           "volume": 103080.0,
-          "prev_close": 12539.4,
-          "cierre_anterior": 12539.4
+          "prev_close": 12539.49,
+          "cierre_anterior": 12539.49
         },
         {
           "ticker": "XOM.BA",
@@ -117589,16 +117589,16 @@
         {
           "ticker": "AMD.BA",
           "name": "ADVANCED MICRO DEVICES INC CEDE",
-          "price": 75475.0,
-          "change": 1.72,
+          "price": 75000.0,
+          "change": 1.65,
           "change_7d": 0,
           "change_1m": -14.61,
           "change_ytd": 163.87,
           "change_12m": 242.73,
           "market_cap": 100000000000.0,
           "volume": 10769.0,
-          "prev_close": 74198.78,
-          "cierre_anterior": 74198.78
+          "prev_close": 73782.59,
+          "cierre_anterior": 73782.59
         },
         {
           "ticker": "VALE.BA",
@@ -117618,34 +117618,34 @@
           "ticker": "GLOB.BA",
           "name": "GLOBANT SA CEDEAR EACH 18 REP 1",
           "price": 3498.0,
-          "change": 0.65,
+          "change": 0.43,
           "change_7d": 0,
           "change_1m": 29.42,
           "change_ytd": 3.27,
           "change_12m": -29.37,
           "market_cap": 100000000000.0,
           "volume": 128088.0,
-          "prev_close": 3475.41,
-          "cierre_anterior": 3475.41
+          "prev_close": 3483.02,
+          "cierre_anterior": 3483.02
         },
         {
           "ticker": "CEPU.BA",
           "name": "CENTRAL PUERTO SA",
-          "price": 2071.0,
-          "change": 1.97,
+          "price": 2066.0,
+          "change": 1.72,
           "change_7d": 0,
           "change_1m": -15.76,
           "change_ytd": -11.39,
           "change_12m": 41.53,
           "market_cap": 100000000000.0,
           "volume": 828488.0,
-          "prev_close": 2030.99,
-          "cierre_anterior": 2030.99
+          "prev_close": 2031.07,
+          "cierre_anterior": 2031.07
         },
         {
           "ticker": "TEN.BA",
           "name": "TENARIS S.A. CEDEAR EACH REPR 1",
-          "price": 83850.0,
+          "price": 83650.0,
           "change": 0.57,
           "change_7d": 0,
           "change_1m": 0.0,
@@ -117653,8 +117653,8 @@
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 994.0,
-          "prev_close": 83374.76,
-          "cierre_anterior": 83374.76
+          "prev_close": 83175.9,
+          "cierre_anterior": 83175.9
         },
         {
           "ticker": "TXR.BA",
@@ -117673,35 +117673,35 @@
         {
           "ticker": "SPY.BA",
           "name": "STATE ST SPDR S&P 500 ETF TR CE",
-          "price": 20360.0,
-          "change": 0.84,
+          "price": 20370.0,
+          "change": 0.89,
           "change_7d": 0,
           "change_1m": 2.96,
           "change_ytd": -0.64,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 484095.0,
-          "prev_close": 20190.4,
-          "cierre_anterior": 20190.4
+          "prev_close": 20190.31,
+          "cierre_anterior": 20190.31
         },
         {
           "ticker": "QQQ.BA",
           "name": "INVESCO QQQ TRUST CEDEAR EACH 2",
-          "price": 56825.0,
-          "change": 0.75,
+          "price": 56925.0,
+          "change": 0.93,
           "change_7d": 0,
           "change_1m": 1.26,
           "change_ytd": -1.31,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 33117.0,
-          "prev_close": 56401.99,
-          "cierre_anterior": 56401.99
+          "prev_close": 56400.48,
+          "cierre_anterior": 56400.48
         },
         {
           "ticker": "IWM.BA",
           "name": "ISHARES TRUST CEDEAR EACH 10 RE",
-          "price": 47880.0,
+          "price": 47800.0,
           "change": 1.48,
           "change_7d": 0,
           "change_1m": 1.42,
@@ -117709,38 +117709,38 @@
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 5093.0,
-          "prev_close": 47181.71,
-          "cierre_anterior": 47181.71
+          "prev_close": 47102.88,
+          "cierre_anterior": 47102.88
         },
         {
           "ticker": "DIA.BA",
           "name": "STATE ST SPDR DOW JONES INDL CE",
-          "price": 42480.0,
-          "change": 1.48,
+          "price": 42460.0,
+          "change": 1.43,
           "change_7d": 0,
           "change_1m": 2.3,
           "change_ytd": -2.06,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 9597.0,
-          "prev_close": 41860.47,
-          "cierre_anterior": 41860.47
+          "prev_close": 41861.38,
+          "cierre_anterior": 41861.38
         }
       ],
       "top_gainers": [
         {
           "ticker": "TSLA.BA",
           "name": "TESLA INC CEDEAR EACH 15 REP 1 ",
-          "price": 38580.0,
-          "change": 6.05,
+          "price": 38520.0,
+          "change": 5.88,
           "change_7d": 0,
           "change_1m": -7.19,
           "change_ytd": -4.21,
           "change_12m": 28.44,
           "market_cap": 100000000000.0,
           "volume": 58301.0,
-          "prev_close": 36379.07,
-          "cierre_anterior": 36379.07
+          "prev_close": 36380.81,
+          "cierre_anterior": 36380.81
         },
         {
           "ticker": "VALE.BA",
@@ -117773,16 +117773,16 @@
         {
           "ticker": "CEPU.BA",
           "name": "CENTRAL PUERTO SA",
-          "price": 2071.0,
-          "change": 1.97,
+          "price": 2066.0,
+          "change": 1.72,
           "change_7d": 0,
           "change_1m": -15.76,
           "change_ytd": -11.39,
           "change_12m": 41.53,
           "market_cap": 100000000000.0,
           "volume": 828488.0,
-          "prev_close": 2030.99,
-          "cierre_anterior": 2030.99
+          "prev_close": 2031.07,
+          "cierre_anterior": 2031.07
         },
         {
           "ticker": "GOOGL.BA",
@@ -117801,7 +117801,7 @@
         {
           "ticker": "V.BA",
           "name": "VISA INC CEDEARS (EACH 18 REP 1",
-          "price": 32900.0,
+          "price": 32880.0,
           "change": 1.92,
           "change_7d": 0,
           "change_1m": 4.81,
@@ -117809,41 +117809,41 @@
           "change_12m": 28.99,
           "market_cap": 100000000000.0,
           "volume": 14098.0,
-          "prev_close": 32280.22,
-          "cierre_anterior": 32280.22
+          "prev_close": 32260.6,
+          "cierre_anterior": 32260.6
         },
         {
           "ticker": "AMD.BA",
           "name": "ADVANCED MICRO DEVICES INC CEDE",
-          "price": 75475.0,
-          "change": 1.72,
+          "price": 75000.0,
+          "change": 1.65,
           "change_7d": 0,
           "change_1m": -14.61,
           "change_ytd": 163.87,
           "change_12m": 242.73,
           "market_cap": 100000000000.0,
           "volume": 10769.0,
-          "prev_close": 74198.78,
-          "cierre_anterior": 74198.78
+          "prev_close": 73782.59,
+          "cierre_anterior": 73782.59
         },
         {
           "ticker": "PEP.BA",
           "name": "PEPSICO INC CEDEAR EACH 18 REP ",
-          "price": 12730.0,
-          "change": 1.52,
+          "price": 12700.0,
+          "change": 1.28,
           "change_7d": 0,
           "change_1m": 5.56,
           "change_ytd": -6.56,
           "change_12m": 14.52,
           "market_cap": 100000000000.0,
           "volume": 103080.0,
-          "prev_close": 12539.4,
-          "cierre_anterior": 12539.4
+          "prev_close": 12539.49,
+          "cierre_anterior": 12539.49
         },
         {
           "ticker": "IWM.BA",
           "name": "ISHARES TRUST CEDEAR EACH 10 RE",
-          "price": 47880.0,
+          "price": 47800.0,
           "change": 1.48,
           "change_7d": 0,
           "change_1m": 1.42,
@@ -117851,22 +117851,22 @@
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 5093.0,
-          "prev_close": 47181.71,
-          "cierre_anterior": 47181.71
+          "prev_close": 47102.88,
+          "cierre_anterior": 47102.88
         },
         {
           "ticker": "DIA.BA",
           "name": "STATE ST SPDR DOW JONES INDL CE",
-          "price": 42480.0,
-          "change": 1.48,
+          "price": 42460.0,
+          "change": 1.43,
           "change_7d": 0,
           "change_1m": 2.3,
           "change_ytd": -2.06,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 9597.0,
-          "prev_close": 41860.47,
-          "cierre_anterior": 41860.47
+          "prev_close": 41861.38,
+          "cierre_anterior": 41861.38
         }
       ],
       "top_losers": [
@@ -117874,15 +117874,15 @@
           "ticker": "BABA.BA",
           "name": "ALIBABA GROUP HOLDING LTD CEDEA",
           "price": 21190.0,
-          "change": -7.47,
+          "change": -7.6,
           "change_7d": 0,
           "change_1m": 12.7,
           "change_ytd": -6.42,
           "change_12m": 31.61,
           "market_cap": 100000000000.0,
           "volume": 219861.0,
-          "prev_close": 22900.68,
-          "cierre_anterior": 22900.68
+          "prev_close": 22932.9,
+          "cierre_anterior": 22932.9
         },
         {
           "ticker": "NFLX.BA",
@@ -117929,7 +117929,7 @@
         {
           "ticker": "AAPL.BA",
           "name": "APPLE INC CEDEAR(REPR 1/20 SHR)",
-          "price": 24690.0,
+          "price": 24680.0,
           "change": 0.04,
           "change_7d": 0,
           "change_1m": -3.74,
@@ -117937,8 +117937,8 @@
           "change_12m": 66.48,
           "market_cap": 100000000000.0,
           "volume": 76461.0,
-          "prev_close": 24680.13,
-          "cierre_anterior": 24680.13
+          "prev_close": 24670.13,
+          "cierre_anterior": 24670.13
         },
         {
           "ticker": "AMZN.BA",
@@ -117986,20 +117986,20 @@
           "ticker": "GLOB.BA",
           "name": "GLOBANT SA CEDEAR EACH 18 REP 1",
           "price": 3498.0,
-          "change": 0.65,
+          "change": 0.43,
           "change_7d": 0,
           "change_1m": 29.42,
           "change_ytd": 3.27,
           "change_12m": -29.37,
           "market_cap": 100000000000.0,
           "volume": 128088.0,
-          "prev_close": 3475.41,
-          "cierre_anterior": 3475.41
+          "prev_close": 3483.02,
+          "cierre_anterior": 3483.02
         },
         {
           "ticker": "TEN.BA",
           "name": "TENARIS S.A. CEDEAR EACH REPR 1",
-          "price": 83850.0,
+          "price": 83650.0,
           "change": 0.57,
           "change_7d": 0,
           "change_1m": 0.0,
@@ -118007,8 +118007,8 @@
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 994.0,
-          "prev_close": 83374.76,
-          "cierre_anterior": 83374.76
+          "prev_close": 83175.9,
+          "cierre_anterior": 83175.9
         }
       ],
       "high_volume": [
@@ -118016,15 +118016,15 @@
           "ticker": "GLOB.BA",
           "name": "GLOBANT SA CEDEAR EACH 18 REP 1",
           "price": 3498.0,
-          "change": 0.65,
+          "change": 0.43,
           "change_7d": 0,
           "change_1m": 29.42,
           "change_ytd": 3.27,
           "change_12m": -29.37,
           "market_cap": 100000000000.0,
           "volume": 128088.0,
-          "prev_close": 3475.41,
-          "cierre_anterior": 3475.41
+          "prev_close": 3483.02,
+          "cierre_anterior": 3483.02
         },
         {
           "ticker": "VALE.BA",
@@ -118043,21 +118043,21 @@
         {
           "ticker": "AMD.BA",
           "name": "ADVANCED MICRO DEVICES INC CEDE",
-          "price": 75475.0,
-          "change": 1.72,
+          "price": 75000.0,
+          "change": 1.65,
           "change_7d": 0,
           "change_1m": -14.61,
           "change_ytd": 163.87,
           "change_12m": 242.73,
           "market_cap": 100000000000.0,
           "volume": 10769.0,
-          "prev_close": 74198.78,
-          "cierre_anterior": 74198.78
+          "prev_close": 73782.59,
+          "cierre_anterior": 73782.59
         },
         {
           "ticker": "AAPL.BA",
           "name": "APPLE INC CEDEAR(REPR 1/20 SHR)",
-          "price": 24690.0,
+          "price": 24680.0,
           "change": 0.04,
           "change_7d": 0,
           "change_1m": -3.74,
@@ -118065,8 +118065,8 @@
           "change_12m": 66.48,
           "market_cap": 100000000000.0,
           "volume": 76461.0,
-          "prev_close": 24680.13,
-          "cierre_anterior": 24680.13
+          "prev_close": 24670.13,
+          "cierre_anterior": 24670.13
         },
         {
           "ticker": "NVDA.BA",
@@ -118099,16 +118099,16 @@
         {
           "ticker": "MSFT.BA",
           "name": "MICROSOFT CORP CEDEAR EACH 30 R",
-          "price": 25640.0,
-          "change": 0.94,
+          "price": 25680.0,
+          "change": 1.1,
           "change_7d": 0,
           "change_1m": 24.33,
           "change_ytd": 37.74,
           "change_12m": 14.93,
           "market_cap": 100000000000.0,
           "volume": 135237.0,
-          "prev_close": 25401.23,
-          "cierre_anterior": 25401.23
+          "prev_close": 25400.59,
+          "cierre_anterior": 25400.59
         },
         {
           "ticker": "AMZN.BA",
@@ -118141,16 +118141,16 @@
         {
           "ticker": "SPY.BA",
           "name": "STATE ST SPDR S&P 500 ETF TR CE",
-          "price": 20360.0,
-          "change": 0.84,
+          "price": 20370.0,
+          "change": 0.89,
           "change_7d": 0,
           "change_1m": 2.96,
           "change_ytd": -0.64,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 484095.0,
-          "prev_close": 20190.4,
-          "cierre_anterior": 20190.4
+          "prev_close": 20190.31,
+          "cierre_anterior": 20190.31
         }
       ],
       "highs_52w": [
@@ -118227,21 +118227,21 @@
         {
           "ticker": "MA.BA",
           "name": "MASTERCARD INCORPORATED CEDEAR ",
-          "price": 28040.0,
-          "change": 1.59,
+          "price": 27980.0,
+          "change": 1.38,
           "change_7d": 0,
           "change_1m": 0.0,
           "change_ytd": 0.0,
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 8477.0,
-          "prev_close": 27601.14,
-          "cierre_anterior": 27601.14
+          "prev_close": 27599.13,
+          "cierre_anterior": 27599.13
         },
         {
           "ticker": "V.BA",
           "name": "VISA INC CEDEARS (EACH 18 REP 1",
-          "price": 32900.0,
+          "price": 32880.0,
           "change": 1.92,
           "change_7d": 0,
           "change_1m": 4.81,
@@ -118249,8 +118249,8 @@
           "change_12m": 28.99,
           "market_cap": 100000000000.0,
           "volume": 14098.0,
-          "prev_close": 32280.22,
-          "cierre_anterior": 32280.22
+          "prev_close": 32260.6,
+          "cierre_anterior": 32260.6
         },
         {
           "ticker": "HD.BA",
@@ -118300,29 +118300,29 @@
           "ticker": "PFE.BA",
           "name": "PFIZER INC CEDEAR EACH 4 REP 1 ",
           "price": 11130.0,
-          "change": 1.0,
+          "change": 1.27,
           "change_7d": 0,
           "change_1m": 12.79,
           "change_ytd": 13.26,
           "change_12m": 32.93,
           "market_cap": 100000000000.0,
           "volume": 27189.0,
-          "prev_close": 11019.8,
-          "cierre_anterior": 11019.8
+          "prev_close": 10990.42,
+          "cierre_anterior": 10990.42
         },
         {
           "ticker": "BABA.BA",
           "name": "ALIBABA GROUP HOLDING LTD CEDEA",
           "price": 21190.0,
-          "change": -7.47,
+          "change": -7.6,
           "change_7d": 0,
           "change_1m": 12.7,
           "change_ytd": -6.42,
           "change_12m": 31.61,
           "market_cap": 100000000000.0,
           "volume": 219861.0,
-          "prev_close": 22900.68,
-          "cierre_anterior": 22900.68
+          "prev_close": 22932.9,
+          "cierre_anterior": 22932.9
         },
         {
           "ticker": "VALE.BA",
@@ -118341,21 +118341,21 @@
         {
           "ticker": "INTC.BA",
           "name": "INTEL CORP CEDEARS (EACH 5 REP ",
-          "price": 28700.0,
-          "change": -2.05,
+          "price": 28680.0,
+          "change": -2.12,
           "change_7d": 0,
           "change_1m": -9.62,
           "change_ytd": 134.96,
           "change_12m": 374.11,
           "market_cap": 100000000000.0,
           "volume": 32563.0,
-          "prev_close": 29300.66,
-          "cierre_anterior": 29300.66
+          "prev_close": 29301.19,
+          "cierre_anterior": 29301.19
         },
         {
           "ticker": "BA.BA",
           "name": "BOEING CO CEDEAR EACH 24 REP 1",
-          "price": 14240.0,
+          "price": 14180.0,
           "change": 0.56,
           "change_7d": 0,
           "change_1m": 3.89,
@@ -118363,8 +118363,8 @@
           "change_12m": 15.36,
           "market_cap": 100000000000.0,
           "volume": 5080.0,
-          "prev_close": 14160.7,
-          "cierre_anterior": 14160.7
+          "prev_close": 14101.03,
+          "cierre_anterior": 14101.03
         },
         {
           "ticker": "PYPL.BA",
@@ -118398,20 +118398,20 @@
           "ticker": "GLOB.BA",
           "name": "GLOBANT SA CEDEAR EACH 18 REP 1",
           "price": 3498.0,
-          "change": 0.65,
+          "change": 0.43,
           "change_7d": 0,
           "change_1m": 29.42,
           "change_ytd": 3.27,
           "change_12m": -29.37,
           "market_cap": 100000000000.0,
           "volume": 128088.0,
-          "prev_close": 3475.41,
-          "cierre_anterior": 3475.41
+          "prev_close": 3483.02,
+          "cierre_anterior": 3483.02
         },
         {
           "ticker": "NIO.BA",
           "name": "NIO INC CEDEAR EACH 4 REP 1 ADR",
-          "price": 1849.0,
+          "price": 1846.0,
           "change": 2.61,
           "change_7d": 0,
           "change_1m": 0.0,
@@ -118419,8 +118419,8 @@
           "change_12m": 0.0,
           "market_cap": 100000000000.0,
           "volume": 123809.0,
-          "prev_close": 1801.97,
-          "cierre_anterior": 1801.97
+          "prev_close": 1799.04,
+          "cierre_anterior": 1799.04
         }
       ]
     },
@@ -118724,30 +118724,30 @@
       {
         "ticker": "BBAR.BA",
         "name": "Banco BBVA",
-        "price": 7490.0,
-        "change": 0.67,
+        "price": 7510.0,
+        "change": 0.94,
         "change_val": -2.62,
         "change_7d": -9.5,
         "change_1m": -24.16,
         "change_ytd": -14.01,
         "change_12m": 18.08,
         "volume": 136214,
-        "prev_close": 7440.15,
-        "cierre_anterior": 7440.15
+        "prev_close": 7440.06,
+        "cierre_anterior": 7440.06
       },
       {
         "ticker": "BMA.BA",
         "name": "Banco Macro",
         "price": 11650.0,
-        "change": 1.04,
+        "change": 0.95,
         "change_val": -1.26,
         "change_7d": -7.76,
         "change_1m": -18.02,
         "change_ytd": -11.82,
         "change_12m": 35.4,
         "volume": 280605,
-        "prev_close": 11530.09,
-        "cierre_anterior": 11530.09
+        "prev_close": 11540.37,
+        "cierre_anterior": 11540.37
       },
       {
         "ticker": "BYMA.BA",
@@ -118766,16 +118766,16 @@
       {
         "ticker": "CEPU.BA",
         "name": "Central Puerto",
-        "price": 2071.0,
-        "change": 1.97,
+        "price": 2066.0,
+        "change": 1.72,
         "change_val": -0.44,
         "change_7d": -6.16,
         "change_1m": -11.6,
         "change_ytd": -23.19,
         "change_12m": 33.25,
         "volume": 1032491,
-        "prev_close": 2030.99,
-        "cierre_anterior": 2030.99
+        "prev_close": 2031.07,
+        "cierre_anterior": 2031.07
       },
       {
         "ticker": "COME.BA",
@@ -118795,15 +118795,15 @@
         "ticker": "CRES.BA",
         "name": "Cresud",
         "price": 1769.0,
-        "change": 2.02,
+        "change": 2.42,
         "change_val": 5.22,
         "change_7d": -3.03,
         "change_1m": -3.31,
         "change_ytd": -13.95,
         "change_12m": 18.16,
         "volume": 203173,
-        "prev_close": 1733.97,
-        "cierre_anterior": 1733.97
+        "prev_close": 1727.2,
+        "cierre_anterior": 1727.2
       },
       {
         "ticker": "ECOG.BA",
@@ -118822,16 +118822,16 @@
       {
         "ticker": "EDN.BA",
         "name": "Edenor",
-        "price": 1775.0,
-        "change": 1.02,
+        "price": 1776.0,
+        "change": 1.08,
         "change_val": -0.85,
         "change_7d": -4.89,
         "change_1m": -8.87,
         "change_ytd": -21.16,
         "change_12m": 1.33,
         "volume": 855965,
-        "prev_close": 1757.08,
-        "cierre_anterior": 1757.08
+        "prev_close": 1757.02,
+        "cierre_anterior": 1757.02
       },
       {
         "ticker": "GGAL.BA",
@@ -118878,30 +118878,30 @@
       {
         "ticker": "PAMP.BA",
         "name": "Pampa Energía",
-        "price": 5055.0,
-        "change": 0.5,
+        "price": 5080.0,
+        "change": 0.99,
         "change_val": 1.01,
         "change_7d": -4.13,
         "change_1m": -4.77,
         "change_ytd": -8.27,
         "change_12m": 27.62,
         "volume": 1057097,
-        "prev_close": 5029.85,
-        "cierre_anterior": 5029.85
+        "prev_close": 5030.2,
+        "cierre_anterior": 5030.2
       },
       {
         "ticker": "SUPV.BA",
         "name": "Grupo Supervielle",
-        "price": 2515.0,
-        "change": 3.54,
+        "price": 2508.0,
+        "change": 3.23,
         "change_val": -1.71,
         "change_7d": -4.83,
         "change_1m": -19.98,
         "change_ytd": -28.72,
         "change_12m": -1.44,
         "volume": 486089,
-        "prev_close": 2429.01,
-        "cierre_anterior": 2429.01
+        "prev_close": 2429.53,
+        "cierre_anterior": 2429.53
       },
       {
         "ticker": "TGNO4.BA",
@@ -118920,16 +118920,16 @@
       {
         "ticker": "TGSU2.BA",
         "name": "Transportadora de Gas del Sur",
-        "price": 8935.0,
-        "change": -0.39,
+        "price": 8970.0,
+        "change": 0.0,
         "change_val": 0.46,
         "change_7d": -2.9,
         "change_1m": -9.03,
         "change_ytd": -6.78,
         "change_12m": 20.68,
         "volume": 311219,
-        "prev_close": 8969.98,
-        "cierre_anterior": 8969.98
+        "prev_close": 8970.0,
+        "cierre_anterior": 8970.0
       },
       {
         "ticker": "TRAN.BA",
@@ -118948,16 +118948,16 @@
       {
         "ticker": "TXAR.BA",
         "name": "Ternium Argentina",
-        "price": 697.0,
-        "change": 3.64,
+        "price": 692.0,
+        "change": 2.9,
         "change_val": -2.01,
         "change_7d": 1.75,
         "change_1m": 8.49,
         "change_ytd": 4.0,
         "change_12m": 19.54,
         "volume": 426318,
-        "prev_close": 672.52,
-        "cierre_anterior": 672.52
+        "prev_close": 672.5,
+        "cierre_anterior": 672.5
       },
       {
         "ticker": "VALO.BA",
@@ -118992,8 +118992,8 @@
       {
         "ticker": "BTC-USD",
         "name": "Bitcoin",
-        "price": 77478.01,
-        "change": 6.09,
+        "price": 77452.55,
+        "change": 6.05,
         "change_val": 0.03,
         "change_7d": -2.81,
         "change_1m": -1.11,
@@ -119006,8 +119006,8 @@
       {
         "ticker": "ETH-USD",
         "name": "Ethereum",
-        "price": 2438.77,
-        "change": 4.83,
+        "price": 2439.88,
+        "change": 4.88,
         "change_val": 0.17,
         "change_7d": -1.7,
         "change_1m": 1.07,
@@ -119034,8 +119034,8 @@
       {
         "ticker": "BNB-USD",
         "name": "BNB",
-        "price": 675.63,
-        "change": 3.16,
+        "price": 676.03,
+        "change": 3.23,
         "change_val": -0.29,
         "change_7d": 1.58,
         "change_1m": 6.59,
@@ -119048,8 +119048,8 @@
       {
         "ticker": "XRP-USD",
         "name": "XRP",
-        "price": 1.37,
-        "change": 8.06,
+        "price": 1.38,
+        "change": 8.54,
         "change_val": 0.65,
         "change_7d": -3.4,
         "change_1m": -7.64,
@@ -119062,8 +119062,8 @@
       {
         "ticker": "SOL-USD",
         "name": "Solana",
-        "price": 91.76,
-        "change": 4.7,
+        "price": 91.82,
+        "change": 4.77,
         "change_val": -0.64,
         "change_7d": -0.49,
         "change_1m": 0.44,
@@ -124159,10 +124159,10 @@
         {
           "ticker": "TXMD9",
           "name": "Bono ARS - vto. 12/2029",
-          "price": 83.94,
+          "price": 83.95,
           "tir": "38.61%",
           "duration": "2.40",
-          "change": 0.53,
+          "change": 0.54,
           "change_1m": -0.93,
           "change_12m": 1.02,
           "change_ytd": 1.02,
@@ -124465,10 +124465,10 @@
           "ticker": "MGCRD",
           "name": "Bono USD Ley NY - 7.75% - vto. 11/2037",
           "company": "Mastellone",
-          "price": 107.25,
+          "price": 107.1,
           "tir": "7.12%",
           "duration": "7.41",
-          "change": 0.05,
+          "change": -0.09,
           "change_1m": 0.89,
           "change_12m": 8.23,
           "change_ytd": 4.86,
@@ -131520,7 +131520,7 @@
           64.87,
           64.99,
           68.19,
-          69.09
+          69.01
         ]
       },
       "GC=F": {
@@ -131586,7 +131586,7 @@
           4363.6,
           4380.4,
           4578.1,
-          4665.6
+          4662.1
         ]
       },
       "ZW=F": {
@@ -132048,7 +132048,7 @@
           1725.2,
           1750.0,
           1849.6,
-          1887.5
+          1891.7
         ]
       },
       "^IXIC": {
@@ -132312,7 +132312,7 @@
           81.25,
           82.4,
           86.25,
-          86.79
+          86.7
         ]
       },
       "KC=F": {
@@ -132642,7 +132642,7 @@
           87.07,
           88.52,
           93.2,
-          94.04
+          93.94
         ]
       },
       "^MERV": {
@@ -141618,7 +141618,7 @@
           8465.0,
           8100.0,
           7440.0,
-          7490.0
+          7510.0
         ]
       },
       "CEPU.BA": {
@@ -141684,7 +141684,7 @@
           2100.0,
           2072.0,
           2031.0,
-          2071.0
+          2066.0
         ]
       },
       "XLY": {
@@ -141816,7 +141816,7 @@
           1893.0,
           1829.0,
           1757.0,
-          1775.0
+          1776.0
         ]
       },
       "XLK": {
@@ -141948,7 +141948,7 @@
           5000.0,
           4990.0,
           5030.0,
-          5055.0
+          5080.0
         ]
       },
       "CRES.BA": {
@@ -142344,7 +142344,7 @@
           8880.0,
           8870.0,
           8970.0,
-          8935.0
+          8970.0
         ]
       },
       "COME.BA": {
@@ -142608,7 +142608,7 @@
           740.0,
           728.0,
           672.5,
-          697.0
+          692.0
         ]
       },
       "SUPV.BA": {
@@ -142674,7 +142674,7 @@
           2677.5,
           2562.5,
           2429.0,
-          2515.0
+          2508.0
         ]
       },
       "VALO.BA": {
@@ -142872,7 +142872,7 @@
           62975.59,
           63080.52,
           73833.34,
-          77478.01
+          77452.55
         ]
       },
       "EURUSD=X": {
@@ -143136,7 +143136,7 @@
           1880.65,
           1883.04,
           2343.43,
-          2438.77
+          2439.88
         ]
       },
       "USDT-USD": {
@@ -143398,7 +143398,7 @@
           20210.0,
           20250.0,
           20190.0,
-          20360.0
+          20370.0
         ]
       },
       "MSFT.BA": {
@@ -143464,7 +143464,7 @@
           25320.0,
           25440.0,
           25400.0,
-          25640.0
+          25680.0
         ]
       },
       "MXN=X": {
@@ -143662,7 +143662,7 @@
           75.33,
           75.6,
           88.36,
-          91.76
+          91.82
         ]
       },
       "AAPL.BA": {
@@ -143728,7 +143728,7 @@
           24480.0,
           24980.0,
           24680.0,
-          24690.0
+          24680.0
         ]
       },
       "AUDUSD=X": {
@@ -143926,7 +143926,7 @@
           1.0,
           1.0,
           1.27,
-          1.37
+          1.38
         ]
       },
       "AMZN.BA": {
@@ -144058,7 +144058,7 @@
           607.58,
           609.89,
           656.4,
-          675.63
+          676.03
         ]
       },
       "ADBE.BA": {
@@ -144190,7 +144190,7 @@
           35360.0,
           36840.0,
           36380.0,
-          38580.0
+          38520.0
         ]
       },
       "KO.BA": {
@@ -144376,7 +144376,7 @@
           56675.0,
           56575.0,
           56400.0,
-          56825.0
+          56925.0
         ]
       },
       "AMD.BA": {
@@ -144442,7 +144442,7 @@
           76250.0,
           73675.0,
           74200.0,
-          75475.0
+          75000.0
         ]
       },
       "PYPL.BA": {
@@ -144640,7 +144640,7 @@
           31940.0,
           32080.0,
           32280.0,
-          32900.0
+          32880.0
         ]
       },
       "BRKB.BA": {
@@ -145036,7 +145036,7 @@
           30480.0,
           29400.0,
           29300.0,
-          28700.0
+          28680.0
         ]
       },
       "PBR.BA": {
@@ -145468,7 +145468,7 @@
           14640.0,
           14550.0,
           14160.0,
-          14240.0
+          14180.0
         ]
       },
       "VALE.BA": {
@@ -157334,7 +157334,7 @@
         ],
         "prices": [
           27600.0,
-          28040.0
+          27980.0
         ]
       },
       "DIA.BA": {
@@ -157388,7 +157388,7 @@
           42120.0,
           42180.0,
           41860.0,
-          42480.0
+          42460.0
         ]
       },
       "TEN.BA": {
@@ -157398,7 +157398,7 @@
         ],
         "prices": [
           83375.0,
-          83850.0
+          83650.0
         ]
       },
       "SKHY": {
@@ -158040,7 +158040,7 @@
           47340.0,
           47660.0,
           47180.0,
-          47880.0
+          47800.0
         ]
       },
       "TTD": {
@@ -159690,7 +159690,7 @@
           12320.0,
           12510.0,
           12540.0,
-          12730.0
+          12700.0
         ]
       },
       "HD.BA": {
@@ -160294,7 +160294,7 @@
         ],
         "prices": [
           1802.0,
-          1849.0
+          1846.0
         ]
       },
       "BTDR": {
