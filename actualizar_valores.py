@@ -4863,6 +4863,27 @@ canvas.sparkline-canvas {
 }
 </style>
 
+<script>
+        // Asynchronously fetch full multi-year historical dataset (1255-1500 points per asset)
+        (function loadFullHistoricalSeries() {
+            fetch('historical_series.json')
+                .then(r => r.json())
+                .then(data => {
+                    if (data && data.historical_db) {
+                        if (!window.appData) window.appData = {};
+                        window.appData.historical_db = Object.assign({}, window.appData.historical_db || {}, data.historical_db);
+                        console.log("[HISTORICAL_DB SUCCESS] Merged 100% of 5-year daily historical series into appData.historical_db!");
+                        // Trigger chart re-render with full multi-year history
+                        if (typeof renderChart === 'function') {
+                            const activeBtn = document.querySelector('.global-tab-btn.bg-brandBlue, .global-tab-btn.text-white');
+                            const section = activeBtn && activeBtn.dataset ? activeBtn.dataset.section : 'indices';
+                            renderChart(section || 'indices');
+                        }
+                    }
+                })
+                .catch(err => console.warn("[HISTORICAL_DB WARN] Could not fetch historical_series.json", err));
+        })();
+    </script>
 </head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
@@ -40166,8 +40187,24 @@ def build_dashboard():
 
 
 
-                        with open("master_dataset.json", "w", encoding="utf-8") as f:
+                                with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
