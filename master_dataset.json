@@ -196109,6 +196109,192 @@
           "link": "https://finance.yahoo.com/quote/MA"
         }
       ]
-    }
+    },
+    "indices": [
+      {
+        "ticker": "^DJI",
+        "name": "Dow Jones Industrial",
+        "cat": "indices",
+        "price": 53277.01,
+        "change": 0.98,
+        "change_7d": -0.85,
+        "change_1m": 3.03,
+        "change_12m": 16.75
+      },
+      {
+        "ticker": "^GSPC",
+        "name": "S&P 500",
+        "cat": "indices",
+        "price": 7674.37,
+        "change": 0.43,
+        "change_7d": -1.43,
+        "change_1m": 3.59,
+        "change_12m": 18.67
+      },
+      {
+        "ticker": "^IXIC",
+        "name": "Nasdaq Composite",
+        "cat": "indices",
+        "price": 26180.455,
+        "change": 0.43,
+        "change_7d": -2.05,
+        "change_1m": 4.15,
+        "change_12m": 21.79
+      },
+      {
+        "ticker": "^N225",
+        "name": "Nikkei 225 (Japón)",
+        "cat": "indices",
+        "price": 66016.36,
+        "change": -0.3,
+        "change_7d": -3.93,
+        "change_1m": -0.15,
+        "change_12m": 54.93
+      },
+      {
+        "ticker": "^FTSE",
+        "name": "FTSE 100 (Reino Unido)",
+        "cat": "indices",
+        "price": 10816.56,
+        "change": 0.64,
+        "change_7d": 0.62,
+        "change_1m": 1.67,
+        "change_12m": 16.19
+      },
+      {
+        "ticker": "^GDAXI",
+        "name": "DAX 40 (Alemania)",
+        "cat": "indices",
+        "price": 26136.56,
+        "change": 0.59,
+        "change_7d": -1.15,
+        "change_1m": 5.55,
+        "change_12m": 7.59
+      },
+      {
+        "ticker": "^STOXX50E",
+        "name": "EURO STOXX 50",
+        "cat": "indices",
+        "price": 6462.22,
+        "change": 0.63,
+        "change_7d": -1.18,
+        "change_1m": 4.06,
+        "change_12m": 18.31
+      },
+      {
+        "ticker": "^HSI",
+        "name": "Hang Seng Index (Hong Kong)",
+        "cat": "indices",
+        "price": 26009.46,
+        "change": 1.21,
+        "change_7d": 3.55,
+        "change_1m": 3.17,
+        "change_12m": 3.6
+      }
+    ],
+    "forex": [
+      {
+        "ticker": "EURUSD=X",
+        "name": "EUR/USD (Euro / Dólar)",
+        "cat": "forex",
+        "price": 1.1678,
+        "change": -0.08,
+        "change_7d": 0.9,
+        "change_1m": 2.65,
+        "change_12m": 0.23
+      },
+      {
+        "ticker": "GBPUSD=X",
+        "name": "GBP/USD (Libra / Dólar)",
+        "cat": "forex",
+        "price": 1.3648,
+        "change": 0.03,
+        "change_7d": 0.75,
+        "change_1m": 2.52,
+        "change_12m": 1.35
+      },
+      {
+        "ticker": "JPY=X",
+        "name": "USD/JPY (Dólar / Yen)",
+        "cat": "forex",
+        "price": 158.94,
+        "change": 0.04,
+        "change_7d": -0.18,
+        "change_1m": -2.99,
+        "change_12m": 7.89
+      },
+      {
+        "ticker": "AUDUSD=X",
+        "name": "AUD/USD (Dólar Aus. / Dólar)",
+        "cat": "forex",
+        "price": 0.7175,
+        "change": 0.78,
+        "change_7d": 1.27,
+        "change_1m": 2.98,
+        "change_12m": 11.48
+      }
+    ],
+    "commodities": [
+      {
+        "ticker": "GC=F",
+        "name": "Oro (Futuros USD/oz)",
+        "cat": "commodities",
+        "price": 4661.6,
+        "change": 3.22,
+        "change_7d": 6.42,
+        "change_1m": 15.2,
+        "change_12m": 39.7
+      },
+      {
+        "ticker": "SI=F",
+        "name": "Plata (Futuros USD/oz)",
+        "cat": "commodities",
+        "price": 69.01,
+        "change": 1.45,
+        "change_7d": 6.19,
+        "change_1m": 19.4,
+        "change_12m": 81.48
+      },
+      {
+        "ticker": "CL=F",
+        "name": "Petróleo WTI (USD/bbl)",
+        "cat": "commodities",
+        "price": 86.64,
+        "change": -1.35,
+        "change_7d": 5.15,
+        "change_1m": -6.02,
+        "change_12m": 36.4
+      },
+      {
+        "ticker": "BZ=F",
+        "name": "Petróleo Brent (USD/bbl)",
+        "cat": "commodities",
+        "price": 93.87,
+        "change": 0.1,
+        "change_7d": 6.04,
+        "change_1m": -6.77,
+        "change_12m": 38.72
+      },
+      {
+        "ticker": "HG=F",
+        "name": "Cobre (USD/lb)",
+        "cat": "commodities",
+        "price": 6.58,
+        "change": 1.86,
+        "change_7d": -0.3,
+        "change_1m": 4.36,
+        "change_12m": 48.48
+      },
+      {
+        "ticker": "NG=F",
+        "name": "Gas Natural (USD/MMBtu)",
+        "cat": "commodities",
+        "price": 2.798,
+        "change": 2.38,
+        "change_7d": 2.38,
+        "change_1m": -4.05,
+        "change_12m": -0.99
+      }
+    ]
   }
 }
