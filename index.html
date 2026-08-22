@@ -9176,27 +9176,33 @@ var lecapsChart = null;
         }
         
         function renderDebtChart(key) {
+            key = key || 'deuda_publica_total';
             var canvas = document.getElementById('chart-econ-fiscal');
             if (!canvas) return;
             var ctx = canvas.getContext('2d');
             
-            
-                    if (key === 'indigencia_val' || key === 'pobreza_val') {
-                        minVal = undefined;
-                        maxVal = undefined;
-                    }
-                var historyObj = appData.historical_db[key];
-            if (!historyObj) {
-                console.error("No history found for:", key);
+            if (!window.appData || !window.appData.historical_db) {
+                console.warn("appData.historical_db is undefined");
                 return;
             }
-            var history = historyObj.daily;
+
+            var historyObj = window.appData.historical_db[key];
+            if (!historyObj) {
+                console.warn("No history found for:", key);
+                return;
+            }
             
+            var history = historyObj.daily || historyObj;
+            if (!history || !history.dates || !Array.isArray(history.dates)) {
+                console.warn("No valid dates array for:", key);
+                return;
+            }
+
             var historyUSD = null;
             if (key === 'deuda_publica_pesos') {
-                var historyUSDObj = appData.historical_db['deuda_publica_pesos_usd'];
+                var historyUSDObj = window.appData.historical_db['deuda_publica_pesos_usd'];
                 if (historyUSDObj) {
-                    historyUSD = historyUSDObj.daily;
+                    historyUSD = historyUSDObj.daily || historyUSDObj;
                 }
             }
             
