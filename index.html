@@ -3964,95 +3964,75 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
     <!-- Header Global -->
 
-    <header class="bg-darkCard/80 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-6 py-4 light:bg-white/80 light:border-gray-200">
+    <header class="bg-darkCard/90 backdrop-blur-md border-b border-darkBorder sticky top-0 z-50 px-4 py-2.5 light:bg-white/90 light:border-gray-200">
+        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-2.5 lg:gap-4">
 
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-
-            <div class="flex items-center gap-3">
-
-                <i class="fas fa-chart-pie text-2xl text-brandBlue"></i>
-
-                <h1 class="text-xl font-bold text-white light:text-slate-900 font-black">Monitor Económico Financiero</h1>
-
+            <!-- LOGO -->
+            <div class="flex items-center gap-2.5 shrink-0">
+                <i class="fas fa-chart-pie text-xl text-brandBlue"></i>
+                <h1 class="text-base sm:text-lg font-bold text-white light:text-slate-900 font-black tracking-tight whitespace-nowrap">Monitor Económico Financiero</h1>
             </div>
 
-            <div class="flex items-center gap-4">
+            <!-- GLOBAL NAVIGATION BUTTONS -->
+            <div id="global-tab-navigation" class="flex items-center gap-1 bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200 shrink-0 max-w-full overflow-x-auto">
+                <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                    <i class="fas fa-building-columns text-brandBlue"></i> Indic. Económicos
+                </button>
+                <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                    <i class="fas fa-shield-halved text-brandBlue"></i> Merc. Asegurador
+                </button>
+                <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-2.5 py-1 rounded-lg text-xs font-semibold transition-all flex items-center gap-1.5 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0">
+                    <i class="fas fa-database text-brandBlue"></i> Fuentes
+                </button>
+            </div>
 
-                <div class="flex bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200">
+            <!-- CONTROLS: LAYOUT, THEME, FONT & SETTINGS -->
+            <div class="flex items-center flex-wrap sm:flex-nowrap gap-1.5 shrink-0 max-w-full">
 
-                    
-
-                    <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
-
-                        <i class="fas fa-building-columns text-brandBlue"></i> Indic. Económicos
-
-                    </button>
-
-                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
-                        <i class="fas fa-shield-halved text-brandBlue"></i> Merc. Asegurador
-                    </button>
-                    <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
-                        <i class="fas fa-database text-brandBlue"></i> Fuentes
-                    </button>
-
-                    
-
-                </div>
-
-                <!-- Selector de Diseño (Layout) -->
-
-                <div class="flex items-center gap-1 bg-darkBg border border-darkBorder shrink-0 light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl">
-
-                    <i class="fas fa-table-cells-large text-xs text-slate-400 light:text-slate-600"></i>
-
-                    <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
+                <!-- Selector Layout -->
+                <div class="flex items-center gap-1 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
+                    <i class="fas fa-table-cells-large text-[10px] text-slate-400 light:text-slate-600"></i>
+                    <select id="select-visual-layout" onchange="switchVisualLayout(this.value)" class="text-[11px] font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3">
                         <option value="agmd-style" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">AGMD Style</option>
                         <option value="bento" class="bg-darkCard text-white light:bg-white light:text-slate-800">Bento Grid</option>
                         <option value="executive" class="bg-darkCard text-white light:bg-white light:text-slate-800">Executive Report</option>
                         <option value="flat-saas" class="bg-darkCard text-white light:bg-white light:text-slate-800">FlatSaas</option>
                     </select>
-
                 </div>
 
-                <!-- Selector de Paleta de Color -->
-
-                <div class="flex items-center gap-1 bg-darkBg border border-darkBorder shrink-0 light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl">
-
-                    <i class="fas fa-palette text-xs text-slate-400 light:text-slate-600"></i>
-
-                    <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
+                <!-- Selector Tema -->
+                <div class="flex items-center gap-1 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
+                    <i class="fas fa-palette text-[10px] text-slate-400 light:text-slate-600"></i>
+                    <select id="select-visual-theme" onchange="switchVisualTheme(this.value)" class="text-[11px] font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3">
                         <option value="emerald-green" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Green</option>
                         <option value="carbon-electric" class="bg-darkCard text-white light:bg-white light:text-slate-800">Carbon</option>
                         <option value="amber-terminal" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amber</option>
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo</option>
                         <option value="pink-neon" class="bg-darkCard text-white light:bg-white light:text-slate-800">Pink</option>
-                    
                         <option value="l2-red" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
                     </select>
-
                 </div>
-                    <!-- Selector Tipografía -->
-                    <div class="flex items-center gap-1.5 bg-darkCard/80 light:bg-slate-100 border border-darkBorder/60 light:border-slate-300 rounded-xl px-2.5 py-1.5 shadow-sm">
-                        <i class="fas fa-font text-xs text-slate-400 light:text-slate-600"></i>
-                        <select id="select-visual-font" onchange="switchVisualFont(this.value)" class="text-xs font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-4">
-                            <option value="outfit-fit" class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
-                            <option value="ibm-plex" class="bg-darkCard text-white light:bg-white light:text-slate-800">IBM Plex</option>
-                            <option value="roboto-inter" class="bg-darkCard text-white light:bg-white light:text-slate-800">Roboto</option>
-                            <option value="jetbrains-fira" selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
-                        </select>
-                    </div>
 
-                <button onclick="toggleTheme()" class="p-2 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors">
+                <!-- Selector Tipografía -->
+                <div class="flex items-center gap-1 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
+                    <i class="fas fa-font text-[10px] text-slate-400 light:text-slate-600"></i>
+                    <select id="select-visual-font" onchange="switchVisualFont(this.value)" class="text-[11px] font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3">
+                        <option value="outfit-fit" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
+                        <option value="ibm-plex" class="bg-darkCard text-white light:bg-white light:text-slate-800">IBM Plex</option>
+                        <option value="roboto-inter" class="bg-darkCard text-white light:bg-white light:text-slate-800">Roboto</option>
+                        <option value="jetbrains-fira" class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
+                    </select>
+                </div>
 
-                    <i id="theme-icon" class="fas fa-sun text-lg"></i>
-
+                <!-- Toggle Modos Claro / Oscuro -->
+                <button onclick="toggleTheme()" class="p-1.5 rounded-xl bg-darkBg border border-darkBorder text-slate-400 hover:text-white light:bg-slate-200 light:border-gray-300 light:text-slate-700 transition-colors shrink-0">
+                    <i id="theme-icon" class="fas fa-sun text-sm"></i>
                 </button>
 
             </div>
 
         </div>
-
     </header>
 
 
