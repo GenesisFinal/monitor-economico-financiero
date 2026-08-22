@@ -3920,6 +3920,44 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
         }
         
+
+        /* L2 COLOR THEME (#e20039) */
+        body.theme-l2-red {
+            --brandBlue: #e20039;
+            --brandGreen: #e20039;
+            --highlight-color: #e20039;
+            --highlight-glow: rgba(226, 0, 57, 0.25);
+            --border-highlight: #e20039;
+        }
+
+        body.theme-l2-red .bg-brandBlue,
+        body.theme-l2-red .bg-brandGreen {
+            background-color: #e20039 !important;
+        }
+
+        body.theme-l2-red .text-brandBlue,
+        body.theme-l2-red .text-brandGreen {
+            color: #e20039 !important;
+        }
+
+        body.theme-l2-red .border-brandBlue,
+        body.theme-l2-red .border-brandGreen {
+            border-color: #e20039 !important;
+        }
+
+        body.theme-l2-red #btn-global-indicadores.active,
+        body.theme-l2-red #btn-global-asegurador.active,
+        body.theme-l2-red #btn-global-fuentes.active,
+        body.theme-l2-red #btn-global-indicadores:not(.text-slate-400),
+        body.theme-l2-red #btn-global-asegurador:not(.text-slate-400),
+        body.theme-l2-red #btn-global-fuentes:not(.text-slate-400) {
+            background-color: rgba(226, 0, 57, 0.2) !important;
+            border: 2px solid #e20039 !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 8px rgba(226, 0, 57, 0.3) !important;
+        }
+        
 </style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
@@ -3989,6 +4027,8 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo</option>
                         <option value="pink-neon" class="bg-darkCard text-white light:bg-white light:text-slate-800">Pink</option>
+                    
+                        <option value="l2-red" class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
                     </select>
 
                 </div>
@@ -45219,7 +45259,7 @@ function switchGlobalTab(tabId) {
 
             
 
-            document.body.classList.remove('font-jetbrains-fira', 'font-ibm-plex', 'font-roboto-inter', 'font-jetbrains-fira');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-red');
 
             document.body.classList.add('font-' + fontName);
 
@@ -45237,13 +45277,13 @@ function switchGlobalTab(tabId) {
 
         function switchVisualTheme(themeName) {
 
-            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon'];
+            const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'l2-red'];
 
             if (!allowed.includes(themeName)) themeName = 'emerald-green';
 
             
 
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-color');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-red');
 
             document.body.classList.add('theme-' + themeName);
 
@@ -45275,7 +45315,7 @@ function switchGlobalTab(tabId) {
 
             
 
-            document.body.classList.remove('layout-bento', 'layout-terminal', 'layout-executive', 'layout-neobrutalist', 'layout-cyber-grid', 'layout-flat-saas', 'layout-l2-style', 'layout-hft-terminal', 'layout-swiss-luxe', 'layout-tokyo-neoglass', 'layout-agmd-style');
+            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-red');
 
             document.body.classList.add('layout-' + layoutName);
 
