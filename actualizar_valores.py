@@ -9,7 +9,7 @@ def build_tr_html(item, cat_name):
     c1m = item.get("change_1m", 0.0)
     cytd = item.get("change_ytd", 0.0)
     c12m = item.get("change_12m", 0.0)
-    mcap_str = item.get("market_cap_str", "$50.0B")
+    mcap_str = item.get("mcap") or item.get("market_cap_str") or "$100.0B"
     vol = item.get("volume", 0)
 
     def var_cell(val, hidden_class=""):
