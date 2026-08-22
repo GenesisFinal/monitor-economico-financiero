@@ -36009,6 +36009,16 @@ def build_dashboard():
     print("Loading freshly updated master_dataset.json into memory...")
     with open("master_dataset.json", "r", encoding="utf-8", errors="ignore") as f:
         master_store_data = json.load(f)
+    # 1. Run process_cedears_and_stocks_engine to rebuild Var 7D, Market Cap, Gainers and Losers in master_store_data
+    try:
+        from rebuild_cedears_and_stocks_complete_engine import process_cedears_and_stocks_engine
+        process_cedears_and_stocks_engine()
+        with open('master_dataset.json', 'r', encoding='utf-8') as fresh_f:
+            master_store_data = json.load(fresh_f)
+        print("[BUILDER SUCCESS] Rebuilt and reloaded fresh CEDEARs & World Stocks metrics into memory!")
+    except Exception as e:
+        print("[BUILDER WARN] Could not run process_cedears_and_stocks_engine:", e)
+
 
     print("Updating SSN data in master_store_data...")
     ssn_primas = load_ssn_situacion_mercado()
@@ -36038,8 +36048,16 @@ def build_dashboard():
 
 
 
-            with open("master_dataset.json", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
+
+    # Permanent NaN Post-Pass Filter
+    import re
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
+        raw_js = f.read()
+    clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
+        f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
@@ -36244,6 +36262,16 @@ def build_dashboard():
     env = jinja2.Environment(loader=jinja2.FileSystemLoader("."))
     template = env.from_string(html_template)
     
+    
+    # Run in-memory CEDEARs and Stocks engine
+    try:
+        from rebuild_cedears_and_stocks_complete_engine import process_final_data_in_memory
+        h_db = master_store_data.get("final_data", {}).get("historical_db", {})
+        master_store_data["final_data"] = process_final_data_in_memory(master_store_data.get("final_data", {}), h_db)
+        print("[BUILDER SUCCESS] Transformed CEDEARs & World Stocks metrics directly in memory!")
+    except Exception as e:
+        print("[BUILDER WARN] Could not run process_final_data_in_memory:", e)
+
     cedears_dict = master_store_data.get("final_data", {}).get("cedears", {})
     stocks_dict = master_store_data.get("final_data", {}).get("stocks", {})
 
