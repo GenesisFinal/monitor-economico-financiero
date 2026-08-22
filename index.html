@@ -2886,7 +2886,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             border-radius: 4px !important;
 
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.08) !important;
+            box-shadow: none !important;
 
             transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 
@@ -2898,7 +2898,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             transform: translateY(-2px) !important;
 
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.2) !important;
+            box-shadow: none !important;
 
             outline-color: rgba(255, 215, 0, 0.5) !important;
 
@@ -2942,7 +2942,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             font-weight: 700 !important;
 
-            box-shadow: 0 0 5px rgba(255, 215, 0, 0.2) !important;
+            box-shadow: none !important;
 
         }
 
@@ -3210,7 +3210,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             box-shadow: inset 4px 0 12px -2px var(--highlight-glow), 0 4px 12px -2px var(--highlight-glow);
 
-            text-shadow: 0 0 8px var(--highlight-glow);
+            text-shadow: none !important;
 
             padding-left: 1.5rem;
 
@@ -3268,9 +3268,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             border-color: var(--highlight-color) !important;
 
-            box-shadow: 0 0 14px 2px var(--highlight-glow) !important;
+            box-shadow: none !important;
 
-            text-shadow: 0 0 8px var(--highlight-color);
+            text-shadow: none !important;
 
         }
 
@@ -3284,7 +3284,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             border-color: var(--highlight-color) !important;
 
-            box-shadow: 0 0 10px 0 var(--highlight-glow);
+            box-shadow: none !important;
 
         }
 
@@ -3883,7 +3883,44 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
-    </style></head>
+    
+        /* CRISP HIGH-CONTRAST BORDER HIGHLIGHT FOR GLOBAL NAV BUTTONS (NO BLUR) */
+        #btn-global-indicadores, #btn-global-asegurador, #btn-global-fuentes {
+            text-shadow: none !important;
+            filter: none !important;
+            backdrop-filter: none !important;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .dark #btn-global-indicadores.active,
+        .dark #btn-global-asegurador.active,
+        .dark #btn-global-fuentes.active,
+        .dark #btn-global-indicadores:not(.text-slate-400),
+        .dark #btn-global-asegurador:not(.text-slate-400),
+        .dark #btn-global-fuentes:not(.text-slate-400) {
+            background-color: rgba(37, 99, 235, 0.25) !important;
+            border: 2px solid #3b82f6 !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            text-shadow: none !important;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .light #btn-global-indicadores.active,
+        .light #btn-global-asegurador.active,
+        .light #btn-global-fuentes.active,
+        .light #btn-global-indicadores:not(.text-slate-600),
+        .light #btn-global-asegurador:not(.text-slate-600),
+        .light #btn-global-fuentes:not(.text-slate-600) {
+            background-color: #2563eb !important;
+            border: 2px solid #1d4ed8 !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            text-shadow: none !important;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3) !important;
+        }
+        
+</style></head>
 
 <body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
 
@@ -42211,7 +42248,7 @@ function switchGlobalTab(tabId) {
 
             const isDark = document.body.classList.contains('dark');
             const inactiveClass = "px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 shrink-0";
-            const activeClass = "px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 bg-brandBlue text-white shadow-lg shadow-brandBlue/25 shrink-0";
+            const activeClass = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 bg-brandBlue/30 text-white border-2 border-brandBlue shrink-0 active";
 
             if (containerValores) containerValores.classList.add('hidden');
             if (containerIndicadores) containerIndicadores.classList.add('hidden');
@@ -48758,7 +48795,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
             };
 
             const isDark = document.body.classList.contains('dark');
-            const activeClass = "px-4 py-2 rounded-lg text-xs font-bold transition-all bg-brandBlue text-white shadow-md";
+            const activeClass = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-2 bg-brandBlue/30 text-white border-2 border-brandBlue shrink-0 active";
             const inactiveClass = isDark
                 ? "px-4 py-2 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all"
                 : "px-4 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition-all";
