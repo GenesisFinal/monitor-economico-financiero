@@ -9279,7 +9279,7 @@ var lecapsChart = null;
                 debtChartInstance.destroy();
             }
             
-            var nameIndicator = appData.names[key] || key;
+            var nameIndicator = (appData.names && (appData.names && appData.names[key])) || key;
             
             debtChartInstance = new Chart(ctx, {
                     plugins: [verticalLinePlugin],
