@@ -1,7 +1,7 @@
 
 def build_tr_html(item, cat_name):
     ticker = item.get("ticker", "")
-    base_t = ticker.replace(".BA", "")
+    base_t = ticker.replace(".BA", "").strip()
     name = item.get("name", ticker)
     price = item.get("price", 0.0)
     c1d = item.get("change", 0.0)
@@ -32,22 +32,28 @@ def build_tr_html(item, cat_name):
 
     price_str = f"${price:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".") if price else "-.-"
     vol_str = f"{int(vol):,}".replace(",", ".") if vol else "-"
-    rava_url = f"https://www.rava.com/perfil/{base_t}"
 
-    return f"""<tr data-ticker="{ticker}" onclick="rowClick(event, '{cat_name}', '{ticker}')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
+    if cat_name in ["stocks", "yf", "indices", "commodities", "forex", "etfs"]:
+        target_url = f"https://finance.yahoo.com/quote/{ticker}"
+        target_title = "Ver en Yahoo Finance"
+    else:
+        target_url = f"https://www.rava.com/perfil/{base_t}"
+        target_title = "Ver en Rava Bursátil"
+
+    return f'''<tr data-ticker="{ticker}" onclick="rowClick(event, '{cat_name}', '{ticker}')" class="hover:bg-brandBlue/5 transition-colors cursor-pointer border-b border-darkBorder/20 light:border-gray-200">
     <td class="py-2.5 px-2 text-center"><input type="checkbox" onchange="toggleSelect(event, '{cat_name}', '{ticker}')" class="rounded text-brandBlue focus:ring-brandBlue cursor-pointer"></td>
-    <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><span class="font-bold">{ticker}</span><a href="{rava_url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-brandBlue transition-colors text-[10px] opacity-75 hover:opacity-100" title="Ver en Rava Bursátil" onclick="event.stopPropagation();"><i class="fas fa-arrow-up-right-from-square"></i></a></span></td>
-    <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 truncate max-w-[140px]" title="{name}">{name}</td>
-    <td class="py-2.5 px-3 text-right font-mono font-semibold live-price-cell text-slate-400 light:text-slate-500 opacity-70" data-ticker="{ticker}" data-close-price="{price}">-.-</td>
-    <td class="py-2.5 px-3 text-right font-mono font-semibold text-white light:text-slate-900 whitespace-nowrap">{price_str}</td>
+    <td class="py-2.5 px-3 font-semibold text-white light:text-slate-900 font-mono whitespace-nowrap"><span class="inline-flex items-center gap-1.5"><a href="{target_url}" target="_blank" rel="noopener noreferrer" class="hover:underline text-brandBlue flex items-center gap-1" title="{target_title}">{ticker}<svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg></a></span></td>
+    <td class="py-2.5 px-3 text-slate-300 light:text-slate-700 whitespace-nowrap text-xs">{name}</td>
+    <td class="py-2.5 px-3 text-right font-mono text-slate-400 light:text-slate-500">-.-</td>
+    <td class="py-2.5 px-3 text-right font-mono text-white light:text-slate-900 font-semibold whitespace-nowrap">{price_str}</td>
     {var_cell(c1d)}
-    {var_cell(c7d, "hidden lg:table-cell")}
-    {var_cell(c1m, "hidden xl:table-cell")}
-    {var_cell(cytd, "hidden xl:table-cell")}
-    {var_cell(c12m, "hidden xl:table-cell")}
-    <td class="py-2.5 px-3 text-right font-mono hidden md:table-cell whitespace-nowrap text-amber-400 font-semibold">{mcap_str}</td>
-    <td class="py-2.5 px-3 text-right font-mono hidden md:table-cell whitespace-nowrap text-slate-400 light:text-slate-500">{vol_str}</td>
-</tr>"""
+    {var_cell(c7d)}
+    {var_cell(c1m, "hidden md:table-cell")}
+    {var_cell(cytd, "hidden md:table-cell")}
+    {var_cell(c12m, "hidden lg:table-cell")}
+    <td class="py-2.5 px-3 text-right font-mono text-slate-300 light:text-slate-700 font-semibold whitespace-nowrap">{mcap_str}</td>
+    <td class="py-2.5 px-3 text-right font-mono text-slate-400 light:text-slate-500 text-xs whitespace-nowrap">{vol_str}</td>
+</tr>'''
 
 def build_table_html(items, cat_name):
     if not items or not isinstance(items, list):
