@@ -143,6 +143,13 @@ html_template = """<!DOCTYPE html>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
+function getTickerName(ticker) {
+    if (window.appData && window.appData.names && window.getTickerName(ticker)) {
+        return window.getTickerName(ticker);
+    }
+    return ticker;
+}
+
 function renderAseguradorData() {
     var cur = window.activeAsegSubtab || 'primas';
     if (typeof switchAsegSubtab === 'function') {
@@ -27118,7 +27125,7 @@ canvas.sparkline-canvas {
 
             
 
-            const nameIndicator = appData.names[key] || key;
+            const nameIndicator = getTickerName(s.ticker) || key;
 
             
 
@@ -29628,7 +29635,7 @@ function toggleBandsVisibility() {
 
                 if (activeTickers.length === 1) {
 
-                    const nm = (appData.names && appData.names[activeTickers[0]]) || activeTickers[0];
+                    const nm = (appData.names && getTickerName(s.ticker)) || activeTickers[0];
 
                     dynamicTitle = 'Evolución de ' + nm + ' (' + periodText + ')';
 
@@ -29636,7 +29643,7 @@ function toggleBandsVisibility() {
 
                     const shortNames = activeTickers.map(t => {
 
-                        const n = (appData.names && appData.names[t]) || t;
+                        const n = (appData.names && getTickerName(s.ticker)) || t;
 
                         return n.length > 28 ? n.substring(0, 26) + '…' : n;
 
@@ -30033,7 +30040,7 @@ function toggleBandsVisibility() {
 
                     const colorSet = colors[index % colors.length];
 
-                    const labelName = appData.names[s.ticker] || s.ticker;
+                    const labelName = getTickerName(s.ticker) || s.ticker;
 
                     const selectedType = isBase100 ? 'line' : (state[section].chartType || 'candlestick');
 
