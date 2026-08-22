@@ -35240,6 +35240,21 @@ def build_dashboard():
     )
 
     
+    
+    #     # ALWAYS ENFORCE PERMANENT REMOVAL OF VALORES FINANCIEROS IN RENDERING
+    import re
+    rendered_html = re.sub(r'<button[^>]*id="btn-global-valores"[^>]*>.*?</button>', '', rendered_html, flags=re.DOTALL)
+    pos_v = rendered_html.find('id="sec-global-valores"')
+    if pos_v != -1:
+        st_v = rendered_html.rfind('<section', 0, pos_v)
+        if st_v == -1: st_v = rendered_html.rfind('<div', 0, pos_v)
+        nx_pos = min([p for p in [rendered_html.find('id="sec-global-asegurador"', pos_v), rendered_html.find('id="sec-global-indicadores"', pos_v), rendered_html.find('id="sec-global-fuentes"', pos_v)] if p != -1])
+        nx_st = rendered_html.rfind('<section', 0, nx_pos)
+        if nx_st == -1: nx_st = rendered_html.rfind('<div', 0, nx_pos)
+        rendered_html = rendered_html[:st_v] + rendered_html[nx_st:]
+    rendered_html = rendered_html.replace("let currentGlobalSection = 'valores';", "let currentGlobalSection = 'asegurador';")
+    rendered_html = rendered_html.replace("let activeGlobalSection = 'valores';", "let activeGlobalSection = 'asegurador';")
+
     with open("index.html", "w", encoding="utf-8") as f:
         f.write(rendered_html)
 
