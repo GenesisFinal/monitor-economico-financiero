@@ -4975,11 +4975,7 @@ canvas.sparkline-canvas {
 
                 <div class="flex bg-darkBg light:bg-slate-100 p-1 rounded-xl border border-darkBorder light:border-gray-200">
 
-                    <button onclick="switchGlobalTab('valores-financieros')" id="btn-global-valores" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-white bg-brandBlue/10 border border-brandBlue/20">
-
-                        <i class="fas fa-chart-line text-brandBlue"></i> Valores Financieros
-
-                    </button>
+                    
 
                     <button onclick="switchGlobalTab('indicadores-economicos')" id="btn-global-indicadores" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
 
@@ -4987,7 +4983,7 @@ canvas.sparkline-canvas {
 
                     </button>
 
-                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
+                    <button onclick="switchGlobalTab('mercado-asegurador')" id="btn-global-asegurador" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900 active bg-brandBlue text-white active bg-brandBlue text-white">
                         <i class="fas fa-shield-halved text-brandBlue"></i> Mercado Asegurador
                     </button>
                     <button onclick="switchGlobalTab('fuentes')" id="btn-global-fuentes" class="px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 text-slate-400 hover:text-white light:text-slate-600 light:hover:text-slate-900">
@@ -34947,13 +34943,13 @@ def build_dashboard():
         print("Live market updater warning:", e)
 
     print("Loading freshly updated master_dataset.json?v=1787368714631 into memory...")
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8", errors="ignore") as f:
+    with open("master_dataset.json", "r", encoding="utf-8", errors="ignore") as f:
         master_store_data = json.load(f)
     # 1. Run process_cedears_and_stocks_engine to rebuild Var 7D, Market Cap, Gainers and Losers in master_store_data
     try:
         from rebuild_cedears_and_stocks_complete_engine import process_cedears_and_stocks_engine
         process_cedears_and_stocks_engine()
-        with open('master_dataset.json?v=1787368714631', 'r', encoding='utf-8') as fresh_f:
+        with open("master_dataset.json", 'r', encoding='utf-8') as fresh_f:
             master_store_data = json.load(fresh_f)
         print("[BUILDER SUCCESS] Rebuilt and reloaded fresh CEDEARs & World Stocks metrics into memory!")
     except Exception as e:
@@ -34988,198 +34984,198 @@ def build_dashboard():
 
 
 
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         json.dump(master_store_data, f, ensure_ascii=False, indent=2)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     # Permanent NaN Post-Pass Filter
     import re
-    with open("master_dataset.json?v=1787368714631", "r", encoding="utf-8") as f:
+    with open("master_dataset.json", "r", encoding="utf-8") as f:
         raw_js = f.read()
     clean_js = re.sub(r':\s*NaN\b', ': null', raw_js)
-    with open("master_dataset.json?v=1787368714631", "w", encoding="utf-8") as f:
+    with open("master_dataset.json", "w", encoding="utf-8") as f:
         f.write(clean_js)
 
     print("Rendering template to index.html...")
     
     # Merge 100% full 5-year historical dataset (1255-1500 points) before rendering HTML
     try:
-        with open('historical_series.json?v=1787368714631', 'r', encoding='utf-8') as hf:
+        with open("historical_series.json", 'r', encoding='utf-8') as hf:
             h_full_data = json.load(hf).get('historical_db', {})
             if h_full_data:
                 if 'historical_db' not in master_store_data['final_data']:
