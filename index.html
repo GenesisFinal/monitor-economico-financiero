@@ -4020,7 +4020,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo</option>
                         <option value="pink-neon" class="bg-darkCard text-white light:bg-white light:text-slate-800">Pink</option>
-                        <option value="l2-red" selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
+                        <option value="l2-red" selected selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
                     </select>
                 </div>
 
@@ -21713,7 +21713,7 @@ function switchGlobalTab(tabId) {
 
             const allowed = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'l2-red'];
 
-            if (!allowed.includes(themeName)) themeName = 'l2-red';
+            if (!allowed.includes(themeName) || themeName === 'emerald-green') themeName = 'l2-red';
 
             
 
