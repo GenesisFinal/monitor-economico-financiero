@@ -6,6 +6,18 @@
     <script>
       (function() {
         try {
+          localStorage.setItem('visualTheme', 'l2-red');
+          localStorage.setItem('visualLayout', 'agmd-style');
+          localStorage.setItem('visualFont', 'sora');
+        } catch(e) {}
+      })();
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+      (function() {
+        try {
           var vt = localStorage.getItem('visualTheme');
           if (!vt || vt === 'emerald-green') {
             localStorage.setItem('visualTheme', 'l2-red');
@@ -2104,6 +2116,16 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+
+        /* Sora Font Family Support */
+        body.font-sora, body.font-sora *, html.font-sora, html.font-sora * {
+            font-family: 'Sora', sans-serif !important;
+        }
+        body.font-sora .font-mono, body.font-sora .live-price-cell {
+            font-family: 'Sora', monospace !important;
+        }
+    
+
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
         /* Dynamic Font Theme Classes */
         body.font-jetbrains-fira, body {
@@ -3970,7 +3992,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         
 </style></head>
 
-<body class="dark theme-l2-red layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
+<body class="text-slate-100 dark bg-darkBg layout-agmd-style duration-300 min-h-screen theme-l2-red font-sora font-jetbrains-fira transition-colors">
 
     <!-- Header Global -->
 
@@ -4028,7 +4050,8 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="flex items-center gap-1 bg-darkBg border border-darkBorder light:bg-slate-200 light:border-gray-300 px-2 py-1 rounded-xl shrink-0">
                     <i class="fas fa-font text-[10px] text-slate-400 light:text-slate-600"></i>
                     <select id="select-visual-font" onchange="switchVisualFont(this.value)" class="text-[11px] font-semibold rounded-lg bg-transparent border-0 text-slate-300 light:text-slate-700 focus:outline-none focus:ring-0 cursor-pointer pr-3">
-                        <option value="outfit-fit" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
+                        <option value="sora" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">Sora</option>
+                        <option value="outfit-fit" class="bg-darkCard text-white light:bg-white light:text-slate-800">Outfit</option>
                         <option value="ibm-plex" class="bg-darkCard text-white light:bg-white light:text-slate-800">IBM Plex</option>
                         <option value="roboto-inter" class="bg-darkCard text-white light:bg-white light:text-slate-800">Roboto</option>
                         <option value="jetbrains-fira" class="bg-darkCard text-white light:bg-white light:text-slate-800">JetBrains</option>
@@ -21686,25 +21709,16 @@ function switchGlobalTab(tabId) {
 
 
         function switchVisualFont(fontName) {
+            const allowed = ['sora', 'outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
+            if (!allowed.includes(fontName)) fontName = 'sora';
 
-            const allowed = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
-
-            if (!allowed.includes(fontName)) fontName = 'jetbrains-fira';
-
-            
-
-            document.body.classList.remove('theme-carbon-electric', 'theme-indigo-slate', 'theme-emerald-green', 'theme-amber-terminal', 'theme-ocean-navy', 'theme-golden-yellow', 'theme-pink-neon', 'theme-l2-red');
-
+            document.body.classList.remove('font-sora', 'font-outfit-fit', 'font-ibm-plex', 'font-roboto-inter', 'font-jetbrains-fira');
             document.body.classList.add('font-' + fontName);
 
-            
-
             const selectEl = document.getElementById('select-visual-font');
-
             if (selectEl) selectEl.value = fontName;
 
             localStorage.setItem('visualFont', fontName);
-
         }
 
 
@@ -24467,14 +24481,13 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             switchVisualLayout(savedVisualLayout);
 
-            // Restore Visual Font
-
-            const allowedFonts = ['outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
-
+                        // Restore Visual Font
+            const allowedFonts = ['sora', 'outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
             let savedVisualFont = localStorage.getItem('visualFont');
-
-            if (!allowedFonts.includes(savedVisualFont)) savedVisualFont = 'jetbrains-fira';
-
+            if (!savedVisualFont || !allowedFonts.includes(savedVisualFont)) {
+                savedVisualFont = 'sora';
+                localStorage.setItem('visualFont', 'sora');
+            }
             switchVisualFont(savedVisualFont);
 
             
