@@ -5,12 +5,6 @@ on:
     # Runs at 21:00 ART (00:00 UTC) Monday through Friday
     - cron: '0 0 * * 2-6'
   workflow_dispatch:
-    inputs:
-      force_full_update:
-        description: 'Forzar actualización completa (--force)'
-        required: false
-        type: boolean
-        default: false
 
 permissions:
   contents: write
@@ -26,27 +20,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          cache: 'pip'
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install requests jinja2
 
       - name: Run Dashboard Builder
         env:
           PYTHONPATH: '.'
           TZ: 'America/Argentina/Buenos_Aires'
         run: |
-          if [ "${{ github.event.inputs.force_full_update }}" = "true" ]; then
-            python src/builder/dashboard_builder.py --force
-          else
-            python src/builder/dashboard_builder.py
-          fi
+          python actualizar_valores.py
+          python permanent_nan_killer.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add -A
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update financial dashboard [skip ci]" && git push)
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update clean financial dashboard [skip ci]" && git push)
