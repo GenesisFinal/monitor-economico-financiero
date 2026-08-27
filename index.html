@@ -24441,13 +24441,11 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             // Restore Color Palette Theme
 
-            const allowedThemes = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon'];
+            const allowedThemes = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'l2-red'];
 
             let savedVisualTheme = localStorage.getItem('visualTheme');
 
-            if (!allowedThemes.includes(savedVisualTheme)) {
-
-                savedVisualTheme = 'l2-red';
+            if (!allowedThemes.includes(savedVisualTheme)) { savedVisualTheme = 'l2-red';
 
             }
 
