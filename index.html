@@ -3,7 +3,16 @@
 <html lang="es">
 
 <head>
-    <script>var vt = localStorage.getItem('visualTheme'); if (!vt) localStorage.setItem('visualTheme', 'l2-red');</script>
+    <script>
+      (function() {
+        try {
+          var vt = localStorage.getItem('visualTheme');
+          if (!vt || vt === 'emerald-green') {
+            localStorage.setItem('visualTheme', 'l2-red');
+          }
+        } catch(e) {}
+      })();
+    </script>
 
     <meta charset="UTF-8">
 
@@ -3961,7 +3970,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         
 </style></head>
 
-<body class="dark theme-emerald-green layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
+<body class="dark theme-l2-red layout-agmd-style font-jetbrains-fira bg-darkBg text-slate-100 min-h-screen transition-colors duration-300">
 
     <!-- Header Global -->
 
@@ -4011,7 +4020,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <option value="ocean-navy" class="bg-darkCard text-white light:bg-white light:text-slate-800">Ocean</option>
                         <option value="golden-yellow" class="bg-darkCard text-white light:bg-white light:text-slate-800">Amarillo</option>
                         <option value="pink-neon" class="bg-darkCard text-white light:bg-white light:text-slate-800">Pink</option>
-                        <option value="l2-red" selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
+                        <option value="l2-red" selected selected class="bg-darkCard text-white light:bg-white light:text-slate-800">L2</option>
                     </select>
                 </div>
 
