@@ -30,7 +30,7 @@
         function safeSet(k, v) {
           try { localStorage.setItem(k, v); } catch(e) {}
         }
-        safeSet('theme', 'dark');
+        safeSet('theme', 'light');
         safeSet('visualTheme', 'l2-red');
         safeSet('visualLayout', 'agmd-style');
         safeSet('visualFont', 'sora');
@@ -4566,7 +4566,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     
 </head>
 
-<body class="text-slate-100 dark layout-agmd-style transition-colors font-sora theme-l2-red min-h-screen font-jetbrains-fira duration-300 bg-darkBg">
+<body class="text-slate-900 light layout-agmd-style transition-colors font-sora theme-l2-red min-h-screen font-jetbrains-fira duration-300 bg-darkBg">
 
     <!-- Header Global -->
 
@@ -24974,7 +24974,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
             // Restore Theme (Dark / Light)
 
-            const savedTheme = localStorage.getItem('theme') || 'dark';
+            const savedTheme = localStorage.getItem('theme') || 'light';
 
             const body = document.body;
 
