@@ -4,6 +4,15 @@
 
 <head>
     <script>
+
+    function getChartTextColor() {
+        return (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) ? '#cbd5e1' : '#090d16';
+    }
+    function getChartGridColor() {
+        return (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.1)';
+    }
+    
+
       (function() {
         function safeSet(k, v) {
           try { localStorage.setItem(k, v); } catch(e) {}
@@ -115,7 +124,7 @@ function renderLaSegundaEmpresasChart(lsData) {
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { color: '#94a3b8', font: { size: 11 } }
+                        labels: { color: getChartTextColor(), font: { size: 11 } }
                     },
                     tooltip: {
                         callbacks: {
@@ -176,7 +185,7 @@ function renderLaSegundaRamosCharts(lsData) {
                         }
                     },
                     scales: {
-                        x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                        x: { ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } },
                         y: { ticks: { color: '#e2e8f0', font: { size: 11 } }, grid: { display: false } }
                     }
                 }
@@ -223,7 +232,7 @@ function renderLaSegundaRamosCharts(lsData) {
                     },
                     scales: {
                         x: { ticks: { color: '#e2e8f0', font: { size: 11 } }, grid: { display: false } },
-                        y: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                        y: { ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } }
                     }
                 }
             });
@@ -441,10 +450,10 @@ function renderSegPersonasSubtabData(spData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: getChartTextColor() } } },
                         scales: {
-                            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            x: { ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } },
+                            y: { ticks: { color: getChartTextColor(), callback: function(v) { return v + '%'; } }, grid: { color: getChartGridColor() } }
                         }
                     }
                 });
@@ -470,10 +479,10 @@ function renderSegPersonasSubtabData(spData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: getChartTextColor() } } },
                         scales: {
-                            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { ticks: { color: '#94a3b8', callback: function(v) { return v + '%'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            x: { ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } },
+                            y: { ticks: { color: getChartTextColor(), callback: function(v) { return v + '%'; } }, grid: { color: getChartGridColor() } }
                         }
                     }
                 });
@@ -663,10 +672,10 @@ function renderSegRetiroSubtabData(srData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: getChartTextColor() } } },
                         scales: {
-                            x: { stacked: true, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { stacked: true, ticks: { color: '#94a3b8', callback: function(v) { return '$' + (v/1000000).toFixed(0) + 'M'; } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            x: { stacked: true, ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } },
+                            y: { stacked: true, ticks: { color: getChartTextColor(), callback: function(v) { return '$' + (v/1000000).toFixed(0) + 'M'; } }, grid: { color: getChartGridColor() } }
                         }
                     }
                 });
@@ -690,10 +699,10 @@ function renderSegRetiroSubtabData(srData) {
                     options: {
                         responsive: true,
                         maintainAspectRatio: false,
-                        plugins: { legend: { labels: { color: '#94a3b8' } } },
+                        plugins: { legend: { labels: { color: getChartTextColor() } } },
                         scales: {
-                            x: { stacked: true, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-                            y: { stacked: true, ticks: { color: '#94a3b8', callback: function(v) { return v.toLocaleString('es-AR'); } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                            x: { stacked: true, ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } },
+                            y: { stacked: true, ticks: { color: getChartTextColor(), callback: function(v) { return v.toLocaleString('es-AR'); } }, grid: { color: getChartGridColor() } }
                         }
                     }
                 });
@@ -1027,9 +1036,9 @@ function updateSpPrimasCalculations() {
                     }
                 },
                 scales: {
-                    x: { ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }, grid: { display: false } },
+                    x: { ticks: { color: getChartTextColor(), font: { size: 11, weight: 'bold' } }, grid: { display: false } },
                     y: {
-                        ticks: { color: '#94a3b8', callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
+                        ticks: { color: getChartTextColor(), callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
                         grid: { color: 'rgba(255, 255, 255, 0.05)' }
                     }
                 }
@@ -1168,7 +1177,7 @@ function updatePrimasRetiroCalculations() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { labels: { color: '#94a3b8', font: { weight: 'bold' } } },
+                    legend: { labels: { color: getChartTextColor(), font: { weight: 'bold' } } },
                     tooltip: {
                         callbacks: {
                             label: function(ctx) {
@@ -1178,9 +1187,9 @@ function updatePrimasRetiroCalculations() {
                     }
                 },
                 scales: {
-                    x: { ticks: { color: '#94a3b8', font: { size: 11, weight: 'bold' } }, grid: { display: false } },
+                    x: { ticks: { color: getChartTextColor(), font: { size: 11, weight: 'bold' } }, grid: { display: false } },
                     y: {
-                        ticks: { color: '#94a3b8', callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
+                        ticks: { color: getChartTextColor(), callback: function(val) { return '$ ' + (val / 1e9).toFixed(1) + ' B'; } },
                         grid: { color: 'rgba(255, 255, 255, 0.05)' }
                     }
                 }
@@ -1296,7 +1305,7 @@ function renderPrimasSubtabData() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+                plugins: { legend: { position: 'bottom', labels: { color: getChartTextColor(), font: { size: 11 } } } }
             }
         });
     }
@@ -1319,7 +1328,7 @@ function renderPrimasSubtabData() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } } }
+                plugins: { legend: { position: 'bottom', labels: { color: getChartTextColor(), font: { size: 11 } } } }
             }
         });
     }
@@ -1345,10 +1354,10 @@ function renderPrimasSubtabData() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { labels: { color: '#cbd5e1' } } },
+                plugins: { legend: { labels: { color: getChartTextColor() } } },
                 scales: {
-                    x: { stacked: true, ticks: { color: '#94a3b8' }, grid: { display: false } },
-                    y: { stacked: true, ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                    x: { stacked: true, ticks: { color: getChartTextColor() }, grid: { display: false } },
+                    y: { stacked: true, ticks: { color: getChartTextColor() }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
                 }
             }
         });
@@ -1630,10 +1639,10 @@ function renderMensualSubtabData() {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom', labels: { color: '#cbd5e1' } } },
+                plugins: { legend: { position: 'bottom', labels: { color: getChartTextColor() } } },
                 scales: {
-                    x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-                    y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
+                    x: { ticks: { color: getChartTextColor() }, grid: { display: false } },
+                    y: { ticks: { color: getChartTextColor() }, grid: { color: 'rgba(255, 255, 255, 0.05)' } }
                 }
             }
         });
@@ -1665,7 +1674,7 @@ function renderMensualSubtabData() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { 
-                    legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } },
+                    legend: { position: 'bottom', labels: { color: getChartTextColor(), font: { size: 10 } } },
                     tooltip: {
                         callbacks: {
                             label: function(ctx) {
@@ -2114,7 +2123,7 @@ function renderRankingsSubtabData() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 10 } } },
+                    legend: { position: 'bottom', labels: { color: getChartTextColor(), font: { size: 10 } } },
                     tooltip: {
                         callbacks: {
                             label: function(ctx) {
@@ -2138,6 +2147,69 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+
+        /* ==========================================================================
+           ULTRA HIGH-CONTRAST LIGHT MODE FOR MERCADO ASEGURADOR (ZERO GRAY TEXT)
+           ========================================================================== */
+        html:not(.dark) #container-mercado-asegurador,
+        html:not(.dark) #sec-global-asegurador,
+        body.light #container-mercado-asegurador,
+        body.light #sec-global-asegurador {
+            color: #090d16 !important;
+            background-color: #ffffff !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador *,
+        body.light #container-mercado-asegurador * {
+            text-shadow: none !important;
+        }
+
+        /* All slate and gray muted text in Light Mode -> Deep High Contrast Slate/Black */
+        html:not(.dark) #container-mercado-asegurador .text-slate-400,
+        html:not(.dark) #container-mercado-asegurador .text-slate-500,
+        html:not(.dark) #container-mercado-asegurador .text-slate-600,
+        html:not(.dark) #container-mercado-asegurador .text-gray-400,
+        html:not(.dark) #container-mercado-asegurador .text-gray-500,
+        html:not(.dark) #container-mercado-asegurador .text-gray-600,
+        body.light #container-mercado-asegurador .text-slate-400,
+        body.light #container-mercado-asegurador .text-slate-500,
+        body.light #container-mercado-asegurador .text-slate-600,
+        body.light #container-mercado-asegurador .text-gray-400,
+        body.light #container-mercado-asegurador .text-gray-500,
+        body.light #container-mercado-asegurador .text-gray-600 {
+            color: #1e293b !important;
+            font-weight: 500 !important;
+        }
+
+        /* Headings & Main Values in Light Mode */
+        html:not(.dark) #container-mercado-asegurador .text-white,
+        html:not(.dark) #container-mercado-asegurador .text-slate-100,
+        html:not(.dark) #container-mercado-asegurador .text-slate-200,
+        html:not(.dark) #container-mercado-asegurador .text-slate-300,
+        body.light #container-mercado-asegurador .text-white,
+        body.light #container-mercado-asegurador .text-slate-100,
+        body.light #container-mercado-asegurador .text-slate-200,
+        body.light #container-mercado-asegurador .text-slate-300 {
+            color: #090d16 !important;
+            font-weight: 700 !important;
+        }
+
+        /* Preserve Brand Accent Colors */
+        html:not(.dark) #container-mercado-asegurador .text-brandBlue,
+        html:not(.dark) #container-mercado-asegurador .text-brandRed,
+        body.light #container-mercado-asegurador .text-brandBlue,
+        body.light #container-mercado-asegurador .text-brandRed {
+            color: var(--brandBlue, #e20039) !important;
+        }
+
+        /* Active Subtab Button Text in Light Mode */
+        html:not(.dark) #container-mercado-asegurador .subtab-btn.active,
+        body.light #container-mercado-asegurador .subtab-btn.active {
+            color: #ffffff !important;
+            background-color: var(--brandBlue, #e20039) !important;
+        }
+    
+
 
         /* ==========================================================================
            MERCADO ASEGURADOR - PURE WHITE LIGHT THEME OVERRIDES (NO GRAYS)
@@ -18945,7 +19017,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                 localStorage.setItem('theme', 'light');
 
-            } else {
+            
+            if (typeof initAsegurador === 'function') setTimeout(initAsegurador, 50);
+} else {
 
                 body.classList.remove('light');
 
