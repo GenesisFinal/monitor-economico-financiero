@@ -2138,6 +2138,128 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+
+        /* ==========================================================================
+           MERCADO ASEGURADOR - PURE WHITE LIGHT THEME OVERRIDES (NO GRAYS)
+           ========================================================================== */
+        html:not(.dark),
+        body.light {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #090d16 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador,
+        html:not(.dark) #sec-global-asegurador,
+        body.light #container-mercado-asegurador,
+        body.light #sec-global-asegurador {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            color: #090d16 !important;
+        }
+
+        /* Pure White Cards in Mercado Asegurador (No Grays) */
+        html:not(.dark) #container-mercado-asegurador .darkCard,
+        html:not(.dark) #container-mercado-asegurador .glass-card,
+        html:not(.dark) #container-mercado-asegurador .card-mosaic,
+        body.light #container-mercado-asegurador .darkCard,
+        body.light #container-mercado-asegurador .glass-card,
+        body.light #container-mercado-asegurador .card-mosaic {
+            background-color: #ffffff !important;
+            background-image: none !important;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+            color: #090d16 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador .darkCard:hover,
+        html:not(.dark) #container-mercado-asegurador .glass-card:hover,
+        html:not(.dark) #container-mercado-asegurador .card-mosaic:hover,
+        body.light #container-mercado-asegurador .darkCard:hover,
+        body.light #container-mercado-asegurador .glass-card:hover,
+        body.light #container-mercado-asegurador .card-mosaic:hover {
+            border-color: var(--brandBlue, #e20039) !important;
+            box-shadow: 0 8px 24px -4px rgba(226, 0, 57, 0.15) !important;
+        }
+
+        /* Crisp Black & Deep Slate Text for Headings & Titles in Light Mode */
+        html:not(.dark) #container-mercado-asegurador h1,
+        html:not(.dark) #container-mercado-asegurador h2,
+        html:not(.dark) #container-mercado-asegurador h3,
+        html:not(.dark) #container-mercado-asegurador h4,
+        html:not(.dark) #container-mercado-asegurador .text-white,
+        html:not(.dark) #container-mercado-asegurador .text-slate-100,
+        html:not(.dark) #container-mercado-asegurador .text-slate-200,
+        html:not(.dark) #container-mercado-asegurador .text-slate-300,
+        body.light #container-mercado-asegurador h1,
+        body.light #container-mercado-asegurador h2,
+        body.light #container-mercado-asegurador h3,
+        body.light #container-mercado-asegurador h4,
+        body.light #container-mercado-asegurador .text-white,
+        body.light #container-mercado-asegurador .text-slate-100,
+        body.light #container-mercado-asegurador .text-slate-200,
+        body.light #container-mercado-asegurador .text-slate-300 {
+            color: #090d16 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador .text-slate-400,
+        html:not(.dark) #container-mercado-asegurador .text-slate-500,
+        body.light #container-mercado-asegurador .text-slate-400,
+        body.light #container-mercado-asegurador .text-slate-500 {
+            color: #334155 !important;
+        }
+
+        /* Tables in Light Mode (Pure White + Crisp Dark Text) */
+        html:not(.dark) #container-mercado-asegurador table,
+        body.light #container-mercado-asegurador table {
+            background-color: #ffffff !important;
+            color: #090d16 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador table th,
+        body.light #container-mercado-asegurador table th {
+            background-color: #ffffff !important;
+            color: #0f172a !important;
+            border-bottom: 2px solid var(--brandBlue, #e20039) !important;
+            font-weight: 700 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador table td,
+        body.light #container-mercado-asegurador table td {
+            color: #090d16 !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador table tr:hover,
+        body.light #container-mercado-asegurador table tr:hover {
+            background-color: rgba(226, 0, 57, 0.04) !important;
+        }
+
+        /* Subtab Navigation Buttons in Light Mode */
+        html:not(.dark) #container-mercado-asegurador .subtab-btn,
+        body.light #container-mercado-asegurador .subtab-btn {
+            background-color: #ffffff !important;
+            color: #1e293b !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador .subtab-btn.active,
+        body.light #container-mercado-asegurador .subtab-btn.active {
+            background-color: var(--brandBlue, #e20039) !important;
+            color: #ffffff !important;
+            border: 2px solid var(--brandBlue, #e20039) !important;
+            font-weight: 700 !important;
+        }
+
+        /* Dropdowns & Badges in Light Mode */
+        html:not(.dark) #container-mercado-asegurador select,
+        body.light #container-mercado-asegurador select {
+            background-color: #ffffff !important;
+            color: #090d16 !important;
+            border: 1px solid #cbd5e1 !important;
+        }
+    
+
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
 
         /* Static Defaults for Google Sites & IFrame embedding */
@@ -2169,7 +2291,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         }
 
         body.layout-l2gdep.dark {
-            --bg-color: #0b0f14;
+            --bg-color: #ffffff;
             --card-bg: #131922;
             --border-color: rgba(226, 0, 57, 0.22);
             --accent-color: #e20039;
@@ -2177,7 +2299,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         }
 
         body.layout-l2gdep.light {
-            --bg-color: #f8fafc;
+            --bg-color: #ffffff;
             --card-bg: #ffffff;
             --border-color: rgba(226, 0, 57, 0.20);
             --accent-color: #e20039;
@@ -2288,7 +2410,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             background: #000000 !important;
             background-color: #000000 !important;
             background-image: none !important;
-            --bg-color: #000000 !important;
+            --bg-color: #ffffff !important;
         }
         body.layout-agmd-style.light {
             background: #ffffff !important;
@@ -2299,7 +2421,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         /* Default CSS Fallbacks to prevent white background */
         :root {
-            --bg-color: #090d16;
+            --bg-color: #ffffff;
             --card-bg: rgba(15, 23, 42, 0.45);
             --border-color: rgba(255, 255, 255, 0.08);
             --highlight-color: #2563eb;
@@ -2337,7 +2459,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-carbon-electric.dark {
 
-            --bg-color: #090d16;
+            --bg-color: #ffffff;
 
             --card-bg: rgba(15, 23, 42, 0.45);
 
@@ -2361,7 +2483,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-carbon-electric.light {
 
-            --bg-color: #f8fafc;
+            --bg-color: #ffffff;
 
             --card-bg: rgba(255, 255, 255, 0.7);
 
@@ -2389,7 +2511,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-indigo-slate.dark {
 
-            --bg-color: #0f172a;
+            --bg-color: #ffffff;
 
             --card-bg: #1e293b;
 
@@ -2441,7 +2563,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-emerald-green.dark {
 
-            --bg-color: #0a100d;
+            --bg-color: #ffffff;
 
             --card-bg: #111d17;
 
@@ -2465,7 +2587,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-emerald-green.light {
 
-            --bg-color: #f4fcf8;
+            --bg-color: #ffffff;
 
             --card-bg: #ffffff;
 
@@ -2493,7 +2615,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-amber-terminal.dark {
 
-            --bg-color: #000000;
+            --bg-color: #ffffff;
 
             --card-bg: #0c0c0c;
 
@@ -2517,7 +2639,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-amber-terminal.light {
 
-            --bg-color: #fefdfb;
+            --bg-color: #ffffff;
 
             --card-bg: #ffffff;
 
@@ -2544,7 +2666,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         
         /* 6. Theme Pink Neon (Light pink in dark mode, Dark pink in light mode) */
         body.theme-pink-neon.dark {
-            --bg-color: #0f172a;
+            --bg-color: #ffffff;
             --card-bg: rgba(30, 27, 46, 0.55);
             --border-color: rgba(244, 114, 182, 0.3);
             --highlight-color: #f472b6; /* Light Pink */
@@ -2556,7 +2678,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             --title-color: #ffffff;
         }
         body.theme-pink-neon.light {
-            --bg-color: #fff1f2;
+            --bg-color: #ffffff;
             --card-bg: #ffffff;
             --border-color: rgba(190, 24, 93, 0.22);
             --highlight-color: #be185d; /* Dark Pink */
@@ -2572,7 +2694,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-ocean-navy.dark {
 
-            --bg-color: #0b0f19;
+            --bg-color: #ffffff;
 
             --card-bg: #151c2c;
 
@@ -2596,7 +2718,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-ocean-navy.light {
 
-            --bg-color: #f1f5f9;
+            --bg-color: #ffffff;
 
             --card-bg: #ffffff;
 
@@ -2622,7 +2744,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-golden-yellow.dark {
 
-            --bg-color: #0a0900;
+            --bg-color: #ffffff;
 
             --card-bg: #111000;
 
@@ -2646,7 +2768,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.theme-golden-yellow.light {
 
-            --bg-color: #fefce8;
+            --bg-color: #ffffff;
 
             --card-bg: #ffffff;
 
