@@ -4393,7 +4393,72 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             box-shadow: 0 2px 8px rgba(226, 0, 57, 0.3) !important;
         }
         
-</style></head>
+</style>
+
+    <script>
+    (function() {
+        function applyChartThemePlugin() {
+            if (!window.Chart) return;
+
+            var forceThemeColorsPlugin = {
+                id: 'forceThemeColorsPlugin',
+                beforeInit: function(chart) {
+                    var isDark = (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark'));
+                    var textColor = isDark ? '#e2e8f0' : '#090d16'; // PURE BLACK (#090d16) IN LIGHT MODE
+                    var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
+
+                    if (chart.options.plugins && chart.options.plugins.legend) {
+                        if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
+                        chart.options.plugins.legend.labels.color = textColor;
+                    }
+
+                    if (chart.options.scales) {
+                        Object.keys(chart.options.scales).forEach(function(axisKey) {
+                            var scale = chart.options.scales[axisKey];
+                            if (scale.ticks) {
+                                scale.ticks.color = textColor;
+                            }
+                            if (scale.grid) {
+                                scale.grid.color = gridColor;
+                            }
+                        });
+                    }
+                },
+                beforeUpdate: function(chart) {
+                    var isDark = (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark'));
+                    var textColor = isDark ? '#e2e8f0' : '#090d16'; // PURE BLACK (#090d16) IN LIGHT MODE
+                    var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
+
+                    if (chart.options.plugins && chart.options.plugins.legend && chart.options.plugins.legend.labels) {
+                        chart.options.plugins.legend.labels.color = textColor;
+                    }
+
+                    if (chart.options.scales) {
+                        Object.keys(chart.options.scales).forEach(function(axisKey) {
+                            var scale = chart.options.scales[axisKey];
+                            if (scale.ticks) scale.ticks.color = textColor;
+                            if (scale.grid) scale.grid.color = gridColor;
+                        });
+                    }
+                }
+            };
+
+            try {
+                Chart.register(forceThemeColorsPlugin);
+            } catch(e) {
+                try { Chart.plugins.register(forceThemeColorsPlugin); } catch(ex) {}
+            }
+        }
+
+        if (window.Chart) {
+            applyChartThemePlugin();
+        } else {
+            window.addEventListener('DOMContentLoaded', applyChartThemePlugin);
+        }
+    })();
+    </script>
+    
+</head>
 
 <body class="text-slate-100 dark layout-agmd-style transition-colors font-sora theme-l2-red min-h-screen font-jetbrains-fira duration-300 bg-darkBg">
 
@@ -19102,6 +19167,17 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             
             if (typeof initAsegurador === 'function') setTimeout(initAsegurador, 50);
+
+
+        if (window.Chart && Chart.instances) {
+            Object.keys(Chart.instances).forEach(function(key) {
+                var c = Chart.instances[key];
+                if (c && typeof c.update === 'function') {
+                    c.update();
+                }
+            });
+        }
+        
 } else {
 
                 body.classList.remove('light');
