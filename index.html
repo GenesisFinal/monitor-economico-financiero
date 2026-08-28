@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="es" class="dark">
+<html lang="es" class="dark font-sora" class="dark font-sora">
 
 <head>
     <script>
       (function() {
-        try {
-          localStorage.setItem('theme', 'dark');
-          localStorage.setItem('visualTheme', 'l2-red');
-          localStorage.setItem('visualLayout', 'agmd-style');
-          localStorage.setItem('visualFont', 'sora');
-        } catch(e) {}
+        function safeSet(k, v) {
+          try { localStorage.setItem(k, v); } catch(e) {}
+        }
+        safeSet('theme', 'dark');
+        safeSet('visualTheme', 'l2-red');
+        safeSet('visualLayout', 'agmd-style');
+        safeSet('visualFont', 'sora');
       })();
     </script>
 
@@ -39,7 +40,7 @@
     <script>
       (function() {
         try {
-          var vt = localStorage.getItem('visualTheme');
+          var vt = (function(){ try{ return localStorage.getItem('visualTheme') || 'l2-red'; }catch(e){ return 'l2-red'; } })();
           if (!vt || vt === 'emerald-green') {
             localStorage.setItem('visualTheme', 'l2-red');
           }
@@ -2137,6 +2138,26 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap');
+
+        /* Static Defaults for Google Sites & IFrame embedding */
+        :root {
+            --brandBlue: #e20039 !important;
+            --brandRed: #e20039 !important;
+            --accent-color: #e20039 !important;
+            --accent-glow: rgba(226, 0, 57, 0.20) !important;
+        }
+
+        html, body, * {
+            font-family: 'Sora', sans-serif !important;
+        }
+
+        body {
+            background-color: #0b0f14 !important;
+            color: #f1f5f9 !important;
+        }
+    
+
 
         /* ==========================================================================
            L2GdeP STYLE - LA SEGUNDA GRUPO DE PERSONAS BRANDBOOK IDENTITY
@@ -4097,7 +4118,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         
 </style></head>
 
-<body class="theme-l2-red dark text-slate-100 min-h-screen font-jetbrains-fira duration-300 layout-agmd-style bg-darkBg transition-colors font-sora">
+<body class="text-slate-100 dark layout-agmd-style transition-colors font-sora theme-l2-red min-h-screen font-jetbrains-fira duration-300 bg-darkBg">
 
     <!-- Header Global -->
 
@@ -18816,7 +18837,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
             
 
-            const activeTheme = localStorage.getItem('visualTheme') || 'l2-red';
+            const activeTheme = (function(){ try{ return localStorage.getItem('visualTheme') || 'l2-red'; }catch(e){ return 'l2-red'; } })() || 'l2-red';
 
             switchVisualTheme(activeTheme);
 
@@ -24546,7 +24567,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                         // Restore Color Palette Theme
             const allowedThemes = ['carbon-electric', 'emerald-green', 'amber-terminal', 'ocean-navy', 'golden-yellow', 'pink-neon', 'l2-red'];
-            let savedVisualTheme = localStorage.getItem('visualTheme');
+            let savedVisualTheme = (function(){ try{ return localStorage.getItem('visualTheme') || 'l2-red'; }catch(e){ return 'l2-red'; } })();
             if (!savedVisualTheme || savedVisualTheme === 'emerald-green' || !allowedThemes.includes(savedVisualTheme)) {
                 savedVisualTheme = 'l2-red';
                 localStorage.setItem('visualTheme', 'l2-red');
@@ -24557,7 +24578,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                                     // Restore Visual Layout
             const allowedLayouts = ['bento', 'executive', 'flat-saas', 'agmd-style', 'l2gdep'];
-            let savedVisualLayout = localStorage.getItem('visualLayout');
+            let savedVisualLayout = (function(){ try{ return localStorage.getItem('visualLayout') || 'agmd-style'; }catch(e){ return 'agmd-style'; } })();
             if (!savedVisualLayout || !allowedLayouts.includes(savedVisualLayout)) {
                 savedVisualLayout = 'agmd-style';
                 localStorage.setItem('visualLayout', 'agmd-style');
@@ -24566,7 +24587,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                                     // Restore Visual Font
             const allowedFonts = ['sora', 'outfit-fit', 'ibm-plex', 'roboto-inter', 'jetbrains-fira'];
-            let savedVisualFont = localStorage.getItem('visualFont');
+            let savedVisualFont = (function(){ try{ return localStorage.getItem('visualFont') || 'sora'; }catch(e){ return 'sora'; } })();
             if (!savedVisualFont || !allowedFonts.includes(savedVisualFont)) {
                 savedVisualFont = 'sora';
                 localStorage.setItem('visualFont', 'sora');
