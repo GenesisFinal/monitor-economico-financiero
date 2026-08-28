@@ -4427,126 +4427,46 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 </style>
 
     
-    <script>
+<script>
     (function() {
+        var forceThemeColorsPlugin = {
+            id: 'forceThemeColorsPlugin',
+            beforeInit: function(chart) {
+                var textColor = (window.isDarkMode && window.isDarkMode()) ? '#cbd5e1' : '#000000';
+                var gridColor = (window.isDarkMode && window.isDarkMode()) ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
+                if (!chart.options) chart.options = {};
+                if (!chart.options.plugins) chart.options.plugins = {};
+                if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
+                if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
+                chart.options.plugins.legend.labels.color = textColor;
+                if (chart.options.scales) {
+                    Object.keys(chart.options.scales).forEach(function(axisKey) {
+                        var scale = chart.options.scales[axisKey];
+                        if (scale.ticks) scale.ticks.color = textColor;
+                        if (scale.grid) scale.grid.color = gridColor;
+                    });
+                }
+            },
+            beforeUpdate: function(chart) {
+                var textColor = (window.isDarkMode && window.isDarkMode()) ? '#cbd5e1' : '#000000';
+                var gridColor = (window.isDarkMode && window.isDarkMode()) ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
+                if (!chart.options) chart.options = {};
+                if (!chart.options.plugins) chart.options.plugins = {};
+                if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
+                if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
+                chart.options.plugins.legend.labels.color = textColor;
+                if (chart.options.scales) {
+                    Object.keys(chart.options.scales).forEach(function(axisKey) {
+                        var scale = chart.options.scales[axisKey];
+                        if (scale.ticks) scale.ticks.color = textColor;
+                        if (scale.grid) scale.grid.color = gridColor;
+                    });
+                }
+            }
+        };
+
         function applyChartThemePlugin() {
-            if (!window.Chart) return;
-
-            var forceThemeColorsPlugin = {
-                id: 'forceThemeColorsPlugin',
-                beforeInit: function(chart) {
-                    var textColor = isDarkMode() ? '#cbd5e1' : '#000000';
-                    var gridColor = isDarkMode() ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
-
-                    if (!chart.options) chart.options = {};
-                    if (!chart.options.plugins) chart.options.plugins = {};
-                    if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
-                    if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
-
-                    chart.options.plugins.legend.labels.color = textColor;
-
-                    if (chart.options.scales) {
-                        Object.keys(chart.options.scales).forEach(function(axisKey) {
-                            var scale = chart.options.scales[axisKey];
-                            if (scale.ticks) scale.ticks.color = textColor;
-                            if (scale.grid) scale.grid.color = gridColor;
-                        });
-                    }
-                },
-                beforeUpdate: function(chart) {
-                    var textColor = isDarkMode() ? '#cbd5e1' : '#000000';
-                    var gridColor = isDarkMode() ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
-
-                    if (!chart.options) chart.options = {};
-                    if (!chart.options.plugins) chart.options.plugins = {};
-                    if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
-                    if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
-
-                    chart.options.plugins.legend.labels.color = textColor;
-
-                    if (chart.options.scales) {
-                        Object.keys(chart.options.scales).forEach(function(axisKey) {
-                            var scale = chart.options.scales[axisKey];
-                            if (scale.ticks) scale.ticks.color = textColor;
-                            if (scale.grid) scale.grid.color = gridColor;
-                        });
-                    }
-                }
-            };
-                    if (!chart.options.plugins) chart.options.plugins = {};
-                    if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
-                    if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
-
-                    chart.options.plugins.legend.labels.color = textColor;
-
-                    if (chart.options.scales) {
-                        Object.keys(chart.options.scales).forEach(function(axisKey) {
-                            var scale = chart.options.scales[axisKey];
-                            if (scale.ticks) scale.ticks.color = textColor;
-                            if (scale.grid) scale.grid.color = gridColor;
-                        });
-                    }
-                },
-                beforeUpdate: function(chart) {
-                    var isDark = (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark'));
-                    var textColor = isDark ? '#cbd5e1' : '#000000'; // PURE BLACK (#000000) IN LIGHT MODE
-                    var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
-
-                    if (!chart.options) chart.options = {};
-                    if (!chart.options.plugins) chart.options.plugins = {};
-                    if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
-                    if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
-
-                    chart.options.plugins.legend.labels.color = textColor;
-
-                    if (chart.options.scales) {
-                        Object.keys(chart.options.scales).forEach(function(axisKey) {
-                            var scale = chart.options.scales[axisKey];
-                            if (scale.ticks) scale.ticks.color = textColor;
-                            if (scale.grid) scale.grid.color = gridColor;
-                        });
-                    }
-                }
-            };
-                    if (!chart.options.plugins) chart.options.plugins = {};
-                    if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
-                    if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
-
-                    chart.options.plugins.legend.labels.color = textColor;
-
-                    if (chart.options.scales) {
-                        Object.keys(chart.options.scales).forEach(function(axisKey) {
-                            var scale = chart.options.scales[axisKey];
-                            if (scale.ticks) scale.ticks.color = textColor;
-                            if (scale.grid) scale.grid.color = gridColor;
-                        });
-                    }
-                },
-                beforeUpdate: function(chart) {
-                    var isDark = (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark'));
-                    var textColor = isDark ? '#cbd5e1' : '#090d16'; // PURE BLACK (#090d16) IN LIGHT MODE
-                    var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.15)';
-
-                    if (!chart.options) chart.options = {};
-                    if (!chart.options.plugins) chart.options.plugins = {};
-                    if (!chart.options.plugins.legend) chart.options.plugins.legend = {};
-                    if (!chart.options.plugins.legend.labels) chart.options.plugins.legend.labels = {};
-
-                    chart.options.plugins.legend.labels.color = textColor;
-
-                    if (chart.options.scales) {
-                        Object.keys(chart.options.scales).forEach(function(axisKey) {
-                            var scale = chart.options.scales[axisKey];
-                            if (scale.ticks) scale.ticks.color = textColor;
-                            if (scale.grid) scale.grid.color = gridColor;
-                        });
-                    }
-                }
-            };
-
-            try {
-                Chart.register(forceThemeColorsPlugin);
-            } catch(e) {
+            try { Chart.register(forceThemeColorsPlugin); } catch(e) {
                 try { Chart.plugins.register(forceThemeColorsPlugin); } catch(ex) {}
             }
         }
@@ -4634,6 +4554,14 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             window.updateChartsTheme(isDark);
         };
     })();
+    </script>
+    
+
+<script>
+    window.verticalLinePlugin = { id: 'verticalLinePlugin', beforeDraw: function() {} };
+    window.crosshairPlugin = window.verticalLinePlugin;
+    var verticalLinePlugin = window.verticalLinePlugin;
+    var crosshairPlugin = window.crosshairPlugin;
     </script>
     
 </head>
@@ -19326,36 +19254,31 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
 
         function toggleTheme() {
-    var isDark = document.body.classList.contains('dark') || document.documentElement.classList.contains('dark');
-    var newTheme = isDark ? 'light' : 'dark';
-    window.applyTheme(newTheme);
-    try { localStorage.setItem('theme', newTheme); } catch(e){}
-}
-            });
-        }
-        
-} else {
-
-                body.classList.remove('light');
-
-                body.classList.add('dark');
-
-                if (icon) icon && icon.classList.replace('fa-moon', 'fa-sun');
-
-                localStorage.setItem('theme', 'dark');
-
+            var isDark = document.body.classList.contains('dark') || document.documentElement.classList.contains('dark');
+            var newTheme = isDark ? 'light' : 'dark';
+            if (typeof window.applyTheme === 'function') {
+                window.applyTheme(newTheme);
+            } else {
+                if (newTheme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                    document.body.classList.add('dark');
+                    document.body.classList.remove('light');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                    document.body.classList.remove('dark');
+                    document.body.classList.add('light');
+                }
             }
-
-            
-
-            const activeTheme = (function(){ try{ return localStorage.getItem('visualTheme') || 'l2-red'; }catch(e){ return 'l2-red'; } })() || 'l2-red';
-
-            switchVisualTheme(activeTheme);
-
+            try { localStorage.setItem('theme', newTheme); } catch(e){}
         }
 
-        const verticalLinePlugin = { id: 'verticalLinePlugin', beforeDraw: function() {} };
-const crosshairPlugin = verticalLinePlugin;
+        const activeTheme = (function(){ try{ return localStorage.getItem('visualTheme') || 'l2-red'; }catch(e){ return 'l2-red'; } })() || 'l2-red';
+        if (typeof switchVisualTheme === 'function') switchVisualTheme(activeTheme);
+
+        var verticalLinePlugin = window.verticalLinePlugin || { id: 'verticalLinePlugin', beforeDraw: function() {} };
+var crosshairPlugin = window.verticalLinePlugin;
 
 
 
@@ -22651,7 +22574,7 @@ function switchGlobalTab(tabId) {
 
                             legend: { display: false },
 
-                            tooltip: { enabled: false }, verticalLine: { enabled: false }, crosshair: { enabled: false },
+                            tooltip: { enabled: false }, verticalLine: { enabled: false }, crosshair: { enabled: false }
 
                             },
 
@@ -24902,7 +24825,6 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
 
         function switchTab(tabId) {
-    try {
 
             const validTabs = ['exchange', 'fci', 'indices', 'forex', 'commodities', 'rates', 'local_rates', 'bonds', 'lecaps', 'corporate', 'cedears', 'stocks', 'etfs', 'acciones_arg', 'cryptos'];
 
@@ -26175,4 +26097,3 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
 </body>
 </html>
-<!-- Deploy timestamp: 1786844688.1804235 -->
