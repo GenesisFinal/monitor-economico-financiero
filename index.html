@@ -5,9 +5,7 @@
 <head>
     <script>
 
-    function getChartTextColor() {
-        return (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) ? '#cbd5e1' : '#090d16';
-    }
+    function getChartTextColor() { return (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) ? '#cbd5e1' : '#090d16'; }
     function getChartGridColor() {
         return (document.documentElement.classList.contains('dark') || document.body.classList.contains('dark')) ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.1)';
     }
@@ -2147,6 +2145,91 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
+
+        /* ==========================================================================
+           ULTRA HIGH-CONTRAST LIGHT MODE FOR MERCADO ASEGURADOR (PURE BLACK TEXT)
+           ========================================================================== */
+        html:not(.dark) #container-mercado-asegurador,
+        html:not(.dark) #sec-global-asegurador,
+        body.light #container-mercado-asegurador,
+        body.light #sec-global-asegurador {
+            color: #090d16 !important;
+            background-color: #ffffff !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador *,
+        body.light #container-mercado-asegurador * {
+            text-shadow: none !important;
+        }
+
+        /* Force ALL slate/gray muted text in Light Mode to Pure Black (#090d16) */
+        html:not(.dark) #container-mercado-asegurador .text-slate-400,
+        html:not(.dark) #container-mercado-asegurador .text-slate-500,
+        html:not(.dark) #container-mercado-asegurador .text-slate-600,
+        html:not(.dark) #container-mercado-asegurador .text-slate-700,
+        html:not(.dark) #container-mercado-asegurador .text-gray-400,
+        html:not(.dark) #container-mercado-asegurador .text-gray-500,
+        html:not(.dark) #container-mercado-asegurador .text-gray-600,
+        html:not(.dark) #container-mercado-asegurador .text-gray-700,
+        body.light #container-mercado-asegurador .text-slate-400,
+        body.light #container-mercado-asegurador .text-slate-500,
+        body.light #container-mercado-asegurador .text-slate-600,
+        body.light #container-mercado-asegurador .text-slate-700,
+        body.light #container-mercado-asegurador .text-gray-400,
+        body.light #container-mercado-asegurador .text-gray-500,
+        body.light #container-mercado-asegurador .text-gray-600,
+        body.light #container-mercado-asegurador .text-gray-700 {
+            color: #090d16 !important;
+            font-weight: 600 !important;
+        }
+
+        /* Headings & Main Values in Light Mode -> Pure Black (#090d16) */
+        html:not(.dark) #container-mercado-asegurador .text-white,
+        html:not(.dark) #container-mercado-asegurador .text-slate-100,
+        html:not(.dark) #container-mercado-asegurador .text-slate-200,
+        html:not(.dark) #container-mercado-asegurador .text-slate-300,
+        body.light #container-mercado-asegurador .text-white,
+        body.light #container-mercado-asegurador .text-slate-100,
+        body.light #container-mercado-asegurador .text-slate-200,
+        body.light #container-mercado-asegurador .text-slate-300 {
+            color: #090d16 !important;
+            font-weight: 700 !important;
+        }
+
+        /* Table Headers & Cells in Light Mode -> Pure Black */
+        html:not(.dark) #container-mercado-asegurador table th,
+        body.light #container-mercado-asegurador table th {
+            color: #090d16 !important;
+            background-color: #ffffff !important;
+            border-bottom: 2px solid var(--brandBlue, #e20039) !important;
+            font-weight: 700 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador table td,
+        body.light #container-mercado-asegurador table td {
+            color: #090d16 !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            font-weight: 500 !important;
+        }
+
+        /* Subtab Navigation Buttons in Light Mode */
+        html:not(.dark) #container-mercado-asegurador .subtab-btn,
+        body.light #container-mercado-asegurador .subtab-btn {
+            background-color: #ffffff !important;
+            color: #090d16 !important;
+            border: 1px solid #cbd5e1 !important;
+            font-weight: 600 !important;
+        }
+
+        html:not(.dark) #container-mercado-asegurador .subtab-btn.active,
+        body.light #container-mercado-asegurador .subtab-btn.active {
+            color: #ffffff !important;
+            background-color: var(--brandBlue, #e20039) !important;
+            border: 2px solid var(--brandBlue, #e20039) !important;
+            font-weight: 700 !important;
+        }
+    
+
 
         /* ==========================================================================
            ULTRA HIGH-CONTRAST LIGHT MODE FOR MERCADO ASEGURADOR (ZERO GRAY TEXT)
