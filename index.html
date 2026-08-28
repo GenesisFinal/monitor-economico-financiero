@@ -309,14 +309,14 @@ function renderLaSegundaSubtabData() {
             patRowsHTML += '<td class="py-2 px-3 text-slate-400 font-mono text-xs text-center">' + (idx + 1) + '</td>';
             patRowsHTML += '<td class="py-2 px-3 font-medium text-white text-xs">' + r.ramo + '</td>';
             patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-white text-xs font-semibold">' + fmtMoney(r.prima) + '</td>';
-            patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-emerald-400 text-xs font-bold">' + fmtPct(r.pct_patrimoniales) + '</td>';
+            patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-brandBlue text-xs font-bold">' + fmtPct(r.pct_patrimoniales) + '</td>';
             patRowsHTML += '<td class="py-2 px-3 text-right font-mono text-amber-400 text-xs font-bold">' + fmtPct(r.pct_grupo) + '</td>';
             patRowsHTML += '</tr>';
         });
-        patRowsHTML += '<tr class="bg-emerald-500/10 border-t border-emerald-500/30 font-bold">';
+        patRowsHTML += '<tr class="bg-brandBlue/10 border-t border-brandBlue/30 font-bold">';
         patRowsHTML += '<td colspan="2" class="py-3 px-3 text-white uppercase tracking-wider text-xs">TOTAL SEGUROS PATRIMONIALES</td>';
-        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(lsData.tot_patrimoniales) + '</td>';
-        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">100,00%</td>';
+        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-brandBlue text-sm">' + fmtMoney(lsData.tot_patrimoniales) + '</td>';
+        patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-brandBlue text-sm">100,00%</td>';
         patRowsHTML += '<td class="py-3 px-3 text-right font-mono text-amber-400 text-sm">' + fmtPct((lsData.tot_patrimoniales / lsData.tot_grupo) * 100) + '</td>';
         patRowsHTML += '</tr>';
         tbodyPatrimoniales.innerHTML = patRowsHTML;
@@ -389,8 +389,8 @@ function renderSegPersonasSubtabData(spData) {
             var mercadoVal = typeof row.mercado === 'number' ? row.mercado.toFixed(2) + '%' : row.mercado;
             var l2Val = typeof row.l2 === 'number' ? row.l2.toFixed(2) + '%' : row.l2;
             
-            var mercadoClass = isRos ? (row.mercado >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold') : 'text-slate-300';
-            var l2Class = isRos ? (row.l2 >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold') : 'text-amber-400 font-bold';
+            var mercadoClass = isRos ? (row.mercado >= 0 ? 'text-brandBlue font-bold' : 'text-rose-400 font-bold') : 'text-slate-300';
+            var l2Class = isRos ? (row.l2 >= 0 ? 'text-brandBlue font-bold' : 'text-rose-400 font-bold') : 'text-amber-400 font-bold';
 
             return '<tr class="hover:bg-darkBg/50 transition">' +
                 '<td class="py-3 px-3 font-semibold text-slate-200">' + row.indicador + '</td>' +
@@ -407,8 +407,8 @@ function renderSegPersonasSubtabData(spData) {
             var mercadoVal = typeof row.mercado === 'number' ? row.mercado.toFixed(2) + '%' : row.mercado;
             var l2Val = typeof row.l2 === 'number' ? row.l2.toFixed(2) + '%' : row.l2;
 
-            var mercadoClass = isRos ? (row.mercado >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold') : 'text-slate-300';
-            var l2Class = isRos ? (row.l2 >= 0 ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold') : 'text-purple-400 font-bold';
+            var mercadoClass = isRos ? (row.mercado >= 0 ? 'text-brandBlue font-bold' : 'text-rose-400 font-bold') : 'text-slate-300';
+            var l2Class = isRos ? (row.l2 >= 0 ? 'text-brandBlue font-bold' : 'text-rose-400 font-bold') : 'text-purple-400 font-bold';
 
             return '<tr class="hover:bg-darkBg/50 transition">' +
                 '<td class="py-3 px-3 font-semibold text-slate-200">' + row.indicador + '</td>' +
@@ -558,18 +558,18 @@ function renderSegRetiroSubtabData(srData) {
         var rows = [];
         if (srData.compromisos_total_row) {
             var tr = srData.compromisos_total_row;
-            rows.push('<tr class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+            rows.push('<tr class="bg-brandBlue/10 font-bold border-b-2 border-brandBlue/40 text-brandBlue">' +
                 '<td class="py-3 px-3 uppercase tracking-wider"><i class="fas fa-calculator mr-1.5"></i>' + tr.entidad + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(tr.total) + '</td>' +
-                '<td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-brandBlue">100,00%</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(tr.ahorro_total) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-300">' + fmtNum(tr.ahorro_indiv) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-300">' + fmtNum(tr.ahorro_colec) + '</td>' +
-                '<td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-brandBlue">100,00%</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(tr.rentas_total) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-300">' + fmtNum(tr.rentas_indiv) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-300">' + fmtNum(tr.rentas_colec) + '</td>' +
-                '<td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-brandBlue">100,00%</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-amber-300">' + fmtNum(tr.rvp_art) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtNum(tr.otros) + '</td>' +
             '</tr>');
@@ -583,15 +583,15 @@ function renderSegRetiroSubtabData(srData) {
             rows.push('<tr class="' + rowClass + '">' +
                 '<td class="py-3 px-3 ' + nameClass + '">' + row.entidad + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(row.total) + '</td>' +
-                '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold">' + row.total_pct.toFixed(2) + '%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-brandBlue font-semibold">' + row.total_pct.toFixed(2) + '%</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-slate-200">' + fmtNum(row.ahorro_total) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-400">' + fmtNum(row.ahorro_indiv) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-ahorro hidden text-slate-400">' + fmtNum(row.ahorro_colec) + '</td>' +
-                '<td class="py-3 px-3 text-right font-mono text-emerald-400/90">' + row.ahorro_pct.toFixed(2) + '%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-brandBlue/90">' + row.ahorro_pct.toFixed(2) + '%</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-slate-200">' + fmtNum(row.rentas_total) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-400">' + fmtNum(row.rentas_indiv) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono col-sr-rentas hidden text-slate-400">' + fmtNum(row.rentas_colec) + '</td>' +
-                '<td class="py-3 px-3 text-right font-mono text-emerald-400/90">' + row.rentas_pct.toFixed(2) + '%</td>' +
+                '<td class="py-3 px-3 text-right font-mono text-brandBlue/90">' + row.rentas_pct.toFixed(2) + '%</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-amber-400/90">' + fmtNum(row.rvp_art) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-slate-400">' + fmtNum(row.otros) + '</td>' +
             '</tr>');
@@ -606,7 +606,7 @@ function renderSegRetiroSubtabData(srData) {
         var rowsA = [];
         if (srData.asegurados_total_row) {
             var trA = srData.asegurados_total_row;
-            rowsA.push('<tr class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+            rowsA.push('<tr class="bg-brandBlue/10 font-bold border-b-2 border-brandBlue/40 text-brandBlue">' +
                 '<td class="py-3 px-3 uppercase tracking-wider"><i class="fas fa-users mr-1.5"></i>' + trA.entidad + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-white text-base font-extrabold">' + fmtNum(trA.total_asegurados) + '</td>' +
                 '<td class="py-3 px-3 text-right font-mono text-white">' + fmtNum(trA.ahorro_total) + '</td>' +
@@ -726,17 +726,17 @@ function renderPrimasEmitidasRetiroTable() {
 
     // Summary Total Row
     var trT = srData.primas_emitidas_total_row || {};
-    rows.push('<tr id="row-sr-primas-total" class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+    rows.push('<tr id="row-sr-primas-total" class="bg-brandBlue/10 font-bold border-b-2 border-brandBlue/40 text-brandBlue">' +
         '<td class="py-3 px-3 text-center"><i class="fas fa-calculator"></i></td>' +
         '<td class="py-3 px-3 uppercase tracking-wider font-bold">TOTAL SELECCIONADO</td>' +
         '<td id="cell-sr-primas-tot-val" class="py-3 px-3 text-right font-mono text-white text-base font-extrabold">' + fmtNum(trT.primas_total || 0) + '</td>' +
-        '<td id="cell-sr-primas-tot-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td id="cell-sr-primas-tot-pct" class="py-3 px-3 text-right font-mono text-brandBlue font-bold">100,00%</td>' +
         '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
         '<td id="cell-sr-primas-col-val" class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(trT.primas_colectivo || 0) + '</td>' +
-        '<td id="cell-sr-primas-col-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td id="cell-sr-primas-col-pct" class="py-3 px-3 text-right font-mono text-brandBlue font-bold">100,00%</td>' +
         '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
         '<td id="cell-sr-primas-ind-val" class="py-3 px-3 text-right font-mono text-white font-bold">' + fmtNum(trT.primas_individual || 0) + '</td>' +
-        '<td id="cell-sr-primas-ind-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td id="cell-sr-primas-ind-pct" class="py-3 px-3 text-right font-mono text-brandBlue font-bold">100,00%</td>' +
         '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
     '</tr>');
 
@@ -747,17 +747,17 @@ function renderPrimasEmitidasRetiroTable() {
 
         rows.push('<tr id="tr-sr-primas-' + idx + '" class="' + rowClass + '" data-entidad="' + row.entidad + '">' +
             '<td class="py-3 px-3 text-center">' +
-                '<input type="checkbox" class="chk-sr-primas accent-emerald-500 cursor-pointer rounded" data-index="' + idx + '" checked onchange="updatePrimasRetiroCalculations()">' +
+                '<input type="checkbox" class="chk-sr-primas accent-brandBlue cursor-pointer rounded" data-index="' + idx + '" checked onchange="updatePrimasRetiroCalculations()">' +
             '</td>' +
             '<td class="py-3 px-3 ' + nameClass + '">' + row.entidad + '</td>' +
             '<td class="py-3 px-3 text-right font-mono text-white font-bold cell-tot-val">' + fmtNum(row.primas_total) + '</td>' +
-            '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold cell-tot-pct">' + row.total_pct.toFixed(2) + '%</td>' +
-            '<td class="py-3 px-3 text-center cell-tot-rank"><span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + row.rank_total + '</span></td>' +
+            '<td class="py-3 px-3 text-right font-mono text-brandBlue font-semibold cell-tot-pct">' + row.total_pct.toFixed(2) + '%</td>' +
+            '<td class="py-3 px-3 text-center cell-tot-rank"><span class="px-2 py-0.5 rounded text-xs font-bold bg-brandBlue/20 text-brandBlue border border-brandBlue/30">#' + row.rank_total + '</span></td>' +
             '<td class="py-3 px-3 text-right font-mono text-slate-200 cell-col-val">' + fmtNum(row.primas_colectivo) + '</td>' +
-            '<td class="py-3 px-3 text-right font-mono text-emerald-400/90 cell-col-pct">' + row.colectivo_pct.toFixed(2) + '%</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-brandBlue/90 cell-col-pct">' + row.colectivo_pct.toFixed(2) + '%</td>' +
             '<td class="py-3 px-3 text-center cell-col-rank">' + (row.rank_colectivo !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">#' + row.rank_colectivo + '</span>' : '-') + '</td>' +
             '<td class="py-3 px-3 text-right font-mono text-slate-200 cell-ind-val">' + fmtNum(row.primas_individual) + '</td>' +
-            '<td class="py-3 px-3 text-right font-mono text-emerald-400/90 cell-ind-pct">' + row.individual_pct.toFixed(2) + '%</td>' +
+            '<td class="py-3 px-3 text-right font-mono text-brandBlue/90 cell-ind-pct">' + row.individual_pct.toFixed(2) + '%</td>' +
             '<td class="py-3 px-3 text-center cell-ind-rank">' + (row.rank_individual !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">#' + row.rank_individual + '</span>' : '-') + '</td>' +
         '</tr>');
     });
@@ -790,9 +790,9 @@ function initSpPrimasRamosView() {
     var htmlPills = [];
     boletin.target_ramos.forEach(function(ramo) {
         var isChecked = spSelectedRamos.indexOf(ramo) !== -1;
-        var pillClass = isChecked ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40 shadow-sm' : 'bg-darkBg/60 text-slate-400 border-darkBorder hover:text-slate-200';
+        var pillClass = isChecked ? 'bg-brandBlue/20 text-brandBlue border-brandBlue/40 shadow-sm' : 'bg-darkBg/60 text-slate-400 border-darkBorder hover:text-slate-200';
         htmlPills.push('<label class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold cursor-pointer transition ' + pillClass + '">' +
-            '<input type="checkbox" class="chk-sp-ramo accent-emerald-500 cursor-pointer" value="' + ramo + '" ' + (isChecked ? 'checked' : '') + ' onchange="onSpRamoCheckboxChange(this)">' +
+            '<input type="checkbox" class="chk-sp-ramo accent-brandBlue cursor-pointer" value="' + ramo + '" ' + (isChecked ? 'checked' : '') + ' onchange="onSpRamoCheckboxChange(this)">' +
             '<span>' + ramo + '</span>' +
         '</label>');
     });
@@ -897,11 +897,11 @@ function renderSpPrimasTable() {
     var rows = [];
 
     // Summary Header Row
-    rows.push('<tr id="row-sp-primas-total" class="bg-emerald-500/10 font-bold border-b-2 border-emerald-500/40 text-emerald-300">' +
+    rows.push('<tr id="row-sp-primas-total" class="bg-brandBlue/10 font-bold border-b-2 border-brandBlue/40 text-brandBlue">' +
         '<td class="py-3 px-3 text-center"><i class="fas fa-calculator"></i></td>' +
         '<td class="py-3 px-3 uppercase tracking-wider font-bold">TOTAL SELECCIONADO (' + spSelectedRamos.length + ' RAMOS)</td>' +
         '<td id="cell-sp-primas-tot-val" class="py-3 px-3 text-right font-mono text-white text-base font-extrabold">' + fmtNum(sumGrand) + '</td>' +
-        '<td id="cell-sp-primas-tot-pct" class="py-3 px-3 text-right font-mono text-emerald-400 font-bold">100,00%</td>' +
+        '<td id="cell-sp-primas-tot-pct" class="py-3 px-3 text-right font-mono text-brandBlue font-bold">100,00%</td>' +
         '<td class="py-3 px-3 text-center text-slate-400">-</td>' +
     '</tr>');
 
@@ -915,12 +915,12 @@ function renderSpPrimasTable() {
 
         rows.push('<tr id="tr-sp-primas-' + item.origIndex + '" class="' + rowClass + '" data-index="' + item.origIndex + '" data-total="' + item.total + '">' +
             '<td class="py-3 px-3 text-center">' +
-                '<input type="checkbox" class="chk-sp-primas accent-emerald-500 cursor-pointer rounded" data-index="' + item.origIndex + '" checked onchange="updateSpPrimasCalculations()">' +
+                '<input type="checkbox" class="chk-sp-primas accent-brandBlue cursor-pointer rounded" data-index="' + item.origIndex + '" checked onchange="updateSpPrimasCalculations()">' +
             '</td>' +
             '<td class="py-3 px-3 ' + nameClass + '">' + item.entidad + '</td>' +
             '<td class="py-3 px-3 text-right font-mono text-white font-bold cell-sp-val">' + fmtNum(item.total) + '</td>' +
-            '<td class="py-3 px-3 text-right font-mono text-emerald-400 font-semibold cell-sp-pct">' + pct + '</td>' +
-            '<td class="py-3 px-3 text-center cell-sp-rank"><span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + actualRank + '</span></td>' +
+            '<td class="py-3 px-3 text-right font-mono text-brandBlue font-semibold cell-sp-pct">' + pct + '</td>' +
+            '<td class="py-3 px-3 text-center cell-sp-rank"><span class="px-2.5 py-0.5 rounded text-xs font-bold bg-brandBlue/20 text-brandBlue border border-brandBlue/30">#' + actualRank + '</span></td>' +
         '</tr>');
     });
 
@@ -991,7 +991,7 @@ function updateSpPrimasCalculations() {
         var exactRank = activeFullMarketList.findIndex(function(it) { return it.origIndex === item.origIndex; }) + 1;
 
         if (pctEl) pctEl.textContent = pctStr;
-        if (rankEl) rankEl.innerHTML = '<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + exactRank + '</span>';
+        if (rankEl) rankEl.innerHTML = '<span class="px-2.5 py-0.5 rounded text-xs font-bold bg-brandBlue/20 text-brandBlue border border-brandBlue/30">#' + exactRank + '</span>';
     });
 
     var cTotVal = document.getElementById('cell-sp-primas-tot-val');
@@ -1141,7 +1141,7 @@ function updatePrimasRetiroCalculations() {
             var rInd = rankIndMap[idx] || '-';
 
             tr.querySelector('.cell-tot-pct').textContent = pctTot;
-            tr.querySelector('.cell-tot-rank').innerHTML = '<span class="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">#' + rTot + '</span>';
+            tr.querySelector('.cell-tot-rank').innerHTML = '<span class="px-2 py-0.5 rounded text-xs font-bold bg-brandBlue/20 text-brandBlue border border-brandBlue/30">#' + rTot + '</span>';
             tr.querySelector('.cell-col-pct').textContent = pctCol;
             tr.querySelector('.cell-col-rank').innerHTML = (rCol !== '-' ? '<span class="px-2 py-0.5 rounded text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">#' + rCol + '</span>' : '-');
             tr.querySelector('.cell-ind-pct').textContent = pctInd;
@@ -1256,8 +1256,8 @@ function renderPrimasSubtabData() {
             html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_actual) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(item.primas_prev) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (calcNom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(calcNom) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (calcReal >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(calcReal) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (calcNom >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(calcNom) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (calcReal >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(calcReal) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono text-cyan-400 font-bold">' + shareVal + '</td>';
             html += '</tr>';
         });
@@ -1391,7 +1391,7 @@ function toggleMensualSeries(sKey) {
     var btnMap = {
         'total': { id: 'btn-toggle-series-total', active: 'bg-brandBlue/20 text-brandBlue border border-brandBlue/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' },
         'patrimoniales': { id: 'btn-toggle-series-patrimoniales', active: 'bg-amber-500/20 text-amber-400 border border-amber-500/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' },
-        'personas': { id: 'btn-toggle-series-personas', active: 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' }
+        'personas': { id: 'btn-toggle-series-personas', active: 'bg-brandBlue/20 text-brandBlue border border-brandBlue/40', inactive: 'bg-slate-800/40 text-slate-500 border border-slate-700/40 opacity-60' }
     };
 
     Object.keys(btnMap).forEach(function(k) {
@@ -1428,11 +1428,11 @@ function toggleMensualCurrency(mode) {
         if (btnCorr) btnCorr.className = inactiveTopClass;
         if (btnConst) btnConst.className = activeTopClass;
         if (iconCorr) iconCorr.className = "fas fa-coins text-slate-500";
-        if (iconConst) iconConst.className = "fas fa-chart-line text-emerald-400";
+        if (iconConst) iconConst.className = "fas fa-chart-line text-brandBlue";
     } else {
         if (btnCorr) btnCorr.className = activeTopClass;
         if (btnConst) btnConst.className = inactiveTopClass;
-        if (iconCorr) iconCorr.className = "fas fa-coins text-emerald-400";
+        if (iconCorr) iconCorr.className = "fas fa-coins text-brandBlue";
         if (iconConst) iconConst.className = "fas fa-chart-line text-slate-500";
     }
 
@@ -1523,9 +1523,9 @@ function renderMensualSubtabData() {
             gridHtml += '<span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono">Últ. Mes</span></div>';
             gridHtml += '<div class="text-xl font-bold text-white font-mono">$' + fmtM(vAct) + ' M</div>';
             gridHtml += '<div class="grid grid-cols-3 gap-1 pt-2 border-t border-darkBorder/40 text-[11px] font-mono">';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">MoM</span><span class="' + (vMom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vMom) + '</span></div>';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">i.a.</span><span class="' + (vIa >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vIa) + '</span></div>';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">Ej. Acum</span><span class="' + (vAcumPct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">MoM</span><span class="' + (vMom >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vMom) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">i.a.</span><span class="' + (vIa >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vIa) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">Ej. Acum</span><span class="' + (vAcumPct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</span></div>';
             gridHtml += '</div></div>';
         });
         grid.innerHTML = gridHtml;
@@ -1551,10 +1551,10 @@ function renderMensualSubtabData() {
             html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
             html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAct) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vMom >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vMom) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vIa >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vIa) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vMom >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vMom) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vIa >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vIa) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAcumVal) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vAcumPct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vAcumPct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
             html += '</tr>';
         });
         tbody.innerHTML = html;
@@ -1905,33 +1905,33 @@ function renderBalancesSubtabData() {
         
         // Tabla Activo
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">';
-        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-wallet text-emerald-400"></i> Estructura del Activo ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-wallet text-brandBlue"></i> Estructura del Activo ($ en Millones) &bull; <span class="text-brandBlue">' + titleSuffix + '</span></h3>';
         html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RUBRO DEL ACTIVO</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">% S/ACTIVO</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
         
         actRows.forEach(function(row) {
             var pct = totAct26 !== 0 ? ((row.val26 || 0) / totAct26) * 100 : 0;
-            html += '<tr class="hover:bg-emerald-500/5 transition"><td class="py-2.5 px-3 font-medium text-slate-200">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(row.val26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtPct(pct) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(row.val25) + '</td></tr>';
+            html += '<tr class="hover:bg-emerald-500/5 transition"><td class="py-2.5 px-3 font-medium text-slate-200">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-brandBlue font-semibold">' + fmtMoney(row.val26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtPct(pct) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(row.val25) + '</td></tr>';
         });
 
-        html += '<tr class="bg-emerald-500/10 font-bold border-t-2 border-emerald-500/30"><td class="py-3 px-3 text-white">TOTAL ACTIVO</td><td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(totAct26) + '</td><td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(totAct25) + '</td></tr>';
-        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
-        html += '<div class="mt-4 pt-3 border-t border-darkBorder/40 flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Total Activo:</span><span class="font-mono text-sm ' + (yoyAct >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoyAct !== null ? (yoyAct >= 0 ? '+' : '') + fmtPct(yoyAct) : 'N/A') + '</span></div>';
+        html += '<tr class="bg-brandBlue/10 font-bold border-t-2 border-brandBlue/30"><td class="py-3 px-3 text-white">TOTAL ACTIVO</td><td class="py-3 px-3 text-right font-mono text-brandBlue text-sm">' + fmtMoney(totAct26) + '</td><td class="py-3 px-3 text-right font-mono text-brandBlue">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(totAct25) + '</td></tr>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-brandBlue/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
+        html += '<div class="mt-4 pt-3 border-t border-darkBorder/40 flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Total Activo:</span><span class="font-mono text-sm ' + (yoyAct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + (yoyAct !== null ? (yoyAct >= 0 ? '+' : '') + fmtPct(yoyAct) : 'N/A') + '</span></div>';
         html += '</div>';
 
         // Tabla Pasivo y PN
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">';
-        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-file-invoice-dollar text-emerald-400"></i> Estructura del Pasivo y PN ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<div><h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-file-invoice-dollar text-brandBlue"></i> Estructura del Pasivo y PN ($ en Millones) &bull; <span class="text-brandBlue">' + titleSuffix + '</span></h3>';
         html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RUBRO PASIVO / PN</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">% S/PASIVO</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
         
         pasRows.forEach(function(row) {
             var pct = totPas26 !== 0 ? ((row.val26 || 0) / totPas26) * 100 : 0;
-            html += '<tr class="hover:bg-emerald-500/5 transition"><td class="py-2.5 px-3 font-medium text-slate-200">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(row.val26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtPct(pct) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(row.val25) + '</td></tr>';
+            html += '<tr class="hover:bg-emerald-500/5 transition"><td class="py-2.5 px-3 font-medium text-slate-200">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-brandBlue font-semibold">' + fmtMoney(row.val26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtPct(pct) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(row.val25) + '</td></tr>';
         });
 
-        html += '<tr class="bg-emerald-500/10 font-bold border-t-2 border-emerald-500/30"><td class="py-3 px-3 text-white">TOTAL PASIVO</td><td class="py-3 px-3 text-right font-mono text-emerald-400 text-sm">' + fmtMoney(totPas26) + '</td><td class="py-3 px-3 text-right font-mono text-emerald-400">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(totPas25) + '</td></tr>';
-        html += '<tr class="bg-darkBg/40 font-bold"><td class="py-3 px-3 text-emerald-300">PATRIMONIO NETO</td><td class="py-3 px-3 text-right font-mono text-emerald-300 font-bold text-sm">' + fmtMoney(pn26) + '</td><td class="py-3 px-3 text-right font-mono text-slate-500">-</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(pn25) + '</td></tr>';
-        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
-        html += '<div class="mt-4 pt-3 border-t border-darkBorder/40 space-y-1.5"><div class="flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Total Pasivo:</span><span class="font-mono ' + (yoyPas >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoyPas !== null ? (yoyPas >= 0 ? '+' : '') + fmtPct(yoyPas) : 'N/A') + '</span></div><div class="flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Patrimonio Neto:</span><span class="font-mono ' + (yoyPn >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoyPn !== null ? (yoyPn >= 0 ? '+' : '') + fmtPct(yoyPn) : 'N/A') + '</span></div></div>';
+        html += '<tr class="bg-brandBlue/10 font-bold border-t-2 border-brandBlue/30"><td class="py-3 px-3 text-white">TOTAL PASIVO</td><td class="py-3 px-3 text-right font-mono text-brandBlue text-sm">' + fmtMoney(totPas26) + '</td><td class="py-3 px-3 text-right font-mono text-brandBlue">100,00%</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(totPas25) + '</td></tr>';
+        html += '<tr class="bg-darkBg/40 font-bold"><td class="py-3 px-3 text-brandBlue">PATRIMONIO NETO</td><td class="py-3 px-3 text-right font-mono text-brandBlue font-bold text-sm">' + fmtMoney(pn26) + '</td><td class="py-3 px-3 text-right font-mono text-slate-500">-</td><td class="py-3 px-3 text-right font-mono text-slate-300">' + fmtMoney(pn25) + '</td></tr>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-brandBlue/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
+        html += '<div class="mt-4 pt-3 border-t border-darkBorder/40 space-y-1.5"><div class="flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Total Pasivo:</span><span class="font-mono ' + (yoyPas >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + (yoyPas !== null ? (yoyPas >= 0 ? '+' : '') + fmtPct(yoyPas) : 'N/A') + '</span></div><div class="flex justify-between items-center text-xs font-bold"><span class="text-slate-400">Variación YoY Patrimonio Neto:</span><span class="font-mono ' + (yoyPn >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + (yoyPn !== null ? (yoyPn >= 0 ? '+' : '') + fmtPct(yoyPn) : 'N/A') + '</span></div></div>';
         html += '</div>';
 
         html += '</div>';
@@ -1950,18 +1950,18 @@ function renderBalancesSubtabData() {
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
-        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-chart-line text-emerald-400"></i> Estado de Resultados ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-chart-line text-brandBlue"></i> Estado de Resultados ($ en Millones) &bull; <span class="text-brandBlue">' + titleSuffix + '</span></h3>';
         html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN DEL ESTADO DE RESULTADOS</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
 
         edrRows.forEach(function(row) {
             var v26 = r26[row.i26], v25 = r25[row.i25];
             var yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
-            var rowClass = row.isHighlight ? 'bg-emerald-500/10 font-bold text-white' : 'hover:bg-emerald-500/5';
+            var rowClass = row.isHighlight ? 'bg-brandBlue/10 font-bold text-white' : 'hover:bg-emerald-500/5';
             
-            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
+            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-brandBlue font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
-        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-brandBlue/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
     } else if (vKey === 'tecnico') {
         var tecRows = [
             { label: 'Primas Netas Devengadas', i: 0 },
@@ -1982,18 +1982,18 @@ function renderBalancesSubtabData() {
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
-        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-calculator text-emerald-400"></i> Estado de Resultado Técnico ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-calculator text-brandBlue"></i> Estado de Resultado Técnico ($ en Millones) &bull; <span class="text-brandBlue">' + titleSuffix + '</span></h3>';
         html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN RESULTADO TÉCNICO</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
 
         tecRows.forEach(function(row) {
             var v26 = r26[row.i], v25 = r25[row.i];
             var yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
-            var rowClass = row.isHighlight ? 'bg-emerald-500/10 font-bold text-white' : 'hover:bg-emerald-500/5';
+            var rowClass = row.isHighlight ? 'bg-brandBlue/10 font-bold text-white' : 'hover:bg-emerald-500/5';
             
-            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
+            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-brandBlue font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
-        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-brandBlue/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
     } else if (vKey === 'financiero') {
         var finRows = [
             { label: 'Rentas', i: 0 },
@@ -2007,18 +2007,18 @@ function renderBalancesSubtabData() {
         ];
 
         html += '<div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">';
-        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-coins text-emerald-400"></i> Estado de Resultado Financiero ($ en Millones) &bull; <span class="text-emerald-400">' + titleSuffix + '</span></h3>';
+        html += '<h3 class="text-base font-bold text-white mb-4 flex items-center gap-2"><i class="fas fa-coins text-brandBlue"></i> Estado de Resultado Financiero ($ en Millones) &bull; <span class="text-brandBlue">' + titleSuffix + '</span></h3>';
         html += '<div class="overflow-x-auto"><table class="w-full text-xs text-left text-slate-300"><thead class="bg-darkBg/60 text-slate-400 font-semibold border-b border-darkBorder/40"><tr><th class="py-2.5 px-3">RENGLÓN RESULTADO FINANCIERO</th><th class="py-2.5 px-3 text-right">2026 ($ en Millones)</th><th class="py-2.5 px-3 text-right">2025 ($ en Millones)</th><th class="py-2.5 px-3 text-right">VARIACIÓN YoY</th></tr></thead><tbody class="divide-y divide-darkBorder/20">';
 
         finRows.forEach(function(row) {
             var v26 = r26[row.i], v25 = r25[row.i];
             var yoy = (v25 !== 0 && v25 !== undefined && v25 !== null) ? ((v26 - v25) / Math.abs(v25)) * 100 : null;
-            var rowClass = row.isHighlight ? 'bg-emerald-500/10 font-bold text-white' : 'hover:bg-emerald-500/5';
+            var rowClass = row.isHighlight ? 'bg-brandBlue/10 font-bold text-white' : 'hover:bg-emerald-500/5';
             
-            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-emerald-300 font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-emerald-400' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
+            html += '<tr class="' + rowClass + '"><td class="py-2.5 px-3 font-medium">' + row.label + '</td><td class="py-2.5 px-3 text-right font-mono text-brandBlue font-semibold">' + fmtMoney(v26) + '</td><td class="py-2.5 px-3 text-right font-mono text-slate-400">' + fmtMoney(v25) + '</td><td class="py-2.5 px-3 text-right font-mono ' + (yoy >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + (yoy !== null ? (yoy >= 0 ? '+' : '') + fmtPct(yoy) : 'N/A') + '</td></tr>';
         });
 
-        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-emerald-400/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
+        html += '</tbody></table></div><p class="text-[11px] text-slate-400 mt-3 italic flex items-center gap-1.5"><i class="fas fa-calculator text-brandBlue/80"></i> Cifras unificadas y expresadas en <strong>Millones de Pesos ($ en Millones)</strong> (Fuente SSN).</p></div>';
     }
 
     container.innerHTML = html;
@@ -3589,19 +3589,19 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.layout-terminal table td.text-brandGreen, 
 
-        body.layout-terminal table td.text-emerald-500,
+        body.layout-terminal table td.text-brandBlue,
 
         body.layout-terminal table td.text-green-500,
 
         table td.text-brandGreen,
 
-        table td.text-emerald-500,
+        table td.text-brandBlue,
 
         table td.text-green-500,
 
         .text-brandGreen,
 
-        .text-emerald-500,
+        .text-brandBlue,
 
         .text-green-500 {
 
@@ -3611,7 +3611,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.layout-terminal.theme-amber-terminal table td.text-brandGreen,
 
-        body.layout-terminal.theme-amber-terminal table td.text-emerald-500,
+        body.layout-terminal.theme-amber-terminal table td.text-brandBlue,
 
         body.layout-terminal.theme-amber-terminal table td.text-green-500 {
 
@@ -3801,27 +3801,27 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.layout-terminal tr td.text-brandGreen,
 
-        body.layout-terminal tr td.text-emerald-500,
+        body.layout-terminal tr td.text-brandBlue,
 
         body.layout-terminal tr td.text-green-500,
 
         body.layout-terminal.theme-amber-terminal tr td.text-brandGreen,
 
-        body.layout-terminal.theme-amber-terminal tr td.text-emerald-500,
+        body.layout-terminal.theme-amber-terminal tr td.text-brandBlue,
 
         body.layout-terminal.theme-amber-terminal tr td.text-green-500,
 
-        tr td.text-brandGreen, tr td.text-emerald-500, tr td.text-green-500,
+        tr td.text-brandGreen, tr td.text-brandBlue, tr td.text-green-500,
 
-        .text-brandGreen, .text-emerald-500, .text-green-500,
+        .text-brandGreen, .text-brandBlue, .text-green-500,
 
         body.layout-terminal table td.text-brandGreen,
 
         body.layout-terminal.theme-amber-terminal table td.text-brandGreen,
 
-        body.layout-terminal table td.text-emerald-500,
+        body.layout-terminal table td.text-brandBlue,
 
-        body.layout-terminal.theme-amber-terminal table td.text-emerald-500,
+        body.layout-terminal.theme-amber-terminal table td.text-brandBlue,
 
         body.layout-terminal td.text-brandGreen,
 
@@ -3891,9 +3891,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.layout-terminal table td .text-brandGreen,
 
-        body.layout-terminal table td.text-emerald-500,
+        body.layout-terminal table td.text-brandBlue,
 
-        body.layout-terminal table td .text-emerald-500,
+        body.layout-terminal table td .text-brandBlue,
 
         body.layout-terminal table td.text-green-500,
 
@@ -3903,9 +3903,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
         body.layout-terminal.theme-amber-terminal table td .text-brandGreen,
 
-        body.layout-terminal.theme-amber-terminal table td.text-emerald-500,
+        body.layout-terminal.theme-amber-terminal table td.text-brandBlue,
 
-        body.layout-terminal.theme-amber-terminal table td .text-emerald-500,
+        body.layout-terminal.theme-amber-terminal table td .text-brandBlue,
 
         body.layout-terminal.theme-amber-terminal table td.text-green-500,
 
@@ -4004,7 +4004,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             font-weight: 700 !important;
         }
 
-        .text-brandBlue, .text-amber-400, .text-cyan-400, .text-emerald-400 {
+        .text-brandBlue, .text-amber-400, .text-cyan-400, .text-brandBlue {
             color: var(--accent-color) !important;
         }
 
@@ -8268,7 +8268,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
 
-                                    <span class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Período: Anual (2001 - Presente)</span>
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Período: Anual (2001 - Presente)</span>
 
                                     <span id="range-badge-econ-fiscal" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Calculando rango...</span>
 
@@ -8344,7 +8344,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                                 <div class="flex flex-wrap gap-1.5 mt-1 items-center font-normal select-none">
 
-                                    <span class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Período: Flujo Anual (2002 - Presente)</span>
+                                    <span class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Período: Flujo Anual (2002 - Presente)</span>
 
                                     <span id="range-badge-econ-variation" class="text-[9px] px-1.5 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20">Calculando rango...</span>
 
@@ -13218,26 +13218,26 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <i class="fas fa-trophy text-amber-400"></i> Rankings de Producción
                 </button>
                 <button id="btn-aseg-subtab-balances" onclick="switchAsegSubtab('balances')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
-                    <i class="fas fa-scale-balanced text-emerald-400"></i> Balances
+                    <i class="fas fa-scale-balanced text-brandBlue"></i> Balances
                 </button>
                         <button id="btn-aseg-subtab-lasegunda" onclick="switchAsegSubtab('lasegunda')" class="px-4 py-2.5 rounded-xl text-xs md:text-sm font-bold text-slate-400 hover:text-white hover:bg-darkBg/60 transition cursor-pointer border border-transparent flex items-center gap-2">
                             <i class="fas fa-building text-amber-400"></i> La Segunda
                         </button>
                 <button id="btn-aseg-subtab-seg-personas" onclick="switchAsegSubtab('seg-personas')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
-                    <i class="fas fa-user-shield text-emerald-400"></i> Seg. de Personas
+                    <i class="fas fa-user-shield text-brandBlue"></i> Seg. de Personas
                 </button>
                 <button id="btn-aseg-subtab-seg-retiro" onclick="switchAsegSubtab('seg-retiro')" class="px-4 py-2 text-xs font-bold rounded-xl transition-all border border-darkBorder text-slate-400 hover:text-white flex items-center gap-2">
-                    <i class="fas fa-piggy-bank text-emerald-400"></i> Seg. de Retiro
+                    <i class="fas fa-piggy-bank text-brandBlue"></i> Seg. de Retiro
                 </button>
             </div>
 
             <!-- Mode Switcher (Visible in Subtab 2) -->
             <div id="subtab-mensual-controls" class="hidden items-center gap-2 bg-darkCard/90 p-1 rounded-xl border border-darkBorder shadow-md">
                 <button id="btn-mensual-corriente" onclick="toggleMensualCurrency('corriente')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all border border-brandBlue/50 bg-brandBlue/20 text-white shadow-md backdrop-blur-sm flex items-center gap-1.5">
-                    <i class="fas fa-coins text-emerald-400"></i> <span>Valores Corrientes</span>
+                    <i class="fas fa-coins text-brandBlue"></i> <span>Valores Corrientes</span>
                 </button>
                 <button id="btn-mensual-constante" onclick="toggleMensualCurrency('constante')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-400 hover:text-white border border-transparent flex items-center gap-1.5">
-                    <i class="fas fa-chart-line text-emerald-400"></i> <span>Valores Constantes (Ajustado IPC)</span>
+                    <i class="fas fa-chart-line text-brandBlue"></i> <span>Valores Constantes (Ajustado IPC)</span>
                 </button>
             </div>
         </div>
@@ -13270,7 +13270,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-total-val">ARS 19.409.600,79 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
                         <span class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i>+43,76% Nom i.a.</span>
-                        <span class="text-emerald-400">(+8,41% Real Neta Inflación)</span>
+                        <span class="text-brandBlue">(+8,41% Real Neta Inflación)</span>
                     </div>
                 </div>
 
@@ -13288,14 +13288,14 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 </div>
 
                 <!-- Card 3: Seguros de Personas -->
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-emerald-500/40 transition-all">
+                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-brandBlue/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros de Personas</span>
-                        <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i class="fas fa-user-shield"></i></span>
+                        <span class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue"><i class="fas fa-user-shield"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-primas-personas-val">ARS 2.594.120,45 M</div>
                     <div class="flex items-center gap-3 text-xs font-bold">
-                        <span class="text-emerald-400"><i class="fas fa-chart-pie mr-1"></i>13,37% Participación</span>
+                        <span class="text-brandBlue"><i class="fas fa-chart-pie mr-1"></i>13,37% Participación</span>
                         <span class="text-brandGreen">+49,87% Nom (+13,02% Real)</span>
                     </div>
                 </div>
@@ -13307,11 +13307,11 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="text-lg font-bold text-white light:text-slate-900 flex items-center gap-2">
-                                <i class="fas fa-user-shield text-emerald-400"></i> Seguros de Personas &bull; Primas Acumuladas
+                                <i class="fas fa-user-shield text-brandBlue"></i> Seguros de Personas &bull; Primas Acumuladas
                             </h3>
                             <p class="text-xs text-slate-400 light:text-slate-600 mt-0.5">Comparación acumulada 9 meses: Mar 2026 vs Mar 2025</p>
                         </div>
-                        <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">Personas</span>
+                        <span class="text-xs font-bold text-brandBlue bg-brandBlue/10 px-3 py-1 rounded-lg border border-brandBlue/20">Personas</span>
                     </div>
 
                     <div class="overflow-x-auto">
@@ -13333,7 +13333,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col items-center">
                     <h3 class="text-base font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2">
-                        <i class="fas fa-chart-pie text-emerald-400"></i> Distribución Seguros de Personas
+                        <i class="fas fa-chart-pie text-brandBlue"></i> Distribución Seguros de Personas
                     </h3>
                     <div class="relative w-full h-[280px]">
                         <canvas id="chart-pie-personas-primas"></canvas>
@@ -13439,7 +13439,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <i class="fas fa-calendar-days text-brandBlue"></i> Producción Mensual del Merc. Asegurador
                     </h1>
                     <p class="text-xs md:text-sm text-slate-400 light:text-slate-600 mt-1 font-medium">
-                        Evolución histórica mensual estimada por la SSN &bull; Serie desde 2017 hasta <span class="font-bold text-white light:text-slate-900" id="badge-mensual-date">Junio 2026</span> &bull; <span id="badge-mensual-subtitle-mode" class="text-emerald-400 font-bold">Valores Corrientes (Nominales)</span>
+                        Evolución histórica mensual estimada por la SSN &bull; Serie desde 2017 hasta <span class="font-bold text-white light:text-slate-900" id="badge-mensual-date">Junio 2026</span> &bull; <span id="badge-mensual-subtitle-mode" class="text-brandBlue font-bold">Valores Corrientes (Nominales)</span>
                     </p>
                 </div>
             </div>
@@ -13456,7 +13456,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <div class="flex flex-wrap items-center gap-3 text-xs font-bold mt-2">
                         <span id="kpi-mensual-total-mom" class="text-brandGreen"><i class="fas fa-arrow-trend-up mr-1"></i>+0,0% m/m</span>
                         <span id="kpi-mensual-total-yoy" class="text-cyan-400">+0,0% i.a.</span>
-                        <span id="kpi-mensual-total-accum" class="text-emerald-400">+0,0% Acum. Ejercicio</span>
+                        <span id="kpi-mensual-total-accum" class="text-brandBlue">+0,0% Acum. Ejercicio</span>
                     </div>
                 </div>
 
@@ -13470,21 +13470,21 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <div class="flex flex-wrap items-center gap-3 text-xs font-bold mt-2">
                         <span id="kpi-mensual-patrim-mom" class="text-brandGreen">+0,0% m/m</span>
                         <span id="kpi-mensual-patrim-yoy" class="text-cyan-400">+0,0% i.a.</span>
-                        <span id="kpi-mensual-patrim-accum" class="text-emerald-400">+0,0% Acum. Ejercicio</span>
+                        <span id="kpi-mensual-patrim-accum" class="text-brandBlue">+0,0% Acum. Ejercicio</span>
                     </div>
                 </div>
 
                 <!-- Card 3: Seguros de Personas Mensual -->
-                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-emerald-500/40 transition-all">
+                <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder/60 shadow-xl hover:border-brandBlue/40 transition-all">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-bold text-slate-400 light:text-slate-600 uppercase tracking-wider">Seguros de Personas</span>
-                        <span class="p-2 rounded-xl bg-emerald-500/10 text-emerald-400"><i class="fas fa-user-shield"></i></span>
+                        <span class="p-2 rounded-xl bg-brandBlue/10 text-brandBlue"><i class="fas fa-user-shield"></i></span>
                     </div>
                     <div class="text-2xl font-black text-white light:text-slate-900 mb-1" id="kpi-mensual-personas-val">ARS 0,00 M</div>
                     <div class="flex flex-wrap items-center gap-3 text-xs font-bold mt-2">
                         <span id="kpi-mensual-personas-mom" class="text-brandGreen">+0,0% m/m</span>
                         <span id="kpi-mensual-personas-yoy" class="text-cyan-400">+0,0% i.a.</span>
-                        <span id="kpi-mensual-personas-accum" class="text-emerald-400">+0,0% Acum. Ejercicio</span>
+                        <span id="kpi-mensual-personas-accum" class="text-brandBlue">+0,0% Acum. Ejercicio</span>
                     </div>
                 </div>
             </div>
@@ -13521,9 +13521,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="glass-card bg-darkCard p-6 rounded-2xl border border-darkBorder shadow-2xl">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-base font-bold text-white light:text-slate-900 flex items-center gap-2">
-                            <i class="fas fa-user-shield text-emerald-400"></i> Seguros de Personas &bull; Producción Mensual
+                            <i class="fas fa-user-shield text-brandBlue"></i> Seguros de Personas &bull; Producción Mensual
                         </h3>
-                        <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-lg border border-emerald-500/20">Personas</span>
+                        <span class="text-xs font-bold text-brandBlue bg-brandBlue/10 px-3 py-1 rounded-lg border border-brandBlue/20">Personas</span>
                     </div>
 
                     <div class="overflow-x-auto">
@@ -13574,7 +13574,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <button id="btn-toggle-series-patrimoniales" onclick="toggleMensualSeries('patrimoniales')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center gap-1.5">
                             <i class="fas fa-check-square"></i> Seguros Patrimoniales & ART
                         </button>
-                        <button id="btn-toggle-series-personas" onclick="toggleMensualSeries('personas')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center gap-1.5">
+                        <button id="btn-toggle-series-personas" onclick="toggleMensualSeries('personas')" class="px-2.5 py-1 rounded-lg text-xs font-bold transition-all bg-brandBlue/20 text-brandBlue border border-brandBlue/40 flex items-center gap-1.5">
                             <i class="fas fa-check-square"></i> Seguros de Personas
                         </button>
                     </div>
@@ -13680,13 +13680,13 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 <div class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 glass-card bg-darkCard/90 p-6 rounded-2xl border border-darkBorder shadow-2xl">
                     <div>
                         <h1 class="text-2xl md:text-3xl font-extrabold text-white light:text-slate-900 tracking-tight flex items-center gap-3">
-                            <i class="fas fa-scale-balanced text-emerald-400"></i> Balances y Estados Contables
+                            <i class="fas fa-scale-balanced text-brandBlue"></i> Balances y Estados Contables
                         </h1>
                         <p class="text-xs md:text-sm text-slate-400 light:text-slate-600 mt-1 font-medium">
-                            Publicación Oficial SSN &bull; Comparativo <span class="font-bold text-white light:text-slate-900">Marzo 2026 vs Marzo 2025</span> &bull; <span class="text-emerald-400 font-bold">Cifras Unificadas en Millones de Pesos ($ en Millones)</span>
+                            Publicación Oficial SSN &bull; Comparativo <span class="font-bold text-white light:text-slate-900">Marzo 2026 vs Marzo 2025</span> &bull; <span class="text-brandBlue font-bold">Cifras Unificadas en Millones de Pesos ($ en Millones)</span>
                         </p>
-                        <div class="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 rounded-xl text-xs font-bold shadow-md">
-                            <i class="fas fa-info-circle text-emerald-400"></i>
+                        <div class="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-xl text-xs font-bold shadow-md">
+                            <i class="fas fa-info-circle text-brandBlue"></i>
                             <span>Unificación de Cifras: Todos los Balances y Estados Contables se presentan unificados en <strong>Millones de Pesos ($ en Millones)</strong>.</span>
                         </div>
                     </div>
@@ -13696,7 +13696,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- Selector 1: Estado Contable -->
                         <div class="flex flex-col gap-1">
                             <label for="select-balances-view" class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">1. Estado Contable:</label>
-                            <select id="select-balances-view" onchange="renderBalancesSubtabData()" class="bg-darkBg text-white text-xs font-bold px-3 py-2 rounded-xl border border-emerald-500/30 focus:border-emerald-400 focus:outline-none shadow-lg cursor-pointer w-full">
+                            <select id="select-balances-view" onchange="renderBalancesSubtabData()" class="bg-darkBg text-white text-xs font-bold px-3 py-2 rounded-xl border border-brandBlue/30 focus:border-brandBlue focus:outline-none shadow-lg cursor-pointer w-full">
                                 <option value="patrimonial" selected>Estados Patrimoniales</option>
                                 <option value="edr">Estado de Resultados</option>
                                 <option value="tecnico">Resultado Técnico</option>
@@ -13707,7 +13707,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- Selector 2: Rubro / Agrupación -->
                         <div class="flex flex-col gap-1">
                             <label for="select-balances-rubro" class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">2. Rubro / Agrupación:</label>
-                            <select id="select-balances-rubro" onchange="onBalancesRubroChange()" class="bg-darkBg text-white text-xs font-bold px-3 py-2 rounded-xl border border-emerald-500/30 focus:border-emerald-400 focus:outline-none shadow-lg cursor-pointer w-full">
+                            <select id="select-balances-rubro" onchange="onBalancesRubroChange()" class="bg-darkBg text-white text-xs font-bold px-3 py-2 rounded-xl border border-brandBlue/30 focus:border-brandBlue focus:outline-none shadow-lg cursor-pointer w-full">
                                 <option value="total_mercado" selected>Total del Mercado</option>
                                 <option value="patrimoniales">Seguros Patrimoniales</option>
                                 <option value="art">Riesgos del Trabajo</option>
@@ -13721,7 +13721,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- Selector 3: Empresa (Always Aligned!) -->
                         <div class="flex flex-col gap-1">
                             <label for="select-balances-company" class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">3. Aseguradora / Entidad:</label>
-                            <select id="select-balances-company" onchange="renderBalancesSubtabData()" disabled class="bg-darkBg text-white text-xs font-bold px-3 py-2 rounded-xl border border-emerald-500/30 focus:border-emerald-400 focus:outline-none shadow-lg cursor-pointer w-full opacity-60">
+                            <select id="select-balances-company" onchange="renderBalancesSubtabData()" disabled class="bg-darkBg text-white text-xs font-bold px-3 py-2 rounded-xl border border-brandBlue/30 focus:border-brandBlue focus:outline-none shadow-lg cursor-pointer w-full opacity-60">
                                 <option value="ALL" selected>Todas (Totales del Mercado)</option>
                             </select>
                         </div>
@@ -13745,9 +13745,9 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             </p>
                         </div>
                         <div class="flex flex-wrap gap-3">
-                            <div class="bg-darkBg/80 border border-emerald-500/30 px-3.5 py-2 rounded-xl text-center min-w-[130px]">
+                            <div class="bg-darkBg/80 border border-brandBlue/30 px-3.5 py-2 rounded-xl text-center min-w-[130px]">
                                 <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Generales</div>
-                                <div id="ls-kpi-tot-generales" class="text-base font-extrabold text-emerald-400 font-mono">-</div>
+                                <div id="ls-kpi-tot-generales" class="text-base font-extrabold text-brandBlue font-mono">-</div>
                             </div>
                             <div class="bg-darkBg/80 border border-cyan-500/30 px-3.5 py-2 rounded-xl text-center min-w-[130px]">
                                 <div class="text-[10px] text-slate-400 font-bold uppercase tracking-wider">La Segunda ART</div>
@@ -13806,14 +13806,14 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <!-- SUB-APARTADO 2: APERTURA POR RAMO -->
                     <div class="space-y-10">
                         <h2 class="text-lg font-bold text-white flex items-center gap-2 border-t border-darkBorder/40 pt-8">
-                            <i class="fas fa-layer-group text-emerald-400"></i> 2. Apertura por Ramo
+                            <i class="fas fa-layer-group text-brandBlue"></i> 2. Apertura por Ramo
                         </h2>
 
                         <!-- SECCIÓN A: TOTAL DE PATRIMONIALES -->
                         <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2">
                                 <h3 class="text-base font-bold text-white flex items-center gap-2">
-                                    <i class="fas fa-shield-halved text-emerald-400"></i> Total de Seguros Patrimoniales &bull; <span id="ls-subtitle-patrimoniales" class="text-emerald-400">-</span>
+                                    <i class="fas fa-shield-halved text-brandBlue"></i> Total de Seguros Patrimoniales &bull; <span id="ls-subtitle-patrimoniales" class="text-brandBlue">-</span>
                                 </h3>
                                 <span class="text-xs text-slate-400 font-medium">Ordenado de mayor a menor por volumen de prima</span>
                             </div>
@@ -13866,7 +13866,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <!-- Treemap Patrimoniales -->
                             <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                                 <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
-                                    <i class="fas fa-chart-pie text-emerald-400"></i> Distribución Seguros Patrimoniales por Ramo
+                                    <i class="fas fa-chart-pie text-brandBlue"></i> Distribución Seguros Patrimoniales por Ramo
                                 </h3>
                                 <div class="relative w-full h-[320px]">
                                     <canvas id="ls-chart-patrimoniales"></canvas>
@@ -13889,17 +13889,17 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <!-- SUBTAB VIEW: SEG. DE PERSONAS -->
                     <div id="subtab-view-seg-personas" class="hidden">
                         <!-- Header Banner -->
-                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-brandBlue/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div>
                                 <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                                    <i class="fas fa-user-shield text-emerald-400"></i> Seguros de Personas y Retiro
+                                    <i class="fas fa-user-shield text-brandBlue"></i> Seguros de Personas y Retiro
                                 </h1>
                                 <p class="text-xs md:text-sm text-slate-400 mt-1 font-medium">
                                     Indicadores de Gestión y Rentabilidad Comparativos (Marzo 2026) &bull; Total Mercado vs. Grupo La Segunda
                                 </p>
                             </div>
                             <div class="flex items-center gap-3">
-                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2">
+                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/20 flex items-center gap-2">
                                     <i class="fas fa-database"></i> Fuente: SSN Anexo I
                                 </span>
                             </div>
@@ -13908,7 +13908,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- SECCIÓN 1: SEGUROS DE PERSONAS -->
                         <div class="mb-10">
                             <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <i class="fas fa-users text-emerald-400"></i> 1. Seguros de Personas (Total Mercado vs. L2 Personas)
+                                <i class="fas fa-users text-brandBlue"></i> 1. Seguros de Personas (Total Mercado vs. L2 Personas)
                             </h2>
                             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div class="lg:col-span-7 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">
@@ -13941,7 +13941,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <!-- SECCIÓN 2: SEGUROS DE RETIRO -->
                         <div class="mb-10">
                             <h2 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                                <i class="fas fa-piggy-bank text-emerald-400"></i> 2. Seguros de Retiro (Exclusivas Retiro Mercado vs. L2 Retiro)
+                                <i class="fas fa-piggy-bank text-brandBlue"></i> 2. Seguros de Retiro (Exclusivas Retiro Mercado vs. L2 Retiro)
                             </h2>
                             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
                                 <div class="lg:col-span-7 glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl flex flex-col justify-between">
@@ -13975,12 +13975,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
                                 <div>
                                     <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
-                                        <i class="fas fa-layer-group text-emerald-400"></i> Primas Emitidas por Ramos en Seg. de Personas
+                                        <i class="fas fa-layer-group text-brandBlue"></i> Primas Emitidas por Ramos en Seg. de Personas
                                     </h2>
                                     <p class="text-xs text-slate-400 mt-1">Boletín Trimestral SSN &bull; Acumulado a Marzo 2026. Seleccione los ramos a incluir para recalcular el mercado dinámicamente.</p>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <button onclick="selectAllSpRamos(true)" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1">
+                                    <button onclick="selectAllSpRamos(true)" class="px-3 py-1.5 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-lg hover:bg-brandBlue/20 transition flex items-center gap-1">
                                         <i class="fas fa-check-square"></i> Seleccionar Todos
                                     </button>
                                     <button onclick="selectAllSpRamos(false)" class="px-3 py-1.5 text-xs font-bold bg-slate-700/50 text-slate-300 border border-slate-600/30 rounded-lg hover:bg-slate-700 transition flex items-center gap-1">
@@ -14004,7 +14004,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                             <thead>
                                                 <tr class="bg-darkBg/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-darkBorder">
                                                     <th class="py-3 px-3 w-10 text-center">
-                                                        <input type="checkbox" id="chk-sp-primas-master" checked onchange="toggleAllSpPrimasCheckboxes(this.checked)" class="accent-emerald-500 cursor-pointer rounded">
+                                                        <input type="checkbox" id="chk-sp-primas-master" checked onchange="toggleAllSpPrimasCheckboxes(this.checked)" class="accent-brandBlue cursor-pointer rounded">
                                                     </th>
                                                     <th class="py-3 px-3">Aseguradora (Entidad)</th>
                                                     <th class="py-3 px-3 text-right">Primas Emitidas ($)</th>
@@ -14022,7 +14022,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <!-- Gráfico Primas Emitidas por Ramos -->
                             <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                                 <h3 class="text-sm font-bold text-slate-300 mb-4 uppercase tracking-wider flex items-center gap-2">
-                                    <i class="fas fa-chart-bar text-emerald-400"></i> Top 10 Aseguradoras en Ramos Seleccionados
+                                    <i class="fas fa-chart-bar text-brandBlue"></i> Top 10 Aseguradoras en Ramos Seleccionados
                                 </h3>
                                 <div class="relative w-full h-[380px]">
                                     <canvas id="chart-sp-primas-ramos"></canvas>
@@ -14035,22 +14035,22 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <!-- SUBTAB VIEW: SEG. DE RETIRO -->
                     <div id="subtab-view-seg-retiro" class="hidden">
                         <!-- Header Banner con Selector de Vista -->
-                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                        <div class="mb-8 glass-card bg-darkCard/90 p-6 rounded-2xl border border-brandBlue/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                             <div>
                                 <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                                    <i class="fas fa-piggy-bank text-emerald-400"></i> Seguros de Retiro</h1>
+                                    <i class="fas fa-piggy-bank text-brandBlue"></i> Seguros de Retiro</h1>
                                 <p class="text-xs md:text-sm text-slate-400 mt-1 font-medium">
                                     Publicación Oficial SSN &bull; Informes Estadísticos Trimestrales (Marzo 2026)
                                 </p>
                             </div>
                             <div class="flex flex-wrap items-center gap-3">
                                 <label for="select-seg-retiro-view" class="text-xs font-bold text-slate-300">Seleccionar Informe:</label>
-                                <select id="select-seg-retiro-view" onchange="switchSegRetiroView(this.value)" class="bg-darkBg text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-emerald-500/30 focus:border-emerald-400 focus:outline-none cursor-pointer shadow-lg">
+                                <select id="select-seg-retiro-view" onchange="switchSegRetiroView(this.value)" class="bg-darkBg text-white text-xs font-bold px-4 py-2.5 rounded-xl border border-brandBlue/30 focus:border-brandBlue focus:outline-none cursor-pointer shadow-lg">
                                     <option value="compromisos" selected>Compromisos Técnicos (Reservas Matemáticas)</option>
                                     <option value="asegurados">Cantidad de Asegurados y Rentistas</option>
                                     <option value="primas">Primas Emitidas (Ranking y Producción)</option>
                                 </select>
-                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2">
+                                <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/20 flex items-center gap-2">
                                     <i class="fas fa-database"></i> Fuente: SSN
                                 </span>
                             </div>
@@ -14060,13 +14060,13 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <div id="sr-view-compromisos" class="mb-10">
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
                                 <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                                    <i class="fas fa-vault text-emerald-400"></i> Compromisos Técnicos / Reservas Matemáticas (en miles de $)
+                                    <i class="fas fa-vault text-brandBlue"></i> Compromisos Técnicos / Reservas Matemáticas (en miles de $)
                                 </h2>
                                 <div class="flex items-center gap-2">
-                                    <button onclick="toggleSrCol('ahorro')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                    <button onclick="toggleSrCol('ahorro')" class="px-3 py-1.5 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-lg hover:bg-brandBlue/20 transition flex items-center gap-1.5">
                                         <i class="fas fa-layer-group"></i> <span id="btn-toggle-ahorro-txt">Desglosar Ahorro</span>
                                     </button>
-                                    <button onclick="toggleSrCol('rentas')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                    <button onclick="toggleSrCol('rentas')" class="px-3 py-1.5 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-lg hover:bg-brandBlue/20 transition flex items-center gap-1.5">
                                         <i class="fas fa-layer-group"></i> <span id="btn-toggle-rentas-txt">Desglosar Rentas</span>
                                     </button>
                                 </div>
@@ -14114,12 +14114,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
                                 <div>
                                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                                        <i class="fas fa-file-invoice-dollar text-emerald-400"></i> Primas Emitidas - Ranking de Producción (Acumulado Trimestral SSN)
+                                        <i class="fas fa-file-invoice-dollar text-brandBlue"></i> Primas Emitidas - Ranking de Producción (Acumulado Trimestral SSN)
                                     </h2>
                                     <p class="text-xs text-slate-400 mt-1">Lógica de ejercicios de Balances (01-07 al 30-06). Datos acumulados a Marzo 2026.</p>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <button onclick="toggleAllPrimasRetiroCheckboxes()" class="px-3.5 py-2 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/20 transition flex items-center gap-2 shadow-md">
+                                    <button onclick="toggleAllPrimasRetiroCheckboxes()" class="px-3.5 py-2 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-xl hover:bg-brandBlue/20 transition flex items-center gap-2 shadow-md">
                                         <i class="fas fa-check-double"></i> <span>Seleccionar / Deseleccionar Todas</span>
                                     </button>
                                 </div>
@@ -14132,7 +14132,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                             <thead>
                                                 <tr class="bg-darkBg/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-darkBorder">
                                                     <th class="py-3 px-3 w-10 text-center">
-                                                        <input type="checkbox" id="chk-sr-primas-master" checked onchange="toggleAllPrimasRetiroCheckboxes(this.checked)" class="accent-emerald-500 cursor-pointer rounded">
+                                                        <input type="checkbox" id="chk-sr-primas-master" checked onchange="toggleAllPrimasRetiroCheckboxes(this.checked)" class="accent-brandBlue cursor-pointer rounded">
                                                     </th>
                                                     <th class="py-3 px-3">Aseguradora (Entidad)</th>
                                                     <th class="py-3 px-3 text-right">Total Primas ($)</th>
@@ -14156,7 +14156,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <!-- Gráfico Primas Emitidas -->
                             <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                                 <h3 class="text-sm font-bold text-slate-300 mb-4 uppercase tracking-wider flex items-center gap-2">
-                                    <i class="fas fa-chart-bar text-emerald-400"></i> Producción por Primas Emitidas (Retiro Colectivo vs. Individual)
+                                    <i class="fas fa-chart-bar text-brandBlue"></i> Producción por Primas Emitidas (Retiro Colectivo vs. Individual)
                                 </h3>
                                 <div class="relative w-full h-[380px]">
                                     <canvas id="chart-sr-primas"></canvas>
@@ -14169,12 +14169,12 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
                                 <div>
                                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                                        <i class="fas fa-file-invoice-dollar text-emerald-400"></i> Primas Emitidas - Ranking de Producción (Acumulado Trimestral SSN)
+                                        <i class="fas fa-file-invoice-dollar text-brandBlue"></i> Primas Emitidas - Ranking de Producción (Acumulado Trimestral SSN)
                                     </h2>
                                     <p class="text-xs text-slate-400 mt-1">Lógica de ejercicios de Balances (01-07 al 30-06). Datos acumulados a Marzo 2026.</p>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <button onclick="toggleAllPrimasRetiroCheckboxes()" class="px-3.5 py-2 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/20 transition flex items-center gap-2 shadow-md">
+                                    <button onclick="toggleAllPrimasRetiroCheckboxes()" class="px-3.5 py-2 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-xl hover:bg-brandBlue/20 transition flex items-center gap-2 shadow-md">
                                         <i class="fas fa-check-double"></i> <span>Seleccionar / Deseleccionar Todas</span>
                                     </button>
                                 </div>
@@ -14187,7 +14187,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                                             <thead>
                                                 <tr class="bg-darkBg/80 text-slate-400 text-xs font-semibold uppercase tracking-wider border-b border-darkBorder">
                                                     <th class="py-3 px-3 w-10 text-center">
-                                                        <input type="checkbox" id="chk-sr-primas-master" checked onchange="toggleAllPrimasRetiroCheckboxes(this.checked)" class="accent-emerald-500 cursor-pointer rounded">
+                                                        <input type="checkbox" id="chk-sr-primas-master" checked onchange="toggleAllPrimasRetiroCheckboxes(this.checked)" class="accent-brandBlue cursor-pointer rounded">
                                                     </th>
                                                     <th class="py-3 px-3">Aseguradora (Entidad)</th>
                                                     <th class="py-3 px-3 text-right">Total Primas ($)</th>
@@ -14211,7 +14211,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <!-- Gráfico Primas Emitidas -->
                             <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder shadow-xl">
                                 <h3 class="text-sm font-bold text-slate-300 mb-4 uppercase tracking-wider flex items-center gap-2">
-                                    <i class="fas fa-chart-bar text-emerald-400"></i> Producción por Primas Emitidas (Retiro Colectivo vs. Individual)
+                                    <i class="fas fa-chart-bar text-brandBlue"></i> Producción por Primas Emitidas (Retiro Colectivo vs. Individual)
                                 </h3>
                                 <div class="relative w-full h-[380px]">
                                     <canvas id="chart-sr-primas"></canvas>
@@ -14223,13 +14223,13 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         <div id="sr-view-asegurados" class="mb-10 hidden">
                             <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-4">
                                 <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                                    <i class="fas fa-users text-emerald-400"></i> Cantidad de Asegurados y Rentistas
+                                    <i class="fas fa-users text-brandBlue"></i> Cantidad de Asegurados y Rentistas
                                 </h2>
                                 <div class="flex items-center gap-2">
-                                    <button onclick="toggleSrAsegCol('ahorro')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                    <button onclick="toggleSrAsegCol('ahorro')" class="px-3 py-1.5 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-lg hover:bg-brandBlue/20 transition flex items-center gap-1.5">
                                         <i class="fas fa-layer-group"></i> <span id="btn-toggle-aseg-ahorro-txt">Desglosar Ahorro</span>
                                     </button>
-                                    <button onclick="toggleSrAsegCol('renta')" class="px-3 py-1.5 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/20 transition flex items-center gap-1.5">
+                                    <button onclick="toggleSrAsegCol('renta')" class="px-3 py-1.5 text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/30 rounded-lg hover:bg-brandBlue/20 transition flex items-center gap-1.5">
                                         <i class="fas fa-layer-group"></i> <span id="btn-toggle-aseg-renta-txt">Desglosar Renta</span>
                                     </button>
                                 </div>
@@ -14273,17 +14273,17 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
         <!-- SECCIÓN GLOBAL: FUENTES DE INFORMACIÓN Y DATOS -->
         <div id="container-fuentes" class="hidden font-sans p-4 md:p-8 max-w-7xl mx-auto space-y-8">
             <!-- Header Banner -->
-            <div class="glass-card bg-darkCard/90 p-6 md:p-8 rounded-2xl border border-emerald-500/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="glass-card bg-darkCard/90 p-6 md:p-8 rounded-2xl border border-brandBlue/30 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                 <div>
                     <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight flex items-center gap-3">
-                        <i class="fas fa-database text-emerald-400"></i> Fuentes de Información y Datos
+                        <i class="fas fa-database text-brandBlue"></i> Fuentes de Información y Datos
                     </h1>
                     <p class="text-xs md:text-sm text-slate-400 mt-2 font-medium max-w-3xl leading-relaxed">
                         Catálogo oficial de organismos públicos, entidades reguladoras, mercados bursátiles y proveedores de información estadística que alimentan el Monitor Económico Financiero.
                     </p>
                 </div>
                 <div class="flex flex-wrap items-center gap-3">
-                    <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-2 shadow-sm">
+                    <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-brandBlue/10 text-brandBlue border border-brandBlue/20 flex items-center gap-2 shadow-sm">
                         <i class="fas fa-shield-check"></i> 8 Fuentes Oficiales
                     </span>
                     <span class="px-3.5 py-1.5 rounded-full text-xs font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 flex items-center gap-2 shadow-sm">
@@ -14296,17 +14296,17 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 <!-- Card 1: SSN -->
-                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-emerald-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-brandBlue/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
                     <div>
                         <div class="flex items-center justify-between gap-3 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-brandBlue/10 border border-brandBlue/20 flex items-center justify-center text-brandBlue text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
                                 <i class="fas fa-shield-halved"></i>
                             </div>
-                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-brandBlue/10 text-brandBlue border border-brandBlue/20">
                                 Merc. Asegurador
                             </span>
                         </div>
-                        <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                        <h3 class="text-base font-bold text-white group-hover:text-brandBlue transition-colors mb-2">
                             Superintendencia de Seguros de la Nación (SSN)
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">
@@ -14314,13 +14314,13 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         </p>
                         <div class="space-y-2 mb-6">
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Primas Emitidas y Balances
+                                <i class="fas fa-check-circle text-brandBlue text-xs"></i> Primas Emitidas y Balances
                             </div>
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Seguros de Personas y Retiro
+                                <i class="fas fa-check-circle text-brandBlue text-xs"></i> Seguros de Personas y Retiro
                             </div>
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Reservas Matemáticas e Indicadores
+                                <i class="fas fa-check-circle text-brandBlue text-xs"></i> Reservas Matemáticas e Indicadores
                             </div>
                         </div>
                     </div>
@@ -14329,7 +14329,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <span>Frecuencia:</span>
                             <span class="text-slate-200 font-bold">Trimestral / Mensual</span>
                         </div>
-                        <a href="https://www.argentina.gob.ar/superintendencia-de-seguros" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                        <a href="https://www.argentina.gob.ar/superintendencia-de-seguros" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-brandBlue hover:bg-brandBlue/20 border border-brandBlue/30 transition flex items-center justify-center gap-2 shadow-md">
                             <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
                         </a>
                     </div>
@@ -14496,17 +14496,17 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 </div>
 
                 <!-- Card 6: MAE -->
-                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-emerald-500/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
+                <div class="glass-card bg-darkCard/80 p-6 rounded-2xl border border-darkBorder hover:border-brandBlue/40 transition-all duration-300 shadow-xl flex flex-col justify-between group">
                     <div>
                         <div class="flex items-center justify-between gap-3 mb-4">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
+                            <div class="w-12 h-12 rounded-xl bg-brandBlue/10 border border-brandBlue/20 flex items-center justify-center text-brandBlue text-xl font-extrabold shadow-inner group-hover:scale-110 transition-transform">
                                 <i class="fas fa-money-bill-transfer"></i>
                             </div>
-                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full bg-brandBlue/10 text-brandBlue border border-brandBlue/20">
                                 Mercado Interbancario
                             </span>
                         </div>
-                        <h3 class="text-base font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">
+                        <h3 class="text-base font-bold text-white group-hover:text-brandBlue transition-colors mb-2">
                             Mercado Abierto Electrónico (MAE)
                         </h3>
                         <p class="text-xs text-slate-400 leading-relaxed mb-4">
@@ -14514,13 +14514,13 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                         </p>
                         <div class="space-y-2 mb-6">
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Precios de Referencia Bonos
+                                <i class="fas fa-check-circle text-brandBlue text-xs"></i> Precios de Referencia Bonos
                             </div>
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Operaciones Cambiarias Mayoristas
+                                <i class="fas fa-check-circle text-brandBlue text-xs"></i> Operaciones Cambiarias Mayoristas
                             </div>
                             <div class="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
-                                <i class="fas fa-check-circle text-emerald-400 text-xs"></i> Pases Pasivos y Activos
+                                <i class="fas fa-check-circle text-brandBlue text-xs"></i> Pases Pasivos y Activos
                             </div>
                         </div>
                     </div>
@@ -14529,7 +14529,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             <span>Frecuencia:</span>
                             <span class="text-slate-200 font-bold">Diaria</span>
                         </div>
-                        <a href="https://www.mae.com.ar/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 transition flex items-center justify-center gap-2 shadow-md">
+                        <a href="https://www.mae.com.ar/" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-darkBg text-brandBlue hover:bg-brandBlue/20 border border-brandBlue/30 transition flex items-center justify-center gap-2 shadow-md">
                             <i class="fas fa-external-link-alt"></i> Visitar Sitio Oficial
                         </a>
                     </div>
@@ -14632,7 +14632,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                     <h3 id="modal-title" class="text-lg font-black text-white light:text-slate-900 tracking-tight truncate"></h3>
                     <p id="modal-desc" class="text-xs text-slate-400 light:text-slate-500 mt-1 truncate" title=""></p>
                     <div class="flex gap-2 mt-2">
-                        <span id="modal-period" class="text-[9px] px-2 py-0.5 rounded font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"></span>
+                        <span id="modal-period" class="text-[9px] px-2 py-0.5 rounded font-semibold bg-brandBlue/10 text-brandBlue border border-brandBlue/20"></span>
                     </div>
                 </div>
                 <!-- Modal Period Selector -->
@@ -14666,7 +14666,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
             <div class="flex flex-col gap-1">
                 <div class="flex items-center gap-3">
                     <span id="bond-modal-ticker" class="text-2xl font-black text-white light:text-slate-900 tracking-tight bg-brandBlue/10 text-brandBlue px-3 py-1 rounded-xl border border-brandBlue/20"></span>
-                    <span id="bond-modal-family" class="text-xs font-semibold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"></span>
+                    <span id="bond-modal-family" class="text-xs font-semibold px-2 py-0.5 rounded bg-brandBlue/10 text-brandBlue border border-brandBlue/20"></span>
                 </div>
                 <h3 id="bond-modal-name" class="text-lg font-bold text-white light:text-slate-800 tracking-tight mt-2"></h3>
             </div>
@@ -15387,7 +15387,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                         // Higher than Close Price -> GREEN
 
-                        cell.className = "px-4 py-2.5 text-right font-bold font-mono live-price-cell text-emerald-400 light:text-emerald-600 bg-emerald-500/10 rounded";
+                        cell.className = "px-4 py-2.5 text-right font-bold font-mono live-price-cell text-brandBlue light:text-emerald-600 bg-brandBlue/10 rounded";
 
                     } else {
 
@@ -17640,7 +17640,7 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                     b.innerHTML = '<i class="fas fa-check"></i> Seleccionada';
 
-                    b.className = 'text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold select-badge';
+                    b.className = 'text-[9px] px-1.5 py-0.5 rounded bg-brandBlue/20 text-brandBlue font-bold select-badge';
 
                 } else {
 
@@ -18620,11 +18620,11 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
 
                         
 
-                        const classRes = dRes >= 0 ? 'text-emerald-500 font-medium' : 'text-rose-500 font-medium';
+                        const classRes = dRes >= 0 ? 'text-brandBlue font-medium' : 'text-rose-500 font-medium';
 
-                        const classDebt = dDebt >= 0 ? 'text-rose-400 font-medium' : 'text-emerald-400 font-medium'; // debt increasing is red
+                        const classDebt = dDebt >= 0 ? 'text-rose-400 font-medium' : 'text-brandBlue font-medium'; // debt increasing is red
 
-                        const classNet = dNet >= 0 ? 'text-emerald-500 font-semibold' : 'text-rose-500 font-semibold';
+                        const classNet = dNet >= 0 ? 'text-brandBlue font-semibold' : 'text-rose-500 font-semibold';
 
                         
 
@@ -19377,7 +19377,7 @@ function switchGlobalTab(tabId) {
 
                     <td class="px-6 py-3 border-b border-darkBorder/20 light:border-slate-100 truncate max-w-[200px] sm:max-w-[300px]" title="${item.entidad}">${item.entidad}</td>
 
-                    <td class="px-6 py-3 border-b border-darkBorder/20 light:border-slate-100 text-right tabular-nums text-emerald-400 light:text-emerald-600 font-medium">${formatNumber(item.prima)}</td>
+                    <td class="px-6 py-3 border-b border-darkBorder/20 light:border-slate-100 text-right tabular-nums text-brandBlue light:text-emerald-600 font-medium">${formatNumber(item.prima)}</td>
 
                     <td class="px-6 py-3 border-b border-darkBorder/20 light:border-slate-100 text-right tabular-nums text-brandBlue font-semibold">${formatPercent(item.participacion)}</td>
 
@@ -23570,7 +23570,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                         <i class="fas fa-chart-line text-amber-400"></i>
 
-                        <span><strong>Regresión Óptima (${bm.name}):</strong> <code class="text-white light:text-slate-900 font-bold">${bm.equationText}</code> | <strong>R²:</strong> <span class="text-emerald-400 font-bold">${bm.r2.toFixed(4)} (${(bm.r2*100).toFixed(1)}%)</span></span>
+                        <span><strong>Regresión Óptima (${bm.name}):</strong> <code class="text-white light:text-slate-900 font-bold">${bm.equationText}</code> | <strong>R²:</strong> <span class="text-brandBlue font-bold">${bm.r2.toFixed(4)} (${(bm.r2*100).toFixed(1)}%)</span></span>
 
                     </div>`;
 
@@ -24186,7 +24186,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                     changeEl.textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
 
-                    changeEl.className = 'px-4 py-2.5 text-right font-mono font-bold text-xs ' + (chg > 0 ? 'text-emerald-400 light:text-emerald-600' : (chg < 0 ? 'text-rose-400 light:text-rose-600' : 'text-white light:text-slate-900'));
+                    changeEl.className = 'px-4 py-2.5 text-right font-mono font-bold text-xs ' + (chg > 0 ? 'text-brandBlue light:text-emerald-600' : (chg < 0 ? 'text-rose-400 light:text-rose-600' : 'text-white light:text-slate-900'));
 
                 }
 
@@ -24254,7 +24254,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
                     el.textContent = (num >= 0 ? '+' : '') + num.toFixed(2) + '%';
 
-                    el.className = 'px-4 py-2.5 text-right font-mono text-xs hidden md:table-cell font-bold ' + (num > 0 ? 'text-emerald-400 light:text-emerald-600' : (num < 0 ? 'text-rose-400 light:text-rose-600' : 'text-white light:text-slate-900'));
+                    el.className = 'px-4 py-2.5 text-right font-mono text-xs hidden md:table-cell font-bold ' + (num > 0 ? 'text-brandBlue light:text-emerald-600' : (num < 0 ? 'text-rose-400 light:text-rose-600' : 'text-white light:text-slate-900'));
 
                 };
 
@@ -25348,7 +25348,7 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
                 return `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-slate-500/20 text-slate-400">0.00%</span>`;
             }
             const isPos = pct > 0;
-            const bgClass = isPos ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20';
+            const bgClass = isPos ? 'bg-brandBlue/10 text-brandBlue border border-brandBlue/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20';
             const sign = isPos ? '+' : '';
             return `<span class="px-2 py-0.5 rounded text-[11px] font-bold ${bgClass}">${sign}${pct.toFixed(2)}%</span>`;
         }
