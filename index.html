@@ -806,7 +806,7 @@ function initSpPrimasRamosView() {
     var container = document.getElementById('sp-ramos-selector-container');
     if (!container) return;
 
-    if (spSelectedRamos === null && boletin.target_ramos) {
+    if ((!spSelectedRamos || spSelectedRamos.length === 0) && boletin.target_ramos && boletin.target_ramos.length > 0) {
         spSelectedRamos = boletin.target_ramos.slice();
     }
 
@@ -826,7 +826,7 @@ function initSpPrimasRamosView() {
 window.initSpPrimasRamosView = initSpPrimasRamosView;
 
 function onSpRamoCheckboxChange(cb) {
-    if (spSelectedRamos === null) spSelectedRamos = [];
+    if (!spSelectedRamos && boletin && boletin.target_ramos) { spSelectedRamos = boletin.target_ramos.slice(); } if (!spSelectedRamos) spSelectedRamos = [];
     var val = cb.value;
     if (cb.checked) {
         if (spSelectedRamos.indexOf(val) === -1) spSelectedRamos.push(val);
