@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-    <!-- Dark slate background circle -->
-    <circle cx="256" cy="256" r="240" fill="#0f172a"/>
-    <!-- Main chart pie body (Brand Blue #3b82f6) -->
-    <path fill="#3b82f6" d="M240 256V48C125.1 48 32 141.1 32 256s93.1 208 208 208 208-93.1 208-208H240z"/>
-    <!-- Highlighted pie slice (Emerald Green #10b981) -->
-    <path fill="#10b981" transform="translate(16, -16)" d="M448 224c0-106-86-192-192-192V224H448z"/>
+    <!-- Dark background circle -->
+    <circle cx="256" cy="256" r="240" fill="#0b0f14"/>
+    <!-- Main chart pie body (L2 Red #e20039) -->
+    <path fill="#e20039" d="M240 256V48C125.1 48 32 141.1 32 256s93.1 208 208 208 208-93.1 208-208H240z"/>
+    <!-- Highlighted pie slice (Brandbook Coral Red #ff4c60) -->
+    <path fill="#ff4c60" transform="translate(16, -16)" d="M448 224c0-106-86-192-192-192V224H448z"/>
 </svg>
