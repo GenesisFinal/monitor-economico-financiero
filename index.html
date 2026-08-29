@@ -1488,6 +1488,8 @@ window.toggleMensualCurrency = toggleMensualCurrency;
 
 
 function renderMensualSubtabData() {
+    var isJuly = (typeof ssnObj === 'undefined' || !ssnObj || !ssnObj.latest_date || ssnObj.latest_date.indexOf('Julio') !== -1);
+
     var rootObjDate = (typeof appData !== 'undefined' && appData) ? appData : (window.appData ? window.appData : (window.finalData ? window.finalData : (window.masterDataset ? window.masterDataset : {})));
     var finalObjDate = rootObjDate.final_data ? rootObjDate.final_data : rootObjDate;
     var ssnObjDate = finalObjDate.ssn_produccion_mensual || rootObjDate.ssn_produccion_mensual || {};
@@ -1530,7 +1532,7 @@ function renderMensualSubtabData() {
         if (document.getElementById('kpi-mensual-total-val')) document.getElementById('kpi-mensual-total-val').textContent = 'ARS ' + fmtM(vAct) + ' M';
         if (document.getElementById('kpi-mensual-total-mom')) document.getElementById('kpi-mensual-total-mom').innerHTML = '<i class="fas fa-arrow-trend-up mr-1"></i>' + fmtPct(vMom) + ' m/m';
         if (document.getElementById('kpi-mensual-total-yoy')) document.getElementById('kpi-mensual-total-yoy').textContent = fmtPct(vIa) + ' i.a.';
-        if (document.getElementById('kpi-mensual-total-accum')) document.getElementById('kpi-mensual-total-accum').textContent = fmtPct(vAcumPct) + ' Acum. Ejercicio';
+        if (document.getElementById('kpi-mensual-total-accum')) document.getElementById('kpi-mensual-total-accum').textContent = fmtPct(isJuly ? vIa : vAcumPct) + ' Acum. Ejercicio';
     }
 
     if (patCard) {
@@ -1542,7 +1544,7 @@ function renderMensualSubtabData() {
         if (document.getElementById('kpi-mensual-patrimoniales-val')) document.getElementById('kpi-mensual-patrimoniales-val').textContent = 'ARS ' + fmtM(vAct) + ' M';
         if (document.getElementById('kpi-mensual-patrim-mom')) document.getElementById('kpi-mensual-patrim-mom').textContent = fmtPct(vMom) + ' m/m';
         if (document.getElementById('kpi-mensual-patrim-yoy')) document.getElementById('kpi-mensual-patrim-yoy').textContent = fmtPct(vIa) + ' i.a.';
-        if (document.getElementById('kpi-mensual-patrim-accum')) document.getElementById('kpi-mensual-patrim-accum').textContent = fmtPct(vAcumPct) + ' Acum. Ejercicio';
+        if (document.getElementById('kpi-mensual-patrim-accum')) document.getElementById('kpi-mensual-patrim-accum').textContent = fmtPct(isJuly ? vIa : vAcumPct) + ' Acum. Ejercicio';
     }
 
     if (perCard) {
@@ -1554,7 +1556,7 @@ function renderMensualSubtabData() {
         if (document.getElementById('kpi-mensual-personas-val')) document.getElementById('kpi-mensual-personas-val').textContent = 'ARS ' + fmtM(vAct) + ' M';
         if (document.getElementById('kpi-mensual-personas-mom')) document.getElementById('kpi-mensual-personas-mom').textContent = fmtPct(vMom) + ' m/m';
         if (document.getElementById('kpi-mensual-personas-yoy')) document.getElementById('kpi-mensual-personas-yoy').textContent = fmtPct(vIa) + ' i.a.';
-        if (document.getElementById('kpi-mensual-personas-accum')) document.getElementById('kpi-mensual-personas-accum').textContent = fmtPct(vAcumPct) + ' Acum. Ejercicio';
+        if (document.getElementById('kpi-mensual-personas-accum')) document.getElementById('kpi-mensual-personas-accum').textContent = fmtPct(isJuly ? vIa : vAcumPct) + ' Acum. Ejercicio';
     }
 
     // 2. Populate Grid 10 Cards
@@ -1575,7 +1577,7 @@ function renderMensualSubtabData() {
             gridHtml += '<div class="grid grid-cols-3 gap-1 pt-2 border-t border-darkBorder/40 text-[11px] font-mono">';
             gridHtml += '<div><span class="text-slate-500 block text-[9px]">MoM</span><span class="' + (vMom >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vMom) + '</span></div>';
             gridHtml += '<div><span class="text-slate-500 block text-[9px]">i.a.</span><span class="' + (vIa >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vIa) + '</span></div>';
-            gridHtml += '<div><span class="text-slate-500 block text-[9px]">Ej. Acum</span><span class="' + (vAcumPct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</span></div>';
+            gridHtml += '<div><span class="text-slate-500 block text-[9px]">Ej. Acum</span><span class="' + (vAcumPct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(isJuly ? vIa : vAcumPct) + '</span></div>';
             gridHtml += '</div></div>';
         });
         grid.innerHTML = gridHtml;
@@ -1595,8 +1597,9 @@ function renderMensualSubtabData() {
             var vAct = (c.latest_val !== undefined) ? c.latest_val : (c.actual_val || 0);
             var vMom = (c.mom_pct !== undefined) ? c.mom_pct : (c.var_mom || 0);
             var vIa = (c.yoy_pct !== undefined) ? c.yoy_pct : (c.var_ia || 0);
-            var vAcumVal = c.accum_val || 0;
-            var vAcumPct = (c.accum_pct !== undefined) ? c.accum_pct : (c.var_acum_ejercicio || 0);
+            
+            var vAcumVal = isJuly ? vAct : (c.accum_val || vAct);
+            var vAcumPct = isJuly ? vIa : ((c.accum_pct !== undefined) ? c.accum_pct : (c.var_acum_ejercicio || vIa));
 
             html += '<tr class="' + rowClass + ' border-b border-darkBorder/40 transition-colors">';
             html += '<td class="py-3 px-4 text-left font-medium">' + nameCol + '</td>';
@@ -1604,7 +1607,7 @@ function renderMensualSubtabData() {
             html += '<td class="py-3 px-4 text-right font-mono ' + (vMom >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vMom) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono ' + (vIa >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vIa) + '</td>';
             html += '<td class="py-3 px-4 text-right font-mono">$' + fmtM(vAcumVal) + '</td>';
-            html += '<td class="py-3 px-4 text-right font-mono ' + (vAcumPct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(vAcumPct) + '</td>';
+            html += '<td class="py-3 px-4 text-right font-mono ' + (vAcumPct >= 0 ? 'text-brandBlue' : 'text-rose-400') + '">' + fmtPct(isJuly ? vIa : vAcumPct) + '</td>';
             html += '</tr>';
         });
         tbody.innerHTML = html;
