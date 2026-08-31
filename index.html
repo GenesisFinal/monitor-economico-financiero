@@ -10885,405 +10885,77 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                 
 
                 <div id="econ-tab-jubilaciones-y-social" class="econ-tab-panel hidden">
-
-                    
-
-                    <!-- Render bar chart if Reservas y Deuda is selected -->
-
-                    
-
-                    
-
                     <h2 class="text-xl font-bold text-white light:text-slate-900 mb-4 flex items-center gap-2 border-b border-darkBorder/40 pb-2">
-
-                        <i class="fas fa-users text-brandBlue text-brandBlue"></i> Jubilaciones y Social
-
+                        <i class="fas fa-users-rays text-brandBlue text-brandBlue"></i> Jubilaciones y Social
                     </h2>
-
                     
-
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-
                         
-
-                        <div 
-
-                          
-
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima', 'Jubilación Máxima', 'Monto límite superior establecido por ley para las prestaciones del régimen previsional general de reparto de la seguridad social.', 'Mensual', '0.0', '2,983,011.8')"
-
-                          
-
-                        >
-
-                            <!-- Category/Label & Hover Badge Tooltip -->
-
+                        <!-- 1. Jubilación Mínima (Nominal) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_minima', 'Jubilación Mínima (ANSES)', 'Haber mínimo garantizado para jubilados y pensionados del sistema público pasivo.', 'Mensual', '$0', '$427,028.15')">
                             <div class="flex justify-between items-start gap-2 mb-2">
-
                                 <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-
-                                    Jubilación Máxima
-
-                                    <!-- Tooltip float -->
-
+                                    Jubilación Mínima (ANSES)
                                     <span class="hover-badge">
-
-                                        <strong class="block text-brandBlue mb-1">Jubilación Máxima</strong>
-
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Monto límite superior establecido por ley para las prestaciones del régimen previsional general de reparto de la seguridad social.</span>
-
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Jun 2026 ($2,873,465.85)</span>
-
+                                        <strong class="block text-brandBlue mb-1">Jubilación Mínima (ANSES)</strong>
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber mínimo garantizado para jubilados y pensionados del sistema público pasivo.</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 ($427,028.15)</span>
                                         <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES</span>
-
-                                    </span>
-
-                                </span>
-
-                                
-
-                                <span class="text-[10px] text-slate-500 light:text-slate-400">Jun 2026</span>
-
-                                
-
-                            </div>
-
-                            
-
-                            <!-- Main Value & Visuals -->
-
-                            <div class="my-3">
-
-                                
-
-                                    <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$2,873,465.85</div>
-
-                                    <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima', 'Jubilación Máxima', 'Monto límite superior establecido por ley para las prestaciones del régimen previsional general de reparto de la seguridad social.', 'Mensual', '0.0', '2,983,011.8')">
-
-                                        <canvas class="sparkline-canvas" data-key="jubilacion_maxima" data-type="line" data-min="0.0" data-max="2983011.7739999997"></canvas>
-
-                                    </div>
-
-                                
-
-                            </div>
-
-    
-
-                            <!-- Footer with Nature & Variation -->
-
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-
-                                    variación interanual
-
-                                    <span onclick="openSourceLink('ANSES', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES</span>
-
-                                </span>
-
-                                
-
-                                <span class="font-bold flex items-center gap-1 text-brandGreen">
-
-                                    
-
-                                    <i class="fas fa-caret-up"></i>
-
-                                    
-
-                                    +32.36% i.a.
-
-                                </span>
-
-                                
-
-                            </div>
-
-                        </div>
-
-                        
-
-                        <div 
-
-                          
-
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_usd', 'Jubilación Máxima en USD (MEP)', 'Haber máximo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '464.9', '2,009.3')"
-
-                          
-
-                        >
-
-                            <!-- Category/Label & Hover Badge Tooltip -->
-
-                            <div class="flex justify-between items-start gap-2 mb-2">
-
-                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-
-                                    Jubilación Máxima en USD (MEP)
-
-                                    <!-- Tooltip float -->
-
-                                    <span class="hover-badge">
-
-                                        <strong class="block text-brandBlue mb-1">Jubilación Máxima en USD (MEP)</strong>
-
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber máximo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.</span>
-
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Jun 2026 (USD 1,783.61)</span>
-
-                                        <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES / MEP</span>
-
-                                    </span>
-
-                                </span>
-
-                                
-
-                                <span class="text-[10px] text-slate-500 light:text-slate-400">Jun 2026</span>
-
-                                
-
-                            </div>
-
-                            
-
-                            <!-- Main Value & Visuals -->
-
-                            <div class="my-3">
-
-                                
-
-                                    <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">USD 1,783.61</div>
-
-                        <div 
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_constante', 'Jubilación Máxima Constante (Ajustado IPC)', 'Haber máximo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '$0', '$2,873,465.85')"
-                        >
-                            <div class="flex justify-between items-start gap-2 mb-2">
-                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-                                    Jubilación Máxima Constante (Ajustado IPC)
-                                    <span class="hover-badge">
-                                        <strong class="block text-brandBlue mb-1">Jubilación Máxima Constante (Ajustado IPC)</strong>
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber máximo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.</span>
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 ($2,873,465.85)</span>
-                                        <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES / INDEC (IPC)</span>
                                     </span>
                                 </span>
                                 <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
                             </div>
                             <div class="my-3">
-                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$2,873,465.85</div>
-                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_constante', 'Jubilación Máxima Constante (Ajustado IPC)', 'Haber máximo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '0.0', '2873465.85')">
-                                    <canvas class="sparkline-canvas" data-key="jubilacion_maxima_constante" data-type="line" data-min="0.0" data-max="2873465.85"></canvas>
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$427,028.15</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_minima', 'Jubilación Mínima (ANSES)', 'Haber mínimo garantizado para jubilados y pensionados del sistema público pasivo.', 'Mensual', '0.0', '427028.15')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_minima" data-type="line" data-min="0.0" data-max="427028.15"></canvas>
                                 </div>
                             </div>
                             <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
                                 <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
                                     dato puntual
-                                    <span onclick="openSourceLink('ANSES / INDEC (IPC)', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / IPC</span>
-                                </span>
-                                <span class="font-bold flex items-center gap-1 text-brandGreen">
-                                    <i class="fas fa-caret-up"></i>
-                                    +2.10% m/m | +3.45% Real
-                                </span>
-                            </div>
-                        </div>
-
-                                    <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_usd', 'Jubilación Máxima en USD (MEP)', 'Haber máximo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '464.9', '2,009.3')">
-
-                                        <canvas class="sparkline-canvas" data-key="jubilacion_maxima_usd" data-type="line" data-min="464.896" data-max="2009.344"></canvas>
-
-                                    </div>
-
-                                
-
-                            </div>
-
-    
-
-                            <!-- Footer with Nature & Variation -->
-
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-
-                                    dato puntual
-
-                                    <span onclick="openSourceLink('ANSES / MEP', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / MEP</span>
-
-                                </span>
-
-                                
-
-                                <span class="font-bold flex items-center gap-1 text-slate-400">
-
-                                    
-
-                                    Calculado al tipo de cambio MEP del día
-
-                                </span>
-
-                                
-
-                            </div>
-
-                        </div>
-
-                        
-
-                        <div 
-
-                          
-
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_minima', 'Jubilación Mínima', 'Monto del haber mensual básico legal establecido para los beneficiarios del régimen general previsional nacional sin incluir suplementos o bonos.', 'Mensual', '0.0', '443,303.3')"
-
-                          
-
-                        >
-
-                            <!-- Category/Label & Hover Badge Tooltip -->
-
-                            <div class="flex justify-between items-start gap-2 mb-2">
-
-                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-
-                                    Jubilación Mínima
-
-                                    <!-- Tooltip float -->
-
-                                    <span class="hover-badge">
-
-                                        <strong class="block text-brandBlue mb-1">Jubilación Mínima</strong>
-
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Monto del haber mensual básico legal establecido para los beneficiarios del régimen general previsional nacional sin incluir suplementos o bonos.</span>
-
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Jun 2026 ($427,028.15)</span>
-
-                                        <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES</span>
-
-                                    </span>
-
-                                </span>
-
-                                
-
-                                <span class="text-[10px] text-slate-500 light:text-slate-400">Jun 2026</span>
-
-                                
-
-                            </div>
-
-                            
-
-                            <!-- Main Value & Visuals -->
-
-                            <div class="my-3">
-
-                                
-
-                                    <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$427,028.15</div>
-
-                                    <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_minima', 'Jubilación Mínima', 'Monto del haber mensual básico legal establecido para los beneficiarios del régimen general previsional nacional sin incluir suplementos o bonos.', 'Mensual', '0.0', '443,303.3')">
-
-                                        <canvas class="sparkline-canvas" data-key="jubilacion_minima" data-type="line" data-min="0.0" data-max="443303.349"></canvas>
-
-                                    </div>
-
-                                
-
-                            </div>
-
-    
-
-                            <!-- Footer with Nature & Variation -->
-
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-
-                                    variación interanual
-
                                     <span onclick="openSourceLink('ANSES', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES</span>
-
                                 </span>
-
-                                
-
                                 <span class="font-bold flex items-center gap-1 text-brandGreen">
-
-                                    
-
                                     <i class="fas fa-caret-up"></i>
-
-                                    
-
-                                    +32.36% i.a.
-
+                                    +2.10% m/m | +38.40% i.a.
                                 </span>
-
-                                
-
                             </div>
-
                         </div>
 
-                        
-
-                        <div 
-
-                          
-
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_usd', 'Jubilación Mínima en USD (MEP)', 'Haber mínimo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '69.1', '298.6')"
-
-                          
-
-                        >
-
-                            <!-- Category/Label & Hover Badge Tooltip -->
-
+                        <!-- 2. Jubilación Mínima en USD (MEP) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_usd', 'Jubilación Mínima en USD (MEP)', 'Haber mínimo jubilatorio expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '0', '308.20')">
                             <div class="flex justify-between items-start gap-2 mb-2">
-
                                 <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-
                                     Jubilación Mínima en USD (MEP)
-
-                                    <!-- Tooltip float -->
-
                                     <span class="hover-badge">
-
                                         <strong class="block text-brandBlue mb-1">Jubilación Mínima en USD (MEP)</strong>
-
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber mínimo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.</span>
-
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Jun 2026 (USD 265.06)</span>
-
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber mínimo jubilatorio expresado en dólares estadounidenses al tipo de cambio MEP del día.</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 (USD 308.20)</span>
                                         <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES / MEP</span>
-
                                     </span>
-
                                 </span>
-
-                                
-
-                                <span class="text-[10px] text-slate-500 light:text-slate-400">Jun 2026</span>
-
-                                
-
+                                <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
                             </div>
-
-                            
-
-                            <!-- Main Value & Visuals -->
-
                             <div class="my-3">
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">USD 308.20</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_usd', 'Jubilación Mínima en USD (MEP)', 'Haber mínimo jubilatorio expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '0.0', '308.20')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_minima_usd" data-type="line" data-min="0.0" data-max="308.20"></canvas>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
+                                    dato puntual
+                                    <span onclick="openSourceLink('ANSES / MEP', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / MEP</span>
+                                </span>
+                                <span class="font-bold flex items-center gap-1 text-slate-400">
+                                    -2.45% vs mes prev
+                                </span>
+                            </div>
+                        </div>
 
-                                
-
-                                    <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">USD 265.06</div>
-
-                        <div 
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_constante', 'Jubilación Mínima Constante (Ajustado IPC)', 'Haber mínimo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '$0', '$427,028.15')"
-                        >
+                        <!-- 3. Jubilación Mínima Constante (Ajustado IPC) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_constante', 'Jubilación Mínima Constante (Ajustado IPC)', 'Haber mínimo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '$0', '$427,028.15')">
                             <div class="flex justify-between items-start gap-2 mb-2">
                                 <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
                                     Jubilación Mínima Constante (Ajustado IPC)
@@ -11314,197 +10986,166 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             </div>
                         </div>
 
-                                    <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_minima_usd', 'Jubilación Mínima en USD (MEP)', 'Haber mínimo jubilatorio nacional expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '69.1', '298.6')">
-
-                                        <canvas class="sparkline-canvas" data-key="jubilacion_minima_usd" data-type="line" data-min="69.094" data-max="298.606"></canvas>
-
-                                    </div>
-
-                                
-
-                            </div>
-
-    
-
-                            <!-- Footer with Nature & Variation -->
-
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-
-                                    dato puntual
-
-                                    <span onclick="openSourceLink('ANSES / MEP', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / MEP</span>
-
-                                </span>
-
-                                
-
-                                <span class="font-bold flex items-center gap-1 text-slate-400">
-
-                                    
-
-                                    Calculado al tipo de cambio MEP del día
-
-                                </span>
-
-                                
-
-                            </div>
-
-                        </div>
-
-                        
-
-                        <div 
-
-                          
-
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio', 'Jubilación Promedio (SIPA)', 'Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).', 'Mensual', '0.0', '511,344.6')"
-
-                          
-
-                        >
-
-                            <!-- Category/Label & Hover Badge Tooltip -->
-
+                        <!-- 4. Jubilación Máxima (Nominal) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima', 'Jubilación Máxima (ANSES)', 'Haber máximo del régimen previsional público de reparto administrado por la ANSES.', 'Mensual', '$0', '$2,873,465.85')">
                             <div class="flex justify-between items-start gap-2 mb-2">
-
                                 <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-
-                                    Jubilación Promedio (SIPA)
-
-                                    <!-- Tooltip float -->
-
+                                    Jubilación Máxima (ANSES)
                                     <span class="hover-badge">
-
-                                        <strong class="block text-brandBlue mb-1">Jubilación Promedio (SIPA)</strong>
-
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).</span>
-
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Jun 2026 ($465,222.00)</span>
-
+                                        <strong class="block text-brandBlue mb-1">Jubilación Máxima (ANSES)</strong>
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber máximo del régimen previsional público de reparto administrado por la ANSES.</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 ($2,873,465.85)</span>
                                         <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES</span>
-
                                     </span>
-
                                 </span>
-
-                                
-
-                                <span class="text-[10px] text-slate-500 light:text-slate-400">Jun 2026</span>
-
-                                
-
+                                <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
                             </div>
-
-                            
-
-                            <!-- Main Value & Visuals -->
-
                             <div class="my-3">
-
-                                
-
-                                    <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$465,222.00</div>
-
-                                    <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio', 'Jubilación Promedio (SIPA)', 'Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).', 'Mensual', '0.0', '511,344.6')">
-
-                                        <canvas class="sparkline-canvas" data-key="jubilacion_promedio" data-type="line" data-min="0.0" data-max="511344.586"></canvas>
-
-                                    </div>
-
-                                
-
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$2,873,465.85</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima', 'Jubilación Máxima (ANSES)', 'Haber máximo del régimen previsional público de reparto administrado por la ANSES.', 'Mensual', '0.0', '2873465.85')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_maxima" data-type="line" data-min="0.0" data-max="2873465.85"></canvas>
+                                </div>
                             </div>
-
-    
-
-                            <!-- Footer with Nature & Variation -->
-
                             <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-
                                 <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-
                                     dato puntual
-
                                     <span onclick="openSourceLink('ANSES', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES</span>
-
                                 </span>
-
-                                
-
-                                <span class="font-bold flex items-center gap-1 text-slate-400">
-
-                                    
-
-                                    0.00% i.a.
-
+                                <span class="font-bold flex items-center gap-1 text-brandGreen">
+                                    <i class="fas fa-caret-up"></i>
+                                    +2.10% m/m | +38.40% i.a.
                                 </span>
-
-                                
-
                             </div>
-
                         </div>
 
-                        
-
-                        <div 
-
-                          
-
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_usd', 'Jubilación Promedio en USD (MEP)', 'Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '79.7', '344.4')"
-
-                          
-
-                        >
-
-                            <!-- Category/Label & Hover Badge Tooltip -->
-
+                        <!-- 5. Jubilación Máxima en USD (MEP) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_usd', 'Jubilación Máxima en USD (MEP)', 'Haber máximo jubilatorio expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '0', '2073.50')">
                             <div class="flex justify-between items-start gap-2 mb-2">
-
                                 <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
-
-                                    Jubilación Promedio en USD (MEP)
-
-                                    <!-- Tooltip float -->
-
+                                    Jubilación Máxima en USD (MEP)
                                     <span class="hover-badge">
-
-                                        <strong class="block text-brandBlue mb-1">Jubilación Promedio en USD (MEP)</strong>
-
-                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.</span>
-
-                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Jun 2026 (USD 305.75)</span>
-
+                                        <strong class="block text-brandBlue mb-1">Jubilación Máxima en USD (MEP)</strong>
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber máximo jubilatorio expresado en dólares estadounidenses al tipo de cambio MEP del día.</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 (USD 2,073.50)</span>
                                         <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES / MEP</span>
-
                                     </span>
-
                                 </span>
-
-                                
-
-                                <span class="text-[10px] text-slate-500 light:text-slate-400">Jun 2026</span>
-
-                                
-
+                                <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
                             </div>
-
-                            
-
-                            <!-- Main Value & Visuals -->
-
                             <div class="my-3">
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">USD 2,073.50</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_usd', 'Jubilación Máxima en USD (MEP)', 'Haber máximo jubilatorio expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '0.0', '2073.50')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_maxima_usd" data-type="line" data-min="0.0" data-max="2073.50"></canvas>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
+                                    dato puntual
+                                    <span onclick="openSourceLink('ANSES / MEP', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / MEP</span>
+                                </span>
+                                <span class="font-bold flex items-center gap-1 text-slate-400">
+                                    Calculado al tipo de cambio MEP
+                                </span>
+                            </div>
+                        </div>
 
-                                
+                        <!-- 6. Jubilación Máxima Constante (Ajustado IPC) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_constante', 'Jubilación Máxima Constante (Ajustado IPC)', 'Haber máximo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '$0', '$2,873,465.85')">
+                            <div class="flex justify-between items-start gap-2 mb-2">
+                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
+                                    Jubilación Máxima Constante (Ajustado IPC)
+                                    <span class="hover-badge">
+                                        <strong class="block text-brandBlue mb-1">Jubilación Máxima Constante (Ajustado IPC)</strong>
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber máximo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 ($2,873,465.85)</span>
+                                        <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES / INDEC (IPC)</span>
+                                    </span>
+                                </span>
+                                <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
+                            </div>
+                            <div class="my-3">
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$2,873,465.85</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_maxima_constante', 'Jubilación Máxima Constante (Ajustado IPC)', 'Haber máximo jubilatorio deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '0.0', '2873465.85')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_maxima_constante" data-type="line" data-min="0.0" data-max="2873465.85"></canvas>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
+                                    dato puntual
+                                    <span onclick="openSourceLink('ANSES / INDEC (IPC)', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / IPC</span>
+                                </span>
+                                <span class="font-bold flex items-center gap-1 text-brandGreen">
+                                    <i class="fas fa-caret-up"></i>
+                                    +2.10% m/m | +3.45% Real
+                                </span>
+                            </div>
+                        </div>
 
-                                    <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">USD 305.75</div>
+                        <!-- 7. Jubilación Promedio (SIPA) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio', 'Jubilación Promedio (SIPA)', 'Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).', 'Mensual', '$0', '$685,420.00')">
+                            <div class="flex justify-between items-start gap-2 mb-2">
+                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
+                                    Jubilación Promedio (SIPA)
+                                    <span class="hover-badge">
+                                        <strong class="block text-brandBlue mb-1">Jubilación Promedio (SIPA)</strong>
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 ($685,420.00)</span>
+                                        <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES</span>
+                                    </span>
+                                </span>
+                                <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
+                            </div>
+                            <div class="my-3">
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">$685,420.00</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio', 'Jubilación Promedio (SIPA)', 'Monto promedio del haber mensual pagado a los beneficiarios del régimen general previsional nacional (SIPA).', 'Mensual', '0.0', '685420.0')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_promedio" data-type="line" data-min="0.0" data-max="685420.0"></canvas>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
+                                    dato puntual
+                                    <span onclick="openSourceLink('ANSES', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES</span>
+                                </span>
+                                <span class="font-bold flex items-center gap-1 text-brandGreen">
+                                    <i class="fas fa-caret-up"></i>
+                                    +1.80% m/m | +39.20% i.a.
+                                </span>
+                            </div>
+                        </div>
 
-                        <div 
-                          class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_constante', 'Jubilación Promedio Constante (Ajustado IPC)', 'Haber promedio del SIPA deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '$0', '$685,420.00')"
-                        >
+                        <!-- 8. Jubilación Promedio en USD (MEP) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_usd', 'Jubilación Promedio en USD (MEP)', 'Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '0', '495.20')">
+                            <div class="flex justify-between items-start gap-2 mb-2">
+                                <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
+                                    Jubilación Promedio en USD (MEP)
+                                    <span class="hover-badge">
+                                        <strong class="block text-brandBlue mb-1">Jubilación Promedio en USD (MEP)</strong>
+                                        <span class="block mb-2 text-slate-300 light:text-slate-600">Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.</span>
+                                        <span class="block text-[10px] text-slate-400 light:text-slate-500 font-semibold">Último: Ago 2026 (USD 495.20)</span>
+                                        <span class="block text-[10px] text-brandBlue/80 font-bold mt-1">Fuente: ANSES / MEP</span>
+                                    </span>
+                                </span>
+                                <span class="text-[10px] text-slate-500 light:text-slate-400">Ago 2026</span>
+                            </div>
+                            <div class="my-3">
+                                <div class="text-xl font-black text-white light:text-slate-900 tracking-tight">USD 495.20</div>
+                                <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_usd', 'Jubilación Promedio en USD (MEP)', 'Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '0.0', '495.20')">
+                                    <canvas class="sparkline-canvas" data-key="jubilacion_promedio_usd" data-type="line" data-min="0.0" data-max="495.20"></canvas>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
+                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
+                                    dato puntual
+                                    <span onclick="openSourceLink('ANSES / MEP', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / MEP</span>
+                                </span>
+                                <span class="font-bold flex items-center gap-1 text-slate-400">
+                                    Calculado al tipo de cambio MEP
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- 9. Jubilación Promedio Constante (Ajustado IPC) -->
+                        <div class="glass-card rounded-2xl p-5 relative overflow-visible flex flex-col justify-between border border-darkBorder/40 cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_constante', 'Jubilación Promedio Constante (Ajustado IPC)', 'Haber promedio del SIPA deflactado por IPC expresado en moneda de poder adquisitivo constante del último mes.', 'Mensual', '$0', '$685,420.00')">
                             <div class="flex justify-between items-start gap-2 mb-2">
                                 <span class="indicator-name text-xs font-semibold text-brandBlue cursor-help border-b border-dotted border-brandBlue/40 pb-0.5 relative">
                                     Jubilación Promedio Constante (Ajustado IPC)
@@ -11535,53 +11176,8 @@ window.renderRankingsSubtabData = renderRankingsSubtabData;
                             </div>
                         </div>
 
-                                    <div class="h-10 w-full mt-2 relative overflow-hidden cursor-pointer" onclick="openIndicatorModal('jubilacion_promedio_usd', 'Jubilación Promedio en USD (MEP)', 'Haber promedio jubilatorio nacional (SIPA) expresado en dólares estadounidenses al tipo de cambio MEP del día.', 'Mensual', '79.7', '344.4')">
-
-                                        <canvas class="sparkline-canvas" data-key="jubilacion_promedio_usd" data-type="line" data-min="79.69800000000001" data-max="344.442"></canvas>
-
-                                    </div>
-
-                                
-
-                            </div>
-
-    
-
-                            <!-- Footer with Nature & Variation -->
-
-                            <div class="flex items-center justify-between text-xs mt-2 pt-2 border-t border-darkBorder/20 light:border-gray-100">
-
-                                <span class="text-[10px] uppercase tracking-wider text-slate-500 light:text-slate-400 font-semibold">
-
-                                    dato puntual
-
-                                    <span onclick="openSourceLink('ANSES / MEP', event)" class="block text-[9px] text-brandBlue/80 hover:underline mt-0.5 font-bold cursor-pointer"><i class="fas fa-external-link-alt text-[8px] mr-0.5"></i> Fuente: ANSES / MEP</span>
-
-                                </span>
-
-                                
-
-                                <span class="font-bold flex items-center gap-1 text-slate-400">
-
-                                    
-
-                                    Calculado al tipo de cambio MEP del día
-
-                                </span>
-
-                                
-
-                            </div>
-
-                        </div>
-
-                        
-
                     </div>
-
                 </div>
-
-                
 
                 <div id="econ-tab-actividad-y-consumo" class="econ-tab-panel hidden">
 
