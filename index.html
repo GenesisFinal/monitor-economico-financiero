@@ -22089,6 +22089,20 @@ function switchGlobalTab(tabId) {
 
                 let historyObj = appData.historical_db[key];
 
+
+                if (!historyObj && key.endsWith('_constante')) {
+                    let baseKey = key.replace('_constante', '');
+                    let baseHist = appData.historical_db[baseKey] || appData.historical_db[baseKey + '_val'];
+                    if (!baseHist) {
+                        for (let k in appData.historical_db) {
+                            if (k.startsWith(baseKey)) { baseHist = appData.historical_db[k]; break; }
+                        }
+                    }
+                    if (baseHist && baseHist.daily) {
+                        historyObj = baseHist;
+                    }
+                }
+
                 if (!historyObj && (key.endsWith('_usd') || key.includes('_usd_mep') || key.includes('_mep'))) {
 
                     let baseKey = key.replace('_usd_mep', '').replace('_usd', '').replace('_mep', '');
@@ -23182,6 +23196,20 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
             } else {
 
                 let historyObj = appData.historical_db[modalState.key];
+
+                if (!historyObj && modalState.key.endsWith('_constante')) {
+                    let baseKey = modalState.key.replace('_constante', '');
+                    let baseHist = appData.historical_db[baseKey] || appData.historical_db[baseKey + '_val'];
+                    if (!baseHist) {
+                        for (let k in appData.historical_db) {
+                            if (k.startsWith(baseKey)) { baseHist = appData.historical_db[k]; break; }
+                        }
+                    }
+                    if (baseHist && baseHist.daily) {
+                        historyObj = baseHist;
+                    }
+                }
+
 
                 if (!historyObj && (modalState.key.endsWith('_usd') || modalState.key.includes('_usd_mep') || modalState.key.includes('_mep'))) {
 
