@@ -15737,112 +15737,59 @@ window.appData = appData;
 
 
 
-        // Data frequency helper to group and downsample
-
-
-
+                // Data frequency helper to group and downsample
         function sampleData(dates, prices, open, high, low, close, frequency, minPoints) {
-
-            if (dates.length <= 100) {
-
+            if (!dates || dates.length <= 100) {
                 return { dates, prices, open, high, low, close };
-            }
-
             }
 
             const hasOhlc = open && open.length > 0;
 
-            
-
             const getWeekKey = (dStr) => {
-
                 const d = new Date(dStr);
-
                 const y = d.getFullYear();
-
                 const onejan = new Date(y, 0, 1);
-
                 const dayOfYear = Math.floor((d - onejan) / (24 * 60 * 60 * 1000));
-
                 const week = Math.ceil((d.getDay() + 1 + dayOfYear) / 7);
-
                 return `${y}-W${week}`;
-
             };
-
-            
 
             const getMonthKey = (dStr) => {
-
                 return dStr.substring(0, 7); // "YYYY-MM"
-
             };
 
-            
-
             const sampleWithKey = (keyFunc) => {
-
                 const groups = {};
-
                 for (let i = 0; i < dates.length; i++) {
-
                     const key = keyFunc(dates[i]);
-
                     groups[key] = i; // keep index of last element in group
-
                 }
-
                 const indices = Object.values(groups).sort((a, b) => a - b);
 
-                
-
                 return {
-
                     dates: indices.map(i => dates[i]),
-
                     prices: indices.map(i => prices[i]),
-
                     open: hasOhlc ? indices.map(i => open[i]) : null,
-
                     high: hasOhlc ? indices.map(i => high[i]) : null,
-
                     low: hasOhlc ? indices.map(i => low[i]) : null,
-
                     close: hasOhlc ? indices.map(i => close[i]) : null
-
-                };;
-
-            
+                };
+            };
 
             if (frequency === 'monthly') {
-
                 const sampled = sampleWithKey(getMonthKey);
-
                 if (sampled.dates.length >= minPoints) return sampled;
-
                 return sampleData(dates, prices, open, high, low, close, 'weekly', minPoints);
-
             }
-
-            
 
             if (frequency === 'weekly') {
-
                 const sampled = sampleWithKey(getWeekKey);
-
                 if (sampled.dates.length >= minPoints) return sampled;
-
                 return { dates, prices, open, high, low, close };
-
             }
 
-            
-
             return { dates, prices, open, high, low, close };
-
         }
-
-
 
         activeEconTab = 'econ-tab-precios-y-costo-de-vida';
 
@@ -23038,242 +22985,118 @@ function openIndicatorModal(key, name, desc, timeRange, minDisplay, maxDisplay) 
 
 
 
-        function renderModalChart() {
-
+                function renderModalChart() {
             const key = modalState.key;
-
             const canvas = document.getElementById('modal-chart-canvas');
-
             if (!canvas) return;
-
             const ctx = canvas.getContext('2d');
 
-            
-
             const existingChart = Chart.getChart(canvas);
-
             if (existingChart) {
-
                 existingChart.destroy();
-
             }
-
             if (indicatorChartInstance) {
-
                 indicatorChartInstance.destroy();
-
                 indicatorChartInstance = null;
-
             }
 
+            let historyObj = (appData && appData.historical_db) ? appData.historical_db[key] : null;
+            if (!historyObj && key && key.endsWith('_constante')) {
+                let baseKey = key.replace('_constante', '');
+                historyObj = (appData && appData.historical_db) ? appData.historical_db[baseKey] : null;
+            }
 
+            if (!historyObj) return;
 
-            const isPovertyGroup = false; // Disabled to show independent charts
+            const isLong = (modalState.period === '5A' || modalState.period === '10A' || modalState.period === 'MAX');
+            let dataObj = historyObj.monthly || historyObj.daily || historyObj.weekly || historyObj;
+            if (!dataObj || !dataObj.dates || dataObj.dates.length === 0) {
+                dataObj = historyObj.daily || historyObj.monthly || historyObj;
+            }
+
+            if (!dataObj || !dataObj.dates || dataObj.dates.length === 0) return;
+
+            let cutDays = null;
+            if (modalState.period === '12M') cutDays = 365;
+            else if (modalState.period === '24M') cutDays = 730;
+            else if (modalState.period === '36M') cutDays = 1095;
+            else if (modalState.period === '5A') cutDays = 5 * 365;
+            else if (modalState.period === '10A') cutDays = 10 * 365;
+            else if (modalState.period === 'MAX') cutDays = null;
 
             let finalDates = [];
-
             let finalPrices = [];
 
-            let finalPoverty = [];
+            if (cutDays && dataObj.dates && dataObj.dates.length > 0) {
+                const latestDateStr = dataObj.dates[dataObj.dates.length - 1];
+                const latestDateParts = latestDateStr.split('-');
+                const latestDate = new Date(parseInt(latestDateParts[0]), parseInt(latestDateParts[1]) - 1, parseInt(latestDateParts[2] || '1'));
+                const cutDate = new Date(latestDate.getTime() - cutDays * 24 * 60 * 60 * 1000);
 
-            let finalIndigence = [];
-
-            
-
-            if (isPovertyGroup) {
-
-                const povertyData = appData.historical_db['pobreza'] || appData.historical_db['pobreza_val'];
-
-                const indigenceData = appData.historical_db['indigencia'] || appData.historical_db['indigencia_val'];
-
-                
-
-                if (povertyData && indigenceData) {
-
-                    const isLong = (modalState.period === '5A' || modalState.period === '10A' || modalState.period === 'MAX');
-
-                    const pobObj = isLong && povertyData.monthly && povertyData.monthly.dates && povertyData.monthly.dates.length > 0 ? povertyData.monthly : povertyData.daily;
-
-                    const indObj = isLong && indigenceData.monthly && indigenceData.monthly.dates && indigenceData.monthly.dates.length > 0 ? indigenceData.monthly : indigenceData.daily;
-
-                    
-
-                    let cutDays = null;
-
-                    if (modalState.period === '12M') cutDays = 365;
-                else if (modalState.period === '24M') cutDays = 730;
-                else if (modalState.period === '36M') cutDays = 1095;
-                else if (modalState.period === '5A') cutDays = 5 * 365;
-                else if (modalState.period === '10A') cutDays = 10 * 365;
-                else if (modalState.period === 'MAX') cutDays = null;
-
-                let filteredDates = [];
-
-                let filteredPrices = [];
-
-                
-
-                if (cutDays) {
-
-                    const latestDateStr = dataObj.dates[dataObj.dates.length - 1];
-
-                    const latestDateParts = latestDateStr.split('-');
-
-                    const latestDate = new Date(parseInt(latestDateParts[0]), parseInt(latestDateParts[1]) - 1, parseInt(latestDateParts[2]));
-
-                    const cutDate = new Date(latestDate.getTime() - cutDays * 24 * 60 * 60 * 1000);
-
-                    
-
-                    const yyyy = cutDate.getFullYear();
-
-                    const mm = String(cutDate.getMonth() + 1).padStart(2, '0');
-
-                    const dd = String(cutDate.getDate()).padStart(2, '0');
-
-                    const cutDateStr = `${yyyy}-${mm}-${dd}`;
-
-                    
-
-                    for (let i = 0; i < dataObj.dates.length; i++) {
-
-                        if (dataObj.dates[i] >= cutDateStr) {
-
-                            filteredDates.push(dataObj.dates[i]);
-
-                            filteredPrices.push(dataObj.prices[i]);
-
-                        }
-
+                for (let i = 0; i < dataObj.dates.length; i++) {
+                    const dParts = dataObj.dates[i].split('-');
+                    const dObj = new Date(parseInt(dParts[0]), parseInt(dParts[1]) - 1, parseInt(dParts[2] || '1'));
+                    if (dObj >= cutDate) {
+                        finalDates.push(dataObj.dates[i]);
+                        finalPrices.push(dataObj.prices[i]);
                     }
-
-                } else {
-
-                    filteredDates = [...dataObj.dates];
-
-                    filteredPrices = [...dataObj.prices];
-
                 }
-
-                
-
-                if (filteredDates.length === 0) {
-
-                    filteredDates = [...dataObj.dates];
-
-                    filteredPrices = [...dataObj.prices];
-
-                }
-
-                
-
-                // Downsample modal indicators chart based on frequency rules
-
-                let sampled;
-
-                if (modalState.period === '12M') {
-
-                    sampled = { dates: filteredDates, prices: filteredPrices };
-
-                } else if (modalState.period === '24M' || modalState.period === '36M' || modalState.period === '5A') {
-
-                    sampled = sampleData(filteredDates, filteredPrices, null, null, null, null, 'weekly', 1);
-
-                } else {
-
-                    sampled = sampleData(filteredDates, filteredPrices, null, null, null, null, 'monthly', 100);
-
-                }
-
-                finalDates = sampled.dates;
-
-                finalPrices = sampled.prices;
-
             }
 
-            
-
-            let chartType = 'line';
-
-            let fillConfig = true;
-
-            let showLineConfig = true;
-
-            let barPercentage = undefined;
-
-            let categoryPercentage = undefined;
-
- 
-
-            if (isPovertyGroup) {
-
-                chartType = 'line';
-
-                fillConfig = true;
-
-            } else if (key === 'empleo_privado' || key === 'empleo_total' || key === 'base_monetaria' || key.startsWith('agregado_')) {
-
-                chartType = 'line';
-
-                fillConfig = true;
-
-            } else if (key.includes('resultado_') || key === 'pbi_interanual' || key === 'emae_interanual' || key === 'ipi_interanual' || key.includes('variacion') || key === 'saldo_comercial') {
-
-                chartType = 'bar';
-
-                fillConfig = false;
-
-                barPercentage = 0.8;
-
-                categoryPercentage = 0.9;
-
-            } else if (key.includes('tasas_') || key.includes('mensual') || key.includes('interanual') || key.includes('inflacion') || key.includes('cpi')) {
-
-                chartType = 'line';
-
-                fillConfig = false;
-
-            } else {
-
-                chartType = 'line';
-
-                fillConfig = true;
-
+            if (finalDates.length === 0 || modalState.period === 'MAX') {
+                finalDates = [...dataObj.dates];
+                finalPrices = [...dataObj.prices];
             }
 
- 
+            const isConstantSeries = key && key.endsWith('_constante');
+            const yMin = isConstantSeries ? Math.floor(Math.min(...finalPrices) * 0.85) : undefined;
+            const yMax = isConstantSeries ? Math.ceil(Math.max(...finalPrices) * 1.15) : undefined;
 
-            let chartColor = 'rgba(16, 185, 129, 0.95)';
-
-            let fillColor = 'transparent';
-
-            
-
-            if (!isPovertyGroup && finalPrices.length > 0) {
-
-                const isUp = finalPrices[finalPrices.length - 1] >= finalPrices[0];
-
-                chartColor = isUp ? 'rgba(16, 185, 129, 0.95)' : 'rgba(239, 68, 68, 0.95)';
-
-                if (fillConfig) {
-
-                    fillColor = isUp ? 'rgba(16, 185, 129, 0.08)' : 'rgba(239, 68, 68, 0.08)';
-
+            indicatorChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: finalDates,
+                    datasets: [{
+                        label: modalState.name || 'Valor',
+                        data: finalPrices,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.2,
+                        pointRadius: finalDates.length > 60 ? 0 : 3,
+                        pointHoverRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let val = context.raw;
+                                    if (typeof val === 'number') {
+                                        return '$' + val.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                                    }
+                                    return val;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { color: getChartTextColor(), font: { size: 10 } }, grid: { color: getChartGridColor() } },
+                        y: {
+                            min: yMin,
+                            max: yMax,
+                            ticks: { color: '#e2e8f0', font: { size: 11 } },
+                            grid: { display: false }
+                        }
+                    }
                 }
+            });
 
-            }
-
-            
-
-            const isDark = document.body.classList.contains('dark');
-
-            const labelColor = isDark ? '#94a3b8' : '#1e293b';
-
-            const gridColor = isDark ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
-
-            
-
-            function formatIndicatorValue(val) {
+        function formatIndicatorValue(val) {
 
                 const key = modalState.key;
 
